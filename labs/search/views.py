@@ -23,16 +23,19 @@ def load(request):
 def search(request, query):
     es = Elasticsearch()
     esquery = {
-            'query': {
                'query_string': {
 
                 'query': query,
                 }
 
-            },
+            
           
         }
 
-    res = es.search(index="judaicalink", body={"query": esquery})
-    return HttpResponse(result)
+    result = es.search(index="judaicalink", body={"query": esquery})
+    res = ""
+    for hit in result['hits']['hits']:
+        print(hit)
+        res += hit['_id']+'<br/>'
+    return HttpResponse(res)
 
