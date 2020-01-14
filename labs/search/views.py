@@ -1,10 +1,12 @@
-from django.shortcuts import render
-from django.http import HttpResponse
 import requests
+from django.http import HttpResponse
+from django.shortcuts import render
+
+from backend.models import Dataset
+from elasticsearch import Elasticsearch
 
 # Create your views here.
 
-from backend.models import Dataset
 
 def index(request):
     return HttpResponse(Dataset.objects.all())
@@ -17,3 +19,20 @@ def load(request):
         headers = {'content-type': 'application/json'}
         response = requests.post('http://localhost:9200/judaicalink/doc/_bulk?pretty', data=data, headers=headers)
         return HttpResponse(response)
+
+def search(request, query):
+    es = Elasticsearch()
+    esquery = {
+            'query': {
+               'query_string': {
+
+                'query': query,
+                }
+
+            },
+          
+        }
+
+    res = es.search(index="judaicalink", body={"query": esquery})
+    return HttpResponse(result)
+
