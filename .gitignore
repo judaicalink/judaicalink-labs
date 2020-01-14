@@ -33,6 +33,12 @@ MANIFEST
 *.manifest
 *.spec
 
+
+# Editors, IDEs..
+
+.vscode
+.idea
+
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
