@@ -24,14 +24,9 @@ def search(request, query):
     es = Elasticsearch()
     esquery = {
                'query_string': {
-
                 'query': query,
-                }
-
-            
-          
+                },
         }
-
     result = es.search(index="judaicalink", body={"query": esquery})
     res = ""
     for hit in result['hits']['hits']:
