@@ -7,10 +7,12 @@ from elasticsearch import Elasticsearch
 
 # Create your views here.
 
+#see labs/urls.py def index to access root with http://localhost:8000
+
 
 def index(request):
-    #return HttpResponse(Dataset.objects.all())
-    return render(request, "labs/root.html")
+    return HttpResponse(Dataset.objects.all())
+    #return render(request, "search/root.html")
 
 
 def load(request):
