@@ -1,4 +1,4 @@
-Django==2.2.6
+Django==2.2.8
 elasticsearch==7.1.0
 PyYAML==5.3
 rdflib==4.2.2
