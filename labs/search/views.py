@@ -9,7 +9,8 @@ from elasticsearch import Elasticsearch
 
 
 def index(request):
-    return HttpResponse(Dataset.objects.all())
+    #return HttpResponse(Dataset.objects.all())
+    return render(request, "labs/root.html")
 
 
 def load(request):

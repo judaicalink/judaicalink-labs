@@ -14,7 +14,7 @@ class MyAdminSite(AdminSite):
         # Note that custom urls get pushed to the list (not appended)
         # This doesn't work with urls += ...
         urls = [
-            url(r'^test/$', self.admin_view(views.admintest))
+            url(r'^load_from_github/$', self.admin_view(views.load_from_github), name='load_from_github')
         ] + urls
         return urls
 

@@ -22,6 +22,6 @@ admin.autodiscover()
 
 urlpatterns = [
     path('admin/', admin_site.urls),
-    path('backend/', include('backend.urls')),
+    path('backend/', include('backend.urls', namespace='backend')),
     path('search/', include('search.urls')),
 ]

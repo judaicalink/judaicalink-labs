@@ -1,0 +1,7 @@
+Django==2.2.6
+elasticsearch==7.1.0
+PyYAML==5.3
+rdflib==4.2.2
+requests==2.22.0
+SPARQLWrapper==1.8.4
+toml==0.10.0
