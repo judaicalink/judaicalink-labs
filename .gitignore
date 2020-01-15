@@ -2,6 +2,8 @@
 
 # the folder where the github markdown files are stored
 gh_datasets
+/data/
+/fuseki/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
