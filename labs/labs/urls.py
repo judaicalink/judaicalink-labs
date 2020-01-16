@@ -17,6 +17,11 @@ from django.contrib import admin
 from django.contrib.admin import AdminSite
 from django.urls import include, path
 from backend.admin import admin_site
+from django.shortcuts import render
+
+def index(request):
+    #return HttpResponse(Dataset.objects.all())
+    return render(request, "search/root.html")
 
 admin.autodiscover()
 
@@ -24,4 +29,5 @@ urlpatterns = [
     path('admin/', admin_site.urls),
     path('backend/', include('backend.urls', namespace='backend')),
     path('search/', include('search.urls')),
+    path('', index, name='index'),
 ]
