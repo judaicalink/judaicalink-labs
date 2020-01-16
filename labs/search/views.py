@@ -30,8 +30,17 @@ def search(request, query):
         }
     result = es.search(index="judaicalink", body={"query": esquery})
 
+    dataset = []
+    for d in result ["hits"] ["hits"]:
+        data = {
+            "id" : d ["_id"],
+            "source" : d ["_source"],
+        }
+        dataset.append (data)
+
     context = {
         "result" : result ["hits"] ["hits"],
+        "dataset" : dataset
     }
     return render (request, "labs/search_result.html", context)
 
