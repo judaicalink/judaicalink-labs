@@ -4,7 +4,7 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.search_index, name='search_index'),
     path('load', views.load, name='load'),
-    path('search/<str:query>', views.search, name='search')
+    path('search/<str:query>', views.search, name='search'),
 ]

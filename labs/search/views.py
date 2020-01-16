@@ -14,6 +14,8 @@ def index(request):
     return HttpResponse(Dataset.objects.all())
     #return render(request, "search/root.html")
 
+def search_index(request):
+    return render(request, "search/search_index.html")
 
 def load(request):
     with open('../data/textfile-djh.json', 'rb') as f:
