@@ -65,5 +65,5 @@ def search(request, query):
         "dataset" : dataset
             #contains id and information from fields
     }
-    return render (request, "labs/search_result.html", context)
+    return render (request, "search/search_result.html", context)
 
