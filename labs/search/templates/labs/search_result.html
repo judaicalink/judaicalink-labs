@@ -7,7 +7,16 @@
 <body>
 
 {% for data in dataset %}
-    {{ data }} <br> <br>
+    id: {{data.id}}<br>
+    name: {{data.source.name}} <br>
+    Alternatives: {{data.source.Alternatives}}<br>
+    birthDate: {{data.source.birthDate}}<br>
+    birthLocation: {{data.source.birthLocation}}<br>
+    deathDate: {{data.source.deathDate}}<br>
+    deathLocation: {{data.source.deathLocation}}<br>
+    Abstract: {{data.source.Abstract}}<br>
+    Publication: {{data.source.Publication}}<br>
+    <br> <br>
 {% endfor %}
 
 </body>

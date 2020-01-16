@@ -23,12 +23,17 @@ def load(request):
 
 def search(request, query):
     es = Elasticsearch()
-    esquery = {
-               'query_string': {
-                'query': query,
-                },
+
+    body = {
+        "query" : {
+            "query_string": {
+                "query": query,
+                "fields": ["name^4", "Alternatives^3", "birthDate", "birthLocation^2", "deathDate", "deathLocation^2", "Abstract", "Publication"]
+            }
+
         }
-    result = es.search(index="judaicalink", body={"query": esquery})
+    }
+    result = es.search(index="judaicalink", body = body)
 
     dataset = []
     for d in result ["hits"] ["hits"]:
