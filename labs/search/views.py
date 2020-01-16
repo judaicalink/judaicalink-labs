@@ -29,9 +29,9 @@ def search(request, query):
                 },
         }
     result = es.search(index="judaicalink", body={"query": esquery})
-    res = ""
-    for hit in result['hits']['hits']:
-        print(hit)
-        res += hit['_id']+'<br/>'
-    return HttpResponse(res)
+
+    context = {
+        "result" : result ["hits"] ["hits"],
+    }
+    return render (request, "labs/search_result.html", context)
 
