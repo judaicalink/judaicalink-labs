@@ -4,6 +4,8 @@ from django.urls import reverse
 import requests
 import json
 from . import hugotools
+from . import tasks
+import time
 from pathlib import Path
 
 
@@ -27,5 +29,13 @@ def load_from_github(request):
         raise e
     return redirect(reverse('admin:backend_dataset_changelist'))
 
-def test(request):
-    pass
+def test_thread(request):
+    tasks.start_task(sleeper)
+    return HttpResponse('started')
+
+def sleeper(task):
+    task.log("Im am a sleeper!")
+    task.save()
+    time.sleep(10)
+    task.log('Awake')
+    task.save()
