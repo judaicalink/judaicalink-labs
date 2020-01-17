@@ -61,13 +61,15 @@ def search(request, query):
         data = {
             "id" : d ["_id"],
             "source" : d ["_source"],
+            "highlight" : d ["highlight"],
         }
         dataset.append (data)
+
 
     context = {
         "result" : result ["hits"] ["hits"],
             #contains full search results from elasticsearch
-        "dataset" : dataset
+        "dataset" : dataset,
             #contains id and information from fields
     }
     return render (request, "search/search_result.html", context)
