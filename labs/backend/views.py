@@ -26,3 +26,6 @@ def load_from_github(request):
     except Exception as e:
         raise e
     return redirect(reverse('admin:backend_dataset_changelist'))
+
+def test(request):
+    pass
