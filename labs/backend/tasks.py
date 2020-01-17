@@ -4,12 +4,13 @@ from . import models
 Task handling is based on:
 https://github.com/nbwoodward/django-async-threading
 '''
-def start_task(target):
+def start_task(name, target):
     '''
     Adapted from here:
     https://github.com/nbwoodward/django-async-threading/blob/master/thread/views.py
     '''
     task = models.ThreadTask()
+    task.name = name
     task.save()
     task.refresh_from_db()
     t = threading.Thread(target = _target_wrapper, args=[task.id, target])

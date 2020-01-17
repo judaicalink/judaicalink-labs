@@ -7,7 +7,7 @@ class Dataset(models.Model):
 
 
 class ThreadTask(models.Model):
-    task = models.CharField(max_length=30, blank=True, null=True)
+    name = models.TextField()
     is_done = models.BooleanField(blank=False, default=False)
     log_text = models.TextField()
 
@@ -20,3 +20,10 @@ class ThreadTask(models.Model):
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
         self.log_text += '\n' + timestamp + ": " + message
         self.save() 
+
+    def last_log(self):
+        msgs = self.log_text.split('\n')
+        for i in range(len(msgs) - 1, 0, -1):
+            if msgs[i].strip():
+                return msgs[i]
+        return ""

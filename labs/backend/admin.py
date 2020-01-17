@@ -22,4 +22,11 @@ class MyAdminSite(AdminSite):
 admin_site = MyAdminSite()
 
 admin_site.register(models.Dataset)
-admin_site.register(models.ThreadTask)
+
+class ThreadTaskAdmin(admin.ModelAdmin):
+    list_display = ['name', 'is_done', 'last_log']
+    list_display_links = ['name']
+
+
+
+admin_site.register(models.ThreadTask, ThreadTaskAdmin)

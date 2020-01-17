@@ -30,7 +30,7 @@ def load_from_github(request):
     return redirect(reverse('admin:backend_dataset_changelist'))
 
 def test_thread(request):
-    tasks.start_task(sleeper)
+    tasks.start_task("Sleeper test", sleeper)
     return HttpResponse('started')
 
 def sleeper(task):
