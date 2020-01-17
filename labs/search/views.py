@@ -48,7 +48,7 @@ def search(request, query):
                 "Abstract": {},
                 "Publication": {}
             },
-            'number_of_fragments': 0
+            'number_of_fragments': 0,
         }
     }
     result = es.search(index="judaicalink", body = body)
@@ -64,6 +64,12 @@ def search(request, query):
             "highlight" : d ["highlight"],
         }
         dataset.append (data)
+
+    #replace data in source with data in highlight
+    for d in dataset:
+        for s in d ["source"]:
+            if s in d ["highlight"]:
+                d ["source"] [s] = d ["highlight"] [s] [0]
 
 
     context = {
