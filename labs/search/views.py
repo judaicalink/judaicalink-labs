@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 from backend.models import Dataset
 from elasticsearch import Elasticsearch
+import json
 
 # Create your views here.
 
@@ -46,11 +47,15 @@ def search(request, query):
                 "deathLocation": {},
                 "Abstract": {},
                 "Publication": {}
-            }
+            },
+            'number_of_fragments': 0
         }
     }
     result = es.search(index="judaicalink", body = body)
-
+    
+    # For testing, never commit with a hardcoded path like this
+    # with open('/tmp/test.json', 'w') as f:
+    #     json.dump(result, f)
     dataset = []
     for d in result ["hits"] ["hits"]:
         data = {
