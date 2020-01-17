@@ -28,10 +28,10 @@ footer {
 }
 
 .gradient_corporate_color {
-    background-image: -moz-linear-gradient(center bottom , #283E99 100%); 
-    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(1, #283E99));
+    background-image: -moz-linear-gradient(center bottom , #8B0000 100%);
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(1, #8B0000));
 	
-	background-color: #283E99;
+	background-color: #8B0000;
 }
 
 .nav li {
@@ -235,7 +235,7 @@ height: 5px;
 }
 
 h1 {
-    color: red; /*red*/
+    color: DarkRed; /*DarkRed*/
     margin-bottom: 30px;
 }
 
