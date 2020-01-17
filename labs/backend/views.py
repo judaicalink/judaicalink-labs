@@ -35,7 +35,5 @@ def test_thread(request):
 
 def sleeper(task):
     task.log("Im am a sleeper!")
-    task.save()
     time.sleep(10)
     task.log('Awake')
-    task.save()

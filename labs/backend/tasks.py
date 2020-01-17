@@ -21,10 +21,8 @@ def start_task(target):
 def _target_wrapper(id, target):
     task = models.ThreadTask.objects.get(pk=id)
     task.log("Task started.")
-    task.save()
     target(task)
-    task.is_done = True
     task.log("Task finished")
-    task.save()
+    task.done()
 
 
