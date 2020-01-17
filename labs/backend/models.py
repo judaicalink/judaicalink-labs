@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from django.utils import timezone
 # Create your models here.
 
 class Dataset(models.Model):
@@ -9,10 +10,13 @@ class Dataset(models.Model):
 class ThreadTask(models.Model):
     name = models.TextField()
     is_done = models.BooleanField(blank=False, default=False)
+    started = models.DateTimeField(default = timezone.now)
+    ended = models.DateTimeField(null=True)
     log_text = models.TextField()
 
     def done(self):
         self.is_done = True
+        self.ended = datetime.now()
         self.save()
 
     def log(self, message):
