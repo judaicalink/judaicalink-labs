@@ -27,3 +27,6 @@ class ThreadTask(models.Model):
             if msgs[i].strip():
                 return msgs[i]
         return ""
+
+    def __str__(self):
+        return "{}".format(self.name)
