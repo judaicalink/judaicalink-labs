@@ -34,6 +34,6 @@ def test_thread(request):
     return HttpResponse('started')
 
 def sleeper(task):
-    task.log("Im am a sleeper!")
+    task.log("I'm a sleeper!")
     time.sleep(10)
     task.log('Awake')

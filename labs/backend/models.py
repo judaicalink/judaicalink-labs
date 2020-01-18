@@ -23,6 +23,7 @@ class ThreadTask(models.Model):
         self.refresh_from_db()
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
         self.log_text += '\n' + timestamp + ": " + message
+        self.log_text = self.log_text.strip()
         self.save() 
 
     def last_log(self):
