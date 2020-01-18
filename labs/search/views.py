@@ -27,20 +27,43 @@ def load(request):
 
 def search(request, query):
     es = Elasticsearch()
-    esquery = {
-               'query_string': {
 
-                'query': query,
-                }
+    body = {
+        "query" : {
+            "query_string": {
+                "query": query,
+                "fields": ["name^4", "Alternatives^3", "birthDate", "birthLocation^2", "deathDate", "deathLocation^2", "Abstract", "Publication"]
+            }
 
-            
-          
+        },
+        "highlight": {
+            "fields": {
+                "name": {},
+                "Alternatives": {},
+                "birthDate": {},
+                "birthLocation": {},
+                "deathDate": {},
+                "deathLocation": {},
+                "Abstract": {},
+                "Publication": {}
+            }
         }
+    }
+    result = es.search(index="judaicalink", body = body)
 
-    result = es.search(index="judaicalink", body={"query": esquery})
-    res = ""
-    for hit in result['hits']['hits']:
-        print(hit)
-        res += hit['_id']+'<br/>'
-    return HttpResponse(res)
+    dataset = []
+    for d in result ["hits"] ["hits"]:
+        data = {
+            "id" : d ["_id"],
+            "source" : d ["_source"],
+        }
+        dataset.append (data)
+
+    context = {
+        "result" : result ["hits"] ["hits"],
+            #contains full search results from elasticsearch
+        "dataset" : dataset
+            #contains id and information from fields
+    }
+    return render (request, "search/search_result.html", context)
 
