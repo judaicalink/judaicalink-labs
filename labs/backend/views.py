@@ -30,8 +30,10 @@ def load_from_github(request):
     return redirect(reverse('admin:backend_dataset_changelist'))
 
 
-def testchannels(request):
-    return HttpResponse('ok')
+def testchannels(request, layer):
+    return render(request, 'backend/chat.html', {
+        'room_name': layer
+    })
 
 
 def test_thread(request):

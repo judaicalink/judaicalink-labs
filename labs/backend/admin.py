@@ -15,7 +15,6 @@ class MyAdminSite(AdminSite):
         # This doesn't work with urls += ...
         urls = [
             url(r'^load_from_github/$', self.admin_view(views.load_from_github), name='load_from_github'),
-            url(r'^testchannels/$', self.admin_view(views.testchannels), name='testchannels'),
             url(r'^test-thread/$', self.admin_view(views.test_thread), name='test_thread')
         ] + urls
         return urls
