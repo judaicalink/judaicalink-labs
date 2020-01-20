@@ -127,7 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = /data/judaicalink/judaicalink-labs/static
+STATIC_ROOT = '/data/judaicalink/judaicalink-labs/static'
 # Channels
 ASGI_APPLICATION = "labs.routing.application"
 
