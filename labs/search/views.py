@@ -30,6 +30,7 @@ def search(request, query):
     es = Elasticsearch()
 
     body = {
+        "from" : 0, "size" : 15,
         "query" : {
             "query_string": {
                 "query": query,
