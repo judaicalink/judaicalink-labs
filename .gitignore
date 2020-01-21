@@ -49,6 +49,7 @@ MANIFEST
 
 .vscode
 .idea
+.vim
 
 # Installer logs
 pip-log.txt

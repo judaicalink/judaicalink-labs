@@ -1,6 +1,8 @@
 from django.db import models
 from datetime import datetime
 from django.utils import timezone
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
 # Create your models here.
 
 class Dataset(models.Model):
@@ -25,6 +27,15 @@ class ThreadTask(models.Model):
         self.log_text += '\n' + timestamp + ": " + message
         self.log_text = self.log_text.strip()
         self.save() 
+        async_to_sync(get_channel_layer().group_send)(
+            'taskmessages',
+            {
+                'type': 'task_message',
+                'message': message,
+                'class': 'warning',
+                'timeout': 3000,
+            }
+        )
 
     def last_log(self):
         msgs = self.log_text.split('\n')

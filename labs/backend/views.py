@@ -17,23 +17,23 @@ def load_from_github(request):
     Loads all Markdown files from the judaicalink-site Github repository.
     Saves files in gh_datasets.
     '''
+    tasks.start_task('Github Import', task_github)
+    return redirect(reverse('admin:backend_dataset_changelist'))
+
+
+def task_github(task):
     try:
         Path("backend/gh_datasets").mkdir(parents=True, exist_ok=True)
         gh_res = requests.get('https://api.github.com/repos/wisslab/judaicalink-site/contents/content/datasets')
         gh_datasets = json.loads(gh_res.content.decode('utf-8'))
         for gh_dataset in gh_datasets:
+            task.log('Importing {}'.format(gh_dataset['name']))
             gh_ds_md = requests.get(gh_dataset['download_url'])
             with open('backend/gh_datasets/{}'.format(gh_dataset['name']), 'wb') as f:
                 f.write(gh_ds_md.content)
     except Exception as e:
         raise e
-    return redirect(reverse('admin:backend_dataset_changelist'))
 
-
-def testchannels(request, layer):
-    return render(request, 'backend/chat.html', {
-        'room_name': layer
-    })
 
 
 def test_thread(request):

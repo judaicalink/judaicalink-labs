@@ -19,7 +19,9 @@ class MyAdminSite(AdminSite):
         ] + urls
         return urls
 
+
 admin_site = MyAdminSite()
+
 
 admin_site.register(models.Dataset)
 
