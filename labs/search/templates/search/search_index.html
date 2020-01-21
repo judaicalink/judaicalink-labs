@@ -13,7 +13,7 @@
 </div>
 <div class="col-md-8">
     <div class="search" align="center">
-        <h1>SEARCH  OUR DATA</h1>
+        <h1>Fulltext Search</h1>
         <form action="{% url 'search_index' %}" method="post">
             {% csrf_token %}
             <input type="text" name="search_term" id="search_term">
@@ -27,7 +27,6 @@
 </p>
 </div>
 
-{% include "search/sidebar.html" %}
 
 {% include "search/footer.html" %}
 
