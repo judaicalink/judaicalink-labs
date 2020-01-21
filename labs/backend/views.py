@@ -4,6 +4,8 @@ from django.urls import reverse
 import requests
 import json
 from . import hugotools
+from . import tasks
+import time
 from pathlib import Path
 
 
@@ -26,3 +28,20 @@ def load_from_github(request):
     except Exception as e:
         raise e
     return redirect(reverse('admin:backend_dataset_changelist'))
+
+
+def testchannels(request, layer):
+    return render(request, 'backend/chat.html', {
+        'room_name': layer
+    })
+
+
+def test_thread(request):
+    tasks.start_task("Sleeper test", sleeper)
+    return HttpResponse('started')
+
+def sleeper(task):
+    task.log("I'm a sleeper!")
+    time.sleep(10)
+    task.log('Awake')
+
