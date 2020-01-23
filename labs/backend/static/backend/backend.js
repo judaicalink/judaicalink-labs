@@ -54,6 +54,7 @@
       // console.log('messagelist created');
       $('<ul class="messagelist"></ul>').insertBefore('div#content');
     }
+    $('li#' + id).remove();
     var msgEl = $('<li id=' + id + ' class="' + level + '"><span class="message">' + message + '</span><span class="submessage">' + submessage + '</span></li>').appendTo('.messagelist');
     if (timeout){
       window.setTimeout(function(){
