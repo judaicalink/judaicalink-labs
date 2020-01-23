@@ -1,9 +1,8 @@
 from django.db import models
 from datetime import datetime
 from django.utils import timezone
-from asgiref.sync import async_to_sync
-from channels.layers import get_channel_layer
 # Create your models here.
+from . import consumers
 
 class Dataset(models.Model):
     name = models.TextField()
@@ -16,10 +15,12 @@ class ThreadTask(models.Model):
     ended = models.DateTimeField(null=True)
     log_text = models.TextField()
 
+
     def done(self):
         self.is_done = True
         self.ended = datetime.now()
         self.save()
+
 
     def log(self, message):
         self.refresh_from_db()
@@ -27,15 +28,9 @@ class ThreadTask(models.Model):
         self.log_text += '\n' + timestamp + ": " + message
         self.log_text = self.log_text.strip()
         self.save() 
-        async_to_sync(get_channel_layer().group_send)(
-            'taskmessages',
-            {
-                'type': 'task_message',
-                'message': message,
-                'class': 'warning',
-                'timeout': 3000,
-            }
-        )
+        consumers.sendMessage('testmsg', 'warning', message, "")
+
+
 
     def last_log(self):
         msgs = self.log_text.split('\n')

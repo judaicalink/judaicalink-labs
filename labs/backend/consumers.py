@@ -1,5 +1,7 @@
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
 import json
 
 class BackendConsumer(WebsocketConsumer):
@@ -21,25 +23,22 @@ class BackendConsumer(WebsocketConsumer):
             self.channel_name
         )
 
-    # Receive message from WebSocket
-    def receive(self, text_data):
-        text_data_json = json.loads(text_data)
-        message = text_data_json['message']
-
-        # Send message to room group
-        async_to_sync(self.channel_layer.group_send)(
-            self.group_name,
-            {
-                'type': 'chat_message',
-                'message': message
-            }
-        )
-
     # Receive message from room group
     def task_message(self, event):
         # Send message to WebSocket
-        self.send(text_data=json.dumps({
-            'message': event['message'],
-            'class': event['class'],
-            'timeout': event['timeout'],
-        }))
+        self.send(text_data=json.dumps(event))
+
+
+def sendMessage(id, level, message, submessage):
+        async_to_sync(get_channel_layer().group_send)(
+            'taskmessages',
+            {
+                'action': 'create',
+                'type': 'task_message',
+                'message': message,
+                'id': id,
+                'submessage': submessage,
+                'level': 'warning',
+                'timeout': 3000,
+            }
+        )

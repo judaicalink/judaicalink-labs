@@ -5,7 +5,7 @@ gh_datasets
 /data/
 /fuseki/
 labs/labs/settings.py
-static
+/static
 labs/secret_key.txt
 htpasswd
 
