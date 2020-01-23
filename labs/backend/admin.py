@@ -30,8 +30,23 @@ formfield_overrides = {
 
 
 def num_files(ds):
-    return ds.datafile_set.count()
+    files = ds.datafile_set.count() 
+    indexed = ds.datafile_set.filter(indexed=True).count()
+    return "{}/{}".format(indexed, files) 
 
+num_files.short_description = "Indexed / Files"
+
+
+def set_indexed(modeladmin, request, queryset):
+    for ds in queryset:
+        ds.set_indexed(True)
+
+def unset_indexed(modeladmin, request, queryset):
+    for ds in queryset:
+        ds.set_indexed(False)
+
+set_indexed.short_description = "Index selected datasets and files"
+unset_indexed.short_description = "So not index selected datasets and files"
 
 class DatafileAdmin(admin.TabularInline):
     model = models.Datafile
@@ -45,6 +60,7 @@ class DatasetAdmin(admin.ModelAdmin):
 
     formfield_overrides = formfield_overrides     
     inlines = [ DatafileAdmin, ]
+    actions = [ set_indexed, unset_indexed ]
 
 
 

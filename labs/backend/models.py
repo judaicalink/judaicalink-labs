@@ -8,16 +8,26 @@ from . import hugotools
 class Dataset(models.Model):
     name = models.TextField()
     title = models.TextField()
+    indexed = models.BooleanField(default=False)
+
+    
+    def set_indexed(self, value):
+        self.indexed = value
+        for file in self.datafile_set.all():
+            file.indexed = value
+            file.save()
+        self.save()
+
 
     def __str__(self):
         return "Dataset: " + self.name
-
 
 
 class Datafile(models.Model):
     dataset = models.ForeignKey(Dataset, on_delete=models.CASCADE)
     url = models.TextField()
     description = models.TextField()
+    indexed = models.BooleanField(default=False)
 
 
 def update_from_markdown(filename):
