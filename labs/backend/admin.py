@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.admin import AdminSite
+import django.db.models as django_models
 
 from . import views
 from . import models
@@ -23,7 +24,31 @@ class MyAdminSite(AdminSite):
 admin_site = MyAdminSite()
 
 
-admin_site.register(models.Dataset)
+formfield_overrides = {
+            django_models.TextField: {'widget': admin.widgets.AdminTextInputWidget}, 
+        }
+
+
+def num_files(ds):
+    return ds.datafile_set.count()
+
+
+class DatafileAdmin(admin.TabularInline):
+    model = models.Datafile
+    formfield_overrides = formfield_overrides
+    extra = 0
+
+
+class DatasetAdmin(admin.ModelAdmin):
+    list_display = ['name', 'title', num_files]
+    list_display_links = ['name']
+
+    formfield_overrides = formfield_overrides     
+    inlines = [ DatafileAdmin, ]
+
+
+
+admin_site.register(models.Dataset, DatasetAdmin)
 
 class ThreadTaskAdmin(admin.ModelAdmin):
     list_display = ['name', 'started', 'ended', 'is_done', 'last_log']
