@@ -40,10 +40,12 @@ num_files.short_description = "Indexed / Files"
 def set_indexed(modeladmin, request, queryset):
     for ds in queryset:
         ds.set_indexed(True)
+    modeladmin.message_user(request, 'Index flags updated.')
 
 def unset_indexed(modeladmin, request, queryset):
     for ds in queryset:
         ds.set_indexed(False)
+    modeladmin.message_user(request, 'Index flags updated.')
 
 set_indexed.short_description = "Index selected datasets and files"
 unset_indexed.short_description = "So not index selected datasets and files"
