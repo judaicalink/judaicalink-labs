@@ -38,6 +38,12 @@ def task_github(task):
         raise e
 
 
+def load_elasticsearch(request):
+    '''
+    Fetches all data files and indexes them in ES.
+    '''
+    # tasks.start_task('Github Import', task_github)
+    return redirect(reverse('admin:backend_dataset_changelist'))
 
 def test_thread(request):
     tasks.start_task("Sleeper test", sleeper)

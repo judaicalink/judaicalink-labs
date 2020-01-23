@@ -16,6 +16,7 @@ class MyAdminSite(AdminSite):
         # This doesn't work with urls += ...
         urls = [
             url(r'^load_from_github/$', self.admin_view(views.load_from_github), name='load_from_github'),
+            url(r'^load_elasticsearch/$', self.admin_view(views.load_elasticsearch), name='load_elasticsearch'),
             url(r'^test-thread/$', self.admin_view(views.test_thread), name='test_thread')
         ] + urls
         return urls
@@ -57,7 +58,8 @@ class DatafileAdmin(admin.TabularInline):
 
 
 class DatasetAdmin(admin.ModelAdmin):
-    list_display = ['name', 'title', num_files]
+    list_display = ['name', 'title', 'indexed', num_files]
+    list_editable = ['indexed']
     list_display_links = ['name']
 
     formfield_overrides = formfield_overrides     
