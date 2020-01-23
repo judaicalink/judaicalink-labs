@@ -5,6 +5,7 @@ import requests
 import json
 from . import hugotools
 from . import tasks
+from . import models
 import time
 from pathlib import Path
 
@@ -31,6 +32,7 @@ def task_github(task):
             gh_ds_md = requests.get(gh_dataset['download_url'])
             with open('backend/gh_datasets/{}'.format(gh_dataset['name']), 'wb') as f:
                 f.write(gh_ds_md.content)
+            models.update_from_markdown(gh_dataset['name'])
         
     except Exception as e:
         raise e
