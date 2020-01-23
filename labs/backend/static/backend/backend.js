@@ -4,14 +4,15 @@
 
     msgSocket.onmessage = function(e) {
         var data = JSON.parse(e.data);
+        console.log('msg received: ' + data)
         var message = data['message'];
         var level = data['level'];
         var timeout = data['timeout'];
         var id = data['id'];
-        var submsg = data['submsg'];
+        var submessage = data['submessage'];
         var action = data['action'];
         if (action == 'create') {
-          addMessage(id, level, message, submsg, timeout);
+          addMessage(id, level, message, submessage,  timeout);
         } else if (action == 'remove') {
           removeMessage(id);
         } else if (action == 'update') {
@@ -30,7 +31,7 @@
   }
 
 
-  function updateMessage(id, level, message, submsg) {
+  function updateMessage(id, level, message, submessage) {
     var msgEl = $('li#' + id)
     if (! msgEl) {
       return;
@@ -40,20 +41,20 @@
       
     }
     if (message !== undefined) {
-      $(msgEl).find('span.msg').html(message);
+      $(msgEl).find('span.message').html(message);
     }
-    if (submsg !== undefined) {
-      $(msgEl).find('span.submsg').html(message);
+    if (submessage !== undefined) {
+      $(msgEl).find('span.submessage').html(submessage);
     }
   }
 
-  function addMessage(id, level, message, submsg, timeout) {
+  function addMessage(id, level, message, submessage, timeout) {
     //console.log('Adding message: ' + message);
     if ($('.messagelist').length == 0) {
       // console.log('messagelist created');
       $('<ul class="messagelist"></ul>').insertBefore('div#content');
     }
-    var msgEl = $('<li id=' + id + ' class="' + level + '"><span class="msg">' + message + '</span><span class="submsg">' + submsg + '</span></li>').appendTo('.messagelist');
+    var msgEl = $('<li id=' + id + ' class="' + level + '"><span class="message">' + message + '</span><span class="submessage">' + submessage + '</span></li>').appendTo('.messagelist');
     if (timeout){
       window.setTimeout(function(){
         msgEl.remove();

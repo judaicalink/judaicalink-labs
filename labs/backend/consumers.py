@@ -3,6 +3,7 @@ from channels.generic.websocket import WebsocketConsumer
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 import json
+from . import models
 
 class BackendConsumer(WebsocketConsumer):
     def connect(self):
@@ -15,6 +16,9 @@ class BackendConsumer(WebsocketConsumer):
         )
 
         self.accept()
+        running = models.ThreadTask.objects.filter(is_done=False)
+        for task in running:
+            send_message('task{}'.format(task.id), 'info', task.name + ':', '') 
 
     def disconnect(self, close_code):
         # Leave room group
@@ -29,7 +33,7 @@ class BackendConsumer(WebsocketConsumer):
         self.send(text_data=json.dumps(event))
 
 
-def sendMessage(id, level, message, submessage):
+def send_message(id, level, message, submessage):
         async_to_sync(get_channel_layer().group_send)(
             'taskmessages',
             {
@@ -38,7 +42,20 @@ def sendMessage(id, level, message, submessage):
                 'message': message,
                 'id': id,
                 'submessage': submessage,
-                'level': 'warning',
-                'timeout': 3000,
+                'level': 'info',
+            }
+        )
+
+
+def send_sub_message(id, level='info', submessage=''):
+        print('sending sub message: {}'.format(submessage))
+        async_to_sync(get_channel_layer().group_send)(
+            'taskmessages',
+            {
+                'action': 'update',
+                'type': 'task_message',
+                'id': id,
+                'submessage': submessage,
+                'level': level,
             }
         )

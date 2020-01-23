@@ -28,7 +28,8 @@ class ThreadTask(models.Model):
         self.log_text += '\n' + timestamp + ": " + message
         self.log_text = self.log_text.strip()
         self.save() 
-        consumers.sendMessage('testmsg', 'warning', message, "")
+        consumers.send_sub_message('task{}'.format(self.id), submessage=message)
+        print('Logged: {}'.format(message))
 
 
 
