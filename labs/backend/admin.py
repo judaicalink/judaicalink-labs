@@ -71,7 +71,7 @@ class DatasetAdmin(admin.ModelAdmin):
 admin_site.register(models.Dataset, DatasetAdmin)
 
 class ThreadTaskAdmin(admin.ModelAdmin):
-    list_display = ['name', 'started', 'ended', 'is_done', 'last_log']
+    list_display = ['name', 'started', 'ended', 'is_done', 'status_ok', 'last_log']
     list_display_links = ['name']
     list_filter = ['is_done', 'name']
 
