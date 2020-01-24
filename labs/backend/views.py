@@ -6,6 +6,7 @@ import json
 from . import hugotools
 from . import tasks
 from . import models
+from . import dataset_loader
 import time
 from pathlib import Path
 
@@ -42,7 +43,7 @@ def load_elasticsearch(request):
     '''
     Fetches all data files and indexes them in ES.
     '''
-    # tasks.start_task('Github Import', task_github)
+    tasks.start_task('Elasticsearch loader: ', dataset_loader.load_in_elasticsearch)
     return redirect(reverse('admin:backend_dataset_changelist'))
 
 def test_thread(request):

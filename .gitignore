@@ -1,7 +1,9 @@
 # JudaicaLink labs specific
 
 # the folder where the github markdown files are stored
-gh_datasets
+/labs/backend/gh_datasets
+# the folder where rdf files are stored
+/labs/backend/rdf_files
 /data/
 /fuseki/
 labs/labs/settings.py
