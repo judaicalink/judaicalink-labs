@@ -49,7 +49,7 @@ def unset_indexed(modeladmin, request, queryset):
     modeladmin.message_user(request, 'Index flags updated.')
 
 set_indexed.short_description = "Index selected datasets and files"
-unset_indexed.short_description = "So not index selected datasets and files"
+unset_indexed.short_description = "Do not index selected datasets and files"
 
 class DatafileAdmin(admin.TabularInline):
     model = models.Datafile

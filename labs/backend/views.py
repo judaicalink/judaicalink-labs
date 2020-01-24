@@ -43,7 +43,7 @@ def load_elasticsearch(request):
     '''
     Fetches all data files and indexes them in ES.
     '''
-    tasks.start_task('Elasticsearch loader: ', dataset_loader.load_in_elasticsearch)
+    tasks.start_task('Elasticsearch loader', dataset_loader.load_in_elasticsearch)
     return redirect(reverse('admin:backend_dataset_changelist'))
 
 def test_thread(request):

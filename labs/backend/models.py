@@ -56,6 +56,7 @@ def update_from_markdown(filename):
 class ThreadTask(models.Model):
     name = models.TextField()
     is_done = models.BooleanField(blank=False, default=False)
+    status_ok = models.BooleanField(blank=False, default=True)
     started = models.DateTimeField(default = timezone.now)
     ended = models.DateTimeField(null=True)
     log_text = models.TextField()

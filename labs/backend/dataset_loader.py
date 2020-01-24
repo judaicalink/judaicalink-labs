@@ -16,8 +16,7 @@ def load_rdf_file(url):
     filename = 'backend/rdf_files/' + url_2_filename(url)
     if os.path.exists(filename):
         mtime = os.path.getmtime(filename)
-        ts = datetime.fromtimestamp(mtime)
-        headers['If-Modified-Since'] = http_date(ts) 
+        headers['If-Modified-Since'] = http_date(int(mtime)) 
     res = requests.get(url, headers=headers)
     if res.status_code == 200:
         Path("backend/rdf_files").mkdir(parents=True, exist_ok=True)
