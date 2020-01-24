@@ -30,13 +30,13 @@ def load(request):
 def search(request, query, page):
     es = Elasticsearch()
     size = 10
-    current_page = page -1
+  #  current_page = page -1
 
-    if page > 1:
-        current_page = current_page * size
+#    if page > 1:
+    start = (page - 1) * size
 
     body = {
-        "from" : current_page, "size" : size,
+        "from" : start, "size" : size,
         "query" : {
             "query_string": {
                 "query": query,
@@ -67,6 +67,7 @@ def search(request, query, page):
     for d in result ["hits"] ["hits"]:
         data = {
             "id" : d ["_id"],
+            #name
             "source" : d ["_source"],
             "highlight" : d ["highlight"],
         }
@@ -79,7 +80,7 @@ def search(request, query, page):
                 d ["source"] [s] = d ["highlight"] [s] [0]
 
 #    print (result)
-    print (current_page)
+ #   print (current_page)
 
     total_hits = result ["hits"] ["total"] ["value"]
     pages = math.ceil (total_hits / size)   #number of needed pages for paging
