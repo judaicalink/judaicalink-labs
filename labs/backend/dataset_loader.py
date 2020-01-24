@@ -25,7 +25,7 @@ def load_rdf_file(url):
 
     
 def load_in_elasticsearch(task):
-    for df in models.Datafile.objects.filter(indexed=True):
+    for df in models.Datafile.objects.filter(indexed=True, dataset__indexed=True):
         task.log(df.url)
         load_rdf_file(df.url)
 
