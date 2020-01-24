@@ -24,5 +24,14 @@
     <br> <br>
 {% endfor %}
 
+pages: {{pages}}
+total_hits: {{total_hits}}
+
+<br> <br>
+
+{% for i in range %}
+<a href="{% url 'search' query i %}"> {{ i }} </a>
+{% endfor %}
+
 </body>
 </html>
