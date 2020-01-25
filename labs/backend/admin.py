@@ -17,12 +17,13 @@ class MyAdminSite(AdminSite):
         urls = [
             url(r'^load_from_github/$', self.admin_view(views.load_from_github), name='load_from_github'),
             url(r'^load_elasticsearch/$', self.admin_view(views.load_elasticsearch), name='load_elasticsearch'),
-            url(r'^test-thread/$', self.admin_view(views.test_thread), name='test_thread')
+            url(r'^test-thread/$', self.admin_view(views.test_thread), name='test_thread'),
+            url(r'^server-status/$', self.admin_view(views.test_thread), name='serverstatus'),
         ] + urls
         return urls
 
 
-admin_site = MyAdminSite()
+admin_site = MyAdminSite(name='admin')
 
 
 formfield_overrides = {
