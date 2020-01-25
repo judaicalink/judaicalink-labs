@@ -18,7 +18,7 @@ class MyAdminSite(AdminSite):
             url(r'^load_from_github/$', self.admin_view(views.load_from_github), name='load_from_github'),
             url(r'^load_elasticsearch/$', self.admin_view(views.load_elasticsearch), name='load_elasticsearch'),
             url(r'^test-thread/$', self.admin_view(views.test_thread), name='test_thread'),
-            url(r'^server-status/$', self.admin_view(views.test_thread), name='serverstatus'),
+            url(r'^backend/serverstatus/$', self.admin_view(views.serverstatus), name='serverstatus'),
         ] + urls
         return urls
 

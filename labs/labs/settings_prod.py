@@ -141,3 +141,9 @@ CHANNEL_LAYERS = {
 }
 
 
+
+
+# Other Servers
+
+FUSEKI_SERVER = "http://localhost:8080/fuseki/"
+ELASTICSEARCH_SERVER = "http://localhost:9200/"

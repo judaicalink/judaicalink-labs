@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
+from django.conf import settings
 import requests
 import json
 from . import hugotools
@@ -55,3 +56,36 @@ def sleeper(task):
     time.sleep(10)
     task.log('Awake')
 
+def serverstatus(request):
+    context = {
+        'elasticsearch': [('Status', 'offline')],
+        'fuseki': [('Status', 'offline')],
+            }
+    try:
+        es_main = json.loads(requests.get(settings.ELASTICSEARCH_SERVER).content.decode('utf-8'))
+        es_stats = json.loads(requests.get(settings.ELASTICSEARCH_SERVER+'_stats').content.decode('utf-8'))
+        context['elasticsearch'] = [
+            ('Version', es_main['version']['number']),
+            ('Name', es_main['name']),
+            ('Cluster Name', es_main['cluster_name']),
+            ('Indices', '\n'.join(es_stats['indices']))
+            ]
+        for index in es_stats['indices']:
+            context['elasticsearch'].append((index + ' Docs', "{:,}".format(es_stats['indices'][index]['total']['docs']['count'])))
+            context['elasticsearch'].append((index + ' Size', "{:.2f} M".format(es_stats['indices'][index]['total']['store']['size_in_bytes']/1024/1024)))
+    except:
+        pass
+    
+    try:
+        f_main = json.loads(requests.get(settings.FUSEKI_SERVER+'$/server').content.decode('utf-8'))
+        
+        context['fuseki'] = [
+            ('Version', f_main['version']),
+            ('Started', f_main['startDateTime']),
+            ('Datasets', '\n'.join([ds['ds.name'] for ds in f_main['datasets']]))
+                ]
+        for ds in f_main['datasets']:
+            pass
+    except:
+        pass
+    return render(request, 'admin/serverstatus.html', context)
