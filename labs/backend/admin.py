@@ -30,12 +30,19 @@ formfield_overrides = {
         }
 
 
-def num_files(ds):
+def num_indexed(ds):
     files = ds.datafile_set.count() 
     indexed = ds.datafile_set.filter(indexed=True).count()
     return "{}/{}".format(indexed, files) 
 
-num_files.short_description = "Indexed / Files"
+num_indexed.short_description = "Indexed / Files"
+
+def num_loaded(ds):
+    files = ds.datafile_set.count() 
+    loaded = ds.datafile_set.filter(loaded=True).count()
+    return "{}/{}".format(loaded, files) 
+
+num_loaded.short_description = "Loaded / Files"
 
 
 def set_indexed(modeladmin, request, queryset):
@@ -58,8 +65,8 @@ class DatafileAdmin(admin.TabularInline):
 
 
 class DatasetAdmin(admin.ModelAdmin):
-    list_display = ['name', 'title', 'indexed', num_files]
-    list_editable = ['indexed']
+    list_display = ['name', 'title', 'loaded', num_loaded, 'indexed', num_indexed]
+    list_editable = ['indexed', 'loaded']
     list_display_links = ['name']
 
     formfield_overrides = formfield_overrides     

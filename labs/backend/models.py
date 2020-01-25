@@ -9,6 +9,7 @@ class Dataset(models.Model):
     name = models.TextField()
     title = models.TextField()
     indexed = models.BooleanField(default=False)
+    loaded = models.BooleanField(default=False)
 
     
     def set_indexed(self, value):
@@ -18,6 +19,13 @@ class Dataset(models.Model):
             file.save()
         self.save()
 
+    
+    def set_loaded(self, value):
+        self.loaded = value
+        for file in self.datafile_set.all():
+            file.loaded = value
+            file.save()
+        self.save()
 
     def __str__(self):
         return "Dataset: " + self.name
@@ -28,6 +36,7 @@ class Datafile(models.Model):
     url = models.TextField()
     description = models.TextField()
     indexed = models.BooleanField(default=False)
+    loaded = models.BooleanField(default=False)
 
 
 def update_from_markdown(filename):
@@ -40,10 +49,12 @@ def update_from_markdown(filename):
         ds.save()
         ds.refresh_from_db()
     ds.title = data['title']
+    ds.loaded = data['loaded']
     ds.datafile_set.all().delete()
     for file in data['files']:
         datafile = Datafile()
         datafile.dataset = ds
+        datafile.loaded = ds.loaded
         datafile.url = file['url']
         if 'description' in file:
             datafile.description = file['description']
