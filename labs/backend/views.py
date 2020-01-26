@@ -8,6 +8,7 @@ from . import hugotools
 from . import tasks
 from . import models
 from . import dataset_loader
+from . import admin
 import time
 from pathlib import Path
 
@@ -58,6 +59,7 @@ def sleeper(task):
 
 def serverstatus(request):
     context = {
+        'site_header': admin.admin_site.site_header,
         'elasticsearch': [('Status', 'offline')],
         'fuseki': [('Status', 'offline')],
             }
