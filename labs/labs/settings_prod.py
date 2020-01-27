@@ -146,4 +146,6 @@ CHANNEL_LAYERS = {
 # Other Servers
 
 FUSEKI_SERVER = "http://localhost:8080/fuseki/"
+FUSEKI_STORAGE = "/data/fuseki/databases/judaicalink"
 ELASTICSEARCH_SERVER = "http://localhost:9200/"
+ELASTICSEARCH_STORAGE = "/var/lib/elasticsearch"
