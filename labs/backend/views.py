@@ -10,6 +10,8 @@ from . import models
 from . import dataset_loader
 from . import admin
 import time
+import shutil
+from datetime import datetime
 from pathlib import Path
 
 
@@ -57,6 +59,12 @@ def sleeper(task):
     time.sleep(10)
     task.log('Awake')
 
+
+def dirsize(directory):
+    root_directory = Path(directory)
+    return sum(f.stat().st_size for f in root_directory.glob('**/*') if f.is_file() )
+
+
 def serverstatus(request):
     context = {
         'site_header': admin.admin_site.site_header,
@@ -75,19 +83,25 @@ def serverstatus(request):
         for index in es_stats['indices']:
             context['elasticsearch'].append((index + ' Docs', "{:,}".format(es_stats['indices'][index]['total']['docs']['count'])))
             context['elasticsearch'].append((index + ' Size', "{:.2f} M".format(es_stats['indices'][index]['total']['store']['size_in_bytes']/1024/1024)))
-    except:
-        pass
+        if hasattr(settings, 'ELASTICSEARCH_STORAGE'):
+            df = shutil.disk_usage(settings.ELASTICSEARCH_STORAGE)
+            context['elasticsearch'].append(('Disk space (' + settings.ELASTICSEARCH_STORAGE + ')', "{:.2f} / {:.2f} G".format(df.free / 2**30, df.total/2**30)))
+            context['elasticsearch'].append(('Disk used (' + settings.ELASTICSEARCH_STORAGE + ')', "{:.2f} M".format(dirsize(settings.ELASTICSEARCH_STORAGE)/2**20)))
+    except Exception as e:
+        print(str(e))
     
     try:
         f_main = json.loads(requests.get(settings.FUSEKI_SERVER+'$/server').content.decode('utf-8'))
         
         context['fuseki'] = [
             ('Version', f_main['version']),
-            ('Started', f_main['startDateTime']),
+            ('Started', datetime.fromisoformat(f_main['startDateTime']).strftime("%Y-%m-%d %H:%M")),
             ('Datasets', '\n'.join([ds['ds.name'] for ds in f_main['datasets']]))
                 ]
-        for ds in f_main['datasets']:
-            pass
-    except:
-        pass
+        if hasattr(settings, 'FUSEKI_STORAGE'):
+            df = shutil.disk_usage(settings.FUSEKI_STORAGE)
+            context['fuseki'].append(('Disk space (' + settings.FUSEKI_STORAGE + ')', "{:.2f} / {:.2f} G".format(df.free / 2**30, df.total/2**30)))
+            context['fuseki'].append(('Disk used (' + settings.FUSEKI_STORAGE  + ')', "{:.2f} M".format(dirsize(settings.FUSEKI_STORAGE)/2**20)))
+    except Exception as e:
+        print(str(e))
     return render(request, 'admin/serverstatus.html', context)
