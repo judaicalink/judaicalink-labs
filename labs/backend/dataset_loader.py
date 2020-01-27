@@ -7,9 +7,11 @@ import time
 import gzip
 import os
 from . import models
+from . import sparqltools
 from pathlib import Path
 from datetime import datetime
 from django.utils.http import http_date
+from django.conf import settings
 
 def url_2_filename(url):
     url = url.replace(':', '_').replace('/', '_').replace('__', '_').replace('__', '_')
@@ -122,6 +124,28 @@ def load_in_elasticsearch(task):
         ic.delete('judaicalink')
     ic.create(index='judaicalink', body={'mappings': mappings})
     for df in models.Datafile.objects.filter(indexed=True, dataset__indexed=True):
-        task.log(df.url + " parsing")
-        filename = load_rdf_file(df.url)
-        index_file(filename, task)
+        if df.dataset.is_rdf():
+            task.log(df.url + " parsing")
+            filename = load_rdf_file(df.url)
+            index_file(filename, task)
+
+
+def create_dataset(name, db_type='mem'):
+    res = requests.get(settings.FUSEKI_SERVER + '$/datasets/' + name)
+    if res.status_code==404:
+        res = requests.post(settings.FUSEKI_SERVER + '$/datasets', {'dbType': db_type, 'dbName':name})
+
+def load_in_fuseki(task):
+    create_dataset('judaicalink')
+    for ds in models.Dataset.objects.all():
+        if not ds.is_rdf():
+            continue
+        task.log(ds.name + " dropping")
+        sparqltools.unload(settings.FUSEKI_SERVER + 'judaicalink/update', ds.graph)
+        if not ds.loaded:
+            continue
+        for df in ds.datafile_set.all():
+            if df.loaded:
+                filename = load_rdf_file(df.url)
+                task.log(filename + " loading")
+                sparqltools.load(filename, settings.FUSEKI_SERVER + 'judaicalink/update', ds.graph, log=task.log)

@@ -10,6 +10,7 @@ class Dataset(models.Model):
     title = models.TextField()
     indexed = models.BooleanField(default=False)
     loaded = models.BooleanField(default=False)
+    graph = models.TextField(null=True)
 
     
     def set_indexed(self, value):
@@ -26,6 +27,9 @@ class Dataset(models.Model):
             file.loaded = value
             file.save()
         self.save()
+
+    def is_rdf(self):
+        return self.graph is not None and self.graph.strip() != ''
 
     def __str__(self):
         return "Dataset: " + self.name
@@ -50,6 +54,8 @@ def update_from_markdown(filename):
         ds.refresh_from_db()
     ds.title = data['title']
     ds.loaded = data['loaded']
+    if 'graph' in data:
+        ds.graph = data['graph']
     ds.datafile_set.all().delete()
     for file in data['files']:
         datafile = Datafile()

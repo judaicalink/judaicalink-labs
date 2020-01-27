@@ -50,6 +50,15 @@ def load_elasticsearch(request):
     tasks.start_task('Elasticsearch loader', dataset_loader.load_in_elasticsearch)
     return redirect(reverse('admin:backend_dataset_changelist'))
 
+
+def load_fuseki(request):
+    '''
+    Fetches all data files and loads them in Fuseki.
+    '''
+    tasks.start_task('Fuseki loader', dataset_loader.load_in_fuseki)
+    return redirect(reverse('admin:backend_dataset_changelist'))
+
+
 def test_thread(request):
     tasks.start_task("Sleeper test", sleeper)
     return HttpResponse('started')
