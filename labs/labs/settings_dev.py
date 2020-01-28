@@ -41,8 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'channels',
+    'core',
     'backend',
-    'search'
+    'search',
+    'lodjango'
 ]
 
 MIDDLEWARE = [
@@ -138,6 +140,7 @@ CHANNEL_LAYERS = {
 
 # Other Servers
 
+LABS_ROOT = 'http://localhost:8000/'
 FUSEKI_SERVER = "http://localhost:3030/"
 FUSEKI_STORAGE = "."
 ELASTICSEARCH_SERVER = "http://localhost:9200/"
