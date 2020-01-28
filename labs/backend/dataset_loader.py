@@ -25,11 +25,14 @@ def load_rdf_file(url):
     if os.path.exists(filename):
         mtime = os.path.getmtime(filename)
         headers['If-Modified-Since'] = http_date(int(mtime)) 
-    res = requests.get(url, headers=headers)
-    if res.status_code == 200:
-        Path("backend/rdf_files").mkdir(parents=True, exist_ok=True)
-        with open(filename, 'wb') as f:
-            f.write(res.content)
+    try:
+        res = requests.get(url, headers=headers)
+        if res.status_code == 200:
+            Path("backend/rdf_files").mkdir(parents=True, exist_ok=True)
+            with open(filename, 'wb') as f:
+                f.write(res.content)
+    except:
+        print("Connection error: " + url)
     return filename
 
 
