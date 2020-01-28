@@ -47,6 +47,9 @@ def get(request, path):
         OPTIONAL {{
             ?o <http://www.w3.org/2004/02/skos/core#prefLabel> ?olabel.
         }}
+        OPTIONAL {{
+            ?o <http://www.w3.org/2000/01/rdf-schema#label> ?olabel.
+        }}
         filter(?s=<{}>)
     }}
     '''.format(uri))

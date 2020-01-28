@@ -1,18 +1,19 @@
+{% extends "core/base.html" %}
 {% load lod_tags %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LOD</title>
-</head>
-<body>
+{% block content %}
+  
   {% for subject, properties in data.items %}
   <h2>{{ subject }}</h2>
-  <table>
+  <table class='table table-striped'>
+    <thead class='thead-dark'>
+      <th colspan='2'>
+        {{subject}}
+      </th>
+    </thead>
+    <tbody>
     {% for property, values in properties.items %}
     <tr>
-      <th>{{ property }}</th>
+      <th scope='row'>{{ property }}</th>
       <td>
         {% for value in values  %}
         {% if value.1 %}
@@ -24,8 +25,8 @@
       </td>
     </tr>
     {% endfor %}
+    </tbody>
   </table>
   {% endfor %}
   
-</body>
-</html>
+{% endblock %}
