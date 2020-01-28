@@ -1,0 +1,31 @@
+{% load lod_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOD</title>
+</head>
+<body>
+  {% for subject, properties in data.items %}
+  <h2>{{ subject }}</h2>
+  <table>
+    {% for property, values in properties.items %}
+    <tr>
+      <th>{{ property }}</th>
+      <td>
+        {% for value in values  %}
+        {% if value.1 %}
+        <a href="{% local value.1 %}" title="{{value.1}}">{{value.0}}</a><br/>
+        {% else %}
+          {{ value.0 }}<br/>  
+        {% endif %}
+        {% endfor %}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endfor %}
+  
+</body>
+</html>
