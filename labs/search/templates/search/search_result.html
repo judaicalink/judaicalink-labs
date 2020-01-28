@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<!--
-{% for r in result %}
-{{ r }} <br> <br>
-{% endfor %}
--->
+{% extends 'search/base.html' %}
+{% block content %}
 
+<!--
 {% for data in dataset %}
     id: {{data.id |safe}}<br>
     name: {{data.source.name |safe}} <br>
@@ -23,6 +14,14 @@
     Publication: {{data.source.Publication |safe}}<br>
     <br> <br>
 {% endfor %}
+-->
+{% for data in ordered_dataset %}
+    {% for item in data %}
+        {{ item | safe}} <br>
+    {% endfor %}
+    <br> <br>
+{% endfor %}
+
 
 pages: {{pages}}
 total_hits: {{total_hits}}
@@ -33,5 +32,4 @@ total_hits: {{total_hits}}
 <a href="{% url 'search' query i %}"> {{ i }} </a>
 {% endfor %}
 
-</body>
-</html>
+{% endblock content %}

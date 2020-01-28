@@ -30,9 +30,7 @@ def load(request):
 def search(request, query, page):
     es = Elasticsearch()
     size = 10
-  #  current_page = page -1
 
-#    if page > 1:
     start = (page - 1) * size
 
     body = {
@@ -79,8 +77,35 @@ def search(request, query, page):
             if s in d ["highlight"]:
                 d ["source"] [s] = d ["highlight"] [s] [0]
 
+    field_order = ["name", "Alternatives", "birthDate", "birthLocation", "deathDate", "deathLocation", "Abstract", "Publication"]
+
+    ordered_dataset = []
+    for d in dataset:
+        data = []
+
+        #linking to detailed view
+        id = "<a href='" + d ["id"] + "'>" + d ["source"] ["name"] + "</a>"
+        data.append (id)
+
+        #extracting fields (named in field_order) and ordering them like field_order
+        for field in field_order:
+            if field in d ["source"] and d ["source"] [field] != "NA":
+                pretty_fieldname = field.capitalize()
+                temp_data = "<b>" + pretty_fieldname + ": " + "</b>" + d ["source"] [field]
+                data.append (temp_data)
+
+        #extracting additional fields (that are not mentioned in field_order)
+        for field in d ["source"]:
+            if field not in field_order:
+                pretty_fieldname = field.capitalize()
+                temp_data = "<b>" + pretty_fieldname + ": " + "</b>" + d ["source"] [field]
+                data.append (temp_data)
+
+        ordered_dataset.append (data)
+
+#    print (ordered_dataset)
+
 #    print (result)
- #   print (current_page)
 
     total_hits = result ["hits"] ["total"] ["value"]
     pages = math.ceil (total_hits / size)   #number of needed pages for paging
@@ -96,6 +121,7 @@ def search(request, query, page):
         "range" : range (1, (pages + 1)),
         "page" : page,
         "query" : query,
+        "ordered_dataset" : ordered_dataset,
     }
     return render (request, "search/search_result.html", context)
 
