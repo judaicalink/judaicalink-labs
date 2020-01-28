@@ -135,3 +135,10 @@ CHANNEL_LAYERS = {
         "BACKEND": "channels.layers.InMemoryChannelLayer",
     },
 }
+
+# Other Servers
+
+FUSEKI_SERVER = "http://localhost:3030/"
+FUSEKI_STORAGE = "."
+ELASTICSEARCH_SERVER = "http://localhost:9200/"
+ELASTICSEARCH_STORAGE = "/var/lib/elasticsearch"
