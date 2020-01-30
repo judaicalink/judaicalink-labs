@@ -60,3 +60,27 @@ def get(request, path):
                 'data': data,
             }
     return render(request, 'lodjango/get.html', context=context)
+
+def get_grid(request, path):
+    uri = settings.DATA_PREFIX + path
+    sparql.setQuery('''
+    select ?s ?p ?o ?g ?olabel  where {{GRAPH ?g {{
+        ?s ?p ?o .
+        }} 
+        OPTIONAL {{
+            ?o <http://www.w3.org/2004/02/skos/core#prefLabel> ?olabel.
+        }}
+        OPTIONAL {{
+            ?o <http://www.w3.org/2000/01/rdf-schema#label> ?olabel.
+        }}
+        filter(?s=<{}>)
+    }}
+    '''.format(uri))
+    res = sparql.query()
+    data = parse_bindings(res.convert()['results']['bindings'])
+    context = {
+                'VIEW_PATH': 'grid/',
+                'settings': settings,
+                'data': data,
+            }
+    return render(request, 'lodjango/get-grid.html', context=context)

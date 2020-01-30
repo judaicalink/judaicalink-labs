@@ -5,7 +5,11 @@ register = template.Library()
 
 @register.simple_tag(takes_context=True)
 def local(context, uri):
-    return uri.replace(context['settings'].DATA_PREFIX, context['settings'].LOCAL_PREFIX)
+    data_prefix = context['settings'].DATA_PREFIX
+    local_prefix = context['settings'].LOCAL_PREFIX
+    if 'VIEW_PATH' in context:
+        local_prefix += context['VIEW_PATH']
+    return uri.replace(data_prefix, local_prefix)
 
 
 

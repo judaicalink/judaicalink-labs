@@ -1,0 +1,101 @@
+{% extends "core/base.html" %}
+{% load lod_tags %}
+{% block content %}
+<div class="container-fluid">
+  {% for subject, properties in data.items %}
+  <h2>{{ subject }}</h2>
+  <div class="row">  
+  <div class='col-3'>
+  <table class='table'>
+    <thead class='thead-dark'>
+      <th colspan='3'>
+        {{subject}}
+      </th>
+    </thead>
+    <tbody>
+    {% for property, values in properties.items %}
+        {% for value in values  %}
+          <tr>
+          {% if forloop.first %}
+            <th scope='row' rowspan='{{values | length}}'>{% last_path property %}</th>
+          {% endif %}
+          <td>
+          {% if value.1 %}
+            <a href="{% local value.1 %}" title="{{value.1}}">{{value.0}}</a>
+          {% else %}
+            {{ value.0 }}
+          {% endif %}
+          </td>
+          <td>
+            {% last_path value.2 %}
+          </td>
+          </tr>
+        {% endfor %}
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  <div class='col-6'>
+  <table class='table'>
+    <thead class='thead-dark'>
+      <th colspan='3'>
+        {{subject}}
+      </th>
+    </thead>
+    <tbody>
+    {% for property, values in properties.items %}
+        {% for value in values  %}
+          <tr>
+          {% if forloop.first %}
+            <th scope='row' rowspan='{{values | length}}'>{% last_path property %}</th>
+          {% endif %}
+          <td>
+          {% if value.1 %}
+            <a href="{% local value.1 %}" title="{{value.1}}">{{value.0}}</a>
+          {% else %}
+            {{ value.0 }}
+          {% endif %}
+          </td>
+          <td>
+            {% last_path value.2 %}
+          </td>
+          </tr>
+        {% endfor %}
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  <div class='col-3'>
+  <table class='table'>
+    <thead class='thead-dark'>
+      <th colspan='3'>
+        {{subject}}
+      </th>
+    </thead>
+    <tbody>
+    {% for property, values in properties.items %}
+        {% for value in values  %}
+          <tr>
+          {% if forloop.first %}
+            <th scope='row' rowspan='{{values | length}}'>{% last_path property %}</th>
+          {% endif %}
+          <td>
+          {% if value.1 %}
+            <a href="{% local value.1 %}" title="{{value.1}}">{{value.0}}</a>
+          {% else %}
+            {{ value.0 }}
+          {% endif %}
+          </td>
+          <td>
+            {% last_path value.2 %}
+          </td>
+          </tr>
+        {% endfor %}
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  <div class="row">  
+  {% endfor %}
+</div>  
+{% endblock %}
