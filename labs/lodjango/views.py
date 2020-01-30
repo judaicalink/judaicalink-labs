@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import SPARQLWrapper
 from . import settings
+from .namespace import uri
 from collections import defaultdict
 import json
 # Create your views here.
@@ -76,31 +77,33 @@ def get(request, path):
 
 
 rightside_properties = [
-        'http://www.w3.org/2004/02/skos/core#related',
-        'http://www.w3.org/2004/02/skos/core#broader',
-        'http://www.w3.org/2004/02/skos/core#narrower',
+        uri('skos','related'),
+        uri('skos','broader'),
+        uri('skos','narrower'),
         ]
 
 
 def get_grid(request, path):
-    uri = settings.DATA_PREFIX + path
-    data = parse_bindings(query(uri))
+    context = {
+                'VIEW_PATH': 'grid/',
+                'settings': settings,
+            }
+    subject = settings.DATA_PREFIX + path
+    context['subject'] = subject
+    data = parse_bindings(query(subject))
+    context['data'] = data
+    if uri('skos', 'prefLabel') in data:
+        context['label'] = data[uri('skos', 'prefLabel')][0][0]
     right = {}
     for p in list(data.keys()):
         if p in rightside_properties:
             right[p] = data[p]
             del data[p]
+    context['right'] = right
     reverse = parse_bindings(
-            query(uri, 'o', 's', 'slabel'),
+            query(subject, 'o', 's', 'slabel'),
             value_var='s',
             label_var='slabel',
             )
-    context = {
-                'VIEW_PATH': 'grid/',
-                'settings': settings,
-                'subject': uri,
-                'data': data,
-                'right': right,
-                'reverse': reverse,
-            }
+    context['reverse'] = reverse
     return render(request, 'lodjango/get-grid.html', context=context)

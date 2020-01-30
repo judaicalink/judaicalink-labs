@@ -1,13 +1,12 @@
 {% extends "core/base.html" %}
 {% load lod_tags %}
 {% block content %}
-  <h2>{{ subject }}</h2>
   <div class="row">  
   <div class='col'>
   <table class='table'>
-    <thead class='thead-dark'>
-      <th colspan='2'>
-        &rarr;
+    <thead class='grid-head'>
+      <th colspan='2'class='text-right'>
+        <i class='fas fa-arrow-right'></i>
       </th>
     </thead>
     <tbody>
@@ -33,9 +32,10 @@
   </div>
   <div class='col'>
   <table class='table'>
-    <thead class='thead-dark'>
+    <thead class='thead-dark grid-head'>
       <th colspan='2'>
-        {{subject}}
+        {{label}}
+        <br/><small>{{subject}}</small>
       </th>
     </thead>
     <tbody>
@@ -61,9 +61,9 @@
   </div>
   <div class='col'>
   <table class='table'>
-    <thead class='thead-dark'>
+    <thead class='grid-head'>
       <th colspan='2'>
-        &rarr;
+        <i class='fas fa-arrow-right'></i>
       </th>
     </thead>
     <tbody>

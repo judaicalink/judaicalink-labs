@@ -2,3 +2,12 @@ div.content {
   padding-left:30px;
   padding-right:50px;
 }
+
+thead.grid-head {
+  height:5em;
+}
+
+thead.grid-head i {
+  font-size:3em;
+  color:#999999;
+}
