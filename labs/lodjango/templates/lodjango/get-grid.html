@@ -2,7 +2,7 @@
 {% load lod_tags %}
 {% block content %}
   <div class="row">  
-  <div class='col'>
+  <div class='col-3'>
   <table class='table'>
     <thead class='grid-head'>
       <th colspan='2'class='text-right'>
@@ -12,17 +12,28 @@
     <tbody>
     {% for property, values in reverse.items %}
         {% for value in values  %}
+        {% if forloop.first %}
           <tr>
+        {% else %}
+          <tr class='collapse left-collapse-{% last_path property %}'>
+        {% endif %}
+
           <td>
           {% if value.1 %}
             <a href="{% local value.1 %}" title="{{value.1}}">{{value.0}}</a>
           {% else %}
             {{ value.0 }}
           {% endif %}
-          <br/><small>{% last_path value.2 %}</small>
+          <br/><span class='graph'>{% last_path value.2 %}</span>
           </td>
           {% if forloop.first %}
-            <th scope='row' rowspan='{{values | length}}'>{% last_path property %}</th>
+          <th>{% last_path property %}<br/>
+              {% if forloop.revcounter > 1 %}
+              <a class="expandlist" data-toggle="collapse" data-target=".left-collapse-{% last_path property %}" aria-expanded="false"></a>
+              {% endif %}
+            </th>
+          {% else %}
+          <td class+'noborder'></td>
           {% endif %}
           </tr>
         {% endfor %}
@@ -30,7 +41,7 @@
     </tbody>
   </table>
   </div>
-  <div class='col'>
+  <div class='col-6'>
   <table class='table'>
     <thead class='thead-dark grid-head'>
       <th colspan='2'>
@@ -41,17 +52,25 @@
     <tbody>
     {% for property, values in data.items %}
         {% for value in values  %}
-          <tr>
           {% if forloop.first %}
-            <th scope='row' rowspan='{{values | length}}'>{% last_path property %}</th>
+          <tr>  
+            <th scope='row'>{% last_path property %}<br/>
+              {% if forloop.revcounter > 1 %}
+              <a class="expandlist" data-toggle="collapse" data-target=".center-collapse-{% last_path property %}" aria-expanded="false"></a>
+              {% endif %}
+            </th>
+          {% else %}
+          <tr class='collapse center-collapse-{% last_path property %}'>
+            <td class='noborder'></td>
           {% endif %}
+            
           <td>
           {% if value.1 %}
             <a href="{% local value.1 %}" title="{{value.1}}">{{value.0}}</a>
           {% else %}
             {{ value.0 }}
           {% endif %}
-          <br/><small>{% last_path value.2 %}</small>
+          <br/><span class='graph'>{% last_path value.2 %}</span>
           </td>
           </tr>
         {% endfor %}
@@ -59,7 +78,7 @@
     </tbody>
   </table>
   </div>
-  <div class='col'>
+  <div class='col-3'>
   <table class='table'>
     <thead class='grid-head'>
       <th colspan='2'>
@@ -69,9 +88,16 @@
     <tbody>
     {% for property, values in right.items %}
         {% for value in values  %}
-          <tr>
           {% if forloop.first %}
-            <th scope='row' rowspan='{{values | length}}'>{% last_path property %}</th>
+          <tr>  
+            <th scope='row'>{% last_path property %}<br/>
+              {% if forloop.revcounter > 1 %}
+              <a class="expandlist" data-toggle="collapse" data-target=".right-collapse-{% last_path property %}" aria-expanded="false"></a>
+              {% endif %}
+            </th>
+          {% else %}
+          <tr class='collapse right-collapse-{% last_path property %}'>
+            <td class='noborder'></td>
           {% endif %}
           <td>
           {% if value.1 %}
@@ -79,7 +105,7 @@
           {% else %}
             {{ value.0 }}
           {% endif %}
-          <br/><small>{% last_path value.2 %}</small>
+          <br/><span class='graph'>{% last_path value.2 %}</span>
           </td>
           </tr>
         {% endfor %}
