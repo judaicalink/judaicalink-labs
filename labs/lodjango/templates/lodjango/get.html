@@ -2,7 +2,7 @@
 {% load lod_tags %}
 {% block content %}
 <div class="container">
-  {% for subject, properties in data.items %}
+  {{ res }}
   <h2>{{ subject }}</h2>
   <table class='table'>
     <thead class='thead-dark'>
@@ -11,7 +11,7 @@
       </th>
     </thead>
     <tbody>
-    {% for property, values in properties.items %}
+    {% for property, values in data.items %}
         {% for value in values  %}
           <tr>
           {% if forloop.first %}
@@ -32,6 +32,5 @@
     {% endfor %}
     </tbody>
   </table>
-  {% endfor %}
 </div>  
 {% endblock %}
