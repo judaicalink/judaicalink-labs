@@ -27,13 +27,13 @@
           <br/><span class='graph'>{% last_path value.2 %}</span>
           </td>
           {% if forloop.first %}
-          <th>{% last_path property %}<br/>
+          <th class='col-1'>{% last_path property %}<br/>
               {% if forloop.revcounter > 1 %}
               <a class="expandlist" data-toggle="collapse" data-target=".left-collapse-{% last_path property %}" aria-expanded="false"></a>
               {% endif %}
             </th>
           {% else %}
-          <td class+'noborder'></td>
+          <td class='noborder'></td>
           {% endif %}
           </tr>
         {% endfor %}
@@ -54,7 +54,7 @@
         {% for value in values  %}
           {% if forloop.first %}
           <tr>  
-            <th scope='row'>{% last_path property %}<br/>
+            <th scope='row' class='col-1'>{% last_path property %}<br/>
               {% if forloop.revcounter > 1 %}
               <a class="expandlist" data-toggle="collapse" data-target=".center-collapse-{% last_path property %}" aria-expanded="false"></a>
               {% endif %}
@@ -90,7 +90,7 @@
         {% for value in values  %}
           {% if forloop.first %}
           <tr>  
-            <th scope='row'>{% last_path property %}<br/>
+            <th scope='row' class='col-1'>{% last_path property %}<br/>
               {% if forloop.revcounter > 1 %}
               <a class="expandlist" data-toggle="collapse" data-target=".right-collapse-{% last_path property %}" aria-expanded="false"></a>
               {% endif %}
