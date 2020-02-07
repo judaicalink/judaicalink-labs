@@ -8,6 +8,8 @@ pip install channels_redis
 ```
 
 - Redis (only for production)
+   - https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-18-04
+   - Change supervised from no to systemd in /etc/redis/redis.conf
 - Elasticsearch
 
 
