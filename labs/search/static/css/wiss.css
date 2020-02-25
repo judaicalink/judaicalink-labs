@@ -235,12 +235,12 @@ height: 5px;
 }
 
 h1 {
-    color: red; /*red*/
+    color: green; /*red*/
     margin-bottom: 30px;
 }
 
 h2, h3, h4 {
-    color: #489ec8;
+    color: green;
     margin-bottom: 30px;
     clear:both;
 }
