@@ -42,8 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'channels',
+    'core',
     'backend',
-    'search'
+    'search',
+    'lodjango',
 ]
 
 MIDDLEWARE = [
@@ -141,3 +143,12 @@ CHANNEL_LAYERS = {
 }
 
 
+
+
+# Other Servers
+
+LABS_ROOT = 'http://labs.judaicalink.org/'
+FUSEKI_SERVER = "http://localhost:8080/fuseki/"
+FUSEKI_STORAGE = "/data/fuseki/databases/judaicalink"
+ELASTICSEARCH_SERVER = "http://localhost:9200/"
+ELASTICSEARCH_STORAGE = "/var/lib/elasticsearch"

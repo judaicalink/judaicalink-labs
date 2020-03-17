@@ -17,12 +17,14 @@ class MyAdminSite(AdminSite):
         urls = [
             url(r'^load_from_github/$', self.admin_view(views.load_from_github), name='load_from_github'),
             url(r'^load_elasticsearch/$', self.admin_view(views.load_elasticsearch), name='load_elasticsearch'),
-            url(r'^test-thread/$', self.admin_view(views.test_thread), name='test_thread')
+            url(r'^load_fuseki/$', self.admin_view(views.load_fuseki), name='load_fuseki'),
+            url(r'^test-thread/$', self.admin_view(views.test_thread), name='test_thread'),
+            url(r'^backend/serverstatus/$', self.admin_view(views.serverstatus), name='serverstatus'),
         ] + urls
         return urls
 
 
-admin_site = MyAdminSite()
+admin_site = MyAdminSite(name='admin')
 
 
 formfield_overrides = {
@@ -30,12 +32,19 @@ formfield_overrides = {
         }
 
 
-def num_files(ds):
+def num_indexed(ds):
     files = ds.datafile_set.count() 
     indexed = ds.datafile_set.filter(indexed=True).count()
     return "{}/{}".format(indexed, files) 
 
-num_files.short_description = "Indexed / Files"
+num_indexed.short_description = "Indexed / Files"
+
+def num_loaded(ds):
+    files = ds.datafile_set.count() 
+    loaded = ds.datafile_set.filter(loaded=True).count()
+    return "{}/{}".format(loaded, files) 
+
+num_loaded.short_description = "Loaded / Files"
 
 
 def set_indexed(modeladmin, request, queryset):
@@ -58,8 +67,8 @@ class DatafileAdmin(admin.TabularInline):
 
 
 class DatasetAdmin(admin.ModelAdmin):
-    list_display = ['name', 'title', 'indexed', num_files]
-    list_editable = ['indexed']
+    list_display = ['name', 'title', 'loaded', num_loaded, 'indexed', num_indexed]
+    list_editable = ['indexed', 'loaded']
     list_display_links = ['name']
 
     formfield_overrides = formfield_overrides     
@@ -71,7 +80,7 @@ class DatasetAdmin(admin.ModelAdmin):
 admin_site.register(models.Dataset, DatasetAdmin)
 
 class ThreadTaskAdmin(admin.ModelAdmin):
-    list_display = ['name', 'started', 'ended', 'is_done', 'last_log']
+    list_display = ['name', 'started', 'ended', 'is_done', 'status_ok', 'last_log']
     list_display_links = ['name']
     list_filter = ['is_done', 'name']
 
