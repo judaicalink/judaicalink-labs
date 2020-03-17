@@ -181,9 +181,7 @@ img.pageLogo {
 .lectureTable tr:nth-child(odd) {background: #ffffff}
 
 /* eigene Zeilen */
-body {
-	background-color: #e9e9e9;
-}
+
 
 .col-md-4{
 	background-color: #ffffff;
@@ -234,10 +232,7 @@ background-color: #ff7f2a;
 height: 5px;
 }
 
-h1 {
-    color: green; /*red*/
-    margin-bottom: 30px;
-}
+
 
 h2, h3, h4 {
     color: green;
