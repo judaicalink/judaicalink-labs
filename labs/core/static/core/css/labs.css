@@ -1,0 +1,41 @@
+div.content {
+  padding-left:30px;
+  padding-right:50px;
+}
+
+thead.grid-head {
+  height:5em;
+}
+
+thead.grid-head i {
+  font-size:3em;
+  color:#999999;
+}
+
+span.graph {
+  color:#999999;
+  font-size:small;
+}
+
+span.graph::before {
+  content:'\f542   ';
+  font-weight:900;
+  font-family: "Font Awesome 5 Free";
+}
+
+td.noborder {
+  border-top: 1px none;
+}
+
+a.expandlist[aria-expanded=true]::before {
+  content:'\f151';
+  font-weight:400;
+  font-family: "Font Awesome 5 Free";
+}
+
+a.expandlist[aria-expanded=false]::before {
+  content:'\f150';
+  font-weight:400;
+  font-family: "Font Awesome 5 Free";
+}
+

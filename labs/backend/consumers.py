@@ -1,46 +1,61 @@
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
 import json
+from . import models
 
 class BackendConsumer(WebsocketConsumer):
     def connect(self):
-        self.room_name = self.scope['url_route']['kwargs']['room_name']
-        self.room_group_name = 'chat_%s' % self.room_name
+        self.group_name = 'taskmessages'
 
         # Join room group
         async_to_sync(self.channel_layer.group_add)(
-            self.room_group_name,
+            self.group_name,
             self.channel_name
         )
 
         self.accept()
+        running = models.ThreadTask.objects.filter(is_done=False)
+        for task in running:
+            send_message('task{}'.format(task.id), 'info', task.name + ':', '') 
 
     def disconnect(self, close_code):
         # Leave room group
         async_to_sync(self.channel_layer.group_discard)(
-            self.room_group_name,
+            self.group_name,
             self.channel_name
         )
 
-    # Receive message from WebSocket
-    def receive(self, text_data):
-        text_data_json = json.loads(text_data)
-        message = text_data_json['message']
+    # Receive message from room group
+    def task_message(self, event):
+        # Send message to WebSocket
+        self.send(text_data=json.dumps(event))
 
-        # Send message to room group
-        async_to_sync(self.channel_layer.group_send)(
-            self.room_group_name,
+
+def send_message(id, level, message, submessage):
+        async_to_sync(get_channel_layer().group_send)(
+            'taskmessages',
             {
-                'type': 'chat_message',
-                'message': message
+                'action': 'create',
+                'type': 'task_message',
+                'message': message,
+                'id': id,
+                'submessage': submessage,
+                'level': 'info',
             }
         )
 
-    # Receive message from room group
-    def chat_message(self, event):
-        message = event['message']
 
-        # Send message to WebSocket
-        self.send(text_data=json.dumps({
-            'message': message
-        }))
+def send_sub_message(id, level='info', submessage=''):
+        print('sending sub message: {}'.format(submessage))
+        async_to_sync(get_channel_layer().group_send)(
+            'taskmessages',
+            {
+                'action': 'update',
+                'type': 'task_message',
+                'id': id,
+                'submessage': submessage,
+                'level': level,
+            }
+        )

@@ -104,7 +104,7 @@ def unload(endpoint, graph):
 
 
 
-def load(file, endpoint, graph):
+def load(file, endpoint, graph, log=log):
     sparql = SPARQLWrapper(endpoint)
     openfunc = open
     if file.endswith(".gz"):
@@ -112,9 +112,9 @@ def load(file, endpoint, graph):
     with openfunc(file, "rt", encoding="utf8") as f:
         r = Reader(f)
         resources = 0
-        start = time.clock()
+        start = time.perf_counter()
         while True:
-            cycle = time.clock()
+            cycle = time.perf_counter()
             last = r.linecount
             data, chunks = r.read_until_fullstop(10000)
             resources += chunks
@@ -124,16 +124,16 @@ def load(file, endpoint, graph):
                 insert(sparql, r.prefixes, graph, data)
             except Exception as e:
                 print("ERROR. More info in log.txt.")
-                log("Error occured at line %d:" % r.linecount)
+                log(file + ": Error occured at line %d:" % r.linecount)
                 log(e)
                 log("Data: " + data)
-            print("%d: %d lines (%d) -- Time: %.2f seconds (%.2f lines/s), total: %.2f seconds (%.2f lines/s)" %
+            log(file + " | %d: %d lines (%d) -- Time: %.2f seconds (%.2f lines/s), total: %.2f seconds (%.2f lines/s)" %
                   (resources,
                    r.linecount-last,
                    r.linecount,
-                   time.clock() - cycle,
-                   (r.linecount-last) / (time.clock()-cycle),
-                   time.clock()-start,
-                   (r.linecount) / (time.clock()-start)))
+                   time.perf_counter() - cycle,
+                   (r.linecount-last) / (time.perf_counter()-cycle),
+                   time.perf_counter()-start,
+                   (r.linecount) / (time.perf_counter()-start)))
 
-        print("Finished!")
+            log("Finished: " + file)

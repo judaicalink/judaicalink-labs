@@ -1,6 +1,5 @@
 # JudaicaLink Labs
 
 The JudaicaLink Portal for experimental access to our data.
-I tried to change the README file
 
-test
+Die settings.py(lokal) immer mit der settings_dev.py aktualisieren, weil das nicht automatisch passiert.

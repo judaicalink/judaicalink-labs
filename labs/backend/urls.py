@@ -21,5 +21,4 @@ from . import views
 app_name = 'backend'
 
 urlpatterns = [
-    path('channel/<str:layer>/', views.testchannels, name='testchannel'),
 ]

@@ -3,8 +3,18 @@
 
 {% block object-tools-items %}
   <li>
-    <a href="{% url 'admin:load_from_github' %}" class="addlink">
+    <a href="{% url 'admin:load_from_github' %}" class="">
      Import from Github
+    </a>
+  </li>
+  <li>
+    <a href="{% url 'admin:load_elasticsearch' %}" class="">
+     Load in Elasticsearch
+    </a>
+  </li>
+  <li>
+    <a href="{% url 'admin:load_fuseki' %}" class="">
+     Load in Fuseki
     </a>
   </li>
   {{ block.super }}
