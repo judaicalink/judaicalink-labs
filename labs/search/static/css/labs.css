@@ -30,12 +30,7 @@ body {
 
 @media (min-width:1200px) {
     .container {
-<<<<<<< HEAD
     width:90%;
-=======
-    width:1170px;
-}
->>>>>>> f99082aaf3be1e29bded271b86dbde3b74cf5253
 }
 
 }
