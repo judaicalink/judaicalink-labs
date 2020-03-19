@@ -33,9 +33,7 @@ body {
     .container {
     width:90%;
 }
-
 }
-
 
 h1 {
    font-family: sans-serif;
@@ -84,6 +82,37 @@ p {
     height: auto;
     margin-right: 10px;
 }
+
+#dmelogo {
+    float: right;
+    padding: 5px;
+    width: 110px;
+    height: auto;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+#jcelogo {
+    float: right;
+    padding: 5px;
+    width: 120px;
+    height: auto;
+    margin-top: -5px;
+}
+#ubflogo {
+    float: right;
+    padding: 5px;
+    width: 95px;
+    height: auto;
+    margin-top: -5px;
+}
+#jeulogo {
+    float: right;
+    padding: 5px;
+    width: 130px;
+    height: auto;
+    margin-right: 20px;
+    margin-top: -5px;
+}
 /*Logos überlappen noch bei sehr kleinem device mit der Copyright Zeile (ist nicht so tragisch*/
 
 .footer {
@@ -102,7 +131,7 @@ p {
 }
 
 .logo {
-  width: 260px;
+  width: 270px;
   position: absolute;
   margin-left: -5px;
 }
