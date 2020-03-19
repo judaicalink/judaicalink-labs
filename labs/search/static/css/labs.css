@@ -1,5 +1,5 @@
 body {
-    background:url(../images/Ersatzbackground.png)#F8F8FF;
+    background:url(../images/FIDbackground.png)#F8F8FF;
     background-repeat: no-repeat;
     background-position: right top;
     background-attachment: fixed;
@@ -30,7 +30,12 @@ body {
 
 @media (min-width:1200px) {
     .container {
+<<<<<<< HEAD
     width:90%;
+=======
+    width:1170px;
+}
+>>>>>>> f99082aaf3be1e29bded271b86dbde3b74cf5253
 }
 
 }
