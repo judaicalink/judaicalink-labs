@@ -1,23 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'search/base.html' %}
+{% block content %}
 
+<!--
 {% for data in dataset %}
-    id: {{data.id}}<br>
-    name: {{data.source.name}} <br>
-    Alternatives: {{data.source.Alternatives}}<br>
-    birthDate: {{data.source.birthDate}}<br>
-    birthLocation: {{data.source.birthLocation}}<br>
-    deathDate: {{data.source.deathDate}}<br>
-    deathLocation: {{data.source.deathLocation}}<br>
-    Abstract: {{data.source.Abstract}}<br>
-    Publication: {{data.source.Publication}}<br>
+    id: {{data.id |safe}}<br>
+    name: {{data.source.name |safe}} <br>
+    Alternatives: {{data.source.Alternatives |safe}}<br>
+    birthDate: {{data.source.birthDate |safe}}<br>
+    birthLocation: {{data.source.birthLocation |safe}}<br>
+    deathDate: {{data.source.deathDate |safe}}<br>
+    deathLocation: {{data.source.deathLocation |safe}}<br>
+    Abstract: {{data.source.Abstract |safe}}<br>
+    Publication: {{data.source.Publication |safe}}<br>
+    <br> <br>
+{% endfor %}
+-->
+{% for data in ordered_dataset %}
+    {% for item in data %}
+        {{ item | safe}} <br>
+    {% endfor %}
     <br> <br>
 {% endfor %}
 
-</body>
-</html>
+
+pages: {{pages}}
+total_hits: {{total_hits}}
+
+<br> <br>
+
+{% for i in range %}
+<a href="{% url 'search' query i %}"> {{ i }} </a>
+{% endfor %}
+
+<br> <br>
+
+<a href="{% url 'search' query %}"> 1 </a>
+
+<a href="{% url 'search' query back %}"> back </a>
+<a href="{% url 'search' query %}"> {{ page }} </a>
+
+<a href="{% url 'search' query next %}"> next </a>
+<a href="{% url 'search' query %}"> {{ pages }} </a>
+
+{% endblock content %}
