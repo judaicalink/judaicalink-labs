@@ -1,8 +1,15 @@
 {% extends 'search/base.html' %}
 {% block content %}
 {% load static %}
+<!---->
+<!--Bis jetzt noch alles in einem File also header, footer,...-->
 
-{% include "search/navbar_dropdown.html" %} 
+<!--header-->
+<img src="/static/images/JudaicaLink_labs_logo.png" alt="JudaicaLink labs logo" class="logo"/> <!-- root that uses the static menu-->
+<!--header-->
+
+{% include "search/navbar_static.html" %}
+
 
 <!--content-->
 <div class="content">
@@ -10,7 +17,7 @@
 
 <p>Thu, May 31, 2018
 
-We have some news regarding search functionality in JudaicaLink.
+We have some news regarding search functionalities in JudaicaLink.
 
 As we said earlier, we plan to develop a full text search for JudaicaLink. Today, we launch a first version of it, although it is still very limited.
 
@@ -44,4 +51,3 @@ Search Improvements<br>
 
 <!--footer-->
     {% endblock content %}
-

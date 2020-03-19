@@ -28,10 +28,10 @@ footer {
 }
 
 .gradient_corporate_color {
-    background-image: -moz-linear-gradient(center bottom , #283E99 100%); 
-    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(1, #283E99));
-	
-	background-color: #283E99;
+    background-image: -moz-linear-gradient(center bottom , #8B0000 100%);
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(1, #8B0000));
+
+	background-color: #8B0000;
 }
 
 .nav li {
@@ -42,24 +42,24 @@ footer {
     color:#ffffff;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    font-size: 15px;							/* Schriftgröße navi.leiste*/
+    font-size: 15px;							/* SchriftgrÃ¶ÃŸe navi.leiste*/
     padding: 10px 15px 10px 15px;
 }
 
-.dropdown-menu > li > a:hover, 
-.navbar-nav > .active > a:hover, 
-.navbar-nav > li > a:hover   { 
+.dropdown-menu > li > a:hover,
+.navbar-nav > .active > a:hover,
+.navbar-nav > li > a:hover   {
     color:#ffffff;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     background-color: #28599A;
 }
 
-.navbar-nav > .dropdown.open > a, .navbar-nav > .dropdown.open > a:focus, 
-.navbar-nav > .active > a, .navbar-nav > .active > a:focus, 
-.navbar-nav > li > a, .navbar-nav > li > a:focus   { 
+.navbar-nav > .dropdown.open > a, .navbar-nav > .dropdown.open > a:focus,
+.navbar-nav > .active > a, .navbar-nav > .active > a:focus,
+.navbar-nav > li > a, .navbar-nav > li > a:focus   {
     color:#ffffff;
-    text-transform: uppercase;  /* Großbuchstaben in navi.leiste*/
+    text-transform: uppercase;  /* GroÃŸbuchstaben in navi.leiste*/
     letter-spacing: 0.1em;		/* Buchstabenabstand */
     background-color: transparent;
 }
@@ -73,7 +73,7 @@ footer {
     position:relative;
     color: #e9e9e9;
     text-transform: uppercase;
-    padding-top:10px;		
+    padding-top:10px;
     vertical-align: bottom;
     font-size:20px;
 }
@@ -105,7 +105,7 @@ footer {
 }
 
 .navbar-collapse.collapse {
-    height: 35px !important;  /* höhe der navi.leiste*/
+    height: 35px !important;  /* hÃ¶he der navi.leiste*/
 }
 
 .nav .open > a:hover, .nav .open > a, .dropdown-menu {
@@ -202,7 +202,7 @@ img.pageLogo {
 
 table.contenttable {
 	width:100%;
-	float:left; 
+	float:left;
 	margin-bottom: 50px;
 }
 table.contenttable th {
