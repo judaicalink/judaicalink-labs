@@ -30,7 +30,7 @@ footer {
 .gradient_corporate_color {
     background-image: -moz-linear-gradient(center bottom , #8B0000 100%);
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(1, #8B0000));
-	
+
 	background-color: #8B0000;
 }
 
@@ -202,7 +202,7 @@ img.pageLogo {
 
 table.contenttable {
 	width:100%;
-	float:left; 
+	float:left;
 	margin-bottom: 50px;
 }
 table.contenttable th {
