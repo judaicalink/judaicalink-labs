@@ -1,34 +1,95 @@
+
 {% extends 'search/base.html' %}
 {% block content %}
-<head>
-    <meta charset="UTF-8">
-    <title>Search Index</title>
-</head>
-<body>
-
 {% load static %}
 
-<div>
-{% include "search/header.html" %}
-</div>
-<div class="col-md-8">
-    <div class="search" align="center">
+{% include "search/navbar_dropdown.html" %}
+
+<!--content-->
+<div class="content">
+<!--content-->
+<h1>Fulltext Search</h1>
+    <!--<div class="search" align="center">
         <h1>Fulltext Search</h1>
         <form action="{% url 'search_index' %}" method="post">
             {% csrf_token %}
-            <input type="text" name="search_term" id="search_term">
-            <br><br>
-            <input type="submit" value="Start Search">
+            <!-- Search form
+        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            <br>
+        <input class="btn btn-primary" type="submit" value="Find">
         </form>
     </div>
-<br><br><br>
-<p>
-	<a href="http://www.jewishstudies.de"><img src="/static/images/fid-logo.jpg" alt="FID Logo"/></a>
-</p>
+</div>-->
+
+
+    <!--wurde jetzt hier aus der FID kopiert und angepasst, muss noch pefektioniert werden-->
+<br>
+    <div class="col-xs-2"></div>
+<form class="searchForm flip" method="get" action="/Search/Results" id="searchForm" name="searchForm" autocomplete="off">
+    <div>
+        <div class="col-xs-8">
+            <input type="hidden" name="type" id="search-option-type" value="allfields">
+            <div class="input-group">
+                <input class="searchForm_lookfor form-control search-query autocomplete searcher:Solr" type="text" name="lookfor" value="">
+                <div class="input-group-btn">
+                    <!-- Button and dropdown menu -->
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span >all fields</span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul id="select-search-handler" class="dropdown-menu">
+                            <li id="allfields">
+                                    <a href="#" data-value="allfields" data-label="all fields">
+                                        <!-- <span class="hds-icon-check-empty"></span> -->
+                                        all fields</a>
+                                </li>
+                                                            <li id="author">
+                                    <a href="#" data-value="author" data-label="author">
+                                        <!-- <span class="hds-icon-check-empty"></span> -->
+                                        author</a>
+                                </li>
+                                                            <li id="title">
+                                    <a href="#" data-value="title" data-label="title">
+                                        <!-- <span class="hds-icon-check-empty"></span> -->
+                                        title                                    </a>
+                                </li>
+                            <li id="publisher">
+                                <a href="#" data-value="publisher" data-label="Publication Info">
+                                    <!-- <span class="hds-icon-check-empty"></span> -->
+                                        Publication Info                                    </a>
+                                </li>
+                        </ul>
+                    <button type="submit" class="btn btn-primary" title="Find"><span >find</span></button>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2 indent-button-grp">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="pull-left flip">
+                        <a href="./" class="btn btn-link" rel="nofollow">Advanced Search</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2"></div>
+    </div>
+
+</form>
 </div>
+<!--NEWS-->
+<br><br><br><br><br>
+<div class="news">
+    <p>NEWS</p>
+    <div class="newsborder"><p>- Juhu die Verlinkung auf Search klappt!<br>
 
+ </div>
+    </div>
+<!--NEWS-->
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<!--footer-->
+<br><br><br><br><br><br><br><br>
+{% include "search/footer_labs.html" %}
 
-{% include "search/footer.html" %}
-
-</body>
-{% endblock content %}
+<!--footer-->
+    {% endblock content %}

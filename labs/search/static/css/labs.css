@@ -1,3 +1,4 @@
+
 body {
     background:url(../images/FIDbackground.png)#F8F8FF;
     background-repeat: no-repeat;
@@ -41,6 +42,7 @@ h1 {
    -ms-text-size-adjust: 100%;
    -webkit-text-size-adjust: 100%;
    color: #004284;
+   text-align: center;
 }
 /*Schrift muss ihre Größe anpassen können, funktioniert noch nicht*/
 
@@ -49,56 +51,60 @@ p {
 }
 
 .news {
-    padding: 20px;
-    margin-left: 320px;
+  padding: 15px;
+  background-color: lightgrey;
+  position: relative;
+  width: 500px;
+  margin: auto;
+     /*Kann man wahrscheinlich noch schöner zentrieren*/
 }
 
 .newsborder {
     border-left: 4px solid #004284;
 }
-.responsive {
-  max-width: 100%;
-  height: auto;
-}
 
 .content {
     margin-top: 70px;
     padding: 20px;
-    margin-left: 300px;
 }
-/*Bilder sollten auch ihre Größe anpassen können, funktioniert noch nicht (responsive)*/
+
 
 #hdmlogo {
-    padding: 5px;
     float: right;
+    padding: 5px;
     width: 75px;
     height: auto;
+    margin-right: 10px;
 }
 
 #fidlogo {
-    padding: 5px;
     float: right;
+    padding: 5px;
     width: 200px;
     height: auto;
+    margin-right: 10px;
 }
+/*Logos überlappen noch bei sehr kleinem device mit der Copyright Zeile (ist nicht so tragisch*/
 
 .footer {
-    margin: auto;
-    width: 50%;
+    position: absolute;
     padding: 10px;
     text-align: center;
+    left: 1%;
+    right: 1%;
 }
 
 
 .dropdown {
   position: relative;
   display: inline-block;
+  
 }
 
 .logo {
-  width: 250px;
+  width: 260px;
   position: absolute;
-  margin-left: 20px;
+  margin-left: -5px;
 }
 
 
@@ -108,7 +114,8 @@ p {
   background-color: white;
   width: 250px;
   margin-right: 20px;
-  margin-top: 110px;
+  margin-top: 120px;
+
 }
 
 .navbarlink {
@@ -116,10 +123,12 @@ p {
   display: block;
   padding: 10px;
   margin-top: -11px;
+
 }
-a.navbarlink:link  {
+a.navbarlink:link {
   width: 250px;
   height: 50px;
+
   }
 
 
@@ -127,10 +136,12 @@ a.navbarlink:link  {
   background-color: #004284;
   color: white;
   text-decoration: none;
+
 }
 
 .dropdown:hover .dropdown-content {
   display: block;
+
   }
 
 
