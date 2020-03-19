@@ -1,0 +1,118 @@
+body {
+    background:url(../images/FIDbackground.png)#F8F8FF;
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.container {
+    background-color: white;
+    box-shadow: 0 10px 15px 10px rgba(0,0,0,.3);
+    margin-right:auto;
+    margin-left:auto;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+@media (min-width:768px) {
+    .container {
+    width:750px;
+}
+}
+
+@media (min-width:992px) {
+    .container {
+    width:970px;
+}
+}
+
+@media (min-width:1200px) {
+    .container {
+    width:1170px;
+}
+}
+
+.logo {
+    width: 250px;
+    position: absolute;
+    margin-left: 20px;
+}
+
+h1 {
+   font-family: sans-serif;
+   -ms-text-size-adjust: 100%;
+   -webkit-text-size-adjust: 100%;
+   color: #004284;
+}
+/*Schrift muss ihre Größe anpassen können, funktioniert noch nicht*/
+
+p {
+  font-size: 18px;
+}
+
+.news {
+    padding: 20px;
+    margin-left: 320px;
+}
+
+.newsborder {
+    border-left: 4px solid #004284;
+}
+.responsive {
+  max-width: 100%;
+  height: auto;
+}
+
+.content {
+    margin-top: 70px;
+    padding: 20px;
+    margin-left: 300px;
+}
+/*Bilder sollten auch ihre Größe anpassen können, funktioniert noch nicht (responsive)*/
+
+#hdmlogo {
+    padding: 5px;
+    float: right;
+    width: 75px;
+    height: auto;
+}
+
+#fidlogo {
+    padding: 5px;
+    float: right;
+    width: 200px;
+    height: auto;
+}
+
+.footer {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+}
+
+.navbar {
+    margin-top: 100px;
+    margin-right: 20px;
+    float: left;
+    padding: 20px;
+    width: 300px;
+}
+a.navbarlink:hover {
+            background-color: #004284;
+            color: white;
+            text-decoration: none;
+            }
+a.navbarlink:link  {
+            width: 250px;
+            height: 50px;
+            display: inline-block;
+            }
+.navbarlink {
+            border: 1px solid lightgrey;
+            padding: 10px;
+            margin-top: -7px;
+            display: inline-block;
+            }

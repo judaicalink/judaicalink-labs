@@ -1,40 +1,65 @@
 {% extends 'search/base.html' %}
 {% block content %}
-<head>
-    <meta charset="UTF-8">
-    <title>Root</title>
-</head>
-<body>
-
 {% load static %}
+<!---->
+<!--Bis jetzt noch alles in einem File also header, footer,...-->
 
-<div class="basic">
-{% include "search/header.html" %}
+<!--header-->
+<img src="/static/images/JudaicaLink_labs_logo.png" alt="JudaicaLink labs logo" class="logo"/>
+<!--header-->
+
+<!--navbar-->
+<div class="navbar">
+    <p><a class="navbarlink" href="./">Datasets</a></p>
+    <p><a class="navbarlink" href="./">Search</a></p>
+    <p><a class="navbarlink" href="./">App 1</a></p>
+    <p><a class="navbarlink" href="./">App 2</a></p>
+    <p><a class="navbarlink" href="./">Web</a></p>
 </div>
-<div class="col-md-8">
-<h1>Welcome to JudaicaLink!</h1>
-    <div align="center">
-    <a href="search/"><button type="button" class="btn btn-danger">START SEARCH!</button></a>
+
+<!--navbar-->
+
+<!--content-->
+<div class="content">
+<h1 align="center">Experimental full text search online</h1>
+
+<p>Thu, May 31, 2018
+
+We have some news regarding search functionalities in JudaicaLink.
+
+As we said earlier, we plan to develop a full text search for JudaicaLink. Today, we launch a first version of it, although it is still very limited.
+
+You can now search our data, backed by ElasticSearch. We are currently mainly working again on the backend part of this, like the processes to populate the search index, the integration with the data pages and so on.
+
+This first search functionality is therefore very limited: you can search in a subset of our data fields (name/title, abstract, birthDate, deathDate, birthLocation, deathLocation) and only the first 10 results (if any) are shown, as simple links to the data pages.
+
+We nevertheless think this is already useful (at least we use it), as this way you can quickly find out, if there are some matching resources available in JudaicaLink, and you can also find quickly some new entries to explore our dataset.
+
+So have fun with it - and be patient, it is still under heavy development and things inevitably will break.</p>
+</div>
+<!--content-->
+<!--NEWS-->
+<br><br>
+<div class="news">
+    <p>NEWS</p>
+    <div class="newsborder"><p>- Mon, July 16, 2018:
+Explore our project GitHub<br>
+
+ - Mon, June 18, 2018:
+Search Improvements<br>
+
+ - Thu, May 31, 2018:
+        Experimental full text search online <a href="/">>>read more</a></p></div>
     </div>
-        <br>
-<p>
-Currently, we provide data about <b>58,111 entities</b>, consisting of <b>531,794 triples</b>, within <b>9 different datasets</b>.
-</p>
-<img src="/static/images/homepage-graphics.png" alt="Linked Data Web"/>
-<h2>Jewish Studies</h2>
-<p>
-JudaicaLink is the knowledge graph behind the <a href="http://www.jewishstudies.de">specialized information service for Jewish Studies</a> (Fachinformationsdienst Jüdische Studien, FID) of the University Library of Frankfurt.
-JudaicaLink is a data resource for data professionals. Stay tuned for more services dedicated to the end user.
-</p>
+<!--NEWS-->
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<!--footer-->
+<img class="responsive" id=hdmlogo src="/static/images/HDM-logo.png" alt="HdM Logo"/>
+<img class="responsive" id=fidlogo src="/static/images/fid-logo.jpg" alt="Fid Logo"/>
 
-<p>
-	<a href="http://www.jewishstudies.de"><img src="/static/images/fid-logo.jpg" alt="FID Logo"/></a>
-</p>
+<div class="footer">
+<p><a href="/">VISION  </a>   |   <a href="/">NEWS  </a>   |   <a href="/">FAQ  </a>   |   <a href="/">ABOUT US</a></p>
+<p><cite>Copyright &copy; WISS Research Group 2013-2020</cite> |  <a href="/">DISCLAIMER</a></p>
 </div>
-
-{% include "search/sidebar.html" %}
-
-{% include "search/footer.html" %}
-
-</body>
-{% endblock content %}
+<!--footer-->
+    {% endblock content %}
