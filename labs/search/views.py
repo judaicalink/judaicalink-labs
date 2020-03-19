@@ -120,6 +120,8 @@ def search(request, query, page):
         "total_hits" : total_hits,
         "range" : range (1, (pages + 1)),
         "page" : page,
+        "next" : page + 1,
+        "back" : page -1,
         "query" : query,
         "ordered_dataset" : ordered_dataset,
     }

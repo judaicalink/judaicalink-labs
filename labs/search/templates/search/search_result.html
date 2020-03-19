@@ -32,4 +32,14 @@ total_hits: {{total_hits}}
 <a href="{% url 'search' query i %}"> {{ i }} </a>
 {% endfor %}
 
+<br> <br>
+
+<a href="{% url 'search' query %}"> 1 </a>
+
+<a href="{% url 'search' query back %}"> back </a>
+<a href="{% url 'search' query %}"> {{ page }} </a>
+
+<a href="{% url 'search' query next %}"> next </a>
+<a href="{% url 'search' query %}"> {{ pages }} </a>
+
 {% endblock content %}
