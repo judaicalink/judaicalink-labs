@@ -25,7 +25,8 @@
     <!--wurde jetzt hier aus der FID kopiert und angepasst, muss noch pefektioniert werden-->
 <br>
     <div class="col-xs-3"></div>
-<form class="searchForm flip" method="get" action="/Search/Results" id="searchForm" name="searchForm" autocomplete="off">
+<form class="searchForm flip" method="post" action="initial_search" id="searchForm" name="searchForm" autocomplete="off">
+    {% csrf_token %}
     <div>
         <div class="col-xs-6">
             <input type="hidden" name="type" id="search-option-type" value="allfields">
