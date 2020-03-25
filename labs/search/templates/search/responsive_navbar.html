@@ -1,0 +1,31 @@
+{% load static %}
+
+{% block navbar %}
+<!--Logo Bereich-->
+<div class="header">
+    <img src="{% static 'images/logo_judaica_labs.png' %}" alt="JudaicaLink labs logo" class="logo"/>
+    <a href="https://www.ub.uni-frankfurt.de/judaica3/home.html" target="_blank"><img src="{% static 'images/fid-logo.jpg' %}" alt="FID logo" class="logofid"/></a>
+    </div>
+<!--Logo Bereich-->
+
+<!--Sidebar Bereich-->
+
+<nav class="resp_navbar">
+        <a href="#" class="toggle-button">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </a>
+        <div class="navbar-links">
+          <ul>
+            <li><a href="#">Datasets</a></li>
+            <li><a href="#">Search</a></li>
+            <li><a href="#">App 1</a></li>
+              <li><a href="#">App 2</a></li>
+              <li><a href="#">Web</a></li>
+          </ul>
+        </div>
+      </nav>
+
+<!--Sidebar Bereich-->
+{% endblock navbar %}

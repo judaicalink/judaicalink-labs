@@ -10,8 +10,11 @@ body {
 .container {
     background-color: white;
     box-shadow: 0 10px 15px 10px rgba(0,0,0,.3);
+    margin-top: 20px;
+    margin-bottom: 20px;
     margin-right:auto;
     margin-left:auto;
+    border-radius: 25px;
     padding: 10px;
     padding-left: 15px;
     padding-right: 15px;
@@ -36,34 +39,44 @@ body {
 }
 
 h1 {
-   font-family: sans-serif;
-   -ms-text-size-adjust: 100%;
-   -webkit-text-size-adjust: 100%;
-   color: #004284;
-   text-align: center;
+    font-family: sans-serif;
+    color: #004284;
+    text-align: center;
+    margin: auto;
 }
+.header {
+    margin-top: 10px;
+    margin-right:auto;
+    margin-left:auto;
+    }
 /*Schrift muss ihre Größe anpassen können, funktioniert noch nicht*/
 
 p {
-  font-size: 18px;
+    font-size: 18px;
 }
-
+hr {
+    color: #004284;
+    background-color: #004284;
+    height: 2px;
+}
 .news {
-  padding: 15px;
-  background-color: lightgrey;
-  position: relative;
-  width: 500px;
-  margin: auto;
+    padding: 15px;
+    background-color: lightgrey;
+    position: relative;
+    border-radius: 25px;
+    width: 500px;
+    float: right;
      /*Kann man wahrscheinlich noch schöner zentrieren*/
 }
 
 .newsborder {
     border-left: 4px solid #004284;
+    padding-left: 5px;
 }
 
 .content {
-    margin-top: 70px;
-    padding: 20px;
+    margin-top: 10px;
+
 }
 
 
@@ -113,6 +126,14 @@ p {
     margin-right: 20px;
     margin-top: -5px;
 }
+#euprologo {
+    float: right;
+    padding: 5px;
+    width: 126px;
+    height: auto;
+    margin-right: 20px;
+    margin-top: 3px;
+    }
 /*Logos überlappen noch bei sehr kleinem device mit der Copyright Zeile (ist nicht so tragisch*/
 
 .footer {
@@ -125,17 +146,20 @@ p {
 
 
 .dropdown {
-  position: relative;
-  display: inline-block;
-  
+  float:left;
 }
 
 .logo {
   width: 270px;
-  position: absolute;
-  margin-left: -5px;
 }
+/*JudaicaLink Logo oben rechts*/
 
+.logofid {
+  margin-top: 5px;
+  width: 270px;
+  float: right;
+}
+/*FID Logo oben links*/
 
 .dropdown-content {
   display: none;
@@ -173,4 +197,98 @@ a.navbarlink:link {
 
   }
 
+
+
+
+
+
+/*responive navbar classes*/
+
+
+
+
+
+.resp_navbar {
+    float:left;
+    width: 260px;
+    height: 100%;
+    margin-top: 10px;
+    /*align-items: center;*/
+    background-color: white;
+
+}
+
+.navbar-links {
+    height: 100%;
+}
+
+.navbar-links ul {
+    margin: 10px;
+    padding: 0;
+}
+
+.navbar-links li {
+    list-style: none;
+    margin-top: 3px;
+}
+
+.navbar-links li a {
+    border: 1px solid lightgrey;
+    display: block;
+    text-decoration: none;
+    color: grey;
+    font-size: 16px;
+    padding: 1rem; /*(1 rem wie 10px)*/
+}
+
+.navbar-links li:hover {
+    background-color: #004284;
+
+}
+.navbar-links li a:hover {
+    color: white;
+}
+.toggle-button {
+    position: absolute;
+    top: 8rem;
+    left: 52px;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 25px;
+}
+/*stylt den ||| button mit dem man das Menü einklappen ausklappen kann*/
+
+.toggle-button .bar {
+    height: 4px;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+
+@media (max-width: 800px) {
+    .resp_navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .toggle-button {
+        display: flex;
+    }
+    .navbar-links {
+        display: none;
+        width: 100%;
+    }
+    .navbar-links ul {
+        width: 100%;
+        flex-direction: column;
+    }
+    .navbar-links ul li a {
+        padding: 1rem;
+    }
+    .navbar-links.active {
+        display: flex;
+    }
+}
 
