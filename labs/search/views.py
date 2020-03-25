@@ -29,112 +29,19 @@ def load(request):
         return HttpResponse(response)
 
 def initial_search (request, page):
-    es = Elasticsearch()
-    size = 10
-
-    query = request.POST ["lookfor"]
-
-    start = (page - 1) * size
-
-    body = {
-        "from" : start, "size" : size,
-        "query" : {
-            "query_string": {
-                "query": query,
-                "fields": ["name^4", "Alternatives^3", "birthDate", "birthLocation^2", "deathDate", "deathLocation^2", "Abstract", "Publication"]
-            }
-
-        },
-        "highlight": {
-            "fields": {
-                "name": {},
-                "Alternatives": {},
-                "birthDate": {},
-                "birthLocation": {},
-                "deathDate": {},
-                "deathLocation": {},
-                "Abstract": {},
-                "Publication": {}
-            },
-            'number_of_fragments': 0,
-        }
-    }
-    result = es.search(index="judaicalink", body = body)
-
-    # For testing, never commit with a hardcoded path like this
-    # with open('/tmp/test.json', 'w') as f:
-    #     json.dump(result, f)
-    dataset = []
-    for d in result ["hits"] ["hits"]:
-        data = {
-            "id" : d ["_id"],
-            #name
-            "source" : d ["_source"],
-            "highlight" : d ["highlight"],
-        }
-        dataset.append (data)
-
-    #replace data in source with data in highlight
-    for d in dataset:
-        for s in d ["source"]:
-            if s in d ["highlight"]:
-                d ["source"] [s] = d ["highlight"] [s] [0]
-
-    field_order = ["name", "Alternatives", "birthDate", "birthLocation", "deathDate", "deathLocation", "Abstract", "Publication"]
-
-    ordered_dataset = []
-    for d in dataset:
-        data = []
-
-        #linking to detailed view
-        id = "<a href='" + d ["id"] + "'>" + d ["source"] ["name"] + "</a>"
-        data.append (id)
-
-        #extracting fields (named in field_order) and ordering them like field_order
-        for field in field_order:
-            if field in d ["source"] and d ["source"] [field] != "NA":
-                pretty_fieldname = field.capitalize()
-                temp_data = "<b>" + pretty_fieldname + ": " + "</b>" + d ["source"] [field]
-                data.append (temp_data)
-
-        #extracting additional fields (that are not mentioned in field_order)
-        for field in d ["source"]:
-            if field not in field_order:
-                pretty_fieldname = field.capitalize()
-                temp_data = "<b>" + pretty_fieldname + ": " + "</b>" + d ["source"] [field]
-                data.append (temp_data)
-
-        ordered_dataset.append (data)
-
-#    print (ordered_dataset)
-
-#    print (result)
-
-    total_hits = result ["hits"] ["total"] ["value"]
-    pages = math.ceil (total_hits / size)   #number of needed pages for paging
-        #round up number of pages
-
-    context = {
-        "result" : result ["hits"] ["hits"],
-            #contains full search results from elasticsearch
-        "dataset" : dataset,
-            #contains id and information from fields
-        "pages" : pages,
-        "total_hits" : total_hits,
-        "range" : range (1, (pages + 1)),
-        "page" : page,
-        "next" : page + 1,
-        "back" : page -1,
-        "query" : query,
-        "ordered_dataset" : ordered_dataset,
-    }
-
-    return render (request, "search/search_result.html", context)
+    if request.POST:
+        query = request.POST ["lookfor"]
+        context = process_query(query, page)
+        return render (request, "search/search_result.html", context)
 
 def search(request, query, page):
+    context = process_query(query, page)
+    return render (request, "search/search_result.html", context)
+
+
+def process_query (query, page):
     es = Elasticsearch()
     size = 10
-
     start = (page - 1) * size
 
     body = {
@@ -144,7 +51,6 @@ def search(request, query, page):
                 "query": query,
                 "fields": ["name^4", "Alternatives^3", "birthDate", "birthLocation^2", "deathDate", "deathLocation^2", "Abstract", "Publication"]
             }
-
         },
         "highlight": {
             "fields": {
@@ -165,6 +71,7 @@ def search(request, query, page):
     # For testing, never commit with a hardcoded path like this
     # with open('/tmp/test.json', 'w') as f:
     #     json.dump(result, f)
+
     dataset = []
     for d in result ["hits"] ["hits"]:
         data = {
@@ -207,10 +114,6 @@ def search(request, query, page):
 
         ordered_dataset.append (data)
 
-#    print (ordered_dataset)
-
-#    print (result)
-
     total_hits = result ["hits"] ["total"] ["value"]
     pages = math.ceil (total_hits / size)   #number of needed pages for paging
         #round up number of pages
@@ -230,4 +133,4 @@ def search(request, query, page):
         "ordered_dataset" : ordered_dataset,
     }
 
-    return render (request, "search/search_result.html", context)
+    return context

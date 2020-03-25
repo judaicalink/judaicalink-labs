@@ -1,20 +1,6 @@
 {% extends 'search/base.html' %}
 {% block content %}
 
-<!--
-{% for data in dataset %}
-    id: {{data.id |safe}}<br>
-    name: {{data.source.name |safe}} <br>
-    Alternatives: {{data.source.Alternatives |safe}}<br>
-    birthDate: {{data.source.birthDate |safe}}<br>
-    birthLocation: {{data.source.birthLocation |safe}}<br>
-    deathDate: {{data.source.deathDate |safe}}<br>
-    deathLocation: {{data.source.deathLocation |safe}}<br>
-    Abstract: {{data.source.Abstract |safe}}<br>
-    Publication: {{data.source.Publication |safe}}<br>
-    <br> <br>
-{% endfor %}
--->
 {% for data in ordered_dataset %}
     {% for item in data %}
         {{ item | safe}} <br>
@@ -37,9 +23,9 @@ total_hits: {{total_hits}}
 <a href="{% url 'search' query %}"> 1 </a>
 
 <a href="{% url 'search' query back %}"> back </a>
-<a href="{% url 'search' query %}"> {{ page }} </a>
+<a href="{% url 'search' query page %}"> {{ page }} </a>
 
 <a href="{% url 'search' query next %}"> next </a>
-<a href="{% url 'search' query %}"> {{ pages }} </a>
+<a href="{% url 'search' query pages %}"> {{ pages }} </a>
 
 {% endblock content %}
