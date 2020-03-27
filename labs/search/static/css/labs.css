@@ -130,7 +130,7 @@ hr {
     }
 
 .footer {
-    position: absolute;
+    position: relative;
     padding: 10px;
     text-align: center;
     left: 1%;
