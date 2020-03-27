@@ -74,12 +74,6 @@ hr {
     padding-left: 5px;
 }
 
-.content {
-    margin-top: 10px;
-
-}
-
-
 #hdmlogo {
     float: right;
     padding: 5px;
@@ -134,7 +128,6 @@ hr {
     margin-right: 20px;
     margin-top: 3px;
     }
-/*Logos überlappen noch bei sehr kleinem device mit der Copyright Zeile (ist nicht so tragisch*/
 
 .footer {
     position: absolute;
@@ -144,13 +137,9 @@ hr {
     right: 1%;
 }
 
-
-.dropdown {
-  float:left;
-}
-
 .logo {
   width: 270px;
+  margin-left: 60px;
 }
 /*JudaicaLink Logo oben rechts*/
 
@@ -161,6 +150,10 @@ hr {
 }
 /*FID Logo oben links*/
 
+
+
+
+/*
 .dropdown-content {
   display: none;
   position: absolute;
@@ -197,7 +190,7 @@ a.navbarlink:link {
 
   }
 
-
+/*
 
 
 
@@ -206,18 +199,18 @@ a.navbarlink:link {
 
 
 
-
+/*
 
 .resp_navbar {
     float:left;
     width: 260px;
     height: 100%;
     margin-top: 10px;
-    /*align-items: center;*/
+    /*align-items: center;*//*
     background-color: white;
 
 }
-
+/*
 .navbar-links {
     height: 100%;
 }
@@ -239,7 +232,7 @@ a.navbarlink:link {
     color: grey;
     font-size: 16px;
     padding: 1rem; /*(1 rem wie 10px)*/
-}
+/*}
 
 .navbar-links li:hover {
     background-color: #004284;
@@ -259,7 +252,7 @@ a.navbarlink:link {
     height: 25px;
 }
 /*stylt den ||| button mit dem man das Menü einklappen ausklappen kann*/
-
+/*
 .toggle-button .bar {
     height: 4px;
     width: 100%;
@@ -292,3 +285,89 @@ a.navbarlink:link {
     }
 }
 
+*/
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500');
+*{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+.sidebar {
+  top: -40px;
+  position: relative;
+  left: -300px;
+  width: 253px;
+  height: 100%;
+  background: white;
+  transition: all .5s ease;
+  opacity: 0;
+}
+
+.sidebar ul a{
+  text-decoration: none;
+  display: block;
+  height: 100%;
+  width: 100%;
+  line-height: 65px;
+  font-size: 20px;
+  border: 0.5px solid lightgrey;
+  color: grey;
+  padding-left: 20px;
+  box-sizing: border-box;
+  transition: .4s;
+}
+ul li:hover a{
+  padding-left: 50px;
+  color: white;
+  background-color: #004284;
+}
+.sidebar ul a i{
+  margin-right: 16px;
+}
+#check{
+  display: none;
+}
+label #btn,label #cancel{
+  position: relative;
+  background: #004284;
+  border-radius: 4px;
+  cursor: pointer;
+}
+label #btn{
+  top: -75px;
+  font-size: 35px;
+  color: white;
+  padding: 6px 12px;
+  transition: all .4s;
+}
+label #cancel{
+  z-index: 1111;
+  left: -200px;
+  top: -31px;
+  font-size: 30px;
+  color: white;
+  padding: 4px 9px;
+  transition: all .5s ease;
+  opacity: 0;
+}
+#check:checked ~ .sidebar{
+  left: 0;
+  opacity: 100;
+}
+#check:checked ~ label #btn{
+  opacity: 0;
+  pointer-events: none;
+}
+#check:checked ~ label #cancel{
+  left: 156px;
+  opacity: 100;
+}
+#check:checked ~ .content{
+  margin-left: 270px;
+}
+.content {
+  margin-top: -500px;
+  transition: all .5s;
+}
