@@ -6,12 +6,12 @@
 {% include "search/responsive_sidebar.html" %}
 
 <!--content-->
-<div class="content">
+<div class="content_search">
 <!--content-->
 <h1>Fulltext Search</h1>
 
     <!--wurde jetzt hier aus der FID kopiert und angepasst, muss noch pefektioniert werden-->
-<br>
+
     <div class="col-xs-3"></div>
 <form class="searchForm flip" method="post" action="initial_search" id="searchForm" name="searchForm" autocomplete="off">
     {% csrf_token %}
@@ -54,7 +54,7 @@
         </div>
         <div><div>
                     <div class="pull-left flip">
-                        <a href="./" class="btn btn-link" rel="nofollow">Advanced Search</a>
+                        <a href="./" class="btn btn-link" >Advanced Search</a>
                     </div>
              </div>
         </div>
@@ -62,18 +62,17 @@
 </form>
 </div>
 <!--NEWS-->
-<br><br><br><br><br>
+
 <div class="news">
     <p>NEWS</p>
     <div class="newsborder"><p>Juhu die Verlinkung auf Search klappt!<br>
         Aaaaaber sie ist noch nicht perfekt...°-°
-
  </div>
     </div>
 <!--NEWS-->
-<br><br><br><br><br><br><br><br><br><br><br><br>
+
 <!--footer-->
-<br><br><br><br><br><br><br><br>
+
 {% include "search/footer_judaicaLink.html" %}
 
 <!--footer-->
