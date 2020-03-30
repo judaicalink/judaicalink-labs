@@ -20,24 +20,6 @@ body {
     padding-right: 15px;
 }
 
-@media (min-width:768px) {
-    .container {
-    width:90%;
-}
-}
-
-@media (min-width:992px) {
-    .container {
-    width:90%;
-}
-}
-
-@media (min-width:1200px) {
-    .container {
-    width:90%;
-}
-}
-
 h1 {
     font-family: sans-serif;
     color: #004284;
