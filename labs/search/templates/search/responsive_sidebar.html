@@ -17,7 +17,7 @@
   <ul>
       <!--classes hier definieren nur die symbole in der Navbar-->
     <li><a href="../"><i class="fas fa-home"></i>Root</a></li> <!-- eig müsste das so verlinkt werden können"{% url 'search' 'search_index'%}"-->
-    <li><a href="/search"><i class="fas fa-search"></i>Search</a></li>
+    <li><a href="{% url 'search_index'%}"><i class="fas fa-search"></i>Search</a></li>
     <li><a href="#"><i class="fas fa-stream"></i>Overview</a></li>
     <li><a href="#"><i class="fas fa-calendar-week"></i>Events</a></li>
     <li><a href="#"><i class="far fa-question-circle"></i>About</a></li>
