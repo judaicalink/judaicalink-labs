@@ -277,6 +277,9 @@ margin-bottom: 5px;
 p {
 font-size: 7.5px;
 }
+.news{
+width: 200px;
+}
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -317,6 +320,9 @@ margin-bottom: 10px;
 }
 p {
 font-size: 11px;
+}
+.news{
+width: 250px;
 }
 }
 
@@ -361,6 +367,9 @@ margin-bottom: 10px;
 
 p {
 font-size: 14px;
+}
+.news{
+width: 320px;
 }
 }
 
@@ -407,6 +416,9 @@ margin-bottom: 13px;
 p {
 font-size: 16px;
 }
+.news{
+width: 415px;
+}
 }
 
 
@@ -449,5 +461,8 @@ margin-bottom: 16px;
 }
 p {
 font-size: 18px;
+}
+.news{
+width: 500px;
 }
 }
