@@ -31,8 +31,7 @@ def load(request):
 def initial_search (request, page):
     if request.POST:
         query = request.POST ["lookfor"]
-        context = process_query(query, page)
-        return render (request, "search/search_result.html", context)
+        return redirect (reverse ('search', args=[query]))
 
 def search(request, query, page):
     context = process_query(query, page)
