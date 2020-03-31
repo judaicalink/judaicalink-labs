@@ -285,56 +285,130 @@ font-size: 7.5px;
     width: 550px;
 }
 .logo {
-  width: 150px;
+  width: 135px;
 }
 .logofid {
-  width: 150px;
+  width: 135px;
+}
+#hdmlogo {
+    width: 37px;
+}
+#fidlogo {
+    width: 100px;
+}
+#dmelogo {
+    width: 55px;
+}
+#jcelogo {
+    width: 60px;
+}
+#ubflogo {
+    width: 48px;
+}
+#jeulogo {
+    width: 65px;
+}
+#euprologo {
+    width: 63px;
 }
 h1 {
-font-size: 15px;
+font-size: 18px;
+margin-bottom: 10px;
 }
 p {
-font-size: 10px;
+font-size: 11px;
 }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
 .container {
-    width: 750px;
+    width: 731px;
 }
 .logo {
-  width: 200px;
+  width: 173px;
 }
 .logofid {
-  width: 200px;
+  width: 173px;
 }
+
+#hdmlogo {
+    width: 48px;
+}
+#fidlogo {
+    width: 128px;
+}
+#dmelogo {
+    width: 71px;
+}
+#jcelogo {
+    width: 77px;
+}
+#ubflogo {
+    width: 61px;
+}
+#jeulogo {
+    width: 83px;
+}
+#euprologo {
+    width: 81px;
+}
+
 h1 {
-font-size: 20px;
+font-size: 23px;
+margin-bottom: 10px;
 }
+
 p {
-font-size: 15px;
+font-size: 14px;
 }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+
 .container {
     width: 950px;
 }
 .logo {
-  width: 200px;
+  width: 224px;
 }
 .logofid {
-  width: 200px;
+  width: 224px;
 }
+
+#hdmlogo {
+    width: 62px;
+}
+#fidlogo {
+    width: 166px;
+}
+#dmelogo {
+    width: 91px;
+}
+#jcelogo {
+    width: 100px;
+}
+#ubflogo {
+    width: 79px;
+}
+#jeulogo {
+    width: 108px;
+}
+#euprologo {
+    width: 105px;
+}
+
 h1 {
 font-size: 30px;
+margin-bottom: 13px;
 }
+
 p {
-font-size: 17.5px;
+font-size: 16px;
 }
 }
+
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
@@ -347,10 +421,33 @@ font-size: 17.5px;
 .logofid {
   width: 270px;
 }
+
+#hdmlogo {
+    width: 75px;
+}
+#fidlogo {
+    width: 200px;
+}
+#dmelogo {
+    width: 110px;
+}
+#jcelogo {
+    width: 120px;
+}
+#ubflogo {
+    width: 95px;
+}
+#jeulogo {
+    width: 130px;
+}
+#euprologo {
+    width: 126px;
+}
 h1 {
 font-size: 35px;
+margin-bottom: 16px;
 }
 p {
-font-size: 20px;
+font-size: 18px;
 }
 }
