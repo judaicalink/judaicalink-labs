@@ -196,7 +196,7 @@ label #cancel{
   z-index: 1111;
   left: -200px;
   top: -31px;
-  font-size: 30px;
+  font-size: 10px;
   color: white;
   padding: 4px 9px;
   transition: all .5s ease;
@@ -280,9 +280,27 @@ font-size: 7.5px;
 .news{
 width: 200px;
 }
+.sidebar{
+width: 124px;
+}
+.sidebar ul a{
+font-size: 7.5px;
+}
+#check:checked ~ .content{
+  margin-left: 133px;
+}
+#check:checked ~ label #cancel{
+  left: 53px;
+}
+label #cancel{
+font-size: 15px;
+}
+label #btn{
+font-size: 18px;
+}
 }
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
+/* Small devices (portrait tablets and large phones, 600px and up) 78% of next larger version*/
 @media only screen and (min-width: 600px) {
 .container {
     width: 550px;
@@ -324,9 +342,27 @@ font-size: 11px;
 .news{
 width: 250px;
 }
+.sidebar{
+width: 124px;
+}
+.sidebar ul a{
+font-size: 11px;
+}
+#check:checked ~ .content{
+  margin-left: 133px;
+}
+#check:checked ~ label #cancel{
+  left: 53px;
+}
+label #cancel{
+font-size: 15px;
+}
+label #btn{
+font-size: 18px;
+}
 }
 
-/* Medium devices (landscape tablets, 768px and up) */
+/* Medium devices (landscape tablets, 768px and up) 77% of next larger version*/
 @media only screen and (min-width: 768px) {
 .container {
     width: 731px;
@@ -366,14 +402,32 @@ margin-bottom: 10px;
 }
 
 p {
-font-size: 14px;
+font-size: 12px;
 }
 .news{
 width: 320px;
 }
+.sidebar{
+width: 159px;
+}
+.sidebar ul a{
+font-size: 12px;
+}
+#check:checked ~ .content{
+  margin-left: 170px;
+}
+#check:checked ~ label #cancel{
+  left: 80px;
+}
+label #cancel{
+font-size: 19px;
+}
+label #btn{
+font-size: 23px;
+}
 }
 
-/* Large devices (laptops/desktops, 992px and up) */
+/* Large devices (laptops/desktops, 992px and up) 82% of largest version */
 @media only screen and (min-width: 992px) {
 
 .container {
@@ -418,6 +472,24 @@ font-size: 16px;
 }
 .news{
 width: 415px;
+}
+.sidebar{
+width: 207px;
+}
+.sidebar ul a{
+font-size: 16px;
+}
+#check:checked ~ .content{
+  margin-left: 221px;
+}
+#check:checked ~ label #cancel{
+  left: 118px;
+}
+label #cancel{
+font-size: 25px;
+}
+label #btn{
+font-size: 30px;
 }
 }
 
@@ -464,5 +536,23 @@ font-size: 18px;
 }
 .news{
 width: 500px;
+}
+.sidebar{
+width: 253px;
+}
+.sidebar ul a{
+font-size: 20px;
+}
+#check:checked ~ .content{
+  margin-left: 270px;
+}
+#check:checked ~ label #cancel{
+  left: 156px;
+}
+label #cancel{
+font-size: 30px;
+}
+label #btn{
+font-size: 36px;
 }
 }
