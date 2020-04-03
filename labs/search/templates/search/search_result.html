@@ -1,31 +1,42 @@
 {% extends 'search/base.html' %}
 {% block content %}
 
-{% for data in ordered_dataset %}
-    {% for item in data %}
-        {{ item | safe}} <br>
-    {% endfor %}
+{% load static %}
+{% include "search/responsive_sidebar.html" %}
+
+<div class="content">
+
+    {% for data in ordered_dataset %}
+        {% for item in data %}
+            {{ item | safe}} <br>
+        {% endfor %}
     <br> <br>
-{% endfor %}
+    {% endfor %}
 
 
-pages: {{pages}}
-total_hits: {{total_hits}}
+    pages: {{pages}}
+    total_hits: {{total_hits}}
 
-<br> <br>
+    <br> <br>
 
-{% for i in range %}
-<a href="{% url 'search' query i %}"> {{ i }} </a>
-{% endfor %}
+    {% for i in range %}
+    <a href="{% url 'search' query i %}"> {{ i }} </a>
+    {% endfor %}
 
-<br> <br>
+    <br> <br>
 
-<a href="{% url 'search' query %}"> 1 </a>
+    <a href="{% url 'search' query %}"> 1 </a>
 
-<a href="{% url 'search' query back %}"> back </a>
-<a href="{% url 'search' query page %}"> {{ page }} </a>
+    <a href="{% url 'search' query back %}"> back </a>
+    <a href="{% url 'search' query page %}"> {{ page }} </a>
 
-<a href="{% url 'search' query next %}"> next </a>
-<a href="{% url 'search' query pages %}"> {{ pages }} </a>
+    <a href="{% url 'search' query next %}"> next </a>
+    <a href="{% url 'search' query pages %}"> {{ pages }} </a>
+
+</div>
+
+
+
+{% include "search/footer_judaicaLink.html" %}
 
 {% endblock content %}
