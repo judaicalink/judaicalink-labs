@@ -293,13 +293,14 @@ font-size: 7.5px;
   margin-left: 133px;
 }
 #check:checked ~ label #cancel{
-  left: 53px;
+  left: 60px;
 }
 label #cancel{
 font-size: 15px;
 }
 label #btn{
-font-size: 18px;
+font-size: 10px;
+top: -33px;
 }
 }
 
@@ -362,6 +363,7 @@ font-size: 15px;
 }
 label #btn{
 font-size: 18px;
+top: -40px;
 }
 }
 
@@ -427,6 +429,7 @@ font-size: 19px;
 }
 label #btn{
 font-size: 23px;
+top: -50px;
 }
 }
 
@@ -490,9 +493,11 @@ font-size: 16px;
 }
 label #cancel{
 font-size: 25px;
+top: -31px;
 }
 label #btn{
 font-size: 30px;
+top: -65px;
 }
 }
 
@@ -554,8 +559,10 @@ font-size: 20px;
 }
 label #cancel{
 font-size: 30px;
+top: -31px;
 }
 label #btn{
 font-size: 36px;
+top: -75px;
 }
 }
