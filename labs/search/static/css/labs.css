@@ -49,7 +49,6 @@ hr {
     border-radius: 25px;
     width: 500px;
     float: right;
-
 }
 
 .newsborder {
@@ -120,10 +119,14 @@ hr {
     left: 1%;
     right: 1%;
 }
-.logo_pictures {
-    margin-top: 500px;
 
+.logo_pictures {
+/*
+    margin-top: 500px;
+*/
+    clear: right;
 }
+
 .logo {
   width: 270px;
   margin-left: 60px;
