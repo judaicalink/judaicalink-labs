@@ -67,7 +67,7 @@ class DatafileAdmin(admin.TabularInline):
 
 
 class DatasetAdmin(admin.ModelAdmin):
-    list_display = ['name', 'title', 'loaded', num_loaded, 'indexed', num_indexed]
+    list_display = ['name', 'title', 'category', 'loaded', num_loaded, 'indexed', num_indexed]
     list_editable = ['indexed', 'loaded']
     list_display_links = ['name']
 
