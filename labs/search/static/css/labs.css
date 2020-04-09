@@ -21,6 +21,7 @@ body {
 }
 .content {
   margin-top: -245px;
+  margin-left: 270px;
   transition: all .5s;
 }
 h1 {
@@ -145,7 +146,6 @@ hr {
 /*-------------------------------------*/
 
 
-
 *{
   padding: 0;
   margin: 0;
@@ -156,12 +156,12 @@ hr {
 .sidebar {
   top: -40px;
   position: relative;
-  left: -300px;
+  left: 0px; /*1*/
   width: 253px;
   height: 100%;
   background: white;
   transition: all .5s ease;
-  opacity: 0;
+  opacity: 1; /*1*/
 }
 
 .sidebar ul a{
@@ -195,41 +195,79 @@ label #btn,label #cancel{
   cursor: pointer;
 }
 label #btn{
+  opacity: 0; /**/
   top: -75px;
   font-size: 35px;
   color: white;
   padding: 6px 12px;
   transition: all .4s;
+  pointer-events: none;
 }
 label #cancel{
   z-index: 1111;
-  left: -200px;
+  left: 156px;  /*1*/
   top: -31px;
   font-size: 10px;
   color: white;
   padding: 4px 9px;
   transition: all .5s ease;
-  opacity: 0;
+  opacity: 1; /*1*/
 }
 #check:checked ~ .sidebar{
-  left: 0;
-  opacity: 100;
+  left: -300px;
+  opacity: 0; /*1*/
 }
+#check:checked ~ label #btn{/*1*/
+  opacity: 1; /*1*/
+  pointer-events: all;
+}
+#check:checked ~ label #cancel{
+  margin-left: -200px; /*1*/
+  opacity: 0; /*1*/
+  pointer-events: none;
+}
+
+
+
+
+/*----------------
+Eingeklappter Start
+
+.sidebar {
+  left: -300px;
+  opacity: 0;
+}
+
+label #btn{
+  opacity: 1;
+  pointer-events: all;
+}
+
+label #cancel{
+  left: -200px;
+  opacity: 0;
+}
+
+#check:checked ~ .sidebar{
+  left: 0;
+  opacity: 1;
+}
+
 #check:checked ~ label #btn{
   opacity: 0;
   pointer-events: none;
 }
+
 #check:checked ~ label #cancel{
-  left: 156px;
-  opacity: 100;
+  left: 156px; (margin-left)
+  opacity: 1;
+  pointer-events: all;
 }
+
 #check:checked ~ .content{
   margin-left: 270px;
 }
-
-
-
-/*-------------------------------------*/
+---------------------*/
 
 
 
@@ -243,9 +281,12 @@ label #cancel{
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-#check:checked ~ .content{
-  margin-left: 200px;
-}
+
+
+/*----------------------------------*/
+.content {
+  margin-left: 0px;
+  }
 
 ul li:hover a{
   padding-left: 40px;
@@ -297,29 +338,50 @@ font-size: 7.5px;
 .news{
 width: 200px;
 }
+
 .sidebar{
 width: 110px;
 top: -20px;
+left: -300px;
+opacity: 0;
 }
 .sidebar ul a{
 font-size: 7.5px;
-}
-#check:checked ~ .content{
-  margin-left: 120px;
-}
-#check:checked ~ label #cancel{
-  left: 56px;
 }
 label #cancel{
 font-size: 13px;
 top: -13px;
 padding: 3px 7px;
+left: -200px;
+opacity: 0;
 }
 
 label #btn{
 font-size: 13px;
 top: -33px;
 padding: 5px 8px;
+opacity: 1;
+pointer-events: all;
+}
+
+#check:checked ~ .sidebar{
+  left: 0;
+  opacity: 1;
+}
+
+#check:checked ~ label #btn{
+  opacity: 0;
+  pointer-events: none;
+}
+
+#check:checked ~ label #cancel{
+  margin-left: 256px;
+  opacity: 100;
+  pointer-events: all;
+}
+
+#check:checked ~ .content{
+  margin-left: 120px;
 }
 
 .footer {
@@ -591,7 +653,7 @@ width: 253px;
 font-size: 20px;
 }
 #check:checked ~ .content{
-  margin-left: 270px;
+  margin-left: 0px; /*1*/
 }
 #check:checked ~ label #cancel{
   left: 156px;
