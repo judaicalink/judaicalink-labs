@@ -19,7 +19,10 @@ body {
     padding-left: 15px;
     padding-right: 15px;
 }
-
+.content {
+  margin-top: -245px;
+  transition: all .5s;
+}
 h1 {
     font-family: sans-serif;
     color: #004284;
@@ -139,6 +142,9 @@ hr {
   float: right;
 }
 /*FID Logo oben links*/
+/*-------------------------------------*/
+
+
 
 *{
   padding: 0;
@@ -161,9 +167,9 @@ hr {
 .sidebar ul a{
   text-decoration: none;
   display: block;
-  height: 100%;
+  height: 30px;
   width: 100%;
-  line-height: 65px;
+  line-height: 30px;
   font-size: 20px;
   border: 0.5px solid lightgrey;
   color: grey;
@@ -222,14 +228,11 @@ label #cancel{
 }
 
 
-.content {
-  margin-top: -500px;
-  transition: all .5s;
-}
-.content_search {
-  margin-top: -500px;
-  transition: all .5s;
-}
+
+/*-------------------------------------*/
+
+
+
 
 /*überschreibt die oberen Werte, wenn eine bestimmte Bedingung erfüllt wird*/
 /*@media (max-width: 1000px) wenn kleiner als 1000px oder =1000px dann...*/
@@ -240,14 +243,20 @@ label #cancel{
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-#check:checked ~ .content_search{
+#check:checked ~ .content{
   margin-left: 200px;
+}
+
+ul li:hover a{
+  padding-left: 40px;
+
 }
 .container {
     width: 400px;
 }
 .logo {
     width: 100px;
+    margin-left: 35px;
 }
 .logofid {
     width: 100px;
@@ -289,26 +298,34 @@ font-size: 7.5px;
 width: 200px;
 }
 .sidebar{
-width: 124px;
+width: 110px;
 top: -20px;
 }
 .sidebar ul a{
 font-size: 7.5px;
 }
 #check:checked ~ .content{
-  margin-left: 133px;
+  margin-left: 120px;
 }
 #check:checked ~ label #cancel{
-  left: 60px;
+  left: 56px;
 }
 label #cancel{
-font-size: 15px;
+font-size: 13px;
 top: -13px;
+padding: 3px 7px;
 }
+
 label #btn{
-font-size: 10px;
+font-size: 13px;
 top: -33px;
+padding: 5px 8px;
 }
+
+.footer {
+margin-top: 50px;
+}
+
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) 78% of next larger version*/
@@ -318,6 +335,7 @@ top: -33px;
 }
 .logo {
   width: 135px;
+  margin-left: 50px;
 }
 .logofid {
   width: 135px;
@@ -371,9 +389,13 @@ font-size: 15px;
 top: -23px;
 }
 label #btn{
-font-size: 18px;
-top: -40px;
+  top: -40px;
+  font-size: 18px;
 }
+.footer {
+margin-top: 75px;
+}
+
 }
 
 /* Medium devices (landscape tablets, 768px and up) 77% of next larger version*/
@@ -442,6 +464,9 @@ label #btn{
 font-size: 23px;
 top: -50px;
 }
+.footer {
+margin-top: 95px;
+}
 }
 
 /* Large devices (laptops/desktops, 992px and up) 82% of largest version */
@@ -452,6 +477,7 @@ top: -50px;
 }
 .logo {
   width: 224px;
+  margin-left: 65px;
 }
 .logofid {
   width: 224px;
@@ -508,6 +534,9 @@ font-size: 25px;
 label #btn{
 font-size: 30px;
 top: -65px;
+}
+.footer {
+margin-top: 115px;
 }
 }
 
@@ -573,5 +602,8 @@ font-size: 30px;
 label #btn{
 font-size: 36px;
 top: -75px;
+}
+.footer {
+margin-top: 135px;
 }
 }
