@@ -20,7 +20,7 @@ body {
     padding-right: 15px;
 }
 .content {
-  margin-top: -245px;
+  margin-top: -240px;
   margin-left: 270px;
   transition: all .5s;
 }
@@ -32,6 +32,7 @@ h1 {
     margin-bottom: 10px;
 }
 .header {
+    background-color: grey;
     margin-top: 10px;
     margin-right:auto;
     margin-left:auto;
@@ -227,7 +228,9 @@ label #cancel{
   pointer-events: none;
 }
 
-
+#check:checked ~ .content{
+  margin-left: 0px;
+}
 
 
 /*----------------
@@ -282,8 +285,7 @@ label #cancel{
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
 
-
-/*----------------------------------*/
+/*1*/
 .content {
   margin-left: 0px;
   }
@@ -297,7 +299,7 @@ ul li:hover a{
 }
 .logo {
     width: 100px;
-    margin-left: 35px;
+    margin-left: 35px;      /*1*/
 }
 .logofid {
     width: 100px;
@@ -312,7 +314,7 @@ ul li:hover a{
 }
 #dmelogo {
     width: 40px;
-    margin-top: -5px;
+    margin-top: -5px;       /*1*/
 }
 #jcelogo {
     width: 40px;
@@ -333,7 +335,7 @@ font-size: 11px;
 margin-bottom: 5px;
 }
 p {
-font-size: 7.5px;
+font-size: 7.5px;       /*1*/
 }
 .news{
 width: 200px;
@@ -354,7 +356,7 @@ top: -13px;
 padding: 3px 7px;
 left: -200px;
 opacity: 0;
-}
+}                       /*1*/
 
 label #btn{
 font-size: 13px;
@@ -377,7 +379,7 @@ pointer-events: all;
 #check:checked ~ label #cancel{
   margin-left: 256px;
   opacity: 100;
-  pointer-events: all;
+  pointer-events: all;          /*1*/
 }
 
 #check:checked ~ .content{
@@ -392,12 +394,16 @@ margin-top: 50px;
 
 /* Small devices (portrait tablets and large phones, 600px and up) 78% of next larger version*/
 @media only screen and (min-width: 600px) {
+/*2*/
+.content {
+  margin-left: 150px;
+  }
 .container {
     width: 550px;
 }
 .logo {
   width: 135px;
-  margin-left: 50px;
+  margin-left: 50px;                /*2*/
 }
 .logofid {
   width: 135px;
@@ -415,7 +421,7 @@ margin-top: 50px;
     width: 60px;
 }
 #ubflogo {
-    width: 48px;
+    width: 48px;                    /*2*/
 }
 #jeulogo {
     width: 65px;
@@ -433,38 +439,42 @@ font-size: 11px;
 .news{
 width: 250px;
 }
+
 .sidebar{
 width: 136px;
 top: -30px;
+
 }
 .sidebar ul a{
 font-size: 11px;
 }
-#check:checked ~ .content{
-  margin-left: 144px;
-}
-#check:checked ~ label #cancel{
-  left: 65px;
-}
-label #cancel{
+
+
+label #cancel{                  /*2*/
 font-size: 15px;
 top: -23px;
+margin-left: -88px;
 }
+
 label #btn{
   top: -40px;
   font-size: 18px;
 }
 .footer {
-margin-top: 75px;
+margin-top: 75px;               /*2*/
 }
 
 }
 
 /* Medium devices (landscape tablets, 768px and up) 77% of next larger version*/
 @media only screen and (min-width: 768px) {
+/*3*/
 .container {
     width: 731px;
 }
+.content {
+  margin-left: 175px;
+  }
 .logo {
   width: 173px;
 }
@@ -477,7 +487,7 @@ margin-top: 75px;
 }
 #fidlogo {
     width: 128px;
-}
+}                           /*3*/
 #dmelogo {
     width: 71px;
 }
@@ -493,11 +503,15 @@ margin-top: 75px;
 #euprologo {
     width: 81px;
 }
+label #cancel{
+font-size: 20px;
+margin-left: -68px;
+}
 
 h1 {
 font-size: 23px;
 margin-bottom: 10px;
-}
+}                           /*3*/
 
 p {
 font-size: 12px;
@@ -506,37 +520,24 @@ font-size: 12px;
 width: 320px;
 }
 .sidebar{
-width: 159px;
-top: -35px;
+width: 159px;               /*3*/
+top: -29px;
 }
 .sidebar ul a{
 font-size: 12px;
-}
-#check:checked ~ .content{
-  margin-left: 170px;
-}
-#check:checked ~ label #cancel{
-  left: 80px;
-}
-label #cancel{
-font-size: 19px;
-top: -27px;
-}
-label #btn{
-font-size: 23px;
-top: -50px;
-}
-.footer {
-margin-top: 95px;
 }
 }
 
 /* Large devices (laptops/desktops, 992px and up) 82% of largest version */
 @media only screen and (min-width: 992px) {
-
+/*4*/
 .container {
     width: 950px;
 }
+.content {
+  margin-left: 220px;
+  margin-top: -360px;
+  }
 .logo {
   width: 224px;
   margin-left: 65px;
@@ -547,7 +548,7 @@ margin-top: 95px;
 
 #hdmlogo {
     width: 62px;
-}
+}                           /*4*/
 #fidlogo {
     width: 166px;
 }
@@ -564,7 +565,7 @@ margin-top: 95px;
     width: 108px;
 }
 #euprologo {
-    width: 105px;
+    width: 105px;           /*4*/
 }
 
 h1 {
@@ -579,23 +580,26 @@ font-size: 16px;
 width: 415px;
 }
 .sidebar{
+top: -30px;
 width: 207px;
+
 }
-.sidebar ul a{
+.sidebar ul a{              /*4*/
 font-size: 16px;
+height: 45px;
+line-height: 45px;
 }
 #check:checked ~ .content{
-  margin-left: 221px;
+  margin-left: 0px;
 }
-#check:checked ~ label #cancel{
-  left: 118px;
-}
+
 label #cancel{
 font-size: 25px;
+margin-left: -38px;
 }
 label #btn{
 font-size: 30px;
-top: -65px;
+top: -65px;                 /*4*/
 }
 .footer {
 margin-top: 115px;
@@ -605,9 +609,14 @@ margin-top: 115px;
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
+/*5*/
 .container {
     width: 1150px;
 }
+.content {
+  margin-left: 270px;
+  margin-top: -420px;
+  }
 .logo {
   width: 270px;
 }
@@ -617,7 +626,7 @@ margin-top: 115px;
 
 #hdmlogo {
     width: 75px;
-}
+}                           /*5*/
 #fidlogo {
     width: 200px;
 }
@@ -635,7 +644,7 @@ margin-top: 115px;
 }
 #euprologo {
     width: 126px;
-}
+}                           /*5*/
 h1 {
 font-size: 35px;
 margin-bottom: 16px;
@@ -647,22 +656,24 @@ font-size: 18px;
 width: 500px;
 }
 .sidebar{
+top: -30px;
 width: 253px;
-}
+}                           /*5*/
 .sidebar ul a{
 font-size: 20px;
+height: 55px;
+line-height: 55px;
 }
 #check:checked ~ .content{
   margin-left: 0px; /*1*/
 }
-#check:checked ~ label #cancel{
-  left: 156px;
-}
+
 label #cancel{
 font-size: 30px;
+margin-left: -0px;
 }
 label #btn{
-font-size: 36px;
+font-size: 36px;                /*5*/
 top: -75px;
 }
 .footer {
