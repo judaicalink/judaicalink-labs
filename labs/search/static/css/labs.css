@@ -8,7 +8,7 @@ body {
 }
 
 .container {
-    background-color: white;
+    background: rgba(255, 255, 255, 0.7);
     box-shadow: 0 10px 15px 10px rgba(0,0,0,.3);
     margin-top: 20px;
     margin-bottom: 20px;
@@ -19,7 +19,9 @@ body {
     padding-left: 15px;
     padding-right: 15px;
 }
+
 .content {
+  background: white;
   margin-top: -240px;
   margin-left: 270px;
   transition: all .5s;
@@ -47,6 +49,7 @@ hr {
     height: 2px;
 }
 .news {
+    background-color: white;
     margin-top: 50px;
     padding: 15px;
     border: 1px solid lightgrey;
@@ -127,15 +130,13 @@ hr {
 }
 
 .logo_pictures {
-/*
-    margin-top: 500px;
-*/
     clear: right;
 }
 
 .logo {
   width: 270px;
   margin-left: 60px;
+  transition: all .5s;
 }
 /*JudaicaLink Logo oben rechts*/
 
@@ -631,6 +632,7 @@ margin-top: 115px;
   }
 .logo {
   width: 270px;
+  margin-left: 70px;
 }
 .logofid {
   width: 270px;
@@ -676,8 +678,9 @@ font-size: 20px;
 height: 55px;
 line-height: 55px;
 }
+
 #check:checked ~ .content{
-  margin-left: 0px; /*1*/
+  margin-left: 0px;
 }
 
 label #cancel{
