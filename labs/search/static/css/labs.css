@@ -25,6 +25,7 @@ body {
   margin-top: -240px;
   margin-left: 270px;
   transition: all .5s;
+  padding: 5px;
 }
 h1 {
     background-color: #004284;
@@ -35,7 +36,7 @@ h1 {
     margin-bottom: 10px;
 }
 .header {
-    margin-top: 10px;
+    height: 110px;
     margin-right:auto;
     margin-left:auto;
     }
@@ -135,8 +136,7 @@ hr {
 
 .logo {
   width: 270px;
-  margin-left: 60px;
-  transition: all .5s;
+  float: left;
 }
 /*JudaicaLink Logo oben rechts*/
 
@@ -302,7 +302,8 @@ ul li:hover a{
 }
 .logo {
     width: 100px;
-    margin-left: 35px;      /*1*/
+
+         /*1*/
 }
 .logofid {
     width: 100px;
@@ -411,7 +412,7 @@ margin-top: 50px;
 }
 .logo {
   width: 135px;
-  margin-left: 50px;                /*2*/
+                /*2*/
 }
 .logofid {
   width: 135px;
@@ -552,7 +553,7 @@ line-height: 35px;
   }
 .logo {
   width: 224px;
-  margin-left: 65px;
+
 }
 .logofid {
   width: 224px;
@@ -632,7 +633,7 @@ margin-top: 115px;
   }
 .logo {
   width: 270px;
-  margin-left: 70px;
+
 }
 .logofid {
   width: 270px;
@@ -689,8 +690,8 @@ margin-left: -0px;
 top: 22px;
 }
 label #btn{
-font-size: 36px;                /*5*/
-top: -75px;
+font-size: 27px;                /*5*/
+top: 18px;
 }
 .footer {
 margin-top: 135px;
