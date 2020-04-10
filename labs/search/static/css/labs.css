@@ -1,6 +1,6 @@
 
 body {
-    background:url(../images/blue.jpeg)#F8F8FF;
+    background:url(../images/FIDbackground.png)#F8F8FF;
     background-repeat: no-repeat;
     background-position: right top;
     background-attachment: fixed;
@@ -8,7 +8,8 @@ body {
 }
 
 .container {
-    background: rgba(255, 255, 255, 0.7);
+    /*background: rgba(255, 255, 255, 0.7);*/
+    background: white;
     box-shadow: 0 10px 15px 10px rgba(0,0,0,.3);
     margin-top: 20px;
     margin-bottom: 20px;
@@ -27,9 +28,8 @@ body {
   padding: 5px;
 }
 h1 {
-    background-color: #004284;
     font-family: sans-serif;
-    color: white;
+    color: #004284;
     text-align: center;
     margin: auto;
     margin-bottom: 10px;
@@ -44,9 +44,10 @@ p {
     font-size: 18px;
 }
 hr {
-    color: #004284;
-    background-color: #004284;
-    height: 2px;
+    background-image:url(../images/blue.jpeg);
+    display:block;
+    border:0px;
+    height:100px;
 }
 .news {
     background-color: white;
