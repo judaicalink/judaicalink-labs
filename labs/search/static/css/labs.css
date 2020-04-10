@@ -25,7 +25,7 @@ body {
   background: white;
   margin-left: 270px;
   transition: all .5s;
-  padding: 0px 50px 50px 0px;
+  padding: 0px 50px 0px 50px;
 }
 h1 {
     font-family: sans-serif;
