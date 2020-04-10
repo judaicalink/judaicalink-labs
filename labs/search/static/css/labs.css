@@ -672,9 +672,10 @@ line-height: 55px;
 }
 
 label #cancel{
+position: absolute;
 font-size: 30px;
-margin-left: -0px;
-top: 22px;
+margin-left: 280px;
+top: 72px;
 }
 label #btn{
 font-size: 27px;                /*5*/
