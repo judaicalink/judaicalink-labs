@@ -43,12 +43,16 @@ h1 {
 p {
     font-size: 18px;
 }
-hr {
+.hr {
     background-image:url(../images/blue.jpeg);
     display:block;
     border:0px;
     height:100px;
 }
+hr {
+    background-color: #004284;
+    height: 1px;
+    }
 .news {
     background-color: white;
     margin-top: 50px;
