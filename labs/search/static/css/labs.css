@@ -195,12 +195,12 @@ ul li:hover a{
   display: none;
 }
 label #btn,label #cancel{
-  position: absolute;
-  background: #004284;
   border-radius: 4px;
   cursor: pointer;
 }
 label #btn{
+  background: #004284;
+  position: absolute;
   opacity: 0;
   font-size: 35px;
   color: white;
@@ -209,6 +209,7 @@ label #btn{
   pointer-events: none;
 }
 label #cancel{
+  position: relative;
   z-index: 1111;
   left: 156px;
   top: -31px;
@@ -255,7 +256,7 @@ label #cancel{
 /*1*/
 .content {
   margin-left: 0px;
-  margin-top: -200px;
+  margin-top: -218px;
   }
 .header {
     height: 42px;
@@ -315,7 +316,7 @@ border-radius: 12px;
 
 .sidebar{
 width: 110px;
-top: -2px;
+top: -7px;
 left: -300px;
 opacity: 0;
 }
@@ -329,14 +330,14 @@ line-height: 25px;
 }
 label #cancel{
 font-size: 10px;
-top: 7px;
+top: 18px;
 padding: 3px 6px;
-left: -196px;
+left: -167px;
 opacity: 0;
 }                       /*1*/
 
 label #btn{
-margin-top: -20px;
+margin-top: -3px;
 font-size: 10px;
 padding: 5px 6px;
 opacity: 1;
@@ -374,7 +375,7 @@ margin-top: 50px;
 /*2*/
 .content {
   margin-left: 150px;
-  margin-top: -205px;
+  margin-top: -250px;
   }
 .container {
     width: 550px;
@@ -432,13 +433,14 @@ font-size: 11px;
 
 
 label #cancel{                  /*2*/
-font-size: 15px;
-top: 9px;
-margin-left: -88px;
+font-size: 14px;
+top: 33px;
+margin-left: -50px;
 }
 
 label #btn{
-  font-size: 18px;
+font-size: 14px;
+padding: 6px 8px;
 }
 .footer {
 margin-top: 75px;               /*2*/
@@ -454,7 +456,7 @@ margin-top: 75px;               /*2*/
 }
 .content {
   margin-left: 175px;
-  margin-top: -230px;
+  margin-top: -293px;
   }
 .header {
     height: 75px;
@@ -488,9 +490,9 @@ margin-top: 75px;               /*2*/
     width: 81px;
 }
 label #cancel{
-font-size: 20px;
-margin-left: -68px;
-top: 15px;
+font-size: 17px;
+margin-left: -30px;
+top: 31px;
 }
 
 h1 {
@@ -506,7 +508,7 @@ width: 320px;
 }
 .sidebar{
 width: 159px;               /*3*/
-top: 8px;
+top: -3px;
 }
 .sidebar ul a{
 font-size: 12px;
@@ -515,6 +517,10 @@ line-height: 35px;
 }
 .sidebar header{
   line-height: 35px;
+}
+label #btn{
+font-size: 17px;             /*4*/
+padding: 6px 8px;
 }
 }
 
@@ -526,7 +532,7 @@ line-height: 35px;
 }
 .content {
   margin-left: 220px;
-  margin-top: -300px;
+  margin-top: -370px;
   }
 
 .header {
@@ -591,11 +597,12 @@ line-height: 45px;
 
 label #cancel{
 font-size: 25px;
-margin-left: -38px;
-top: 8px;
+margin-left: 10px;
+top: 45px;
 }
 label #btn{
-font-size: 30px;             /*4*/
+font-size: 25px;             /*4*/
+padding: 6px 9px;
 }
 .footer {
 margin-top: 115px;
@@ -611,7 +618,7 @@ margin-top: 115px;
 }
 .content {
   margin-left: 270px;
-  margin-top: -420px;
+  margin-top: -450px;
   }
 .header {
     height: 115px;
@@ -656,7 +663,6 @@ font-size: 18px;
 width: 500px;
 }
 .sidebar{
-top: 14px;
 width: 253px;
 }                           /*5*/
 .sidebar ul a{
@@ -672,13 +678,13 @@ line-height: 55px;
 }
 
 label #cancel{
-position: absolute;
+position: relative;
 font-size: 30px;
-margin-left: 280px;
-top: 72px;
+margin-left: 50px;
+top: 50px;
 }
 label #btn{
-font-size: 27px;                /*5*/
+font-size: 30px;                /*5*/
 }
 .footer {
 margin-top: 135px;
