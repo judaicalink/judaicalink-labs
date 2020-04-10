@@ -22,7 +22,6 @@ body {
 
 .content {
   background: white;
-  margin-top: -240px;
   margin-left: 270px;
   transition: all .5s;
   padding: 5px;
@@ -159,14 +158,18 @@ hr {
 .sidebar {
   top: -40px;
   position: relative;
-  left: 0px; /*1*/
+  left: 0px;
   width: 253px;
   height: 100%;
   background: white;
   transition: all .5s ease;
-  opacity: 1; /*1*/
+  opacity: 1;
 }
-
+.sidebar header{
+  line-height: 30px;
+  background-color:#004284;
+  color: #004284;
+}
 .sidebar ul a{
   text-decoration: none;
   display: block;
@@ -192,14 +195,13 @@ ul li:hover a{
   display: none;
 }
 label #btn,label #cancel{
-  position: relative;
+  position: absolute;
   background: #004284;
   border-radius: 4px;
   cursor: pointer;
 }
 label #btn{
-  opacity: 0; /**/
-  top: -75px;
+  opacity: 0;
   font-size: 35px;
   color: white;
   padding: 6px 12px;
@@ -208,25 +210,25 @@ label #btn{
 }
 label #cancel{
   z-index: 1111;
-  left: 156px;  /*1*/
+  left: 156px;
   top: -31px;
   font-size: 10px;
   color: white;
   padding: 4px 9px;
   transition: all .5s ease;
-  opacity: 1; /*1*/
+  opacity: 1;
 }
 #check:checked ~ .sidebar{
   left: -300px;
-  opacity: 0; /*1*/
+  opacity: 0;
 }
-#check:checked ~ label #btn{/*1*/
-  opacity: 1; /*1*/
+#check:checked ~ label #btn{
+  opacity: 1;
   pointer-events: all;
 }
 #check:checked ~ label #cancel{
-  margin-left: -200px; /*1*/
-  opacity: 0; /*1*/
+  margin-left: -200px;
+  opacity: 0;
   pointer-events: none;
 }
 
@@ -235,44 +237,7 @@ label #cancel{
 }
 
 
-/*----------------
-Eingeklappter Start
 
-.sidebar {
-  left: -300px;
-  opacity: 0;
-}
-
-label #btn{
-  opacity: 1;
-  pointer-events: all;
-}
-
-label #cancel{
-  left: -200px;
-  opacity: 0;
-}
-
-#check:checked ~ .sidebar{
-  left: 0;
-  opacity: 1;
-}
-
-#check:checked ~ label #btn{
-  opacity: 0;
-  pointer-events: none;
-}
-
-#check:checked ~ label #cancel{
-  left: 156px; (margin-left)
-  opacity: 1;
-  pointer-events: all;
-}
-
-#check:checked ~ .content{
-  margin-left: 270px;
-}
----------------------*/
 
 
 
@@ -290,20 +255,21 @@ label #cancel{
 /*1*/
 .content {
   margin-left: 0px;
-  margin-top: -202px;
+  margin-top: -200px;
   }
+.header {
+    height: 42px;
+    }
 
 ul li:hover a{
   padding-left: 40px;
-
 }
 .container {
     width: 400px;
+    border-radius: 11px;
 }
 .logo {
-    width: 100px;
-
-         /*1*/
+    width: 100px;           /*1*/
 }
 .logofid {
     width: 100px;
@@ -358,7 +324,9 @@ font-size: 7.5px;
 height: 25px;
 line-height: 25px;
 }
-
+.sidebar header{
+  line-height: 25px;
+}
 label #cancel{
 font-size: 10px;
 top: 7px;
@@ -368,9 +336,9 @@ opacity: 0;
 }                       /*1*/
 
 label #btn{
-font-size: 13px;
-top: -33px;
-padding: 5px 8px;
+margin-top: -20px;
+font-size: 10px;
+padding: 5px 6px;
 opacity: 1;
 pointer-events: all;
 }
@@ -406,9 +374,13 @@ margin-top: 50px;
 /*2*/
 .content {
   margin-left: 150px;
+  margin-top: -205px;
   }
 .container {
     width: 550px;
+}
+.header {
+    height: 60px;
 }
 .logo {
   width: 135px;
@@ -466,7 +438,6 @@ margin-left: -88px;
 }
 
 label #btn{
-  top: -40px;
   font-size: 18px;
 }
 .footer {
@@ -483,8 +454,11 @@ margin-top: 75px;               /*2*/
 }
 .content {
   margin-left: 175px;
-  margin-top: -275px;
+  margin-top: -230px;
   }
+.header {
+    height: 75px;
+}
 .logo {
   width: 173px;
 }
@@ -539,6 +513,9 @@ font-size: 12px;
 height: 35px;
 line-height: 35px;
 }
+.sidebar header{
+  line-height: 35px;
+}
 }
 
 /* Large devices (laptops/desktops, 992px and up) 82% of largest version */
@@ -549,8 +526,12 @@ line-height: 35px;
 }
 .content {
   margin-left: 220px;
-  margin-top: -360px;
+  margin-top: -300px;
   }
+
+.header {
+    height: 95px;
+}
 .logo {
   width: 224px;
 
@@ -595,12 +576,14 @@ width: 415px;
 .sidebar{
 top: 0px;
 width: 207px;
-
 }
 .sidebar ul a{              /*4*/
 font-size: 16px;
 height: 45px;
 line-height: 45px;
+}
+.sidebar header{
+  line-height: 45px;
 }
 #check:checked ~ .content{
   margin-left: 0px;
@@ -612,8 +595,7 @@ margin-left: -38px;
 top: 8px;
 }
 label #btn{
-font-size: 30px;
-top: -65px;                 /*4*/
+font-size: 30px;             /*4*/
 }
 .footer {
 margin-top: 115px;
@@ -631,6 +613,9 @@ margin-top: 115px;
   margin-left: 270px;
   margin-top: -420px;
   }
+.header {
+    height: 115px;
+}
 .logo {
   width: 270px;
 
@@ -679,7 +664,9 @@ font-size: 20px;
 height: 55px;
 line-height: 55px;
 }
-
+.sidebar header{
+  line-height: 55px;
+}
 #check:checked ~ .content{
   margin-left: 0px;
 }
@@ -691,7 +678,6 @@ top: 22px;
 }
 label #btn{
 font-size: 27px;                /*5*/
-top: 18px;
 }
 .footer {
 margin-top: 135px;
