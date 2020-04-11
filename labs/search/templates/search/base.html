@@ -11,9 +11,11 @@
     <link rel="stylesheet" href="{% static 'css/simplePagination.css' %} ">
     <!--<link rel="stylesheet" href="{% static 'css/wiss.css' %} ">-->
     <link rel="stylesheet" href="{% static 'css/labs.css' %} "> <!-- css for root.html -->
+    <link rel="stylesheet" href="{% static 'css/kai-overrides.css' %} "> <!-- css for root.html -->
 </head>
 
 <body>
+{% include "search/responsive_sidebar.html" %}
 <div class="container">
 
 {% block content %}
