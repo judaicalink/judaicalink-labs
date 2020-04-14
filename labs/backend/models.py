@@ -11,6 +11,7 @@ class Dataset(models.Model):
     indexed = models.BooleanField(default=False)
     loaded = models.BooleanField(default=False)
     graph = models.TextField(null=True)
+    category = models.TextField(null=True)
 
     
     def set_indexed(self, value):
@@ -54,6 +55,8 @@ def update_from_markdown(filename):
         ds.refresh_from_db()
     ds.title = data['title']
     ds.loaded = data['loaded']
+    if 'category' in data:
+        ds.category = data['category']
     if 'graph' in data:
         ds.graph = data['graph']
     ds.datafile_set.all().delete()
