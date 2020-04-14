@@ -42,15 +42,16 @@ C:\Users\{USER-NAME}\AppData\Local\Programs\Python\Python38\Lib\asyncio\__init__
 
 
 von:
+```
 if sys.platform == 'win32':  # pragma: no cover
     from .windows_events import *
     __all__ += windows_events.__all__
 else:
     from .unix_events import *  # pragma: no cover
     __all__ += unix_events.__all__
-
+```
 zu
-
+```
 import asyncio
 
 if sys.platform == 'win32':
@@ -59,7 +60,7 @@ if sys.platform == 'win32':
     __all__ += windows_events.__all__
 else:
     from .unix_events import *  # pragma:
-
+```
 
 Quelle: (14.04.2020)
 https://stackoverflow.com/questions/58422817/jupyter-notebook-with-python-3-8-notimplementederror/58430041#58430041
