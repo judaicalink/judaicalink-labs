@@ -1,29 +1,22 @@
-
 body {
-    background:url(../images/FIDbackground.png)#F8F8FF;
-    background-repeat: no-repeat;
-    background-position: right top;
-    background-attachment: fixed;
-    background-size: cover;
+    background-color: white;
 }
 
 .container {
-    /*background: rgba(255, 255, 255, 0.7);*/
     background: white;
-    box-shadow: 0 10px 15px 10px rgba(0,0,0,.3);
-    margin-top: 20px;
-    margin-bottom: 20px;
+    width: 1150px;
+    /*margin-bottom: 20px;
     margin-right:auto;
     margin-left:auto;
-    border-radius: 25px;
     padding: 10px;
     padding-left: 15px;
-    padding-right: 15px;
+    padding-right: 15px;*/
 }
 
 .content {
   background: white;
-  margin-left: 270px;
+  margin-left: 270px;       /*abstand text rand*/
+  margin-top: -450px;
   transition: all .5s;
   padding: 0px 50px 0px 50px;
 }
@@ -32,10 +25,11 @@ h1 {
     color: #004284;
     text-align: center;
     margin: auto;
-    margin-bottom: 10px;
+    font-size: 35px;
+    margin-bottom: 16px;
 }
 .header {
-    height: 110px;
+    height: 115px;
     margin-right:auto;
     margin-left:auto;
     }
@@ -161,26 +155,27 @@ hr {
 }
 
 .sidebar {
-  top: -40px;
+  top: -50px;
   position: relative;
-  left: 0px;
+  left: -68px;
   width: 253px;
   height: 100%;
   background: white;
   transition: all .5s ease;
   opacity: 1;
+  background-color: #90EE90;
 }
 .sidebar header{
-  line-height: 30px;
+  line-height: 55px;
   background-color:#004284;
   color: #004284;
 }
 .sidebar ul a{
   text-decoration: none;
   display: block;
-  height: 30px;
+  height: 55px;
   width: 100%;
-  line-height: 30px;
+  line-height: 55px;
   font-size: 20px;
   border-bottom: 0.5px solid grey;
   color: grey;
@@ -199,7 +194,7 @@ ul li:hover a{
 #check{
   display: none;
 }
-label #btn,label #cancel{
+#btn,label #cancel{
   border-radius: 4px;
   cursor: pointer;
 }
@@ -217,13 +212,16 @@ label #cancel{
   position: relative;
   z-index: 1111;
   left: 156px;
-  top: -31px;
-  font-size: 10px;
+  top: 50px;
+  font-size: 30px;
   color: white;
   padding: 4px 9px;
-  transition: all .5s ease;
+  transition:
+  all .5s ease;
   opacity: 1;
+  margin-left: 50px;
 }
+
 #check:checked ~ .sidebar{
   left: -300px;
   opacity: 0;
@@ -256,9 +254,10 @@ label #cancel{
 
 
 /* Extra small devices (phones, 600px and down) */
+/*
 @media only screen and (max-width: 600px) {
 
-/*1*/
+
 .content {
   margin-left: 0px;
   margin-top: -218px;
@@ -275,7 +274,7 @@ ul li:hover a{
     border-radius: 11px;
 }
 .logo {
-    width: 100px;           /*1*/
+    width: 100px;
 }
 .logofid {
     width: 100px;
@@ -290,7 +289,7 @@ ul li:hover a{
 }
 #dmelogo {
     width: 40px;
-    margin-top: -5px;       /*1*/
+    margin-top: -5px;
 }
 #jcelogo {
     width: 40px;
@@ -311,7 +310,7 @@ font-size: 11px;
 margin-bottom: 5px;
 }
 p {
-font-size: 7.5px;       /*1*/
+font-size: 7.5px;
 }
 .news{
 width: 200px;
@@ -339,7 +338,7 @@ top: 18px;
 padding: 3px 6px;
 left: -167px;
 opacity: 0;
-}                       /*1*/
+}
 
 label #btn{
 margin-top: -3px;
@@ -362,7 +361,7 @@ pointer-events: all;
 #check:checked ~ label #cancel{
   margin-left: 256px;
   opacity: 100;
-  pointer-events: all;          /*1*/
+  pointer-events: all;
 }
 
 #check:checked ~ .content{
@@ -374,10 +373,12 @@ margin-top: 50px;
 }
 
 }
+*/
 
 /* Small devices (portrait tablets and large phones, 600px and up) 78% of next larger version*/
+/*
 @media only screen and (min-width: 600px) {
-/*2*/
+
 .content {
   margin-left: 150px;
   margin-top: -250px;
@@ -390,7 +391,6 @@ margin-top: 50px;
 }
 .logo {
   width: 135px;
-                /*2*/
 }
 .logofid {
   width: 135px;
@@ -408,7 +408,7 @@ margin-top: 50px;
     width: 60px;
 }
 #ubflogo {
-    width: 48px;                    /*2*/
+    width: 48px;
 }
 #jeulogo {
     width: 65px;
@@ -437,7 +437,7 @@ font-size: 11px;
 }
 
 
-label #cancel{                  /*2*/
+label #cancel{
 font-size: 14px;
 top: 33px;
 margin-left: -50px;
@@ -448,14 +448,16 @@ font-size: 14px;
 padding: 6px 8px;
 }
 .footer {
-margin-top: 75px;               /*2*/
+margin-top: 75px;
 }
 
 }
+*/
 
 /* Medium devices (landscape tablets, 768px and up) 77% of next larger version*/
+/*
 @media only screen and (min-width: 768px) {
-/*3*/
+
 .container {
     width: 731px;
 }
@@ -478,7 +480,7 @@ margin-top: 75px;               /*2*/
 }
 #fidlogo {
     width: 128px;
-}                           /*3*/
+}
 #dmelogo {
     width: 71px;
 }
@@ -503,7 +505,7 @@ top: 31px;
 h1 {
 font-size: 23px;
 margin-bottom: 10px;
-}                           /*3*/
+}
 
 p {
 font-size: 12px;
@@ -512,7 +514,7 @@ font-size: 12px;
 width: 320px;
 }
 .sidebar{
-width: 159px;               /*3*/
+width: 159px;
 top: -3px;
 }
 .sidebar ul a{
@@ -524,14 +526,16 @@ line-height: 35px;
   line-height: 35px;
 }
 label #btn{
-font-size: 17px;             /*4*/
+font-size: 17px;
 padding: 6px 8px;
 }
 }
+*/
 
 /* Large devices (laptops/desktops, 992px and up) 82% of largest version */
+/*
 @media only screen and (min-width: 992px) {
-/*4*/
+
 .container {
     width: 950px;
 }
@@ -553,7 +557,7 @@ padding: 6px 8px;
 
 #hdmlogo {
     width: 62px;
-}                           /*4*/
+}
 #fidlogo {
     width: 166px;
 }
@@ -570,7 +574,7 @@ padding: 6px 8px;
     width: 108px;
 }
 #euprologo {
-    width: 105px;           /*4*/
+    width: 105px;
 }
 
 h1 {
@@ -588,7 +592,7 @@ width: 415px;
 top: 0px;
 width: 207px;
 }
-.sidebar ul a{              /*4*/
+.sidebar ul a{
 font-size: 16px;
 height: 45px;
 line-height: 45px;
@@ -606,18 +610,19 @@ margin-left: 10px;
 top: 45px;
 }
 label #btn{
-font-size: 25px;             /*4*/
+font-size: 25px;
 padding: 6px 9px;
 }
 .footer {
 margin-top: 115px;
 }
 }
-
+*/
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
+/*
 @media only screen and (min-width: 1200px) {
-/*5*/
+
 .container {
     width: 1150px;
 }
@@ -638,7 +643,7 @@ margin-top: 115px;
 
 #hdmlogo {
     width: 75px;
-}                           /*5*/
+}
 #fidlogo {
     width: 200px;
 }
@@ -656,7 +661,7 @@ margin-top: 115px;
 }
 #euprologo {
     width: 126px;
-}                           /*5*/
+}
 h1 {
 font-size: 35px;
 margin-bottom: 16px;
@@ -669,7 +674,7 @@ width: 500px;
 }
 .sidebar{
 width: 253px;
-}                           /*5*/
+}
 .sidebar ul a{
 font-size: 20px;
 height: 55px;
@@ -689,9 +694,10 @@ margin-left: 50px;
 top: 50px;
 }
 label #btn{
-font-size: 30px;                /*5*/
+font-size: 30px;
 }
 .footer {
 margin-top: 135px;
 }
 }
+*/
