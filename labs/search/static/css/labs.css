@@ -15,8 +15,7 @@ body {
 
 .content {
   background: white;
-  margin-left: 270px;       /*abstand text rand*/
-  margin-top: -450px;
+  margin-left: 200px;       /*abstand text rand*/
   transition: all .5s;
   padding: 0px 50px 0px 50px;
 }
@@ -30,23 +29,14 @@ h1 {
 }
 .header {
     height: 115px;
-    margin-right:auto;
-    margin-left:auto;
+    margin-left: auto;
+    margin-right: auto;
     }
 
 p {
     font-size: 18px;
 }
-.hr {
-    background-image:url(../images/blue.jpeg);
-    display:block;
-    border:0px;
-    height:100px;
-}
-hr {
-    background-color: #004284;
-    height: 1px;
-    }
+
 .news {
     background-color: white;
     margin-top: 50px;
@@ -133,15 +123,28 @@ hr {
 }
 
 .logo {
-  width: 270px;
+  width: 200px;
   float: left;
+  margin-left: -50px;
+  margin-top: 10px;
+  position: fixed;
 }
+
+#check:checked ~ .logo{
+  margin-left: -50px;
+  position:static;
+}
+
+#check:checked ~ .content{
+  margin-left: 0px;
+}
+
 /*JudaicaLink Logo oben rechts*/
 
 .logofid {
-  margin-top: 5px;
-  width: 270px;
+  width: 220px;
   float: right;
+  margin-right: -90px;
 }
 /*FID Logo oben links*/
 /*-------------------------------------*/
@@ -157,20 +160,21 @@ hr {
 .sidebar {
   top: -50px;
   position: relative;
-  left: -68px;
+  left: 0px;
   width: 253px;
   height: 100%;
-  background: white;
   transition: all .5s ease;
   opacity: 1;
-  background-color: #90EE90;
+  position: fixed;
 }
 .sidebar header{
-  line-height: 55px;
-  background-color:#004284;
+  background-color: #90EE90;
   color: #004284;
+  opacity: 30%;
+  height: 145px;
 }
 .sidebar ul a{
+  background-color: #90EE90;
   text-decoration: none;
   display: block;
   height: 55px;
@@ -194,32 +198,35 @@ ul li:hover a{
 #check{
   display: none;
 }
-#btn,label #cancel{
+label #btn,label #cancel{
   border-radius: 4px;
   cursor: pointer;
 }
 label #btn{
   background: #004284;
-  position: absolute;
   opacity: 0;
   font-size: 35px;
   color: white;
   padding: 6px 12px;
   transition: all .4s;
   pointer-events: none;
+  position: fixed;
+  margin-top: 100px;
+  margin-left: -220px;
 }
 label #cancel{
   position: relative;
   z-index: 1111;
-  left: 156px;
-  top: 50px;
+  left: 193px;
+  top: 100px;
   font-size: 30px;
-  color: white;
   padding: 4px 9px;
   transition:
   all .5s ease;
   opacity: 1;
   margin-left: 50px;
+  color: black;
+  position: fixed;
 }
 
 #check:checked ~ .sidebar{
@@ -236,9 +243,6 @@ label #cancel{
   pointer-events: none;
 }
 
-#check:checked ~ .content{
-  margin-left: 0px;
-}
 
 
 
