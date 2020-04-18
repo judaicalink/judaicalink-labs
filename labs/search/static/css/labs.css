@@ -1,6 +1,4 @@
-html {
-    height:100%;
-}
+
 body {
     min-height:100%;
 }
@@ -11,19 +9,20 @@ body {
 
 .container {
     background: white;
-    width: 1150px;
+    width: 100%;
+    height: 100%;
     /*margin-bottom: 20px;
     margin-right:auto;
     margin-left:auto;
     padding: 10px;
     padding-left: 15px;
     padding-right: 15px;*/
-    height: 100%;
 }
 
 .content {
   background: white;
-  margin-left: 200px;       /*abstand text rand*/
+  margin-left: 250px;       /*abstand text rand*/
+  margin-top: 50px;
   transition: all .5s;
   padding: 0px 50px 0px 50px;
   height: 100%
@@ -36,14 +35,16 @@ h1 {
     font-size: 35px;
     margin-bottom: 16px;
 }
+/*
 .header {
     height: 115px;
     margin-left: auto;
     margin-right: auto;
     }
+*/
 
 p {
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .news {
@@ -133,15 +134,14 @@ p {
 
 .logo {
   width: 200px;
-  float: left;
-  margin-left: -50px;
+  left: 0px;
   margin-top: 10px;
   position: fixed;
 }
 
 #check:checked ~ .logo{
-  margin-left: -50px;
   position:static;
+  margin-left: -20px;
 }
 
 #check:checked ~ .content{
@@ -153,7 +153,8 @@ p {
 .logofid {
   width: 220px;
   float: right;
-  margin-right: -90px;
+  margin-bottom: 50px;
+  margin-top: 10px;
 }
 /*FID Logo oben links*/
 /*-------------------------------------*/
@@ -220,7 +221,7 @@ label #btn{
   transition: all .4s;
   pointer-events: none;
   position: fixed;
-  margin-left: -254px;
+  margin-left: -45px;
 
 }
 label #cancel{
@@ -228,7 +229,7 @@ label #cancel{
   transition:
   all .5s ease;
   opacity: 1;
-  margin-left: 152px;
+  margin-left: 205px;
   position: fixed;
 }
 
