@@ -166,6 +166,7 @@ p {
   transition: all .5s ease;
   opacity: 1;
   position: fixed;
+  z-index: 2;
 }
 .sidebar header{
   background-color: #90EE90;
@@ -177,11 +178,10 @@ p {
   background-color: #90EE90;
   text-decoration: none;
   display: block;
-  height: 55px;
+  height: 62px;
   width: 100%;
   line-height: 55px;
   font-size: 20px;
-  border-bottom: 0.5px solid grey;
   color: grey;
   padding-left: 20px;
   box-sizing: border-box;
@@ -199,34 +199,34 @@ ul li:hover a{
   display: none;
 }
 label #btn,label #cancel{
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
+  -webkit-transform: rotate(45deg);
+  background: #90EE90;
+  color: #90EE90;
+  font-size: 35px;
+  padding: 6px 12px;
+  margin-top: 93px;
+
+
 }
 label #btn{
-  background: #004284;
   opacity: 0;
-  font-size: 35px;
-  color: white;
-  padding: 6px 12px;
   transition: all .4s;
   pointer-events: none;
   position: fixed;
-  margin-top: 100px;
-  margin-left: -220px;
+  margin-left: -254px;
+
 }
 label #cancel{
   position: relative;
-  z-index: 1111;
-  left: 193px;
-  top: 100px;
-  font-size: 30px;
-  padding: 4px 9px;
+  z-index: 1;
   transition:
   all .5s ease;
   opacity: 1;
-  margin-left: 50px;
-  color: black;
+  margin-left: 152px;
   position: fixed;
+
 }
 
 #check:checked ~ .sidebar{
@@ -238,7 +238,6 @@ label #cancel{
   pointer-events: all;
 }
 #check:checked ~ label #cancel{
-  margin-left: -200px;
   opacity: 0;
   pointer-events: none;
 }
