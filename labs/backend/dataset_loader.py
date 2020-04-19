@@ -18,10 +18,13 @@ def url_2_filename(url):
     return url
     
 
+def get_filename(url):
+    return 'backend/rdf_files/' + url_2_filename(url)
+
 
 def load_rdf_file(url):
     headers = {}
-    filename = 'backend/rdf_files/' + url_2_filename(url)
+    filename = get_filename(url)
     if os.path.exists(filename):
         mtime = os.path.getmtime(filename)
         headers['If-Modified-Since'] = http_date(int(mtime)) 
@@ -120,6 +123,13 @@ mappings = {
   }
 
     
+mappings_simpletext = {
+    "properties": {
+      "text":   { "type": "text"  },     
+    }
+  }
+
+    
 def load_in_elasticsearch(task):
     es = elasticsearch.Elasticsearch()
     ic = elasticsearch.client.IndicesClient(es)
@@ -131,6 +141,16 @@ def load_in_elasticsearch(task):
             task.log(df.url + " parsing")
             filename = load_rdf_file(df.url)
             index_file(filename, task)
+    for df in models.Datafile.objects.filter(indexed=True, dataset__indexed=True):
+        if df.dataset.category == 'support':
+            openfunc = open
+            filename = load_rdf_file(df.url)
+            if filename.endswith(".gz"):
+                openfunc = gzip.open
+            with openfunc(filename, "rt", encoding="utf8") as f:
+                es.bulk(f.read())
+            
+    
 
 
 def create_dataset(name, db_type='mem'):

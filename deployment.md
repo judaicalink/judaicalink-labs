@@ -29,6 +29,18 @@ python manage.py collectstatic
 daphne labs.asgi:application
 ```
 
+## Deployment
+- stop daphne server
+- after git pull, check settings_prod for changes 
+
+```
+git pull
+python manage.py collectstatic
+python manage.py migrate
+daphne labs.asgi:application
+
+```
+
 ## Apache as proxy
 
 Install websocket proxy:
@@ -69,4 +81,31 @@ Apache config
                 Require all granted
         </Directory>
 </VirtualHost>
+```
+
+
+## Nginx as proxy
+```
+server {
+        listen 80;
+        listen [::]:80;
+
+        server_name labs2.judaicalink.org labs.judaicalink.org;
+        auth_basic "not public";
+        auth_basic_user_file /data/judaicalink-labs/.htpasswd;
+
+        location /static/ {
+                root /data/judaicalink-labs/;
+        }
+        location /ws/ {
+            proxy_pass http://localhost:8000/ws/;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "Upgrade";
+            proxy_set_header Host $host;
+        }
+        location / {
+                proxy_pass http://localhost:8000;
+        }
+}
 ```

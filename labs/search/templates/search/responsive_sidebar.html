@@ -5,10 +5,11 @@
 
 <!--Logo Bereich-->
 
+
 <input type="checkbox" id="check">
     <label for="check">
       <i class="fas fa-bars" id="btn"></i>
-      <i class="fas fa-times" id="cancel"></i>
+      <i class="fas fa-bars" id="cancel"></i>
     </label>
     <div class="sidebar">
         <header>
@@ -19,11 +20,8 @@
       <!--classes hier definieren nur die symbole in der Navbar-->
     <li><a href="../"><i class="fas fa-home"></i>Root</a></li> <!-- eig müsste das so verlinkt werden können"{% url 'search' 'search_index'%}"-->
     <li><a href="{% url 'search_index'%}"><i class="fas fa-search"></i>Search</a></li>
-    <li><a href="#"><i class="fas fa-stream"></i>Overview</a></li>
-    <li><a href="#"><i class="fas fa-calendar-week"></i>Events</a></li>
-    <li><a href="#"><i class="far fa-question-circle"></i>About</a></li>
-    <li><a href="#"><i class="fas fa-sliders-h"></i>Services</a></li>
-    <li><a href="#"><i class="far fa-envelope"></i>Contact</a></li>
+    <li><a href="#"><i class="fas fa-search"></i>CM Search</a></li>
+    <li><a href="http://www.judaicalink.org/datasets/"><i class="fas fa-sliders-h"></i>Datasets</a></li>
   </ul>
 </div>
 {% endblock navbar %}

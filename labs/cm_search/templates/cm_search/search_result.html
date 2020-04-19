@@ -1,0 +1,82 @@
+
+{% extends 'search/base.html' %}
+{% block content %}
+{% load static %}
+
+{% include "search/responsive_sidebar.html" %}
+
+<!--content-->
+<div class="content_search">
+<!--content-->
+<h1>Compact Memory</h1>
+    
+    <!--wurde jetzt hier aus der FID kopiert und angepasst, muss noch pefektioniert werden-->
+<br>
+    <div class="col-xs-3"></div>
+<form class="searchForm flip" method="get" action="/cm_search/search_result/" id="searchForm" name="searchForm" autocomplete="off">
+    <div>
+        <div class="col-xs-6">
+            <input type="hidden" name="type" id="search-option-type" value="allfields">
+            <div class="input-group">
+                <input class="searchForm_lookfor form-control search-query autocomplete searcher:Solr" type="text" name="query" value="">
+                <div class="input-group-btn">
+                    <!-- Button and dropdown menu -->
+                        
+                    <button type="submit" class="btn btn-primary" title="Find"><span >find</span></button>
+                </div>
+            </div>
+        </div>
+        <div><div>
+                    <div class="pull-left flip">
+                        <a href="./" class="btn btn-link" rel="nofollow">Advanced Search</a>
+                    </div>
+             </div>
+        </div>
+    </div>
+</form>
+</div>
+<br><br>
+<div>
+    {% if total_hits > 0 %}
+        <p>Found {{ total_hits }} documents for the query "<b>{{ query }}</b>".</p>
+    {% else %}
+        <p>No documents matching your query "<b>{{ query}}</b>"! :( </p>
+    {% endif %}
+
+    {% for r in result %}
+        <hr style="height:3px; border:none; color:rgb(47,85,151); background-color:rgb(47,85,151); width:50%">
+        
+        <ul style="list-style-type: none">
+
+            <li><b>Match score</b>: {{ r.score }}</li>
+            <li><b>Page</b> {{ r.page}}</li>
+            <li><b>Fulltext</b>: {{ r.text|truncatechars:500 }}</li>
+            <li><b>Highlight</b>: </li>
+                <ul style="list-style-type: none">
+                    {% for line in r.highlight %}
+                        <li>{{line|safe}}</li>
+                    {% endfor %}
+                </ul>
+            <br>
+            <li>Link to the <a href={{r.jl}} target="_blank">journal</a></li>
+            <li>Link to the <a href={{r.vl}} target="_blank">volume</a></li>
+            <li>Link to the <a href={{r.il}} target="_blank">issue</a></li>
+        </ul>
+        
+        <br>
+    {% endfor %}
+    
+</div>
+
+
+<!--NEWS-->
+<br><br><br><br><br>
+
+<!--NEWS-->
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<!--footer-->
+<br><br><br><br><br><br><br><br>
+{% include "search/footer_labs.html" %}
+
+<!--footer-->
+    {% endblock content %}
