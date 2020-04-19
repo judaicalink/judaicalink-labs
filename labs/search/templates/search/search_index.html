@@ -1,16 +1,14 @@
-
 {% extends 'search/base.html' %}
 {% block content %}
 {% load static %}
 
-{% include "search/responsive_sidebar.html" %}
 
-<!--content-->
+<div class="header">
     <img src="{% static 'images/transp_judaica_labs.png' %}" alt="JudaicaLink labs logo" class="logo"/>
     <a href="https://www.ub.uni-frankfurt.de/judaica3/home.html" target="_blank"><img src="{% static 'images/fid-logo.jpg' %}" alt="FID logo" class="logofid"/></a>
+</div>
+
 <div class="content">
-<hr class="hr">
-<!--content-->
 <h1>Fulltext Search</h1>
 
     <!--wurde jetzt hier aus der FID kopiert und angepasst, muss noch pefektioniert werden-->
