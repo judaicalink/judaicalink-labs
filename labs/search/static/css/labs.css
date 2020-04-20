@@ -8,7 +8,8 @@ body {
 }
 
 .container {
-    background-color: white;
+    /*background: rgba(255, 255, 255, 0.7);*/
+    background: white;
     box-shadow: 0 10px 15px 10px rgba(0,0,0,.3);
     margin-top: 20px;
     margin-bottom: 20px;
@@ -20,6 +21,12 @@ body {
     padding-right: 15px;
 }
 
+.content {
+  background: white;
+  margin-left: 270px;
+  transition: all .5s;
+  padding: 0px 50px 0px 50px;
+}
 h1 {
     font-family: sans-serif;
     color: #004284;
@@ -28,27 +35,34 @@ h1 {
     margin-bottom: 10px;
 }
 .header {
-    margin-top: 10px;
+    height: 110px;
     margin-right:auto;
     margin-left:auto;
     }
-/*Schrift muss ihre Größe anpassen können, funktioniert noch nicht*/
 
 p {
     font-size: 18px;
 }
-hr {
-    color: #004284;
-    background-color: #004284;
-    height: 2px;
+.hr {
+    background-image:url(../images/blue.jpeg);
+    display:block;
+    border:0px;
+    height:100px;
 }
+hr {
+    background-color: #004284;
+    height: 1px;
+    }
 .news {
-    margin-top: 100px;
+    background-color: white;
+    margin-top: 50px;
     padding: 15px;
-    background-color: lightgrey;
+    border: 1px solid lightgrey;
     border-radius: 25px;
+    box-shadow: 5px -5px #004284;
     width: 500px;
     float: right;
+    margin-bottom: 30px;
 }
 
 .newsborder {
@@ -121,15 +135,12 @@ hr {
 }
 
 .logo_pictures {
-/*
-    margin-top: 500px;
-*/
     clear: right;
 }
 
 .logo {
   width: 270px;
-  margin-left: 60px;
+  float: left;
 }
 /*JudaicaLink Logo oben rechts*/
 
@@ -139,6 +150,8 @@ hr {
   float: right;
 }
 /*FID Logo oben links*/
+/*-------------------------------------*/
+
 
 *{
   padding: 0;
@@ -150,22 +163,26 @@ hr {
 .sidebar {
   top: -40px;
   position: relative;
-  left: -300px;
+  left: 0px;
   width: 253px;
   height: 100%;
   background: white;
   transition: all .5s ease;
-  opacity: 0;
+  opacity: 1;
 }
-
+.sidebar header{
+  line-height: 30px;
+  background-color:#004284;
+  color: #004284;
+}
 .sidebar ul a{
   text-decoration: none;
   display: block;
-  height: 100%;
+  height: 30px;
   width: 100%;
-  line-height: 65px;
+  line-height: 30px;
   font-size: 20px;
-  border: 0.5px solid lightgrey;
+  border-bottom: 0.5px solid grey;
   color: grey;
   padding-left: 20px;
   box-sizing: border-box;
@@ -183,53 +200,53 @@ ul li:hover a{
   display: none;
 }
 label #btn,label #cancel{
-  position: relative;
-  background: #004284;
   border-radius: 4px;
   cursor: pointer;
 }
 label #btn{
-  top: -75px;
+  background: #004284;
+  position: absolute;
+  opacity: 0;
   font-size: 35px;
   color: white;
   padding: 6px 12px;
   transition: all .4s;
+  pointer-events: none;
 }
 label #cancel{
+  position: relative;
   z-index: 1111;
-  left: -200px;
+  left: 156px;
   top: -31px;
-  font-size: 30px;
+  font-size: 10px;
   color: white;
   padding: 4px 9px;
   transition: all .5s ease;
-  opacity: 0;
+  opacity: 1;
 }
 #check:checked ~ .sidebar{
-  left: 0;
-  opacity: 100;
+  left: -300px;
+  opacity: 0;
 }
 #check:checked ~ label #btn{
+  opacity: 1;
+  pointer-events: all;
+}
+#check:checked ~ label #cancel{
+  margin-left: -200px;
   opacity: 0;
   pointer-events: none;
 }
-#check:checked ~ label #cancel{
-  left: 156px;
-  opacity: 100;
-}
+
 #check:checked ~ .content{
-  margin-left: 270px;
+  margin-left: 0px;
 }
 
 
-.content {
-  margin-top: -500px;
-  transition: all .5s;
-}
-.content_search {
-  margin-top: -500px;
-  transition: all .5s;
-}
+
+
+
+
 
 /*überschreibt die oberen Werte, wenn eine bestimmte Bedingung erfüllt wird*/
 /*@media (max-width: 1000px) wenn kleiner als 1000px oder =1000px dann...*/
@@ -240,58 +257,140 @@ label #cancel{
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-#check:checked ~ .content_search{
-  margin-left: 200px;
+
+/*1*/
+.content {
+  margin-left: 0px;
+  margin-top: -218px;
+  }
+.header {
+    height: 42px;
+    }
+
+ul li:hover a{
+  padding-left: 40px;
 }
 .container {
     width: 400px;
+    border-radius: 11px;
 }
 .logo {
-    width: 100px;
+    width: 100px;           /*1*/
 }
 .logofid {
     width: 100px;
 }
 #hdmlogo {
-    width: 30px;
+    width: 35px;
+    margin-top: -10px;
 }
 #fidlogo {
-    width: 70px;
+    width: 60px;
+    margin-top: -5px;
 }
 #dmelogo {
-    width: 50px;
+    width: 40px;
+    margin-top: -5px;       /*1*/
 }
 #jcelogo {
-    width: 60px;
+    width: 40px;
 }
 #ubflogo {
-    width: 45px;
+    width: 40px;
+    margin-top: -8px;
 }
 #jeulogo {
-    width: 50px;
+    width: 40px;
 }
 #euprologo {
-    width: 50px;
-    }
+    width: 40px;
+    margin-top: -5px;
+}
 h1 {
 font-size: 11px;
 margin-bottom: 5px;
 }
 p {
-font-size: 7.5px;
+font-size: 7.5px;       /*1*/
 }
 .news{
 width: 200px;
-}
+padding: 10px;
+border-radius: 12px;
 }
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
+.sidebar{
+width: 110px;
+top: -7px;
+left: -300px;
+opacity: 0;
+}
+.sidebar ul a{
+font-size: 7.5px;
+height: 25px;
+line-height: 25px;
+}
+.sidebar header{
+  line-height: 25px;
+}
+label #cancel{
+font-size: 10px;
+top: 18px;
+padding: 3px 6px;
+left: -167px;
+opacity: 0;
+}                       /*1*/
+
+label #btn{
+margin-top: -3px;
+font-size: 10px;
+padding: 5px 6px;
+opacity: 1;
+pointer-events: all;
+}
+
+#check:checked ~ .sidebar{
+  left: 0;
+  opacity: 1;
+}
+
+#check:checked ~ label #btn{
+  opacity: 0;
+  pointer-events: none;
+}
+
+#check:checked ~ label #cancel{
+  margin-left: 256px;
+  opacity: 100;
+  pointer-events: all;          /*1*/
+}
+
+#check:checked ~ .content{
+  margin-left: 120px;
+}
+
+.footer {
+margin-top: 50px;
+}
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) 78% of next larger version*/
 @media only screen and (min-width: 600px) {
+/*2*/
+.content {
+  margin-left: 150px;
+  margin-top: -250px;
+  }
 .container {
     width: 550px;
 }
+.header {
+    height: 60px;
+}
 .logo {
   width: 135px;
+                /*2*/
 }
 .logofid {
   width: 135px;
@@ -309,7 +408,7 @@ width: 200px;
     width: 60px;
 }
 #ubflogo {
-    width: 48px;
+    width: 48px;                    /*2*/
 }
 #jeulogo {
     width: 65px;
@@ -327,12 +426,45 @@ font-size: 11px;
 .news{
 width: 250px;
 }
+
+.sidebar{
+width: 136px;
+top: 2px;
+
+}
+.sidebar ul a{
+font-size: 11px;
 }
 
-/* Medium devices (landscape tablets, 768px and up) */
+
+label #cancel{                  /*2*/
+font-size: 14px;
+top: 33px;
+margin-left: -50px;
+}
+
+label #btn{
+font-size: 14px;
+padding: 6px 8px;
+}
+.footer {
+margin-top: 75px;               /*2*/
+}
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) 77% of next larger version*/
 @media only screen and (min-width: 768px) {
+/*3*/
 .container {
     width: 731px;
+}
+.content {
+  margin-left: 175px;
+  margin-top: -293px;
+  }
+.header {
+    height: 75px;
 }
 .logo {
   width: 173px;
@@ -346,7 +478,7 @@ width: 250px;
 }
 #fidlogo {
     width: 128px;
-}
+}                           /*3*/
 #dmelogo {
     width: 71px;
 }
@@ -362,28 +494,58 @@ width: 250px;
 #euprologo {
     width: 81px;
 }
+label #cancel{
+font-size: 17px;
+margin-left: -30px;
+top: 31px;
+}
 
 h1 {
 font-size: 23px;
 margin-bottom: 10px;
-}
+}                           /*3*/
 
 p {
-font-size: 14px;
+font-size: 12px;
 }
 .news{
 width: 320px;
 }
+.sidebar{
+width: 159px;               /*3*/
+top: -3px;
+}
+.sidebar ul a{
+font-size: 12px;
+height: 35px;
+line-height: 35px;
+}
+.sidebar header{
+  line-height: 35px;
+}
+label #btn{
+font-size: 17px;             /*4*/
+padding: 6px 8px;
+}
 }
 
-/* Large devices (laptops/desktops, 992px and up) */
+/* Large devices (laptops/desktops, 992px and up) 82% of largest version */
 @media only screen and (min-width: 992px) {
-
+/*4*/
 .container {
     width: 950px;
 }
+.content {
+  margin-left: 220px;
+  margin-top: -370px;
+  }
+
+.header {
+    height: 95px;
+}
 .logo {
   width: 224px;
+
 }
 .logofid {
   width: 224px;
@@ -391,7 +553,7 @@ width: 320px;
 
 #hdmlogo {
     width: 62px;
-}
+}                           /*4*/
 #fidlogo {
     width: 166px;
 }
@@ -408,7 +570,7 @@ width: 320px;
     width: 108px;
 }
 #euprologo {
-    width: 105px;
+    width: 105px;           /*4*/
 }
 
 h1 {
@@ -422,16 +584,53 @@ font-size: 16px;
 .news{
 width: 415px;
 }
+.sidebar{
+top: 0px;
+width: 207px;
+}
+.sidebar ul a{              /*4*/
+font-size: 16px;
+height: 45px;
+line-height: 45px;
+}
+.sidebar header{
+  line-height: 45px;
+}
+#check:checked ~ .content{
+  margin-left: 0px;
+}
+
+label #cancel{
+font-size: 25px;
+margin-left: 10px;
+top: 45px;
+}
+label #btn{
+font-size: 25px;             /*4*/
+padding: 6px 9px;
+}
+.footer {
+margin-top: 115px;
+}
 }
 
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
+/*5*/
 .container {
     width: 1150px;
 }
+.content {
+  margin-left: 270px;
+  margin-top: -450px;
+  }
+.header {
+    height: 115px;
+}
 .logo {
   width: 270px;
+
 }
 .logofid {
   width: 270px;
@@ -439,7 +638,7 @@ width: 415px;
 
 #hdmlogo {
     width: 75px;
-}
+}                           /*5*/
 #fidlogo {
     width: 200px;
 }
@@ -457,7 +656,7 @@ width: 415px;
 }
 #euprologo {
     width: 126px;
-}
+}                           /*5*/
 h1 {
 font-size: 35px;
 margin-bottom: 16px;
@@ -467,5 +666,32 @@ font-size: 18px;
 }
 .news{
 width: 500px;
+}
+.sidebar{
+width: 253px;
+}                           /*5*/
+.sidebar ul a{
+font-size: 20px;
+height: 55px;
+line-height: 55px;
+}
+.sidebar header{
+  line-height: 55px;
+}
+#check:checked ~ .content{
+  margin-left: 0px;
+}
+
+label #cancel{
+position: relative;
+font-size: 30px;
+margin-left: 50px;
+top: 50px;
+}
+label #btn{
+font-size: 30px;                /*5*/
+}
+.footer {
+margin-top: 135px;
 }
 }
