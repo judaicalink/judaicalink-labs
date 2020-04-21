@@ -1,10 +1,7 @@
 
 body {
     min-height:100%;  /*Was macht das? Bzw warum wurde das hier eingesetzt? @julika von Patty*/
-}
-
-body {
-    background-color: white;
+    background
 }
 
 .container {
@@ -20,6 +17,8 @@ body {
     transition: all .5s;
     height: 100%;
 }
+
+
 h1 {
     font-family: sans-serif;
     color: #004284;
@@ -115,12 +114,19 @@ p {
     clear: right;
 }
 
-/*JudaicaLink Logo oben rechts*/
+/*JudaicaLink Logo*/
 .logo {
   width: 200px;
-  float: left;
+  margin-top: 20px;
+  margin-left: 15px;
 }
-/*JudaicaLink Logo oben rechts*/
+
+.logo_sidebar{
+  width: 200px;
+  margin-top: 20px;
+  margin-left: 15px;
+}
+
 
 /*FID Logo oben links*/
 .logofid {
@@ -142,41 +148,50 @@ p {
   margin-top: -20px;
   width: 253px;
   transition: all .5s ease;
-  opacity: 1;
-  position: absolute;
   z-index: 1;
-  background-image: url("../images/FIDbackground.png");
+  background-color: #FFDB99;
+  height: 100%;
+  position: fixed;
+}
+
+.sidebar header{
+  height: 105px;
+}
+
+.sidebar_content{
+  background-image: url("../images/orangeTransparent.png"); /*the background needs to be very light/transparent, else the sidebar content won't be as visible*/
+  background-repeat: no-repeat;
   background-size: 800px 600px;
   height: 600px;
 }
-.sidebar header{
-  height: 98px;
-}
-.sidebar ul a{
-  background: rgba(255, 255, 255, 0.5);
+.sidebar_content ul a{
   text-decoration: none;
   display: block;
   height: 62px;
   width: 100%;
   line-height: 55px;
   font-size: 20px;
-  color: grey;
+  color: gray;
   padding-left: 20px;
   box-sizing: border-box;
   transition: .4s;
   z-index: 2;
+  opacity: 1;
 }
+
 ul li:hover a{
   padding-left: 50px;
   color: white;
   background-color: #004284;
 }
-.sidebar ul a i{
+.sidebar_content ul a i{
   margin-right: 16px;
+
 }
 #check{
   display: none;
 }
+
 label #btn,label #cancel{
   border-radius: 10px;
   cursor: pointer;
@@ -185,22 +200,21 @@ label #btn,label #cancel{
   color: #004284;
   font-size: 35px;
   padding: 6px 12px;
-  margin-top: 93px;
+  margin-top: 102px;
 }
 label #btn{
   opacity: 0;
   transition: all .4s;
   pointer-events: none;
-  position: absolute;
-  margin-left: -45px;
-  margin-top: 60px;
+  position: fixed;
+  margin-left: -35px;
 }
 label #cancel{
   z-index: 0;
   opacity: 1;
   transition: all .4s;
-  margin-left: 210px;
-  position: absolute;
+  margin-left: 223px;
+  position: fixed;
 }
 
 #check:checked ~ .sidebar{
@@ -218,12 +232,9 @@ label #cancel{
   pointer-events: none;
 }
 
-
-#check:checked ~ .content{
-  left: 0px;
+#check:checked ~ .container .content{
+  margin-left: 50px;
 }
-
-
 
 
 

@@ -13,9 +13,10 @@
     </label>
     <div class="sidebar">
         <header>
-    <img src="{% static 'images/transp_judaica_labs.png' %}" alt="JudaicaLink labs logo" class="logo"/>
+    <img src="{% static 'images/transp_judaica_labs.png' %}" alt="JudaicaLink labs logo" class="logo_sidebar"/>
 
         </header>
+        <div class="sidebar_content">
   <ul>
       <!--classes hier definieren nur die symbole in der Navbar-->
     <li><a href="../"><i class="fas fa-home"></i>Root</a></li> {%comment%}<!-- eig müsste das so verlinkt werden können"{% url 'search' 'search_index'%}"-->{%endcomment%}
@@ -23,5 +24,6 @@
     <li><a href="#"><i class="fas fa-search"></i>CM Search</a></li>
     <li><a href="http://www.judaicalink.org/datasets/"><i class="fas fa-sliders-h"></i>Datasets</a></li>
   </ul>
+        </div>
 </div>
 {% endblock navbar %}
