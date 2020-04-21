@@ -28,7 +28,7 @@ admin.autodiscover()
 urlpatterns = [
     path('admin/', admin_site.urls),
     path('backend/', include('backend.urls', namespace='backend')),
-    path('search/', include('search.urls')),
+    path('search/', include('search.urls', namespace='search')),
     path('lod/', include('lodjango.urls')),
     path('', index, name='index'),
     path('cm_search/', include('cm_search.urls')),
