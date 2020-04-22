@@ -2,16 +2,33 @@
 {% block content %}
 
 {% load static %}
-{% include "search/responsive_sidebar.html" %}
+
+<div class="header">
+    <img src="{% static 'images/transp_judaica_labs.png' %}" alt="JudaicaLink labs logo" class="logo"/>
+    <a href="https://www.ub.uni-frankfurt.de/judaica3/home.html" target="_blank"><img src="{% static 'images/fid-logo.jpg' %}" alt="FID logo" class="logofid"/></a>
+</div>
+<a href="https://github.com/wisslab/judaicalink-site"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
+
 
 <div class="content">
 
-    {% for data in ordered_dataset %}
-        {% for item in data %}
-            {{ item | safe}} <br>
+    <table class="table table-striped">
+
+        {% for data in ordered_dataset %}
+
+        <tr>
+
+            <td>
+                {% for item in data %}
+                {{ item | safe}} <br>
+                {% endfor %}
+            </td>
+
+        </tr>
+
         {% endfor %}
-    <br> <br>
-    {% endfor %}
+
+    </table>
 
 
     pages: {{pages}}
@@ -37,6 +54,6 @@
 
 
 
-{% include "search/footer_judaicaLink.html" %}
+{% include "search/footer_labs.html" %}
 
 {% endblock content %}
