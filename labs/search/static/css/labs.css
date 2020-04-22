@@ -1,7 +1,6 @@
 
 body {
-    min-height:100%;  /*Was macht das? Bzw warum wurde das hier eingesetzt? @julika von Patty*/
-    background
+    min-height:100%;
 }
 
 .container {
@@ -192,7 +191,6 @@ ul li:hover a{
 #check{
   display: none;
 }
-
 label #btn,label #cancel{
   border-radius: 10px;
   cursor: pointer;
@@ -201,36 +199,38 @@ label #btn,label #cancel{
   color: #004284;
   font-size: 35px;
   padding: 6px 12px;
-  margin-top: 102px;
+  margin-top: 70px; /*Wert anders als bei Hugo vgl. -30px*/
 }
 label #btn{
   opacity: 0;
-  transition: all .4s;
+  transition: all .5s;
   pointer-events: none;
   position: fixed;
-  margin-left: -35px;
+  margin-left: -105px;
 }
 label #cancel{
   z-index: 0;
   opacity: 1;
-  transition: all .4s;
-  margin-left: 223px;
+  transition: all .9s;
+  margin-left: 220px;
   position: fixed;
 }
 
 #check:checked ~ .sidebar{
-  left: -300px;
+  margin-left: -300px;
   opacity: 0;
   transition: all .5s ease;
 }
 #check:checked ~ label #btn{
   opacity: 1;
   pointer-events: all;
+  margin-left: -35px;
 }
 #check:checked ~ label #cancel{
   margin-left:-300px;
   opacity: 0;
   pointer-events: none;
+  transition: all .4s ease;
 }
 
 #check:checked ~ .container .content{
