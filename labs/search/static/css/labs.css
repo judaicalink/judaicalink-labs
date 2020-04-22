@@ -132,7 +132,9 @@ p {
 .logofid {
   width: 220px;
   float: right;
-  margin-top: 20px;}
+  margin-top: 20px;
+  margin-right:50px;
+  }
 
 /*FID Logo oben links*/
 
