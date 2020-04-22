@@ -20,18 +20,18 @@
     <br> <br>
 
     {% for i in range %}
-    <a href="{% url 'search' query i %}"> {{ i }} </a>
+    <a href="{% url 'search:search' query i %}"> {{ i }} </a>
     {% endfor %}
 
     <br> <br>
 
-    <a href="{% url 'search' query %}"> 1 </a>
+    <a href="{% url 'search:search' query %}"> 1 </a>
 
-    <a href="{% url 'search' query back %}"> back </a>
-    <a href="{% url 'search' query page %}"> {{ page }} </a>
+    <a href="{% url 'search:search' query back %}"> back </a>
+    <a href="{% url 'search:search' query page %}"> {{ page }} </a>
 
-    <a href="{% url 'search' query next %}"> next </a>
-    <a href="{% url 'search' query pages %}"> {{ pages }} </a>
+    <a href="{% url 'search:search' query next %}"> next </a>
+    <a href="{% url 'search:search' query pages %}"> {{ pages }} </a>
 
 </div>
 
