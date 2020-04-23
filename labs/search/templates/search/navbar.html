@@ -1,0 +1,28 @@
+{% load static %}
+{% block navbar %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent text-light">
+  <a class="navbar-brand" href="/"><img src="{% static 'images/transp_judaica_labs.png' %}" alt="JudaicaLink labs logo" class="logo"/></a>
+
+
+ <button type="button" id="sidebarCollapse" class="btn btn-outline-primary">
+              <i class="fas fa-bars"></i>
+              <span class="sr-only">Toggle Menu</span>
+            </button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active"><a class="nav-link" href="../"><i class="fas fa-home"></i>Root</a></li> {%comment%}<!-- eig müsste das so verlinkt werden können"{% url 'search' 'search_index'%}"-->{%endcomment%}
+        <li class="nav-item"><a href="{% url 'search:search_index'%}" class="nav-link"><i class="fas fa-search"></i>Search</a></li>
+        <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-search"></i>CM Search</a></li>
+        <li class="nav-item"><a href="http://www.judaicalink.org/datasets/" class="nav-link"><i class="fas fa-sliders-h"></i>Datasets</a></li>
+    </ul>
+
+      <a href="https://www.ub.uni-frankfurt.de/judaica3/home.html" target="_blank"><img src="{% static 'images/fid-logo-transparent.png' %}" alt="FID logo" class="logofid"/></a>
+  </div>
+</nav>
+
+{% endblock navbar %}
