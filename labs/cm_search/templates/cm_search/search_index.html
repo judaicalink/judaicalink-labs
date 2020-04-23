@@ -1,13 +1,18 @@
-
 {% extends 'search/base.html' %}
 {% block content %}
 {% load static %}
 
-{% include "search/responsive_sidebar.html" %}
+<!--{% include "search/responsive_sidebar.html" %}-->
 
-<!--content-->
-<div class="content_search">
-<!--content-->
+
+<div class="header">
+    <img src="{% static 'images/transp_judaica_labs.png' %}" alt="JudaicaLink labs logo" class="logo"/>
+    <a href="https://www.ub.uni-frankfurt.de/judaica3/home.html" target="_blank"><img src="{% static 'images/fid-logo.jpg' %}" alt="FID logo" class="logofid"/></a>
+</div>
+<a href="https://github.com/wisslab/judaicalink-portal" target="_blank"><img id="forkmeongithub" src="{% static 'images/forkmeongithub-blue.png' %}" alt="Fork me on GitHub"></a>
+<div class="content">
+
+<!--<div class="content_search">-->
 <h1>Compact Memory Fulltext Search</h1>
 
     <!--wurde jetzt hier aus der FID kopiert und angepasst, muss noch pefektioniert werden-->
@@ -48,7 +53,7 @@
 
 <!--footer-->
 
-{% include "search/footer_judaicaLink.html" %}
+{% include "search/footer_labs.html" %}
 
 <!--footer-->
     {% endblock content %}
