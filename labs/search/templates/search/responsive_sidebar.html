@@ -1,27 +1,17 @@
 {% load static %}
 {% block navbar %}
 
-  <!--Logo Bereich-->
+<nav id="sidebar" class="sidebar">
+				<div class="p-4 pt-5">
 
-<!--Logo Bereich-->
+	        <ul class="list-unstyled components mb-5">
+                <li><a href="../"><i class="fas fa-home"></i>Root</a></li> {%comment%}<!-- eig müsste das so verlinkt werden können"{% url 'search' 'search_index'%}"-->{%endcomment%}
+                <li><a href="{% url 'search:search_index'%}"><i class="fas fa-search"></i>Search</a></li>
+                <li><a href="#"><i class="fas fa-search"></i>CM Search</a></li>
+                <li><a href="http://www.judaicalink.org/datasets/"><i class="fas fa-sliders-h"></i>Datasets</a></li>
+	        </ul>
 
+	      </div>
+    	</nav>
 
-<input type="checkbox" id="check">
-    <label for="check">
-      <i class="fas fa-bars" id="btn"></i>
-      <i class="fas fa-bars" id="cancel"></i>
-    </label>
-    <div class="sidebar">
-        <header>
-    <img src="{% static 'images/transp_judaica_labs.png' %}" alt="JudaicaLink labs logo" class="logo"/>
-
-        </header>
-  <ul>
-      <!--classes hier definieren nur die symbole in der Navbar-->
-    <li><a href="../"><i class="fas fa-home"></i>Root</a></li> {%comment%}<!-- eig müsste das so verlinkt werden können"{% url 'search' 'search_index'%}"-->{%endcomment%}
-    <li><a href="{% url 'search:search_index'%}"><i class="fas fa-search"></i>Search</a></li>
-    <li><a href="#"><i class="fas fa-search"></i>CM Search</a></li>
-    <li><a href="http://www.judaicalink.org/datasets/"><i class="fas fa-sliders-h"></i>Datasets</a></li>
-  </ul>
-</div>
 {% endblock navbar %}

@@ -11,22 +11,29 @@
     <link rel="stylesheet" href="{% static 'css/simplePagination.css' %} ">
     <!--<link rel="stylesheet" href="{% static 'css/wiss.css' %} ">-->
     <link rel="stylesheet" href="{% static 'css/labs.css' %} "> <!-- css for root.html -->
-   <!-- css for root.html -->
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %} "> <!-- Fontawesome -->
 </head>
 
 <body>
-{% include "search/responsive_sidebar.html" %}
-<div class="container">
-{% block content %}
-{% endblock content %}
+<div class="wrapper align-items-stretch">
+
+    {% include "search/responsive_sidebar.html" %}
+
+    <div class="container-lg">
+    {% block header %}
+    {% endblock header %}
+
+    {% block content %}
+    {% endblock content %}
+    </div>
 </div>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/js_labs.js' %}"></script>
-   <!--s. unten Symbole bei der sidebar-->
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{%  static 'js/all.min.js' %}"></script> <!-- Fontawesome -->
 
 
 </body>
