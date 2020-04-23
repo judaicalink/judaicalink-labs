@@ -13,55 +13,21 @@
 
     <!--wurde jetzt hier aus der FID kopiert und angepasst, muss noch pefektioniert werden-->
 
-    <div class="col-xs-3"></div>
-<form class="searchForm flip" method="post" action="initial_search" id="searchForm" name="searchForm" autocomplete="off">
-    {% csrf_token %}
-    <div>
+<div class="col-xs-3"></div>
+    <form class="searchForm flip" method="post" action="initial_search">
+        {% csrf_token %}
         <div class="col-xs-6">
-            <input type="hidden" name="type" id="search-option-type" value="allfields">
+            <input type="hidden" name="type" value="allfields">
             <div class="input-group">
                 <input class="searchForm_lookfor form-control search-query autocomplete searcher:Solr" type="text" name="lookfor" value="">
-                <div class="input-group-btn">
-                    <!-- Button and dropdown menu -->
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span >all fields</span>
-                            <span class="caret"></span>
-                        </button>
-                        <ul id="select-search-handler" class="dropdown-menu">
-                            <li id="allfields">
-                                    <a href="#" data-value="allfields" data-label="all fields">
-                                        <!-- <span class="hds-icon-check-empty"></span> -->
-                                        all fields</a>
-                                </li>
-                                                            <li id="author">
-                                    <a href="#" data-value="author" data-label="author">
-                                        <!-- <span class="hds-icon-check-empty"></span> -->
-                                        author</a>
-                                </li>
-                                                            <li id="title">
-                                    <a href="#" data-value="title" data-label="title">
-                                        <!-- <span class="hds-icon-check-empty"></span> -->
-                                        title                                    </a>
-                                </li>
-                            <li id="publisher">
-                                <a href="#" data-value="publisher" data-label="Publication Info">
-                                    <!-- <span class="hds-icon-check-empty"></span> -->
-                                        Publication Info                                    </a>
-                                </li>
-                        </ul>
-                    <button type="submit" class="btn btn-primary" title="Find"><i class="fas fa-search"></i></button>
+                <div class="input-group-btn" >
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                 </div>
             </div>
         </div>
-        <div><div>
-                    <div class="pull-left flip">
-                        <a href="./" class="btn btn-link" >Advanced Search</a>
-                    </div>
-             </div>
-        </div>
-    </div>
-</form>
+    </form>
 </div>
+
 <!--NEWS-->
 <br><br><br><br><br><br><br><br><br><br><br><br>
 <div class="news">

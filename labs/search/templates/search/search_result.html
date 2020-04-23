@@ -10,7 +10,29 @@
 <a href="https://github.com/wisslab/judaicalink-site"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
 
 
+
 <div class="content">
+
+    <br><br>
+
+        <form class="searchForm flip" method="post" action="initial_search">
+            {% csrf_token %}
+            <div class="col-xs-6">
+                <input type="hidden" name="type" value="allfields">
+                <div class="input-group">
+                    <input class="searchForm_lookfor form-control search-query autocomplete searcher:Solr" type="text" name="lookfor" value="{{query}}">
+                    <div class="input-group-btn" >
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    <br><br>
+
+    Your query <b>'{{query}}'</b> generated <b>{{total_hits}}</b> hits
+
+    <br><br>
 
     <table class="table table-striped">
 
@@ -30,10 +52,6 @@
 
     </table>
 
-
-    pages: {{pages}}
-    total_hits: {{total_hits}}
-
     <br> <br>
 
     {% for i in range %}
@@ -50,10 +68,8 @@
     <a href="{% url 'search:search' query next %}"> next </a>
     <a href="{% url 'search:search' query pages %}"> {{ pages }} </a>
 
-</div>
-
-
-
 {% include "search/footer_labs.html" %}
+
+</div>
 
 {% endblock content %}
