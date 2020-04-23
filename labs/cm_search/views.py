@@ -11,9 +11,9 @@ def index(request):
 
 
 def result(request):
-	#query = request.GET.get('query')
-	#context = {'query': query}
-	#return render(request, 'cm_search/search_result.html', context)
+	
+	# hardcoded list of journals that do not have external access on visual library UB Fra
+	blacklist = ('2431292', '2823768', '10112841', '4086896', '9038025', '4875667', '7938572', '8553624', '8823924', '9498581', '9572329', '9616703', '9620162')
 
 	es = Elasticsearch()
 	query = request.GET.get('query')
@@ -31,12 +31,19 @@ def result(request):
 		journal_link = "http://sammlungen.ub.uni-frankfurt.de/cm/periodical/titleinfo/"+chunks[0]
 		volume_link = "http://sammlungen.ub.uni-frankfurt.de/cm/periodical/titleinfo/"+chunks[1]
 		issue_link = "http://sammlungen.ub.uni-frankfurt.de/cm/periodical/titleinfo/"+chunks[2]
+		page_link = "http://sammlungen.ub.uni-frankfurt.de/cm/periodical/pageview/"+chunks[-1]
 
 		formatted_doc['jl'] = journal_link
 		formatted_doc['vl'] = volume_link
 		formatted_doc['il'] = issue_link
-		formatted_doc['page'] = chunks[-1]
 
+
+		if chunks[0] in blacklist:
+			formatted_doc['plink'] = ''
+		else:
+			formatted_doc['plink'] = page_link
+
+		formatted_doc['page'] = chunks[-2]
 		formatted_doc['id'] = doc['_id']
 		formatted_doc['score'] = round(doc['_score'], 2)
 		formatted_doc['text'] = doc['_source']['text']
