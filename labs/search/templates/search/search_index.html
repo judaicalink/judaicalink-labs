@@ -14,10 +14,9 @@
     <!--wurde jetzt hier aus der FID kopiert und angepasst, muss noch pefektioniert werden-->
 
 <div class="col-xs-3"></div>
-    <form class="searchForm flip" method="post" action="initial_search">
-        {% csrf_token %}
+    <form class="searchForm flip" method="get" action="search">
         <div class="col-xs-6">
-            <input type="hidden" name="type" value="allfields">
+            <input type="hidden" name="page" value="1">
             <div class="input-group">
                 <input class="searchForm_lookfor form-control search-query autocomplete searcher:Solr" type="text" name="lookfor" value="">
                 <div class="input-group-btn" >

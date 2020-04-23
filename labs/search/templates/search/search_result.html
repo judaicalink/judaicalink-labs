@@ -15,8 +15,7 @@
 
     <br><br>
 
-        <form class="searchForm flip" method="post" action="initial_search">
-            {% csrf_token %}
+        <form class="searchForm flip" method="get" action="search">
             <div class="col-xs-6">
                 <input type="hidden" name="type" value="allfields">
                 <div class="input-group">
@@ -55,18 +54,15 @@
     <br> <br>
 
     {% for i in range %}
-    <a href="{% url 'search:search' query i %}"> {{ i }} </a>
-    {% endfor %}
 
-    <br> <br>
+    <form style="display: inline;" method="get" action="search">
+        <input type="hidden" name="lookfor" value="{{ query }}">
+        <input type="hidden" name="page" value="{{ i }}">
+        <button type="submit" > {{ i }} </button>
+    </form>
 
-    <a href="{% url 'search:search' query %}"> 1 </a>
+    {%endfor %}
 
-    <a href="{% url 'search:search' query back %}"> back </a>
-    <a href="{% url 'search:search' query page %}"> {{ page }} </a>
-
-    <a href="{% url 'search:search' query next %}"> next </a>
-    <a href="{% url 'search:search' query pages %}"> {{ pages }} </a>
 
 {% include "search/footer_labs.html" %}
 

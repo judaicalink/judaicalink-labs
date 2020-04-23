@@ -28,15 +28,11 @@ def load(request):
         response = requests.post('http://localhost:9200/judaicalink/doc/_bulk?pretty', data=data, headers=headers)
         return HttpResponse(response)
 
-def initial_search (request, page):
-    if request.POST:
-        query = request.POST ["lookfor"]
-        return redirect (reverse ('search:search', args=[query]))
-
-def search(request, query, page):
-    context = process_query(query, page)
-    return render (request, "search/search_result.html", context)
-
+def search (request):
+    query = request.GET.get ('lookfor')
+    page = int (request.GET.get ('page'))
+    context = process_query (query, page)
+    return render (request, 'search/search_result.html', context)
 
 def process_query (query, page):
     es = Elasticsearch()
