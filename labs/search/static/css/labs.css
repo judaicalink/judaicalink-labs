@@ -249,7 +249,21 @@ label #cancel{
   margin-left: 50px;
 }
 
+.paging_button_inactive {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    padding: 10px 10px;
+    text-align: center;
+}
 
+.paging_button_active {
+    background-color: #004284;
+    border: 1px solid black;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+}
 
 
 /*überschreibt die oberen Werte, wenn eine bestimmte Bedingung erfüllt wird*/

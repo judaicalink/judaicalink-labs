@@ -35,6 +35,7 @@ def search (request):
     return render (request, 'search/search_result.html', context)
 
 def process_query (query, page):
+    page = int (page)
     es = Elasticsearch()
     size = 10
     start = (page - 1) * size
@@ -113,17 +114,37 @@ def process_query (query, page):
     pages = math.ceil (total_hits / size)   #number of needed pages for paging
         #round up number of pages
 
+    paging = []
+    #if page = 1 contains -2, -1, 0, 1, 2, 3, 4
+
+    paging.append (page - 3)
+    paging.append (page - 2)
+    paging.append (page - 1)
+    paging.append (page)
+    paging.append (page + 1)
+    paging.append (page + 2)
+    paging.append (page + 3)
+
+    real_paging = []
+    #if page = 1 contains 1, 2, 3, 4
+        #-> non-existing pages are removed
+
+    for number in paging:
+        if number >= 1 and number <= pages:
+            real_paging.append (number)
+
     context = {
         "result" : result ["hits"] ["hits"],
             #contains full search results from elasticsearch
         "dataset" : dataset,
             #contains id and information from fields
         "pages" : pages,
+        "paging" : real_paging,
+        "next" : page + 1,
+        "previous" : page -1,
         "total_hits" : total_hits,
         "range" : range (1, (pages + 1)),
         "page" : page,
-        "next" : page + 1,
-        "back" : page -1,
         "query" : query,
         "ordered_dataset" : ordered_dataset,
     }
