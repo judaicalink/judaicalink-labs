@@ -3,17 +3,20 @@
 {% load static %}
 
 
-<div class="header">
-    <img src="{% static 'images/transp_judaica_labs.png' %}" alt="JudaicaLink labs logo" class="logo"/>
-    <a href="https://www.ub.uni-frankfurt.de/judaica3/home.html" target="_blank"><img src="{% static 'images/fid-logo.jpg' %}" alt="FID logo" class="logofid"/></a>
-</div>
+{% include "search/header.html" %}
+
+
+
 <a href="https://github.com/wisslab/judaicalink-portal" target="_blank"><img id="forkmeongithub" src="{% static 'images/forkmeongithub-blue.png' %}" alt="Fork me on GitHub"></a>
-<div class="content">
+
+
+<!--content-->
+<main class="row">
+	<div class="col-md-9">
 <h1>Fulltext Search</h1>
 
-    <!--wurde jetzt hier aus der FID kopiert und angepasst, muss noch pefektioniert werden-->
 
-<div class="col-xs-3"></div>
+
     <form class="searchForm flip" method="get" action="search">
         <div class="col-xs-6">
             <input type="hidden" name="page" value="1">
@@ -27,19 +30,13 @@
     </form>
 </div>
 
-<!--NEWS-->
-<br><br><br><br><br><br><br><br><br><br><br><br>
-<div class="news">
-    <p>NEWS</p>
-    <div class="newsborder"><p>Juhu die Verlinkung auf Search klappt!<br>
-        Aaaaaber sie ist noch nicht perfekt...°-°
-    </div>
-</div>
-<!--NEWS-->
 
-<!--footer-->
+</main>
+<!--content end-->
 
-{% include "search/footer_labs.html" %}
 
-<!--footer-->
+
+{% include "search/footer.html" %}
+
+
     {% endblock content %}

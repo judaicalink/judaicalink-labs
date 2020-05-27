@@ -2,59 +2,34 @@
 {% block content %}
 {% load static %}
 
+{% include "search/header.html" %}
 
 <!--content-->
-<div class="header">
-<img src="{% static 'images/transp_judaica_labs.png' %}" alt="JudaicaLink labs logo" class="logo"/>
-    <a href="https://www.ub.uni-frankfurt.de/judaica3/home.html" target="_blank"><img src="{% static 'images/fid-logo.jpg' %}" alt="FID logo" class="logofid"/></a>
+<main class="row">
+	<div class="col-md-9">
+
+
+<h1>Welcome to JudaicaLink labs!</h1>
+<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+</p>
+
+
+
+<!--<img src="/img/homepage-graphics.png" alt="Linked Data Web"/>-->
+<h2>Apps</h2>
+<p>
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+</p>
+
 </div>
-<a href="https://github.com/wisslab/judaicalink-portal" target="_blank"><img id="forkmeongithub" src="{% static 'images/forkmeongithub-blue.png' %}" alt="Fork me on GitHub"></a>
-    <div class="content">
-<h1>Experimental full text search online</h1>
-<p>Thu, May 31, 2018
+	<div class="col-md-3">
+		<img src="{% static '/img/brille.jpg'%}" class="img-thumbnail" height="auto" width="100%"></img>
 
-We have some news regarding search functionality in JudaicaLink.
+	</div>
+</main>
 
-As we said earlier, we plan to develop a full text search for JudaicaLink. Today, we launch a first version of it, although it is still very limited.
+<!--content end-->
+{% include "search/footer.html" %}
 
-You can now search our data, backed by ElasticSearch. We are currently mainly working again on the backend part of this, like the processes to populate the search index, the integration with the data pages and so on.
 
-This first search functionality is therefore very limited: you can search in a subset of our data fields (name/title, abstract, birthDate, deathDate, birthLocation, deathLocation) and only the first 10 results (if any) are shown, as simple links to the data pages.
-
-We nevertheless think this is already useful (at least we use it), as this way you can quickly find out, if there are some matching resources available in JudaicaLink, and you can also find quickly some new entries to explore our dataset.
-
-So have fun with it - and be patient, it is still under heavy development and things inevitably will break.<br><br>We have some news regarding search functionality in JudaicaLink.
-
-As we said earlier, we plan to develop a full text search for JudaicaLink. Today, we launch a first version of it, although it is still very limited.
-
-You can now search our data, backed by ElasticSearch. We are currently mainly working again on the backend part of this, like the processes to populate the search index, the integration with the data pages and so on.
-
-This first search functionality is therefore very limited: you can search in a subset of our data fields (name/title, abstract, birthDate, deathDate, birthLocation, deathLocation) and only the first 10 results (if any) are shown, as simple links to the data pages.
-
-We nevertheless think this is already useful (at least we use it), as this way you can quickly find out, if there are some matching resources available in JudaicaLink, and you can also find quickly some new entries to explore our dataset.
-
-So have fun with it - and be patient, it is still under heavy development and things inevitably will break.</p>
-</div>
-<!--content-->
-<!--NEWS-->
-
-<div class="news">
-    <p>NEWS</p>
-    <div class="newsborder"><p>Mon, July 16, 2018:
-Explore our project GitHub<br>
-
- Mon, June 18, 2018:
-Search Improvements<br>
-
- Thu, May 31, 2018:
-        Experimental full text search online <a href="/">>>read more</a></p></div>
-    </div>
-<!--NEWS-->
-
-<!--footer-->
-
-{% include "search/footer_labs.html" %}
-
-<!--footer-->
-    {% endblock content %}
-
+{% endblock content %}
