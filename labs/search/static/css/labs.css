@@ -1,59 +1,129 @@
 
-body {
-    min-height:100%;
+body,html {
+   padding:0;
+   margin:0;
+   top:0;
+   left:0;
+   width: 100%;
+   height: 100%;
+   font-size: 16px;
+
+}
+h1, h2, h3, h4, a{
+  color: #004284;
 }
 
-.container {
-    background: white;
+/*-------------------------------------------------------*/
+
+
+a:hover {
+    color: lighgrey;
+}
+
+.wrapper {
+    display: flex;
     width: 100%;
-    height: 100%;
-    margin-top: -20px;
-    margin-left: -15px;
-}
-
-.content {
-    margin-left: 300px;
-    transition: all .5s;
-    height: 100%;
-    z-index: -10;
 }
 
 
-h1 {
-    font-family: sans-serif;
-    color: #004284;
-    text-align: center;
-    margin: auto;
-    font-size: 35px;
-    margin-bottom: 16px;
+#sidebar a, #sidebar a:hover, #sidebar a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
 }
 
-.header{
-    height:100px;
-    width: 100%;
+button {
+   position: fixed;
+   top: -5px;
+   margin-left: -68px;
+   height: 35px;
+   width: 35px;
+   opacity: 0.6;
+}
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    background: #8AAFFF;
+    color: #fff;
+    transition: all 0.3s;
+}
+#sidebar.active {
+    margin-left: -250px;
+}
+
+#sidebar a[data-toggle="collapse"] {
     position: relative;
 }
 
-p {
-    font-size: 15px;
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+#sidebar .sidebar-header {
+    padding: 20px;
+    background-color: #8AAFFF;
 }
 
-.news {
-    margin-top: 50px;
-    padding: 15px;
-    box-shadow: 5px -5px #004284;
-    width: 500px;
-    float: right;
-    margin-bottom: 30px;
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #fff;
 }
 
-.newsborder {
-    border-left: 4px solid #004284;
-    padding-left: 5px;
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
 }
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+#sidebar ul li a:hover {
+    background: rgba(0,66,132,0.5);  /*Dunkelblau in Hex #004284*/
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: #fff;
+    background: #004284;
+}
+#sidebar ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #004284;            /*Das ist UNSER Dunkelblau #004284*/
+}
+
+
+#content {
+    width: calc(100% - 250px);
+    padding: 40px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#content.active {
+    width: 100%;
+}
+
+.row {
+    padding: 10px;
+    }
+
+.col-md-4 {
+    border-left: solid 1px lightgrey;
+    }
 
 #hdmlogo {
-    float: right;
     padding: 5px;
     width: 75px;
     height: auto;
@@ -61,81 +131,146 @@ p {
 }
 
 #dmelogo {
-    float: right;
-    padding: 5px;
     width: 110px;
     height: auto;
     margin-top: 10px;
-    margin-right: 10px;
+    margin-left: 5px;
 }
 #jcelogo {
-    float: right;
     padding: 5px;
     width: 120px;
     height: auto;
-    margin-top: -5px;
 }
 #ubflogo {
-    float: right;
     padding: 5px;
     width: 95px;
     height: auto;
     margin-top: -5px;
 }
 #jeulogo {
-    float: right;
     padding: 5px;
     width: 130px;
     height: auto;
-    margin-right: 20px;
     margin-top: -5px;
 }
 #euprologo {
-    float: right;
     padding: 5px;
     width: 126px;
     height: auto;
-    margin-right: 20px;
     margin-top: 3px;
     }
 
-.footer {
-    margin-top: 125px;
-    position: relative;
-    padding: 10px;
-    text-align: center;
-    margin-left: -20px;
-    margin-right: -20px;
-    z-index: 0;
-}
 
-.logo_pictures {
-    clear: right;
+.header-logos{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 /*JudaicaLink Logo*/
 .logo {
   width: 200px;
-  margin-top: 20px;
-  margin-left: 15px;
+}
+/*JudaicaLink Logo*/
+
+
+/*FID Logo oben rechts*/
+.logofid {
+  width: 220px;
+  }
+/*FID Logo oben rechts*/
+
+
+.footer-logos {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+
+}
+
+.footer-content{
+    margin-top: 30px;
+    font-size: 17px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+
+}
+.footer-content a{
+    color: black;
+}
+.footer-content a:hover{
+    text-decoration:underline;
 }
 
 .logo_sidebar{
   width: 200px;
-  margin-top: 20px;
-  margin-left: 15px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
 }
 
 
-/*FID Logo oben links*/
-.logofid {
-  width: 220px;
-  float: right;
-  margin-top: 20px;
-  margin-right:50px;
-  }
+.container-fluid {
+margin-top: -30px;}
 
-/*FID Logo oben links*/
+
+
+
+
+
+
+/*--------war davor in search.css---------*/
+.hit {
+	margin-bottom: 10px;
+
+}
+
+.snippet, .score {
+	color:#333333;
+	font-size:80%;
+}
+
+ul.results {
+	list-style-type: none;
+	font-family:sans-serif;
+	width:600px;
+}
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+/*@media (max-width: 1000px) wenn kleiner als 1000px oder =1000px dann...*/
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -100%; /*davor -250px*/
+        width: 100%;        /*250px*/
+    }
+
+    #sidebar.active {
+        margin-left: 0;
+    }
+
+    #content {
+        width: 100%;
+    }
+    #content.active {
+        width: calc(100% - 250px);
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+}
+
+/*-------------------------------------------------------*/
+
+
+
+
 
 #forkmeongithub {
 height: 120px;
@@ -149,575 +284,6 @@ transition: .4s;
 opacity: 0.8;
 height: 130px;
 }
-*{
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  text-decoration: none;
-}
-
-.sidebar {
-  margin-top: -20px;
-  width: 253px;
-  transition: all .5s ease;
-  z-index: 1;
-  background-color: #ebffff;
-  height: 100%;
-  position: fixed;
-}
-
-.sidebar header{
-  height: 105px;
-}
-
-.sidebar_content{
-  background-image: url("../images/FIDbackgroundBlue.png"); /*the background needs to be very light/transparent, else the sidebar content won't be as visible*/
-  background-repeat: no-repeat;
-  background-size: 1000px 750px;
-  height: 100%;
-}
-.sidebar_content ul a{
-  text-decoration: none;
-  display: block;
-  height: 62px;
-  width: 100%;
-  line-height: 55px;
-  font-size: 20px;
-  color: gray;
-  padding-left: 20px;
-  box-sizing: border-box;
-  transition: .4s;
-  z-index: 2;
-  opacity: 1;
-}
-
-ul li:hover a{
-  padding-left: 50px;
-  color: white;
-  background-color: #004284;
-}
-.sidebar_content ul a i{
-  margin-right: 16px;
-
-}
-#check{
-  display: none;
-}
-label #btn,label #cancel{
-  border-radius: 10px;
-  cursor: pointer;
-  -webkit-transform: rotate(45deg);
-  background: #004284;
-  color: #004284;
-  font-size: 35px;
-  padding: 6px 12px;
-  margin-top: 70px; /*Wert anders als bei Hugo vgl. -30px*/
-}
-label #btn{
-  opacity: 0;
-  transition: all .5s;
-  pointer-events: none;
-  position: fixed;
-  margin-left: -105px;
-}
-label #cancel{
-  z-index: 0;
-  opacity: 1;
-  transition: all .9s;
-  margin-left: 220px;
-  position: fixed;
-}
-
-#check:checked ~ .sidebar{
-  margin-left: -300px;
-  opacity: 0;
-  transition: all .5s ease;
-}
-#check:checked ~ label #btn{
-  opacity: 1;
-  pointer-events: all;
-  margin-left: -35px;
-}
-#check:checked ~ label #cancel{
-  margin-left:-300px;
-  opacity: 0;
-  pointer-events: none;
-  transition: all .4s ease;
-}
-
-#check:checked ~ .container .content{
-  margin-left: 50px;
-}
-
-.paging_button_inactive {
-    background-color: white;
-    border: 1px solid black;
-    color: black;
-    padding: 10px 10px;
-    text-align: center;
-}
-
-.paging_button_active {
-    background-color: #004284;
-    border: 1px solid black;
-    color: white;
-    padding: 10px 10px;
-    text-align: center;
-}
-
-
-/*überschreibt die oberen Werte, wenn eine bestimmte Bedingung erfüllt wird*/
-/*@media (max-width: 1000px) wenn kleiner als 1000px oder =1000px dann...*/
-
-/*Hier wird die Responsiveness eingestellt
 
 
 
-/* Extra small devices (phones, 600px and down) */
-/*
-@media only screen and (max-width: 600px) {
-
-
-.content {
-  margin-left: 0px;
-  margin-top: -218px;
-  }
-.header {
-    height: 42px;
-    }
-
-ul li:hover a{
-  padding-left: 40px;
-}
-.container {
-    width: 400px;
-    border-radius: 11px;
-}
-.logo {
-    width: 100px;
-}
-.logofid {
-    width: 100px;
-}
-#hdmlogo {
-    width: 35px;
-    margin-top: -10px;
-}
-#fidlogo {
-    width: 60px;
-    margin-top: -5px;
-}
-#dmelogo {
-    width: 40px;
-    margin-top: -5px;
-}
-#jcelogo {
-    width: 40px;
-}
-#ubflogo {
-    width: 40px;
-    margin-top: -8px;
-}
-#jeulogo {
-    width: 40px;
-}
-#euprologo {
-    width: 40px;
-    margin-top: -5px;
-}
-h1 {
-font-size: 11px;
-margin-bottom: 5px;
-}
-p {
-font-size: 7.5px;
-}
-.news{
-width: 200px;
-padding: 10px;
-border-radius: 12px;
-}
-
-.sidebar{
-width: 110px;
-top: -7px;
-left: -300px;
-opacity: 0;
-}
-.sidebar ul a{
-font-size: 7.5px;
-height: 25px;
-line-height: 25px;
-}
-.sidebar header{
-  line-height: 25px;
-}
-label #cancel{
-font-size: 10px;
-top: 18px;
-padding: 3px 6px;
-left: -167px;
-opacity: 0;
-}
-
-label #btn{
-margin-top: -3px;
-font-size: 10px;
-padding: 5px 6px;
-opacity: 1;
-pointer-events: all;
-}
-
-#check:checked ~ .sidebar{
-  left: 0;
-  opacity: 1;
-}
-
-#check:checked ~ label #btn{
-  opacity: 0;
-  pointer-events: none;
-}
-
-#check:checked ~ label #cancel{
-  margin-left: 256px;
-  opacity: 100;
-  pointer-events: all;
-}
-
-#check:checked ~ .content{
-  margin-left: 120px;
-}
-
-.footer {
-margin-top: 50px;
-}
-
-}
-*/
-
-/* Small devices (portrait tablets and large phones, 600px and up) 78% of next larger version*/
-/*
-@media only screen and (min-width: 600px) {
-
-.content {
-  margin-left: 150px;
-  margin-top: -250px;
-  }
-.container {
-    width: 550px;
-}
-.header {
-    height: 60px;
-}
-.logo {
-  width: 135px;
-}
-.logofid {
-  width: 135px;
-}
-#hdmlogo {
-    width: 37px;
-}
-#fidlogo {
-    width: 100px;
-}
-#dmelogo {
-    width: 55px;
-}
-#jcelogo {
-    width: 60px;
-}
-#ubflogo {
-    width: 48px;
-}
-#jeulogo {
-    width: 65px;
-}
-#euprologo {
-    width: 63px;
-}
-h1 {
-font-size: 18px;
-margin-bottom: 10px;
-}
-p {
-font-size: 11px;
-}
-.news{
-width: 250px;
-}
-
-.sidebar{
-width: 136px;
-top: 2px;
-
-}
-.sidebar ul a{
-font-size: 11px;
-}
-
-
-label #cancel{
-font-size: 14px;
-top: 33px;
-margin-left: -50px;
-}
-
-label #btn{
-font-size: 14px;
-padding: 6px 8px;
-}
-.footer {
-margin-top: 75px;
-}
-
-}
-*/
-
-/* Medium devices (landscape tablets, 768px and up) 77% of next larger version*/
-/*
-@media only screen and (min-width: 768px) {
-
-.container {
-    width: 731px;
-}
-.content {
-  margin-left: 175px;
-  margin-top: -293px;
-  }
-.header {
-    height: 75px;
-}
-.logo {
-  width: 173px;
-}
-.logofid {
-  width: 173px;
-}
-
-#hdmlogo {
-    width: 48px;
-}
-#fidlogo {
-    width: 128px;
-}
-#dmelogo {
-    width: 71px;
-}
-#jcelogo {
-    width: 77px;
-}
-#ubflogo {
-    width: 61px;
-}
-#jeulogo {
-    width: 83px;
-}
-#euprologo {
-    width: 81px;
-}
-label #cancel{
-font-size: 17px;
-margin-left: -30px;
-top: 31px;
-}
-
-h1 {
-font-size: 23px;
-margin-bottom: 10px;
-}
-
-p {
-font-size: 12px;
-}
-.news{
-width: 320px;
-}
-.sidebar{
-width: 159px;
-top: -3px;
-}
-.sidebar ul a{
-font-size: 12px;
-height: 35px;
-line-height: 35px;
-}
-.sidebar header{
-  line-height: 35px;
-}
-label #btn{
-font-size: 17px;
-padding: 6px 8px;
-}
-}
-*/
-
-/* Large devices (laptops/desktops, 992px and up) 82% of largest version */
-/*
-@media only screen and (min-width: 992px) {
-
-.container {
-    width: 950px;
-}
-.content {
-  margin-left: 220px;
-  margin-top: -370px;
-  }
-
-.header {
-    height: 95px;
-}
-.logo {
-  width: 224px;
-
-}
-.logofid {
-  width: 224px;
-}
-
-#hdmlogo {
-    width: 62px;
-}
-#fidlogo {
-    width: 166px;
-}
-#dmelogo {
-    width: 91px;
-}
-#jcelogo {
-    width: 100px;
-}
-#ubflogo {
-    width: 79px;
-}
-#jeulogo {
-    width: 108px;
-}
-#euprologo {
-    width: 105px;
-}
-
-h1 {
-font-size: 30px;
-margin-bottom: 13px;
-}
-
-p {
-font-size: 16px;
-}
-.news{
-width: 415px;
-}
-.sidebar{
-top: 0px;
-width: 207px;
-}
-.sidebar ul a{
-font-size: 16px;
-height: 45px;
-line-height: 45px;
-}
-.sidebar header{
-  line-height: 45px;
-}
-#check:checked ~ .content{
-  margin-left: 0px;
-}
-
-label #cancel{
-font-size: 25px;
-margin-left: 10px;
-top: 45px;
-}
-label #btn{
-font-size: 25px;
-padding: 6px 9px;
-}
-.footer {
-margin-top: 115px;
-}
-}
-*/
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-/*
-@media only screen and (min-width: 1200px) {
-
-.container {
-    width: 1150px;
-}
-.content {
-  margin-left: 270px;
-  margin-top: -450px;
-  }
-.header {
-    height: 115px;
-}
-.logo {
-  width: 270px;
-
-}
-.logofid {
-  width: 270px;
-}
-
-#hdmlogo {
-    width: 75px;
-}
-#fidlogo {
-    width: 200px;
-}
-#dmelogo {
-    width: 110px;
-}
-#jcelogo {
-    width: 120px;
-}
-#ubflogo {
-    width: 95px;
-}
-#jeulogo {
-    width: 130px;
-}
-#euprologo {
-    width: 126px;
-}
-h1 {
-font-size: 35px;
-margin-bottom: 16px;
-}
-p {
-font-size: 18px;
-}
-.news{
-width: 500px;
-}
-.sidebar{
-width: 253px;
-}
-.sidebar ul a{
-font-size: 20px;
-height: 55px;
-line-height: 55px;
-}
-.sidebar header{
-  line-height: 55px;
-}
-#check:checked ~ .content{
-  margin-left: 0px;
-}
-
-label #cancel{
-position: relative;
-font-size: 30px;
-margin-left: 50px;
-top: 50px;
-}
-label #btn{
-font-size: 30px;
-}
-.footer {
-margin-top: 135px;
-}
-}
-*/

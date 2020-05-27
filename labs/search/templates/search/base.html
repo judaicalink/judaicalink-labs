@@ -9,19 +9,18 @@
     <title>JudaicaLink labs</title>
     {% load sass_tags %}
     <link type="text/css" rel="stylesheet" href="{% sass_src 'bootstrap-4.4.1/scss/bootstrap.scss' %} ">
-    <!--<link rel="stylesheet" href="{% static 'css/search.css' %} ">-->
     <link rel="stylesheet" href="{% static 'css/fontawesome.min.css' %} ">
     <link rel="stylesheet" href="{% static 'css/simplePagination.css' %} ">
-    <!--<link rel="stylesheet" href="{% static 'css/wiss.css' %} ">-->
-    <link rel="stylesheet" href="{% static 'css/labs.css' %} "> <!-- css for root.html -->
-   <!-- css for root.html -->
+    <link rel="stylesheet" href="{% static 'css/labs.css' %} ">
 </head>
 
 <body>
-{% include "search/responsive_sidebar.html" %}
-<div class="container">
+{% include "search/navbar.html" %}
+<div id="content">
+    <div class="container-fluid">
 {% block content %}
 {% endblock content %}
+</div>
 </div>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>

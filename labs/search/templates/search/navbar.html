@@ -1,0 +1,78 @@
+{% load static %}
+{% block navbar %}
+
+  <!--Logo Bereich-->
+
+<!--Logo Bereich-->
+
+<!--<input type="checkbox" id="check">
+    <label for="check">
+      <i class="fas fa-bars" id="btn"></i>
+      <i class="fas fa-bars" id="cancel"></i>
+    </label>
+    <div class="sidebar">
+        <header>
+    <img src="{% static 'images/transp_judaica_labs.png' %}" alt="JudaicaLink labs logo" class="logo_sidebar"/>
+
+        </header>
+        <div class="sidebar_content">
+  <ul>
+      &lt;!&ndash;classes hier definieren nur die symbole in der Navbar&ndash;&gt;
+    <li><a href="../"><i class="fas fa-home"></i>Root</a></li> {%comment%}&lt;!&ndash; eig müsste das so verlinkt werden können"{% url 'search' 'search_index'%}"&ndash;&gt;{%endcomment%}
+    <li><a href="{% url 'search:search_index'%}"><i class="fas fa-search"></i>Search</a></li>
+    <li><a href="{% url 'search_index' %}"><i class="fas fa-search"></i>CM Search</a></li>
+    <li><a href="http://www.judaicalink.org/datasets/"><i class="fas fa-table"></i>Datasets</a></li>
+  </ul>
+        </div>
+</div>-->
+
+<div class="wrapper">
+
+
+      <!-- Page Navigation -->
+
+      <nav id="sidebar">
+            <div class="sidebar-header">
+
+            </div>
+
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="/"><i class="fas fa-home"></i>  Home</a>
+                </li>
+                <li>
+                    <a href="/datasets"><i class="fas fa-table"></i>  Datasets</a>
+                </li>
+                <li>
+                    <a href="https://labs.judaicalink.org"><i class="fas fa-search"></i>  Labs</a>
+                </li>
+                <li>
+                <a href="/news"><i class="fas fa-comment"></i>  News</a>
+                </li>
+                <li>
+                    <a href="https://www.ub.uni-frankfurt.de/judaica3/home.html" target="_blank"><i class="fas fa-hanukiah"></i>  FID Jewish Studies</a>
+                </li>
+
+            </ul>
+
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-eye"></i>  Background</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="/faq">FAQ</a>
+                        </li>
+                        <li>
+                            <a href="/about-us">About</a>
+                        </li>
+                        <li>
+                            <a href="/legal">Disclaimer</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+      <!-- Page Navigation -->
+
+{% endblock navbar %}
