@@ -46,8 +46,8 @@ buttonnav {
     left: 0;
     height: 100vh;
     z-index: 999;
-    background: #004284;
-    color: #fff;
+    background: #d8ffbf;   /*hier*/
+    color: black; /*Schriftfarbe komplett*/
     transition: all 0.3s;
 }
 #sidebar.active {
@@ -67,7 +67,7 @@ buttonnav {
 }
 #sidebar .sidebar-header {
     padding: 20px;
-    background-color: #004284;
+    background-color: #d8ffbf; /*hier*/
 }
 
 #sidebar ul.components {
@@ -76,7 +76,7 @@ buttonnav {
 }
 
 #sidebar ul p {
-    color: #fff;
+    color: red;
     padding: 10px;
 }
 
@@ -86,17 +86,18 @@ buttonnav {
     display: block;
 }
 #sidebar ul li a:hover {
-    background: rgba(0,128,0,0.5);  /*Dunkelblau in Hex #004284*/
+    background: rgba(169,255,115,0.5);  /*Dunkelblau in Hex #004284 0,128,0*/
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
-    background: green; /*Home*/
+    background: #004284; /*Home*/
 }
-#sidebar ul ul a {
+#sidebar ul ul a {  /*das sind die aufklapbaren*/
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: green;            /*Das ist UNSER Dunkelblau #004284*/
+    background: #004284;            /*Das ist UNSER Dunkelblau #004284*/
+    color: #fff;
 }
 
 
