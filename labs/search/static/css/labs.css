@@ -47,7 +47,7 @@ button {
     left: 0;
     height: 100vh;
     z-index: 999;
-    background: #8AAFFF;
+    background: #004284;
     color: #fff;
     transition: all 0.3s;
 }
@@ -68,7 +68,7 @@ button {
 }
 #sidebar .sidebar-header {
     padding: 20px;
-    background-color: #8AAFFF;
+    background-color: #004284;
 }
 
 #sidebar ul.components {
@@ -87,17 +87,17 @@ button {
     display: block;
 }
 #sidebar ul li a:hover {
-    background: rgba(0,66,132,0.5);  /*Dunkelblau in Hex #004284*/
+    background: rgba(0,128,0,0.5);  /*Dunkelblau in Hex #004284*/
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
-    background: #004284;
+    background: green; /*Home*/
 }
 #sidebar ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #004284;            /*Das ist UNSER Dunkelblau #004284*/
+    background: green;            /*Das ist UNSER Dunkelblau #004284*/
 }
 
 
@@ -207,12 +207,7 @@ button {
     text-decoration:underline;
 }
 
-.logo_sidebar{
-  width: 200px;
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-bottom: 10px;
-}
+
 
 
 .container-fluid {
