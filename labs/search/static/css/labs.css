@@ -247,14 +247,22 @@ ul.results {
     }
 
     #sidebar.active {
-        margin-left: 0;
+        margin-left: 0px;
+    }
+    button {
+    z-index: 1000;
+    top: 1px;
+   margin-left: -64px;
+   height: 40px;
+   width: 40px;
+   opacity: 0.8;
     }
 
     #content {
         width: 100%;
     }
     #content.active {
-        width: calc(100% - 250px);
+        width: 0px;
     }
     #sidebarCollapse span {
         display: none;
