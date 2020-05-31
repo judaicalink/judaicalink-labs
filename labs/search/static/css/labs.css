@@ -123,6 +123,22 @@ buttonnav {
     border-left: solid 1px lightgrey;
     }
 
+.paging_button_active {
+    background-color: #004284;
+    border: 1px solid black;
+    color: black;
+    padding: 10px 10px;
+    text-align: center;
+}
+
+.paging_button_inactive {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    padding: 10px 10px;
+    text-align: center;
+}
+
 #hdmlogo {
     padding: 5px;
     width: 75px;
