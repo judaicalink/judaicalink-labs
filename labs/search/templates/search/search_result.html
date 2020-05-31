@@ -3,33 +3,33 @@
 
 {% load static %}
 
-<div class="header">
-    <img src="{% static 'images/transp_judaica_labs.png' %}" alt="JudaicaLink labs logo" class="logo"/>
-    <a href="https://www.ub.uni-frankfurt.de/judaica3/home.html" target="_blank"><img src="{% static 'images/fid-logo.jpg' %}" alt="FID logo" class="logofid"/></a>
-</div>
-<a href="https://github.com/wisslab/judaicalink-site"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
+{% include "search/header.html" %}
 
+<main>
 
+<div class="col-md-9">
 
-<div class="content">
+<h1>Fulltext Search</h1>
 
-    <br><br>
-
-        <form class="searchForm flip" method="get" action="search">
-            <div class="col-xs-6">
-                <input type="hidden" name="page" value="1">
-                <div class="input-group">
-                    <input class="searchForm_lookfor form-control search-query autocomplete searcher:Solr" type="text" name="lookfor" value="{{query}}">
-                    <div class="input-group-btn" >
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
-                    </div>
+    <form class="searchForm flip" method="get" action="search">
+        <div class="col-xs-6">
+            <input type="hidden" name="page" value="1">
+            <div class="input-group">
+                <input class="searchForm_lookfor form-control search-query autocomplete searcher:Solr" type="text" name="lookfor" value="{{query}}">
+                <div class="input-group-btn" >
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                 </div>
             </div>
-        </form>
+        </div>
+    </form>
 
     <br><br>
 
-    Your query <b>'{{query}}'</b> generated <b>{{total_hits}}</b> hits
+    {% if total_hits > 0 %}
+        <p>Found {{ total_hits }} documents for the query "<b>{{ query }}</b>".</p>
+    {% else %}
+        <p>No documents matching your query "<b>{{ query}}</b>"!</p>
+    {% endif %}
 
     <br><br>
 
@@ -107,8 +107,10 @@
 
     {% endif %}
 
-{% include "search/footer_labs.html" %}
+    </div>
 
-</div>
+</main>
+
+{% include "search/footer.html" %}
 
 {% endblock content %}

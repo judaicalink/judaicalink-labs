@@ -2,58 +2,35 @@
 {% block content %}
 {% load static %}
 
-<!--{% include "search/responsive_sidebar.html" %}-->
+{% include "search/header.html" %}
 
+<!--content-->
+<main class="row">
 
-<div class="header">
-    <img src="{% static 'images/transp_judaica_labs.png' %}" alt="JudaicaLink labs logo" class="logo"/>
-    <a href="https://www.ub.uni-frankfurt.de/judaica3/home.html" target="_blank"><img src="{% static 'images/fid-logo.jpg' %}" alt="FID logo" class="logofid"/></a>
-</div>
-<a href="https://github.com/wisslab/judaicalink-portal" target="_blank"><img id="forkmeongithub" src="{% static 'images/forkmeongithub-blue.png' %}" alt="Fork me on GitHub"></a>
-<div class="content">
+	<div class="col-md-9">
 
-<!--<div class="content_search">-->
-<h1>Compact Memory Fulltext Search</h1>
+    <h1>Compact Memory Fulltext Search</h1>
 
-    <!--wurde jetzt hier aus der FID kopiert und angepasst, muss noch pefektioniert werden-->
+    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 
-    <div class="col-xs-3"></div>
-<form class="searchForm flip" action="/cm_search/search_result/" id="searchForm" name="searchForm" autocomplete="off">
-    
-    <div>
-        <div class="col-xs-6">
-            <input type="hidden" name="type" id="search-option-type" value="allfields">
-            <div class="input-group">
-                <input class="searchForm_lookfor form-control search-query autocomplete searcher:Solr" type="text" name="query" value="">
-                <div class="input-group-btn">
-                    <!-- Button and dropdown menu -->
-    
-                    <button type="submit" class="btn btn-primary" title="Find"><i class="fas fa-search"></i></button>
+        <form class="searchForm flip" action="/cm_search/search_result/" id="searchForm" name="searchForm" autocomplete="off">
+            <div class="col-xs-6">
+                <input type="hidden" name="type" id="search-option-type" value="allfields">
+                <div class="input-group">
+                    <input class="searchForm_lookfor form-control search-query autocomplete searcher:Solr" type="text" name="query" value="">
+                    <div class="input-group-btn">
+                        <!-- Button and dropdown menu -->
+                        <button type="submit" class="btn btn-primary" title="Find"><i class="fas fa-search"></i></button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div><div>
-                    <div class="pull-left flip">
-                        <a href="./" class="btn btn-link" >Advanced Search</a>
-                    </div>
-             </div>
-        </div>
+        </form>
+
     </div>
-</form>
-</div>
-<!--NEWS-->
 
-<div class="news">
-    <p>NEWS</p>
-    <div class="newsborder"><p>Juhu die Verlinkung auf Search klappt!<br>
-        Aaaaaber sie ist noch nicht perfekt...°-°
-    </div>
-</div>
-<!--NEWS-->
+</main>
+<!--content end-->
 
-<!--footer-->
+{% include "search/footer.html" %}
 
-{% include "search/footer_labs.html" %}
-
-<!--footer-->
-    {% endblock content %}
+{% endblock content %}

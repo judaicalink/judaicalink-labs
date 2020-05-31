@@ -58,4 +58,3 @@ def result(request):
 	}
 
 	return render(request, 'cm_search/search_result.html', context)
-	
