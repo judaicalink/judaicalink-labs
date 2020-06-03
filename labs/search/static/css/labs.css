@@ -88,7 +88,7 @@ buttonnav {
     background: rgba(169,255,115,0.5);  /*Dunkelblau in Hex #004284 0,128,0*/
 }
 
-#sidebar ul li.active > a, a[aria-expanded="true"] {
+#sidebar ul li.active {
     color: #fff;
     background: #004284; /*Home*/
 }
