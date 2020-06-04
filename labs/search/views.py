@@ -115,7 +115,7 @@ def process_query (query, page):
         #round up number of pages
 
     paging = []
-    #if page = 1 contains -2, -1, 0, 1, 2, 3, 4
+    #if page = 1, paging contains -2, -1, 0, 1, 2, 3, 4
 
     paging.append (page - 3)
     paging.append (page - 2)
@@ -126,8 +126,8 @@ def process_query (query, page):
     paging.append (page + 3)
 
     real_paging = []
-    #if page = 1 contains 1, 2, 3, 4
-        #-> non-existing pages are removed
+    #if page = 1, paging contains 1, 2, 3, 4
+        #-> non-existing (like -2, -1, ...) pages are removed
 
     for number in paging:
         if number >= 1 and number <= pages:
