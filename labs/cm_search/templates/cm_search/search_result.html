@@ -31,33 +31,100 @@
         <p>No documents matching your query "<b>{{ query}}</b>"!</p>
     {% endif %}
 
-    {% for r in result %}
-        <hr style="height:3px; border:none; color:rgb(47,85,151); background-color:rgb(47,85,151); width:50%">
-        
-        <ul style="list-style-type: none">
+    <br><br>
 
-            <li><b>Match score</b>: {{ r.score }}</li>
-            <!-- <li><b>Page</b> {{ r.page}}</li> -->
-            <li><b>Fulltext</b>: {{ r.text|truncatechars:500 }}</li>
-            <li><b>Highlight</b>: </li>
-                <ul style="list-style-type: none">
-                    {% for line in r.highlight %}
-                        <li>{{line|safe}}</li>
-                    {% endfor %}
-                </ul>
-            <br>
-            <li>Link to <a href={{r.jl}} target="_blank">journal</a></li>
-            <li>Link to <a href={{r.vl}} target="_blank">volume</a></li>
-            <li>Link to <a href={{r.il}} target="_blank">issue</a></li>
-            {% if r.plink == '' %}
-                <li>Link to the page not available for this journal.</li>
-            {% else %}
-                <li>Link to <a href={{r.plink}} target="_blank">page</a></li>
-            {% endif %} 
-        </ul>
-        
-        <br>
+    <table class="table table-striped">
+
+    {% for r in result %}
+
+        <tr>
+
+            <td>
+
+                <!-- <hr style="height:3px; border:none; color:rgb(47,85,151); background-color:rgb(47,85,151); width:50%"> -->
+
+                <!-- <b>Match score</b>: {{ r.score }} <br> -->
+                <!-- <b>Page</b> {{ r.page}} <br> -->
+
+                <b>Fulltext</b>: {{ r.text|truncatechars:500 }} <br>
+                <b>Highlight</b>: <br>
+                        {% for line in r.highlight %}
+                            {{line|safe}}
+                        {% endfor %}
+                <br> <br>
+
+                Link to <a href={{r.jl}} target="_blank">journal</a> <br>
+                Link to <a href={{r.vl}} target="_blank">volume</a> <br>
+                Link to <a href={{r.il}} target="_blank">issue</a> <br>
+                {% if r.plink == '' %}
+                    Link to the page not available for this journal.
+                {% else %}
+                    Link to <a href={{r.plink}} target="_blank">page</a>
+                {% endif %}
+
+            </td>
+
+        </tr>
+
     {% endfor %}
+
+    </table>
+
+    <br> <br>
+
+    {% if page != 1 %}
+
+        <form style="display: inline;" method="get" action="search">
+            <input type="hidden" name="lookfor" value="{{ query }}">
+            <input type="hidden" name="page" value="{{ 1 }}">
+            <button class="paging_button_inactive" type="submit" > {{ 1 }} </button>
+        </form>
+
+        <form style="display: inline;" method="get" action="search">
+            <input type="hidden" name="lookfor" value="{{ query }}">
+            <input type="hidden" name="page" value="{{ previous }}">
+            <button class="paging_button_inactive" type="submit" > previous </button>
+        </form>
+
+    {% endif %}
+
+    {% for i in paging %}
+
+        {% if i == page %}
+
+            <form style="display: inline;" method="get" action="search">
+                <input type="hidden" name="lookfor" value="{{ query }}">
+                <input type="hidden" name="page" value="{{ i }}">
+                <button class="paging_button_active" type="submit" > {{ i }} </button>
+            </form>
+
+        {% else %}
+
+            <form style="display: inline;" method="get" action="search">
+                <input type="hidden" name="lookfor" value="{{ query }}">
+                <input type="hidden" name="page" value="{{ i }}">
+                <button class="paging_button_inactive" type="submit" > {{ i }} </button>
+            </form>
+
+        {% endif %}
+
+    {%endfor %}
+
+    {% if page != pages and pages != 0 %}
+
+        <form style="display: inline;" method="get" action="search">
+            <input type="hidden" name="lookfor" value="{{ query }}">
+            <input type="hidden" name="page" value="{{ next }}">
+            <button class="paging_button_inactive" type="submit" > next </button>
+        </form>
+
+        <form style="display: inline;" method="get" action="search">
+            <input type="hidden" name="lookfor" value="{{ query }}">
+            <input type="hidden" name="page" value="{{ pages }}">
+            <button class="paging_button_inactive" type="submit" > {{ pages }} </button>
+        </form>
+
+    {% endif %}
 
 {% include "search/footer.html" %}
 
