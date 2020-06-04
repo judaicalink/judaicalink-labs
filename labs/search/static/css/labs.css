@@ -76,7 +76,6 @@ buttonnav {
 }
 
 #sidebar ul p {
-    color: red;
     padding: 10px;
 }
 
@@ -89,7 +88,7 @@ buttonnav {
     background: rgba(169,255,115,0.5);  /*Dunkelblau in Hex #004284 0,128,0*/
 }
 
-#sidebar ul li.active > a, a[aria-expanded="true"] {
+#sidebar ul li.active {
     color: #fff;
     background: #004284; /*Home*/
 }
@@ -123,10 +122,11 @@ buttonnav {
     border-left: solid 1px lightgrey;
     }
 
+/*paging*/
 .paging_button_active {
-    background-color: #004284;
+    background-color: #004284;  /*blue:#004284,hover-green:#b9ff8c,sidebar-green:#d8ffbf*/
     border: 1px solid black;
-    color: black;
+    color: white;
     padding: 10px 10px;
     text-align: center;
 }
@@ -138,6 +138,7 @@ buttonnav {
     padding: 10px 10px;
     text-align: center;
 }
+/*paging*/
 
 #hdmlogo {
     padding: 5px;
