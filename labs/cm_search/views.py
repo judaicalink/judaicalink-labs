@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from elasticsearch import Elasticsearch
+import math
 
 
 
@@ -17,8 +18,15 @@ def result(request):
 
 	es = Elasticsearch()
 	query = request.GET.get('query')
-	size = 15
-	res = es.search(index='cm', body={"query": {"match": {'text': query}}, 'size': size, 'highlight': {'fields': {'text': {}}}    })
+	page = int (request.GET.get('page'))
+	size = 10
+		#changed size from 15 to 10 to match the amount of results in judaicalink search
+	start = (page - 1) * size
+	res = es.search(index='cm', body={"query": {"match": {'text': query}}, 'size': size, 'from': start, 'highlight': {'fields': {'text': {}}}    })
+		#added 'from': start, to indicate which results should be displayed
+			#'from' is used to tell elasticsearch which results to return by index
+		# -> if page = 1 then results 0-9 will be displayed
+		# -> if page = 2 then results 10-19 and so on
 
 	result = []
 	for doc in res['hits']['hits']:
@@ -51,10 +59,42 @@ def result(request):
 
 		result.append(formatted_doc)
 
+	#paging
+	# -> almost copy from jl-search, except some variable-names
+
+	total_hits = res['hits']['total'] ['value']
+	pages = math.ceil (total_hits / size)
+		#pages containes necessary amount of pages for paging
+
+	paging = []
+	#if page = 1 will contain -2, -1, 0, 1, 2, 3, 4
+
+	paging.append (page - 3)
+	paging.append (page - 2)
+	paging.append (page - 1)
+	paging.append (page)
+	paging.append (page + 1)
+	paging.append (page + 2)
+	paging.append (page + 3)
+
+	real_paging = []
+	#if page = 1 will contain 1, 2, 3, 4
+	#-> non-existing pages are removed
+
+	for number in paging:
+		if number > 1 and number < pages:
+			real_paging.append (number)
+
 	context = {
 		"result": result,
 		"total_hits": res['hits']['total']['value'],
-		"query": query
+		"query": query,
+		"pages" : pages,
+		"previous" : page - 1,
+		"page" : page,
+		"next" : page + 1,
+		"paging" : real_paging,
+
 	}
 
 	return render(request, 'cm_search/search_result.html', context)

@@ -11,17 +11,17 @@
 
 <h1>Compact Memory</h1>
 
-    <form class="searchForm flip" method="get" action="/cm_search/search_result/" id="searchForm" name="searchForm" autocomplete="off">
-        <div class="col-xs-6">
-            <input type="hidden" name="type" id="search-option-type" value="allfields">
-            <div class="input-group">
-                <input class="searchForm_lookfor form-control search-query autocomplete searcher:Solr" type="text" name="query" value="">
-                <div class="input-group-btn">
-                    <button type="submit" class="btn btn-primary" title="Find"><span >find</span></button>
+    <form method="get" action="/cm_search/search_result/">
+            <div class="col-xs-6">
+                <input type="hidden" name="page" value="1">
+                <div class="input-group">
+                    <input class="form-control" type="text" name="query" value="{{query}}">
+                    <div class="input-group-btn">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
 
     <br><br>
 
@@ -72,16 +72,22 @@
 
     <br> <br>
 
-    {% if page != 1 %}
+        <!-- paging -->
 
-        <form style="display: inline;" method="get" action="search">
-            <input type="hidden" name="lookfor" value="{{ query }}">
+        <form style="display: inline;" method="get" action="/cm_search/search_result/">
+            <input type="hidden" name="query" value="{{ query }}">
             <input type="hidden" name="page" value="{{ 1 }}">
+            {% if page != 1 %}
             <button class="paging_button_inactive" type="submit" > {{ 1 }} </button>
+            {% else %}
+            <button class="paging_button_active" type="submit" > {{ 1 }} </button>
+            {% endif %}
         </form>
 
-        <form style="display: inline;" method="get" action="search">
-            <input type="hidden" name="lookfor" value="{{ query }}">
+    {% if page != 1 %}
+
+        <form style="display: inline;" method="get" action="/cm_search/search_result/">
+            <input type="hidden" name="query" value="{{ query }}">
             <input type="hidden" name="page" value="{{ previous }}">
             <button class="paging_button_inactive" type="submit" > previous </button>
         </form>
@@ -90,41 +96,39 @@
 
     {% for i in paging %}
 
-        {% if i == page %}
-
-            <form style="display: inline;" method="get" action="search">
-                <input type="hidden" name="lookfor" value="{{ query }}">
+            <form style="display: inline;" method="get" action="/cm_search/search_result/">
+                <input type="hidden" name="query" value="{{ query }}">
                 <input type="hidden" name="page" value="{{ i }}">
+                {% if i == page %}
                 <button class="paging_button_active" type="submit" > {{ i }} </button>
-            </form>
-
-        {% else %}
-
-            <form style="display: inline;" method="get" action="search">
-                <input type="hidden" name="lookfor" value="{{ query }}">
-                <input type="hidden" name="page" value="{{ i }}">
+                {% else %}
                 <button class="paging_button_inactive" type="submit" > {{ i }} </button>
+                {% endif %}
             </form>
-
-        {% endif %}
 
     {%endfor %}
 
     {% if page != pages and pages != 0 %}
 
-        <form style="display: inline;" method="get" action="search">
-            <input type="hidden" name="lookfor" value="{{ query }}">
+        <form style="display: inline;" method="get" action="/cm_search/search_result/">
+            <input type="hidden" name="query" value="{{ query }}">
             <input type="hidden" name="page" value="{{ next }}">
             <button class="paging_button_inactive" type="submit" > next </button>
         </form>
 
-        <form style="display: inline;" method="get" action="search">
-            <input type="hidden" name="lookfor" value="{{ query }}">
-            <input type="hidden" name="page" value="{{ pages }}">
-            <button class="paging_button_inactive" type="submit" > {{ pages }} </button>
-        </form>
-
     {% endif %}
+
+
+
+        <form style="display: inline;" method="get" action="/cm_search/search_result/">
+            <input type="hidden" name="query" value="{{ query }}">
+            <input type="hidden" name="page" value="{{ pages }}">
+            {% if page != pages %}
+            <button class="paging_button_inactive" type="submit" > {{ pages }} </button>
+            {% else %}
+            <button class="paging_button_active" type="submit" > {{ pages }} </button>
+            {% endif %}
+        </form>
 
 {% include "search/footer.html" %}
 
