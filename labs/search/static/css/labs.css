@@ -122,10 +122,11 @@ buttonnav {
     border-left: solid 1px lightgrey;
     }
 
+/*paging*/
 .paging_button_active {
-    background-color: #004284;
+    background-color: #004284;  /*blue:#004284,hover-green:#b9ff8c,sidebar-green:#d8ffbf*/
     border: 1px solid black;
-    color: black;
+    color: white;
     padding: 10px 10px;
     text-align: center;
 }
@@ -137,6 +138,7 @@ buttonnav {
     padding: 10px 10px;
     text-align: center;
 }
+/*paging*/
 
 #hdmlogo {
     padding: 5px;

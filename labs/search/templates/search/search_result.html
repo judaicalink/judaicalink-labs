@@ -53,13 +53,18 @@
 
     <br> <br>
 
-    {% if page != 1 %}
 
         <form style="display: inline;" method="get" action="search">
             <input type="hidden" name="lookfor" value="{{ query }}">
             <input type="hidden" name="page" value="{{ 1 }}">
+            {% if page != 1 %}
             <button class="paging_button_inactive" type="submit" > {{ 1 }} </button>
+            {% else %}
+            <button class="paging_button_active" type="submit" > {{ 1 }} </button>
+            {% endif %}
         </form>
+
+    {% if page != 1 %}
 
         <form style="display: inline;" method="get" action="search">
             <input type="hidden" name="lookfor" value="{{ query }}">
@@ -71,23 +76,15 @@
 
     {% for i in paging %}
 
-        {% if i == page %}
-
             <form style="display: inline;" method="get" action="search">
                 <input type="hidden" name="lookfor" value="{{ query }}">
                 <input type="hidden" name="page" value="{{ i }}">
+                {% if i == page %}
                 <button class="paging_button_active" type="submit" > {{ i }} </button>
-            </form>
-
-        {% else %}
-
-            <form style="display: inline;" method="get" action="search">
-                <input type="hidden" name="lookfor" value="{{ query }}">
-                <input type="hidden" name="page" value="{{ i }}">
+                {% else %}
                 <button class="paging_button_inactive" type="submit" > {{ i }} </button>
+                {% endif %}
             </form>
-
-        {% endif %}
 
     {%endfor %}
 
@@ -99,13 +96,19 @@
             <button class="paging_button_inactive" type="submit" > next </button>
         </form>
 
+    {% endif %}
+
         <form style="display: inline;" method="get" action="search">
             <input type="hidden" name="lookfor" value="{{ query }}">
             <input type="hidden" name="page" value="{{ pages }}">
+            {% if pages != page %}
             <button class="paging_button_inactive" type="submit" > {{ pages }} </button>
+            {% else %}
+            <button class="paging_button_active" type="submit" > {{ pages }} </button>
+            {% endif %}
         </form>
 
-    {% endif %}
+
 
     </div>
 

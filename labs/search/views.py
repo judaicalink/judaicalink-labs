@@ -130,7 +130,7 @@ def process_query (query, page):
         #-> non-existing (like -2, -1, ...) pages are removed
 
     for number in paging:
-        if number >= 1 and number <= pages:
+        if number > 1 and number < pages:
             real_paging.append (number)
 
     context = {
