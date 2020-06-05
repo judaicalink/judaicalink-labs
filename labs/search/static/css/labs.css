@@ -12,7 +12,10 @@ body,html {
 h1, h2, h3, h4, a{
   color: #004284;
 }
-
+h1, h2, h3, h4{
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
 /*-------------------------------------------------------*/
 
 
@@ -73,7 +76,7 @@ buttonnav {
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid lightgrey;
 }
 
 #sidebar ul p {
@@ -90,9 +93,9 @@ buttonnav {
 
 }
 
-#sidebar ul li.active {
-    /*background: #004284; /*Home*/
-}
+/*#sidebar ul li.current a{
+    background: #004284; }/*Home*/
+
 #sidebar ul ul a {  /*das sind die aufklapbaren*/
     font-size: 0.9em !important;
     padding-left: 30px !important;

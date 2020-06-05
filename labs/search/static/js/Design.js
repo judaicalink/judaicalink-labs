@@ -1,7 +1,4 @@
 
-$(document).on('click', 'ul li', function(){
-                $(this).addClass('active').siblings().removeClass('active')
-                })
 /*-------------------SIDEBAR-------------------------*/
 $(document).ready(function () {
             $("#sidebar").mCustomScrollbar({
@@ -31,3 +28,7 @@ li.forEach(el => {
         el.classList.add('active');
         });
     });*/
+/*---------------------------------------------------*/
+/*$(document).on('click', 'ul li', function(){
+                $(this).addClass('current').siblings().removeClass('current')
+                })*/
