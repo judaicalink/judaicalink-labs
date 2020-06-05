@@ -223,6 +223,8 @@ buttonnav {
 .footer-content a:hover{
     text-decoration:underline;
 }
+pre{
+    color:grey;}
 
 
 
