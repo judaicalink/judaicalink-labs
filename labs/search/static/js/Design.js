@@ -1,3 +1,7 @@
+
+$(document).on('click', 'ul li', function(){
+                $(this).addClass('active').siblings().removeClass('active')
+                })
 /*-------------------SIDEBAR-------------------------*/
 $(document).ready(function () {
             $("#sidebar").mCustomScrollbar({
@@ -11,4 +15,19 @@ $(document).ready(function () {
             });
         });
 
+/*------------Sidebar active page highlighting---------------*/
+/*$(document).on('click', 'ul li', function(){
+                $(this).addClass('active').siblings().removeClass('active')
+                })
 /*---------------------------------------------------*/
+/*let ul = document.querySelector('ul');
+let li = document.querySelector('li');
+
+li.forEach(el => {
+    el.addEventListener('click',function(){
+        ul.querySelector('.active').classList.
+            remove('active');
+
+        el.classList.add('active');
+        });
+    });*/

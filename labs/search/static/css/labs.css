@@ -73,7 +73,7 @@ buttonnav {
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid grey;
 }
 
 #sidebar ul p {
@@ -86,7 +86,8 @@ buttonnav {
     display: block;
 }
 #sidebar ul li a:hover {
-    background: rgba(169,255,115,0.5);  /*Dunkelblau in Hex #004284 0,128,0*/
+    background: #a9ff73;       /*rgba(0,66,132,0.4); /*Dunkelblau in Hex #004284*/
+
 }
 
 #sidebar ul li.active {
