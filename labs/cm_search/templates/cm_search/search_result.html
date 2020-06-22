@@ -41,25 +41,58 @@
 
             <td>
 
-                <!-- <hr style="height:3px; border:none; color:rgb(47,85,151); background-color:rgb(47,85,151); width:50%"> -->
-
-                <!-- <b>Match score</b>: {{ r.score }} <br> -->
-                <!-- <b>Page</b> {{ r.page}} <br> -->
-
-                <b>Fulltext</b>: {{ r.text|truncatechars:500 }} <br>
-                <b>Highlight</b>: <br>
-                        {% for line in r.highlight %}
+                <b>Matching text</b>: <br>
+                        {% for line in r.text %}
                             {{line|safe}}
                         {% endfor %}
-                <br> <br>
+                <br> 
 
-                Link to <a href={{r.jl}} target="_blank">journal</a> <br>
-                Link to <a href={{r.vl}} target="_blank">volume</a> <br>
-                Link to <a href={{r.il}} target="_blank">issue</a> <br>
-                {% if r.plink == '' %}
-                    Link to the page not available for this journal.
+                <b>Journal:</b>
+                {% if r.jl != '' %}            
+                    <a href={{r.jl}} target="_blank">{{r.j_title}}</a><br>
                 {% else %}
-                    Link to <a href={{r.plink}} target="_blank">page</a>
+                    {{r.j_title}}
+                {% endif %}
+
+                {% if r.lang != '' %}
+                    <b>Language:</b> {{r.lang}}<br>
+                {% endif %}
+
+                {% if r.dateIssued != '' %}
+                    <b>Date of Issue:</b> {{r.dateIssued}}
+                    <br>
+                {% endif %}
+
+                {% if r.place != '' %}
+                    <b>Place:</b> {{r.place}}
+                    <br>
+                {% endif %}
+
+                {% if r.publisher != '' %}
+                    <b>Publisher:</b> {{r.publisher}}
+                    <br>
+                {% endif %}
+
+                <b>Bibliographic reference</b><br>
+
+                {% if r.volume != '' %}
+                    &nbsp; Volume: {{r.volume}}<br>
+                {% endif %}
+
+                {% if r.heft != '' %}
+                    &nbsp; Issue: {{r.heft }}<br>
+                {% endif %}
+
+                {% if r.aufsatz != '' %}
+                    &nbsp; Essay: {{r.aufsatz}}<br>
+                {% endif %}
+
+                {% if r.page != '' and r.page != 'None' %}
+                    {% if r.pl != '' %}
+                        <b>Page:</b> <a href={{r.pl}} target="_blank">{{r.page}}</a>
+                    {% else %}
+                        <b>Page:</b> {{r.page}} (Link to the page not available for this journal)
+                    {% endif %}
                 {% endif %}
 
             </td>
