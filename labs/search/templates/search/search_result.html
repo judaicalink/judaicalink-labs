@@ -53,6 +53,7 @@
 
     <br> <br>
 
+    {% if pages > 1 %}
 
         <form style="display: inline;" method="get" action="search">
             <input type="hidden" name="lookfor" value="{{ query }}">
@@ -64,7 +65,7 @@
             {% endif %}
         </form>
 
-    {% if page != 1 %}
+        {% if page != 1 %}
 
         <form style="display: inline;" method="get" action="search">
             <input type="hidden" name="lookfor" value="{{ query }}">
@@ -72,9 +73,9 @@
             <button class="paging_button_inactive" type="submit" > previous </button>
         </form>
 
-    {% endif %}
+        {% endif %}
 
-    {% for i in paging %}
+        {% for i in paging %}
 
             <form style="display: inline;" method="get" action="search">
                 <input type="hidden" name="lookfor" value="{{ query }}">
@@ -86,9 +87,9 @@
                 {% endif %}
             </form>
 
-    {%endfor %}
+        {%endfor %}
 
-    {% if page != pages and pages != 0 %}
+        {% if page != pages %}
 
         <form style="display: inline;" method="get" action="search">
             <input type="hidden" name="lookfor" value="{{ query }}">
@@ -96,7 +97,9 @@
             <button class="paging_button_inactive" type="submit" > next </button>
         </form>
 
-    {% endif %}
+        {% endif %}
+
+        {% if pages != 1 %}
 
         <form style="display: inline;" method="get" action="search">
             <input type="hidden" name="lookfor" value="{{ query }}">
@@ -108,7 +111,9 @@
             {% endif %}
         </form>
 
+        {% endif %}
 
+    {% endif %}
 
     </div>
 

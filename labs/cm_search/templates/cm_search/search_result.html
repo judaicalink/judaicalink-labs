@@ -74,6 +74,8 @@
 
         <!-- paging -->
 
+    {% if pages > 1 %}
+
         <form style="display: inline;" method="get" action="/cm_search/search_result/">
             <input type="hidden" name="query" value="{{ query }}">
             <input type="hidden" name="page" value="{{ 1 }}">
@@ -84,7 +86,7 @@
             {% endif %}
         </form>
 
-    {% if page != 1 %}
+        {% if page != 1 %}
 
         <form style="display: inline;" method="get" action="/cm_search/search_result/">
             <input type="hidden" name="query" value="{{ query }}">
@@ -108,7 +110,7 @@
 
     {%endfor %}
 
-    {% if page != pages and pages != 0 %}
+    {% if page != pages %}
 
         <form style="display: inline;" method="get" action="/cm_search/search_result/">
             <input type="hidden" name="query" value="{{ query }}">
@@ -118,7 +120,7 @@
 
     {% endif %}
 
-
+        {% if pages != 1 %}
 
         <form style="display: inline;" method="get" action="/cm_search/search_result/">
             <input type="hidden" name="query" value="{{ query }}">
@@ -129,6 +131,10 @@
             <button class="paging_button_active" type="submit" > {{ pages }} </button>
             {% endif %}
         </form>
+
+        {% endif %}
+
+    {% endif %}
 
 {% include "search/footer.html" %}
 
