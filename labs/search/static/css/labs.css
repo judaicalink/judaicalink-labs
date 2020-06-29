@@ -52,10 +52,15 @@ a:hover {
     left: 0;
     height: 100vh;
     z-index: 999;
-    background: #d8ffbf;   /*hier*/
+    /*background: #d8ffbf;*/   /*hier*/
     color: grey; /*Schriftfarbe komplett*/
     transition: all 0.3s;
+    background-image: url("../img/backgroundtransparent.png");
+    background-color: #d8ffbf;
+    background-size: cover;
+    background-blend-mode: multiply;
 }
+
 #sidebar.active {
     margin-left: -250px;
 }
@@ -73,7 +78,8 @@ a:hover {
 }
 #sidebar .sidebar-header {
     padding: 20px;
-    background-color: #d8ffbf; /*hier*/
+   /* background: rgba(0,66,132,0.4); *//**//*hier*/
+
 }
 
 #sidebar ul.components {
@@ -89,6 +95,7 @@ a:hover {
     padding: 10px;
     font-size: 1.1em;
     display: block;
+  /*  background: rgba(216,255,191,0.8);*/
 }
 #sidebar ul li a:hover {
     background: #a9ff73;       /*rgba(0,66,132,0.4); /*Dunkelblau in Hex #004284*/
