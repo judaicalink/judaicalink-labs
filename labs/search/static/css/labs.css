@@ -130,7 +130,13 @@ a:hover {
 .col-md-4 {
     border-left: solid 1px lightgrey;
     }
-
+.search_button {
+    background-color: #004284;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid #004284;
+}
 /*paging*/
 .paging_button_active {
     background-color: #004284;  /*blue:#004284,hover-green:#b9ff8c,sidebar-green:#d8ffbf*/
@@ -139,6 +145,8 @@ a:hover {
     color: white;
     padding: 10px 10px;
     text-align: center;
+    margin-top: 5px;
+
 }
 
 .paging_button_inactive {
@@ -147,7 +155,7 @@ a:hover {
     border-radius: 5px;
     color: black;
     padding: 10px 10px;
-    text-align: center;
+    margin-top: 5px;
 }
 /*paging*/
 
