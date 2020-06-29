@@ -53,9 +53,9 @@ a:hover {
     height: 100vh;
     z-index: 999;
     /*background: #d8ffbf;*/   /*hier*/
-    color: grey; /*Schriftfarbe komplett*/
+    color: #505050; /* dunkles Grau Schriftfarbe komplett*/
     transition: all 0.3s;
-    background-image: url("../img/backgroundtransparent.png");
+    background-image: url("../img/5backgroundtransparent.png");
     background-color: #d8ffbf;
     background-size: cover;
     background-blend-mode: multiply;
@@ -82,10 +82,10 @@ a:hover {
 
 }
 
-#sidebar ul.components {
+/*#sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid lightgrey;
-}
+    border-bottom: 1px solid #505050;
+}*/
 
 #sidebar ul p {
     padding: 10px;
@@ -112,7 +112,7 @@ a:hover {
 #sidebar ul ul a {  /*das sind die aufklapbaren*/
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #d8ffbf;
+    /*background: #d8ffbf;*/
 }
 
 
@@ -219,7 +219,7 @@ a:hover {
 
 /*FID Logo oben rechts*/
 .logofid {
-  width: 220px;
+  width: 215px;
   }
 /*FID Logo oben rechts*/
 
@@ -287,15 +287,6 @@ height: 130px;
     footer-content {
         font-size: 14px;
     }
-
-}
-
-@media (max-width: 768px) {
-    .logo {
-        width: 170px;
-        margin-left: 10px;
-    }
-
     #sidebar {
         margin-left: -100%; /*davor -250px*/
         width: 100%;        /*250px*/
@@ -312,16 +303,12 @@ height: 130px;
         height: 40px;
         width: 40px;
         opacity: 0.8;
-
     }
 
     body,html {
         font-size: 14px;
         }
 
-    #content {
-        width: 100%;
-    }
     #content.active {       /*Button innen*/
         width: 50px;
     }
@@ -332,15 +319,39 @@ height: 130px;
         font-size: 13px;
     }
     #content {
+    width: 100%;
     padding: 10px;
     margin-top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .logo {
+        width: 170px;
+        margin-left: 10px;
+    }
+
+    #content {
+    padding: 10px;
+    margin-top: 20px;
+    }
+
+    .buttonnav {                    /*evtl. hier buttonnav vgl. labs*/
+        margin-left: -38px;  /*Button außen*/
     }
 }
 
 /*-------------------------------------------------------*/
 
 
+@media (max-width: 992px) {
+    .logo {
+    width: 180px;
+    }
 
+    .logofid {
+    width: 195px;
+    }
 
 
 
