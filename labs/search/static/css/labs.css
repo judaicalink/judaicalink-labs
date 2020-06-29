@@ -36,7 +36,7 @@ a:hover {
     transition: all 0.3s;
 }
 
-buttonnav {
+.buttonnav {
    position: fixed;
    top: -5px;
    margin-left: -68px;
@@ -44,6 +44,7 @@ buttonnav {
    width: 35px;
    opacity: 0.6;
 }
+
 #sidebar {
     width: 250px;
     position: fixed;
@@ -133,7 +134,8 @@ buttonnav {
 /*paging*/
 .paging_button_active {
     background-color: #004284;  /*blue:#004284,hover-green:#b9ff8c,sidebar-green:#d8ffbf*/
-    border: 1px solid black;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
     color: white;
     padding: 10px 10px;
     text-align: center;
@@ -141,7 +143,8 @@ buttonnav {
 
 .paging_button_inactive {
     background-color: white;
-    border: 1px solid black;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
     color: black;
     padding: 10px 10px;
     text-align: center;
@@ -259,51 +262,56 @@ height: 130px;
     MEDIAQUERIES
 ----------------------------------------------------- */
 /*@media (max-width: 1000px) wenn kleiner als 1000px oder =1000px dann...*/
+
+@media (max-width: 540px){
+    .logo {
+        width: 150px;
+        margin-left: 10px;
+    }
+
+    footer-content {
+        font-size: 14px;
+    }
+
+}
+
 @media (max-width: 768px) {
     .logo {
         width: 170px;
-    }
-    .logofid {
-        width: 180px;
+        margin-left: 10px;
     }
 
     #sidebar {
         margin-left: -100%; /*davor -250px*/
         width: 100%;        /*250px*/
+        position:fixed;
     }
 
     #sidebar.active {
         margin-left: 0px;
     }
-    buttonnav {
+    .buttonnav {                    /*evtl. hier buttonnav vgl. labs*/
         z-index: 1000;
         top: 1px;
-        margin-left: -34px;     /*Button außen*/
-        height: 35px;
-        width: 35px;
+        margin-left: -34px;  /*Button außen*/
+        height: 40px;
+        width: 40px;
         opacity: 0.8;
+
     }
 
-    #content {
-        width: 100%;
-    }
-    #content.active {
-        width: 50px;            /*Button innen*/
-    }
-    #sidebarCollapse span {
-        display: none;
-    }
     body,html {
         font-size: 14px;
         }
 
-    #forkmeongithub {
-    height: 0px;
-    margin-top: -20px;
+    #content {
+        width: 100%;
     }
-    #forkmeongithub:hover{
-    opacity: 1;
-    height: 100px;
+    #content.active {       /*Button innen*/
+        width: 50px;
+    }
+    #sidebarCollapse span {
+        display: none;
     }
     pre {
         font-size: 13px;
@@ -312,7 +320,6 @@ height: 130px;
     padding: 10px;
     margin-top: 20px;
     }
-
 }
 
 /*-------------------------------------------------------*/
