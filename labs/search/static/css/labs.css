@@ -301,6 +301,7 @@ height: 130px;
 
     #sidebar.active {
         margin-left: 0px;
+        height:100%;
     }
     .buttonnav {                    /*evtl. hier buttonnav vgl. labs*/
         z-index: 1000;
