@@ -302,12 +302,11 @@ height: 130px;
     #sidebar.active {
         margin-left: 0px;
         height: 100%;
-        width: 70%;
     }
     .buttonnav {                    /*evtl. hier buttonnav vgl. labs*/
         z-index: 1000;
         top: 1px;
-        margin-left: -34px;  /*Button außen*/
+        /*Button außen*/
         height: 40px;
         width: 40px;
         opacity: 0.8;
@@ -317,9 +316,7 @@ height: 130px;
         font-size: 14px;
         }
 
-    #content.active {       /*Button innen*/
-        width: 50px;
-    }
+
     #sidebarCollapse span {
         display: none;
     }
