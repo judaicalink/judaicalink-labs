@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'backend',
     'search',
     'lodjango',
+    'dashboard',
 ]
 
 MIDDLEWARE = [
