@@ -32,4 +32,5 @@ urlpatterns = [
     path('lod/', include('lodjango.urls')),
     path('', index, name='index'),
     path('cm_search/', include('cm_search.urls')),
+    path('dashboard/', include('dashboard.urls')),
 ]
