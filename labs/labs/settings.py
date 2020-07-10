@@ -20,11 +20,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-with open('secret_key.txt') as f:
-    SECRET_KEY = f.read().strip()
+SECRET_KEY = 'sx(-a*38sn4d_tspf_fn7%q^w=1t+w^r9g9(mz_7nu#9oaej1_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'labs.judaicalink.org',
@@ -130,26 +129,23 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/data/judaicalink/judaicalink-labs/static'
+
 # Channels
 ASGI_APPLICATION = "labs.routing.application"
 
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("localhost", 6379)],
-        },
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
     },
 }
 
-
-
-
 # Other Servers
 
-LABS_ROOT = 'http://labs.judaicalink.org/'
-FUSEKI_SERVER = "http://localhost:8080/fuseki/"
-FUSEKI_STORAGE = "/data/fuseki/databases/judaicalink"
+LABS_ROOT = 'http://localhost:8000/'
+FUSEKI_SERVER = "http://localhost:3030/"
+FUSEKI_STORAGE = "."
 ELASTICSEARCH_SERVER = "http://localhost:9200/"
 ELASTICSEARCH_STORAGE = "/var/lib/elasticsearch"
+
+if os.path.isfile("localsettings.py"):
+    from .localsettings import *

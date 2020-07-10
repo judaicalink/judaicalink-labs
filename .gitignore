@@ -6,7 +6,6 @@
 /labs/backend/rdf_files
 /data/
 /fuseki/
-labs/labs/settings.py
 /static
 labs/secret_key.txt
 htpasswd
