@@ -1,9 +1,9 @@
+/*-------------HAMBURGER-MENU-BUTTON------------------*/
+
 $('#sidebarCollapse').click(function(){
    $('#sidebarCollapse svg').toggleClass('fa-bars fa-times')
 });
 
-//$("#sidebarCollapse").on("click", ".fas fa-bars", function() {
-//    $(this).toggleClass("fas fa-times");
 /*-------------------SIDEBAR-------------------------*/
 $(document).ready(function () {
             $("#sidebar").mCustomScrollbar({
