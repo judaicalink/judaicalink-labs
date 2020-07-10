@@ -1,5 +1,5 @@
 $('#sidebarCollapse').click(function(){
-   $(this).find('i').toggleClass('fas fa-times','fas fa-bars')
+   $('#sidebarCollapse svg').toggleClass('fa-bars fa-times')
 });
 
 //$("#sidebarCollapse").on("click", ".fas fa-bars", function() {
