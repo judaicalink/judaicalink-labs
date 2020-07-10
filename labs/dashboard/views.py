@@ -10,7 +10,7 @@ import json
 def test(request):
     es = Elasticsearch()
     body = {
-        "from" : 0,
+        "from" : 0, "size" : 1000,
         "query" : {
             "match_all" : {}
         },

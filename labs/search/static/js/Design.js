@@ -1,4 +1,9 @@
+$('#sidebarCollapse').click(function(){
+   $(this).find('i').toggleClass('fas fa-times','fas fa-bars')
+});
 
+//$("#sidebarCollapse").on("click", ".fas fa-bars", function() {
+//    $(this).toggleClass("fas fa-times");
 /*-------------------SIDEBAR-------------------------*/
 $(document).ready(function () {
             $("#sidebar").mCustomScrollbar({
