@@ -147,5 +147,5 @@ FUSEKI_STORAGE = "."
 ELASTICSEARCH_SERVER = "http://localhost:9200/"
 ELASTICSEARCH_STORAGE = "/var/lib/elasticsearch"
 
-if os.path.isfile("localsettings.py"):
+if os.path.isfile("labs/localsettings.py"):
     from .localsettings import *
