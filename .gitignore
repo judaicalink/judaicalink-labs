@@ -8,6 +8,7 @@
 /fuseki/
 /static
 labs/secret_key.txt
+labs/labs/localsettings.py
 htpasswd
 
 # Byte-compiled / optimized / DLL files
