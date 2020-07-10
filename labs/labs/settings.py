@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'core',
     'backend',
     'search',
+    'cm_search',
     'lodjango',
     'dashboard',
 ]
