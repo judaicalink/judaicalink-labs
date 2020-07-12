@@ -97,6 +97,11 @@ def index_file(filename, task):
                 if f == 'Alternatives':
                     values = cleanstring(values, ['"', '{', '}', '.'])
                 doc[f] = values
+
+            dataset_name = s
+            dataset_name = dataset_name.replace ("http://data.judaicalink.org/data/", "").split ("/")[0]
+            doc ["dataset"] = dataset_name
+
             index = {
                     "index": { "_index": "judaicalink", "_id": s }
                     }
