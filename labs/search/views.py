@@ -45,7 +45,7 @@ def process_query (query, page):
         "query" : {
             "query_string": {
                 "query": query,
-                "fields": ["name^4", "Alternatives^3", "birthDate", "birthLocation^2", "deathDate", "deathLocation^2", "Abstract", "Publication"]
+                "fields": ["name^4", "Alternatives^3", "birthDate", "birthLocation^2", "deathDate", "deathLocation^2", "Abstract", "Publication", "dataset"]
             }
         },
         "highlight": {
@@ -57,12 +57,19 @@ def process_query (query, page):
                 "deathDate": {},
                 "deathLocation": {},
                 "Abstract": {},
-                "Publication": {}
+                "Publication": {},
+                "dataset": {},
             },
             'number_of_fragments': 0,
         }
     }
     result = es.search(index="judaicalink", body = body)
+
+    x = []
+    dataset_objects = Dataset.objects.all()
+    for i in dataset_objects:
+        x.append (i.name)
+    print (x)
 
     # For testing, never commit with a hardcoded path like this
     # with open('/tmp/test.json', 'w') as f:
@@ -84,7 +91,17 @@ def process_query (query, page):
             if s in d ["highlight"]:
                 d ["source"] [s] = d ["highlight"] [s] [0]
 
+
     field_order = ["name", "Alternatives", "birthDate", "birthLocation", "deathDate", "deathLocation", "Abstract", "Publication"]
+
+    dataset_objects = Dataset.objects.all()
+    dataset_names_titles = []
+    for i in dataset_objects:
+        data = {
+            "title": i.title,
+            "abbreviation": i.name
+        }
+        dataset_names_titles.append (data)
 
     ordered_dataset = []
     for d in dataset:
@@ -104,6 +121,15 @@ def process_query (query, page):
         #extracting additional fields (that are not mentioned in field_order)
         for field in d ["source"]:
             if field not in field_order:
+
+                #replace abbreviation of dataset (that was indexed in elasticsearch) with real name from models.Dataset.title
+                if field == "dataset":
+                    dataset_name = d ["source"] [field]
+                    for i in dataset_names_titles:
+                        if i ["abbreviation"] == dataset_name:
+                            dataset_name = i ["title"]
+                            d ["source"] [field] = dataset_name
+
                 pretty_fieldname = field.capitalize()
                 temp_data = "<b>" + pretty_fieldname + ": " + "</b>" + d ["source"] [field]
                 data.append (temp_data)

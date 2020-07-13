@@ -56,8 +56,6 @@ def cleanstring(value, chars):
     value = re.sub( '\s+', ' ', value).strip()
     return value
 
-
-
 def index_file(filename, task):
     openfunc = open
     if filename.endswith(".gz"):
@@ -98,15 +96,33 @@ def index_file(filename, task):
                     values = cleanstring(values, ['"', '{', '}', '.'])
                 doc[f] = values
 
+            datasets = []
+            dataset_objects = models.Dataset.objects.all()
+            for i in dataset_objects:
+                datasets.append (i.name)
+
             dataset_name = s
             dataset_name = dataset_name.replace ("http://data.judaicalink.org/data/", "").split ("/")[0]
-            doc ["dataset"] = dataset_name
+
+            if dataset_name == "dbpedia":
+                dataset_name = "dbpedia-persons"
+            if dataset_name == "gnd":
+                dataset_name = "gnd-persons"
+            if dataset_name == "hirsch":
+                dataset_name = "hirsch-family"
+
+
+            if dataset_name in datasets:
+                doc ["dataset"] = dataset_name
+            else:
+                doc ["dataset"] = "undefined"
 
             index = {
                     "index": { "_index": "judaicalink", "_id": s }
                     }
             bulk_body.append(json.dumps(index))
             bulk_body.append(json.dumps(doc))
+
         if len(bulk_body)>0:
             task.log(filename + " indexing")
             es.bulk('\n'.join(bulk_body))
