@@ -95,34 +95,15 @@ def index_file(filename, task):
                 if f == 'Alternatives':
                     values = cleanstring(values, ['"', '{', '}', '.'])
                 doc[f] = values
-
-            datasets = []
-            dataset_objects = models.Dataset.objects.all()
-            for i in dataset_objects:
-                datasets.append (i.name)
-
-            dataset_name = s
-            dataset_name = dataset_name.replace ("http://data.judaicalink.org/data/", "").split ("/")[0]
-
-            if dataset_name == "dbpedia":
-                dataset_name = "dbpedia-persons"
-            if dataset_name == "gnd":
-                dataset_name = "gnd-persons"
-            if dataset_name == "hirsch":
-                dataset_name = "hirsch-family"
-
-
-            if dataset_name in datasets:
-                doc ["dataset"] = dataset_name
-            else:
-                doc ["dataset"] = "undefined"
-
+            #indexing slug
+            dataslug = s
+            dataslug = dataslug.replace ("http://data.judaicalink.org/data/", "").split ("/")[0]
+            doc ["dataslug"] = dataslug
             index = {
                     "index": { "_index": "judaicalink", "_id": s }
                     }
             bulk_body.append(json.dumps(index))
             bulk_body.append(json.dumps(doc))
-
         if len(bulk_body)>0:
             task.log(filename + " indexing")
             es.bulk('\n'.join(bulk_body))
@@ -169,6 +150,7 @@ def load_in_elasticsearch(task):
             if filename.endswith(".gz"):
                 openfunc = gzip.open
             with openfunc(filename, "rt", encoding="utf8") as f:
+                print ("indexing: " + filename)
                 es.bulk(f.read())
             
     
