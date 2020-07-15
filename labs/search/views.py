@@ -45,7 +45,7 @@ def process_query (query, page):
         "query" : {
             "query_string": {
                 "query": query,
-                "fields": ["name^4", "Alternatives^3", "birthDate", "birthLocation^2", "deathDate", "deathLocation^2", "Abstract", "Publication", "dataset"]
+                "fields": ["name^4", "Alternatives^3", "birthDate", "birthLocation^2", "deathDate", "deathLocation^2", "Abstract", "Publication"]
             }
         },
         "highlight": {
@@ -58,18 +58,11 @@ def process_query (query, page):
                 "deathLocation": {},
                 "Abstract": {},
                 "Publication": {},
-                "dataset": {},
             },
             'number_of_fragments': 0,
         }
     }
     result = es.search(index="judaicalink", body = body)
-
-    x = []
-    dataset_objects = Dataset.objects.all()
-    for i in dataset_objects:
-        x.append (i.name)
-    print (x)
 
     # For testing, never commit with a hardcoded path like this
     # with open('/tmp/test.json', 'w') as f:
@@ -79,7 +72,6 @@ def process_query (query, page):
     for d in result ["hits"] ["hits"]:
         data = {
             "id" : d ["_id"],
-            #name
             "source" : d ["_source"],
             "highlight" : d ["highlight"],
         }
@@ -95,13 +87,9 @@ def process_query (query, page):
     field_order = ["name", "Alternatives", "birthDate", "birthLocation", "deathDate", "deathLocation", "Abstract", "Publication"]
 
     dataset_objects = Dataset.objects.all()
-    dataset_names_titles = []
+    dataslug_to_title_dataset = {}
     for i in dataset_objects:
-        data = {
-            "title": i.title,
-            "abbreviation": i.name
-        }
-        dataset_names_titles.append (data)
+        dataslug_to_title_dataset [i.dataslug] = i.title
 
     ordered_dataset = []
     for d in dataset:
@@ -122,17 +110,18 @@ def process_query (query, page):
         for field in d ["source"]:
             if field not in field_order:
 
-                #replace abbreviation of dataset (that was indexed in elasticsearch) with real name from models.Dataset.title
-                if field == "dataset":
-                    dataset_name = d ["source"] [field]
-                    for i in dataset_names_titles:
-                        if i ["abbreviation"] == dataset_name:
-                            dataset_name = i ["title"]
-                            d ["source"] [field] = dataset_name
+                #display dataslug, adding dataset
+                if field == "dataslug":
+                    dataslug = d ["source"] [field]
+                    if dataslug in dataslug_to_title_dataset:
+                        dataset_name = "<b> Dataset: </b>" + dataslug_to_title_dataset [dataslug]
+                    else:
+                        dataset_name = "<b> Dataset: </b> undefined "
 
                 pretty_fieldname = field.capitalize()
                 temp_data = "<b>" + pretty_fieldname + ": " + "</b>" + d ["source"] [field]
                 data.append (temp_data)
+                data.append (dataset_name)
 
         ordered_dataset.append (data)
 
