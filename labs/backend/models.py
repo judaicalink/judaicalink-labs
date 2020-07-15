@@ -8,6 +8,7 @@ from . import hugotools
 class Dataset(models.Model):
     name = models.TextField()
     title = models.TextField()
+    dataslug = models.TextField(null=True)
     indexed = models.BooleanField(default=False)
     loaded = models.BooleanField(default=False)
     graph = models.TextField(null=True)
@@ -55,6 +56,8 @@ def update_from_markdown(filename):
         ds.refresh_from_db()
     ds.title = data['title']
     ds.loaded = data['loaded']
+    if 'dataslug' in data:
+        ds.dataslug = data['dataslug']
     if 'category' in data:
         ds.category = data['category']
     if 'graph' in data:
