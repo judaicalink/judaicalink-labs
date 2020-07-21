@@ -28,7 +28,6 @@
 
 <div class="wrapper">
 
-
       <!-- Page Navigation -->
 
       <nav id="sidebar">
@@ -38,20 +37,20 @@
             </div>
 
             <ul class="list-unstyled components">
-                <li>
-                    <a href="/"><i class="fas fa-home"></i>  Labs Home</a>
+                <li class="{% if request.resolver_match.view_name == "index" %}active{% endif %}">
+                    <a href="/" ><i class="fas fa-home"></i>  Labs Home</a>
                 </li>
-                <li>
+                <li class="{% if request.resolver_match.namespace == "search" %}active{% endif %}">
                     <a href="{% url 'search:search_index'%}"><i class="fas fa-search"></i>  JudaicaLink Search</a>
                 </li>
-                <li>
+                <li class="{% if request.resolver_match.view_name == "search_index" %}active{% endif %}">
                     <a href="{% url 'search_index' %}"><i class="fas fa-search"></i>  Compact Memory Search</a>
                 </li>
                 <li>
                     <a href="http://web.judaicalink.org/datasets/"><i class="fas fa-table"></i>  Datasets</a>
                 </li>
                 <li>
-                <a href="http://web.judaicalink.org/news"><i class="fas fa-comment"></i>  News</a>
+                    <a href="http://web.judaicalink.org/news"><i class="fas fa-comment"></i>  News</a>
                 </li>
                 <li>
                     <a href="https://www.ub.uni-frankfurt.de/judaica3/home.html" target="_blank"><i class="fas fa-hanukiah"></i>  FID Jewish Studies</a>

@@ -111,7 +111,7 @@ a:hover {
 /*#sidebar ul li.current a{
     background: #004284; }/*Home*/
 
-#sidebar ul li a.active{
+#sidebar ul li.active{
     background:green;
     color: #fff;}
 
@@ -337,7 +337,7 @@ height: 130px;
         padding: 40px;
     }
 
-    #sidebar.active {
+    #sidebar .active {
         margin-left: 0px;
         height: 100%;
     }
