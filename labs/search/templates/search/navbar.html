@@ -38,13 +38,13 @@
             </div>
 
             <ul class="list-unstyled components">
-                <li>
+                <li class="{% if request.resolver_match.view_name == "index" %}active{% endif %}">
                     <a href="/"><i class="fas fa-home"></i>  Labs Home</a>
                 </li>
-                <li>
+                <li class="{% if request.resolver_match.namespace == "search" %}active{% endif %}">
                     <a href="{% url 'search:search_index'%}"><i class="fas fa-search"></i>  JudaicaLink Search</a>
                 </li>
-                <li>
+                <li class="{% if request.resolver_match.view_name == "search_index" %}active{% endif %}">
                     <a href="{% url 'search_index' %}"><i class="fas fa-search"></i>  Compact Memory Search</a>
                 </li>
                 <li>
