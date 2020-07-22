@@ -2,39 +2,85 @@
 {% block content %}
 {% load static %}
 
-{% include "search/header.html" %}
 
 <!--content-->
-<main class="row">
-	<div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-8">
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-4 header">
+            <img src="{% static 'images/transp_judaica_labs.png' %}" alt="JudaicaLink labs logo" class="logo"/>
+            <a href="https://www.ub.uni-frankfurt.de/judaica3/home.html" target="_blank"><img
+                    src="{% static 'images/fid-logo.jpg' %}" alt="FID logo" class="logofid"/></a>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4">
+            <a href="https://github.com/wisslab/judaicalink-portal" target="_blank"><img id="forkmeongithub"
+                                                                                     src="{% static 'images/forkmeongithub-blue.png' %}"
+                                                                                     alt="Fork me on GitHub"></a>
+        </div>
+     <div class="row pt-0 pt-lg-5 pb-5">
 
 
+        <div class="col-12 content">
+            <h1>Experimental full text search online</h1>
+            <p>Thu, May 31, 2018
 
-<h1 class="text-center text-md-left">Welcome to JudaicaLink Labs!</h1>
-<p>JudaicaLink Labs is a brand new portal where we aim at making various apps available to scholars and interested users to search and interact with our data.</p>
+                We have some news regarding search functionality in JudaicaLink.
 
+                As we said earlier, we plan to develop a full text search for JudaicaLink. Today, we launch a first
+                version of it, although it is still very limited.
 
+                You can now search our data, backed by ElasticSearch. We are currently mainly working again on the
+                backend part of this, like the processes to populate the search index, the integration with the data
+                pages and so on.
 
-<!--<img src="/img/homepage-graphics.png" alt="Linked Data Web"/>-->
-<h2 class="text-center text-md-left">Apps</h2>
-<p>For now, we provide the following apps:
-<ul>
-  <li><b>JudaicaLink Search:</b> Full-text search on our knowledge graph, e.g. the data we extract from sources like online encyclopedia.</li>
-  <li><b>Compact Memory Search:</b> Full-text search on <a href='http://sammlungen.ub.uni-frankfurt.de/cm/nav/index/title/'>Compact Memory</a>, a database of newspaper and journal articles from the 19th century.</li>
-</ul>
+                This first search functionality is therefore very limited: you can search in a subset of our data fields
+                (name/title, abstract, birthDate, deathDate, birthLocation, deathLocation) and only the first 10 results
+                (if any) are shown, as simple links to the data pages.
 
-</p>
+                We nevertheless think this is already useful (at least we use it), as this way you can quickly find out,
+                if there are some matching resources available in JudaicaLink, and you can also find quickly some new
+                entries to explore our dataset.
 
-</div>
-	<div class="col-lg-3 col-xl-4">
-		<img src="{% static '/img/brille.jpg'%}" class="img-thumbnail" height="auto" width="100%"></img>
+                So have fun with it - and be patient, it is still under heavy development and things inevitably will
+                break.<br><br>We have some news regarding search functionality in JudaicaLink.
 
-	</div>
+                As we said earlier, we plan to develop a full text search for JudaicaLink. Today, we launch a first
+                version of it, although it is still very limited.
 
-</main>
+                You can now search our data, backed by ElasticSearch. We are currently mainly working again on the
+                backend part of this, like the processes to populate the search index, the integration with the data
+                pages and so on.
 
-<!--content end-->
-{% include "search/footer.html" %}
+                This first search functionality is therefore very limited: you can search in a subset of our data fields
+                (name/title, abstract, birthDate, deathDate, birthLocation, deathLocation) and only the first 10 results
+                (if any) are shown, as simple links to the data pages.
 
+                We nevertheless think this is already useful (at least we use it), as this way you can quickly find out,
+                if there are some matching resources available in JudaicaLink, and you can also find quickly some new
+                entries to explore our dataset.
 
-{% endblock content %}
+                So have fun with it - and be patient, it is still under heavy development and things inevitably will
+                break.</p>
+        </div>
+    </div>
+<!--content-->
+<!--NEWS-->
+
+<div class="news">
+    <p>NEWS</p>
+    <div class="newsborder"><p>Mon, July 16, 2018:
+Explore our project GitHub<br>
+
+ Mon, June 18, 2018:
+Search Improvements<br>
+
+ Thu, May 31, 2018:
+        Experimental full text search online <a href="/">>>read more</a></p></div>
+    </div>
+<!--NEWS-->
+
+<!--footer-->
+
+{% include "search/footer_labs.html" %}
+
+<!--footer-->
+    {% endblock content %}
+
