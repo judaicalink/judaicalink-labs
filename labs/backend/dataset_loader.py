@@ -56,8 +56,6 @@ def cleanstring(value, chars):
     value = re.sub( '\s+', ' ', value).strip()
     return value
 
-
-
 def index_file(filename, task):
     openfunc = open
     if filename.endswith(".gz"):
@@ -97,6 +95,10 @@ def index_file(filename, task):
                 if f == 'Alternatives':
                     values = cleanstring(values, ['"', '{', '}', '.'])
                 doc[f] = values
+            #indexing slug
+            dataslug = s
+            dataslug = dataslug.replace ("http://data.judaicalink.org/data/", "").split ("/")[0]
+            doc ["dataslug"] = dataslug
             index = {
                     "index": { "_index": "judaicalink", "_id": s }
                     }
@@ -148,6 +150,7 @@ def load_in_elasticsearch(task):
             if filename.endswith(".gz"):
                 openfunc = gzip.open
             with openfunc(filename, "rt", encoding="utf8") as f:
+                print ("indexing: " + filename)
                 es.bulk(f.read())
             
     

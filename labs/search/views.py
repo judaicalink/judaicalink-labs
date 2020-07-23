@@ -57,7 +57,7 @@ def process_query (query, page):
                 "deathDate": {},
                 "deathLocation": {},
                 "Abstract": {},
-                "Publication": {}
+                "Publication": {},
             },
             'number_of_fragments': 0,
         }
@@ -72,7 +72,6 @@ def process_query (query, page):
     for d in result ["hits"] ["hits"]:
         data = {
             "id" : d ["_id"],
-            #name
             "source" : d ["_source"],
             "highlight" : d ["highlight"],
         }
@@ -84,7 +83,13 @@ def process_query (query, page):
             if s in d ["highlight"]:
                 d ["source"] [s] = d ["highlight"] [s] [0]
 
+
     field_order = ["name", "Alternatives", "birthDate", "birthLocation", "deathDate", "deathLocation", "Abstract", "Publication"]
+
+    dataset_objects = Dataset.objects.all()
+    dataslug_to_dataset = {}
+    for i in dataset_objects:
+        dataslug_to_dataset [i.dataslug] = i.title
 
     ordered_dataset = []
     for d in dataset:
@@ -107,7 +112,6 @@ def process_query (query, page):
                 pretty_fieldname = field.capitalize()
                 temp_data = "<b>" + pretty_fieldname + ": " + "</b>" + d ["source"] [field]
                 data.append (temp_data)
-
         ordered_dataset.append (data)
 
     total_hits = result ["hits"] ["total"] ["value"]
@@ -134,19 +138,15 @@ def process_query (query, page):
             real_paging.append (number)
 
     context = {
-        "result" : result ["hits"] ["hits"],
-            #contains full search results from elasticsearch
-        "dataset" : dataset,
-            #contains id and information from fields
         "pages" : pages,
         "paging" : real_paging,
         "next" : page + 1,
         "previous" : page -1,
         "total_hits" : total_hits,
-        "range" : range (1, (pages + 1)),
         "page" : page,
         "query" : query,
         "ordered_dataset" : ordered_dataset,
+        "dataslug_to_dataset": dataslug_to_dataset,
     }
 
     return context

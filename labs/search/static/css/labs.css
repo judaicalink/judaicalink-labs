@@ -111,7 +111,7 @@ a:hover {
 /*#sidebar ul li.current a{
     background: #004284; }/*Home*/
 
-#sidebar ul li a.active{
+#sidebar ul li.active{
     background:green;
     color: #fff;}
 
@@ -271,7 +271,9 @@ a:hover {
     text-decoration:underline;
 }
 pre{
-    color:grey;}
+    color:grey;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
 
 
 
