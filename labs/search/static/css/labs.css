@@ -232,18 +232,6 @@ a:hover {
     width: 160px;
     }
 
-/*.weblabsdatalogo{
-    width: 200px;
-    margin-left: -130px;
-    }
-
-.weblabsdatalogos {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    align-content: center;
-    align-items: center;
-    }*/
 
 .footer-logos {
     display: flex;
@@ -366,10 +354,7 @@ height: 130px;
         padding: 10px;
         margin-top: 20px;
     }
-    .weblabsdatalogo{
-        width: 200px;
-        margin-left: -100px;
-    }
+
 }
 
 @media (max-width: 768px) {
