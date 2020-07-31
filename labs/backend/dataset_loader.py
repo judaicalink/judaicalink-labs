@@ -44,8 +44,10 @@ property2field = {
         'http://www.w3.org/2004/02/skos/core#prefLabel': 'name',
         'http://www.w3.org/2004/02/skos/core#altLabel': 'Alternatives',
         'http://data.judaicalink.org/ontology/birthDate': 'birthDate',
+        'http://data.judaicalink.org/ontology/birthYear': 'birthYear',
         'http://data.judaicalink.org/ontology/birthLocation': 'birthLocation',
         'http://data.judaicalink.org/ontology/deathDate': 'deathDate',
+        'http://data.judaicalink.org/ontology/deathYear': 'deathYear',
         'http://data.judaicalink.org/ontology/deathLocation': 'deathLocation',
         'http://data.judaicalink.org/ontology/hasAbstract': 'Abstract',
         }
@@ -100,10 +102,10 @@ def index_file(filename, task):
             dataslug = dataslug.replace ("http://data.judaicalink.org/data/", "").split ("/")[0]
             doc ["dataslug"] = dataslug
             index = {
-                    "index": { "_index": "judaicalink", "_id": s }
+                    "update": { "_index": "judaicalink", "_id": s }
                     }
             bulk_body.append(json.dumps(index))
-            bulk_body.append(json.dumps(doc))
+            bulk_body.append(json.dumps({"doc": doc, "doc_as_upsert": True}))
         if len(bulk_body)>0:
             task.log(filename + " indexing")
             es.bulk('\n'.join(bulk_body))
@@ -116,7 +118,9 @@ mappings = {
     "properties": {
       "Name":   { "type": "text"  },     
       "birthDate":   { "type": "text"  },     
+      "birthYear":   { "type": "integer"  },     
       "deathDate":   { "type": "text"  },    
+      "deathYear":   { "type": "integer"  },     
       "birthLocation":   { "type": "text"  },     
       "deathLocation":   { "type": "text"  },    
       "Abstract":   { "type": "text"  },
