@@ -108,7 +108,7 @@ def index_file(filename, task):
             bulk_body.append(json.dumps({"doc": doc, "doc_as_upsert": True}))
         if len(bulk_body)>0:
             task.log(filename + " indexing")
-            es.bulk('\n'.join(bulk_body))
+            es.bulk('\n'.join(bulk_body), request_timeout=60)
 
             
 
