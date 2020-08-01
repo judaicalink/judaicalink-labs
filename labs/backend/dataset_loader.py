@@ -102,7 +102,7 @@ def index_file(filename, task):
             dataslug = dataslug.replace ("http://data.judaicalink.org/data/", "").split ("/")[0]
             doc ["dataslug"] = dataslug
             index = {
-                    "update": { "_index": "judaicalink", "_id": s }
+                    "update": { "_index": settings.JUDAICALINK_INDEX, "_id": s }
                     }
             bulk_body.append(json.dumps(index))
             bulk_body.append(json.dumps({"doc": doc, "doc_as_upsert": True}))
