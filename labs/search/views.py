@@ -3,6 +3,7 @@ import math
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.conf import settings
 
 from backend.models import Dataset
 from elasticsearch import Elasticsearch
@@ -25,7 +26,7 @@ def load(request):
         data = f.read()
         print(data)
         headers = {'content-type': 'application/json'}
-        response = requests.post('http://localhost:9200/judaicalink/doc/_bulk?pretty', data=data, headers=headers)
+        response = requests.post(f'http://localhost:9200/{settings.JUDAICALINK_INDEX}/doc/_bulk?pretty', data=data, headers=headers)
         return HttpResponse(response)
 
 def search (request):
@@ -62,7 +63,7 @@ def process_query (query, page):
             'number_of_fragments': 0,
         }
     }
-    result = es.search(index="judaicalink", body = body)
+    result = es.search(index=settings.JUDAICALINK_INDEX, body = body)
 
     # For testing, never commit with a hardcoded path like this
     # with open('/tmp/test.json', 'w') as f:
@@ -84,7 +85,7 @@ def process_query (query, page):
                 d ["source"] [s] = d ["highlight"] [s] [0]
 
 
-    field_order = ["name", "Alternatives", "birthDate", "birthLocation", "deathDate", "deathLocation", "Abstract", "Publication"]
+    field_order = ["name", "Alternatives", "birthDate", "birthYear", "birthLocation", "deathDate", "deathYear", "deathLocation", "Abstract", "Publication"]
 
     dataset_objects = Dataset.objects.all()
     dataslug_to_dataset = {}

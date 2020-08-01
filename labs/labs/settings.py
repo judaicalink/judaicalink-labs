@@ -149,5 +149,9 @@ FUSEKI_STORAGE = "."
 ELASTICSEARCH_SERVER = "http://localhost:9200/"
 ELASTICSEARCH_STORAGE = "/var/lib/elasticsearch"
 
+JUDAICALINK_INDEX = "judaicalink"
+COMPACT_MEMORY_INDEX = "cm"
+COMPACT_MEMORY_META_INDEX = "cm_meta"
+
 if os.path.isfile("labs/localsettings.py"):
     from .localsettings import *

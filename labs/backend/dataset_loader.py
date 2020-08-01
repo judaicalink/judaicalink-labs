@@ -139,9 +139,9 @@ mappings_simpletext = {
 def load_in_elasticsearch(task):
     es = elasticsearch.Elasticsearch()
     ic = elasticsearch.client.IndicesClient(es)
-    if ic.exists('judaicalink'):
-        ic.delete('judaicalink')
-    ic.create(index='judaicalink', body={'mappings': mappings})
+    if ic.exists(settings.JUDAICALINK_INDEX):
+        ic.delete(settings.JUDAICALINK_INDEX)
+    ic.create(index=settings.JUDAICALINK_INDEX, body={'mappings': mappings})
     for df in models.Datafile.objects.filter(indexed=True, dataset__indexed=True):
         if df.dataset.is_rdf():
             task.log(df.url + " parsing")
