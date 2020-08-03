@@ -15,7 +15,7 @@ class Command(BaseCommand):
         jl = rdflib.Namespace("http://data.judaicalink.org/ontology/")
         
         # First, we iterate over all data files in our django database
-        for df in models.Datafile.objects.filter():
+        for df in models.Datafile.objects.all():
             # we use the backend functions to download and access the actual files 
             filename = dataset_loader.load_rdf_file(df.url)
             # we check, if the file is supposed to be RDF
