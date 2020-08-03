@@ -47,10 +47,10 @@
                 <li class="{% if request.resolver_match.view_name == "search_index" %}active{% endif %}">
                     <a href="{% url 'search_index' %}"><i class="fas fa-search"></i>  Compact Memory Search</a>
                 </li>
-                <li>
+                <li class="{% if request.resolver_match.view_name == "datasets" %}active{% endif %}">
                     <a href="http://web.judaicalink.org/datasets/"><i class="fas fa-table"></i>  Datasets</a>
                 </li>
-                <li>
+                <li class="{% if request.resolver_match.view_name == "news" %}active{% endif %}">
                 <a href="http://web.judaicalink.org/news"><i class="fas fa-comment"></i>  News</a>
                 </li>
                 <li>
@@ -59,22 +59,6 @@
 
             </ul>
 
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-eye"></i>  Background</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="http://web.judaicalink.org/faq">FAQ</a>
-                        </li>
-                        <li>
-                            <a href="http://web.judaicalink.org/about-us">About</a>
-                        </li>
-                        <li>
-                            <a href="http://web.judaicalink.org/legal">Disclaimer</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
           <div class="weblabsdatalogos">
           <a href="#"><img src="{% static '/img/frei_web.png'%}" alt="Web Logo" class="weblabsdatalogo"/></a>
           <a href="#"><img src="{% static '/img/frei_labs.png'%}" alt="Labs Logo" class="weblabsdatalogo"/></a>
