@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'cm_search',
     'lodjango',
     'dashboard',
-    'enrichment',
+    'data',
 ]
 
 MIDDLEWARE = [

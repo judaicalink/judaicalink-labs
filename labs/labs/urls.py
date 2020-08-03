@@ -33,5 +33,5 @@ urlpatterns = [
     path('', index, name='index'),
     path('cm_search/', include('cm_search.urls')),
     path('dashboard/', include('dashboard.urls')),
-    path('enrichment/', include('enrichment.urls')),
+    path('data', include('data.urls')),
 ]
