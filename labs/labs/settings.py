@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'channels',
     'core',
-    'backend',
+    'backend.apps.BackendConfig',
     'search',
     'cm_search',
     'lodjango',
