@@ -24,6 +24,9 @@ def cleanstring(value, chars):
     value = re.sub( '\s+', ' ', value).strip()
     return value
 
+
+
+
 class Command(BaseCommand):
     help = 'index data from a file in elasticsearch'
 
@@ -80,5 +83,5 @@ class Command(BaseCommand):
                 bulk_body.append(json.dumps(index))
                 bulk_body.append(json.dumps({"doc": doc, "doc_as_upsert": True}))
             if len(bulk_body)>0:
-                print ('indexing successful!')
+                self.stdout.write('indexing successful!')
                 es.bulk('\n'.join(bulk_body), request_timeout=60)

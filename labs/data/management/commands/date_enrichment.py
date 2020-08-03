@@ -2,7 +2,8 @@ from django.core.management.base import BaseCommand
 from django.utils import timezone
 import gzip
 import rdflib
-from backend import models, dataset_loader
+from data import models 
+from data import utils as dataset_loader
 import re
 
 class Command(BaseCommand):

@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.conf import settings
 
-from backend.models import Dataset
+from data.models import Dataset
 from elasticsearch import Elasticsearch
 import json
 

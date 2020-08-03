@@ -3,7 +3,8 @@ from django.utils import timezone
 from django.conf import settings
 import gzip
 import rdflib
-from backend import models, dataset_loader
+from data import models
+from data import utils as dataset_loader
 import requests, os
 from rdflib import Graph, URIRef, Namespace
 from rdflib.namespace import RDF, SKOS, OWL, FOAF
