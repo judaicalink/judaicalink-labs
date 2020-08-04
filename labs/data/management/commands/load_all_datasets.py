@@ -15,7 +15,12 @@ def create_dataset(name, db_type='mem'):
         res = requests.post(settings.FUSEKI_SERVER + '$/datasets', {'dbType': db_type, 'dbName':name})
 
 class Command(BaseCommand):
-    help = 'load all datasets marked as loaded in Fuseki'
+    help = '''
+    Load all datasets marked as loaded in Fuseki.
+
+    This currently checks for the loaded flags in the database, 
+    i.e., it behaves exactly as in the backend.
+    '''
 
     def handle(self, *args, **kwargs):
         create_dataset('judaicalink')
