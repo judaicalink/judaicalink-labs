@@ -47,10 +47,10 @@
                 <li class="{% if request.resolver_match.view_name == "search_index" %}active{% endif %}">
                     <a href="{% url 'search_index' %}"><i class="fas fa-search"></i>  Compact Memory Search</a>
                 </li>
-                <li>
+                <li class="{% if request.resolver_match.view_name == "datasets" %}active{% endif %}">
                     <a href="http://web.judaicalink.org/datasets/"><i class="fas fa-table"></i>  Datasets</a>
                 </li>
-                <li>
+                <li class="{% if request.resolver_match.view_name == "news" %}active{% endif %}">
                 <a href="http://web.judaicalink.org/news"><i class="fas fa-comment"></i>  News</a>
                 </li>
                 <li>
