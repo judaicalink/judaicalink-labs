@@ -11,10 +11,13 @@ class BackendConfig(AppConfig):
         marked as running in the database. Therefore, we have to 
         clean them.
         '''
-        from .models import ThreadTask
-        for task in ThreadTask.objects.filter(is_done=False):
-            task.is_done = True
-            task.status_ok = False
-            task.save()
-            task.log("Error: Task was found running after startup, marked as done.")
+        try:
+            from .models import ThreadTask
+            for task in ThreadTask.objects.filter(is_done=False):
+                task.is_done = True
+                task.status_ok = False
+                task.save()
+                task.log("Error: Task was found running after startup, marked as done.")
+        except:
+            print("No cleanup, probably database not yet migrated.")
 
