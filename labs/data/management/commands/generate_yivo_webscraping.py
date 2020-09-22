@@ -12,10 +12,11 @@ import scrapy.crawler
 # table.find_all("tr") # select all tr tags
 # tr.find("th").text.strip() # Find first Tag
 import re
+from ._scraper_command import ScraperCommand
 
 
 class YivoSpider(scrapy.Spider):
-    name = 'yivo Spider'
+    name = 'yivo'
     start_urls = ["https://yivoencyclopedia.org/article.aspx/Abeles_Shimon"]
 
     def parse(self, response):
@@ -26,22 +27,16 @@ class YivoSpider(scrapy.Spider):
         yield data
         yield response.follow(data["next_article"])
 
-class Command(BaseCommand):
+class Command(ScraperCommand):
     help = 'Generate the Yivo dataset from the online encyclopedia'
 
-    def handle(self, *args, **kwargs):
-        first = "https://yivoencyclopedia.org/article.aspx/Abeles_Shimon"
-        spider = YivoSpider()
-        spider.start_urls = [first]
-        process = scrapy.crawler.CrawlerProcess({
-            'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)',
-            'FEED_FORMAT': 'json',
-            'FEED_URI': 'yivo_webscraping.json'
-            #'FEED': { Path('yivo_webscraping.json'): { 'format': 'jsonlines', 'encoding': 'utf-8'} },
-            # 'LOG_LEVEL': 'WARNING'
-        })
-        process.crawl(YivoSpider, start_urls=[first])
-        process.start()
+    def handle(self, *args, **options):
+        first = ["https://yivoencyclopedia.org/article.aspx/Abeles_Shimon"]
+        last = ["http://www.yivoencyclopedia.org/article.aspx/Zylbercweig_Zalmen"]
+        multi = ["http://www.yivoencyclopedia.org/article.aspx/Poland"]
+        error = ["http://www.yivoencyclopedia.org/article.aspx?id=497"]
+        sub = ["http://www.yivoencyclopedia.org/article.aspx/Poland/Poland_before_1795"]
+        self.start_scraper(YivoSpider, gzip=options['gzip'], kwargs_dict={"start_urls": first})
 
 
 
