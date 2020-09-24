@@ -28,6 +28,8 @@ namespaces = {
         "geo": rdflib.Namespace("http://www.w3.org/2003/01/geo/wgs84_pos#"),
         "void": rdflib.Namespace("http://rdfs.org/ns/void#"),
         "foaf": rdflib.Namespace("http://xmlns.com/foaf/0.1/"),
+        "prov": rdflib.Namespace("http://www.w3.org/ns/prov#"),
+        "cc": rdflib.Namespace("https://creativecommons.org/ns#"),
 }
 
 for ns in namespaces:
@@ -79,7 +81,8 @@ class DatasetCommand(BaseCommand):
     def start_scraper(self, scraper_class, filename=None, settings={}, args_list=[], kwargs_dict={}):
         if not filename:
             filename = f"{self.metadata['slug']}.jsonl"
-        os.remove(filename)
+        if os.path.exists(filename):
+            os.remove(filename)
         default_settings = {
                 'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)',
                 'FEED_FORMAT': 'jsonlines',
@@ -131,26 +134,46 @@ class DatasetCommand(BaseCommand):
             git_head_hash = process.communicate()[0].strip().decode("utf-8")
         except:
             git_head_hash = "Not available"
+        scriptinfo = True
         try:
             script = self.__class__.__module__.split(".")[-1] + ".py"
             script_path = settings.LABS_GIT_WEBROOT + self.__class__.__module__.replace(".", "/") + ".py"
         except:
             script = "Not available"
             script_path = "Not available"
+            scriptinfo = False
 
         self.metadata["generator"] = {
             "script": script,
-            "github": script_path,
+            "gitweb": script_path,
             "commit": git_head_hash,
             }
-        for ns in namespaces:
-            graph.bind(ns, namespaces[ns])
-            subject = rdflib.URIRef(f"http://data.judaicalink.org/datasets/{self.metadata['slug']}")
-            graph.add((subject, dcterms.date, rdflib.Literal(creation_date)))
-        with open(rdf_filename, "wb") as f:
-            f.write(graph.serialize(format="turtle"))
+        # The toml file contains the metadata to be copied to the Hugo page
         with open(toml_filename, "w", encoding="utf-8") as f:
             toml.dump(self.metadata, f)
+        # The ttl file contains the metadata as RDF to be shown in Pubby.
+        for ns in namespaces:
+            graph.bind(ns, namespaces[ns])
+        subject = rdflib.URIRef(f"http://data.judaicalink.org/datasets/{self.metadata['slug']}")
+        graph.add((subject, rdf.type, void.Dataset))
+        graph.add((subject, dcterms.date, rdflib.Literal(creation_date)))
+        graph.add((subject, dcterms.title, rdflib.Literal(self.metadata["title"])))
+        if "license" in self.metadata:
+            if "uri" in self.metadata["license"]:
+                graph.add((subject, cc.license, rdflib.URIRef(self.metadata["license"]["uri"])))
+            if "name" in self.metadata["license"]:
+                graph.add((subject, dcterms.rights, rdflib.Literal(self.metadata["license"]["name"])))
+        if scriptinfo:
+            graph.add((subject, rdf.type, prov.Entity))
+            activity = rdflib.BNode()
+            script = rdflib.BNode()
+            graph.add((subject, prov.wasGeneratedBy, activity))
+            graph.add((activity, prov.used, script))
+            graph.add((script, jlo.gitWeb, rdflib.URIRef(self.metadata["generator"]["gitweb"])))
+            graph.add((script, jlo.gitCommit, rdflib.Literal(self.metadata["generator"]["commit"])))
+            graph.add((script, rdfs.label, rdflib.Literal(self.metadata["generator"]["script"])))
+        with open(rdf_filename, "wb") as f:
+            f.write(graph.serialize(format="turtle"))
         if self.gzip:
             gzip_file(rdf_filename)
 
