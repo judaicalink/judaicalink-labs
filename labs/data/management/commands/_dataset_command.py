@@ -7,7 +7,7 @@ from pathlib import Path
 import scrapy
 import scrapy.crawler
 import re
-import gzip as gziplib
+import gzip
 import shutil
 import os
 import json
@@ -32,13 +32,19 @@ for ns in namespaces:
 
 def gzip_file(filename):
     with open(filename, 'rb') as f_in:
-        with gziplib.open(f'{filename}.gz', 'wb') as f_out:
+        with gzip.open(f'{filename}.gz', 'wb') as f_out:
             shutil.copyfileobj(f_in, f_out)
     os.remove(filename)
 
 
 class DatasetCommand(BaseCommand):
     help = 'Base Command for a scraper'
+
+    
+    def __init__(self):
+        super().__init__()
+        self.gzip = False
+
 
     def add_arguments(self, parser):
         parser.add_argument("--clear-cache", action="store_true", help="Clear cache before scraping.")
@@ -47,55 +53,66 @@ class DatasetCommand(BaseCommand):
         parser.add_argument("--gzip", action="store_true", help="Zip output files.")
 
 
-
-
     def set_metadata(self, metadata):
         self.metadata = metadata
+        if not "files" in metadata:
+            self.metadata["files"] = []
     
 
-    def start_scraper(self, scraper_class, filename=None, gzip=False, settings={}, args_list=[], kwargs_dict={}):
+    def add_file(self, filename, description = None):
+        if self.gzip and not filename.endswith(".gz"):
+            filename += ".gz"
+
+        if not description:
+            description = f"RDF dump of the {self.metadata['slug']} dataset."
+
+        self.metadata["files"].append({
+                "filename": filename,
+                "url": f"http://data/judaicalink.org/dumps/{self.metadata['slug']}/{filename}",
+                "description": description,
+            })
+
+    def start_scraper(self, scraper_class, filename=None, settings={}, args_list=[], kwargs_dict={}):
         if not filename:
-            filename = f"{scraper_class.name}.jsonl"
+            filename = f"{self.metadata['slug']}.jsonl"
         os.remove(filename)
         default_settings = {
                 'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)',
                 'FEED_FORMAT': 'jsonlines',
                 'FEED_URI': filename,
                 'HTTPCACHE_ENABLED': True,
-                'HTTPCACHE_DIR': f'{scraper_class.name}-cache',
+                'HTTPCACHE_DIR': f"{self.metadata['slug']}-cache",
         }
         default_settings.update(settings)
         process = scrapy.crawler.CrawlerProcess(default_settings)
         process.crawl(scraper_class, *args_list, **kwargs_dict)
         process.start()
 
-        if gzip:
-            gzip_file(f"{scraper_class.name}.jsonl")
+        if self.gzip:
+            gzip_file(f"{self.metadata['slug']}.jsonl")
 
 
-    def jsonlines_to_rdf(self, dict_to_graph_function, jsonl_filename=None, rdf_filename=None, gzip=False):
+    def jsonlines_to_rdf(self, dict_to_graph_function, jsonl_filename=None, rdf_filename=None):
         if not jsonl_filename:
-            jsonl_filename = f"{self.metadata['name']}.jsonl"
+            jsonl_filename = f"{self.metadata['slug']}.jsonl"
         if not rdf_filename:
-            rdf_filename = f"{self.metadata['name']}.ttl"
-        if gzip and not jsonl_filename.endswith(".gz"):
+            rdf_filename = f"{self.metadata['slug']}.ttl"
+        if self.gzip and not jsonl_filename.endswith(".gz"):
             jsonl_filename += ".gz" 
         graph = rdflib.Graph()
         for ns in namespaces:
             graph.bind(ns, namespaces[ns])
         openfunc = open
         if jsonl_filename.endswith(".gz"):
-            openfunc = gziplib.open
+            openfunc = gzip.open
         with openfunc(jsonl_filename, "rt", encoding="utf-8") as jsonlines:
             for line in jsonlines:
                 line_dict = json.loads(line)
                 dict_to_graph_function(graph, line_dict)
         with open(rdf_filename, "wb") as f:
             f.write(graph.serialize(format="turtle"))
-        if gzip:
+        if self.gzip:
             gzip_file(rdf_filename)
-
-
 
 
     def handle(self, *args, **kwargs):

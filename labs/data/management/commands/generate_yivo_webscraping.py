@@ -12,7 +12,7 @@ from ._dataset_command import DatasetCommand
 from ._dataset_command import jlo, jld, skos, dcterms, void, foaf
 
 metadata = {
-        "name": "yivo", # Used as graph name and for file names, identifies this dataset.
+        "slug": "yivo", # Used as graph name and for file names, identifies this dataset.
         "namespace_slugs": [
             "yivo"
             ],
@@ -23,7 +23,7 @@ metadata = {
 
 
 class YivoSpider(scrapy.Spider):
-    name = metadata["name"] # Used for the file name: {name}.jsonl
+    name = metadata["slug"] # Used for the file name: {name}.jsonl
     start_urls = ["https://yivoencyclopedia.org/article.aspx/Abeles_Shimon"]
 
     # Cheatsheet
@@ -53,14 +53,16 @@ class Command(DatasetCommand):
 
     def handle(self, *args, **options):
         self.set_metadata(metadata)
+        self.gzip = options['gzip']
         first = ["http://www.yivoencyclopedia.org/article.aspx/Abeles_Shimon"]
         last = ["http://www.yivoencyclopedia.org/article.aspx/Zylbercweig_Zalmen"]
         multi = ["http://www.yivoencyclopedia.org/article.aspx/Poland"]
         error = ["http://www.yivoencyclopedia.org/article.aspx?id=497"]
         sub = ["http://www.yivoencyclopedia.org/article.aspx/Poland/Poland_before_1795"]
 
-        self.start_scraper(YivoSpider, gzip=options['gzip'], kwargs_dict={"start_urls": first})
-        self.jsonlines_to_rdf(yivo_rdf, gzip=options['gzip'])
+        self.start_scraper(YivoSpider, kwargs_dict={"start_urls": first})
+        self.jsonlines_to_rdf(yivo_rdf) 
+        self.add_file("yivo.ttl")
 
 
 
