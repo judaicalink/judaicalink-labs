@@ -12,13 +12,15 @@ from ._dataset_command import DatasetCommand
 from ._dataset_command import jlo, jld, skos, dcterms, void, foaf
 
 metadata = {
+        "title": "Yivo Encyclopedia",
+        "example": "http://data.judaicalink.org/data/yivo/Moscow",
         "slug": "yivo", # Used as graph name and for file names, identifies this dataset.
         "namespace_slugs": [
             "yivo"
             ],
         "creators": [
             {"name": "Kai Eckert", "url": "http://wiss.iuk.hdm-stuttgart.de/people/kai-eckert"}
-            ]
+            ],
         }
 
 
@@ -63,6 +65,8 @@ class Command(DatasetCommand):
         self.start_scraper(YivoSpider, kwargs_dict={"start_urls": first})
         self.jsonlines_to_rdf(yivo_rdf) 
         self.add_file("yivo.ttl")
+        self.write_metadata()
+        print(self.metadata)
 
 
 

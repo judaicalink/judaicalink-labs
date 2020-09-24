@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
 from django.utils import timezone
+from django.conf import settings
 import gzip
 import rdflib
 from bs4 import BeautifulSoup
@@ -11,6 +12,9 @@ import gzip
 import shutil
 import os
 import json
+import toml
+import subprocess
+
 
 namespaces = {
         "jlo": rdflib.Namespace("http://data.judaicalink.org/ontology/"),
@@ -68,7 +72,7 @@ class DatasetCommand(BaseCommand):
 
         self.metadata["files"].append({
                 "filename": filename,
-                "url": f"http://data/judaicalink.org/dumps/{self.metadata['slug']}/{filename}",
+                "url": f"{settings.LABS_DUMPS_WEBROOT}{self.metadata['slug']}/{filename}",
                 "description": description,
             })
 
@@ -113,6 +117,44 @@ class DatasetCommand(BaseCommand):
             f.write(graph.serialize(format="turtle"))
         if self.gzip:
             gzip_file(rdf_filename)
+
+    def write_metadata(self, rdf_filename=None, toml_filename=None):
+        if not rdf_filename:
+            rdf_filename = f"{self.metadata['slug']}-metadata.ttl"
+        if not toml_filename:
+            toml_filename = f"{self.metadata['slug']}-metadata.toml"
+        graph = rdflib.Graph()
+        creation_date = timezone.now()
+        self.metadata["date"] = creation_date
+        try:
+            process = subprocess.Popen(['git', 'rev-parse', 'HEAD'], shell=False, stdout=subprocess.PIPE)
+            git_head_hash = process.communicate()[0].strip().decode("utf-8")
+        except:
+            git_head_hash = "Not available"
+        try:
+            script = self.__class__.__module__.split(".")[-1] + ".py"
+            script_path = settings.LABS_GIT_WEBROOT + self.__class__.__module__.replace(".", "/") + ".py"
+        except:
+            script = "Not available"
+            script_path = "Not available"
+
+        self.metadata["generator"] = {
+            "script": script,
+            "github": script_path,
+            "commit": git_head_hash,
+            }
+        for ns in namespaces:
+            graph.bind(ns, namespaces[ns])
+            subject = rdflib.URIRef(f"http://data.judaicalink.org/datasets/{self.metadata['slug']}")
+            graph.add((subject, dcterms.date, rdflib.Literal(creation_date)))
+        with open(rdf_filename, "wb") as f:
+            f.write(graph.serialize(format="turtle"))
+        with open(toml_filename, "w", encoding="utf-8") as f:
+            toml.dump(self.metadata, f)
+        if self.gzip:
+            gzip_file(rdf_filename)
+
+
 
 
     def handle(self, *args, **kwargs):
