@@ -8,8 +8,9 @@ import scrapy
 import scrapy.crawler
 import scrapy.http
 import re
+from urllib.parse import quote
 from ._dataset_command import DatasetCommand, DatasetSpider
-from ._dataset_command import jlo, jld, skos, dcterms, void, foaf
+from ._dataset_command import jlo, jld, skos, dcterms, void, foaf, rdf
 
 metadata = {
         "title": "Yivo Encyclopedia",
@@ -46,7 +47,6 @@ class YivoSpider(DatasetSpider):
         if url in self.queued:
             return False
         self.queued.add(url)
-        self.log("Queued: " + url)
         return True
 
 
@@ -73,8 +73,6 @@ class YivoSpider(DatasetSpider):
         # Mark as visited
         self.visited.add(data['uri'][data['uri'].find("article.aspx"):])
         self.visited.add(f"article.aspx?id={data['id']}")
-        self.log(self.visited)
-        self.log(self.queued)
 
         # Basic stuff
         data['abstract'] = soup.select_one(".articleblockconteiner p").text
@@ -150,9 +148,33 @@ class YivoSpider(DatasetSpider):
             yield response.follow(data['next_article'])
 
 
+def local(uri):
+    if "aspx" in uri:
+        return jld[f"yivo/{uri[uri.find('aspx') + 5:]}"] 
+    else:
+        return rdflib.URIRef(uri)
+
+
 def yivo_rdf(graph: rdflib.Graph, resource_dict: dict):
-    subject = jld[f"yivo/{resource_dict['uri'][resource_dict['uri'].rfind('/') + 1:]}"] 
+    subject = local(resource_dict["uri"])
     graph.add((subject, jlo.title, rdflib.Literal(resource_dict['title'])))
+    graph.add((subject, jlo.describedAt, rdflib.URIRef(resource_dict["uri"])))
+    graph.add((subject, skos.prefLabel, rdflib.Literal(resource_dict["title"])))
+    for l in resource_dict["links"]:	
+            graph.add((subject, skos.related, local(l["href"])))
+            if len(l["text"])>0:
+                graph.add((local(l["href"]), skos.altLabel, rdflib.Literal(l["text"])))
+    graph.add((subject, jlo.hasAbstract, rdflib.Literal(resource_dict["abstract"], "en")))
+    for sc in resource_dict["subconcepts"]:
+            scu = rdflib.URIRef(str(subject) + "/" + quote(re.sub("[ ]+", "_", sc)))
+            graph.add((scu, rdf.type, skos.Concept))
+            graph.add((scu, skos.broader, subject))
+            graph.add((scu, skos.prefLabel, rdflib.Literal(sc)))
+            graph.add((subject, skos.narrower, scu))
+    for sr in resource_dict["subrecords"]:
+            graph.add((subject, skos.narrower, local(sr.href)))
+    if "broader" in resource_dict:
+            graph.add((subject, skos.broader, rdflib.URIRef(resource_dict["broader"])))
     return graph
 
 
@@ -168,11 +190,12 @@ class Command(DatasetCommand):
         error = ['http://www.yivoencyclopedia.org/article.aspx?id=497']
         sub = ['http://www.yivoencyclopedia.org/article.aspx/Poland/Poland_before_1795']
 
-        self.start_scraper(YivoSpider, settings={"LOG_LEVEL": "INFO"}, kwargs_dict={"start_urls": first})
-        self.jsonlines_to_rdf(yivo_rdf) 
-        self.add_file("yivo.ttl")
+        if not options["skip_scraping"]:
+            self.start_scraper(YivoSpider, settings={"LOG_LEVEL": "INFO"}, kwargs_dict={"start_urls": first})
+        if not options["no_rdf"]:
+            self.jsonlines_to_rdf(yivo_rdf) 
+            self.add_file("yivo.ttl")
         self.write_metadata()
-        print(self.metadata)
 
 
 
