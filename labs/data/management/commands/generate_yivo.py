@@ -59,8 +59,8 @@ class Command(DatasetCommand):
     help = 'Generate the Yivo dataset from the online encyclopedia'
 
     def handle(self, *args, **options):
-        self.set_metadata(metadata)
         self.gzip = options['gzip']
+        self.set_metadata(metadata)
         first = ["http://www.yivoencyclopedia.org/article.aspx/Abeles_Shimon"]
         last = ["http://www.yivoencyclopedia.org/article.aspx/Zylbercweig_Zalmen"]
         multi = ["http://www.yivoencyclopedia.org/article.aspx/Poland"]
