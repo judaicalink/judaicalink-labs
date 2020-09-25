@@ -63,7 +63,10 @@ class DatasetCommand(BaseCommand):
         self.metadata = metadata
         if not "files" in metadata:
             self.metadata["files"] = []
-    
+        self.directory = os.path.join(settings.LABS_DUMPS_LOCAL, metadata["slug"])
+        self.add_file(f"{self.metadata['slug']}-metadata.ttl", description=f"Metadata for {self.metadata['slug']} dataset.")
+        Path(self.directory).mkdir(parents=True, exist_ok=True)
+
 
     def add_file(self, filename, description = None):
         if self.gzip and not filename.endswith(".gz"):
@@ -74,19 +77,22 @@ class DatasetCommand(BaseCommand):
 
         self.metadata["files"].append({
                 "filename": filename,
+                "filepath": os.path.join(self.metadata['slug'], filename),
                 "url": f"{settings.LABS_DUMPS_WEBROOT}{self.metadata['slug']}/{filename}",
                 "description": description,
             })
 
+
     def start_scraper(self, scraper_class, filename=None, settings={}, args_list=[], kwargs_dict={}):
         if not filename:
             filename = f"{self.metadata['slug']}.jsonl"
-        if os.path.exists(filename):
-            os.remove(filename)
+        filepath = os.path.join(self.directory, filename)
+        if os.path.exists(filepath):
+            os.remove(filepath)
         default_settings = {
                 'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)',
                 'FEED_FORMAT': 'jsonlines',
-                'FEED_URI': filename,
+                'FEED_URI': filepath,
                 'HTTPCACHE_ENABLED': True,
                 'HTTPCACHE_DIR': f"{self.metadata['slug']}-cache",
         }
@@ -96,7 +102,7 @@ class DatasetCommand(BaseCommand):
         process.start()
 
         if self.gzip:
-            gzip_file(f"{self.metadata['slug']}.jsonl")
+            gzip_file(filepath)
 
 
     def jsonlines_to_rdf(self, dict_to_graph_function, jsonl_filename=None, rdf_filename=None):
@@ -106,26 +112,39 @@ class DatasetCommand(BaseCommand):
             rdf_filename = f"{self.metadata['slug']}.ttl"
         if self.gzip and not jsonl_filename.endswith(".gz"):
             jsonl_filename += ".gz" 
+        jsonl_filepath = os.path.join(self.directory, jsonl_filename)
+        rdf_filepath = os.path.join(self.directory, rdf_filename)
         graph = rdflib.Graph()
         for ns in namespaces:
             graph.bind(ns, namespaces[ns])
         openfunc = open
-        if jsonl_filename.endswith(".gz"):
+        if jsonl_filepath.endswith(".gz"):
             openfunc = gzip.open
-        with openfunc(jsonl_filename, "rt", encoding="utf-8") as jsonlines:
+        with openfunc(jsonl_filepath, "rt", encoding="utf-8") as jsonlines:
             for line in jsonlines:
                 line_dict = json.loads(line)
                 dict_to_graph_function(graph, line_dict)
-        with open(rdf_filename, "wb") as f:
+        with open(rdf_filepath, "wb") as f:
             f.write(graph.serialize(format="turtle"))
         if self.gzip:
-            gzip_file(rdf_filename)
+            gzip_file(rdf_filepath)
+
+
+    def create_version(self):
+        date_prefix = timezone.now().strftime("%Y-%m-%d-")
+        for f in self.metadata["files"]:
+            source = os.path.join(self.directory, f['filename'])
+            target = os.path.join(self.directory, f"{date_prefix}{f['filename']}")
+            shutil.copy(source, target)
+
 
     def write_metadata(self, rdf_filename=None, toml_filename=None):
         if not rdf_filename:
             rdf_filename = f"{self.metadata['slug']}-metadata.ttl"
         if not toml_filename:
             toml_filename = f"{self.metadata['slug']}-metadata.toml"
+        rdf_filepath = os.path.join(self.directory, rdf_filename)
+        toml_filepath = os.path.join(self.directory, toml_filename)
         graph = rdflib.Graph()
         creation_date = timezone.now()
         self.metadata["date"] = creation_date
@@ -149,7 +168,7 @@ class DatasetCommand(BaseCommand):
             "commit": git_head_hash,
             }
         # The toml file contains the metadata to be copied to the Hugo page
-        with open(toml_filename, "w", encoding="utf-8") as f:
+        with open(toml_filepath, "w", encoding="utf-8") as f:
             toml.dump(self.metadata, f)
         # The ttl file contains the metadata as RDF to be shown in Pubby.
         for ns in namespaces:
@@ -172,12 +191,11 @@ class DatasetCommand(BaseCommand):
             graph.add((script, jlo.gitWeb, rdflib.URIRef(self.metadata["generator"]["gitweb"])))
             graph.add((script, jlo.gitCommit, rdflib.Literal(self.metadata["generator"]["commit"])))
             graph.add((script, rdfs.label, rdflib.Literal(self.metadata["generator"]["script"])))
-        with open(rdf_filename, "wb") as f:
+        with open(rdf_filepath, "wb") as f:
             f.write(graph.serialize(format="turtle"))
         if self.gzip:
-            gzip_file(rdf_filename)
-
-
+            gzip_file(rdf_filepath)
+        self.create_version()
 
 
     def handle(self, *args, **kwargs):
