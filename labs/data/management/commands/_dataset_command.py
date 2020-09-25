@@ -43,6 +43,25 @@ def gzip_file(filename):
     os.remove(filename)
 
 
+class DatasetSpider(scrapy.Spider):
+    def __init__(self, *args, **options):
+        super().__init__(*args, **options)
+
+
+    def log(self, message):
+        print(f"Log: {message}")
+        logfile = os.path.join(self.__class__.directory, "log.txt")
+        with open(logfile, "a", encoding="utf-8") as f:
+            f.write(f"{message}\n")
+
+
+    def error(self, message):
+        print(f"Error: {message}")
+        logfile = os.path.join(self.__class__.directory, "error.txt")
+        with open(logfile, "a", encoding="utf-8") as f:
+            f.write(f"{message}\n")
+
+
 class DatasetCommand(BaseCommand):
     help = 'Base Command for a scraper'
 
@@ -50,6 +69,20 @@ class DatasetCommand(BaseCommand):
     def __init__(self):
         super().__init__()
         self.gzip = False
+
+
+    def log(self, message):
+        print(f"Log: {message}")
+        logfile = os.path.join(self.directory, "log.txt")
+        with open(logfile, "a", encoding="utf-8") as f:
+            f.write(f"{message}\n")
+
+
+    def error(self, message):
+        print(f"Error: {message}")
+        logfile = os.path.join(self.directory, "error.txt")
+        with open(logfile, "a", encoding="utf-8") as f:
+            f.write(f"{message}\n")
 
 
     def add_arguments(self, parser):
@@ -66,6 +99,10 @@ class DatasetCommand(BaseCommand):
         self.directory = os.path.join(settings.LABS_DUMPS_LOCAL, metadata["slug"])
         self.add_file(f"{self.metadata['slug']}-metadata.ttl", description=f"Metadata for {self.metadata['slug']} dataset.")
         Path(self.directory).mkdir(parents=True, exist_ok=True)
+        if os.path.exists(os.path.join(self.directory, "log.txt")):
+            os.remove(os.path.join(self.directory, "log.txt"))
+        if os.path.exists(os.path.join(self.directory, "error.txt")):
+            os.remove(os.path.join(self.directory, "error.txt"))
 
 
     def add_file(self, filename, description = None):
@@ -97,6 +134,7 @@ class DatasetCommand(BaseCommand):
                 'HTTPCACHE_DIR': f"{self.metadata['slug']}-cache",
         }
         default_settings.update(settings)
+        scraper_class.directory = self.directory
         process = scrapy.crawler.CrawlerProcess(default_settings)
         process.crawl(scraper_class, *args_list, **kwargs_dict)
         process.start()

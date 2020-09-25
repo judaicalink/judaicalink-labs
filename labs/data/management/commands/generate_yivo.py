@@ -8,7 +8,7 @@ import scrapy
 import scrapy.crawler
 import scrapy.http
 import re
-from ._dataset_command import DatasetCommand
+from ._dataset_command import DatasetCommand, DatasetSpider
 from ._dataset_command import jlo, jld, skos, dcterms, void, foaf
 
 metadata = {
@@ -29,9 +29,27 @@ metadata = {
         }
 
 
-class YivoSpider(scrapy.Spider):
-    name = metadata["slug"] # Used for the file name: {name}.jsonl
-    start_urls = ["https://yivoencyclopedia.org/article.aspx/Abeles_Shimon"]
+class YivoSpider(DatasetSpider):
+    name = metadata['slug'] # Used for the file name: {name}.jsonl
+    start_urls = ['https://yivoencyclopedia.org/article.aspx/Abeles_Shimon']
+
+    def __init__(self, *args, **options):
+        super().__init__(*args, **options)
+        self.visited = set()
+        self.queued = set()
+
+
+    def check_queue(self, url):
+        url = url[url.find("article.aspx"):]
+        if url in self.visited:
+            return False
+        if url in self.queued:
+            return False
+        self.queued.add(url)
+        self.log("Queued: " + url)
+        return True
+
+
 
     # Cheatsheet
     # soup = BeautifulSoup(HTMLSTRING, 'html.parser')
@@ -42,11 +60,94 @@ class YivoSpider(scrapy.Spider):
     def parse(self, response: scrapy.http.Response):
         soup = BeautifulSoup(response.text, 'html.parser')
         data = {}
-        data["title"] = soup.h1.string
-        data["uri"] = response.url
-        data["next_article"] = soup.select_one('#ctl00_placeHolderMain_linkNextArticle')['href']
+        data['title'] = soup.h1.string
+        data['uri'] = response.url
+        self.log(f"Processing {data['uri']}")
+        try:
+            href = soup.select_one("#ctl00_placeHolderMain_linkEmailArticle")["href"]
+            data['id'] = re.search(r"id=([0-9]+)", href).group(1)
+        except Exception as e:
+            self.log(f"Error ({data['uri']}): {e}")
+            self.error("Error ({data['uri']}): {e}")
+            yield None
+        # Mark as visited
+        self.visited.add(data['uri'][data['uri'].find("article.aspx"):])
+        self.visited.add(f"article.aspx?id={data['id']}")
+        self.log(self.visited)
+        self.log(self.queued)
+
+        # Basic stuff
+        data['abstract'] = soup.select_one(".articleblockconteiner p").text
+
+        # Images
+        data['images'] = []
+        for img in soup.select("img.mbimg"): 
+            image = {}
+            image["thumbUrl"] = f"http://www.yivoencyclopedia.org{img['src']}"
+            href = img.parent["href"]
+            image["viewerUrl"] = re.search(r"(http.*)&article", href).group(0)
+            caption = img.parent.find_next_sibling("div")
+            if caption:
+                image["imgDesc"] = caption.text.replace("SEE MEDIA RELATED TO THIS ARTICLE","").strip()
+            data['images'].append(image)
+
+        # Links
+        data['links'] = []
+        for a in soup.select(f"#ctl00_placeHolderMain_panelArticleText a[href^='article.aspx/']"): 
+            link = {}
+            link["href"] = f"http://www.yivoencyclopedia.org/{a['href']}"
+            link["text"] = a.text.strip()
+            if len(link["text"]) > 0: # Strangely, there are sometimes empty links
+                data['links'].append(link) 
+                if self.check_queue(link['href']):
+                    yield response.follow(link["href"])
+
+        # Glossary terms
+        data['glossary'] = []
+        for span in soup.select(".term"):
+            term = span.text.strip()
+            if len(term)>0: # Strangely, there are sometimes empty spans
+                data['glossary'].append(term)
+
+        # Subrecords, i.e., multi-page articles (like Poland)
+        data['subrecords'] = []
+        isMain = True
+        for index, a in enumerate(soup.select("#ctl00_placeHolderMain_panelPager a")):
+            sr = {}
+            sr["href"] = f"http://www.yivoencyclopedia.org" + a["href"]
+            sr["page"] = a.text.strip()
+            if index==0 and sr["href"]!=data['uri']:
+                isMain = False
+            if not isMain and index==0:
+                data['parent'] = sr["href"]
+                if self.check_queue(sr['href']):
+                    yield response.follow(sr["href"])
+            if isMain and index != 0:
+                data['subrecords'].append(sr)
+                if self.check_queue(sr['href']):
+                    yield response.follow(sr["href"])
+
+        # Subconcepts, i.e., H2 headings on the same page (not really a concept, but maybe useful)
+        data['subconcepts'] = []
+        for index, h2 in enumerate(soup.select("h2.entry")):
+            sc = h2.text.strip()
+            if index==0 and not isMain:
+                data['title'] = f"{sc} ({data['title']})"
+                break
+            # The following H2 headings are NOT stored as concepts:
+            stops = ["About this Article", "Suggested Reading", "YIVO Archival Resources", "Author", "Translation"]
+            if sc in stops:
+                break
+            data['subconcepts'].append(sc)
+
+        # Next record in alphabet
+        next_article = soup.select_one('#ctl00_placeHolderMain_linkNextArticle')
+        if next_article:
+            data['next_article'] = next_article['href']
+
         yield data
-        yield response.follow(data["next_article"])
+        if next_article and self.check_queue(data['next_article']):
+            yield response.follow(data['next_article'])
 
 
 def yivo_rdf(graph: rdflib.Graph, resource_dict: dict):
@@ -61,13 +162,13 @@ class Command(DatasetCommand):
     def handle(self, *args, **options):
         self.gzip = options['gzip']
         self.set_metadata(metadata)
-        first = ["http://www.yivoencyclopedia.org/article.aspx/Abeles_Shimon"]
-        last = ["http://www.yivoencyclopedia.org/article.aspx/Zylbercweig_Zalmen"]
-        multi = ["http://www.yivoencyclopedia.org/article.aspx/Poland"]
-        error = ["http://www.yivoencyclopedia.org/article.aspx?id=497"]
-        sub = ["http://www.yivoencyclopedia.org/article.aspx/Poland/Poland_before_1795"]
+        first = ['http://www.yivoencyclopedia.org/article.aspx/Abeles_Shimon']
+        last = ['http://www.yivoencyclopedia.org/article.aspx/Zylbercweig_Zalmen']
+        multi = ['http://www.yivoencyclopedia.org/article.aspx/Poland']
+        error = ['http://www.yivoencyclopedia.org/article.aspx?id=497']
+        sub = ['http://www.yivoencyclopedia.org/article.aspx/Poland/Poland_before_1795']
 
-        self.start_scraper(YivoSpider, kwargs_dict={"start_urls": first})
+        self.start_scraper(YivoSpider, settings={"LOG_LEVEL": "INFO"}, kwargs_dict={"start_urls": first})
         self.jsonlines_to_rdf(yivo_rdf) 
         self.add_file("yivo.ttl")
         self.write_metadata()
