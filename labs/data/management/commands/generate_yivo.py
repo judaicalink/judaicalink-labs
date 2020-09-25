@@ -12,6 +12,11 @@ from urllib.parse import quote
 from ._dataset_command import DatasetCommand, DatasetSpider
 from ._dataset_command import jlo, jld, skos, dcterms, void, foaf, rdf
 
+## Step by step instructions
+
+# First: create the necessary metadata for the new dataset.
+# Most importantly define the "slug", as this is used to determine
+# the folder for the files and the default filenames.
 metadata = {
         "title": "Yivo Encyclopedia",
         "example": "http://data.judaicalink.org/data/yivo/Moscow",
@@ -30,16 +35,25 @@ metadata = {
         }
 
 
+# In case you want to scrape data, you have to implement a scraper class.
+# Check Scrapy docs for details.
+# Note: As demonstrated, you can use BeautifulSoup for the actual extractio.
+# Scrapy has its own extraction tools, of course you can use them, too.
 class YivoSpider(DatasetSpider):
     name = metadata['slug'] # Used for the file name: {name}.jsonl
     start_urls = ['https://yivoencyclopedia.org/article.aspx/Abeles_Shimon']
 
+
+    # In this case we use two sets to keep track of already seen
+    # pages and already queued ones, therefore we need this constructor function
+    # to create the instance variables.
     def __init__(self, *args, **options):
         super().__init__(*args, **options)
         self.visited = set()
         self.queued = set()
 
 
+    # Helper to check if we already know a URL.
     def check_queue(self, url):
         url = url[url.find("article.aspx"):]
         if url in self.visited:
@@ -55,10 +69,13 @@ class YivoSpider(DatasetSpider):
     # soup = BeautifulSoup(HTMLSTRING, 'html.parser')
     # soup.h2.string # First H2
     # table = soup.select_one('table.myclass') # first by CSS Selector
+    # tds = table.select('td.datacell') # all by CSS Selector
     # table.find_all("tr") # select all tr tags
     # tr.find("th").text.strip() # Find first Tag
     def parse(self, response: scrapy.http.Response):
+        # We get our soup.
         soup = BeautifulSoup(response.text, 'html.parser')
+        # We create an empty dictionary to store all data about this page.
         data = {}
         data['title'] = soup.h1.string
         data['uri'] = response.url
@@ -69,7 +86,7 @@ class YivoSpider(DatasetSpider):
         except Exception as e:
             self.log(f"Error ({data['uri']}): {e}")
             self.error("Error ({data['uri']}): {e}")
-            yield None
+            return None
         # Mark as visited
         self.visited.add(data['uri'][data['uri'].find("article.aspx"):])
         self.visited.add(f"article.aspx?id={data['id']}")
@@ -97,6 +114,8 @@ class YivoSpider(DatasetSpider):
             link["text"] = a.text.strip()
             if len(link["text"]) > 0: # Strangely, there are sometimes empty links
                 data['links'].append(link) 
+                # With yield, we can either return a new URL to be crawled
+                # or the final data.
                 if self.check_queue(link['href']):
                     yield response.follow(link["href"])
 
@@ -143,18 +162,26 @@ class YivoSpider(DatasetSpider):
         if next_article:
             data['next_article'] = next_article['href']
 
+        # Here we yield the data of this page.
         yield data
         if next_article and self.check_queue(data['next_article']):
             yield response.follow(data['next_article'])
 
 
+# Helper function to convert Yivo URLs to our data URIs.
+# In this case, it uses the jld namespace and add yivo and
+# then the remainder of the URL after aspx/
 def local(uri):
     if "aspx" in uri:
-        return jld[f"yivo/{uri[uri.find('aspx') + 5:]}"] 
+        return jld[f"yivo/{uri[uri.find('aspx/') + 5:]}"] 
     else:
         return rdflib.URIRef(uri)
 
 
+# This is a function that is called for each dictionary that 
+# we created with the crawler. All triples are collected in the
+# graph that is provided.
+# So no worries here about filenames, file formats and so on...
 def yivo_rdf(graph: rdflib.Graph, resource_dict: dict):
     subject = local(resource_dict["uri"])
     graph.add((subject, jlo.title, rdflib.Literal(resource_dict['title'])))
@@ -177,24 +204,51 @@ def yivo_rdf(graph: rdflib.Graph, resource_dict: dict):
             graph.add((subject, skos.broader, rdflib.URIRef(resource_dict["broader"])))
     return graph
 
-
+# The actual command. It inherits from DatasetCommand, where
+# all the magic happens. Here, we can therefore keep it simple.
 class Command(DatasetCommand):
     help = 'Generate the Yivo dataset from the online encyclopedia'
 
     def handle(self, *args, **options):
+        # First, check if --gzip was given as parameter and set the 
+        # gzip variable accordingly. This affects a lot, especially the
+        # filenames that are produced.
         self.gzip = options['gzip']
+        # Next, set your metadata. This is absolutely required, without this,
+        # your command will not work, as it needs the information, e.g. to 
+        # determine from the slug where the files have to be stored.
         self.set_metadata(metadata)
+
+        # These are various test cases in yivo to quickly check if a certain
+        # URL is correctly extracted. Usually you start with first, of course.
+        # They are lists, because Scrapy expects a list of start_urls.
         first = ['http://www.yivoencyclopedia.org/article.aspx/Abeles_Shimon']
         last = ['http://www.yivoencyclopedia.org/article.aspx/Zylbercweig_Zalmen']
         multi = ['http://www.yivoencyclopedia.org/article.aspx/Poland']
         error = ['http://www.yivoencyclopedia.org/article.aspx?id=497']
         sub = ['http://www.yivoencyclopedia.org/article.aspx/Poland/Poland_before_1795']
 
+        # Check the parameters to skip parts if desired by the user.
         if not options["skip_scraping"]:
+            # This is a wrapper around Scrapy, you can actually just
+            # call start_scraper just with your class, but as you can see,
+            # it is possible to set various Scrapy configurations as 
+            # well, if desired.
             self.start_scraper(YivoSpider, settings={"LOG_LEVEL": "INFO"}, kwargs_dict={"start_urls": first})
         if not options["no_rdf"]:
+            # This is a helper function that calls the function you provide for each line in a jsonl file.
+            # If you do not have jsonl as original format, it probably makes sense to create additional
+            # helpers, e.g. to walk through an RDF file or a common JSON file. Discuss with the team if this is
+            # needed, so that we get a common infrastructure.
             self.jsonlines_to_rdf(yivo_rdf) 
+
+            # This adds a file to the metadata. Note that you only give the filename here, without .gz. Everyting
+            # else, like a directory path and gzipping is taken care of by DatasetCommand.
+            # All files not in the metadata are considered temporal files. Feed free to also add jsonl-Files or any
+            # other files here, if you want to make them part of the dataset.
             self.add_file("yivo.ttl")
+        # This finally writes the metadata of the new dataset and takes care of versioning.
+        # Check yivo.toml to see metadata in our Hugo format, ready to be copied into the Hugo description.
         self.write_metadata()
 
 
