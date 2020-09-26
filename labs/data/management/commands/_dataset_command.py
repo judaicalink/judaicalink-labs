@@ -131,6 +131,11 @@ class DatasetCommand(BaseCommand):
 
 
     def add_file(self, filename, description = None):
+        '''
+        Adds a file officially to the dataset. Use just the filename, without .gz ending.
+        Metadata includes filename, filepath (within the dumps directory), public URL, description.
+        Public and local dumps location is configured in Django settings.
+        '''
         if self.gzip and not filename.endswith(".gz"):
             filename += ".gz"
 
@@ -169,6 +174,11 @@ class DatasetCommand(BaseCommand):
 
 
     def jsonlines_to_rdf(self, dict_to_graph_function, jsonl_filename=None, rdf_filename=None):
+        '''
+        Opens the jsonl file, either the default (slug.jsonl) or the one provided as parameter.
+        Calls the provided dict_to_graph_function with a prepared graph and a dict for the
+        current record.
+        '''
         if not jsonl_filename:
             jsonl_filename = f"{self.metadata['slug']}.jsonl"
         if not rdf_filename:
@@ -202,6 +212,11 @@ class DatasetCommand(BaseCommand):
 
 
     def write_metadata(self, rdf_filename=None, toml_filename=None):
+        '''
+        Creates toml and ttl metadata files, containing all infos from the provided
+        metadata, as well as automatically obtained data, such as git commit, current date, script name, ...
+        It also creates the versioned copies of the data, although we might want to make this optional.
+        '''
         if not rdf_filename:
             rdf_filename = f"{self.metadata['slug']}-metadata.ttl"
         if not toml_filename:
