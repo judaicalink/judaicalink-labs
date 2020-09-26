@@ -16,6 +16,18 @@ import toml
 import subprocess
 
 
+## The base script
+# Here, all the magic happens to ensure that our datasets are consistent.
+# You should only change this code in close cooperation with the rest of 
+# the team as any change here might break the other dataset commands.
+
+# Good example commands to see this in action:
+# - generate_yivo.py
+# - ...
+
+# The following namespaces are preconfigured and can directly be used.
+# Make sure to import them in your dataset command:
+# from ._dataset_command import jlo, jld, ...
 namespaces = {
         "jlo": rdflib.Namespace("http://data.judaicalink.org/ontology/"),
         "jld": rdflib.Namespace("http://data.judaicalink.org/data/"),
@@ -32,10 +44,12 @@ namespaces = {
         "cc": rdflib.Namespace("https://creativecommons.org/ns#"),
 }
 
+# Yes, this is evil. But saves a lot of writing ;-)
 for ns in namespaces:
     exec(f"{ns} = namespaces['{ns}']")
 
 
+# Helper to zip files, obviously...
 def gzip_file(filename):
     with open(filename, 'rb') as f_in:
         with gzip.open(f'{filename}.gz', 'wb') as f_out:
@@ -43,6 +57,8 @@ def gzip_file(filename):
     os.remove(filename)
 
 
+# Base class for the spiders. Implements logging with
+# self.log() and self.error()
 class DatasetSpider(scrapy.Spider):
     def __init__(self, *args, **options):
         super().__init__(*args, **options)
@@ -62,6 +78,7 @@ class DatasetSpider(scrapy.Spider):
             f.write(f"{message}\n")
 
 
+# Base class for the command.
 class DatasetCommand(BaseCommand):
     help = 'Base Command for a scraper'
 
@@ -86,6 +103,10 @@ class DatasetCommand(BaseCommand):
 
 
     def add_arguments(self, parser):
+        # This clears the Scrapy cache, otherwise all requests will be cached so that
+        # you won't have to recrawl everything. Clear the cache if the original data on the Web has changed.
+        # For production, we should change the caching to a full RFC 2616 Cache.
+        # https://docs.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-policy-rfc2616
         parser.add_argument("--clear-cache", action="store_true", help="Clear cache before scraping.")
         parser.add_argument("--skip-scraping", action="store_true", help="Create RDF from JSON.")
         parser.add_argument("--no-rdf", action="store_true", help="Create only json")
@@ -93,6 +114,10 @@ class DatasetCommand(BaseCommand):
 
 
     def set_metadata(self, metadata):
+        '''
+        This does various initialisations, it is mandatory to call this method at the beginning,
+        but after setting self.gzip!
+        '''
         self.metadata = metadata
         if not "files" in metadata:
             self.metadata["files"] = []
@@ -106,6 +131,11 @@ class DatasetCommand(BaseCommand):
 
 
     def add_file(self, filename, description = None):
+        '''
+        Adds a file officially to the dataset. Use just the filename, without .gz ending.
+        Metadata includes filename, filepath (within the dumps directory), public URL, description.
+        Public and local dumps location is configured in Django settings.
+        '''
         if self.gzip and not filename.endswith(".gz"):
             filename += ".gz"
 
@@ -144,6 +174,11 @@ class DatasetCommand(BaseCommand):
 
 
     def jsonlines_to_rdf(self, dict_to_graph_function, jsonl_filename=None, rdf_filename=None):
+        '''
+        Opens the jsonl file, either the default (slug.jsonl) or the one provided as parameter.
+        Calls the provided dict_to_graph_function with a prepared graph and a dict for the
+        current record.
+        '''
         if not jsonl_filename:
             jsonl_filename = f"{self.metadata['slug']}.jsonl"
         if not rdf_filename:
@@ -177,6 +212,11 @@ class DatasetCommand(BaseCommand):
 
 
     def write_metadata(self, rdf_filename=None, toml_filename=None):
+        '''
+        Creates toml and ttl metadata files, containing all infos from the provided
+        metadata, as well as automatically obtained data, such as git commit, current date, script name, ...
+        It also creates the versioned copies of the data, although we might want to make this optional.
+        '''
         if not rdf_filename:
             rdf_filename = f"{self.metadata['slug']}-metadata.ttl"
         if not toml_filename:
