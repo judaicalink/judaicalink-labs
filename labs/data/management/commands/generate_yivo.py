@@ -9,7 +9,7 @@ import scrapy.crawler
 import scrapy.http
 import re
 from urllib.parse import quote
-from ._dataset_command import DatasetCommand, DatasetSpider
+from ._dataset_command import DatasetCommand, DatasetSpider, log, error
 from ._dataset_command import jlo, jld, skos, dcterms, void, foaf, rdf
 
 ## Step by step instructions
@@ -43,27 +43,9 @@ class YivoSpider(DatasetSpider):
     name = metadata['slug'] # Used for the file name: {name}.jsonl
     start_urls = ['https://yivoencyclopedia.org/article.aspx/Abeles_Shimon']
 
-
-    # In this case we use two sets to keep track of already seen
-    # pages and already queued ones, therefore we need this constructor function
-    # to create the instance variables.
-    def __init__(self, *args, **options):
-        super().__init__(*args, **options)
-        self.visited = set()
-        self.queued = set()
-
-
-    # Helper to check if we already know a URL.
     def check_queue(self, url):
         url = url[url.find("article.aspx"):]
-        if url in self.visited:
-            return False
-        if url in self.queued:
-            return False
-        self.queued.add(url)
-        return True
-
-
+        return super().check_queue(url)
 
     # Cheatsheet
     # soup = BeautifulSoup(HTMLSTRING, 'html.parser')
@@ -79,13 +61,13 @@ class YivoSpider(DatasetSpider):
         data = {}
         data['title'] = soup.h1.string
         data['uri'] = response.url
-        self.log(f"Processing {data['uri']}")
+        log.info(f"Processing {data['uri']}")
         try:
             href = soup.select_one("#ctl00_placeHolderMain_linkEmailArticle")["href"]
             data['id'] = re.search(r"id=([0-9]+)", href).group(1)
         except Exception as e:
-            self.log(f"Error ({data['uri']}): {e}")
-            self.error("Error ({data['uri']}): {e}")
+            log.info(f"Error ({data['uri']}): {e}")
+            error.info("Error ({data['uri']}): {e}")
             return None
         # Mark as visited
         self.visited.add(data['uri'][data['uri'].find("article.aspx"):])

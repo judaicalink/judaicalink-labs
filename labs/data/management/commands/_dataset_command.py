@@ -14,6 +14,8 @@ import os
 import json
 import toml
 import subprocess
+import logging
+import sys
 
 
 ## The base script
@@ -49,6 +51,10 @@ for ns in namespaces:
     exec(f"{ns} = namespaces['{ns}']")
 
 
+# Logging for our scripts
+log = logging.getLogger("log")
+error = logging.getLogger("error")
+
 # Helper to zip files, obviously...
 def gzip_file(filename):
     with open(filename, 'rb') as f_in:
@@ -57,25 +63,26 @@ def gzip_file(filename):
     os.remove(filename)
 
 
-# Base class for the spiders. Implements logging with
-# self.log() and self.error()
+# Base class for the spiders.
 class DatasetSpider(scrapy.Spider):
+    # We provide two sets to keep track of already seen
+    # pages and already queued ones. 
+    # This is not always needed, Scrapy caches requests and
+    # also provided means to avoid duplicates
     def __init__(self, *args, **options):
         super().__init__(*args, **options)
+        self.visited = set()
+        self.queued = set()
 
 
-    def log(self, message):
-        print(f"Log: {message}")
-        logfile = os.path.join(self.__class__.directory, "log.txt")
-        with open(logfile, "a", encoding="utf-8") as f:
-            f.write(f"{message}\n")
-
-
-    def error(self, message):
-        print(f"Error: {message}")
-        logfile = os.path.join(self.__class__.directory, "error.txt")
-        with open(logfile, "a", encoding="utf-8") as f:
-            f.write(f"{message}\n")
+    # Helper to check if we already know a URL.
+    def check_queue(self, url):
+        if url in self.visited:
+            return False
+        if url in self.queued:
+            return False
+        self.queued.add(url)
+        return True
 
 
 # Base class for the command.
@@ -86,21 +93,6 @@ class DatasetCommand(BaseCommand):
     def __init__(self):
         super().__init__()
         self.gzip = False
-
-
-    def log(self, message):
-        print(f"Log: {message}")
-        logfile = os.path.join(self.directory, "log.txt")
-        with open(logfile, "a", encoding="utf-8") as f:
-            f.write(f"{message}\n")
-
-
-    def error(self, message):
-        print(f"Error: {message}")
-        logfile = os.path.join(self.directory, "error.txt")
-        with open(logfile, "a", encoding="utf-8") as f:
-            f.write(f"{message}\n")
-
 
     def add_arguments(self, parser):
         # This clears the Scrapy cache, otherwise all requests will be cached so that
@@ -128,6 +120,14 @@ class DatasetCommand(BaseCommand):
             os.remove(os.path.join(self.directory, "log.txt"))
         if os.path.exists(os.path.join(self.directory, "error.txt")):
             os.remove(os.path.join(self.directory, "error.txt"))
+        logFileHandler = logging.FileHandler(os.path.join(self.directory, "log.txt"), mode="w")
+        errorFileHandler = logging.FileHandler(os.path.join(self.directory, "error.txt"), mode="w")
+        log.addHandler(logFileHandler)
+        log.addHandler(logging.StreamHandler(sys.stdout))
+        error.addHandler(errorFileHandler)
+        error.addHandler(logging.StreamHandler(sys.stdout))
+        log.setLevel(logging.INFO)
+        error.setLevel(logging.INFO)
 
 
     def add_file(self, filename, description = None):
