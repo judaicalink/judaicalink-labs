@@ -1,6 +1,6 @@
 import requests
 from urllib.parse import quote, unquote
-from ._dataset_command import DatasetCommand, jlo, log, error
+from ._dataset_command import DatasetCommand, jlo, skos, log, error
 import json
 import rdflib
 from googletrans import Translator
@@ -40,53 +40,55 @@ def translate(text, source_lang, target_lang):
     return "".join(sentences)
 
 translator = Translator()
-engl_cachefile = None
-engl_cached = {}
+cachefile = "en_label_cache.csv"
+outfile = "rujen-en-label-translations.ttl"
+trans_cached = {}
+src_lang = "ru"
+dest_lang = "en"
+prop = skos.prefLabel
 
 def transform_rdf(graph, ingraph):
     global translator
-    query = f"""
-    SELECT ?s ?o WHERE {{?s <{jlo.hasAbstract}> ?o .}} 
-            """
+    query = "SELECT ?s ?o WHERE {?s <" + str(prop) + "> ?o .}"
     res = ingraph.query(query)
     for triple in res:
-        # engl = translate(triple["o"], "ru", "en")
         s = str(triple["s"])
-        if s in engl_cached:
-            engl = engl_cached[s].strip()
-            log.info(f"Added translation (cached): {s}: {engl[:20]}")
+        if s in trans_cached:
+            trans = trans_cached[s].strip()
+            log.info(f"Added translation (cached): {s}: {trans[:20]}")
         else:
-            engl = translator.translate(triple["o"], src="ru", dest="en")
-            log.info(f"Added translation: {s}: {engl.text.strip()[:20]} {engl.src} - {engl.dest}")
-            if engl.src=="ru" and re.search('[а-яА-Я]', engl.text.strip()):
+            trans = translator.translate(triple["o"], src=src_lang, dest=dest_lang)
+            log.info(f"Added translation: {s}: {trans.text.strip()[:20]} {trans.src} - {trans.dest}")
+            if trans.src=="ru" and re.search('[а-яА-Я]', trans.text.strip()):
                 error.info(f"Cyrillic in translation: {s}")
-            if engl.src=="ru":
-                engl_cached[s] = engl.text.strip()
+            if trans.src=="ru":
+                trans_cached[s] = trans.text.strip()
             else:
                 log.info("Translation does not work anymore, getting no translation. I use a new instance.")
                 translator = Translator()
-        graph.add((triple["s"], jlo.hasAbstract, rdflib.Literal(engl, "en")))
+        graph.add((triple["s"], prop, rdflib.Literal(trans, dest_lang)))
 
 class Command(DatasetCommand):
     help = 'Translate the Rujen encyclopedia'
 
     def handle(self, *args, **options):
         self.set_metadata(metadata)
-        engl_cachefile = os.path.join(self.directory, "engl_cache.csv")
-        if os.path.exists(engl_cachefile):
-            with open(engl_cachefile, "r", encoding="utf-8") as f:
+        cachefile_path = os.path.join(self.directory, cachefile)
+        if os.path.exists(cachefile_path):
+            with open(cachefile_path, "r", encoding="utf-8") as f:
                 for row in csv.reader(f):
-                    engl_cached[row[0]] = row[1]
-        log.info(f"Cache populated with {len(engl_cached)} entries.")
+                    trans_cached[row[0]] = row[1]
+        log.info(f"Cache populated with {len(trans_cached)} entries.")
         try:
-            self.turtle_to_rdf(transform_rdf, turtle_filename="rujen.ttl", source_dataset_slug="rujen")
+            self.turtle_to_rdf(transform_rdf, turtle_filename="rujen.ttl", source_dataset_slug="rujen", rdf_filename=outfile)
         except KeyboardInterrupt:
             log.info("User interrupt, finishing...")
-        with open(engl_cachefile, "w", encoding="utf-8") as f:
+        with open(cachefile_path, "w", encoding="utf-8") as f:
             writer = csv.writer(f)
-            for s in engl_cached:
-                writer.writerow((s, engl_cached[s]))
-        self.add_file("engl_cache.csv")
+            for s in trans_cached:
+                writer.writerow((s, trans_cached[s]))
+        self.add_file(cachefile)
+        self.add_file(outfile)
         self.write_metadata()
 
 
