@@ -6,6 +6,7 @@ import rdflib
 from googletrans import Translator
 import os
 import csv
+import re
 
 metadata = {
         "title": "Translations for Rujen (Google)",
@@ -54,9 +55,14 @@ def transform_rdf(graph, ingraph):
             engl = engl_cached[s].strip()
             log.info(f"Added translation (cached): {s}: {engl[:20]}")
         else:
-            engl = translator.translate(triple["o"], src="ru", dest="en").text.strip()
-            engl_cached[s] = engl
-            log.info(f"Added translation: {s}: {engl[:20]}")
+            engl = translator.translate(triple["o"], src="ru", dest="en")
+            log.info(f"Added translation: {s}: {engl.text.strip()[:20]} {engl.src} - {engl.dest}")
+            if engl.src=="ru" and re.search('[а-яА-Я]', engl.text.strip()):
+                error.info(f"Cyrillic in translation: {s}")
+            if engl.src=="ru":
+                engl_cached[s] = engl.text.strip()
+            else:
+                log.info("Translation does not work anymore, getting no translation.")
         graph.add((triple["s"], jlo.hasAbstract, rdflib.Literal(engl, "en")))
 
 class Command(DatasetCommand):
