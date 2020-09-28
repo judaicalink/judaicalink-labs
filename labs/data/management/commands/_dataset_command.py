@@ -203,6 +203,59 @@ class DatasetCommand(BaseCommand):
             gzip_file(rdf_filepath)
 
 
+    def turtle_to_rdf(self, graph_to_graph_function, turtle_filename=None, rdf_filename=None, source_dataset_slug=None):
+        '''
+        Opens the turtle file, either the default (slug.jsonl) or the one provided as parameter.
+        Calls the provided graph_to_graph_function with a prepared graph and a graph for the
+        current record.
+        '''
+        if not turtle_filename:
+            turtle_filename = f"{self.metadata['slug']}.ttl"
+        if not rdf_filename:
+            rdf_filename = f"{self.metadata['slug']}.ttl"
+        if turtle_filename==rdf_filename:
+            print("You must explicitly give a different rdf_filename, if you read from the default filename.")
+            return
+        if self.gzip and not rdf_filename.endswith(".gz"):
+            rdf_filename += ".gz" 
+        directory = self.directory
+        if source_dataset_slug:
+            directory = directory.replace(self.metadata['slug'], source_dataset_slug)
+        print(f"Directory: {directory}")
+        print(f"Source slug: {source_dataset_slug}")
+        turtle_filepath = os.path.join(directory, turtle_filename)
+        if not os.path.exists(turtle_filepath) and not turtle_filepath.endswith(".gz"):
+            turtle_filepath += ".gz"
+        rdf_filepath = os.path.join(directory, rdf_filename)
+        graph = rdflib.Graph()
+        for ns in namespaces:
+            graph.bind(ns, namespaces[ns])
+        openfunc = open
+        if turtle_filepath.endswith(".gz"):
+            openfunc = gzip.open
+        with openfunc(turtle_filepath, "rt", encoding="utf-8") as infile:
+            prefixes = []
+            datalines = []
+            for line in infile:
+                if "@prefix" in line:
+                    prefixes.append(line)
+                elif len(line.strip()) > 0:
+                    datalines.append(line)
+                else:
+                    if len(datalines) > 0:
+                        ingraph = rdflib.Graph()
+                        data = "\n".join(prefixes)
+                        data += "\n\n"
+                        data += "\n".join(datalines)
+                        datalines.clear()
+                        ingraph.parse(data = data, format="turtle")
+                        graph_to_graph_function(graph, ingraph)
+        with open(rdf_filepath, "wb") as f:
+            f.write(graph.serialize(format="turtle"))
+        if self.gzip:
+            gzip_file(rdf_filepath)
+
+
     def create_version(self):
         date_prefix = timezone.now().strftime("%Y-%m-%d-")
         for f in self.metadata["files"]:

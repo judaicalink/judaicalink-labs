@@ -86,6 +86,9 @@ class Spider(DatasetSpider):
 
         data['uri'] = self.lower_case(response.url)
         log.info(f"Processing {data['uri']}")
+        if response.status == 404:
+            log.info(f"Page not found: {response.url}")
+            return data
         try: # "wgArticleId":9907
             data['id'] = re.search(r'"wgArticleId":([0-9]+),', soup.head.get_text()).group(1)
         except Exception as e:
@@ -214,7 +217,7 @@ class Command(DatasetCommand):
             # call start_scraper just with your class, but as you can see,
             # it is possible to set various Scrapy configurations as 
             # well, if desired.
-            self.start_scraper(Spider, settings={"LOG_LEVEL": "INFO"})
+            self.start_scraper(Spider, settings={"LOG_LEVEL": "INFO", "HTTPERROR_ALLOWED_CODES": [404]})
         if not options["no_rdf"]:
             # This is a helper function that calls the function you provide for each line in a jsonl file.
             # If you do not have jsonl as original format, it probably makes sense to create additional
