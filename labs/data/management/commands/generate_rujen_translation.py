@@ -40,12 +40,32 @@ def translate(text, source_lang, target_lang):
     return "".join(sentences)
 
 translator = Translator()
-cachefile = "en_label_cache.csv"
-outfile = "rujen-en-label-translations.ttl"
 trans_cached = {}
 src_lang = "ru"
-dest_lang = "en"
-prop = skos.prefLabel
+
+def configure_task(task):
+    global cachefile, outfile, dest_lang, prop
+    if task=="en-label":
+        cachefile = "en_label_cache.csv"
+        outfile = "rujen-en-label-translations.ttl"
+        dest_lang = "en"
+        prop = skos.prefLabel
+    elif task=="en-abstract":
+        cachefile = "en_abstract_cache.csv"
+        outfile = "rujen-en-abstract-translations.ttl"
+        dest_lang = "en"
+        prop = jlo.hasAbstract
+    elif task=="de-label":
+        cachefile = "de_label_cache.csv"
+        outfile = "rujen-de-label-translations.ttl"
+        dest_lang = "de"
+        prop = skos.prefLabel
+    elif task=="de-abstract":
+        cachefile = "de_abstract_cache.csv"
+        outfile = "rujen-de-abstract-translations.ttl"
+        dest_lang = "de"
+        prop = jlo.hasAbstract
+
 
 def transform_rdf(graph, ingraph):
     global translator
@@ -73,22 +93,28 @@ class Command(DatasetCommand):
 
     def handle(self, *args, **options):
         self.set_metadata(metadata)
-        cachefile_path = os.path.join(self.directory, cachefile)
-        if os.path.exists(cachefile_path):
-            with open(cachefile_path, "r", encoding="utf-8") as f:
-                for row in csv.reader(f):
-                    trans_cached[row[0]] = row[1]
-        log.info(f"Cache populated with {len(trans_cached)} entries.")
-        try:
-            self.turtle_to_rdf(transform_rdf, turtle_filename="rujen.ttl", source_dataset_slug="rujen", rdf_filename=outfile)
-        except KeyboardInterrupt:
-            log.info("User interrupt, finishing...")
-        with open(cachefile_path, "w", encoding="utf-8") as f:
-            writer = csv.writer(f)
-            for s in trans_cached:
-                writer.writerow((s, trans_cached[s]))
-        self.add_file(cachefile)
-        self.add_file(outfile)
+
+        for task in ["en-abstract", "en-label", "de-abstract", "de-label"]:
+            log.info(f"Starting task {task}")
+            configure_task(task)
+            trans_cached.clear()
+            cachefile_path = os.path.join(self.directory, cachefile)
+            if os.path.exists(cachefile_path):
+                with open(cachefile_path, "r", encoding="utf-8") as f:
+                    for row in csv.reader(f):
+                        trans_cached[row[0]] = row[1]
+            log.info(f"Cache populated with {len(trans_cached)} entries.")
+            try:
+                self.turtle_to_rdf(transform_rdf, turtle_filename="rujen.ttl", source_dataset_slug="rujen", rdf_filename=outfile)
+            except KeyboardInterrupt:
+                log.info("User interrupt, finishing...")
+            with open(cachefile_path, "w", encoding="utf-8") as f:
+                writer = csv.writer(f)
+                for s in trans_cached:
+                    writer.writerow((s, trans_cached[s]))
+            self.add_file(cachefile)
+            self.add_file(outfile)
+        
         self.write_metadata()
 
 
