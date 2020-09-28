@@ -44,6 +44,7 @@ engl_cachefile = None
 engl_cached = {}
 
 def transform_rdf(graph, ingraph):
+    global translator
     query = f"""
     SELECT ?s ?o WHERE {{?s <{jlo.hasAbstract}> ?o .}} 
             """
@@ -62,7 +63,8 @@ def transform_rdf(graph, ingraph):
             if engl.src=="ru":
                 engl_cached[s] = engl.text.strip()
             else:
-                log.info("Translation does not work anymore, getting no translation.")
+                log.info("Translation does not work anymore, getting no translation. I use a new instance.")
+                translator = Translator()
         graph.add((triple["s"], jlo.hasAbstract, rdflib.Literal(engl, "en")))
 
 class Command(DatasetCommand):
