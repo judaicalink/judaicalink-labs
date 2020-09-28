@@ -1,8 +1,11 @@
 import requests
 from urllib.parse import quote, unquote
-from ._dataset_command import DatasetCommand, jlo
+from ._dataset_command import DatasetCommand, jlo, log, error
 import json
 import rdflib
+from googletrans import Translator
+import os
+import csv
 
 metadata = {
         "title": "Translations for Rujen (Google)",
@@ -22,6 +25,10 @@ metadata = {
         }
 
 def translate(text, source_lang, target_lang):
+    '''
+    This quickly gets banned by Google and is just for demonstration.
+    Use googletrans for better results.
+    '''
     url = f"https://translate.googleapis.com/translate_a/single?client=gtx&sl={source_lang}&tl={target_lang}&dt=t&q={quote(text)}"
     res = requests.get(url)
     data = json.loads(res.text)
@@ -31,21 +38,47 @@ def translate(text, source_lang, target_lang):
             sentences.append(sentence[0])
     return "".join(sentences)
 
+translator = Translator()
+engl_cachefile = None
+engl_cached = {}
+
 def transform_rdf(graph, ingraph):
     query = f"""
     SELECT ?s ?o WHERE {{?s <{jlo.hasAbstract}> ?o .}} 
             """
     res = ingraph.query(query)
     for triple in res:
-        engl = translate(triple["o"], "ru", "en")
+        # engl = translate(triple["o"], "ru", "en")
+        s = str(triple["s"])
+        if s in engl_cached:
+            engl = engl_cached[s].strip()
+            log.info(f"Added translation (cached): {s}: {engl[:20]}")
+        else:
+            engl = translator.translate(triple["o"], src="ru", dest="en").text.strip()
+            engl_cached[s] = engl
+            log.info(f"Added translation: {s}: {engl[:20]}")
         graph.add((triple["s"], jlo.hasAbstract, rdflib.Literal(engl, "en")))
-        print(f"Added translation: {triple['s']}")
 
 class Command(DatasetCommand):
     help = 'Translate the Rujen encyclopedia'
 
     def handle(self, *args, **options):
         self.set_metadata(metadata)
-        self.turtle_to_rdf(transform_rdf, turtle_filename="rujen.ttl", source_dataset_slug="rujen")
+        engl_cachefile = os.path.join(self.directory, "engl_cache.csv")
+        if os.path.exists(engl_cachefile):
+            with open(engl_cachefile, "r", encoding="utf-8") as f:
+                for row in csv.reader(f):
+                    engl_cached[row[0]] = row[1]
+        log.info(f"Cache populated with {len(engl_cached)} entries.")
+        try:
+            self.turtle_to_rdf(transform_rdf, turtle_filename="rujen.ttl", source_dataset_slug="rujen")
+        except KeyboardInterrupt:
+            log.info("User interrupt, finishing...")
+        with open(engl_cachefile, "w", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            for s in engl_cached:
+                writer.writerow((s, engl_cached[s]))
+        self.add_file("engl_cache.csv")
+        self.write_metadata()
 
 

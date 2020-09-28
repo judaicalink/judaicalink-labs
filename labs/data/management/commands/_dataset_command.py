@@ -16,6 +16,7 @@ import toml
 import subprocess
 import logging
 import sys
+import traceback
 
 
 ## The base script
@@ -213,7 +214,7 @@ class DatasetCommand(BaseCommand):
             turtle_filename = f"{self.metadata['slug']}.ttl"
         if not rdf_filename:
             rdf_filename = f"{self.metadata['slug']}.ttl"
-        if turtle_filename==rdf_filename:
+        if turtle_filename==rdf_filename and not source_dataset_slug:
             print("You must explicitly give a different rdf_filename, if you read from the default filename.")
             return
         if self.gzip and not rdf_filename.endswith(".gz"):
@@ -226,7 +227,7 @@ class DatasetCommand(BaseCommand):
         turtle_filepath = os.path.join(directory, turtle_filename)
         if not os.path.exists(turtle_filepath) and not turtle_filepath.endswith(".gz"):
             turtle_filepath += ".gz"
-        rdf_filepath = os.path.join(directory, rdf_filename)
+        rdf_filepath = os.path.join(self.directory, rdf_filename)
         graph = rdflib.Graph()
         for ns in namespaces:
             graph.bind(ns, namespaces[ns])
@@ -236,20 +237,27 @@ class DatasetCommand(BaseCommand):
         with openfunc(turtle_filepath, "rt", encoding="utf-8") as infile:
             prefixes = []
             datalines = []
-            for line in infile:
-                if "@prefix" in line:
-                    prefixes.append(line)
-                elif len(line.strip()) > 0:
-                    datalines.append(line)
-                else:
-                    if len(datalines) > 0:
-                        ingraph = rdflib.Graph()
-                        data = "\n".join(prefixes)
-                        data += "\n\n"
-                        data += "\n".join(datalines)
-                        datalines.clear()
-                        ingraph.parse(data = data, format="turtle")
-                        graph_to_graph_function(graph, ingraph)
+            try:
+                for line in infile:
+                    if "@prefix" in line:
+                        prefixes.append(line)
+                    elif len(line.strip()) > 0:
+                        datalines.append(line)
+                    else:
+                        if len(datalines) > 0:
+                            ingraph = rdflib.Graph()
+                            data = "\n".join(prefixes)
+                            data += "\n\n"
+                            data += "\n".join(datalines)
+                            datalines.clear()
+                            ingraph.parse(data = data, format="turtle")
+                            try:
+                                graph_to_graph_function(graph, ingraph)
+                            except Exception as e:
+                                error.info(f"Exception during RDF generation: {e}")
+                                traceback.print_exc()
+            except KeyboardInterrupt:
+                log.info("User interrupt, writing partial turtle file...")
         with open(rdf_filepath, "wb") as f:
             f.write(graph.serialize(format="turtle"))
         if self.gzip:
