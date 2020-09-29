@@ -83,6 +83,7 @@ def transform_rdf(graph, ingraph):
                 error.info(f"Cyrillic in translation: {s}")
             if trans.src=="ru":
                 trans_cached[s] = trans.text.strip()
+                trans = trans.text.strip()
             else:
                 log.info("Translation does not work anymore, getting no translation. I use a new instance.")
                 translator = Translator()
