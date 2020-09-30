@@ -21,6 +21,7 @@ from ._dataset_command import owl, foaf, rdf, skos
 
 #os.chdir('C:\\Users\\Maral\\Desktop')
 # Frage wer creator, hab mich mal rein
+# Step 1 (finished)
 metadata = {
         "title": "Liste der Stolpersteine in Mainz",
         "example": "https://de.wikipedia.org/wiki/Liste_der_Stolpersteine_in_Mainz-Altstadt",
@@ -38,16 +39,72 @@ metadata = {
             }
         }
 
+# Step 2
+class StolpersteineSpider(DatasetSpider):
+    name = metadata['slug']
+    start_urls = ['https://de.wikipedia.org/wiki/Liste_der_Stolpersteine_in_Mainz']
+
+    def check_queue(self, url):
+        url = url[url.find("Liste_der_Stolpersteine_in_Mainz-"):]  #evtl. Liste_der_Stolpersteine_in_Mainz ohne "-" am Ende
+        return super().check_queue(url)
+
+
+    def parse(self, response: scrapy.http.Response):
+        soup = BeautifulSoup(response.text, 'html.parser')
+        data = {}
+
+
+# Step 3
+def local(uri):
+
+
+
+# Step 4
+def stolpersteine_rdf(graph: rdflib.Graph, resource_dict: dict):
+
+
+
+# Step 5
+class Command(DatasetCommand):
+    help = 'Generate the Stolpersteine dataset from the wikipedia articles'
+
+    def handle(self, *args, **options):
+        self.gzip = options['gzip']
+        self.set_metadata(metadata)
+
+        #Umändern für Stolpersteine
+        first = ['http://www.yivoencyclopedia.org/article.aspx/Abeles_Shimon']
+        last = ['http://www.yivoencyclopedia.org/article.aspx/Zylbercweig_Zalmen']
+        multi = ['http://www.yivoencyclopedia.org/article.aspx/Poland']
+        error = ['http://www.yivoencyclopedia.org/article.aspx?id=497']
+        sub = ['http://www.yivoencyclopedia.org/article.aspx/Poland/Poland_before_1795']
+
+        if not options["skip_scraping"]:
+            self.start_scraper(StolpersteineSpider, settings={"LOG_LEVEL": "INFO"}, kwargs_dict={"start_urls": first})
+        if not options["no_rdf"]:
+            self.jsonlines_to_rdf(stolpersteine_rdf)
+            self.add_file("stolpersteine.ttl")
+        self.write_metadata()
+
+
+
+
+
+
 
 #verlinkung zu _dataset_command
 graph = Graph()
 
 skos = Namespace("http://www.w3.org/2004/02/skos/core#")
+    #Was mache ich mit dem Namespace, steht nicht in _dataset_command.py#
     jl = Namespace("http://data.judaicalink.org/ontology/") #--vllt jlo in dataset_command.py?
 foaf = Namespace("http://xmlns.com/foaf/0.1/")
+    #Was mache ich mit dem Namespace, steht nicht in _dataset_command.py#
     gndo = Namespace("http://d-nb.info/standards/elementset/gnd#") #fehlt in dataset_command.py
 owl = Namespace("http://www.w3.org/2002/07/owl#")
+    #Was mache ich mit dem Namespace, steht nicht in _dataset_command.py#
     edm = Namespace("http://www.europeana.eu/schemas/edm/") #fehlt in dataset_command.py
+    #Was mache ich mit dem Namespace, steht nicht in _dataset_command.py#
     dc = Namespace ("http://purl.org/dc/elements/1.1/") #--vllt dcterms in dataset_command.py?
 #-------------------------------------------------------
 skos = Namespace("http://www.w3.org/2004/02/skos/core#")
@@ -71,7 +128,7 @@ graph.bind('dc',dc)
 page = urllib2.urlopen('https://de.wikipedia.org/wiki/Liste_der_Stolpersteine_in_Mainz')
 soup = BeautifulSoup(page)
 
-stonetextlist=[]
+stonetextlist=[]  #Mehrere Listen für die Tabelle in Wikipedia
 picurllist=[]
 remarktextlist=[]
 namelist=[]
@@ -81,14 +138,14 @@ urilist=[]
 namelistremarks=[]
 
 
-body = soup.findAll('td')
+body = soup.findAll('td')  # Damit findet man die Kästen auf der Homepage mit den Links zu den Stolpersteinen, oder es sind allgemein die Reihenelemente in der Stoplerstein-Tabelle
 
-pic = soup.findAll('a',attrs={"class" : "image"})
+pic = soup.findAll('a',attrs={"class" : "image"}) # Damit findet man die Bilder
 
 for i in range(1,len(pic),1): #extract the link to the stone pictures
 
     picurl = 'https://de.wikipedia.org' + str(pic[i].get('href'))
-    #print (picurl)
+    print (picurl)
     picurllist.append(picurl)
 
 
