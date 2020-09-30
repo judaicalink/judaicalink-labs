@@ -60,7 +60,7 @@ class YivoSpider(DatasetSpider):
         # We create an empty dictionary to store all data about this page.
         data = {}
         data['title'] = soup.h1.string
-        data['uri'] = response.url
+        data['uri'] = response.url.replace(":443", "")
         log.info(f"Processing {data['uri']}")
         try:
             href = soup.select_one("#ctl00_placeHolderMain_linkEmailArticle")["href"]
@@ -69,8 +69,12 @@ class YivoSpider(DatasetSpider):
             log.info(f"Error ({data['uri']}): {e}")
             error.info("Error ({data['uri']}): {e}")
             return None
+       
+        url_path = data['uri'][data['uri'].find("article.aspx"):]
+        if url_path in self.visited:
+            return None
         # Mark as visited
-        self.visited.add(data['uri'][data['uri'].find("article.aspx"):])
+        self.visited.add(url_path)
         self.visited.add(f"article.aspx?id={data['id']}")
 
         # Basic stuff
@@ -236,11 +240,11 @@ class Command(DatasetCommand):
         # These are various test cases in yivo to quickly check if a certain
         # URL is correctly extracted. Usually you start with first, of course.
         # They are lists, because Scrapy expects a list of start_urls.
-        first = ['http://www.yivoencyclopedia.org/article.aspx/Abeles_Shimon']
-        last = ['http://www.yivoencyclopedia.org/article.aspx/Zylbercweig_Zalmen']
-        multi = ['http://www.yivoencyclopedia.org/article.aspx/Poland']
-        error = ['http://www.yivoencyclopedia.org/article.aspx?id=497']
-        sub = ['http://www.yivoencyclopedia.org/article.aspx/Poland/Poland_before_1795']
+        first = ['https://yivoencyclopedia.org/article.aspx/Abeles_Shimon']
+        last = ['https://yivoencyclopedia.org/article.aspx/Zylbercweig_Zalmen']
+        multi = ['https://yivoencyclopedia.org/article.aspx/Poland']
+        error = ['https://yivoencyclopedia.org/article.aspx?id=497']
+        sub = ['https://yivoencyclopedia.org/article.aspx/Poland/Poland_before_1795']
 
         # Check the parameters to skip parts if desired by the user.
         if not options["skip_scraping"]:
