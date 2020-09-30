@@ -8,7 +8,7 @@ import scrapy
 import scrapy.crawler
 import scrapy.http
 import re
-from urllib.parse import quote
+from urllib.parse import quote, unquote
 from ._dataset_command import DatasetCommand, DatasetSpider, log, error
 from ._dataset_command import jlo, jld, skos, dcterms, void, foaf, rdf
 
@@ -150,14 +150,46 @@ class YivoSpider(DatasetSpider):
             yield response.follow(data['next_article'])
 
 
+replacements = {
+        "ł": "l",
+        }
+
+disallowed_chars = re.compile(r"[^a-z0-9:/.-_]")
+multiple_underscores = re.compile(r"_{2,}")
+
+def enforce_valid_characters(uri):
+    # Unquote until no further unquoting is possible
+    last = uri
+    unquoted = unquote(last)
+    while last != unquoted:
+        last = unquoted
+        unquoted = unquote(last)
+    # Make sure we only use lower case
+    lowered = unquoted.lower()
+    # replace characters with readable latin characters, if desired.
+    for char in replacements:
+        lowered = lowered.replace(char, replacements[char])
+    # Final replacements, disallowed chars are replaces by a single underscore 
+    final = disallowed_chars.sub("_", lowered)
+    # Multiple underscores are reduced to one
+    final = multiple_underscores.sub("_", final)
+    # And no underscore at the end.
+    final = final.strip("_")
+    if final != uri:
+        # Make sure to check the log to see if these rules are ok
+        log.info(f"Enforced URI: {uri} -> {final}")
+    return final
+
+
+
+
 # Helper function to convert Yivo URLs to our data URIs.
 # In this case, it uses the jld namespace and add yivo and
 # then the remainder of the URL after aspx/
 def local(uri):
-    if "aspx" in uri:
-        return jld[f"yivo/{uri[uri.find('aspx/') + 5:]}"] 
-    else:
-        return rdflib.URIRef(uri)
+    if "article.aspx" in uri:
+        uri = f"http://data.judaicalink.org/data/yivo/{uri[uri.find('aspx/') + 5:]}".lower()
+    return rdflib.URIRef(enforce_valid_characters(uri))
 
 
 # This is a function that is called for each dictionary that 
@@ -175,7 +207,7 @@ def yivo_rdf(graph: rdflib.Graph, resource_dict: dict):
                 graph.add((local(l["href"]), skos.altLabel, rdflib.Literal(l["text"])))
     graph.add((subject, jlo.hasAbstract, rdflib.Literal(resource_dict["abstract"], "en")))
     for sc in resource_dict["subconcepts"]:
-            scu = rdflib.URIRef(str(subject) + "/" + quote(re.sub("[ ]+", "_", sc)))
+            scu = local(str(subject) + "/" + sc)
             graph.add((scu, rdf.type, skos.Concept))
             graph.add((scu, skos.broader, subject))
             graph.add((scu, skos.prefLabel, rdflib.Literal(sc)))
