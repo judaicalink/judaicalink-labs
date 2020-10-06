@@ -16,8 +16,8 @@ import time
 
 import scrapy.http
 from urllib.parse import quote
-from ._dataset_command import DatasetCommand, DatasetSpider
-from ._dataset_command import owl, foaf, rdf, skos
+from ._dataset_command import DatasetCommand, DatasetSpider, log, error
+from ._dataset_command import owl, foaf, rdf, skos, dcterms, dc, jlo
 
 #os.chdir('C:\\Users\\Maral\\Desktop')
 # Frage wer creator, hab mich mal rein
@@ -42,27 +42,160 @@ metadata = {
 # Step 2
 class StolpersteineSpider(DatasetSpider):
     name = metadata['slug']
-    start_urls = ['https://de.wikipedia.org/wiki/Liste_der_Stolpersteine_in_Mainz']
-
-    def check_queue(self, url):
-        url = url[url.find("Liste_der_Stolpersteine_in_Mainz-"):]  #evtl. Liste_der_Stolpersteine_in_Mainz ohne "-" am Ende
-        return super().check_queue(url)
-
+    start_urls = [
+            'https://de.wikipedia.org/wiki/Liste_der_Stolpersteine_in_Mainz-Altstadt',
+            'https://de.wikipedia.org/wiki/Liste_der_Stolpersteine_in_Mainz-Neustadt',
+            'https://de.wikipedia.org/wiki/Liste_der_Stolpersteine_in_Mainz-Oberstadt',
+            'https://de.wikipedia.org/wiki/Liste_der_Stolpersteine_in_Mainz-Bretzenheim',
+            'https://de.wikipedia.org/wiki/Liste_der_Stolpersteine_in_Mainz-Ebersheim',
+            'https://de.wikipedia.org/wiki/Liste_der_Stolpersteine_in_Mainz-Finthen',
+            'https://de.wikipedia.org/wiki/Liste_der_Stolpersteine_in_Mainz-Gonsenheim',
+            'https://de.wikipedia.org/wiki/Liste_der_Stolpersteine_in_Mainz-Hechtsheim',
+            'https://de.wikipedia.org/wiki/Liste_der_Stolpersteine_in_Mainz-Kastel_AKK',
+            ]
 
     def parse(self, response: scrapy.http.Response):
-        soup = BeautifulSoup(response.text, 'html.parser')
-        data = {}
+
+        soup = BeautifulSoup(response.text)
+
+        
+        stonetextlist=[]  #Mehrere Listen für die Tabelle in Wikipedia
+        picurllist=[]
+        remarktextlist=[]
+        namelist=[]
+        namelinklist1=[]
+        namelinklist2=[]
+        urilist=[]
+        namelistremarks=[]
 
 
-# Step 3
-def local(uri):
+        body = soup.findAll('td')  # Damit findet man die Kästen auf der Homepage mit den Links zu den Stolpersteinen, oder es sind allgemein die Reihenelemente in der Stoplerstein-Tabelle
+
+        pic = soup.findAll('a',attrs={"class" : "image"}) # Damit findet man die Bilder
+
+        for i in range(1,len(pic),1): #extract the link to the stone pictures
+
+            picurl = 'https://de.wikipedia.org' + str(pic[i].get('href'))
+            log.info(picurl)
+            picurllist.append(picurl)
 
 
 
-# Step 4
-def stolpersteine_rdf(graph: rdflib.Graph, resource_dict: dict):
+        explain = soup.findAll('td',attrs={"align" : "center"})
+        for j in range(0,len(explain)):
+            stonetext = explain[j].getText(' ')
+            #log.info(stonetext)
+            stonetextlist.append(stonetext)
+            namecontent = explain[j].getText(',')
+            namecontent = namecontent.replace('UND ARBEITETE,','')
+            log.info(namecontent)
+
+            if 'DR.' in namecontent:
+                namecontent = namecontent.replace('DR.','')
+
+            names = namecontent.split(',',2)[1].lstrip()
+           # if ' ' not in names:
+            #    log.info(explain[j].getText(','), '...' ,  names)
+             #   names = names + ' ' + namecontent.split(',',3)[2]
+              #  log.info(names)
+            if 'JG.' not in namecontent.split(',',3)[2].lstrip() and 'GEB.' not in namecontent.split(',',3)[2].lstrip() and 'VERH.' not in namecontent.split(',',3)[2].lstrip():
+                names = names + ' ' + namecontent.split(',',3)[2].lstrip()
+                log.info(names)
+
+            namelistremarks.append(names)
+            na= names.replace(' ',', ')
+            namelist.append(na)
 
 
+
+            name1 = names.replace(' ','_')
+            namelinklist1.append(name1)
+
+            if len(names.split(' ')) == 2:
+                n1 = names.split(' ')[0]
+                n2 = names.split(' ')[1]
+                name2 = n2 + '_' + n1
+                namelinklist2.append(name2)
+            elif len(names.split(' ')) == 3:
+                n1 = names.split(' ')[0]
+                n2 = names.split(' ')[1]
+                n3 = names.split(' ')[2]
+                name2 = n3 + '_' + n1 + '_' + n2
+                namelinklist2.append(name2)
+            else:
+                log.info(names)
+                namelinklist2.append(name2)
+
+        remarks1 = soup.findAll('td',attrs={"rowspan" : "1"})
+        for x in range(0,len(remarks1)):
+            if '<small>' in str(remarks1[x]):
+                remarktext1 = remarks1[x].getText(',')
+                remarktext1 = re.sub(r'\[.*\]', ' ', remarktext1)
+                remarktextlist.append(remarktext1)
+
+        remarks2 = soup.findAll('td',attrs={"rowspan" : "2"})
+        for x in range(0,len(remarks2)):
+            if '<small>' in str(remarks2[x]):
+                remarktext2 = remarks2[x].getText(',')
+                remarktext2 = re.sub(r'\[.*\]', ' ', remarktext2)
+                remarktextlist.append(remarktext2)
+
+        data = {
+            "stonetextlist":stonetextlist,  #Mehrere Listen für die Tabelle in Wikipedia
+            "picurllist":picurllist,
+            "remarktextlist":remarktextlist,
+            "namelist":namelist,
+            "namelinklist1":namelinklist1,
+            "namelinklist2":namelinklist2,
+            "urilist":urilist,
+            "namelistremarks":namelistremarks,
+        }
+        return data
+
+
+
+def create_rdf(graph, dictionary):
+
+    stonetextlist=dictionary["stonetextlist"]  #Mehrere Listen für die Tabelle in Wikipedia
+    picurllist=dictionary["picurllist"]
+    remarktextlist=dictionary["remarktextlist"]
+    namelist=dictionary["namelist"]
+    namelinklist1=dictionary["namelinklist1"]
+    namelinklist2=dictionary["namelinklist2"]
+    urilist=dictionary["urilist"]
+    namelistremarks=dictionary["namelistremarks"]
+    
+    for i in range(0,len(namelinklist1)):
+       for j in range(0,len(picurllist)):
+            if namelinklist1[i].lower() in picurllist[j].lower():
+                uri = 'http://data.judaicalink.org/data/stolpersteine/' + namelinklist1[i].title()
+                urilist.append(uri)
+                graph.add((URIRef(uri), rdf.type, foaf.Person ))
+                graph.add((URIRef(uri), skos.prefLabel, (Literal(namelist[i].title())) ))
+                graph.add((URIRef(uri), jlo.hasAbstract, (Literal(stonetextlist[i].title())) ))
+                graph.add((URIRef(uri), dc.subject, (URIRef(picurllist[j])) ))
+                graph.add((URIRef(uri), foaf.primaryTopic , (URIRef('https://de.wikipedia.org/wiki/Liste_der_Stolpersteine_in_Mainz')) ))
+
+                for y in range (0,len(remarktextlist)):
+                        if namelistremarks[i].title() in remarktextlist[y]:
+                            graph.add((URIRef(uri), skos.scopeNote, (Literal(remarktextlist[y])) ))
+
+    for i in range(0,len(namelinklist2)):
+        for j in range(0,len(picurllist)):
+            if namelinklist2[i].lower() in picurllist[j].lower():
+                uri = 'http://data.judaicalink.org/data/stolpersteine/' + namelinklist2[i].title()
+                urilist.append(uri)
+                log.info(uri)
+                log.info(namelist[i].title())
+                graph.add((URIRef(uri), rdf.type, foaf.Person ))
+                graph.add((URIRef(uri), skos.prefLabel, (Literal(namelist[i].title())) ))
+                graph.add((URIRef(uri), jlo.hasAbstract, (Literal(stonetextlist[i].title())) ))
+                graph.add((URIRef(uri), dc.subject, (URIRef(picurllist[j])) ))
+                graph.add((URIRef(uri), foaf.primaryTopic , (URIRef('https://de.wikipedia.org/wiki/Liste_der_Stolpersteine_in_Mainz')) ))
+                for y in range (0,len(remarktextlist)):
+                        if namelistremarks[i].title() in remarktextlist[y]:
+                            graph.add((URIRef(uri), skos.scopeNote, (Literal(remarktextlist[y])) ))
+    return graph
 
 # Step 5
 class Command(DatasetCommand):
@@ -72,17 +205,20 @@ class Command(DatasetCommand):
         self.gzip = options['gzip']
         self.set_metadata(metadata)
 
-        #Umändern für Stolpersteine
-        first = ['http://www.yivoencyclopedia.org/article.aspx/Abeles_Shimon']
-        last = ['http://www.yivoencyclopedia.org/article.aspx/Zylbercweig_Zalmen']
-        multi = ['http://www.yivoencyclopedia.org/article.aspx/Poland']
-        error = ['http://www.yivoencyclopedia.org/article.aspx?id=497']
-        sub = ['http://www.yivoencyclopedia.org/article.aspx/Poland/Poland_before_1795']
-
         if not options["skip_scraping"]:
-            self.start_scraper(StolpersteineSpider, settings={"LOG_LEVEL": "INFO"}, kwargs_dict={"start_urls": first})
+            self.start_scraper(StolpersteineSpider, settings={"LOG_LEVEL": "INFO"})
+
         if not options["no_rdf"]:
-            self.jsonlines_to_rdf(stolpersteine_rdf)
+            # This is a helper function that calls the function you provide for each line in a jsonl file.
+            # If you do not have jsonl as original format, it probably makes sense to create additional
+            # helpers, e.g. to walk through an RDF file or a common JSON file. Discuss with the team if this is
+            # needed, so that we get a common infrastructure.
+            self.jsonlines_to_rdf(create_rdf) 
+
+            # This adds a file to the metadata. Note that you only give the filename here, without .gz. Everyting
+            # else, like a directory path and gzipping is taken care of by DatasetCommand.
+            # All files not in the metadata are considered temporal files. Feed free to also add jsonl-Files or any
+            # other files here, if you want to make them part of the dataset.
             self.add_file("stolpersteine.ttl")
         self.write_metadata()
 
@@ -91,157 +227,3 @@ class Command(DatasetCommand):
 
 
 
-
-#verlinkung zu _dataset_command
-graph = Graph()
-
-skos = Namespace("http://www.w3.org/2004/02/skos/core#")
-    #Was mache ich mit dem Namespace, steht nicht in _dataset_command.py#
-    jl = Namespace("http://data.judaicalink.org/ontology/") #--vllt jlo in dataset_command.py?
-foaf = Namespace("http://xmlns.com/foaf/0.1/")
-    #Was mache ich mit dem Namespace, steht nicht in _dataset_command.py#
-    gndo = Namespace("http://d-nb.info/standards/elementset/gnd#") #fehlt in dataset_command.py
-owl = Namespace("http://www.w3.org/2002/07/owl#")
-    #Was mache ich mit dem Namespace, steht nicht in _dataset_command.py#
-    edm = Namespace("http://www.europeana.eu/schemas/edm/") #fehlt in dataset_command.py
-    #Was mache ich mit dem Namespace, steht nicht in _dataset_command.py#
-    dc = Namespace ("http://purl.org/dc/elements/1.1/") #--vllt dcterms in dataset_command.py?
-#-------------------------------------------------------
-skos = Namespace("http://www.w3.org/2004/02/skos/core#")
-jl = Namespace("http://data.judaicalink.org/ontology/")
-foaf = Namespace("http://xmlns.com/foaf/0.1/")
-gndo = Namespace("http://d-nb.info/standards/elementset/gnd#")
-owl = Namespace("http://www.w3.org/2002/07/owl#")
-edm = Namespace("http://www.europeana.eu/schemas/edm/")
-dc = Namespace ("http://purl.org/dc/elements/1.1/")
-
-
-graph.bind('skos', skos)
-graph.bind ('foaf' , foaf)
-graph.bind ('jl' , jl)
-graph.bind('gndo',gndo)
-graph.bind ('owl' , owl)
-graph.bind('edm',edm)
-graph.bind('dc',dc)
-
-
-page = urllib2.urlopen('https://de.wikipedia.org/wiki/Liste_der_Stolpersteine_in_Mainz')
-soup = BeautifulSoup(page)
-
-stonetextlist=[]  #Mehrere Listen für die Tabelle in Wikipedia
-picurllist=[]
-remarktextlist=[]
-namelist=[]
-namelinklist1=[]
-namelinklist2=[]
-urilist=[]
-namelistremarks=[]
-
-
-body = soup.findAll('td')  # Damit findet man die Kästen auf der Homepage mit den Links zu den Stolpersteinen, oder es sind allgemein die Reihenelemente in der Stoplerstein-Tabelle
-
-pic = soup.findAll('a',attrs={"class" : "image"}) # Damit findet man die Bilder
-
-for i in range(1,len(pic),1): #extract the link to the stone pictures
-
-    picurl = 'https://de.wikipedia.org' + str(pic[i].get('href'))
-    print (picurl)
-    picurllist.append(picurl)
-
-
-
-explain = soup.findAll('td',attrs={"align" : "center"})
-for j in range(0,len(explain)):
-    stonetext = explain[j].getText(' ')
-    #print (stonetext)
-    stonetextlist.append(stonetext)
-    namecontent = explain[j].getText(',')
-    namecontent = namecontent.replace('UND ARBEITETE,','')
-    print (namecontent)
-
-    if 'DR.' in namecontent:
-        namecontent = namecontent.replace('DR.','')
-
-    names = namecontent.split(',',2)[1].lstrip()
-   # if ' ' not in names:
-    #    print (explain[j].getText(','), '...' ,  names)
-     #   names = names + ' ' + namecontent.split(',',3)[2]
-      #  print (names)
-    if 'JG.' not in namecontent.split(',',3)[2].lstrip() and 'GEB.' not in namecontent.split(',',3)[2].lstrip() and 'VERH.' not in namecontent.split(',',3)[2].lstrip():
-        names = names + ' ' + namecontent.split(',',3)[2].lstrip()
-        print (names)
-
-    namelistremarks.append(names)
-    na= names.replace(' ',', ')
-    namelist.append(na)
-
-
-
-    name1 = names.replace(' ','_')
-    namelinklist1.append(name1)
-
-    if len(names.split(' ')) == 2:
-        n1 = names.split(' ')[0]
-        n2 = names.split(' ')[1]
-        name2 = n2 + '_' + n1
-        namelinklist2.append(name2)
-    elif len(names.split(' ')) == 3:
-        n1 = names.split(' ')[0]
-        n2 = names.split(' ')[1]
-        n3 = names.split(' ')[2]
-        name2 = n3 + '_' + n1 + '_' + n2
-        namelinklist2.append(name2)
-    else:
-        print (names)
-        namelinklist2.append(name2)
-
-remarks1 = soup.findAll('td',attrs={"rowspan" : "1"})
-for x in range(0,len(remarks1)):
-    if '<small>' in str(remarks1[x]):
-        remarktext1 = remarks1[x].getText(',')
-        remarktext1 = re.sub(r'\[.*\]', ' ', remarktext1)
-        remarktextlist.append(remarktext1)
-
-remarks2 = soup.findAll('td',attrs={"rowspan" : "2"})
-for x in range(0,len(remarks2)):
-    if '<small>' in str(remarks2[x]):
-        remarktext2 = remarks2[x].getText(',')
-        remarktext2 = re.sub(r'\[.*\]', ' ', remarktext2)
-        remarktextlist.append(remarktext2)
-
-
-for i in range(0,len(namelinklist1)):
-   for j in range(0,len(picurllist)):
-        if namelinklist1[i].lower() in picurllist[j].lower():
-            uri = 'http://data.judaicalink.org/data/stolpersteine/' + namelinklist1[i].title()
-            urilist.append(uri)
-            graph.add((URIRef(uri), RDF.type, foaf.Person ))
-            graph.add((URIRef(uri), skos.prefLabel, (Literal(namelist[i].title())) ))
-            graph.add((URIRef(uri), jl.hasAbstract, (Literal(stonetextlist[i].title())) ))
-            graph.add((URIRef(uri), dc.subject, (URIRef(picurllist[j])) ))
-            graph.add((URIRef(uri), foaf.primaryTopic , (URIRef('https://de.wikipedia.org/wiki/Liste_der_Stolpersteine_in_Mainz')) ))
-
-            for y in range (0,len(remarktextlist)):
-                    if namelistremarks[i].title() in remarktextlist[y]:
-                        graph.add((URIRef(uri), skos.scopeNote, (Literal(remarktextlist[y])) ))
-
-
-
-for i in range(0,len(namelinklist2)):
-    for j in range(0,len(picurllist)):
-        if namelinklist2[i].lower() in picurllist[j].lower():
-            uri = 'http://data.judaicalink.org/data/stolpersteine/' + namelinklist2[i].title()
-            urilist.append(uri)
-            print (uri)
-            print (namelist[i].title())
-            graph.add((URIRef(uri), RDF.type, foaf.Person ))
-            graph.add((URIRef(uri), skos.prefLabel, (Literal(namelist[i].title())) ))
-            graph.add((URIRef(uri), jl.hasAbstract, (Literal(stonetextlist[i].title())) ))
-            graph.add((URIRef(uri), dc.subject, (URIRef(picurllist[j])) ))
-            graph.add((URIRef(uri), foaf.primaryTopic , (URIRef('https://de.wikipedia.org/wiki/Liste_der_Stolpersteine_in_Mainz')) ))
-            for y in range (0,len(remarktextlist)):
-                    if namelistremarks[i].title() in remarktextlist[y]:
-                        graph.add((URIRef(uri), skos.scopeNote, (Literal(remarktextlist[y])) ))
-
-
-graph.serialize(destination='stolpersteine.ttl', format="turtle")
