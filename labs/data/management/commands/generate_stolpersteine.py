@@ -4,14 +4,14 @@
 #https://github.com/wisslab/judaicalink-generators/blob/master/stolpersteine/scripts/Stein-wiki-01.py
 
 import urllib.request as urllib2
-from bs4 import BeautifulSoup #same as yivo
-import rdflib #same as yivo
+from bs4 import BeautifulSoup
+import rdflib
 from rdflib import Namespace, URIRef, Graph , Literal
 from SPARQLWrapper import SPARQLWrapper2, XML , RDF , JSON , TURTLE
 from rdflib.namespace import RDF, FOAF , OWL
-import os , glob
+import os, glob
 import csv
-import re #same as yivo
+import re
 import time
 
 import scrapy.http
@@ -19,13 +19,13 @@ from urllib.parse import quote
 from ._dataset_command import DatasetCommand, DatasetSpider, log, error
 from ._dataset_command import owl, foaf, rdf, skos, dcterms, dc, jlo
 
-#os.chdir('C:\\Users\\Maral\\Desktop')
-# Frage wer creator, hab mich mal rein
-# Step 1 (finished)
+
+
+
 metadata = {
         "title": "Liste der Stolpersteine in Mainz",
         "example": "https://de.wikipedia.org/wiki/Liste_der_Stolpersteine_in_Mainz-Altstadt",
-        "slug": "stolpersteine", # Used as graph name and for file names, identifies this dataset.
+        "slug": "stolpersteine",
         "namespace_slugs": [
             "stolpersteine"
             ],
@@ -39,7 +39,7 @@ metadata = {
             }
         }
 
-# Step 2
+
 class StolpersteineSpider(DatasetSpider):
     name = metadata['slug']
     start_urls = [
@@ -197,7 +197,7 @@ def create_rdf(graph, dictionary):
                             graph.add((URIRef(uri), skos.scopeNote, (Literal(remarktextlist[y])) ))
     return graph
 
-# Step 5
+
 class Command(DatasetCommand):
     help = 'Generate the Stolpersteine dataset from the wikipedia articles'
 
