@@ -75,6 +75,8 @@ class BhrSpider(DatasetSpider):
 
         h3 = soup.find_all('h3')
         name = h3[0].string
+        names = []
+
 
         if name!= None:
 
@@ -105,7 +107,7 @@ class BhrSpider(DatasetSpider):
                 uri = uri0
 
             else:
-                n = n + 1
+                n = n+1
                 uri = uri0 + '-' +str(n)
                 if uri not in names:
                     names.append(uri)
@@ -162,10 +164,6 @@ class BhrSpider(DatasetSpider):
                 wikipedia = link.get('href')
                 graph.add((URIRef(uri) , owl.sameAs , URIRef(wikipedia)))
                 #print wikidata
-
-
-
-
 
 
         for header in soup.find_all('h3'):
@@ -228,6 +226,12 @@ class BhrSpider(DatasetSpider):
 
     graph.serialize(destination='bhr-new-enrich.rdf', format="turtle")
 
+def create_rdf(graph):
+
+
+
+
+
 
 # 3 -------Step 3 RDF-Dateien (vgl. Step 1) mit Gescrapten Informationen (vgl. Step 2) verbinden
 
@@ -236,3 +240,17 @@ class BhrSpider(DatasetSpider):
 # 4 -------Step 4 sonstige Fehlende Informationen anfügen evtl. abgleichen mit Daten in JudaicaLink (sameAs) + Entity-Facts + Todesort/ Geburtsort
 # FRAGE: Birthlocation und Deathlocation kommen aus der GND, das Skript dazu fehlt in Github!
 
+class Command(DatasetCommand):
+    help = 'Generate the bhr dataset from the Biographisches Handbuch der Rabbiner'
+
+    def handle(self, *args, **options):
+        self.gzip = options['gzip']
+        self.set_metadata(metadata)
+
+        if not options["skip_scraping"]:
+            self.start_scraper(BhrSpider, settings={"LOG_LEVEL": "INFO"})
+
+        if not options["no_rdf"]:
+            self.jsonlines_to_rdf(create_rdf)
+            self.add_file("bhr.ttl")
+        self.write_metadata()
