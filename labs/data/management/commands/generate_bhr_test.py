@@ -2,7 +2,7 @@
 
 
 
-#-------Step 1 CSV-Datei lesen, bereinigen, -> RDF aus den Daten machen (Idee kann von Maral abgeschaut werden) (Birthdate und Deathdate + occpation + Name)
+#-------Step 1 CSV-Datei lesen, bereinigen, -> RDF aus den Daten machen (Idee kann von Maral abgeschaut werden) (Birthdate und Deathdate + occupation + Name)
 
 #-------Step 2 scrapen Round 2 übernehmen und damit fortfahren (Abstract + GND-ID + Steinheim-ID + andere ID's + Name)
 
@@ -14,7 +14,7 @@
 
 
 
-# 1 -------Step 1 CSV-Datei lesen, bereinigen, -> RDF aus den Daten machen (Idee kann von Maral abgeschaut werden) (Birthdate und Deathdate + occpation + Name)
+# 1 -------Step 1 CSV-Datei lesen, bereinigen, -> RDF aus den Daten machen (Idee kann von Maral abgeschaut werden) (Birthdate und Deathdate + occupation + Name)
 
 # FRAGE: evtl. auslagern in ein anderes script oder einfach mit der Encyc.rdf Datei fortfahren?
 
