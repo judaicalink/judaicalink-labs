@@ -121,10 +121,14 @@ class BhrSpider(DatasetSpider):
                         uri = uri0 + '-' +str(n)
                         names.append(uri)
 
+            data = {
+                "names":names,
+            }
+            return data
 
 
-            graph.add ((URIRef(uri) , RDF.type , foaf.Person))
-            graph.add ((URIRef(uri) , skos.prefLabel , Literal(pname.title())))
+            #graph.add ((URIRef(uri) , RDF.type , foaf.Person))
+            #graph.add ((URIRef(uri) , skos.prefLabel , Literal(pname.title())))
 
 
             citation = soup.find_all('nav')
@@ -134,10 +138,107 @@ class BhrSpider(DatasetSpider):
             finalcitation = cit + ', id:' + idbhr
             sameurl = 'http://steinheim-institut.de:50580/cgi-bin/bhr?id=' + idbhr
 
-            graph.add((URIRef(uri) , owl.sameAs , URIRef(sameurl)))
-            graph.add((URIRef(uri) , jl.describedAt , Literal(finalcitation)))
+            #graph.add((URIRef(uri) , owl.sameAs , URIRef(sameurl)))
+            #graph.add((URIRef(uri) , jl.describedAt , Literal(finalcitation)))
 
             #print name , finalcitation
+
+    #     for link in soup.find_all('a'):
+    #         if 'gnd' in link.get('href'):
+    #             gnd = link.get('href')
+    #             graph.add((URIRef(uri) , owl.sameAs , URIRef(gnd)))
+    #             #print gnd
+    #         if 'viaf' in link.get('href'):
+    #             viaf = link.get('href')
+    #             graph.add((URIRef(uri) , owl.sameAs , URIRef(viaf)))
+    #             #print viaf
+    #         if 'entityfacts' in link.get('href'):
+    #             entityfacts = link.get('href')
+    #             graph.add((URIRef(uri) , owl.sameAs , URIRef(entityfacts)))
+    #
+    #         if 'wikidata' in link.get('href'):
+    #             wikidata = link.get('href')
+    #             graph.add((URIRef(uri) , owl.sameAs , URIRef(wikidata)))
+    #             #print wikidata
+    #         if 'steinheim-institut.de/see-also/' in link.get('href'):
+    #             steinheim = link.get('href')
+    #             graph.add((URIRef(uri) , owl.sameAs , URIRef(steinheim)))
+    #             #print wikidata
+    #         if 'wikipedia' in link.get('href'):
+    #             wikipedia = link.get('href')
+    #             graph.add((URIRef(uri) , owl.sameAs , URIRef(wikipedia)))
+    #             #print wikidata
+    #
+    #
+    #     for header in soup.find_all('h3'):
+    #
+    #         if header.text == 'Publikationen':
+    #
+    #             nextNode = header
+    #
+    #             while True:
+    #                 nextNode = nextNode.nextSibling
+    #                 if nextNode is None:
+    #                     break
+    #                 if isinstance(nextNode, NavigableString):
+    #                     print (nextNode.strip())
+    #                 if isinstance(nextNode, Tag):
+    #                     if nextNode.name == "h3":
+    #                         break
+    #                     print (nextNode.get_text(strip=True).strip())
+    #                     publication = (nextNode.get_text(strip=True).strip())
+    #                     graph.add((URIRef(uri) , jl.hasPublication , Literal(publication)))
+    #
+    #
+    #         #elif header.text == 'Literatur': #to add the text in the literature section
+    #
+    #            # nextNode = header
+    #
+    #             #while True:
+    #              #   nextNode = nextNode.nextSibling
+    #               #  if nextNode is None:
+    #                #     break
+    #                 #if isinstance(nextNode, NavigableString):
+    #                  #   print (nextNode.strip())
+    #                 #if isinstance(nextNode, Tag):
+    #                  #   if nextNode.name == "h3":
+    #                   #      break
+    #                    # print (nextNode.get_text(strip=True).strip())
+    #                     #literature = (nextNode.get_text(strip=True).strip())
+    #                     #graph.add((URIRef(uri) , jl.hasPublication , Literal(literature)))
+    #
+    #
+    #         elif header.text == name:
+    #
+    #             nextNode = header
+    #
+    #             while True:
+    #                 nextNode = nextNode.nextSibling
+    #                 if nextNode is None:
+    #                     break
+    #                 if isinstance(nextNode, NavigableString):
+    #                     print (nextNode.strip())
+    #                 if isinstance(nextNode, Tag):
+    #                     if nextNode.name == "h3":
+    #                         break
+    #                     print (nextNode.get_text(strip=True).strip())
+    #                     abstract = (nextNode.get_text(strip=True).strip())
+    #                     if cit not in abstract:
+    #                         graph.add((URIRef(uri) , jl.hasAbstract , Literal(abstract)))
+    #
+    #
+    #
+    # graph.serialize(destination='bhr-new-enrich.rdf', format="turtle")
+
+def create_rdf(graph, dictionary):
+    names=dictionary["names"]
+
+    graph.add((URIRef(uri), RDF.type, foaf.Person))
+    graph.add((URIRef(uri), skos.prefLabel, Literal(pname.title())))
+    graph.add((URIRef(uri) , owl.sameAs , URIRef(sameurl)))
+    graph.add((URIRef(uri) , jl.describedAt , Literal(finalcitation)))
+    #alle graph.add müssen hier hin
+    #jedoch stehen sie hier noch im parse code, was jetzt?
 
         for link in soup.find_all('a'):
             if 'gnd' in link.get('href'):
@@ -225,10 +326,6 @@ class BhrSpider(DatasetSpider):
 
 
     graph.serialize(destination='bhr-new-enrich.rdf', format="turtle")
-
-def create_rdf(graph):
-
-
 
 
 
