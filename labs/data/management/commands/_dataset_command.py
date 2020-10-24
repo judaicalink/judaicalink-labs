@@ -342,4 +342,20 @@ class DatasetCommand(BaseCommand):
         print("This command is not meant to be executed directly, use a subclass.")
 
 
+    def start_csv_reader (self, csv_to_jsonl_function, filename=None):
+        if not filename:
+            filename = f"{self.metadata['slug']}.jsonl"
+        filepath = os.path.join(self.directory, filename)
+        if os.path.exists(filepath):
+            os.remove(filepath)
 
+        import json
+
+        with open(filename, 'w') as file:
+            data = csv_to_jsonl_function()
+            for entry in data:
+                json.dump(entry, file)
+                file.write('\n')
+
+        if self.gzip:
+            gzip_file(filepath)
