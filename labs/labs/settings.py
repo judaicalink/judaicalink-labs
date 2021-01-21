@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'lodjango',
     'dashboard',
     'data',
+    'cookie_consent',
+    'piwik'
 ]
 
 MIDDLEWARE = [
@@ -158,6 +160,8 @@ COMPACT_MEMORY_META_INDEX = "cm_meta"
 
 GEONAMES_API_USER = "" # Configure in localsettings.py
 
+PIWIK_SITE_ID = 2
+PIWIK_URL = 'http://web.judaicalink.org/matomo/'
 
 if os.path.isfile("labs/localsettings.py"):
     from .localsettings import *
