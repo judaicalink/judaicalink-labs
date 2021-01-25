@@ -3,9 +3,8 @@ import math
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.conf import settings
 
-from data.models import Dataset
+from backend.models import Dataset
 from elasticsearch import Elasticsearch
 import json
 
@@ -26,7 +25,7 @@ def load(request):
         data = f.read()
         print(data)
         headers = {'content-type': 'application/json'}
-        response = requests.post(f'http://localhost:9200/{settings.JUDAICALINK_INDEX}/doc/_bulk?pretty', data=data, headers=headers)
+        response = requests.post('http://localhost:9200/judaicalink/doc/_bulk?pretty', data=data, headers=headers)
         return HttpResponse(response)
 
 def search (request):
@@ -58,12 +57,12 @@ def process_query (query, page):
                 "deathDate": {},
                 "deathLocation": {},
                 "Abstract": {},
-                "Publication": {},
+                "Publication": {}
             },
             'number_of_fragments': 0,
         }
     }
-    result = es.search(index=settings.JUDAICALINK_INDEX, body = body)
+    result = es.search(index="judaicalink", body = body)
 
     # For testing, never commit with a hardcoded path like this
     # with open('/tmp/test.json', 'w') as f:
@@ -73,6 +72,7 @@ def process_query (query, page):
     for d in result ["hits"] ["hits"]:
         data = {
             "id" : d ["_id"],
+            #name
             "source" : d ["_source"],
             "highlight" : d ["highlight"],
         }
@@ -84,13 +84,7 @@ def process_query (query, page):
             if s in d ["highlight"]:
                 d ["source"] [s] = d ["highlight"] [s] [0]
 
-
-    field_order = ["name", "Alternatives", "birthDate", "birthYear", "birthLocation", "deathDate", "deathYear", "deathLocation", "Abstract", "Publication"]
-
-    dataset_objects = Dataset.objects.all()
-    dataslug_to_dataset = {}
-    for i in dataset_objects:
-        dataslug_to_dataset [i.dataslug] = i.title
+    field_order = ["name", "Alternatives", "birthDate", "birthLocation", "deathDate", "deathLocation", "Abstract", "Publication"]
 
     ordered_dataset = []
     for d in dataset:
@@ -113,6 +107,7 @@ def process_query (query, page):
                 pretty_fieldname = field.capitalize()
                 temp_data = "<b>" + pretty_fieldname + ": " + "</b>" + d ["source"] [field]
                 data.append (temp_data)
+
         ordered_dataset.append (data)
 
     total_hits = result ["hits"] ["total"] ["value"]
@@ -139,15 +134,19 @@ def process_query (query, page):
             real_paging.append (number)
 
     context = {
+        "result" : result ["hits"] ["hits"],
+            #contains full search results from elasticsearch
+        "dataset" : dataset,
+            #contains id and information from fields
         "pages" : pages,
         "paging" : real_paging,
         "next" : page + 1,
         "previous" : page -1,
         "total_hits" : total_hits,
+        "range" : range (1, (pages + 1)),
         "page" : page,
         "query" : query,
         "ordered_dataset" : ordered_dataset,
-        "dataslug_to_dataset": dataslug_to_dataset,
     }
 
     return context

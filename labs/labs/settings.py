@@ -42,12 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'channels',
     'core',
-    'backend.apps.BackendConfig',
+    'backend',
     'search',
     'cm_search',
     'lodjango',
     'dashboard',
-    'data',
 ]
 
 MIDDLEWARE = [
@@ -148,13 +147,6 @@ FUSEKI_SERVER = "http://localhost:3030/"
 FUSEKI_STORAGE = "."
 ELASTICSEARCH_SERVER = "http://localhost:9200/"
 ELASTICSEARCH_STORAGE = "/var/lib/elasticsearch"
-
-JUDAICALINK_INDEX = "judaicalink"
-COMPACT_MEMORY_INDEX = "cm"
-COMPACT_MEMORY_META_INDEX = "cm_meta"
-
-GEONAMES_API_USER = "" # Configure in localsettings.py
-
 
 if os.path.isfile("labs/localsettings.py"):
     from .localsettings import *

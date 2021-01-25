@@ -41,9 +41,7 @@
 
             <td>
                 {% for item in data %}
-                    {%if "Dataslug" not in item  %}
-                        {{ item | safe}} <br>
-                    {% endif %}
+                {{ item | safe}} <br>
                 {% endfor %}
             </td>
 

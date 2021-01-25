@@ -23,6 +23,3 @@ CHANNEL_LAYERS = {
 }
 LABS_ROOT = 'http://localhost:8000/'
 FUSEKI_SERVER = "http://localhost:3030/"
-
-
-GEONAMES_API_USER = "Your username" # https://www.geonames.org/login
