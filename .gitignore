@@ -2,8 +2,10 @@
 
 # the folder where the github markdown files are stored
 /labs/backend/gh_datasets
+/labs/data/gh_datasets
 # the folder where rdf files are stored
 /labs/backend/rdf_files
+/labs/data/rdf_files
 /data/
 /fuseki/
 /static
