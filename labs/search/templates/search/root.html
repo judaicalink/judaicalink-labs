@@ -4,18 +4,7 @@
 
 
 <!--content-->
-    <div class="row">
-        <div class="col-12 col-md-6 col-lg-4 header">
-            <img src="{% static 'img/transp_judaica_labs.png' %}" alt="JudaicaLink labs logo" class="logo"/>
-            <a href="https://www.ub.uni-frankfurt.de/judaica3/home.html" target="_blank"><img
-                    src="{% static 'img/fid-logo.jpg' %}" alt="FID logo" class="logofid"/></a>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4">
-            <a href="https://github.com/wisslab/judaicalink-portal" target="_blank"><img id="forkmeongithub"
-                                                                                     src="{% static 'img/forkmeongithub-blue.png' %}"
-                                                                                     alt="Fork me on GitHub"></a>
-        </div>
-     <div class="row pt-0 pt-lg-5 pb-5">
+    {% include "search/header.html" %}
 
 
         <div class="col-12 content">
@@ -60,7 +49,6 @@
                 So have fun with it - and be patient, it is still under heavy development and things inevitably will
                 break.</p>
         </div>
-    </div>
 <!--content-->
 <!--NEWS-->
 
@@ -82,5 +70,6 @@ Search Improvements<br>
 {% include "search/footer.html" %}
 
 <!--footer-->
-    {% endblock content %}
+
+{% endblock content %}
 
