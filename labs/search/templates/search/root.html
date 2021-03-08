@@ -2,14 +2,18 @@
 {% block content %}
 {% load static %}
 
+{% include "search/header.html" %}
 
 <!--content-->
-    {% include "search/header.html" %}
 
+<main class="row">
 
-        <div class="col-12 content">
+        <div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-9 col-xl-8">
+
             <h1>Experimental full text search online</h1>
-            <p>Thu, May 31, 2018
+
+            <p>
+                Thu, May 31, 2018
 
                 We have some news regarding search functionality in JudaicaLink.
 
@@ -47,10 +51,16 @@
                 entries to explore our dataset.
 
                 So have fun with it - and be patient, it is still under heavy development and things inevitably will
-                break.</p>
+                break.
+            </p>
+            
         </div>
+
+</main>
+
 <!--content-->
-<!--NEWS-->
+
+<!--NEWS
 
 <div class="news">
     <p>NEWS</p>
@@ -63,7 +73,8 @@ Search Improvements<br>
  Thu, May 31, 2018:
         Experimental full text search online <a href="/">&#62;&#62;read more</a></p></div>
     </div>
-<!--NEWS-->
+
+NEWS-->
 
 <!--footer-->
 
