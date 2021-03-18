@@ -112,7 +112,7 @@ a:hover {
     background: #004284; }/*Home*/
 
 #sidebar ul li.active{
-    background:green;
+    background: #78ab78;
     color: #fff;}
 
 #sidebar ul ul a {  /*das sind die aufklapbaren*/
