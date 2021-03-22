@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'lodjango',
     'dashboard',
     'data',
+    'crispy_forms',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -131,6 +133,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#Crispy form
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+EMAIL_TO = 'benjamin.schnabel@hdm-stuttgart.de'
 
 # Channels
 ASGI_APPLICATION = "labs.routing.application"
