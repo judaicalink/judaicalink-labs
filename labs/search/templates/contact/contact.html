@@ -7,13 +7,27 @@
 {% load static %}
 
 {% include "search/header.html" %}
-    <h1>Contact us</h1>
+
+<main class="row">
+
+        <div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-8 col-xl-8">
+
+
+            <h1 class="text-center text-md-left">Contact us</h1>
+
+
     <div class="container">
         <div class="row">
             {% crispy form %}
         </div>
     </div>
+        </div>
 
+    <div class="col-md-0 col-lg-4 col-xl-4">
+            <img src="/static/img/cole-keister-ogQLprYfTKY-unsplash1.jpg" class="img-thumbnail img-fluid mt-4" alt="Contact us">
+    </div>
+
+</main>
 {% include "search/footer.html" %}
 
 {% endblock content %}
