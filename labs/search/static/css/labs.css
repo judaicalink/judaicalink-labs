@@ -112,7 +112,7 @@ a:hover {
     background: #004284; }/*Home*/
 
 #sidebar ul li.active{
-    background:green;
+    background: #78ab78;
     color: #fff;}
 
 #sidebar ul ul a {  /*das sind die aufklapbaren*/
@@ -321,11 +321,11 @@ height: 130px;
         text-align: center;
         font-size: 16px;
     }
-    #sidebar .sidebar-header {
+    #sidebar.sidebar-header {
         padding: 40px;
     }
 
-    #sidebar .active {
+    #sidebar.active {
         margin-left: 0px;
         height: 100%;
     }
