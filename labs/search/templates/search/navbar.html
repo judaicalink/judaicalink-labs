@@ -30,48 +30,34 @@
 
       <!-- Page Navigation -->
 
-      <nav id="sidebar">
-
-            <div class="sidebar-header">
-
-            </div>
-
-            <ul class="list-unstyled components">
-                <li class="{% if request.resolver_match.view_name == "index" %}active{% endif %}">
-                    <a href="/" ><i class="fas fa-home"></i>  Labs Home</a>
+      <nav id="sidebar" class="p-3">
+            <ul class="list-unstyled components  nav flex-column">
+                <li class="nav-item {% if request.resolver_match.view_name == "index" %}active{% endif %}">
+                    <a class="nav-link" href="/" ><i class="fas fa-home"></i>  Labs Home</a>
                 </li>
-                <li class="{% if request.resolver_match.namespace == "search" %}active{% endif %}">
-                    <a href="{% url 'search:search_index'%}"><i class="fas fa-search"></i>  JudaicaLink Search</a>
+                <li class="nav-item {% if request.resolver_match.namespace == "search" %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'search:search_index'%}"><i class="fas fa-search"></i>  JudaicaLink Search</a>
                 </li>
-                <li class="{% if request.resolver_match.view_name == "search_index" %}active{% endif %}">
-                    <a href="{% url 'search_index' %}"><i class="fas fa-search"></i>  Compact Memory Search</a>
+                <li class="nav-item {% if request.resolver_match.view_name == "search_index" %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'search_index' %}"><i class="fas fa-search"></i>  Compact Memory Search</a>
                 </li>
-                <li class="{% if request.resolver_match.view_name == "datasets" %}active{% endif %}">
-                    <a href="http://web.judaicalink.org/datasets/"><i class="fas fa-table"></i>  Datasets</a>
+                <li class="nav-item {% if request.resolver_match.view_name == "datasets" %}active{% endif %}">
+                    <a class="nav-link" href="http://web.judaicalink.org/datasets/"><i class="fas fa-table"></i>  Datasets</a>
                 </li>
-                <li class="{% if request.resolver_match.view_name == "news" %}active{% endif %}">
-                <a href="http://web.judaicalink.org/news"><i class="fas fa-comment"></i>  News</a>
+                <li class="nav-item {% if request.resolver_match.view_name == "news" %}active{% endif %}">
+                    <a class="nav-link" href="http://web.judaicalink.org/news"><i class="fas fa-comment"></i>  News</a>
                 </li>
-                <li>
-                    <a href="https://www.ub.uni-frankfurt.de/judaica3/home.html" target="_blank"><i class="fas fa-hanukiah"></i>  FID Jewish Studies</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.ub.uni-frankfurt.de/judaica3/home.html" target="_blank"><i class="fas fa-hanukiah"></i>  FID Jewish Studies</a>
                 </li>
-
-            </ul>
-
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-eye"></i>  Background</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="http://web.judaicalink.org/faq">FAQ</a>
-                        </li>
-                        <li>
-                            <a href="http://web.judaicalink.org/about-us">About</a>
-                        </li>
-                        <li>
-                            <a href="http://web.judaicalink.org/legal">Disclaimer</a>
-                        </li>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://web.judaicalink.org/faq"><i class="fas fa-question-circle"></i> FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://web.judaicalink.org/about-us"><i class="fas fa-info-circle"></i> About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://web.judaicalink.org/legal"><i class="fas fa-shield-alt"></i> Disclaimer</a>
                 </li>
             </ul>
         </nav>
