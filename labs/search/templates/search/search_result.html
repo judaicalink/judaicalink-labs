@@ -32,8 +32,8 @@
     {% endif %}
 
     <br><br>
-
-    <table class="table table-striped">
+    <div class="table-responsive">
+    <table class="table table-light table-striped">
 
         {% for data in ordered_dataset %}
 
@@ -52,7 +52,7 @@
         {% endfor %}
 
     </table>
-
+    </div>
     <br> <br>
 
     {% if pages > 1 %}
