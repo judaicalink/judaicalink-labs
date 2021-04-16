@@ -13,6 +13,11 @@ import json
 
 #see labs/urls.py def index to access root with http://localhost:8000
 
+def custom_error_404(request, exception):
+    return render(request, 'search/404.html', {})
+
+def custom_error_500(request):
+    return render(request, 'search/500.html', {})
 
 def index(request):
     return HttpResponse(Dataset.objects.all())
