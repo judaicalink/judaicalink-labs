@@ -18,6 +18,7 @@ from django.contrib.admin import AdminSite
 from django.urls import include, path
 from backend.admin import admin_site
 from django.shortcuts import render
+from django.conf.urls import handler404, handler500
 
 def index(request):
     #return HttpResponse(Dataset.objects.all())
@@ -37,3 +38,7 @@ urlpatterns = [
     path('captcha/', include('captcha.urls')),
     path('contact/', include('contact.urls', namespace='contact')),
 ]
+
+handler404 = 'search.views.custom_error_404'
+handler500 = 'search.views.custom_error_500'
+
