@@ -10,7 +10,7 @@ If you're running Windows you need to install [Visual Studio Build Tools](https:
 Clone the project ``` git clone https://github.com/wisslab/judaicalink-labs.git```  
 In folder *labs* run ``` pip install -r requirements.txt --user```  
 In *labs/labs* copy *settings_dev.py* in the same directory and name it *settings.py*  
-In *labs* run ```python manage.py migrate``` command.  
+In *labs* run ```python manage.py migrate``` command.
 
 Download [Elasticsearch](https://www.elastic.co/de/downloads/elasticsearch) and unzip the downloaded file.  
 Run elasticsearch:   
