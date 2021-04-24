@@ -45,5 +45,5 @@ class ContactForm(forms.Form):
             Field('message', placeholder="Your Message"),
             'gdpr',
             'captcha',
-            Submit('submit', 'Submit', css_class="btn-primary"),
+            Submit('submit', 'Submit', css_class="btn-secondary"),
         )

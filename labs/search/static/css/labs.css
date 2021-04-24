@@ -88,28 +88,16 @@ a:hover {
 
 }
 
-/*#sidebar ul.components {
-    padding: 20px 0;
-    border-bottom: 1px solid #505050;
-}*/
-
-#sidebar ul p {
-    padding: 10px;
-}
-
 #sidebar ul li a {
     padding: 10px;
+    padding-left: 1.1em;
     font-size: 1.1em;
     display: block;
   /*  background: rgba(216,255,191,0.8);*/
 }
 #sidebar ul li a:hover {
     background: #a9ff73;       /*rgba(0,66,132,0.4); /*Dunkelblau in Hex #004284*/
-
 }
-
-/*#sidebar ul li.current a{
-    background: #004284; }/*Home*/
 
 #sidebar ul li.active{
     background: #78ab78;
@@ -120,7 +108,6 @@ a:hover {
     padding-left: 30px !important;
     /*background: #d8ffbf;*/
 }
-
 
 #content {
     width: calc(100% - 250px);
@@ -209,7 +196,6 @@ a:hover {
     margin-top: 3px;
     }
 
-
 .header-logos{
     display: flex;
     align-items: center;
@@ -270,20 +256,6 @@ pre{
 margin-top: -30px;}
 
 
-#forkmeongithub {
-height: 120px;
-position: absolute;
-top: 0;
-right: 0;
-border: 0;
-transition: .4s;
-}
-#forkmeongithub:hover {
-opacity: 0.8;
-height: 130px;
-}
-
-
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
@@ -300,6 +272,7 @@ height: 130px;
     }
     .header-logos{
         margin-left: -5%;
+        margin-top: 30px;
     }
 
     footer-content {
@@ -329,6 +302,9 @@ height: 130px;
         margin-left: 0px;
         height: 100%;
     }
+    #sidebar ul li a {
+    padding-left: 0;
+}
 
     .buttonnav {                    /*evtl. hier buttonnav vgl. labs*/
         z-index: 1000;
