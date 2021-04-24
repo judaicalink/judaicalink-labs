@@ -173,6 +173,11 @@ a:hover {
     margin-top: 3px;
     }
 
+#picturemargintop30 {
+    top: 30px;
+    z-index: -1;
+}
+
 .header-logos{
     display: flex;
     align-items: center;
@@ -280,6 +285,7 @@ margin-top: -30px;}
     #sidebar ul li a {
     padding-left: 0;
     }
+
 
     .buttonnav {                    /*evtl. hier buttonnav vgl. labs*/
         z-index: 1000;
