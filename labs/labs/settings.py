@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'backend.apps.BackendConfig',
     'search',
     'cm_search',
+    'cm_e_search',
     'lodjango',
     'dashboard',
     'data',

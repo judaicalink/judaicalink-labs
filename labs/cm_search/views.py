@@ -5,7 +5,6 @@ import math
 
 
 
-
 def index(request):
     
     return render(request, 'cm_search/search_index.html')
