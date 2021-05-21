@@ -103,7 +103,11 @@ def process_query (query, page):
 
         #linking to detailed view
         id = "<a href='" + d ["id"] + "'>" + d ["source"] ["name"] + "</a>"
+        # d ["id"] = http://data.judaicalink.org/data/dbpedia/Siegfried_Einstein
+        source_dataset = '<b>' + 'Source: ' + '</b>' + '<span class ="badge badge-info">' + d ["id"].split("/")[-2] + '</span>'
+        # source_dataset = dbpedia
         data.append (id)
+        data.append(source_dataset)
 
         #extracting fields (named in field_order) and ordering them like field_order
         for field in field_order:
