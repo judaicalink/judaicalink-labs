@@ -26,6 +26,9 @@ def index(request):
 def search_index(request):
     return render(request, "search/search_index.html")
 
+def all_search_nav(request):
+    return render(request, "search/all_search_nav.html")
+
 def load(request):
     with open('../data/textfile-djh.json', 'rb') as f:
         data = f.read()
