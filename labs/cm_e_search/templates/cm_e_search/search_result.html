@@ -83,11 +83,14 @@ function show_journal(counter) {
 
     <br><br>
     
-    <div>
-    {% if result|length < 1 %}
-        <p>Could not find any matching entity in Compact Memory for this query. :(</p>
 
-    {% else %}
+    {% if result|length > 0 %}
+    <div class="alert alert-success text-center" role="alert">
+    Found {{ result|length }} documents for the query "<b>{{ query }}</b>".
+    </div>
+
+    <div>
+    {% if result|length > 0 %}
 
         {% for r in result %}     
             <ul style="list-style-type: none;">
@@ -176,15 +179,23 @@ function show_journal(counter) {
                     <br>
             </ul>
         {% endfor %}
-    {% endif %}
     </div>
-    <br><br>
-{% include "search/footer.html" %}
-</div>
-    <div class="col-md-0 col-lg-3 col-xl-4">
+    
+    {% else %}
+    <div class="alert alert-danger text-center" role="alert">
+    No documents matching your query "<b>{{ query }}</b>"!
+    </div>
+    {% endif %}
+
+
+   <div class="col-md-0 col-lg-3 col-xl-4">
             <div class="img-fluid sticky-top mt-4" id="picturemargintop30">
                 <img src="/static/img/anton-mislawsky_small.jpg" class="img-thumbnail img-fluid" alt="Jewish building">
             <div>
     </div>
+
+{% include "search/footer.html" %}
+</div>
+
 </main>
 {% endblock content %}
