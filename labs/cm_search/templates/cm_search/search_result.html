@@ -27,11 +27,11 @@
 
     {% if total_hits > 0 %}
     <div class="alert alert-success text-center" role="alert">
-        Found {{ total_hits }} document(s) for the query "<b>{{ query }}</b>".
+        Found {{ total_hits }} document(s) for the query.
     </div>
     {% else %}
     <div class="alert alert-danger text-center" role="alert">
-        No documents matching your query "<b>{{ query }}</b>"!
+        No documents matching your query!
     </div>
     {% endif %}
 
@@ -174,11 +174,11 @@
 
 
 </div>
-    <div class="col-md-0 col-lg-3 col-xl-4">
-            <div class="img-fluid sticky-top mt-4" id="picturemargintop30">
-            <img src="/static/img/cm_search.jpg" class="img-thumbnail img-fluid" alt="stack of newspapers">
-            </div>
-    </div>
+<!--    <div class="col-md-0 col-lg-3 col-xl-4">-->
+<!--            <div class="img-fluid sticky-top mt-4" id="picturemargintop30">-->
+<!--            <img src="/static/img/cm_search.jpg" class="img-thumbnail img-fluid" alt="stack of newspapers">-->
+<!--            </div>-->
+<!--    </div>-->
 </main>
 
 {% include "search/footer.html" %}
