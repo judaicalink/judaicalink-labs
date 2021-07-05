@@ -7,26 +7,31 @@
 
 <main class="row">
 
-	<div class="col-12">
+	<div class="col-12 text-center">
 
     <h1 class="text-center">Explore JudaicaLink</h1>
 
 <div class="card-group">
+
+
   <div class="card">
     <img class="card-img-top" src="/static/img/JudaicaLink_Knowledge_Graph_small.jpg" alt="JudaicaLink Knowledge Graph">
     <div class="card-body">
       <h5 class="card-title">Data from Knowledge Graph</h5>
       <p class="card-text">The Compact Memory collection comprises over 300 Jewish newspapers and journals of the German speaking area of the years 1768–1938 and beyond.</p>
+    </div>
+    <div class="card-footer bg-white">
       <a href="{% url 'search:judaicalink_search_index' %}" class="btn btn-light search_button">JudaicaLink Search</a>
     </div>
   </div>
-
 
   <div class="card">
     <img class="card-img-top" src="/static/img/cm_search_small.jpg" alt="Jewish newspaper">
     <div class="card-body">
       <h5 class="card-title">Newspapers and Journals</h5>
       <p class="card-text">The Compact Memory collection comprises over 300 Jewish newspapers and journals of the German speaking area of the years 1768–1938 and beyond.</p>
+    </div>
+    <div class="card-footer bg-white">
       <a href="{% url 'cm_search_index' %}" class="btn btn-light search_button">Compact Memory Search</a>
     </div>
   </div>
@@ -36,7 +41,9 @@
     <img class="card-img-top" src="/static/img/anton-mislawsky_small.jpg" alt="Jewish building">
     <div class="card-body">
       <h5 class="card-title">Persons and Places</h5>
-      <p class="card-text">Search for persons and places from the Compact Memory collection linked to JudaicaLink entries.</p><br>
+      <p class="card-text">Search for persons and places from the Compact Memory collection linked to JudaicaLink entries.</p>
+    </div>
+    <div class="card-footer bg-white">
       <a href="{% url 'entity_search_index' %}" class="btn btn-light search_button">Compact Memory Entity Search</a>
     </div>
   </div>
