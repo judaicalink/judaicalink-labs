@@ -88,14 +88,14 @@ function show_journal(counter) {
     <div class="alert alert-danger text-center" role="alert">
     No documents matching your query "<b>{{ query }}</b>"!
     </div>
-    
+
     {% else %}
     <div class="alert alert-success text-center" role="alert">
     Found {{ result|length }} documents for the query "<b>{{ query }}</b>".
     </div>
 
     <div>
-    {% if result|length > 0 %}
+
 
         {% for r in result %}     
             <ul style="list-style-type: none;">
