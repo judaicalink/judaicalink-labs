@@ -64,11 +64,11 @@ function show_journal(counter) {
 
 {% include "search/header.html" %}
 
-<main>
+<main class="row">
 
 <div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-9 col-xl-8">
 
-<h1 class="text-center">Compact Memory Entity Search</h1>
+<h1 class="text-center">Compact Memory <br>Entity Search</h1>
 
     <form method="get" action="/cm_e_search/search_result/">
             <div class="col-xs-6">
@@ -88,6 +88,7 @@ function show_journal(counter) {
     <div class="alert alert-danger text-center" role="alert">
     No entity matching your query!
     </div>
+    <br><br><br><br><br><br><br><br><br><br>
     {% endif %}
 
     <div>
@@ -135,8 +136,8 @@ function show_journal(counter) {
                         </ul>
                         {% if r.related_entities|length > 10 %}
                             <br>
-                            <button onclick="more_items('related_item')" class="btn btn-secondary" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More entities</button>
-                            <button onclick="less_items('related_item')" class="btn btn-outline-secondary" type="button" id="less_e" style="display: inline-block; margin: 0 auto;">Less entities</button>
+                            <button onclick="more_items('related_item')" class="btn btn-secondary btn-sm" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More</button>
+                            <button onclick="less_items('related_item')" class="btn btn-outline-secondary btn-sm" type="button" id="less_e" style="display: inline-block; margin: 0 auto;">Less</button>
                         {% endif %}
         </div>
                     <br>
@@ -178,8 +179,8 @@ function show_journal(counter) {
                         </ul>
                         {% if r.journal_occs|length > 10 %}
                             <br>
-                            <button onclick="more_items('journal')" class="btn btn-secondary btn" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More journals</button>
-                            <button onclick="less_items('journal')" class="btn btn-outline-secondary btn" type="button" id="less_e" style="display: inline-block; margin: 0 auto;">Less journals</button>
+                            <button onclick="more_items('journal')" class="btn btn-secondary btn-sm" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More</button>
+                            <button onclick="less_items('journal')" class="btn btn-outline-secondary btn-sm" type="button" id="less_e" style="display: inline-block; margin: 0 auto;">Less</button>
                         {% endif %}
 
         </div>
