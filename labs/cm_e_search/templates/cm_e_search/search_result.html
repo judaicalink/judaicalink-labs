@@ -88,7 +88,6 @@ function show_journal(counter) {
     <div class="alert alert-danger text-center" role="alert">
     No entity matching your query!
     </div>
-    <br><br><br><br><br><br><br>
     {% endif %}
 
     <div>
@@ -104,19 +103,21 @@ function show_journal(counter) {
                     {% else %}
                         <p><b>Name</b>: {{ r.name }} <span class="badge badge-outline-secondary">other</span></p>
                     {% endif %}
+
                     {% if r.ep != '' %}
                         <p><b>Entity Page</b>: <a href={{ r.ep }} target='_blank'>{{r.ep}}</a></p>
+
                     {% endif %}
         </div>
                     <br>
         <div>
                     <b>Related entities</b>: {{r.related_entities|length}}<br>
-                        <ul class="list-group">
+                        <ul style="list-style-type: none;">
                             {% for related_entity in r.related_entities %} <!-- |slice:":10" -->
                                 {% if forloop.counter <= 10 %}
-                                <li class="related_item">
+                                <li style="display:list-item;" class="related_item">
                                 {% else %}
-                                <li class="related_item">
+                                <li style="display:none;" class="related_item">
                                 {% endif %}
                                     {% if related_entity.3 == 'PER' %}
                                         <span class="badge badge-secondary">person</span>
