@@ -74,7 +74,7 @@ function show_journal(counter) {
             <div class="col-xs-6">
                 <input type="hidden" name="page" value="1">
                 <div class="input-group">
-                    <input class="form-control" id="entities" type="text" name="query" value="{{r.name}}">
+                    <input class="form-control" id="entities" type="text" name="query" value="{{ result.name }}">
                     <div class="input-group-btn">
                         <button type="submit" class="btn btn-primary search_button"><i class="fas fa-search"></i></button>
                     </div>
@@ -98,22 +98,23 @@ function show_journal(counter) {
 
         <div class="alert alert-success text-center" role="alert">
                     {% if r.e_type == 'PER' %}
-                        <p><b>Name</b>: {{ r.name }} <span class="badge badge-secondary">person</span></p>
+                        <p><b>Name</b>: {{ r.name }} <span class="badge badge-secondary">person</span>
                     {% elif r.e_type == 'LOC' %}
-                        <p><b>Name</b>: {{ r.name }} <span class="badge badge-info">location</span></p>
+                        <p><b>Name</b>: {{ r.name }} <span class="badge badge-info">location</span>
                     {% else %}
-                        <p><b>Name</b>: {{ r.name }} <span class="badge badge-outline-secondary">other</span></p>
+                        <p><b>Name</b>: {{ r.name }} <span class="badge badge-outline-secondary">other</span>
                     {% endif %}
 
                     {% if r.ep != '' %}
-                        <p><b>Entity Page</b>: <a href={{ r.ep }} target='_blank'>{{r.ep}}</a></p>
+                        <br><b>Entity Page</b>: <a href={{ r.ep }} target='_blank'>{{r.ep}}</a></p>
 
                     {% endif %}
         </div>
                     <br>
         <div>
                     <b>Related entities</b>: {{r.related_entities|length}}<br>
-                        <ul style="list-style-type: none;">
+                    <p>Label | Dataset | Related score | Entity Search</p>
+                        <ul>
                             {% for related_entity in r.related_entities %} <!-- |slice:":10" -->
                                 {% if forloop.counter <= 10 %}
                                 <li style="display:list-item;" class="related_item">
@@ -135,7 +136,7 @@ function show_journal(counter) {
                             
                         </ul>
                         {% if r.related_entities|length > 10 %}
-                            <br>
+
                             <button onclick="more_items('related_item')" class="btn btn-secondary btn-sm" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More</button>
                             <button onclick="less_items('related_item')" class="btn btn-outline-secondary btn-sm" type="button" id="less_e" style="display: inline-block; margin: 0 auto;">Less</button>
                         {% endif %}
@@ -150,7 +151,7 @@ function show_journal(counter) {
                     <br>
         <div>
                     <b>Occurs in Journals</b>: {{r.journal_occs|length}}<br>
-                        <p>(Number of mentions) | Journal | [Oldest mention - Latest mention]
+                    <p>(Number of mentions) | Journal | [Oldest mention - Latest mention]</p>
                         <ul style="list-style-type: none;">
                             {% for journal_occ in r.journal_occs %} <!-- |slice:":10" -->
                                 {% if  forloop.counter < 10 %}
@@ -178,7 +179,7 @@ function show_journal(counter) {
                             
                         </ul>
                         {% if r.journal_occs|length > 10 %}
-                            <br>
+
                             <button onclick="more_items('journal')" class="btn btn-secondary btn-sm" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More</button>
                             <button onclick="less_items('journal')" class="btn btn-outline-secondary btn-sm" type="button" id="less_e" style="display: inline-block; margin: 0 auto;">Less</button>
                         {% endif %}
