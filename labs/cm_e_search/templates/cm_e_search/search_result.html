@@ -74,11 +74,7 @@ function show_journal(counter) {
             <div class="col-xs-6">
                 <input type="hidden" name="page" value="1">
                 <div class="input-group">
-                    {% if r in result %}
-                    <input class="form-control" id="entities" type="text" name="query" value="{{ r.name }}" placeholder="Enter your search keyword">
-                    {% else %}
                     <input class="form-control" id="entities" type="text" name="query" value="" placeholder="Enter your search keyword">
-                    {% endif %}
                     <div class="input-group-btn">
                         <button type="submit" class="btn btn-primary search_button"><i class="fas fa-search"></i></button>
                     </div>
