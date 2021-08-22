@@ -8,6 +8,7 @@
     var availableTags = JSON.parse(availableTags);
 </script>
 <script language="JavaScript" type="text/javascript" src="{% static 'js/jquery-1.12.4.min.js'%}"></script>
+
 <script>
 function more_items(classname) {
 
@@ -75,7 +76,7 @@ function show_journal(counter) {
                 <div class="input-group">
                     <input class="form-control" id="entities" type="text" name="query" value="{{query}}">
                     <div class="input-group-btn">
-                        <button type="submit" class="btn btn-light search_button"><i class="fas fa-search"></i></button>
+                        <button type="submit" class="btn btn-primary search_button"><i class="fas fa-search"></i></button>
                     </div>
                 </div>
             </div>
@@ -85,30 +86,29 @@ function show_journal(counter) {
 
     {% if result|length < 1 %}
     <div class="alert alert-danger text-center" role="alert">
-    No documents matching your query!
+    No entity matching your query!
     </div>
-
-    {% else %}
-    <div class="alert alert-success text-center" role="alert">
-    Found {{ result|length }} document(s) for the query.
-    </div>
+    {% endif %}
 
     <div>
 
 
         {% for r in result %}     
             <ul style="list-style-type: none;">
+                <div class="alert alert-success text-center" role="alert>
                     {% if r.e_type == 'PER' %}
-                        <li><b>Name</b>: {{ r.name }} <span class="badge badge-warning">PER</span></li>
+                        <li><b>Name</b>: {{ r.name }} <span class="badge badge-secondary">person</span></li>
                     {% elif r.e_type == 'LOC' %}
-                        <li><b>Name</b>: {{ r.name }} <span class="badge badge-info">LOC</span></li>
+                        <li><b>Name</b>: {{ r.name }} <span class="badge badge-info">location</span></li>
                     {% else %}
-                        <li><b>Name</b>: {{ r.name }} <span class="badge badge-secondary">OTH</span></li>
+                        <li><b>Name</b>: {{ r.name }} <span class="badge badge-outline-secondary">other</span></li>
                     {% endif %}
 
                     {% if r.ep != '' %}
                         <li><b>Entity Page</b>: <a href={{ r.ep }} target='_blank'>{{r.ep}}</a> </li>
+                </div>
                     {% endif %}
+                    <br>
                     <li><b>Related entities</b>:<br>
                         <ul style="list-style-type: none;">
                             {% for related_entity in r.related_entities %} <!-- |slice:":10" -->
@@ -118,28 +118,29 @@ function show_journal(counter) {
                                 <li style="display:none;" class="related_item">
                                 {% endif %}
                                     {% if related_entity.3 == 'PER' %}
-                                        <span class="badge badge-warning">PER</span>
+                                        <span class="badge badge-secondary">person</span>
                                     {% elif related_entity.3 == 'LOC' %}
-                                        <span class="badge badge-info">LOC</span>
+                                        <span class="badge badge-info">location</span>
                                     {% else %}
-                                        <span class="badge badge-secondary">OTH</span>
+                                        <span class="badge badge-outline-secondary">other</span>
                                     {% endif %}
                                     <a href="{{related_entity.0}}">{{related_entity.1}}</a>
                                     ({{ related_entity.2|truncatechars:6}})
-                                    <a href="/cm_e_search/search_result/?query={{related_entity.1}}"><img src="{% static '/img/lens.png' %}" alt='Query this entity'></a>
+                                    <a href="/cm_e_search/search_result/?query={{related_entity.1}}" class="btn btn-primary search_button" role="button" alt='Query this entity'><i class="fas fa-search"></i></a>
                                 </li>
                             {% endfor %}
                             
                         </ul>
                         {% if r.related_entities|length > 10 %}
                             <br>
-                            <button onclick="more_items('related_item')" class="btn btn-dark" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More entities</button>
-                            <button onclick="less_items('related_item')" class="btn btn-outline-dark" type="button" id="less_e" style="display: inline-block; margin: 0 auto;">Less entities</button>
+                            <button onclick="more_items('related_item')" class="btn btn-primary search_button" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More entities</button>
+                            <button onclick="less_items('related_item')" class="btn btn-info" type="button" id="less_e" style="display: inline-block; margin: 0 auto;">Less entities</button>
                         {% endif %}
                     </li>
+                    <br>
                     <!-- END RELATED ENTITIES -->
-                    
-                    <hr style="border-top: 2px solid;">
+
+                    <hr>
                     
                     <!-- BEGIN JOURNAL MENTIONS -->
                     
@@ -174,8 +175,8 @@ function show_journal(counter) {
                         </ul>
                         {% if r.journal_occs|length > 10 %}
                             <br>
-                            <button onclick="more_items('journal')" class="btn btn-dark" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More journals</button>
-                            <button onclick="less_items('journal')" class="btn btn-outline-dark" type="button" id="less_e" style="display: inline-block; margin: 0 auto;">Less journals</button>
+                            <button onclick="more_items('journal')" class="btn btn-primary search_button" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More journals</button>
+                            <button onclick="less_items('journal')" class="btn btn-info" type="button" id="less_e" style="display: inline-block; margin: 0 auto;">Less journals</button>
                         {% endif %}
                     </li>
                 
@@ -183,17 +184,16 @@ function show_journal(counter) {
                     <br>
             </ul>
         {% endfor %}
-    {% endif %}
     </div>
 
 
 </div>
 
-<!--<div class="col-md-0 col-lg-3 col-xl-4">-->
-<!--    <div class="img-fluid sticky-top mt-4" id="picturemargintop30">-->
-<!--       <img src="/static/img/anton-mislawsky_small.jpg" class="img-thumbnail img-fluid" alt="Jewish building">-->
-<!--    <div>-->
-<!--</div>-->
+<div class="col-md-0 col-lg-3 col-xl-4">
+   <div class="img-fluid sticky-top mt-4" id="picturemargintop30">
+       <img src="/static/img/anton-mislawsky_small.jpg" class="img-thumbnail img-fluid" alt="Jewish building">
+   </div>
+</div>
 
 </main>
 
