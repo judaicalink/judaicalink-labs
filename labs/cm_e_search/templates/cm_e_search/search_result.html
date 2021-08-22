@@ -114,7 +114,7 @@ function show_journal(counter) {
 
         <div>
                     <b>Related entities</b>: {{r.related_entities|length}}<br>
-                    <p>Label | Dataset | Related Score | Entity Search</p>
+                    <p>Label | Dataset | (Related Score) | Entity Search</p>
                         <ol>
                             {% for related_entity in r.related_entities %} <!-- |slice:":10" -->
                                 {% if forloop.counter <= 10 %}
