@@ -74,7 +74,7 @@ function show_journal(counter) {
             <div class="col-xs-6">
                 <input type="hidden" name="page" value="1">
                 <div class="input-group">
-                    <input class="form-control" id="entities" type="text" name="query" value="{{query}}">
+                    <input class="form-control" id="entities" type="text" name="query" value="{{r.name}}">
                     <div class="input-group-btn">
                         <button type="submit" class="btn btn-primary search_button"><i class="fas fa-search"></i></button>
                     </div>
@@ -105,18 +105,19 @@ function show_journal(counter) {
                     {% endif %}
 
                     {% if r.ep != '' %}
-                        <br>
                         <p><b>Entity Page</b>: <a href={{ r.ep }} target='_blank'>{{r.ep}}</a></p>
-         </div>
+
                     {% endif %}
+        </div>
                     <br>
+        <div>
                     <b>Related entities</b>: {{r.related_entities|length}}<br>
-                        <ul style="list-style-type: none;">
+                        <ol class="list-group list-group-numbered">
                             {% for related_entity in r.related_entities %} <!-- |slice:":10" -->
                                 {% if forloop.counter <= 10 %}
-                                <li style="display:list-item;" class="related_item">
+                                <li class="related_item list-group-item">
                                 {% else %}
-                                <li style="display:none;" class="related_item">
+                                <li class="related_item list-group-item">
                                 {% endif %}
                                     {% if related_entity.3 == 'PER' %}
                                         <span class="badge badge-secondary">person</span>
@@ -127,17 +128,17 @@ function show_journal(counter) {
                                     {% endif %}
                                     <a href="{{related_entity.0}}">{{related_entity.1}}</a>
                                     ({{ related_entity.2|truncatechars:6}})
-                                    <a href="/cm_e_search/search_result/?query={{related_entity.1}}" class="btn btn-primary search_button" role="button" alt='Query this entity'><i class="fas fa-search"></i></a>
+                                    <a href="/cm_e_search/search_result/?query={{related_entity.1}}" role="button" alt='Query this entity'><i class="fas fa-search"></i></a>
                                 </li>
                             {% endfor %}
                             
-                        </ul>
+                        </ol>
                         {% if r.related_entities|length > 10 %}
                             <br>
-                            <button onclick="more_items('related_item')" class="btn btn-secondary btn-sm" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More entities</button>
-                            <button onclick="less_items('related_item')" class="btn btn-outline-secondary btn-sm" type="button" id="less_e" style="display: inline-block; margin: 0 auto;">Less entities</button>
+                            <button onclick="more_items('related_item')" class="btn btn-secondary" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More entities</button>
+                            <button onclick="less_items('related_item')" class="btn btn-outline-secondary" type="button" id="less_e" style="display: inline-block; margin: 0 auto;">Less entities</button>
                         {% endif %}
-
+        </div>
                     <br>
                     <!-- END RELATED ENTITIES -->
 
@@ -146,6 +147,7 @@ function show_journal(counter) {
                     <!-- BEGIN JOURNAL MENTIONS -->
                     
                     <br>
+        <div>
                     <b>Occurs in Journals</b>: {{r.journal_occs|length}}<br>
                         <p>(Number of mentions) | Journal | [Oldest mention - Latest mention]
                         <ul style="list-style-type: none;">
@@ -176,11 +178,11 @@ function show_journal(counter) {
                         </ul>
                         {% if r.journal_occs|length > 10 %}
                             <br>
-                            <button onclick="more_items('journal')" class="btn btn-secondary btn-sm" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More journals</button>
-                            <button onclick="less_items('journal')" class="btn btn-outline-secondary btn-sm" type="button" id="less_e" style="display: inline-block; margin: 0 auto;">Less journals</button>
+                            <button onclick="more_items('journal')" class="btn btn-secondary btn" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More journals</button>
+                            <button onclick="less_items('journal')" class="btn btn-outline-secondary btn" type="button" id="less_e" style="display: inline-block; margin: 0 auto;">Less journals</button>
                         {% endif %}
 
-                
+        </div>
                     <!-- END JOURNAL MENTIONS -->
                     <br>
 
@@ -190,10 +192,10 @@ function show_journal(counter) {
 
 </div>
 
-<div class="col-md-0 col-lg-2 col-xl-3">
-   <div class="img-fluid sticky-top mt-4" id="picturemargintop30">
-       <img src="/static/img/anton-mislawsky_small.jpg" class="img-thumbnail img-fluid" alt="Jewish building">
-   </div>
+<div class="col-md-0 col-lg-3 col-xl-4">
+            <div class="img-fluid sticky-top mt-4" id="picturemargintop30">
+            <img src="/static/img/anton-mislawsky_small.jpg" class="img-thumbnail img-fluid" alt="Jewish building">
+            </div>
 </div>
 
 </main>
