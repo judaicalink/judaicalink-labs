@@ -93,23 +93,24 @@ function show_journal(counter) {
     <div>
 
 
-        {% for r in result %}     
-            <ul style="list-style-type: none;">
-                <div class="alert alert-success text-center" role="alert>
+        {% for r in result %}
+
+        <div class="alert alert-success text-center" role="alert">
                     {% if r.e_type == 'PER' %}
-                        <li><b>Name</b>: {{ r.name }} <span class="badge badge-secondary">person</span></li>
+                        <p><b>Name</b>: {{ r.name }} <span class="badge badge-secondary">person</span></p>
                     {% elif r.e_type == 'LOC' %}
-                        <li><b>Name</b>: {{ r.name }} <span class="badge badge-info">location</span></li>
+                        <p><b>Name</b>: {{ r.name }} <span class="badge badge-info">location</span></p>
                     {% else %}
-                        <li><b>Name</b>: {{ r.name }} <span class="badge badge-outline-secondary">other</span></li>
+                        <p><b>Name</b>: {{ r.name }} <span class="badge badge-outline-secondary">other</span></p>
                     {% endif %}
 
                     {% if r.ep != '' %}
-                        <li><b>Entity Page</b>: <a href={{ r.ep }} target='_blank'>{{r.ep}}</a> </li>
-                </div>
+                        <br>
+                        <p><b>Entity Page</b>: <a href={{ r.ep }} target='_blank'>{{r.ep}}</a></p>
+         </div>
                     {% endif %}
                     <br>
-                    <li><b>Related entities</b>:<br>
+                    <b>Related entities</b>: {{r.related_entities|length}}<br>
                         <ul style="list-style-type: none;">
                             {% for related_entity in r.related_entities %} <!-- |slice:":10" -->
                                 {% if forloop.counter <= 10 %}
@@ -133,10 +134,10 @@ function show_journal(counter) {
                         </ul>
                         {% if r.related_entities|length > 10 %}
                             <br>
-                            <button onclick="more_items('related_item')" class="btn btn-primary search_button" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More entities</button>
-                            <button onclick="less_items('related_item')" class="btn btn-info" type="button" id="less_e" style="display: inline-block; margin: 0 auto;">Less entities</button>
+                            <button onclick="more_items('related_item')" class="btn btn-secondary btn-sm" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More entities</button>
+                            <button onclick="less_items('related_item')" class="btn btn-outline-secondary btn-sm" type="button" id="less_e" style="display: inline-block; margin: 0 auto;">Less entities</button>
                         {% endif %}
-                    </li>
+
                     <br>
                     <!-- END RELATED ENTITIES -->
 
@@ -145,7 +146,7 @@ function show_journal(counter) {
                     <!-- BEGIN JOURNAL MENTIONS -->
                     
                     <br>
-                    <li><b>Occurs in Journals</b>:<br>
+                    <b>Occurs in Journals</b>: {{r.journal_occs|length}}<br>
                         <p>(Number of mentions) | Journal | [Oldest mention - Latest mention]
                         <ul style="list-style-type: none;">
                             {% for journal_occ in r.journal_occs %} <!-- |slice:":10" -->
@@ -175,21 +176,21 @@ function show_journal(counter) {
                         </ul>
                         {% if r.journal_occs|length > 10 %}
                             <br>
-                            <button onclick="more_items('journal')" class="btn btn-primary search_button" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More journals</button>
-                            <button onclick="less_items('journal')" class="btn btn-info" type="button" id="less_e" style="display: inline-block; margin: 0 auto;">Less journals</button>
+                            <button onclick="more_items('journal')" class="btn btn-secondary btn-sm" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More journals</button>
+                            <button onclick="less_items('journal')" class="btn btn-outline-secondary btn-sm" type="button" id="less_e" style="display: inline-block; margin: 0 auto;">Less journals</button>
                         {% endif %}
-                    </li>
+
                 
                     <!-- END JOURNAL MENTIONS -->
                     <br>
-            </ul>
+
         {% endfor %}
     </div>
 
 
 </div>
 
-<div class="col-md-0 col-lg-3 col-xl-4">
+<div class="col-md-0 col-lg-2 col-xl-3">
    <div class="img-fluid sticky-top mt-4" id="picturemargintop30">
        <img src="/static/img/anton-mislawsky_small.jpg" class="img-thumbnail img-fluid" alt="Jewish building">
    </div>
