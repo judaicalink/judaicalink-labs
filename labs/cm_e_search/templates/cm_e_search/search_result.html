@@ -75,7 +75,7 @@ function show_journal(counter) {
                 <input type="hidden" name="page" value="1">
                 <div class="input-group">
                     {% for r in result %}
-                    <input class="form-control" id="entities" type="text" name="query" value="{{ r.name }}">
+                    <input class="form-control" id="entities" type="text" name="query" value="{{ r.name }}" placeholder="Enter your search keyword">
                     {% endfor %}
                     <div class="input-group-btn">
                         <button type="submit" class="btn btn-primary search_button"><i class="fas fa-search"></i></button>
@@ -111,7 +111,7 @@ function show_journal(counter) {
                         <br><b>Entity Page</b>: <a href={{ r.ep }} target='_blank'>{{r.ep}}</a>
                     {% endif %}
         </div>
-                    <br>
+                    
         <div>
                     <b>Related entities</b>: {{r.related_entities|length}}<br>
                     <p>Label | Dataset | Related Score | Entity Search</p>
