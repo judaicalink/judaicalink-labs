@@ -102,7 +102,7 @@ function show_journal(counter) {
                     {% elif r.e_type == 'LOC' %}
                         <b>Name</b>: {{ r.name }} <span class="badge badge-info">location</span>
                     {% else %}
-                        <p><b>Name</b>: {{ r.name }} <span class="badge badge-outline-secondary">other</span>
+                        <p><b>Name</b>: {{ r.name }} <span class="badge badge-dark">other</span>
                     {% endif %}
 
                     {% if r.ep != '' %}
@@ -125,7 +125,7 @@ function show_journal(counter) {
                                     {% elif related_entity.3 == 'LOC' %}
                                         <span class="badge badge-info">location</span>
                                     {% else %}
-                                        <span class="badge badge-outline-secondary">other</span>
+                                        <span class="badge badge-dark">other</span>
                                     {% endif %}
                                     <a href="{{related_entity.0}}">{{related_entity.1}}</a>
                                     ({{ related_entity.2|truncatechars:6}})
