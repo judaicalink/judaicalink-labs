@@ -74,7 +74,9 @@ function show_journal(counter) {
             <div class="col-xs-6">
                 <input type="hidden" name="page" value="1">
                 <div class="input-group">
-                    <input class="form-control" id="entities" type="text" name="query" value="{{ result.name }}">
+                    {% for r in result %}
+                    <input class="form-control" id="entities" type="text" name="query" value="{{ r.name }}">
+                    {% endfor %}
                     <div class="input-group-btn">
                         <button type="submit" class="btn btn-primary search_button"><i class="fas fa-search"></i></button>
                     </div>
@@ -98,23 +100,22 @@ function show_journal(counter) {
 
         <div class="alert alert-success text-center" role="alert">
                     {% if r.e_type == 'PER' %}
-                        <p><b>Name</b>: {{ r.name }} <span class="badge badge-secondary">person</span>
+                        <b>Name</b>: {{ r.name }} <span class="badge badge-secondary">person</span>
                     {% elif r.e_type == 'LOC' %}
-                        <p><b>Name</b>: {{ r.name }} <span class="badge badge-info">location</span>
+                        <b>Name</b>: {{ r.name }} <span class="badge badge-info">location</span>
                     {% else %}
                         <p><b>Name</b>: {{ r.name }} <span class="badge badge-outline-secondary">other</span>
                     {% endif %}
 
                     {% if r.ep != '' %}
-                        <br><b>Entity Page</b>: <a href={{ r.ep }} target='_blank'>{{r.ep}}</a></p>
-
+                        <br><b>Entity Page</b>: <a href={{ r.ep }} target='_blank'>{{r.ep}}</a>
                     {% endif %}
         </div>
                     <br>
         <div>
                     <b>Related entities</b>: {{r.related_entities|length}}<br>
-                    <p>Label | Dataset | Related score | Entity Search</p>
-                        <ul>
+                    <p>Label | Dataset | Related Score | Entity Search</p>
+                        <ol>
                             {% for related_entity in r.related_entities %} <!-- |slice:":10" -->
                                 {% if forloop.counter <= 10 %}
                                 <li style="display:list-item;" class="related_item">
@@ -134,7 +135,7 @@ function show_journal(counter) {
                                 </li>
                             {% endfor %}
                             
-                        </ul>
+                        </ol>
                         {% if r.related_entities|length > 10 %}
 
                             <button onclick="more_items('related_item')" class="btn btn-secondary btn-sm" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More</button>
@@ -147,8 +148,6 @@ function show_journal(counter) {
                     <hr>
                     
                     <!-- BEGIN JOURNAL MENTIONS -->
-                    
-                    <br>
         <div>
                     <b>Occurs in Journals</b>: {{r.journal_occs|length}}<br>
                     <p>(Number of mentions) | Journal | [Oldest mention - Latest mention]</p>
@@ -186,7 +185,7 @@ function show_journal(counter) {
 
         </div>
                     <!-- END JOURNAL MENTIONS -->
-                    <br>
+                    <br><br><br><br><br>
 
         {% endfor %}
     </div>
