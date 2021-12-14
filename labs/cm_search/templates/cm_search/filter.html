@@ -87,18 +87,30 @@
         <div class="card-body">
           <form>
             <div class="form-group">
-              <label for="formControlRange">Example Range input</label>
-              <input type="range" class="form-control-range" id="formControlRange">
+              <label for="slider-range">Example Range input</label>
+              <div class="selector">
+                <div class="price-slider">
+                    <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+                        <!--<div class="ui-slider-range ui-corner-all ui-widget-header"></div>-->
+                        <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                        <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                    </div>
+                    <span id="min-price" class="slider-price">0</span>
+                    <span class="separator">-</span>
+                    <span id="max-price" data-max="3500" class="slider-price">3000</span>
+                </div>
+              </div>
 
               <div class="row">
                 <div class="col">
-                  <input type="text" class="form-control" placeholder="from">
+                  <input type="text" class="form-control" placeholder="from" value="">
                 </div>
                 -
                 <div class="col">
                   <input type="text" class="form-control" placeholder="to">
                 </div>
               </div>
+
             </div>
           </form>
         </div>
@@ -110,3 +122,5 @@
 
 
   </div>
+
+

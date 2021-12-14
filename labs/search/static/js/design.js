@@ -222,3 +222,14 @@ $(document).ready(function ($) {
         });
 
 });
+
+$("#slider-range").slider({
+  range: true,
+  min: 0,
+  max: 3000,
+  step: 1,
+  slide: function(event, ui) {
+    $("#min-price").html(ui.values[0]);
+    $("#max-price").html(ui.values[1]);
+  }
+})
