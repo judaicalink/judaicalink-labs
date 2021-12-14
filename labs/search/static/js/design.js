@@ -229,7 +229,19 @@ $("#slider-range").slider({
   max: 3000,
   step: 1,
   slide: function(event, ui) {
-    $("#min-price").html(ui.values[0]);
-    $("#max-price").html(ui.values[1]);
+    $("#min-price").val(ui.values[0]);
+    $("#max-price").val(ui.values[1]);
   }
 })
+
+$("#min-price").change(function () {
+    var value = this.value;
+    console.log(value);
+    $("#slider-range").slider('values', 0, $(this).val());
+});
+
+$("#max-price").change(function () {
+    var value = this.value;
+    console.log(value);
+    $("#slider-range").slider('values', 1, $(this).val());
+});
