@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from elasticsearch import Elasticsearch
 import math
-
+import cm_search.filter
 
 
 def index(request):
