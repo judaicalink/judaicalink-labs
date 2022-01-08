@@ -18,13 +18,20 @@
       <div id="collapseOne1" class="collapse show" role="button" aria-labelledby="headingOne1">
         <div class="card-body">
           <form>
-            <div class="form-group">
-              <input type="text" class="form-control" id="journal_search" aria-describedby="journal_info" placeholder="journal name">
+            <!--<div class="form-group">
+              <input type="text" class="form-control" id="journal_search" aria-describedby="journal_info" placeholder="journal title">
               <small id="journal_info" class="form-text text-muted">Looking for something specific?</small>
-            </div>
+            </div>-->
             <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="journal_check1">
-              <label class="form-check-label" for="journal_check1">Journal 1 (number)</label>
+              {% for journal_title in journals.checked %}
+              <input type="checkbox" class="form-check-input" id="{{journal_title}}" value="{{journal_title}}">
+              <label class="form-check-label" for="{{journal_title}}">{{journal_title}}</label>
+              {% endfor %}
+
+              {% for journal_title in journals.unchecked %}
+              <input type="checkbox" class="form-check-input" id="{{journal_title}}" value="{{journal_title}}">
+              <label class="form-check-label" for="{{journal_title}}">{{journal_title}}</label>
+              {% endfor %}
             </div>
             <!--<button type="submit" class="btn btn-primary">Submit</button>-->
           </form>
