@@ -28,7 +28,7 @@ class ContactForm(forms.Form):
         label='I accept the <a href="http://web.judaicalink.org/legal">privacy policy</a>.'
     )
 
-    captcha = CaptchaField()
+    #captcha = CaptchaField()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -43,7 +43,7 @@ class ContactForm(forms.Form):
             Field('name', placeholder="Your Name"),
             Field('email', placeholder="Your Email"),
             Field('message', placeholder="Your Message"),
-            'gdpr',
-            'captcha',
+            #'gdpr',
+            #'captcha',
             Submit('submit', 'Submit', css_class="btn-secondary"),
         )

@@ -36,7 +36,7 @@ urlpatterns = [
     path('cm_e_search/', include('cm_e_search.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('data', include('data.urls')),
-    path('captcha/', include('captcha.urls')),
+    #path('captcha/', include('captcha.urls')),
     path('contact/', include('contact.urls', namespace='contact')),
 ]
 
