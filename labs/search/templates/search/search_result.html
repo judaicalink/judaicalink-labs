@@ -5,35 +5,117 @@
 
 {% include "search/header.html" %}
 
-<main>
+<script> var rows_data = {{rows | safe}}; </script>
+
+
+<main class="row">
 
 <div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-9 col-xl-8">
 
 <h1 class="text-center">JudaicaLink Search</h1>
 
-    <form method="get" action="search">
-        <div class="col-xs-6">
-            <input type="hidden" name="page" value="1">
-            <div class="input-group">
-                <input class="form-control" type="text" name="lookfor" value="{{query}}">
-                <div class="input-group-btn" >
-                    <button type="submit" class="btn btn-light search_button"><i class="fas fa-search"></i></button>
+<!-- looking at our data -->
+<!--{{rows}}-->
+
+    <div id="accordion">
+
+    <!-- Simple Search -->
+
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <form method="get" action="search">
+                    <div class="col-xs-6">
+                        <input type="hidden" name="page" value="1">
+                        <div class="input-group">
+                            <input class="form-control" type="text" name="input0" value="{{ simple_search_input }}" placeholder="Search...">
+                            <div class="input-group-btn" >
+                                <button type="submit" class="btn btn-primary search_button"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+        </div>
+
+    <!-- Advanced Search -->
+
+        <div id="headingOne">
+                <button id="buttonadvancedsearch" type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color:#0056b3">
+                    Advanced Search
+                </button>
+        </div>
+
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card">
+                <div class="card-body">
+
+                    {% verbatim %}
+                    <div id="app">
+                    <form  method="get" action="search">
+                    <input type="hidden" name="page" value="1">
+                            <div v-for="(row, index) in rows" class="form-row">
+
+                                <!--Operator-->
+                                <div v-if="index > 0" class="form-group col-2">
+                                    <select v-model="row.selected_operator" class="form-control" :name="row.operator">
+                                        <option v-for="(operator) in row.other_operators" v-bind:value="operator.fieldname">{{operator.display}}</option>
+                                    </select>
+                                </div>
+                                <div v-if="index < 1" class="form-group col-2">
+                                    <!--Placeholder for missing Operators in first row-->
+                                </div>
+                                <!--Option-->
+                                <div class="form-group col-4">
+                                    <select v-model="row.selected_option" class="form-control" :name="row.option">
+                                        <option v-for="(option) in row.other_options" v-bind:value="option.fieldname">{{option.display}}</option>
+                                    </select>
+                                </div>
+                                <!--Input-->
+                                <div class="form-group col-5">
+                                    <input v-model="row.submitted_input" type="text" :name="row.input" class="form-control" value="row.submitted_input">
+                                </div>
+
+                                <!--@click="removeElement(index);"-->
+                                <div class="form-group col-1">
+                                    <button type="button" class="btn btn-danger" @click="removeElement(index)"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+
+                        <button type="submit" class="btn btn-primary search_button float-right"><i class="fas fa-search"></i> Search</button>
+                    </form>
+                    <button class="btn btn-primary search_button" @click="addRow()"><i class="fas fa-plus"></i> Add</button>
+                    <button class="btn btn-danger" @click="clearElements(), addRow(), addRow()">Clear All</button>
+                    </div>
+                    {% endverbatim %}
+
                 </div>
             </div>
-        </div>
-    </form>
+        </div> <!--close collapse div-->
+    </div> <!--close accordion div-->
+    <!-- End Advanced Search -->
+    <br>
 
-    <br><br>
+    <!--Alert--->
 
-    {% if total_hits > 0 %}
-        <p>Found {{ total_hits }} documents for the query "<b>{{ query }}</b>".</p>
-    {% else %}
-        <p>No documents matching your query "<b>{{ query}}</b>"!</p>
-    {% endif %}
+            {% if total_hits > 0 %}
+                <div class="alert alert-success text-center" role="alert">
+                Found {{ total_hits }} results for your query:
+                <b>{% for entry in alert %}
+                    {{entry}}
+                    {% endfor %}</b>
+                </div>
+            {% else %}
+            <div class="alert alert-danger text-center" role="alert">
+                No results matching your query:
+                <b>{% for entry in alert %}
+                    {{entry}}
+                    {% endfor %}</b>
+            </div>
+            {% endif %}
 
-    <br><br>
 
-    <table class="table table-striped">
+    <!--Results-->
+
+    <div class="table-responsive">
+    <table class="table table-light table-striped">
 
         {% for data in ordered_dataset %}
 
@@ -52,13 +134,16 @@
         {% endfor %}
 
     </table>
-
+    </div>
     <br> <br>
+
+
+    <!--Pagination-->
 
     {% if pages > 1 %}
 
         <form style="display: inline;" method="get" action="search">
-            <input type="hidden" name="lookfor" value="{{ query }}">
+            <input type="hidden" name="paging" value="{{ submitted_search }}">
             <input type="hidden" name="page" value="{{ 1 }}">
             {% if page != 1 %}
             <button class="btn btn-light paging_button_inactive" type="submit" > {{ 1 }} </button>
@@ -70,7 +155,7 @@
         {% if page != 1 %}
 
         <form style="display: inline;" method="get" action="search">
-            <input type="hidden" name="lookfor" value="{{ query }}">
+            <input type="hidden" name="paging" value="{{ submitted_search }}">
             <input type="hidden" name="page" value="{{ previous }}">
             <button class="btn btn-light paging_button_inactive" type="submit" > previous </button>
         </form>
@@ -80,7 +165,7 @@
         {% for i in paging %}
 
             <form style="display: inline;" method="get" action="search">
-                <input type="hidden" name="lookfor" value="{{ query }}">
+                <input type="hidden" name="paging" value="{{ submitted_search }}">
                 <input type="hidden" name="page" value="{{ i }}">
                 {% if i == page %}
                 <button class="btn btn-light paging_button_active" type="submit" > {{ i }} </button>
@@ -94,7 +179,7 @@
         {% if page != pages %}
 
         <form style="display: inline;" method="get" action="search">
-            <input type="hidden" name="lookfor" value="{{ query }}">
+            <input type="hidden" name="paging" value="{{ submitted_search }}">
             <input type="hidden" name="page" value="{{ next }}">
             <button class="btn btn-light paging_button_inactive" type="submit" > next </button>
         </form>
@@ -104,7 +189,7 @@
         {% if pages != 1 %}
 
         <form style="display: inline;" method="get" action="search">
-            <input type="hidden" name="lookfor" value="{{ query }}">
+            <input type="hidden" name="paging" value="{{ submitted_search }}">
             <input type="hidden" name="page" value="{{ pages }}">
             {% if pages != page %}
             <button class="btn btn-light paging_button_inactive" type="submit" > {{ pages }} </button>
@@ -119,8 +204,18 @@
 
     </div>
 
+    <!--Picture-->
+
+    <div class="col-md-0 col-lg-3 col-xl-4">
+        <div class="img-fluid sticky-top mt-4" id="picturemargintop30">
+            <img src="/static/img/JudaicaLink_Knowledge_Graph.jpg" class="img-thumbnail img-fluid" alt="Judaicalink Knowledge Graph">
+        </div>
+    </div>
+
+
 </main>
 
 {% include "search/footer.html" %}
 
 {% endblock content %}
+
