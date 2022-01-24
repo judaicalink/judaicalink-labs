@@ -71,57 +71,20 @@ a:hover {
     margin-left: -250px;
 }
 
-#sidebar a[data-toggle="collapse"] {
-    position: relative;
-}
-
-.dropdown-toggle::after {
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-}
-#sidebar .sidebar-header {
-    padding: 20px;
-   /* background: rgba(0,66,132,0.4); *//**//*hier*/
-
-}
-
-/*#sidebar ul.components {
-    padding: 20px 0;
-    border-bottom: 1px solid #505050;
-}*/
-
-#sidebar ul p {
-    padding: 10px;
-}
-
 #sidebar ul li a {
     padding: 10px;
+    padding-left: 1.1em;
     font-size: 1.1em;
     display: block;
   /*  background: rgba(216,255,191,0.8);*/
 }
 #sidebar ul li a:hover {
     background: #a9ff73;       /*rgba(0,66,132,0.4); /*Dunkelblau in Hex #004284*/
-
 }
-
-/*#sidebar ul li.current a{
-    background: #004284; }/*Home*/
 
 #sidebar ul li.active{
-    background: #a9ff73;
-    color: #505050;
-    }
-
-#sidebar ul ul a {  /*das sind die aufklapbaren*/
-    font-size: 0.9em !important;
-    padding-left: 30px !important;
-    /*background: #d8ffbf;*/
-}
-
+    background: #78ab78;
+    color: #fff;}
 
 #content {
     width: calc(100% - 250px);
@@ -184,7 +147,7 @@ a:hover {
     width: 110px;
     height: auto;
     margin-top: 10px;
-    margin-left: 5px;
+    margin-left: -10px;
 }
 #jcelogo {
     padding: 5px;
@@ -210,6 +173,10 @@ a:hover {
     margin-top: 3px;
     }
 
+#picturemargintop30 {
+    top: 30px;
+    z-index: -1;
+}
 
 .header-logos{
     display: flex;
@@ -271,20 +238,6 @@ pre{
 margin-top: -30px;}
 
 
-#forkmeongithub {
-height: 120px;
-position: absolute;
-top: 0;
-right: 0;
-border: 0;
-transition: .4s;
-}
-#forkmeongithub:hover {
-opacity: 0.8;
-height: 130px;
-}
-
-
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
@@ -301,6 +254,7 @@ height: 130px;
     }
     .header-logos{
         margin-left: -5%;
+        margin-top: 10px;
     }
 
     footer-content {
@@ -322,14 +276,16 @@ height: 130px;
         text-align: center;
         font-size: 16px;
     }
-    #sidebar .sidebar-header {
-        padding: 40px;
-    }
 
     #sidebar.active {
         margin-left: 0px;
         height: 100%;
     }
+
+    #sidebar ul li a {
+    padding-left: 0;
+    }
+
 
     .buttonnav {                    /*evtl. hier buttonnav vgl. labs*/
         z-index: 1000;
