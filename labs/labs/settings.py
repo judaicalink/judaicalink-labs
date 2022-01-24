@@ -161,6 +161,9 @@ CHANNEL_LAYERS = {
 # Other Servers
 
 LABS_ROOT = 'http://localhost:8000/'
+LABS_GIT_WEBROOT = "https://github.com/wisslab/judaicalink-labs/blob/master/labs/"
+LABS_DUMPS_WEBROOT = "http://data.judaicalink.org/dumps/"
+LABS_DUMPS_LOCAL = "dumps/"
 FUSEKI_SERVER = "http://localhost:3030/"
 FUSEKI_STORAGE = "."
 ELASTICSEARCH_SERVER = "http://localhost:9200/"

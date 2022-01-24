@@ -3,7 +3,7 @@
 The JudaicaLink Portal for experimental access to our data.
 
 Make sure [Python 3.8](https://www.python.org/downloads/release/python-382/) is installed!  
-If you're running Windows you need to install [Visual Studio Build Tools](https://download.visualstudio.microsoft.com/download/pr/ac28b571-7709-4635-83d0-6277d6102ecb/ae0caec52ee10d6efc9b855bec5b934cf8054a638e08372e0de4f6351a25ea5d/vs_BuildTools.exe).  
+If you're running Windows you need to install [Visual Studio Build Tools](https://download.visualstudio.microsoft.com/download/pr/ac28b571-7709-4635-83d0-6277d6102ecb/ae0caec52ee10d6efc9b855bec5b934cf8054a638e08372e0de4f6351a25ea5d/vs_BuildTools.exe) with the C++ package.  
 
 
 
