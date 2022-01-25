@@ -18,6 +18,7 @@ from django.contrib.admin import AdminSite
 from django.urls import include, path
 from backend.admin import admin_site
 from django.shortcuts import render
+from django.conf.urls import handler404, handler500
 
 def index(request):
     #return HttpResponse(Dataset.objects.all())
@@ -32,4 +33,13 @@ urlpatterns = [
     path('lod/', include('lodjango.urls')),
     path('', index, name='index'),
     path('cm_search/', include('cm_search.urls')),
+    path('cm_e_search/', include('cm_e_search.urls')),
+    #path('dashboard/', include('dashboard.urls')),
+    path('data', include('data.urls')),
+    path('captcha/', include('captcha.urls')),
+    path('contact/', include('contact.urls', namespace='contact')),
 ]
+
+handler404 = 'search.views.custom_error_404'
+handler500 = 'search.views.custom_error_500'
+

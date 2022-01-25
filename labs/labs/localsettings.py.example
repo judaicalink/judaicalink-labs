@@ -1,0 +1,28 @@
+"""
+Django settings for labs project.
+
+Copy this file to localsettings.py and adjust it.
+You can overwrite all settings here.
+
+This is used for deployment settings and can be used
+for local development as well.
+
+The localsettings.py is never added to git.
+"""
+
+SECRET_KEY = 'CHANGE_ME'
+DEBUG = False
+STATIC_ROOT = '/data/judaicalink/judaicalink-labs/static'
+CHANNEL_LAYERS = {
+   "default": {
+	"BACKEND": "channels_redis.core.RedisChannelLayer",
+	"CONFIG": {
+             "hosts": [("localhost", 6379)],
+         },
+   },
+}
+LABS_ROOT = 'http://localhost:8000/'
+FUSEKI_SERVER = "http://localhost:3030/"
+
+
+GEONAMES_API_USER = "Your username" # https://www.geonames.org/login

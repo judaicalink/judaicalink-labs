@@ -5,9 +5,7 @@ import math
 
 
 
-
 def index(request):
-    
     return render(request, 'cm_search/search_index.html')
 
 
@@ -22,7 +20,7 @@ def result(request):
 	size = 10
 		#changed size from 15 to 10 to match the amount of results in judaicalink search
 	start = (page - 1) * size
-	res = es.search(index='cm', body={"query": {"match": {'text': query}}, 'size': size, 'from': start, 'highlight': {'fields': {'text': {}}}    })
+	res = es.search(index='cm_meta', body={"query": {"match": {'text': query}}, 'size': size, 'from': start, 'highlight': {'fields': {'text': {}}}    })
 		#added 'from': start, to indicate which results should be displayed
 			#'from' is used to tell elasticsearch which results to return by index
 		# -> if page = 1 then results 0-9 will be displayed
@@ -33,36 +31,34 @@ def result(request):
 		
 		formatted_doc = {}
 
-		# chunk the id string and build the links to cm frankfurt (journal, volume, issue)
-		chunks = doc['_id'].split('_')
-
-		journal_link = "http://sammlungen.ub.uni-frankfurt.de/cm/periodical/titleinfo/"+chunks[0]
-		volume_link = "http://sammlungen.ub.uni-frankfurt.de/cm/periodical/titleinfo/"+chunks[1]
-		issue_link = "http://sammlungen.ub.uni-frankfurt.de/cm/periodical/titleinfo/"+chunks[2]
-		page_link = "http://sammlungen.ub.uni-frankfurt.de/cm/periodical/pageview/"+chunks[-1]
-
-		formatted_doc['jl'] = journal_link
-		formatted_doc['vl'] = volume_link
-		formatted_doc['il'] = issue_link
+		journal_link = "http://sammlungen.ub.uni-frankfurt.de/cm/periodical/titleinfo/"+doc['_source']['vlid_journal']
+		page_link = "http://sammlungen.ub.uni-frankfurt.de/cm/periodical/pageview/"+doc['_source']['vlid_page']
 
 
-		if chunks[0] in blacklist:
-			formatted_doc['plink'] = ''
+		if doc['_source']['vlid_journal'] in blacklist:
+			formatted_doc['jl'] = ''
+			formatted_doc['pl'] = ''
 		else:
-			formatted_doc['plink'] = page_link
+			formatted_doc['jl'] = journal_link
+			formatted_doc['pl'] = page_link
 
-		formatted_doc['page'] = chunks[-2]
-		formatted_doc['id'] = doc['_id']
-		formatted_doc['score'] = round(doc['_score'], 2)
-		formatted_doc['text'] = doc['_source']['text']
-		formatted_doc['highlight'] = doc['highlight']['text']
+		formatted_doc['page'] = doc['_source']['page']
+		formatted_doc['text'] = doc['highlight']['text']
+		formatted_doc['dateIssued'] = doc['_source']['dateIssued']
+		formatted_doc['lang'] = doc['_source']['lang']
+		formatted_doc['place'] = doc['_source']['place']
+		formatted_doc['j_title'] = doc['_source']['j_title']
+		formatted_doc['publisher'] = doc['_source']['publisher']
+		formatted_doc['volume'] = doc['_source']['volume']
+		formatted_doc['heft'] = doc['_source']['heft']
+		formatted_doc['aufsatz'] = doc['_source']['aufsatz']
 
 		result.append(formatted_doc)
 
 	#paging
 	# -> almost copy from jl-search, except some variable-names
 
-	total_hits = res['hits']['total'] ['value']
+	total_hits = res['hits']['total']['value']
 	pages = math.ceil (total_hits / size)
 		#pages containes necessary amount of pages for paging
 

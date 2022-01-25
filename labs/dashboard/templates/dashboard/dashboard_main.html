@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Main</title>
+</head>
+<body>
+
+{{result}}
+<br><br><br>
+{% if result %}
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script type='text/javascript'>
+    var datasets = {{result|safe}};
+  </script>
+
+  <div id="dashboard">
+      <li v-for="data in datasets">
+          [[ data]]
+      </li>
+
+  </div>
+ <!-- delimiters: Hier keine {} bei den Variablen in Vue.js um Konflikte mir der Django Syntax zu vermeiden-->
+  <script>
+    var dashboard = new Vue({
+      delimiters: ['[[', ']]'],
+      el: '#dashboard',
+      data: {
+          datasets: datasets,
+      },
+    });
+  </script>
+{% endif %}
+
+
+</body>
+</html>

@@ -2,13 +2,15 @@
 
 # the folder where the github markdown files are stored
 /labs/backend/gh_datasets
+/labs/data/gh_datasets
 # the folder where rdf files are stored
 /labs/backend/rdf_files
+/labs/data/rdf_files
 /data/
 /fuseki/
-labs/labs/settings.py
 /static
 labs/secret_key.txt
+labs/labs/localsettings.py
 htpasswd
 
 # Byte-compiled / optimized / DLL files
