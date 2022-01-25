@@ -1,0 +1,206 @@
+{% extends 'search/base.html' %}
+{% block content %}
+
+{% load static %}
+<script src="{% static 'js/autocomplete.js' %}" type="text/javascript"></script>
+<script>
+    var availableTags = "{{data}}".replace(/&quot;/g, '"');
+    var availableTags = JSON.parse(availableTags);
+</script>
+<script language="JavaScript" type="text/javascript" src="{% static 'js/jquery-1.12.4.min.js'%}"></script>
+
+<script>
+function more_items(classname) {
+
+    var tail_items = document.getElementsByClassName(classname);
+    var btn = document.getElementById("more_e");
+
+    var i = 0;
+    for (const item of tail_items) {
+        if (item.style.display === "none") {
+            item.style.display = "list-item";
+            i++;
+        }
+        if (i > 9) {
+            break;
+        }
+    }
+    if (document.getElementById("less_e").style.display === "none") {
+        document.getElementById("less_e").style.display = "block";
+    }
+}
+
+function less_items(classname) {
+
+    var tail_items = document.getElementsByClassName(classname);
+    var btn = document.getElementById("less_e");
+
+    var j = 0
+    for (var i = tail_items.length-1; i >= 10; i--) {
+        
+        if (tail_items[i].style.display === "list-item") {
+            tail_items[i].style.display = "none";
+            j++;
+        }
+        if (j > 9) {
+            break;
+        }
+        
+    }     
+}
+
+function show_journal(counter) {
+    
+    var div = document.getElementById(counter);
+    
+    if (div.style.display === "none") {
+
+        div.style.display = "block";
+    } else  {
+        div.style.display = "none";
+    }
+}
+</script>
+
+{% include "search/header.html" %}
+
+<main class="row">
+
+<div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-9 col-xl-8">
+
+<h1 class="text-center">Compact Memory <br>Entity Search</h1>
+
+    <form method="get" action="/cm_e_search/search_result/">
+            <div class="col-xs-6">
+                <input type="hidden" name="page" value="1">
+                <div class="input-group">
+                    <input class="form-control" id="entities" type="text" name="query" value="" placeholder="Enter your search keyword">
+                    <div class="input-group-btn">
+                        <button type="submit" class="btn btn-primary search_button"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    <br>
+
+    {% if result|length < 1 %}
+    <div class="alert alert-danger text-center" role="alert">
+    No entity matching your query!
+    </div>
+    <br><br><br><br><br><br><br><br><br><br>
+    {% endif %}
+
+    <div>
+
+
+        {% for r in result %}
+
+        <div class="alert alert-success text-center" role="alert">
+                    {% if r.e_type == 'PER' %}
+                        <b>Name</b>: {{ r.name }} <span class="badge badge-secondary">person</span>
+                    {% elif r.e_type == 'LOC' %}
+                        <b>Name</b>: {{ r.name }} <span class="badge badge-info">location</span>
+                    {% else %}
+                        <p><b>Name</b>: {{ r.name }} <span class="badge badge-dark">other</span>
+                    {% endif %}
+
+                    {% if r.ep != '' %}
+                        <br><b>Entity Page</b>: <a href={{ r.ep }} target='_blank'>{{r.ep}}</a>
+                    {% endif %}
+        </div>
+
+        <div>
+                    <b>Related entities</b>: {{r.related_entities|length}}<br>
+                    <p>Label | Dataset | (Related Score) | Entity Search</p>
+                        <ol>
+                            {% for related_entity in r.related_entities %} <!-- |slice:":10" -->
+                                {% if forloop.counter <= 10 %}
+                                <li style="display:list-item;" class="related_item">
+                                {% else %}
+                                <li style="display:none;" class="related_item">
+                                {% endif %}
+                                    {% if related_entity.3 == 'PER' %}
+                                        <span class="badge badge-secondary">person</span>
+                                    {% elif related_entity.3 == 'LOC' %}
+                                        <span class="badge badge-info">location</span>
+                                    {% else %}
+                                        <span class="badge badge-dark">other</span>
+                                    {% endif %}
+                                    <a href="{{related_entity.0}}">{{related_entity.1}}</a>
+                                    ({{ related_entity.2|truncatechars:6}})
+                                    <a href="/cm_e_search/search_result/?query={{related_entity.1}}" role="button" alt='Query this entity'><i class="fas fa-search"></i></a>
+                                </li>
+                            {% endfor %}
+                            
+                        </ol>
+                        {% if r.related_entities|length > 10 %}
+
+                            <button onclick="more_items('related_item')" class="btn btn-secondary btn-sm" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More</button>
+                            <button onclick="less_items('related_item')" class="btn btn-outline-secondary btn-sm" type="button" id="less_e" style="display: inline-block; margin: 0 auto;">Less</button>
+                        {% endif %}
+        </div>
+                    <br>
+                    <!-- END RELATED ENTITIES -->
+
+                    <hr>
+                    
+                    <!-- BEGIN JOURNAL MENTIONS -->
+        <div>
+                    <b>Occurs in Journals</b>: {{r.journal_occs|length}}<br>
+                    <p>(Number of mentions) | Journal | [Oldest mention - Latest mention]</p>
+                        <ul style="list-style-type: none;">
+                            {% for journal_occ in r.journal_occs %} <!-- |slice:":10" -->
+                                {% if  forloop.counter < 10 %}
+                                    <li style="display:list-item;" class="journal">
+                                {% else %}
+                                    <li style="display:none;" class="journal">
+                                {% endif %}
+                                    ({{journal_occ.mentions|length}}) <a href="javascript:void(0);" onclick="show_journal('{{forloop.counter}}')">{{journal_occ.j_name}}</a> [{{journal_occ.first}} - {{journal_occ.last}}]
+                                    <div class="mentions" id="{{forloop.counter}}" style="display: none; overflow-y: scroll; max-height: 400px;">
+
+                                        <ul>
+                                        {% for mention in journal_occ.mentions %}
+                                            <ul style="list-style-type: none;">
+                                                <li><i>Text</i>: {{mention.spot}}</li>
+                                                <li><i>Date</i>: {{ mention.date }}</li>
+                                                <li><i>Position (offset)</i>: {{mention.start}} - {{mention.end}}</li>
+                                                <li><i>Ref. in Visual Library</i>: <a href="http://sammlungen.ub.uni-frankfurt.de/cm/periodical/pageview/{{ mention.p_link}}">Visual Library</a></li>
+                                            </ul>
+                                            <br>
+                                        {% endfor %}
+                                    </ul>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                            
+                        </ul>
+                        {% if r.journal_occs|length > 10 %}
+
+                            <button onclick="more_items('journal')" class="btn btn-secondary btn-sm" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More</button>
+                            <button onclick="less_items('journal')" class="btn btn-outline-secondary btn-sm" type="button" id="less_e" style="display: inline-block; margin: 0 auto;">Less</button>
+                        {% endif %}
+
+        </div>
+                    <!-- END JOURNAL MENTIONS -->
+                    <br>
+
+        {% endfor %}
+    </div>
+
+
+</div>
+
+<div class="col-md-0 col-lg-3 col-xl-4">
+            <div class="img-fluid sticky-top mt-4" id="picturemargintop30">
+            <img src="/static/img/Westend-synagoge.jpg" class="img-thumbnail img-fluid" alt="Jewish building">
+            </div>
+</div>
+
+</main>
+
+{% include "search/footer.html" %}
+
+
+
+{% endblock content %}
