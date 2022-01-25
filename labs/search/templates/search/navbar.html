@@ -1,22 +1,23 @@
 {% load static %}
+{% load active_link_tags %}
 
 <div class="wrapper">
 
       <!-- Page Navigation -->
 
-      <nav id="sidebar">
-            <ul class="list-unstyled">
+      <nav id="sidebar" class="navbar">
+            <ul class="list-unstyled navbar-nav">
                 <br><br>
-                <li {% if request.resolver_match.view_name == "index" %}active{% endif %}">
+                <li class="nav-item {% active_link '/' 'active' %}">
                     <a href="/" ><i class="fas fa-home"></i>  Labs Home</a>
                 </li>
-                <li {% if request.resolver_match.namespace == "search" %}active{% endif %}">
+                <li class="nav-item {% active_link 'search:all_search_nav' 'active' %}">
                     <a href="{% url 'search:all_search_nav'%}"><i class="fas fa-search"></i>  Search</a>
                 </li>
-                <li {% if request.resolver_match.view_name == "datasets" %}active{% endif %}">
+                <li class="nav-item {% active_link 'http://web.judaicalink.org/datasets/' 'active' %}">
                     <a href="http://web.judaicalink.org/datasets/"><i class="fa fa-database"></i>  Datasets</a>
                 </li>
-                <li {% if request.resolver_match.view_name == "news" %}active{% endif %}">
+                <li class="nav-item {% active_link 'http://web.judaicalink.org/news' 'active' %}">
                     <a href="http://web.judaicalink.org/news"><i class="fas fa-comment"></i>  News</a>
                 </li>
                 <li>
