@@ -1,37 +1,23 @@
 {% extends 'search/base.html' %}
 {% block content %}
-{% load static %}
+    {% load static %}
 
-{% include "search/header.html" %}
+        <!-- header -->
+        {%  include 'search/header.html' %}
+        <!-- header -->
 
-<!--content-->
-<main class="row">
-	<div class="col-12 col-sm-12 ml-3 ml-md-0 ml-xl-0 col-md-12 col-lg-9 col-xl-8">
+    <div class="row pt-5">
+        <!--content-->
+        {% include 'search/content.html' %}
+        <!--content-->
+        <!--NEWS-->
+        {% include 'search/news.html' %}
+        <!--NEWS-->
+    </div>
 
-
-
-<h1 class="text-center text-md-left">Welcome to JudaicaLink labs!</h1>
-<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-</p>
-
-
-
-<!--<img src="/img/homepage-graphics.png" alt="Linked Data Web"/>-->
-<h2 class="text-center text-lg-left">Apps</h2>
-<p>
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-</p>
-
-</div>
-	<div class="col-lg-3">
-		<img src="{% static '/img/brille.jpg'%}" class="img-thumbnail" height="auto" width="100%"></img>
-
-	</div>
-
-</main>
-
-<!--content end-->
-{% include "search/footer.html" %}
-
+    <!--footer-->
+    {% include "search/footer_labs.html" %}
+    <!--footer-->
 
 {% endblock content %}
+
