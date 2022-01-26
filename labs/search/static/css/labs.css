@@ -350,3 +350,6 @@ margin-top: -30px;}
 }
 
 
+#sidebar a.active{
+    background-color: rgba(169, 255, 115, 0.5);
+}
