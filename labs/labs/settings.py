@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'data',
     'crispy_forms',
     'captcha',
+    'active_link',
 ]
 
 MIDDLEWARE = [

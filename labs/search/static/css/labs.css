@@ -83,8 +83,8 @@ a:hover {
 }
 
 #sidebar ul li.active{
-    background: #78ab78;
-    color: #fff;}
+    background-color: rgba(169, 255, 115, 0.5);
+}
 
 #content {
     width: calc(100% - 250px);
@@ -348,5 +348,4 @@ margin-top: -30px;}
         margin-left: -42px;  /*Button auÃŸen*/
     }
 }
-
 
