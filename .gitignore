@@ -6,6 +6,7 @@
 # the folder where rdf files are stored
 /labs/backend/rdf_files
 /labs/data/rdf_files
+/labs/dumps
 /data/
 /fuseki/
 /static
