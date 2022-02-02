@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'dashboard',
     'data',
     'crispy_forms',
+    'captcha',
     'hcaptcha',
     'active_link',
     'environ',
