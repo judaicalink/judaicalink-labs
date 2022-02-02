@@ -27,6 +27,13 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # False if not in os.environ because of casting above
 DEBUG = env('DEBUG')
+MODE = env('MODE')
+
+# if MODE = preduction, then DEBUG = False
+if env('MODE') == 'production':
+    DEBUG = False
+
+INTERNAL_IPS = env('INTERNAL_IPS')
 
 # Raises Django's ImproperlyConfigured
 # exception if SECRET_KEY not in os.environ
@@ -64,6 +71,7 @@ INSTALLED_APPS = [
     'hcaptcha',
     'active_link',
     'environ',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -74,6 +82,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'labs.urls'
