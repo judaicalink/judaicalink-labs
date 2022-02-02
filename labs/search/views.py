@@ -13,7 +13,8 @@ import json
 
 # see labs/urls.py def index to access root with http://localhost:8000
 
-def custom_error_404(request):
+def custom_error_404(request, exception):
+    print("Error 404", exception)
     return render(request, 'search/404.html', {})
 
 
