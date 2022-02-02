@@ -31,8 +31,10 @@
     </script>
     <!-- End Matomo Code -->
 
-
      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    {% block header_script %}
+    {% endblock %}
+
 
 </head>
 
@@ -70,6 +72,9 @@
 
         <script src="{% static 'js/design.js' %}"></script>
         <script src="{% static 'js/activePageHighlighting.js' %}"></script>
+
+        {% block footer_scripts %}
+        {% endblock %}
 
 </body>
 </html>
