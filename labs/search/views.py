@@ -7,34 +7,46 @@ from django.conf import settings
 from data.models import Dataset
 from elasticsearch import Elasticsearch
 import json
+from django.conf import settings
+from django.views.decorators.cache import cache_page
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
+
 
 
 # Create your views here.
 
 # see labs/urls.py def index to access root with http://localhost:8000
+CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
+
+@cache_page(CACHE_TTL)
 def custom_error_404(request, exception):
     print("Error 404", exception)
     return render(request, 'search/404.html', {})
 
 
+@cache_page(CACHE_TTL)
 def custom_error_500(request):
     return render(request, 'search/500.html', {})
 
 
+@cache_page(CACHE_TTL)
 def index(request):
     return HttpResponse(Dataset.objects.all())
     # return render(request, "search/root.html")
 
 
+@cache_page(CACHE_TTL)
 def search_index(request):
     return render(request, "search/search_index.html")
 
 
+@cache_page(CACHE_TTL)
 def all_search_nav(request):
     return render(request, "search/all_search_nav.html")
 
 
+@cache_page(CACHE_TTL)
 def load(request):
     with open('../data/textfile-djh.json', 'rb') as f:
         data = f.read()
@@ -45,6 +57,7 @@ def load(request):
         return HttpResponse(response)
 
 
+@cache_page(CACHE_TTL)
 def search(request):
     # for key, value in request.GET.items():
     #    print(f'Key: {key}')
@@ -90,6 +103,7 @@ def create_query_str(submitted_search):
     return query_dic
 
 
+@cache_page(CACHE_TTL)
 def get_query(request):
     operators = []
     options = []
@@ -177,6 +191,8 @@ def get_query(request):
     return submitted_search
 
 
+
+@cache_page(CACHE_TTL)
 def create_alert(submitted_search):
     # receives dictionary query_dic ["submitted_search"] submitted_search may look like this: [{'Option1': 'name:',
     # 'Input1': 'einstein'}, {'Operator3': ' OR ', 'Option3': 'birthDate:', 'Input3': '1900'}] creates a string for
@@ -199,6 +215,8 @@ def create_alert(submitted_search):
     return alert
 
 
+
+@cache_page(CACHE_TTL)
 def generate_rows(submitted_search):
     counter = 0
     rows = []
@@ -296,6 +314,8 @@ def generate_rows(submitted_search):
         return rows
 
 
+
+@cache_page(CACHE_TTL)
 def process_query(query_dic, page, alert):
     page = int(page)
     es = Elasticsearch()

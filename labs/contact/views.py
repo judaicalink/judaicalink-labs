@@ -5,12 +5,19 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.conf import settings
 from django.utils.timezone import now
+from django.conf import settings
+from django.views.decorators.cache import cache_page
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
+
 
 from .forms import ContactForm
 from django.core.mail import BadHeaderError, send_mail
 
 # Create your views here.
+CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
+
+@cache_page(CACHE_TTL)
 def index(request):
     error_message = ''
     if request.method == 'POST':
@@ -54,5 +61,6 @@ def index(request):
     return render(request, 'contact/contact.html', {'form': form, 'error_message': error_message})
 
 
+@cache_page(CACHE_TTL)
 def sent(request):
     return render(request, 'contact/sent.html')

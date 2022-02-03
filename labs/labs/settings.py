@@ -138,6 +138,8 @@ CACHES = {
     'redis': env.cache_url('REDIS_URL')
 }
 
+CACHE_TTL = 60 * 15
+
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 

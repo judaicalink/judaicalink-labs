@@ -2,8 +2,15 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from elasticsearch import Elasticsearch
 import math, json, pprint
+from django.conf import settings
+from django.views.decorators.cache import cache_page
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
 
+
+CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
+
+@cache_page(CACHE_TTL)
 def get_names():
 
 	names = []
@@ -25,6 +32,8 @@ def index(request):
 	return render(request, 'cm_e_search/search_index.html', context)
 
 
+
+@cache_page(CACHE_TTL)
 def result(request):
 
 	names = get_names()
@@ -47,6 +56,5 @@ def result(request):
 		"result": result,
 		"data": json.dumps(names)
 	}
-
 
 	return render(request, 'cm_e_search/search_result.html', context)
