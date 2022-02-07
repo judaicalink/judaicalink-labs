@@ -46,7 +46,6 @@ def all_search_nav(request):
     return render(request, "search/all_search_nav.html")
 
 
-@cache_page(CACHE_TTL)
 def load(request):
     with open('../data/textfile-djh.json', 'rb') as f:
         data = f.read()
@@ -57,7 +56,6 @@ def load(request):
         return HttpResponse(response)
 
 
-@cache_page(CACHE_TTL)
 def search(request):
     # for key, value in request.GET.items():
     #    print(f'Key: {key}')
@@ -103,7 +101,6 @@ def create_query_str(submitted_search):
     return query_dic
 
 
-@cache_page(CACHE_TTL)
 def get_query(request):
     operators = []
     options = []
@@ -192,7 +189,6 @@ def get_query(request):
 
 
 
-@cache_page(CACHE_TTL)
 def create_alert(submitted_search):
     # receives dictionary query_dic ["submitted_search"] submitted_search may look like this: [{'Option1': 'name:',
     # 'Input1': 'einstein'}, {'Operator3': ' OR ', 'Option3': 'birthDate:', 'Input3': '1900'}] creates a string for
@@ -216,7 +212,6 @@ def create_alert(submitted_search):
 
 
 
-@cache_page(CACHE_TTL)
 def generate_rows(submitted_search):
     counter = 0
     rows = []
@@ -315,7 +310,6 @@ def generate_rows(submitted_search):
 
 
 
-@cache_page(CACHE_TTL)
 def process_query(query_dic, page, alert):
     page = int(page)
     es = Elasticsearch()
