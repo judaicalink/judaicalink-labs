@@ -13,6 +13,7 @@
 labs/secret_key.txt
 labs/labs/localsettings.py
 htpasswd
+/labs/.env
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
