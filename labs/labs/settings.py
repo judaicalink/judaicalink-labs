@@ -69,7 +69,7 @@ INSTALLED_APPS = [
     'data',
     'crispy_forms',
     'hcaptcha',
-    'active_link',
+    'active_link.templatetags.active_link_tags',
     'environ',
     'debug_toolbar',
 ]
@@ -101,9 +101,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-            'builtins': [
-                'active_link.templatetags.active_link_tags',
-            ]
         },
     },
 ]
