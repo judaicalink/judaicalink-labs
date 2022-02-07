@@ -69,7 +69,7 @@ INSTALLED_APPS = [
     'data',
     'crispy_forms',
     'hcaptcha',
-    'active_link.templatetags.active_link_tags',
+    'active_link',
     'environ',
     'debug_toolbar',
 ]
