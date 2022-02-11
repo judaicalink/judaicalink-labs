@@ -97,9 +97,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-#            'libraries': {
-#                'active_link_tags': 'active_link.templatetags.active_link_tags',
-#            }
+            'libraries': {
+                'active_link_tags': 'active_link.templatetags.active_link_tags',
+            }
         },
     },
 ]
