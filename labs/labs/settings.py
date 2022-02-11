@@ -44,9 +44,7 @@ SECRET_KEY = env('SECRET_KEY')
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 ALLOWED_HOSTS = env('ALLOWED_HOSTS').replace(" ", "").split(",")
-#ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-print(ALLOWED_HOSTS)
-print(type(ALLOWED_HOSTS))
+
 # Application definition
 
 INSTALLED_APPS = [
