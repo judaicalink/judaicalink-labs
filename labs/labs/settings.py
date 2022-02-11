@@ -33,7 +33,7 @@ MODE = env('MODE')
 if env('MODE') == 'production':
     DEBUG = False
 
-INTERNAL_IPS = env('INTERNAL_IPS')
+INTERNAL_IPS = env('INTERNAL_IPS').replace(" ", "").split(",")
 
 # Raises Django's ImproperlyConfigured
 # exception if SECRET_KEY not in os.environ
@@ -43,12 +43,10 @@ SECRET_KEY = env('SECRET_KEY')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
-ALLOWED_HOSTS = [
-    'labs.judaicalink.org',
-    'localhost'
-]
-
-
+ALLOWED_HOSTS = env('ALLOWED_HOSTS').replace(" ", "").split(",")
+#ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+print(ALLOWED_HOSTS)
+print(type(ALLOWED_HOSTS))
 # Application definition
 
 INSTALLED_APPS = [
@@ -101,9 +99,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-            'libraries': {
-                'active_link_tags': 'active_link.templatetags.active_link_tags',
-            }
+#            'libraries': {
+#                'active_link_tags': 'active_link.templatetags.active_link_tags',
+#            }
         },
     },
 ]
@@ -180,7 +178,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 #Crispy form
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
