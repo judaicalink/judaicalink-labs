@@ -62,7 +62,7 @@ python-debian===0.1.36ubuntu1
 pytz==2019.3
 PyYAML==5.4
 ranger-fm==1.9.3
-requests==2.22.0
+requests~=2.27.1
 requests-toolbelt==0.8.0
 requests-unixsocket==0.2.0
 SecretStorage==2.3.1
@@ -83,3 +83,12 @@ zope.component==4.3.0
 zope.event==4.4
 zope.hookable==5.0.0
 zope.interface==4.7.1
+
+Django~=3.2.9
+rdflib~=6.0.2
+beautifulsoup4~=4.8.2
+toml~=0.10.2
+SPARQLWrapper~=1.8.5
+environ~=1.0
+asgiref~=3.4.1
+setuptools~=57.0.0
