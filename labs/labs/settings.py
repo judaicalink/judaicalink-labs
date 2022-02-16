@@ -101,6 +101,7 @@ TEMPLATES = [
             ],
             'libraries': {
                 'active_link_tags': 'active_link.templatetags.active_link_tags',
+                'cookiebanner': 'cookiebanner.templatetags.cookiebanner',
             }
         },
     },
