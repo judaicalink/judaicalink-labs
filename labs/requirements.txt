@@ -1,4 +1,4 @@
-Django>=2.2.8
+Django==3.2.12
 channels>=2.4.0
 elasticsearch>=7.1.0
 PyYAML>=5.3
@@ -8,6 +8,12 @@ SPARQLWrapper>=1.8.4
 toml>=0.10.0
 libsass==0.20.0
 django-compressor==2.2
-django-simple-captcha==0.5.13
 django-crispy-forms==1.11.1
 django-sass-processor==0.8
+django-environ==0.8.1
+django-hcaptcha==0.2.0
+django-active-link==0.1.8
+django-debug-toolbar==3.2.4
+django-extensions==3.1.2
+redis==4.1.2
+django-redis==5.2.0

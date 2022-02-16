@@ -6,12 +6,14 @@
 # the folder where rdf files are stored
 /labs/backend/rdf_files
 /labs/data/rdf_files
+/labs/dumps
 /data/
 /fuseki/
 /static
 labs/secret_key.txt
 labs/labs/localsettings.py
 htpasswd
+/labs/.env
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

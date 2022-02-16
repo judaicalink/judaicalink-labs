@@ -1,5 +1,6 @@
 
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,8 +32,10 @@
     </script>
     <!-- End Matomo Code -->
 
-
      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    {% block header_scripts %}
+    {% endblock %}
+
 
 </head>
 
@@ -69,6 +72,10 @@
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
 
         <script src="{% static 'js/design.js' %}"></script>
-        
+        <script src="{% static 'js/activePageHighlighting.js' %}"></script>
+
+        {% block footer_scripts %}
+        {% endblock %}
+
 </body>
 </html>
