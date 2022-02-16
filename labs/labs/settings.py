@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import environ
 import os
+from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -68,6 +69,7 @@ INSTALLED_APPS = [
     'active_link',
     'environ',
     'debug_toolbar',
+    'cookiebanner',
 ]
 
 MIDDLEWARE = [
@@ -223,3 +225,47 @@ GEONAMES_API_USER = "" # Configure in localsettings.py
 # removed
 #if os.path.isfile("labs/localsettings.py"):
 #    from .localsettings import *
+
+
+# COOKIE_BANNER
+COOKIEBANNER = {
+    "title": _("Cookie settings"),
+    "header_text": _("We are using cookies on this website. A few are essential, others are not."),
+    "footer_text": _("Please accept our cookies"),
+    "footer_links": [
+        {"title": _("Imprint"), "href": "https://web.judaicalink.org/legal/"},
+        {"title": _("Privacy"), "href": "https://web.judaicalink.org/legal/"},
+    ],
+    "groups": [
+        {
+            "id": "essential",
+            "name": _("Essential"),
+            "description": _("Essential cookies allow this page to work."),
+            "cookies": [
+                {
+                    "pattern": "cookiebanner",
+                    "description": _("Meta cookie for the cookies that are set."),
+                },
+                {
+                    "pattern": "csrftoken",
+                    "description": _("This cookie prevents Cross-Site-Request-Forgery attacks."),
+                },
+                {
+                    "pattern": "sessionid",
+                    "description": _("This cookie is necessary to allow logging in, for example."),
+                },
+            ],
+        },
+        {
+            "id": "analytics",
+            "name": _("Analytics"),
+            "optional": False,
+            "cookies": [
+                {
+                    "pattern": "_pk_.*",
+                    "description": _("Matomo cookie for website analysis."),
+                },
+            ],
+        },
+    ],
+}
