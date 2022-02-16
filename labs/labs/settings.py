@@ -238,6 +238,6 @@ RENDER_PANELS = True
 
 GEONAMES_API_USER = "" # Configure in localsettings.py
 
-
-if os.path.isfile("labs/localsettings.py"):
-    from .localsettings import *
+# removed
+#if os.path.isfile("labs/localsettings.py"):
+#    from .localsettings import *
