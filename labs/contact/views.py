@@ -17,7 +17,7 @@ from django.core.mail import BadHeaderError, send_mail
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 
-#@cache_page(CACHE_TTL)
+@cache_page(CACHE_TTL)
 def index(request):
     error_message = ''
     if request.method == 'POST':
@@ -61,6 +61,6 @@ def index(request):
     return render(request, 'contact/contact.html', {'form': form, 'error_message': error_message})
 
 
-#@cache_page(CACHE_TTL)
+@cache_page(CACHE_TTL)
 def sent(request):
     return render(request, 'contact/sent.html')
