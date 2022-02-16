@@ -26,7 +26,7 @@ def index(request):
             # send mail
             name = request.POST.get('name')
 
-            subject = "New request from the contact form."
+            subject = "New request from Judaicalink.org."
             from_mail = request.POST.get('email', '')
             from_name_mail = '{} <{}>'.format(name, from_mail)
             content = request.POST.get('message', '')
