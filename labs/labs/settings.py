@@ -128,17 +128,21 @@ DATABASES = {
 }
 
 # Cache
+if 'CACHE_URL' in os.environ:
+    CACHES = {
+        'default': env.cache_url('CACHE_URL')
+    }
+elif 'REDIS_URL' in os.environ:
+    CACHES = {
+        'redis': env.cache_url('REDIS_URL')
+    }
+else:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        }
+    }
 
-CACHES = {
-    # Read os.environ['CACHE_URL'] and raises
-    # ImproperlyConfigured exception if not found.
-    #
-    # The cache() method is an alias for cache_url().
-    'default': env.cache(),
-
-    # read os.environ['REDIS_URL']
-    'redis': env.cache_url('REDIS_URL')
-}
 
 CACHE_TTL = 60 * 15
 
