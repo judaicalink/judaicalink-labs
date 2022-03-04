@@ -19,6 +19,8 @@ from django.urls import include, path
 from backend.admin import admin_site
 from django.shortcuts import render
 from django.conf.urls import handler404, handler500
+from django.conf import settings
+from django.conf.urls.static import static
 
 def index(request):
     #return HttpResponse(Dataset.objects.all())
@@ -38,7 +40,7 @@ urlpatterns = [
     path('data', include('data.urls')),
     path('contact/', include('contact.urls', namespace='contact')),
     path('__debug__/', include('debug_toolbar.urls'))
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 handler404 = 'search.views.custom_error_404'
 handler500 = 'search.views.custom_error_500'
