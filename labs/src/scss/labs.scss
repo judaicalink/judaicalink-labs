@@ -7,10 +7,10 @@ body,html {
    width: 100%;
    height: 100%;
    font-size: 16px;
-   color: black;
+   color: $black;
 }
 h1, h2, h3, h4, a{
-  color: #004284;
+  color: $primary;
 }
 h1, h2, h3, h4{
   margin-bottom: 20px;
@@ -21,7 +21,7 @@ h1, h2, h3, h4{
 
 
 a:hover {
-    color: lighgrey;
+    color: $gray-400;
 }
 
 .wrapper {
@@ -53,10 +53,10 @@ a:hover {
     height: 100vh;
     z-index: 999;
     /*background: #d8ffbf;*/   /*hier*/
-    color: #505050; /* dunkles Grau Schriftfarbe komplett*/
+    color: $gray-700; /* dunkles Grau Schriftfarbe komplett*/
     transition: all 0.3s;
-    background-image: url("../img/5backgroundtransparent.png");
-    background-color: #d8ffbf;
+    background-image: url("../img/backgroundtransparent.png");
+    background-color: $background-color;
     background-size: cover;
     background-blend-mode: multiply;
 }
@@ -79,11 +79,11 @@ a:hover {
   /*  background: rgba(216,255,191,0.8);*/
 }
 #sidebar ul li a:hover {
-    background: #a9ff73;       /*rgba(0,66,132,0.4); /*Dunkelblau in Hex #004284*/
+    background: darken($background-color, 50%);       /*rgba(0,66,132,0.4); /*Dunkelblau in Hex #004284*/
 }
 
 #sidebar ul li.active{
-    background-color: rgba(169, 255, 115, 0.5);
+    background-color: $background-color;
 }
 
 #content {
@@ -350,5 +350,5 @@ margin-top: -30px;}
 }
 
 #cookiebannerModal {
-    z-index: 99999;
-}   
+    z-index: 999999;
+}

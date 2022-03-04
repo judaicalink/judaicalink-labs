@@ -1,0 +1,28 @@
+// Webpack config for the stylesheet
+@use "sass:map";
+
+//@import "~bootstrap/scss/functions";
+//@import "~bootstrap/scss/variables";
+
+// custom theme colors for Judaicalink
+$theme-colors: (
+  primary:       #1A4fA6,
+  secondary:     #4285f4ff,
+  success:       #6f990eff,
+  info:          #158999ff,
+  warning:       #e58a43ff,
+  danger:        #993c2cff,
+  light:         #1d489929,
+  dark:          #071f4dff,
+);
+
+$background-color: lighten(map.get($theme-colors, "success"), 5%);
+$background-color: #E2EBCF;
+
+
+@import "~bootstrap/scss/bootstrap"; // import all bootstrap
+@import "./labs.scss"; //import custom stylesheet
+
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts"; // import all fontawesome fonts
+@import "~@fortawesome/fontawesome-free/scss/fontawesome"; // import all fontawesome scss files
+@import "malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css"; // import all solid
