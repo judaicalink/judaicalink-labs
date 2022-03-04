@@ -151,3 +151,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+/labs/node_modules/
+/labs/static/
