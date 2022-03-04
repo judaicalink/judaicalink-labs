@@ -2,9 +2,13 @@
   "name": "judaicalink-labs",
   "version": "0.1.0",
   "description": "Django project for judaicalink.org",
-  "main": "index.js",
+  "main": "./webpack.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --progress",
+    "build:w": "webpack -w",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scss": "node-sass — watch scss -o css",
+    "cs": "python manage.py collectstatic --no-input"
   },
   "repository": {
     "type": "git",
@@ -25,6 +29,47 @@
   },
   "homepage": "https://github.com/judaicalink/judaicalink-labs#readme",
   "dependencies": {
-    "bootstrap": "^5.1.3"
-  }
+    "@fortawesome/fontawesome-free": "^6.0.0",
+    "@fortawesome/fontawesome-svg-core": "^1.3.0",
+    "@popperjs/core": "^2.11.2",
+    "@tarekraafat/autocomplete.js": "^10.2.6",
+    "bootstrap": "^4.6.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "dotenv-webpack": "^7.1.0",
+    "fontawesome": "^5.6.3",
+    "gulp": "^4.0.2",
+    "html-webpack-plugin": "^5.5.0",
+    "jquery": "^3.6.0",
+    "jquery-ui": "^1.13.1",
+    "malihu-custom-scrollbar-plugin": "^3.1.5",
+    "popper": "^1.0.1",
+    "popper.js": "^1.16.1",
+    "vue": "^3.2.31"
+  },
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.2.31",
+    "autoprefixer": "^10.4.2",
+    "copy-webpack-plugin": "^10.2.4",
+    "css-loader": "^6.6.0",
+    "css-minimizer-webpack-plugin": "^3.4.1",
+    "exports-loader": "^3.1.0",
+    "expose-loader": "^3.1.0",
+    "file-loader": "^6.2.0",
+    "gulp-sass": "^5.1.0",
+    "mini-css-extract-plugin": "^2.5.3",
+    "node-sass": "^7.0.1",
+    "postcss-loader": "^6.2.1",
+    "sass": "^1.49.7",
+    "sass-loader": "^12.6.0",
+    "style-loader": "^3.3.1",
+    "vue-loader": "^17.0.0",
+    "webpack": "^5.69.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-fix-style-only-entries": "^0.6.1"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }
