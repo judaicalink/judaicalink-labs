@@ -1,11 +1,8 @@
 {% extends 'search/base.html' %}
 {% block content %}
-
 {% load static %}
 
 {% include "search/header.html" %}
-
-<script> var rows_data = {{rows | safe}}; </script>
 
 
 <main class="row">
@@ -216,6 +213,11 @@
 </main>
 
 {% include "search/footer.html" %}
-
 {% endblock content %}
+
+{% block footer_scripts %}
+    <script> var rows_data = {{rows | safe}}; </script>
+{% endblock footer_scripts %}
+
+
 
