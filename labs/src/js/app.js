@@ -24,7 +24,18 @@ import '@fortawesome/fontawesome-free/js/brands'
 
 require('./activePageHighlighting.js'); // import active page highlighting javascript files
 require('./autocomplete.js'); // import active page highlighting css files
-require('vue'); // import vue javascript files
+import Vue from 'vue';
+
 require('bootstrap');
 require('malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js')
 require('./design.js')
+
+
+import { createApp } from 'vue'
+// import the root component App from a single-file component.
+import App from '../vue/search.vue'
+
+const app = createApp(App)
+app.mount('#app')
+
+//require('../vue/search.vue')

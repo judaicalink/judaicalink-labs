@@ -5,14 +5,14 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-require('vue-loader');
+const { VueLoaderPlugin } = require('vue-loader')
 require('dotenv-webpack');
 require('dotenv').config();
+const webpack = require ('webpack');
 
 
 const { Module } = require('webpack');
-const mode = process.env.MODE || 'NONE';
-
+const mode = process.env.MODE || 'development';
 
 
 module.exports = [
@@ -33,20 +33,38 @@ module.exports = [
                     options: {
                       exposes: ["$", "jQuery", "jquery", "vue", "Vue", "jquery-ui"]
                     },
+                },
+                {
+                    // for vue files
+                    test: /\.vue$/,
+                    loader: 'vue-loader',
+                },
+                {
+                    test: /\.js$/,
+                    loader: 'babel-loader',
+                    exclude: /node_modules/
                 }
             ]
         },
-        // copy the image files
+
         plugins: [
+            // copy the image files
             new CopyWebpackPlugin({
                 patterns: [
                     { from: './src/img/', to: __dirname + '/search/static/img/'},
                 ],
             }),
+
+            //for vue
+            new VueLoaderPlugin(),
+            
+            new webpack.DefinePlugin({
+                '__VUE_OPTIONS_API__': true,
+                '__VUE_PROD_DEVTOOLS__': false,
+            }),
         ]
     },
-
-
+    
     {
         // export for CSS files
         entry: {styles: './src/scss/app.scss'},
@@ -55,7 +73,6 @@ module.exports = [
         //  output file and its location
         output: {
             path: __dirname + '/search/static/css/', //output folder for css files
-            //assetModuleFilename: '../img/[hash][ext][query]',
         },
         plugins: [
             new FixStyleOnlyEntriesPlugin(),
@@ -72,11 +89,6 @@ module.exports = [
                     test: /\.(sa|sc|c)ss$/,
                     //use: [MiniCssPlugin.loader, 'css-loader', 'sass-loader'],
                     use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
-                },
-                {
-                    // for vue
-                    test: /\.vue$/,
-                    loader: 'vue-loader',
                 },
                 {
 
