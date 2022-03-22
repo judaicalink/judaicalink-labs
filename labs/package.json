@@ -1,0 +1,30 @@
+{
+  "name": "judaicalink-labs",
+  "version": "0.1.0",
+  "description": "Django project for judaicalink.org",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/judaicalink/judaicalink-labs.git"
+  },
+  "keywords": [
+    "jewish",
+    "studies",
+    "digital",
+    "humanities",
+    "python",
+    "django"
+  ],
+  "author": "Judaicalink Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/judaicalink/judaicalink-labs/issues"
+  },
+  "homepage": "https://github.com/judaicalink/judaicalink-labs#readme",
+  "dependencies": {
+    "bootstrap": "^5.1.3"
+  }
+}

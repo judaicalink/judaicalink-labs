@@ -52,7 +52,7 @@
 
                 <b>Journal:</b>
                 {% if r.jl != '' %}            
-                    <a href={{r.jl}} target="_blank">{{r.j_title}}</a><br>
+                    <a href={{r.jl}} target="_blank" rel="noopener noreferrer">{{r.j_title}}</a><br>
                 {% else %}
                     {{r.j_title}}
                 {% endif %}
@@ -92,7 +92,7 @@
 
                 {% if r.page != '' and r.page != 'None' %}
                     {% if r.pl != '' %}
-                        <b>Page:</b> <a href={{r.pl}} target="_blank">{{r.page}}</a>
+                        <b>Page:</b> <a href={{r.pl}} target="_blank" rel="noopener noreferrer">{{r.page}}</a>
                     {% else %}
                         <b>Page:</b> {{r.page}} (Link to the page not available for this journal)
                     {% endif %}
