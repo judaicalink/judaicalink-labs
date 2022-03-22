@@ -18,6 +18,9 @@ from django.core.cache.backends.base import DEFAULT_TIMEOUT
 # see labs/urls.py def index to access root with http://localhost:8000
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
+# import SEARCH_URL from settings.py
+SEARCH_URL = getattr(settings, 'SEARCH_URL', 'http://localhost:9200')
+
 
 @cache_page(CACHE_TTL)
 def custom_error_404(request, exception):
@@ -215,8 +218,8 @@ def create_alert(submitted_search):
 def generate_rows(submitted_search):
     counter = 0
     rows = []
-    if "option" in submitted_search[
-        0]:  # to check that it is not the simple search - only the advanced search contains the option field
+    if "option" in submitted_search[0]:
+        # to check that it is not the simple search - only the advanced search contains the option field
         while counter != len(submitted_search):
             for part in submitted_search:
                 all_operators = [" AND ", " OR ", " NOT "]
@@ -312,7 +315,7 @@ def generate_rows(submitted_search):
 
 def process_query(query_dic, page, alert):
     page = int(page)
-    es = Elasticsearch()
+    es = Elasticsearch(hosts=SEARCH_URL)
     size = 10
     start = (page - 1) * size
     query_str = query_dic["query_str"]
