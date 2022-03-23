@@ -21,7 +21,12 @@ from django.shortcuts import render
 from django.conf.urls import handler404, handler500
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.decorators.cache import cache_page
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
+CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
+
+@cache_page(CACHE_TTL)
 def index(request):
     #return HttpResponse(Dataset.objects.all())
     return render(request, "search/root.html")
