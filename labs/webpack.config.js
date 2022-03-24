@@ -6,6 +6,7 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
+const CompressionPlugin = require("compression-webpack-plugin");
 require('dotenv-webpack');
 require('dotenv').config();
 const webpack = require ('webpack');
@@ -62,6 +63,14 @@ module.exports = [
                 '__VUE_OPTIONS_API__': true,
                 '__VUE_PROD_DEVTOOLS__': false,
             }),
+             new CompressionPlugin([
+                {
+                    test: /\.js$|\.vue$/,
+                    threshold: 10240,
+                    algorithm: 'gzip',
+                    minRatio: 0.8
+                }
+            ]),
         ]
     },
     
@@ -82,6 +91,15 @@ module.exports = [
             new MiniCssExtractPlugin({
                 filename: '[name].css',
             }),
+
+            new CompressionPlugin([
+                {
+                    test: /\.(sa|sc|c)ss$/,
+                    threshold: 10240,
+                    algorithm: 'gzip',
+                    minRatio: 0.8
+                }
+            ]),
         ],
         module: {
             rules: [
@@ -91,7 +109,6 @@ module.exports = [
                     use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
                 },
                 {
-
                     // for images
                     test: /\.(png|svg|jpg|jpeg|gif)$/i,
                     type: 'asset/resource',
@@ -110,8 +127,6 @@ module.exports = [
             minimize: true,
                 minimizer: [
                   // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
-                  // `...`,
-
                   new CssMinimizerPlugin({ minimizerOptions: {
                           preset: [
                               "default",
