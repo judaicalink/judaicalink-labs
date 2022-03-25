@@ -13,12 +13,24 @@ import json
 
 # see labs/urls.py def index to access root with http://localhost:8000
 
-def custom_error_404(request):
+def custom_error_404(request, exception):
     return render(request, 'search/404.html', {})
 
 
 def custom_error_500(request):
     return render(request, 'search/500.html', {})
+
+
+def custom_error_400(request, exception):
+    return render(request, 'search/400.html', {})
+
+
+def custom_error_403(request, exception):
+    return render(request, 'search/403.html', {})
+
+
+def test_error_page(request):
+    return render(request, 'search/404.html', {})
 
 
 def index(request):

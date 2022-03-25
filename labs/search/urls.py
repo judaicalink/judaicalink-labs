@@ -10,4 +10,6 @@ urlpatterns = [
     path('all_search_nav', views.all_search_nav, name='all_search_nav'),
     path('load', views.load, name='load'),
     path('search', views.search, name='search'),
+    # for test purposes:
+    # path('error', views.test_error_page, name='test_error_page'),
 ]

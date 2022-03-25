@@ -18,11 +18,12 @@ from django.contrib.admin import AdminSite
 from django.urls import include, path
 from backend.admin import admin_site
 from django.shortcuts import render
-from django.conf.urls import handler404, handler500
+
 
 def index(request):
-    #return HttpResponse(Dataset.objects.all())
+    # return HttpResponse(Dataset.objects.all())
     return render(request, "search/root.html")
+
 
 admin.autodiscover()
 
@@ -42,4 +43,5 @@ urlpatterns = [
 
 handler404 = 'search.views.custom_error_404'
 handler500 = 'search.views.custom_error_500'
-
+handler403 = 'search.views.custom_error_403'
+handler400 = 'search.views.custom_error_400'
