@@ -175,7 +175,7 @@ a:hover {
 
 #picturemargintop30 {
     top: 30px;
-    z-index: -1;
+    /*z-index: -1;*/
 }
 
 .header-logos{
