@@ -241,7 +241,7 @@ export default {
                                 </div>
                                 <!--Input-->
                                 <div class="form-group col-5">
-                                    <input v-model="row.submitted_input" type="text" :name="row.input" class="form-control" value="">
+                                    <input v-model="row.submitted_input" type="text" :name="row.input" class="form-control">
                                 </div>
                                 <!--@click="removeElement(index);"-->
                                 <div class="form-group col-1">

@@ -20711,8 +20711,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "onUpdate:modelValue": $event => row.submitted_input = $event,
       type: "text",
       name: row.input,
-      class: "form-control",
-      value: ""
+      class: "form-control"
     }, null, 8
     /* PROPS */
     , _hoisted_12), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, row.submitted_input]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("@click=\"removeElement(index);\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
@@ -42990,13 +42989,13 @@ exports["default"] = (sfc, props) => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _search_vue_vue_type_template_id_6ccf132c__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./search.vue?vue&type=template&id=6ccf132c */ "./src/vue/search.vue?vue&type=template&id=6ccf132c");
 /* harmony import */ var _search_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./search.vue?vue&type=script&lang=js */ "./src/vue/search.vue?vue&type=script&lang=js");
-/* harmony import */ var _mnt_data_coding_judaicalink_judaicalink_labs_labs_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_Users_saraf_judaicalink_labs_labs_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_mnt_data_coding_judaicalink_judaicalink_labs_labs_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_search_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_search_vue_vue_type_template_id_6ccf132c__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"src/vue/search.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_Users_saraf_judaicalink_labs_labs_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_search_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_search_vue_vue_type_template_id_6ccf132c__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"src/vue/search.vue"]])
 /* hot reload */
 if (false) {}
 
