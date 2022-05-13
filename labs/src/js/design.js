@@ -1,7 +1,7 @@
 /*-------------HAMBURGER-MENU-BUTTON------------------*/
 
 $('#sidebarCollapse').click(function () {
-    $('#sidebarCollapse svg').toggleClass('fa-bars fa-times')
+    $('#sidebarCollapse > svg').toggleClass('fa-bars fa-xmark')
 });
 
 /*-------------------SIDEBAR-------------------------*/
