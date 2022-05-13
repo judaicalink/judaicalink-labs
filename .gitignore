@@ -153,3 +153,4 @@ dmypy.json
 .pyre/
 /labs/node_modules/
 /labs/static/
+/labs/search/static/
