@@ -70,6 +70,8 @@ INSTALLED_APPS = [
     'environ',
     'debug_toolbar',
     'cookiebanner',
+    'django.contrib.sitemaps',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

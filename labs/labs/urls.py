@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+from django.contrib import admin, sitemaps
 from django.contrib.admin import AdminSite
 from django.urls import include, path
 from backend.admin import admin_site
@@ -24,6 +24,12 @@ from django.conf.urls.static import static
 from django.views.decorators.cache import cache_page
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
+# for the sitemap
+from django.contrib.sitemaps import GenericSitemap
+from django.contrib.sitemaps.views import sitemap
+from django.urls import path
+from search.models import Entry
+
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 @cache_page(CACHE_TTL)
@@ -32,6 +38,12 @@ def index(request):
     return render(request, "search/root.html")
 
 admin.autodiscover()
+
+
+info_dict = {
+    'queryset': Entry.objects.all(),
+    'date_field': 'pub_date',
+}
 
 urlpatterns = [
     path('admin/', admin_site.urls),
@@ -44,7 +56,11 @@ urlpatterns = [
     #path('dashboard/', include('dashboard.urls')),
     path('data', include('data.urls')),
     path('contact/', include('contact.urls', namespace='contact')),
-    path('__debug__/', include('debug_toolbar.urls'))
+    path('__debug__/', include('debug_toolbar.urls')),
+    # the sitemap
+    path('sitemap.xml', sitemap,
+         {'sitemaps': {'search': GenericSitemap(info_dict, priority=0.6)}},
+         name='django.contrib.sitemaps.views.sitemap'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 handler404 = 'search.views.custom_error_404'
