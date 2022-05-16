@@ -12,8 +12,12 @@
 /static
 labs/secret_key.txt
 labs/labs/localsettings.py
-htpasswd
+.htpasswd
 /labs/.env
+/labs/node_modules/
+/labs/static/
+/labs/search/static/
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -151,6 +155,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-/labs/node_modules/
-/labs/static/
-/labs/search/static/
