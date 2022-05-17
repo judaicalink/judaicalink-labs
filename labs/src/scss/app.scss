@@ -5,16 +5,27 @@
 //@import "~bootstrap/scss/variables";
 
 // custom theme colors for Judaicalink
+
+  $primary:       #004284 !default;
+  $secondary:     #4285f4ff !default;
+  $success:       #6f990eff !default;
+  $info:          #158999ff !default;
+  $warning:       #e58a43ff !default;
+  $danger:        #993c2cff !default;
+  $light:         #1d489929 !default;
+  $dark:          #071f4dff !default;
+
 $theme-colors: (
-  primary:       #1A4fA6,
-  secondary:     #4285f4ff,
-  success:       #6f990eff,
-  info:          #158999ff,
-  warning:       #e58a43ff,
-  danger:        #993c2cff,
-  light:         #1d489929,
-  dark:          #071f4dff,
+  primary: $primary,
+  secondary: $secondary,
+  success: $success,
+  info: $info,
+  warning: $warning,
+  danger: $danger,
+  light: $light,
+  dark: $dark
 );
+
 
 $background-color: lighten(map.get($theme-colors, "success"), 5%);
 $background-color: #E2EBCF;
