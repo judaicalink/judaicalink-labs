@@ -1,13 +1,14 @@
-document.addEventListener("DOMContentLoaded", function(){
-    if (typeof(availableTags) !== 'undefined') {
-            console.log(availableTags);
+// for the autocomplete function in cm_e_search
+import autocomplete from "jquery";
 
-            $( function() {
-            $( "#entities" ).autocomplete({
-              source: availableTags,
-              minLength: 2
+
+    if (typeof (availableTags) !== 'undefined') {
+        console.log(availableTags);
+
+        $(function () {
+            $("#entities").autocomplete({
+                source: availableTags,
+                minLength: 2
             });
-          } );
+        });
     }
-
-});

@@ -1,19 +1,20 @@
 {% extends 'search/base.html' %}
-
+{% load static %}
 {% block meta_cme_index %}
     <meta name="keywords" content="judaicalink, search, entity search, compact memory, access">
     <meta name="description" content="Through this interface the user can search persons and places automatically extracted from Compact Memory and linked to Judaicalink entries.">
 {% endblock %}
 
-{% block content %}
-{% load static %}
 
+    {% block header_scripts %}
 <script>
     var availableTags = "{{data}}".replace(/&quot;/g, '"');
     var availableTags = JSON.parse(availableTags);
-    //console.log(mydata);
 </script>
 
+        {% endblock header_scripts %}
+
+{% block content %}
 
 {% include "search/header.html" %}
 
@@ -31,7 +32,13 @@
                 <input type="hidden" name="page" value="1">
                 <div class="input-group">
                     
-                    <input class="form-control" id="entities" type="search" name="query" value="" placeholder="Enter your search keyword">
+                    <input class="form-control" id="entities" list="datalistEntities" name="query" value="" placeholder="Enter your search keyword">
+
+                    <datalist id="datalistEntities">
+                        {% for entity in data %}
+                            <option value="{{ entity }}">{{entitiy}}</option>
+                        {% endfor %}
+                    </datalist>
 
                     <div class="input-group-btn">
                         <button type="submit" class="btn btn-primary search_button"><i class="fas fa-search"></i></button>

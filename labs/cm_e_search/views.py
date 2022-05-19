@@ -28,8 +28,9 @@ def get_names():
 def index(request):
 
 	names = get_names()
-
-	context = {'data': json.dumps(names)}
+	data = names
+	print(data)
+	context = {'data': data}
 
 	return render(request, 'cm_e_search/search_index.html', context)
 

@@ -34,6 +34,8 @@ $border-radius-pill:          0;
 $background-color: lighten(map.get($theme-colors, "success"), 5%);
 $background-color: #E2EBCF;
 
+$badge-color:                 $background-color;
+$badge-border-radius:         .35rem !default;
 
 @import "~bootstrap/scss/bootstrap"; // import all bootstrap
 @import "./labs.scss"; //import custom stylesheet
