@@ -14,7 +14,7 @@ CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 def get_names():
 
 	names = []
-	es = Elasticsearch()
+	es = Elasticsearch(hosts=['http://localhost:9200'])
 	res = es.search(index='cm_entity_names', body={'size': 7000, "query": {"match_all": {}}})
 
 	for doc in res['hits']['hits']:
@@ -40,7 +40,7 @@ def result(request):
 
 	names = get_names()
 
-	es = Elasticsearch()
+	es = Elasticsearch(hosts=['http://localhost:9200'])
 	query = request.GET.get('query')
 
 	res = es.search(index='cm_entities', body={"query": {"match_phrase": {'name': query}}})
