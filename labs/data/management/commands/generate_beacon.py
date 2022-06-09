@@ -39,21 +39,14 @@ def save_file(text):
     return: boolean
     """
     filename = 'beacon-persons.txt'
-    #filename = os.path.join('/data/judaicalink/dumps/beacon/current', filename)
+    filename = os.path.join('/data/judaicalink/dumps/beacon/current', filename)
     if os.path.exists(filename):
         os.remove(filename)
     try:
         with open(filename, 'w') as f:
             result = f.write(text)
-            if result:
-                print("File written successfully")
-                # move the file
-                #os.remove(filename, path)
-                #os.rename(filename, path)
-                return filename
-            else:
-                print("File not written")
-                return None
+            print("File written successfully")
+            return filename
     except IOError:
         print("Error writing file")
         return False
@@ -93,7 +86,6 @@ def get_gnd_ids():
         sparql.setReturnFormat(JSON)
         results = sparql.query().convert()
 
-        print('---------------------------')
         for result in results["results"]["bindings"]:
             # if result type is literal, get the value
             if result["id"]["type"] == "literal":
