@@ -50,7 +50,7 @@ pyasn1-modules==0.2.1
 PyGObject==3.36.0
 PyHamcrest==1.9.0
 PyICU==2.4.2
-PyJWT==1.7.1
+PyJWT==2.4.0
 pyOpenSSL==19.0.0
 pyparsing==2.4.6
 pyRFC3339==1.1
