@@ -6,13 +6,12 @@
 {% endblock %}
 
 
-    {% block header_scripts %}
+{% block header_scripts %}
 <script>
     var availableTags = "{{data}}".replace(/&quot;/g, '"');
     var availableTags = JSON.parse(availableTags);
 </script>
-
-        {% endblock header_scripts %}
+{% endblock header_scripts %}
 
 {% block content %}
 
@@ -23,30 +22,8 @@
 
 	<div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-9 col-xl-8">
 
-    <h1 class="text-center">Compact Memory <br>Entity Search</h1>
-        
+    {% include "cm_e_search/search_form.html" %}
 
-
-        <form method="get" action="search_result/"> 
-            <div class="col-xs-6">
-                <input type="hidden" name="page" value="1">
-                <div class="input-group">
-                    
-                    <input class="form-control" id="entities" list="datalistEntities" name="query" value="" placeholder="Enter your search keyword">
-
-                    <datalist id="datalistEntities">
-                        {% for entity in data %}
-                            <option value="{{ entity }}">{{entitiy}}</option>
-                        {% endfor %}
-                    </datalist>
-
-                    <div class="input-group-btn">
-                        <button type="submit" class="btn btn-primary search_button"><i class="fas fa-search"></i></button>
-                    </div>
-                </div>
-            </div>
-        </form>
-<br>
 <!--
 {% for name in data %}
     <p>{{name}}</p>

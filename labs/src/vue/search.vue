@@ -142,7 +142,6 @@ export default {
                 when the "addRow"-function is used*/
       rows: returnData(),
       counter: (typeof (returnData()) !== 'undefined') ? returnData(2).length : 0,
-      test: "test"
     }
   },
 

@@ -137,6 +137,7 @@ def get_query(request):
     operators.sort(key=lambda r: r['html_name'])
     operators = [d['value'] for d in operators]
     operators.insert(0, "placeholder")
+    operators.insert(0, "placeholder")
     options.sort(key=lambda r: r['html_name'])
     options = [d['value'] for d in options]
     inputs.sort(key=lambda r: r['html_name'])
