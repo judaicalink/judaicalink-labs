@@ -80,19 +80,6 @@ def result(request):
             else:
                 formatted_doc[field] = doc["_source"][field]
 
-
-
-        #formatted_doc['page'] = doc['_source']['page']
-        #formatted_doc['text'] = doc['highlight']['text']
-        #formatted_doc['dateIssued'] = doc['_source']['dateIssued']
-        #formatted_doc['lang'] = doc['_source']['lang']
-        #formatted_doc['place'] = doc['_source']['place']
-        #formatted_doc['j_title'] = doc['_source']['j_title']
-        #formatted_doc['publisher'] = doc['_source']['publisher']
-        #formatted_doc['volume'] = doc['_source']['volume']
-        #formatted_doc['heft'] = doc['_source']['heft']
-        #formatted_doc['aufsatz'] = doc['_source']['aufsatz']
-
         result.append(formatted_doc)
 
     # paging
