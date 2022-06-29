@@ -43,58 +43,55 @@
         <tr>
 
             <td>
-
                 <b>Matching text</b>: <br>
-                        {% for line in r.text %}
-                            {{line|safe}}
-                        {% endfor %}
+                {{r.text|safe}}
                 <br> 
 
                 <b>Journal:</b>
                 {% if r.jl != '' %}            
-                    <a href={{r.jl}} target="_blank" rel="noopener noreferrer">{{r.j_title}}</a><br>
+                    <a href={{r.jl}} target="_blank" rel="noopener noreferrer">{{r.j_title|safe}}</a><br>
                 {% else %}
-                    {{r.j_title}}
+                    {{r.j_title|safe}}
                 {% endif %}
 
                 {% if r.lang != '' %}
-                    <b>Language:</b> {{r.lang}}<br>
+                    <b>Language:</b> {{r.lang|safe}}<br>
                 {% endif %}
 
                 {% if r.dateIssued != '' %}
-                    <b>Date of Issue:</b> {{r.dateIssued}}
+                    <b>Date of Issue:</b> {{r.dateIssued|safe}}
                     <br>
                 {% endif %}
 
                 {% if r.place != '' %}
-                    <b>Place:</b> {{r.place}}
+                    <b>Place:</b> {{r.place|safe}}
                     <br>
                 {% endif %}
 
                 {% if r.publisher != '' %}
-                    <b>Publisher:</b> {{r.publisher}}
+                    <b>Publisher:</b> {{r.publisher|safe}}
                     <br>
                 {% endif %}
 
                 <b>Bibliographic reference</b><br>
 
                 {% if r.volume != '' %}
-                    &nbsp; Volume: {{r.volume}}<br>
+                    &nbsp; Volume: {{r.volume|safe}}<br>
                 {% endif %}
 
                 {% if r.heft != '' %}
-                    &nbsp; Issue: {{r.heft }}<br>
+                    &nbsp; Issue: {{r.heft|safe }}<br>
                 {% endif %}
 
                 {% if r.aufsatz != '' %}
-                    &nbsp; Essay: {{r.aufsatz}}<br>
+                    &nbsp; Essay: {{r.aufsatz|safe}}<br>
                 {% endif %}
 
                 {% if r.page != '' and r.page != 'None' %}
                     {% if r.pl != '' %}
-                        <b>Page:</b> <a href={{r.pl}} target="_blank" rel="noopener noreferrer">{{r.page}}</a>
+                        <b>Page:</b> <a href={{r.pl|safe}} target="_blank" rel="noopener noreferrer">{{r.page|safe}}</a>
                     {% else %}
-                        <b>Page:</b> {{r.page}} (Link to the page not available for this journal)
+                        <b>Page:</b> {{r.page|safe}} (Link to the page not available for this journal)
                     {% endif %}
                 {% endif %}
 

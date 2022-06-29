@@ -28,8 +28,32 @@ def result(request):
     size = 10
     # changed size from 15 to 10 to match the amount of results in judaicalink search
     start = (page - 1) * size
-    res = es.search(index='cm_meta', body={"query": {"match": {'text': query}}, 'size': size, 'from': start,
-                                           'highlight': {'fields': {'text': {}}}})
+    body = {
+        "query": {
+            "query_string": {
+                'query': query,
+                "fields": ["page", "text", "dateIssued", "lang", "place", "j_title",
+                           "publisher", "volume", "heft", "aufsatz"]
+            }
+        },
+        'size': size,
+        'from': start,
+        'highlight': {
+            'fields': {
+                "page": {},
+                "text": {},
+                "dateIssued": {},
+                "lang": {},
+                "place": {},
+                "j_title": {},
+                "publisher": {},
+                "volume": {},
+                "heft": {},
+                "aufsatz": {}
+            }
+        }
+    }
+    res = es.search(index='cm_meta', body=body)
     # added 'from': start, to indicate which results should be displayed
     # 'from' is used to tell elasticsearch which results to return by index
     # -> if page = 1 then results 0-9 will be displayed
@@ -50,16 +74,11 @@ def result(request):
             formatted_doc['jl'] = journal_link
             formatted_doc['pl'] = page_link
 
-        formatted_doc['page'] = doc['_source']['page']
-        formatted_doc['text'] = doc['highlight']['text']
-        formatted_doc['dateIssued'] = doc['_source']['dateIssued']
-        formatted_doc['lang'] = doc['_source']['lang']
-        formatted_doc['place'] = doc['_source']['place']
-        formatted_doc['j_title'] = doc['_source']['j_title']
-        formatted_doc['publisher'] = doc['_source']['publisher']
-        formatted_doc['volume'] = doc['_source']['volume']
-        formatted_doc['heft'] = doc['_source']['heft']
-        formatted_doc['aufsatz'] = doc['_source']['aufsatz']
+        for field in doc["_source"]:
+            if field in doc["highlight"]:
+                formatted_doc[field] = doc["highlight"][field][0]
+            else:
+                formatted_doc[field] = doc["_source"][field]
 
         result.append(formatted_doc)
 
