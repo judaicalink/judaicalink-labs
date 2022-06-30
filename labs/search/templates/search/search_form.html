@@ -1,7 +1,7 @@
 <div id="accordion">
 
     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-        <form method="get" action="search/search">
+        <form method="get" action="{% url 'search:search'%}">
             <div class="col-xs-6">
                 <input type="hidden" name="page" value="1">
                 <div class="input-group">

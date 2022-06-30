@@ -5,58 +5,29 @@
     <meta name="description" content="Through this interface the user can search persons and places automatically extracted from Compact Memory and linked to Judaicalink entries.">
 {% endblock %}
 
+{% block header_scripts %}
 
-    {% block header_scripts %}
 <script>
     var availableTags = "{{data}}".replace(/&quot;/g, '"');
     var availableTags = JSON.parse(availableTags);
 </script>
 
-        {% endblock header_scripts %}
+{% endblock header_scripts %}
 
 {% block content %}
 
 {% include "search/header.html" %}
 
-<!--content-->
 <main class="row">
-
 	<div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-9 col-xl-8">
-
     <h1 class="text-center">Compact Memory <br>Entity Search</h1>
-        
-
-
-        <form method="get" action="search_result/"> 
-            <div class="col-xs-6">
-                <input type="hidden" name="page" value="1">
-                <div class="input-group">
-                    
-                    <input class="form-control" id="entities" list="datalistEntities" name="query" value="" placeholder="Enter your search keyword">
-
-                    <datalist id="datalistEntities">
-                        {% for entity in data %}
-                            <option value="{{ entity }}">{{entitiy}}</option>
-                        {% endfor %}
-                    </datalist>
-
-                    <div class="input-group-btn">
-                        <button type="submit" class="btn btn-primary search_button"><i class="fas fa-search"></i></button>
-                    </div>
-                </div>
-            </div>
-        </form>
-<br>
-<!--
-{% for name in data %}
-    <p>{{name}}</p>
-{% endfor%}
--->
-
-
-<p>The Compact Memory collection comprises over 300 Jewish newspapers and journals of the German speaking area of the years 1768–1938 and beyond.
-<br>Through this interface the user can search <b>persons</b> and <b>places</b> automatically extracted from Compact Memory and <b>linked to Judaicalink entries</b>.
-</p>
+    {% include "cm_e_search/search_form.html" %}
+    <br>
+    <p>
+        The Compact Memory collection comprises over 300 Jewish newspapers and journals of the German speaking area of the years 1768–1938 and beyond.
+        <br>
+        Through this interface the user can search <b>persons</b> and <b>places</b> automatically extracted from Compact Memory and <b>linked to Judaicalink entries</b>.
+    </p>
     </div>
 
     <div class="col-md-0 col-lg-3 col-xl-4">
@@ -72,7 +43,6 @@
     </div>
 
 </main>
-<!--content end-->
 
 {% include "search/footer.html" %}
 
