@@ -16,9 +16,32 @@
 
     <div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-8 col-xl-8">
 
-        <h1 class="text-center text-md-center">JudaicaLink Search</h1>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#judaicalink_search" type="button" role="tab" aria-controls="judaicalink_search" aria-selected="true">JudaicaLink Search</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#fulltext_search" type="button" role="tab" aria-controls="fulltext_search" aria-selected="false">Fulltext Search</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#entity_search" type="button" role="tab" aria-controls="entity_search" aria-selected="false">Entity Search</button>
+            </li>
+        </ul>
 
-        {% include "search/search_form.html" %}
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="judaicalink_search" role="tabpanel" aria-labelledby="judaicalink_search-tab">
+              <br>
+              {% include "search/search_form.html" %}
+          </div>
+          <div class="tab-pane fade" id="fulltext_search" role="tabpanel" aria-labelledby="fulltext_search-tab">
+              <br>
+              {% include "cm_search/search_form.html" %}
+          </div>
+          <div class="tab-pane fade" id="entity_search" role="tabpanel" aria-labelledby="entity_search-tab">
+              <br>
+              {% include "cm_e_search/search_form.html" %}
+          </div>
+        </div>
 
         <br>
 
