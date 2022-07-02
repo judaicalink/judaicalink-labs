@@ -7,6 +7,8 @@ from .sitemaps import StaticViewSitemap
 from . import views
 sitemaps = {'static': StaticViewSitemap}
 
+app_name = 'cm_e_search'
+
 urlpatterns = [
     path('', views.index, name='entity_search_index'),
     path('search_result/', views.result, name='search_result'),
