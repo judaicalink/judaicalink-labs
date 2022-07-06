@@ -31,14 +31,26 @@
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="judaicalink_search" role="tabpanel" aria-labelledby="judaicalink_search-tab">
               <br>
+              <p class="alert alert-success text-center" role="alert">
+                  Here you can access the JudaicaLink Knowledge Graph and search for different entities that we have collected from several datasets. <br>
+                  You also have the option to specify your search query by using the advanced search.
+              </p>
               {% include "search/search_form.html" %}
+
           </div>
           <div class="tab-pane fade" id="fulltext_search" role="tabpanel" aria-labelledby="fulltext_search-tab">
               <br>
+              <p class="alert alert-success text-center" role="alert">
+                  The Compact Memory collection comprises over 300 Jewish newspapers and journals of the German speaking area of the years 1768–1938 and beyond. <br>
+                  Here you can search the digitized version of the whole collection in fulltext mode.
+              </p>
               {% include "cm_search/search_form.html" %}
           </div>
           <div class="tab-pane fade" id="entity_search" role="tabpanel" aria-labelledby="entity_search-tab">
               <br>
+              <p class="alert alert-success text-center" role="alert">
+                  Here you can search persons and places extracted from Compact Memory and linked to Judaicalink entities.
+              </p>
               {% include "cm_e_search/search_form.html" %}
           </div>
         </div>
