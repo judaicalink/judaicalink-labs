@@ -365,7 +365,7 @@ def process_query(query_dic, page, alert):
             if s in d["highlight"]:
                 d["source"][s] = d["highlight"][s][0]
 
-    field_order = ["name", "Alternatives", "birthDate", "birthYear", "birthLocation", "deathDate", "deathYear",
+    field_order = ["name", "Alternatives", "birthDate", "birthLocation", "deathDate", "deathYear",
                    "deathLocation", "Abstract", "Publication"]
 
     dataset_objects = Dataset.objects.all()
@@ -388,9 +388,9 @@ def process_query(query_dic, page, alert):
                 temp_data = "<b>" + pretty_fieldname + ": " + "</b>" + d["source"][field]
                 data.append(temp_data)
 
-        # extracting additional fields (that are not mentioned in field_order)
+        # extracting additional fields (that are not mentioned in field_order) except for birthYear
         for field in d["source"]:
-            if field not in field_order:
+            if field not in field_order and field != "birthYear":
                 pretty_fieldname = field.capitalize()
                 temp_data = "<b>" + pretty_fieldname + ": " + "</b>" + d["source"][field]
                 data.append(temp_data)
