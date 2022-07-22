@@ -1,0 +1,11 @@
+<form method="get" action="{% url 'search:search' %}">
+    <div class="col-xs-6">
+        <input type="hidden" name="page" value="1">
+        <div class="input-group">
+            <input class="form-control" type="text" name="query" value="" placeholder="Enter your search keyword">
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-primary search_button"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </div>
+</form>
