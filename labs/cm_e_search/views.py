@@ -35,6 +35,20 @@ def index(request):
 	return render(request, 'cm_e_search/search_index.html', context)
 
 
+def create_map(result):
+	# creates a map from locations
+	locations = []
+	for r in result:
+		if r.e_type == 'LOC':
+			locations.append(r.name)
+	pass
+
+
+def create_timeline():
+	pass
+
+def create_graph_visualization():
+	pass
 
 @cache_page(CACHE_TTL)
 def result(request):
