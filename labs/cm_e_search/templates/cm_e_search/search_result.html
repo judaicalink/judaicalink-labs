@@ -85,10 +85,9 @@ function show_journal(counter) {
     <br>
 
     {% if result|length < 1 %}
-    <div class="alert alert-danger text-center" role="alert">
+    <div class="alert alert-danger text-center mb-5" role="alert">
     No entity matching your query!
     </div>
-    <br><br><br><br><br><br><br><br><br><br>
     {% endif %}
 
     <div>
@@ -98,11 +97,11 @@ function show_journal(counter) {
 
         <div class="alert alert-success text-center" role="alert">
                     {% if r.e_type == 'PER' %}
-                        <b>Name</b>: {{ r.name }} <span class="badge rounded-pill text-bg-secondary">person</span>
+                        <b>Name</b>: {{ r.name }} <span class="badge text-white text-bg-secondary">person</span>
                     {% elif r.e_type == 'LOC' %}
-                        <b>Name</b>: {{ r.name }} <span class="badge rounded-pill text-bg-info">location</span>
+                        <b>Name</b>: {{ r.name }} <span class="badge text-white text-bg-info">location</span>
                     {% else %}
-                        <p><b>Name</b>: {{ r.name }} <span class="badge rounded-pill text-bg-dark">other</span>
+                        <p><b>Name</b>: {{ r.name }} <span class="badge text-white text-bg-dark">other</span>
                     {% endif %}
 
                     {% if r.ep != '' %}
@@ -121,11 +120,11 @@ function show_journal(counter) {
                                 <li style="display:none;" class="related_item">
                                 {% endif %}
                                     {% if related_entity.3 == 'PER' %}
-                                        <span class="badge rounded-pill text-bg-secondary">person</span>
+                                        <span class="badge text-white text-bg-secondary">person</span>
                                     {% elif related_entity.3 == 'LOC' %}
-                                        <span class="badge rounded-pill text-bg-info">location</span>
+                                        <span class="badge text-white text-bg-info">location</span>
                                     {% else %}
-                                        <span class="badge rounded-pill text-bg-dark">other</span>
+                                        <span class="badge text-white text-bg-dark">other</span>
                                     {% endif %}
                                     <a href="{{related_entity.0}}">{{related_entity.1}}</a>
                                     ({{ related_entity.2|truncatechars:6}})
