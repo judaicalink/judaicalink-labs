@@ -1,14 +1,59 @@
-<script>
+<template>
+  <form  method="get" action="/search/search">
+    <input type="hidden" name="page" value="1">
+    <div v-for="(row, index) in rows" class="form-row">
 
+      <!--Operator-->
+      <div v-if="index > 0" class="form-group col-2">
+        <select v-model="row.selected_operator" class="form-control" :name="row.operator">
+          <option v-for="(operator) in row.other_operators" v-bind:value="operator.fieldname">{{operator.display}}</option>
+        </select>
+      </div>
+      <div v-if="index < 1" class="form-group col-2">
+        <!--Placeholder for missing Operators in first row-->
+      </div>
+      <!--Option-->
+      <div class="form-group col-4">
+        <select v-model="row.selected_option" class="form-control" :name="row.option">
+          <option v-for="(option) in row.other_options" v-bind:value="option.fieldname">{{option.display}}</option>
+        </select>
+      </div>
+      <!--Input-->
+      <div class="form-group col-5">
+        <input v-model="row.submitted_input" type="text" :name="row.input" class="form-control">
+      </div>
+      <!--@click="removeElement(index);"-->
+      <div class="form-group col-1">
+        <button type="button" class="btn btn-danger" @click="removeElement(index)"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary search_button float-right"><i class="fas fa-search"></i> Search</button>
+  </form>
+  <button class="btn btn-primary search_button" @click="addRow()"><i class="fas fa-plus"></i> Add</button>
+  <button class="btn btn-danger" @click="clearElements(), addRow(), addRow()">Clear All</button>
+</template>
+
+
+<script>
 export default {
+  name : 'search',
 
   data() {
-    function returnData() {
+    return {
+      rows: [],
+      counter: 0,
+    };
+
+  },
+
+  methods: {
+    returnData: function() {
 
       try {
         /* rows_data is defined in views.py and is passed on to search_result.html*/
-        if (typeof (rows_data) !== 'undefined') {
-          var rows = rows_data;
+        if (typeof (this.rows_data) !== 'undefined') {
+          rows = this.rows_data;
           /* if rows is not None or empty*/
           if (rows) {
             /*alert("We have data!");*/
@@ -23,7 +68,7 @@ export default {
       }
           /* create 2 standard rows */
       catch (error) {
-        var rows = [
+        this.rows = [
           {
             operator: "operator1",
             option: "option1",
@@ -130,24 +175,13 @@ export default {
           }
         ];
         console.log(error);
-        /*alert("We have no data! - therefore 2 standard rows")*/
+        alert("We have no data! - therefore 2 standard rows")
         return rows;
       }
 
-
-    }
-
-    return {
-      /*a counter is needed to create distinct names for inputs and select fields
-                when the "addRow"-function is used*/
-      rows: returnData(),
-      counter: (typeof (returnData()) !== 'undefined') ? returnData(2).length : 0,
-    }
-  },
-
-  methods: {
+    },
     addRow: function () {
-      var elem = document.createElement('div');
+      this.elem = document.createElement('div');
 
       /*creating the distinct names for input and select fields
                     when the "addRow"-function is activated
@@ -213,43 +247,20 @@ export default {
 
     },
 
+  },
+  mounted() {
+    this.returnData();
+    this.addRow();
+    this.removeElement();
+    this.clearElements();
+    this.rows = this.returnData();
+    this.counter = (typeof (this.returnData()) !== 'undefined') ? this.returnData(2).length : 0;
   }
 };
 
 </script>
 
-<template>
-  <form  method="get" action="search">
-                    <input type="hidden" name="page" value="1">
-                            <div v-for="(row, index) in rows" class="form-row">
 
-                                <!--Operator-->
-                                <div v-if="index > 0" class="form-group col-2">
-                                    <select v-model="row.selected_operator" class="form-control" :name="row.operator">
-                                        <option v-for="(operator) in row.other_operators" v-bind:value="operator.fieldname">{{operator.display}}</option>
-                                    </select>
-                                </div>
-                                <div v-if="index < 1" class="form-group col-2">
-                                    <!--Placeholder for missing Operators in first row-->
-                                </div>
-                                <!--Option-->
-                                <div class="form-group col-4">
-                                    <select v-model="row.selected_option" class="form-control" :name="row.option">
-                                        <option v-for="(option) in row.other_options" v-bind:value="option.fieldname">{{option.display}}</option>
-                                    </select>
-                                </div>
-                                <!--Input-->
-                                <div class="form-group col-5">
-                                    <input v-model="row.submitted_input" type="text" :name="row.input" class="form-control">
-                                </div>
-                                <!--@click="removeElement(index);"-->
-                                <div class="form-group col-1">
-                                    <button type="button" class="btn btn-danger" @click="removeElement(index)"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </div>
+<style scoped>
 
-                        <button type="submit" class="btn btn-primary search_button float-right"><i class="fas fa-search"></i> Search</button>
-                    </form>
-                    <button class="btn btn-primary search_button" @click="addRow()"><i class="fas fa-plus"></i> Add</button>
-                    <button class="btn btn-danger" @click="clearElements(), addRow(), addRow()">Clear All</button>
-</template>
+</style>

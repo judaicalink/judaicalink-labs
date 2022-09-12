@@ -20,24 +20,10 @@ require('malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js')
 require('./design.js')
 
 
-//import { createApp } from 'vue'
-// import the root component App from a single-file component.
-//import Vue from 'vue';
-//import SearchForm from './SearchForm.vue';
-//Vue.config.productionTip = false;
-//new Vue({
-//  render: h => h(SearchForm),
-//}).$mount('#searchForm');
-
-//const app = createApp(App)
-//app.mount('#app')
-
-import {Vue} from 'vue';
+// for vue
+import Vue from 'vue';
+import { createApp } from 'vue';
 import search  from "../vue/search.vue";
 
-new Vue({
-    el: '#app',
-    components: {
-        search
-    }
-} ).$mount('#app');
+const app = createApp(search);
+app.mount('#app');
