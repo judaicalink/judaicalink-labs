@@ -167,7 +167,7 @@ LABS_DUMPS_WEBROOT = "http://data.judaicalink.org/dumps/"
 LABS_DUMPS_LOCAL = "dumps/"
 FUSEKI_SERVER = "http://localhost:3030/"
 FUSEKI_STORAGE = "."
-ELASTICSEARCH_SERVER = "http://localhost:9200/"
+ELASTICSEARCH_SERVER = "https://localhost:9200/"
 ELASTICSEARCH_STORAGE = "/var/lib/elasticsearch"
 
 JUDAICALINK_INDEX = "judaicalink"
