@@ -309,7 +309,14 @@ def generate_rows(submitted_search):
 
 def process_query(query_dic, page, alert):
     page = int(page)
-    es = Elasticsearch()
+    es = Elasticsearch(
+        hosts=[settings.ELASTICSEARCH_SERVER],
+        http_auth=(settings.ELASTICSEARCH_USER, settings.ELASTICSEARCH_PASSWORD),
+        client_cert=settings.ELASTICSEARCH_SERVER_CERT,
+        timeout=30,
+        max_retries=10,
+        retry_on_timeout=True
+        )
     size = 10
     start = (page - 1) * size
     query_str = query_dic["query_str"]
