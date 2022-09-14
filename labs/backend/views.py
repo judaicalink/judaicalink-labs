@@ -54,8 +54,16 @@ def serverstatus(request):
         'fuseki': [('Status', 'offline')],
             }
     try:
-        es_main = json.loads(requests.get(settings.ELASTICSEARCH_SERVER).content.decode('utf-8'))
-        es_stats = json.loads(requests.get(settings.ELASTICSEARCH_SERVER+'_stats').content.decode('utf-8'))
+        if settings.ELASTICSEARCH_SSL_ENABLED:
+            es_main = json.loads(requests.get(settings.ELASTICSEARCH_SERVER, verify=True,
+                                              cert=settings.ELASTICSEARCH_SERVER_CERT_PATH).content.decode('utf-8'))
+            es_stats = json.loads(requests.get(settings.ELASTICSEARCH_SERVER + '_stats', verify=True,
+                                               cert=settings.ELASTICSEARCH_SERVER_CERT_PATH).content.decode('utf-8'))
+
+        else:
+            es_main = json.loads(requests.get(settings.ELASTICSEARCH_SERVER).content.decode('utf-8'))
+            es_stats = json.loads(requests.get(settings.ELASTICSEARCH_SERVER + '_stats').content.decode('utf-8'))
+
         context['elasticsearch'] = [
             ('Version', es_main['version']['number']),
             ('Name', es_main['name']),

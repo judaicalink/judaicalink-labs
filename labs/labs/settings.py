@@ -9,12 +9,11 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-
+import logging
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -29,7 +28,6 @@ ALLOWED_HOSTS = [
     'labs.judaicalink.org',
     'localhost'
 ]
-
 
 # Application definition
 
@@ -70,8 +68,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-             os.path.join(BASE_DIR, 'templates'),
-            ],
+            os.path.join(BASE_DIR, 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -86,7 +84,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'labs.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -96,7 +93,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -116,7 +112,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -130,13 +125,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
 
-#Crispy form
+# Crispy form
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Email settings
@@ -159,23 +153,35 @@ CHANNEL_LAYERS = {
     },
 }
 
-# Other Servers
-
+# labs settings
 LABS_ROOT = 'http://localhost:8000/'
 LABS_GIT_WEBROOT = "https://github.com/wisslab/judaicalink-labs/blob/master/labs/"
 LABS_DUMPS_WEBROOT = "http://data.judaicalink.org/dumps/"
 LABS_DUMPS_LOCAL = "dumps/"
+
+# Fuseki
 FUSEKI_SERVER = "http://localhost:3030/"
 FUSEKI_STORAGE = "."
-ELASTICSEARCH_SERVER = "https://localhost:9200/"
-ELASTICSEARCH_STORAGE = "/var/lib/elasticsearch"
 
+# Elasticsearch
+ELASTICSEARCH_SERVER = "https://localhost:9200/" if os.environ.get('ELASTICSEARCH_SERVER') is None else os.environ.get('ELASTICSEARCH_SERVER')
+
+ELASTICSEARCH_STORAGE = "/var/lib/elasticsearch"
 JUDAICALINK_INDEX = "judaicalink"
 COMPACT_MEMORY_INDEX = "cm"
 COMPACT_MEMORY_META_INDEX = "cm_meta"
 
-GEONAMES_API_USER = "" # Configure in localsettings.py
+ELASTICSEARCH_SSL_ENABLED = False if ELASTICSEARCH_SERVER.startswith("http://") else True
 
+# if the settings in the .env contain the ELASTICSEARCH_SERVER_CERT_PATH use it, else throw an error
+if ELASTICSEARCH_SSL_ENABLED and 'ELASTICSEARCH_SERVER_CERT_PATH' not in os.environ:
+    ELASTICSEARCH_SERVER_CERT_PATH = os.environ['ELASTICSEARCH_SERVER_CERT_PATH']
+else:
+    logging.ERROR("ELASTICSEARCH_SERVER_CERT_PATH not set in .env file")
+    raise Exception('ELASTICSEARCH_SERVER_CERT_PATH not set in .env')
+
+# Geonames
+GEONAMES_API_USER = ""  # Configure in localsettings.py
 
 if os.path.isfile("labs/localsettings.py"):
     from .localsettings import *
