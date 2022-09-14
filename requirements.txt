@@ -50,7 +50,6 @@ pyRFC3339==1.1
 pyrsistent==0.15.5
 pyserial==3.4
 python-augeas==0.5.0
-python-debian===0.1.36ubuntu1
 pytz==2019.3
 PyYAML==5.4
 ranger-fm==1.9.3
