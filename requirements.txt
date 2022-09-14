@@ -61,7 +61,6 @@ service-identity==18.1.0
 simplejson==3.16.0
 six==1.14.0
 ssh-import-id==5.10
-systemd-python==234
 Twisted==22.1.0
 ubuntu-advantage-tools==20.3
 ufw==0.36
