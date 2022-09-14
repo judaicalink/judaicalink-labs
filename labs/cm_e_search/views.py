@@ -2,12 +2,21 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from elasticsearch import Elasticsearch
 import math, json, pprint
+from django.conf import settings
 
 
 def get_names():
 
 	names = []
-	es = Elasticsearch()
+	es = Elasticsearch(
+		hosts=[settings.ELASTICSEARCH_SERVER],
+		http_auth=(settings.ELASTICSEARCH_USER, settings.ELASTICSEARCH_PASSWORD),
+		ca_certs=settings.ELASTICSEARCH_SERVER_CERT,
+		verify_certs=False,
+		timeout=30,
+		max_retries=10,
+		retry_on_timeout=True,
+	)
 	res = es.search(index='cm_entity_names', body={'size': 7000, "query": {"match_all": {}}})
 
 	for doc in res['hits']['hits']:
