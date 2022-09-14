@@ -314,6 +314,7 @@ def process_query(query_dic, page, alert):
         basic_auth=(settings.ELASTICSEARCH_USER, settings.ELASTICSEARCH_PASSWORD),
         #http_auth=(settings.ELASTICSEARCH_USER, settings.ELASTICSEARCH_PASSWORD),
         ca_certs=settings.ELASTICSEARCH_SERVER_CERT,
+        ssl_assert_fingerprint="D3:2F:7C:E9:5A:EE:10:1B:DD:1D:FD:96:B0:01:C9:A5:55:ED:DE:0C:6A:63:ED:ED:69:C0:F9:BD:EB:FE:A5:03",
         #client_cert=settings.ELASTICSEARCH_SERVER_CERT,
         timeout=30,
         max_retries=10,
