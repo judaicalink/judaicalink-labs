@@ -309,12 +309,13 @@ def generate_rows(submitted_search):
 
 def process_query(query_dic, page, alert):
     page = int(page)
+    CERT_FINGERPRINT = "94:DD:72:25:4D:94:83:82:7B:D9:2B:FA:AC:62:E3:8B:64:0E:FF:9C:5E:13:8E:51:27:2B:B2:34:5B:9C:82:63"
     es = Elasticsearch(
         hosts=[settings.ELASTICSEARCH_SERVER],
         basic_auth=(settings.ELASTICSEARCH_USER, settings.ELASTICSEARCH_PASSWORD),
         #http_auth=(settings.ELASTICSEARCH_USER, settings.ELASTICSEARCH_PASSWORD),
         ca_certs=settings.ELASTICSEARCH_SERVER_CERT,
-        ssl_assert_fingerprint="D3:2F:7C:E9:5A:EE:10:1B:DD:1D:FD:96:B0:01:C9:A5:55:ED:DE:0C:6A:63:ED:ED:69:C0:F9:BD:EB:FE:A5:03",
+        ssl_assert_fingerprint=CERT_FINGERPRINT,
         #client_cert=settings.ELASTICSEARCH_SERVER_CERT,
         timeout=30,
         max_retries=10,
