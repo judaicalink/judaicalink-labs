@@ -311,8 +311,10 @@ def process_query(query_dic, page, alert):
     page = int(page)
     es = Elasticsearch(
         hosts=[settings.ELASTICSEARCH_SERVER],
-        http_auth=(settings.ELASTICSEARCH_USER, settings.ELASTICSEARCH_PASSWORD),
-        client_cert=settings.ELASTICSEARCH_SERVER_CERT,
+        basic_auth=(settings.ELASTICSEARCH_USER, settings.ELASTICSEARCH_PASSWORD),
+        #http_auth=(settings.ELASTICSEARCH_USER, settings.ELASTICSEARCH_PASSWORD),
+        ca_certs=settings.ELASTICSEARCH_SERVER_CERT,
+        #client_cert=settings.ELASTICSEARCH_SERVER_CERT,
         timeout=30,
         max_retries=10,
         retry_on_timeout=True,
