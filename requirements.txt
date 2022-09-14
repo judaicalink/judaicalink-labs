@@ -14,7 +14,7 @@ ConfigArgParse==0.13.0
 configobj==5.0.6
 constantly==15.1.0
 cryptography==3.3.2
-dbus-python==1.2.16
+dbus-python>=1.2.16
 distro==1.4.0
 entrypoints==0.3
 future==0.18.2
