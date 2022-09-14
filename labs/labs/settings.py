@@ -221,7 +221,7 @@ HCAPTCHA_DEFAULT_CONFIG = {
 
 # if the settings in the .env contain the ELASTICSEARCH_SERVER_CERT_PATH use it, else throw an error
 if ELASTICSEARCH_SSL_ENABLED and env('ELASTICSEARCH_SERVER_CERT') is not None:
-    ELASTICSEARCH_SERVER_CERT = os.environ['ELASTICSEARCH_SERVER_CERT']
+    ELASTICSEARCH_SERVER_CERT = env('ELASTICSEARCH_SERVER_CERT')
 else:
     logging.ERROR("ELASTICSEARCH_SERVER_CERT_PATH not set in .env file")
     raise Exception('ELASTICSEARCH_SERVER_CERT_PATH not set in .env')
