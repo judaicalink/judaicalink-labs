@@ -38,7 +38,15 @@ def result(request):
 
 	names = get_names()
 
-	es = Elasticsearch()
+	es = Elasticsearch(
+		hosts=[settings.ELASTICSEARCH_SERVER],
+		http_auth=(settings.ELASTICSEARCH_USER, settings.ELASTICSEARCH_PASSWORD),
+		ca_certs=settings.ELASTICSEARCH_SERVER_CERT,
+		verify_certs=False,
+		timeout=30,
+		max_retries=10,
+		retry_on_timeout=True,
+	)
 	query = request.GET.get('query')
 
 	res = es.search(index='cm_entities', body={"query": {"match_phrase": {'name': query}}})
