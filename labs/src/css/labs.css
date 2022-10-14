@@ -350,3 +350,11 @@ margin-top: -30px;}
 #cookiebannerModal {
     z-index: 999999;
 }
+
+.navbar {
+    flex: block;
+}
+
+#navbar a.active {
+    background-color: rgba(216,255,191,0.8);
+}
