@@ -27,7 +27,7 @@ def header():
 #CONTACT: Benjamin Schnabel <schnabel@hdm-stuttgart.de>
 #INSTITUTION: Stuttgart Media University
 #MESSAGE: JudaicaLink
-#FEED: http://data.judaicalink.org/dumps/beacon/current/beacon-persons.txt
+#FEED: https://data.judaicalink.org/dumps/beacon/current/beacon-persons.txt
 #TIMESTAMP: """ + now.strftime("%Y-%m-%dT%H:%M:%SZ") + "\n#UPDATE: monthly\n"
     # print(header_text)
     return header_text
