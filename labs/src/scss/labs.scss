@@ -76,14 +76,15 @@ a:hover {
     padding-left: 1.1em;
     font-size: 1.1em;
     display: block;
+    width:250px;
   /*  background: rgba(216,255,191,0.8);*/
 }
 #sidebar ul li a:hover {
-    background: darken($background-color, 50%);       /*rgba(0,66,132,0.4); /*Dunkelblau in Hex #004284*/
+    background: $background-color;       /*rgba(0,66,132,0.4); /*Dunkelblau in Hex #004284*/
 }
 
 #sidebar ul li.active{
-    background-color: $background-color;
+    background: darken($background-color, 30%);
 }
 
 #content {
