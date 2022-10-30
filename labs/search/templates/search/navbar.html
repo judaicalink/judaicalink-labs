@@ -7,9 +7,11 @@
 
       <nav id="sidebar" class="navbar">
             <ul class="list-unstyled navbar-nav">
-                <li class="nav-item {% active_link 'index' 'active' %}">
+                {% with url_name=request.resolver_match.url_name %}
+                <li class="nav-item {% if url_name == 'index' %}active{% endif %}">
                     <a href="{% url 'index' %}" ><i class="fas fa-home"></i>  Labs Home</a>
                 </li>
+                {% endwith %}
                 <li class="nav-item {% active_link 'search:all_search_nav' 'active' %}">
                     <a href="{% url 'search:all_search_nav'%}"><i class="fas fa-search"></i>  Search</a>
                 </li>
