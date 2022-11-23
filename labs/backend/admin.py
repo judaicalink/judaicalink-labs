@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.admin import AdminSite
 import django.db.models as django_models
+from django.conf.urls import url
 
 from . import views
 from . import models
@@ -10,7 +11,6 @@ class MyAdminSite(AdminSite):
     site_header = 'JudaicaLink Labs Backend'
 
     def get_urls(self):
-        from django.conf.urls import url
         urls = super(MyAdminSite, self).get_urls()
         # Note that custom urls get pushed to the list (not appended)
         # This doesn't work with urls += ...

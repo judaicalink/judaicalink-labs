@@ -19,7 +19,7 @@ from django.core.cache.backends.base import DEFAULT_TIMEOUT
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 # import SEARCH_URL from settings.py
-SEARCH_URL = getattr(settings, 'SEARCH_URL', 'http://localhost:9200')
+SEARCH_URL = getattr(settings, 'SEARCH_URL', 'https://localhost:9200')
 
 
 @cache_page(CACHE_TTL)
@@ -54,7 +54,7 @@ def load(request):
         data = f.read()
         print(data)
         headers = {'content-type': 'application/json'}
-        response = requests.post(f'http://localhost:9200/{settings.JUDAICALINK_INDEX}/doc/_bulk?pretty', data=data,
+        response = requests.post(f'https://localhost:9200/{settings.JUDAICALINK_INDEX}/doc/_bulk?pretty', data=data,
                                  headers=headers)
         return HttpResponse(response)
 
