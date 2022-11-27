@@ -22,7 +22,15 @@ def result(request):
         '2431292', '2823768', '10112841', '4086896', '9038025', '4875667', '7938572', '8553624', '8823924', '9498581',
         '9572329', '9616703', '9620162')
 
-    es = Elasticsearch()
+    es = Elasticsearch(
+        hosts=[settings.ELASTICSEARCH_SERVER],
+        http_auth=(settings.ELASTICSEARCH_USER, settings.ELASTICSEARCH_PASSWORD),
+        ca_certs=settings.ELASTICSEARCH_SERVER_CERT,
+        verify_certs=False,
+        timeout=30,
+        max_retries=10,
+        retry_on_timeout=True,
+    )
     query = request.GET.get('query')
     page = int(request.GET.get('page'))
     size = 10
