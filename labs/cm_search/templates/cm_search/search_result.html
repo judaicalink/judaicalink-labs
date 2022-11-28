@@ -45,12 +45,13 @@
                 <!--{{r.text|safe}}-->
 
                     {% if r.text|wordcount > 56 %}
-                        <div class="half-content" id="half">{{r.text|safe|linebreaks|truncatewords:50}}
-                            <a data-id="first" href="javascript:void(0)" class="show-hide-btn"><br>Read more</a>
+                        <div class="half-content" id="half-{{r.id}}">{{r.text|safe|linebreaks|truncatewords:50}}
+                            <a data-id="{{r.id}}" href="javascript:void(0)" class="show-hide-btn"><br>Read more</a>
                         </div>
-                        <div class="full-content" id="full" style="display: none;">{{ r.text|safe|linebreaks }}
-                            <a data-id="second" href="javascript:void(0)" class="show-hide-btn">Read less</a>
+                        <div class="full-content" id="full-{{r.id}}" style="display: none;">{{ r.text|safe|linebreaks }}
+                            <a data-id="{{r.id}}" href="javascript:void(0)" class="show-hide-btn">Read less</a>
                         </div>
+                {{r.id}}
                     {% else %}
                         <div>
                             {{ r.text|safe|linebreaks }}

@@ -68,6 +68,7 @@ def result(request):
     # -> if page = 2 then results 10-19 and so on
 
     result = []
+    i = 0  # generates a number that will be used as an id in the template
     for doc in res['hits']['hits']:
 
         formatted_doc = {}
@@ -87,6 +88,9 @@ def result(request):
                 formatted_doc[field] = doc["highlight"][field][0]
             else:
                 formatted_doc[field] = doc["_source"][field]
+
+        formatted_doc["id"] = i
+        i += 1
 
         result.append(formatted_doc)
 

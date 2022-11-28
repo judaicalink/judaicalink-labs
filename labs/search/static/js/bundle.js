@@ -20801,33 +20801,7 @@ $(document).ready(function ($) {
 
   var target = $('#sidebar a[href="' + path + '"]');
   target.addClass('active');
-});
-/*---------------------------------------------------*/
-
-/*$(document).on('click', 'ul li', function(){
-                $(this).addClass('active').siblings().removeClass('active')
-                })
-/*---------------------------------------------------*/
-
-/*let ul = document.querySelector('ul');
-let li = document.querySelector('li');
-
-li.forEach(el => {
-    el.addEventListener('click',function(){
-        ul.querySelector('.active').classList.
-            remove('active');
-
-        el.classList.add('active');
-        });
-    });*/
-
-/*---------------------------------------------------*/
-
-/*$(document).on('click', 'ul li', function(){
-                $(this).addClass('current').siblings().removeClass('current')
-                })*/
-
-/*------------Sidebar active page highlighting---------------*/
+}); //advanced search button
 
 $(document).ready(function ($) {
   window.onload = function () {
@@ -20844,30 +20818,12 @@ $(document).ready(function ($) {
   };
 }); // read more/less button
 
-/*
-$(document).ready(function ($) {
-    window.onload = function () {
-        const readMoreLessButton = document.getElementById("more-less-button");
-
-        readMoreLessButton.addEventListener("click", () => {
-
-            if (readMoreLessButton.innerText === "More") {
-                readMoreLessButton.innerText = "Less";
-            } else {
-                readMoreLessButton.innerText = "More";
-            }
-        });
-    }
-});
-*/
-
 $(document).ready(function ($) {
   window.onload = function () {
     $(".show-hide-btn").click(function () {
       var id = $(this).data("id");
-      $("#half").toggle(); //hide/show..
-
-      $("#full").toggle();
+      $("#half-" + id).toggle();
+      $("#full-" + id).toggle();
       console.log(id);
     });
   };
