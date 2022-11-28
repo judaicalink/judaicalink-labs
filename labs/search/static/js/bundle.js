@@ -20842,6 +20842,35 @@ $(document).ready(function ($) {
       });
     }
   };
+}); // read more/less button
+
+/*
+$(document).ready(function ($) {
+    window.onload = function () {
+        const readMoreLessButton = document.getElementById("more-less-button");
+
+        readMoreLessButton.addEventListener("click", () => {
+
+            if (readMoreLessButton.innerText === "More") {
+                readMoreLessButton.innerText = "Less";
+            } else {
+                readMoreLessButton.innerText = "More";
+            }
+        });
+    }
+});
+*/
+
+$(document).ready(function ($) {
+  window.onload = function () {
+    $(".show-hide-btn").click(function () {
+      var id = $(this).data("id");
+      $("#half").toggle(); //hide/show..
+
+      $("#full").toggle();
+      console.log(id);
+    });
+  };
 });
 
 /***/ }),

@@ -39,13 +39,24 @@
     <table class="table table-light table-striped">
 
     {% for r in result %}
-
         <tr>
-
             <td>
                 <b>Matching text</b>: <br>
-                {{r.text|safe}}
-                <br> 
+                <!--{{r.text|safe}}-->
+
+                    {% if r.text|wordcount > 56 %}
+                        <div class="half-content" id="half">{{r.text|safe|linebreaks|truncatewords:50}}
+                            <a data-id="first" href="javascript:void(0)" class="show-hide-btn"><br>Read more</a>
+                        </div>
+                        <div class="full-content" id="full" style="display: none;">{{ r.text|safe|linebreaks }}
+                            <a data-id="second" href="javascript:void(0)" class="show-hide-btn">Read less</a>
+                        </div>
+                    {% else %}
+                        <div>
+                            {{ r.text|safe|linebreaks }}
+                        </div>
+                    {% endif %}
+
 
                 <b>Journal:</b>
                 {% if r.jl != '' %}            
@@ -180,6 +191,8 @@
 
 {% include "search/footer.html" %}
 
+<script>
 
+</script>
 
 {% endblock content %}
