@@ -89,9 +89,6 @@ def result(request):
             else:
                 formatted_doc[field] = doc["_source"][field]
 
-        formatted_doc["id"] = i
-        i += 1
-
         result.append(formatted_doc)
 
     # paging

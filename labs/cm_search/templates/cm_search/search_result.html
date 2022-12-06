@@ -43,18 +43,18 @@
             <td>
                 <b>Matching text</b>: <br>
                     {% if r.text|wordcount > 56 %}
-                        <div class="half-content" id="half-{{r.id}}">{{r.text|safe|linebreaks|truncatewords:50}}
-                            <a data-id="{{r.id}}" href="javascript:void(0)" class="show-hide-btn"><br>Read more</a>
+                        <div class="half-content" id="half-{{forloop.counter}}">{{r.text|safe|linebreaks|truncatewords:50}}
+                            <a data-id="{{forloop.counter}}" href="javascript:void(0)" class="show-hide-btn"><br>Read more</a>
                         </div>
-                        <div class="full-content" id="full-{{r.id}}" style="display: none;">{{ r.text|safe|linebreaks }}
-                            <a data-id="{{r.id}}" href="javascript:void(0)" class="show-hide-btn">Read less</a>
+                        <div class="full-content" id="full-{{forloop.counter}}" style="display: none;">{{ r.text|safe|linebreaks }}
+                            <a data-id="{{forloop.counter}}" href="javascript:void(0)" class="show-hide-btn">Read less</a>
                         </div>
                     {% else %}
                         <div>
                             {{ r.text|safe|linebreaks }}
                         </div>
                     {% endif %}
-                
+
                 <b>Journal:</b>
                 {% if r.jl != '' %}            
                     <a href={{r.jl}} target="_blank" rel="noopener noreferrer">{{r.j_title|safe}}</a><br>
