@@ -43,11 +43,11 @@
             <td>
                 <b>Matching text</b>: <br>
                     {% if r.text|wordcount > 56 %}
-                        <div class="half-content" id="half-{{forloop.counter}}">{{r.text|safe|linebreaks|truncatewords:50}}
-                            <a data-id="{{forloop.counter}}" href="javascript:void(0)" class="show-hide-btn"><br>Read more</a>
+                        <div class="half-content" id="half-{{forloop.counter}}">{{r.text|safe|linebreaks|truncatewords:50}}<br>
+                            <button type="button" data-id="{{forloop.counter}}" onclick="javascript:void(0)" class="show-hide-btn btn btn-primary btn-sm">Read more ></button>
                         </div>
                         <div class="full-content" id="full-{{forloop.counter}}" style="display: none;">{{ r.text|safe|linebreaks }}
-                            <a data-id="{{forloop.counter}}" href="javascript:void(0)" class="show-hide-btn">Read less</a>
+                            <button data-id="{{forloop.counter}}" onclick="javascript:void(0)" class="show-hide-btn btn btn-primary btn-sm">< Read less</button>
                         </div>
                     {% else %}
                         <div>
