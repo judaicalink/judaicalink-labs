@@ -97,9 +97,9 @@ def create_query_str(submitted_search):
         "query_str": query_str.strip(),
         "submitted_search": submitted_search,
     }
-    print("--------------------------------query_str-----------------------------------------------")
+    #print("--------------------------------query_str-----------------------------------------------")
     # query_str = name:Albert
-    print(query_str)
+    #print(query_str)
 
     return query_dic
 
@@ -130,13 +130,14 @@ def get_query(request):
             }
             inputs.append(dictionary)
 
+    print(operators)
+
     # sorting the lists by the "html_name" in the dictionarys
     # example result for inputs: ['einstein', 'herbert']
     # special treatment for operators: after sorting a placeholder is inserted
     # to keep the right order when creating the list "submitted_search"
     operators.sort(key=lambda r: r['html_name'])
     operators = [d['value'] for d in operators]
-    operators.insert(0, "placeholder")
     operators.insert(0, "placeholder")
     options.sort(key=lambda r: r['html_name'])
     options = [d['value'] for d in options]
@@ -177,9 +178,9 @@ def get_query(request):
         else:
             submitted_search = [{'input': 'error_nothing_submitted'}]
 
-    print("--------------------------------submitted_search-----------------------------------------------")
+    #print("--------------------------------submitted_search-----------------------------------------------")
     # submitted_search = [{'option': 'name:', 'input': 'Anders'}, {'operator': ' AND ', 'option': 'name:', 'input': ''}]
-    print(submitted_search)
+    #print(submitted_search)
 
     cleared_submitted_search = submitted_search.copy()
     for dictionary in submitted_search:
@@ -301,9 +302,9 @@ def generate_rows(submitted_search):
 
             rows.append(row)
 
-        print("----------------- rows ---------------------")
-        print(len(rows))
-        print(rows)
+        #print("----------------- rows ---------------------")
+        #print(len(rows))
+        #print(rows)
         return rows
 
     # if we don't use the advanced search we still want to have displayed two empty rows in the advanced search
