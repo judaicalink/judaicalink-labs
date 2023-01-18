@@ -51,18 +51,7 @@ export default {
     returnData: function() {
       try {
         /* rows_data is defined in views.py and is passed on to search_result.html*/
-        if (typeof (this.rows_data) !== 'undefined') {
-          rows = this.rows_data;
-          /* if rows is not None or empty*/
-          if (rows) {
-            alert("We have data!");
-            return rows;
-          }
-        }
-        else {
-            alert("We don't have data!");
-            throw new TypeError();
-          }
+        return rows = JSON.parse("{{rows | safe}}");
       }
           /* create 2 standard rows */
       catch (error) {
