@@ -51,7 +51,9 @@ export default {
     returnData: function() {
       try {
         /* rows_data is defined in views.py and is passed on to search_result.html*/
-        return rows = JSON.parse("{{rows | safe}}");
+        rows = JSON.parse("{{rows | safe}}");
+        console.log("rows: ", rows);
+        return rows;
       }
           /* create 2 standard rows */
       catch (error) {
