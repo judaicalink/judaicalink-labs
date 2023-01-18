@@ -20,7 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 env = environ.Env(
     # set casting, default value
-    DEBUG=(bool, False)
+    DEBUG=(bool, False),
+    EMAIL_USE_TLS=(bool,False),
+    EMAIL_USE_SSL=(bool, False),
 )
 
 # Take environment variables from .env file
@@ -232,6 +234,5 @@ else:
 
 # Geonames
 GEONAMES_API_USER = ""  # Configure in localsettings.py
-
 if os.path.isfile("labs/localsettings.py"):
     from .localsettings import *
