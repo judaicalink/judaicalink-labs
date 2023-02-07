@@ -44,15 +44,16 @@ export default {
       rows: [],
       counter: 0,
     };
-
   },
 
   methods: {
     returnData: function() {
       try {
         /* rows_data is defined in views.py and is passed on to search_result.html*/
-        rows = JSON.parse("{{rows | safe}}");
-        console.log("rows: ", rows);
+        //this.rows = rows_data;
+        this.rows = JSON.parse(document.getElementById('rows').textContent);
+        console.log("rows: ", this.rows);
+        console.log(JSON.parse(document.getElementById('rows').textContent));
         return rows;
       }
           /* create 2 standard rows */
@@ -238,6 +239,7 @@ export default {
 
   },
   mounted() {
+
     this.returnData();
     this.addRow();
     this.removeElement();

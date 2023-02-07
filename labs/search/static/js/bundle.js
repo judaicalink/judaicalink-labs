@@ -20439,17 +20439,11 @@ __webpack_require__.r(__webpack_exports__);
     returnData: function () {
       try {
         /* rows_data is defined in views.py and is passed on to search_result.html*/
-        if (typeof this.rows_data !== 'undefined') {
-          rows = this.rows_data;
-          /* if rows is not None or empty*/
-
-          if (rows) {
-            /*alert("We have data!");*/
-            return rows;
-          } else {
-            throw new TypeError();
-          }
-        }
+        //this.rows = rows_data;
+        this.rows = JSON.parse(document.getElementById('rows').textContent);
+        console.log("rows: ", this.rows);
+        console.log(JSON.parse(document.getElementById('rows').textContent));
+        return rows;
       }
       /* create 2 standard rows */
       catch (error) {
@@ -20753,16 +20747,9 @@ pathName = window.location.pathname.trim();
 page = pathName.split("/").filter(function (e) {
   return e != null;
 });
-console.log(pathName);
-console.log(page);
 
 if (page[1] != null) {
-  //console.log('Active page: ' + page[1]);
-  console.log("a[href='/" + page[1] + "']");
-  console.log(page[1]);
   $("a[href='/" + page[1] + "']").addClass("active");
-} else {
-  console.log('no element available');
 }
 
 /***/ }),

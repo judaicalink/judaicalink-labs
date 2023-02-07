@@ -443,5 +443,6 @@ def process_query(query_dic, page, alert):
         "alert": alert,
         "rows": generate_rows(query_dic["submitted_search"]),
     }
+    print(context["rows"])
 
     return context
