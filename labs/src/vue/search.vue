@@ -51,9 +51,8 @@ export default {
       try {
         /* rows_data is defined in views.py and is passed on to search_result.html*/
         //this.rows = rows_data;
-        this.rows = JSON.parse(document.getElementById('rows').textContent);
+        this.rows = document.getElementById('rows').textContent;
         console.log("rows: ", this.rows);
-        console.log(JSON.parse(document.getElementById('rows').textContent));
         return rows;
       }
           /* create 2 standard rows */

@@ -441,7 +441,7 @@ def process_query(query_dic, page, alert):
         "ordered_dataset": ordered_dataset,
         # "dataslug_to_dataset": dataslug_to_dataset,
         "alert": alert,
-        "rows": generate_rows(query_dic["submitted_search"]),
+        "rows": json.dumps(generate_rows(query_dic["submitted_search"])),
     }
     print(context["rows"])
 
