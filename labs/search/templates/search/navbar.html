@@ -53,7 +53,16 @@
                 <li class="nav-item {% active_link 'contact:contact' 'active' %}">
                     <a href="{% url 'contact:contact' %}"><i class="fas fa-envelope"></i> Contact</a>
                 </li>
-                <br>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a href="{% url 'logout' %}"><i class="bi bi-lock"></i> Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a href="{% url 'login' %}"><i class="bi bi-unlock"></i> Login</a>
+                </li>
+                {% endif %}
+                <br />
                 <li>
                     <small><a href="https://web.judaicalink.org/"><i class="fas fa-door-open"></i> Web Home</a></small>
                 </li>

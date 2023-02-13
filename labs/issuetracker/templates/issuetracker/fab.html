@@ -1,0 +1,19 @@
+{% extends 'search/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="">
+        <a href="{% url 'issuetracker:issue_create' %}" class="btn btn-secondary text-white">
+            <i class="bi bi-bug"></i> New Issue
+        </a>
+</div>
+
+<style>
+    .fab {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+</style>
+{% endblock %}

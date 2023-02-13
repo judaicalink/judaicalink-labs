@@ -1,0 +1,11 @@
+{% extends "search/base.html" %}
+
+
+{% block content %}
+  <h1>Login</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary" type="submit"><i class="bi bi-unlock"></i> Login</button>
+  </form>
+{% endblock %}

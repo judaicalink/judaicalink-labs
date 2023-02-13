@@ -39,7 +39,7 @@ INTERNAL_IPS = env('INTERNAL_IPS').replace(" ", "").split(",")
 # Raises Django's ImproperlyConfigured
 # exception if SECRET_KEY not in os.environ
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY') or 'j@8=4)jq640jw%)(_sp#ockyg0&w(8ugjo=w#m2@v1vg*k^+e@'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -58,9 +58,10 @@ INSTALLED_APPS = [
     'channels',
     'core',
     'backend.apps.BackendConfig',
-    'search',
-    'cm_search',
-    'cm_e_search',
+    'search',  # Regular Entity search
+    'cm_search',  # CompactMemory search
+    'cm_e_search',  # CompactMemory Entity search
+    'issuetracker',  # issue tracker
     'lodjango',
     'dashboard',
     'data',
@@ -92,8 +93,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-             os.path.join(BASE_DIR, 'templates'),
-            ],
+            os.path.join(BASE_DIR, 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -111,7 +112,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'labs.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -146,7 +146,6 @@ else:
         }
     }
 
-
 CACHE_TTL = 60 * 15
 
 # Password validation
@@ -167,7 +166,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -181,14 +179,13 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, env('STATIC_ROOT') if env('STATIC_ROOT') else 'static')
 
-#Crispy form
+# Crispy form
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Email settings
@@ -213,7 +210,6 @@ LABS_ROOT = env('LABS_ROOT')
 FUSEKI_SERVER = env('FUSEKI_SERVER')
 FUSEKI_STORAGE = env('FUSEKI_STORAGE')
 
-
 # Elasticsearch
 ELASTICSEARCH_SERVER = env('ELASTICSEARCH_SERVER') or "https://localhost:9200/"
 ELASTICSEARCH_STORAGE = "/var/lib/elasticsearch"
@@ -237,10 +233,10 @@ HCAPTCHA_DEFAULT_CONFIG = {
     'size': 'normal',  # do not use data- prefix
 }
 
-GEONAMES_API_USER = "" # Configure in localsettings.py
+GEONAMES_API_USER = ""  # Configure in localsettings.py
 
 # removed
-#if os.path.isfile("labs/localsettings.py"):
+# if os.path.isfile("labs/localsettings.py"):
 #    from .localsettings import *
 
 

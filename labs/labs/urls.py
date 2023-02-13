@@ -60,6 +60,8 @@ urlpatterns = [
     #path('dashboard/', include('dashboard.urls')),
     path('data', include('data.urls')),
     path('contact/', include('contact.urls', namespace='contact')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('issues/', include('issuetracker.urls', namespace='issuetracker')),
     path('__debug__/', include('debug_toolbar.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
        #{'sitemaps': {'blog': GenericSitemap(sitemaps, priority=0.6)}},
