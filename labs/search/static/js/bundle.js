@@ -20441,6 +20441,8 @@ __webpack_require__.r(__webpack_exports__);
         /* rows_data is defined in views.py and is passed on to search_result.html*/
         //this.rows = rows_data;
         this.rows = document.getElementById('rows').textContent;
+        this.rows = JSON.parse(JSON.parse(this.rows));
+        console.log(typeof this.rows);
         console.log("rows: ", this.rows);
         return rows;
       }
