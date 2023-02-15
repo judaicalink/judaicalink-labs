@@ -53,8 +53,6 @@ export default {
         //this.rows = rows_data;
         this.rows = document.getElementById('rows').textContent;
         this.rows = JSON.parse(JSON.parse(this.rows));
-        console.log(typeof this.rows);
-        console.log("rows: ", this.rows);
         return rows;
       }
           /* create 2 standard rows */
@@ -166,7 +164,7 @@ export default {
           }
         ];
         console.log(error);
-        alert("We have no data! - therefore 2 standard rows")
+        console.log("We have no data! - therefore 2 standard rows");
         return rows;
       }
 

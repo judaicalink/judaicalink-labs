@@ -20442,8 +20442,6 @@ __webpack_require__.r(__webpack_exports__);
         //this.rows = rows_data;
         this.rows = document.getElementById('rows').textContent;
         this.rows = JSON.parse(JSON.parse(this.rows));
-        console.log(typeof this.rows);
-        console.log("rows: ", this.rows);
         return rows;
       }
       /* create 2 standard rows */
@@ -20528,7 +20526,7 @@ __webpack_require__.r(__webpack_exports__);
           submitted_input: ""
         }];
         console.log(error);
-        alert("We have no data! - therefore 2 standard rows");
+        console.log("We have no data! - therefore 2 standard rows");
         return rows;
       }
     },

@@ -130,7 +130,7 @@ def get_query(request):
             }
             inputs.append(dictionary)
 
-    print(operators)
+    #print(operators)
 
     # sorting the lists by the "html_name" in the dictionarys
     # example result for inputs: ['einstein', 'herbert']
@@ -443,6 +443,4 @@ def process_query(query_dic, page, alert):
         "alert": alert,
         "rows": json.dumps(generate_rows(query_dic["submitted_search"])),
     }
-    print(context["rows"])
-
     return context
