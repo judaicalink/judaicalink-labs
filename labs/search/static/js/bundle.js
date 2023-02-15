@@ -20442,6 +20442,16 @@ __webpack_require__.r(__webpack_exports__);
         //this.rows = rows_data;
         this.rows = document.getElementById('rows').textContent;
         this.rows = JSON.parse(JSON.parse(this.rows));
+        console.log(typeof this.rows);
+        console.log(this.rows); // if the standard search is used we don't get values in rows_data
+        // need to throw an error so the standard rows will be generated
+
+        if (this.rows == null) {
+          this.rows = [];
+          throw new TypeError();
+          console.log(this.rows);
+        }
+
         return rows;
       }
       /* create 2 standard rows */
