@@ -64,11 +64,13 @@ def search(request):
     #    print(f'Key: {key}')
     #    print(f'Value: {value}')
 
-    # following pages
+    # if user is changing between pages and search query stays the same
+    # 'paging' is used as an indicator to check that
     if request.GET.get('paging') is not None:
+        # search query gets processed by elasticsearch again, but this time with the corresponding page
         submitted_search = request.GET.get('paging').replace("'", '"')
         query = create_query_str(json.loads(submitted_search))
-    # first page
+    # if new search query is generated
     else:
         query = create_query_str(get_query(request))
 
@@ -79,6 +81,11 @@ def search(request):
 
 
 def create_query_str(submitted_search):
+    '''
+    creates strings that contain the search query in a format that elasticsearch can process and stores them in a dictionary
+    :param submitted_search: dictionary that contains the submitted search (either simple or advanced search query)
+    :return: query_dic: dictionary with query strings
+    '''
     query_str = ""
     simple_search_input = ""
     for dictionary in submitted_search:
@@ -105,6 +112,11 @@ def create_query_str(submitted_search):
 
 
 def get_query(request):
+    '''
+    creates a dictionary that contains the searched query for the advanced search
+    :param request:
+    :return: submitted_search: dictionary that contains search query
+    '''
     operators = []
     options = []
     inputs = []
@@ -193,7 +205,6 @@ def get_query(request):
     return submitted_search
 
 
-
 def create_alert(submitted_search):
     # receives dictionary query_dic ["submitted_search"] submitted_search may look like this: [{'Option1': 'name:',
     # 'Input1': 'einstein'}, {'Operator3': ' OR ', 'Option3': 'birthDate:', 'Input3': '1900'}] creates a string for
@@ -218,6 +229,11 @@ def create_alert(submitted_search):
 
 
 def generate_rows(submitted_search):
+    '''
+    generates a dictionary containing the search request for an advanced search
+    :param submitted_search:
+    :return: rows (dictionary containing advanced search request)
+    '''
     counter = 0
     rows = []
     if "option" in submitted_search[0]:
@@ -314,8 +330,15 @@ def generate_rows(submitted_search):
         return rows
 
 
-
 def process_query(query_dic, page, alert):
+    '''
+    search query is processed here: request to elasticsearch is made, search results are received, paging is generated according to the number of search results
+    paging: implemented so 10 results will be displayed per page
+    :param query_dic:
+    :param page: integer, representing the page the user is currently on
+    :param alert: string, built from the search query in a readable form, displayed when a search was requested
+    :return: context that contains all the information needed to generate the template
+    '''
     page = int(page)
     es = Elasticsearch(
         hosts=[settings.ELASTICSEARCH_SERVER],
@@ -429,12 +452,12 @@ def process_query(query_dic, page, alert):
             real_paging.append(number)
 
     context = {
-        "pages": pages,
-        "paging": real_paging,
+        "pages": pages,  # amount of pages that need to be generated
+        "paging": real_paging,  # numbers of pages that need to be displayed for the paging
         "next": page + 1,
         "previous": page - 1,
-        "total_hits": total_hits,
-        "page": page,
+        "total_hits": total_hits,  # amount of search results
+        "page": page,  # page the user has selected
         "submitted_search": query_dic["submitted_search"],
         "query_str": query_dic["query_str"],
         "simple_search_input": query_dic["simple_search_input"],
