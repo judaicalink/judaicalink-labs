@@ -1,5 +1,6 @@
 <template>
-  <form  method="get" action="/search/search">
+
+<form  method="get" action="/search/search">
     <input type="hidden" name="page" value="1">
     <div v-for="(row, index) in rows" class="form-row">
 
@@ -9,6 +10,7 @@
           <option v-for="(operator) in row.other_operators" v-bind:value="operator.fieldname">{{operator.display}}</option>
         </select>
       </div>
+        <br> <!--between BoolSelector and Selector-->
       <div v-if="index < 1" class="form-group col-2">
         <!--Placeholder for missing Operators in first row-->
       </div>
@@ -18,20 +20,25 @@
           <option v-for="(option) in row.other_options" v-bind:value="option.fieldname">{{option.display}}</option>
         </select>
       </div>
+
       <!--Input-->
       <div class="form-group col-5">
         <input v-model="row.submitted_input" type="text" :name="row.input" class="form-control">
       </div>
       <!--@click="removeElement(index);"-->
+        <br> <!--between input and remove -->
       <div class="form-group col-1">
         <button type="button" class="btn btn-danger" @click="removeElement(index)"><i class="fas fa-trash"></i></button>
       </div>
+         <br> <!--between remove and ?? -->
     </div>
 
     <button type="submit" class="btn btn-primary search_button float-right"><i class="fas fa-search"></i> Search</button>
+    <br> <!--search and add/clear all -->
   </form>
   <button class="btn btn-primary search_button" @click="addRow()"><i class="fas fa-plus"></i> Add</button>
-  <button class="btn btn-danger" @click="clearElements(), addRow(), addRow()">Clear All</button>
+   <button class="btn btn-danger" @click="clearElements(), addRow(), addRow()">Clear all</button>
+
 </template>
 
 
