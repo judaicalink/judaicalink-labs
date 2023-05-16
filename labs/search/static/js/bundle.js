@@ -20841,7 +20841,7 @@ const _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElemen
 );
 
 const _hoisted_3 = {
-  class: "form-row"
+  class: "row"
 };
 const _hoisted_4 = {
   key: 0,
@@ -20849,73 +20849,67 @@ const _hoisted_4 = {
 };
 const _hoisted_5 = ["onUpdate:modelValue", "name"];
 const _hoisted_6 = ["value"];
-
-const _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-const _hoisted_8 = {
+const _hoisted_7 = {
   key: 1,
   class: "form-group col-2"
 };
-const _hoisted_9 = {
+const _hoisted_8 = {
   class: "form-group col-4"
 };
-const _hoisted_10 = ["onUpdate:modelValue", "name"];
-const _hoisted_11 = ["value"];
-const _hoisted_12 = {
+const _hoisted_9 = ["onUpdate:modelValue", "name"];
+const _hoisted_10 = ["value"];
+const _hoisted_11 = {
   class: "form-group col-5"
 };
-const _hoisted_13 = ["onUpdate:modelValue", "name"];
-
-const _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-const _hoisted_15 = {
+const _hoisted_12 = ["onUpdate:modelValue", "name"];
+const _hoisted_13 = {
   class: "form-group col-1"
 };
-const _hoisted_16 = ["onClick"];
+const _hoisted_14 = ["onClick"];
 
-const _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+const _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   class: "fas fa-trash"
 }, null, -1
 /* HOISTED */
 );
 
-const _hoisted_18 = [_hoisted_17];
+const _hoisted_16 = [_hoisted_15];
+const _hoisted_17 = {
+  class: "row"
+};
+const _hoisted_18 = {
+  class: "col-auto"
+};
 
-const _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-const _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  type: "submit",
-  class: "btn btn-primary search_button float-right"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  class: "fas fa-search"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Search")], -1
-/* HOISTED */
-);
-
-const _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-const _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+const _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   class: "fas fa-plus"
 }, null, -1
 /* HOISTED */
 );
 
-const _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Add");
+const _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Add");
 
-const _hoisted_24 = [_hoisted_22, _hoisted_23];
+const _hoisted_21 = [_hoisted_19, _hoisted_20];
+const _hoisted_22 = {
+  class: "col-auto"
+};
+
+const _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  class: "col-md-3 ms-md-auto"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  type: "submit",
+  class: "btn btn-primary search_button float-right"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  class: "fas fa-search"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Search")])], -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_1, [_hoisted_2, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.rows, (row, index) => {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Operator"), index > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
       "onUpdate:modelValue": $event => row.selected_operator = $event,
-      class: "form-control",
+      class: "form-select",
       name: row.operator
     }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(row.other_operators, operator => {
       return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
@@ -20927,43 +20921,43 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* UNKEYED_FRAGMENT */
     ))], 8
     /* PROPS */
-    , _hoisted_5), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, row.selected_operator]])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("between BoolSelector and Selector"), index < 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Placeholder for missing Operators in first row")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Option"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    , _hoisted_5), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, row.selected_operator]])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), index < 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Placeholder for missing Operators in first row")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Option"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
       "onUpdate:modelValue": $event => row.selected_option = $event,
-      class: "form-control",
+      class: "form-select",
       name: row.option
     }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(row.other_options, option => {
       return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
         value: option.fieldname
       }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(option.display), 9
       /* TEXT, PROPS */
-      , _hoisted_11);
+      , _hoisted_10);
     }), 256
     /* UNKEYED_FRAGMENT */
     ))], 8
     /* PROPS */
-    , _hoisted_10), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, row.selected_option]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Input"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    , _hoisted_9), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, row.selected_option]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Input"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
       "onUpdate:modelValue": $event => row.submitted_input = $event,
       type: "text",
       name: row.input,
       class: "form-control"
     }, null, 8
     /* PROPS */
-    , _hoisted_13), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, row.submitted_input]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("@click=\"removeElement(index);\""), _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("between input and remove "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    , _hoisted_12), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, row.submitted_input]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("@click=\"removeElement(index);\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       type: "button",
       class: "btn btn-danger",
       onClick: $event => $options.removeElement(index)
-    }, _hoisted_18, 8
+    }, _hoisted_16, 8
     /* PROPS */
-    , _hoisted_16)]), _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("between remove and ?? ")]);
+    , _hoisted_14)])]);
   }), 256
   /* UNKEYED_FRAGMENT */
-  )), _hoisted_20, _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("search and add/clear all ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     class: "btn btn-primary search_button",
     onClick: _cache[0] || (_cache[0] = $event => $options.addRow())
-  }, _hoisted_24), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, _hoisted_21)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     class: "btn btn-danger",
     onClick: _cache[1] || (_cache[1] = $event => ($options.clearElements(), $options.addRow(), $options.addRow()))
-  }, "Clear all")], 64
+  }, "Clear all")]), _hoisted_23])], 64
   /* STABLE_FRAGMENT */
   );
 }
