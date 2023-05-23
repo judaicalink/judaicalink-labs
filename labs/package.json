@@ -64,7 +64,7 @@
     "file-loader": "^6.2.0",
     "gulp-sass": "^5.1.0",
     "mini-css-extract-plugin": "^2.6.1",
-    "node-sass": "^7.0.1",
+
     "postcss-loader": "^7.0.1",
     "sass": "^1.54.0",
     "sass-loader": "^13.0.2",
