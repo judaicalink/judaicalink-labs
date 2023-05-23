@@ -1,6 +1,6 @@
 <template>
 
-<form  method="get" action="/search/search">
+<form  method="get" action="search">
     <input type="hidden" name="page" value="1">
     <div v-for="(row, index) in rows" class="row">
 
@@ -26,24 +26,25 @@
       <!--@click="removeElement(index);"-->
 
       <div class="form-group col-1">
-        <button type="button" class="btn btn-danger" @click="removeElement(index)"><i class="fas fa-trash"></i></button>
+          <span role="button" class="btn btn-danger" @click="removeElement(index)"><i class="fas fa-trash"></i></span>
       </div>
     </div>
 
-  </form>
     <div class="row">
         <div class ="col-auto">
-          <button class="btn btn-primary search_button " @click="addRow()"><i class="fas fa-plus"></i> Add</button>
+            <span role="button" class="btn btn-primary search_button" @click="addRow()"><i class="fas fa-plus"></i> Add</span>
         </div>
 
          <div class ="col-auto">
-          <button class="btn btn-danger" @click="clearElements(), addRow(), addRow()">Clear all</button>
+             <span role="button" class="btn btn-danger" @click="clearElements(); addRow(); addRow()">Clear all</span>
          </div>
 
         <div class ="col-md-3 ms-md-auto">
-          <button type="submit" class="btn btn-primary search_button float-right"><i class="fas fa-search"></i> Search</button>
+            <button type="submit" class="btn btn-primary search_button float-right"><i class="fas fa-search"></i> Search</button>
         </div>
     </div>
+</form>
+
 </template>
 
 
@@ -72,9 +73,9 @@ export default {
         if (this.rows == null) {
             this.rows = [];
             throw new TypeError();
-            console.log(this.rows);
+            /* console.log(this.rows); */
         }
-        return rows;
+        return this.rows;
       }
           /* create 2 standard rows */
       catch (error) {
@@ -184,9 +185,9 @@ export default {
             submitted_input: "",
           }
         ];
-        console.log(error);
-        console.log("We have no data! - therefore 2 standard rows");
-        return rows;
+        /* console.log(error);
+        console.log("We have no data! - therefore 2 standard rows"); */
+        return this.rows;
       }
 
     },

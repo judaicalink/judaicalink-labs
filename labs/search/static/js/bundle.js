@@ -20655,10 +20655,10 @@ __webpack_require__.r(__webpack_exports__);
         if (this.rows == null) {
           this.rows = [];
           throw new TypeError();
-          console.log(this.rows);
+          /* console.log(this.rows); */
         }
 
-        return rows;
+        return this.rows;
       }
       /* create 2 standard rows */
       catch (error) {
@@ -20741,9 +20741,10 @@ __webpack_require__.r(__webpack_exports__);
           }],
           submitted_input: ""
         }];
-        console.log(error);
-        console.log("We have no data! - therefore 2 standard rows");
-        return rows;
+        /* console.log(error);
+        console.log("We have no data! - therefore 2 standard rows"); */
+
+        return this.rows;
       }
     },
     addRow: function () {
@@ -20829,7 +20830,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const _hoisted_1 = {
   method: "get",
-  action: "/search/search"
+  action: "search"
 };
 
 const _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -20906,7 +20907,7 @@ const _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createEleme
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_1, [_hoisted_2, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.rows, (row, index) => {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", _hoisted_1, [_hoisted_2, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.rows, (row, index) => {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Operator"), index > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
       "onUpdate:modelValue": $event => row.selected_operator = $event,
       class: "form-select",
@@ -20942,8 +20943,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       class: "form-control"
     }, null, 8
     /* PROPS */
-    , _hoisted_12), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, row.submitted_input]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("@click=\"removeElement(index);\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-      type: "button",
+    , _hoisted_12), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, row.submitted_input]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("@click=\"removeElement(index);\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+      role: "button",
       class: "btn btn-danger",
       onClick: $event => $options.removeElement(index)
     }, _hoisted_16, 8
@@ -20951,15 +20952,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , _hoisted_14)])]);
   }), 256
   /* UNKEYED_FRAGMENT */
-  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    role: "button",
     class: "btn btn-primary search_button",
     onClick: _cache[0] || (_cache[0] = $event => $options.addRow())
-  }, _hoisted_21)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, _hoisted_21)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    role: "button",
     class: "btn btn-danger",
-    onClick: _cache[1] || (_cache[1] = $event => ($options.clearElements(), $options.addRow(), $options.addRow()))
-  }, "Clear all")]), _hoisted_23])], 64
-  /* STABLE_FRAGMENT */
-  );
+    onClick: _cache[1] || (_cache[1] = $event => {
+      $options.clearElements();
+      $options.addRow();
+      $options.addRow();
+    })
+  }, "Clear all")]), _hoisted_23])]);
 }
 
 /***/ }),
@@ -42861,13 +42866,13 @@ exports["default"] = (sfc, props) => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _search_vue_vue_type_template_id_6ccf132c__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./search.vue?vue&type=template&id=6ccf132c */ "./src/vue/search.vue?vue&type=template&id=6ccf132c");
 /* harmony import */ var _search_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./search.vue?vue&type=script&lang=js */ "./src/vue/search.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_chris_Documents_studium_hiwi_judaica_l_server_judaicalink_labs_labs_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _Users_benni_coding_judaicalink_judaicalink_labs_labs_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_chris_Documents_studium_hiwi_judaica_l_server_judaicalink_labs_labs_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_search_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_search_vue_vue_type_template_id_6ccf132c__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"src/vue/search.vue"]])
+const __exports__ = /*#__PURE__*/(0,_Users_benni_coding_judaicalink_judaicalink_labs_labs_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_search_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_search_vue_vue_type_template_id_6ccf132c__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"src/vue/search.vue"]])
 /* hot reload */
 if (false) {}
 
