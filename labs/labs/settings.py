@@ -20,7 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 env = environ.Env(
     # set casting, default value
-    DEBUG=(bool, False)
+    DEBUG=(bool, False),
+    EMAIL_USE_TLS=(bool,False),
+    EMAIL_USE_SSL=(bool, False),
 )
 
 # Take environment variables from .env file
@@ -176,6 +178,10 @@ EMAIL_PORT = env('EMAIL_PORT')
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_TO = env('EMAIL_TO')
+EMAIL_USE_TLS = env('EMAIL_USE_TLS')
+EMAIL_USE_SSL = env('EMAIL_USE_SSL')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+
 
 # Channels
 ASGI_APPLICATION = "labs.routing.application"
@@ -228,6 +234,5 @@ else:
 
 # Geonames
 GEONAMES_API_USER = ""  # Configure in localsettings.py
-
 if os.path.isfile("labs/localsettings.py"):
     from .localsettings import *
