@@ -31,11 +31,13 @@
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="judaicalink_search" role="tabpanel" aria-labelledby="judaicalink_search-tab">
               <br>
+
+              {% include "search/search_form.html" %}
+              <br>
               <p class="alert alert-success text-center" role="alert">
                   Here you can access the JudaicaLink Knowledge Graph and search for different entities that we have collected from several datasets. <br>
                   You also have the option to specify your search query by using the advanced search.
               </p>
-              {% include "search/search_form.html" %}
 
           </div>
           <div class="tab-pane fade" id="fulltext_search" role="tabpanel" aria-labelledby="fulltext_search-tab">
@@ -54,29 +56,6 @@
               {% include "cm_e_search/search_form.html" %}
           </div>
         </div>
-
-        <br>
-
-        <p>
-            We have some news regarding search functionality in JudaicaLink.
-
-            As we said earlier, we plan to develop a full text search for JudaicaLink. Today, we launch a first
-            version of it, although it is still very limited.
-
-            You can now search our data, backed by ElasticSearch. We are currently mainly working again on the
-            backend part of this, like the processes to populate the search index, the integration with the data
-            pages and so on.
-            <br><br>
-            This first search functionality is therefore very limited: you can search in a subset of our data fields
-            <b>(name/title, abstract, birthDate, deathDate, birthLocation, deathLocation)</b> and only the first 10 results are shown, as simple links to the data pages.
-
-            Nevertheless we think this is already useful, as this way you can quickly find out,
-            if there are some matching resources available in JudaicaLink, and you can also find quickly some new
-            entries to explore our dataset.
-            <br><br><b>
-            So have fun with it - and be patient, it is still under heavy development and things inevitably will
-            break.</b>
-        </p>
 
     </div>
     <div class="col-md-0 col-lg-4 col-xl-4">
