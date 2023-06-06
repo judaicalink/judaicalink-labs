@@ -5,7 +5,7 @@
     <div v-for="(row, index) in rows" class="row">
 
       <!--Operator-->
-      <div v-if="index > 0" class="form-group col-2">
+      <div v-ifcd lA
         <select v-model="row.selected_operator" class="form-select" :name="row.operator">
           <option v-for="(operator) in row.other_operators" v-bind:value="operator.fieldname">{{operator.display}}</option>
         </select>
