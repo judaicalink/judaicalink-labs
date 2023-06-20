@@ -19,11 +19,4 @@ require('bootstrap');
 require('malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js')
 require('./design.js')
 
-
-// for vue
-import Vue from 'vue';
-import { createApp } from 'vue';
-import search  from "../vue/search.vue";
-
-const app = createApp(search);
-app.mount('#app');
+require('./vue.config.js')

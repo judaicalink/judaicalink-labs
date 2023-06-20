@@ -1,5 +1,31 @@
-/*filter.vue created by Christian Deuschle 20.06.2023/*
-<script setup>
+/*
+filter.vue
+This file creates and handles the filter component for the search results.
+created by Christian Deuschle
+cd60@hdm-stuttgart.de
+20.06.2023
+*/
+
+<script>
+ // here comes the Javascript code
+ export default {
+   name: 'filter',
+
+  data() {
+    return {
+      counter : 0,
+          };
+  },
+
+   methods : {
+     mounted() {
+       console.log('Filter component mounted.')
+     },
+   }
+
+
+
+ }
 
 </script>
 

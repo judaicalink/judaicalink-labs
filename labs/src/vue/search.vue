@@ -50,8 +50,10 @@
 
 <script>
 export default {
+  // export the function and name it search
   name : 'search',
 
+  // create empty data
   data() {
     return {
       rows: [],
@@ -59,6 +61,7 @@ export default {
     };
   },
 
+  // define the methods
   methods: {
     returnData: function() {
       try {
@@ -191,6 +194,8 @@ export default {
       }
 
     },
+
+    // remove function addRow
     addRow: function () {
       this.elem = document.createElement('div');
 
@@ -250,15 +255,20 @@ export default {
         submitted_input: "",
       });
     },
+
+    //create function removeElement
     removeElement: function (index) {
       this.rows.splice(index, 1);
     },
+
+    // create function clearElements
     clearElements: function (index) {
       this.rows.splice(0);
 
     },
 
   },
+  // when the app is mounted make these functions available
   mounted() {
 
     this.returnData();
