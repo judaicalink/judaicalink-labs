@@ -18,6 +18,7 @@ django-extensions==3.1.2
 redis==4.1.2
 django-redis==5.2.0
 django-cookiebanner>=0.2.5
-environ~=1.0
-asgiref~=3.4.1
-setuptools~=57.0.0
+environ>=1.0
+asgiref>=3.5.0
+setuptools>=57.0.0
+urllib3>=2.0.3
