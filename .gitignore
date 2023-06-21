@@ -157,4 +157,7 @@ dmypy.json
 .pyre/
 /labs/static/
 
+# Keys
 labs/localhost.crt
+labs/localhost.csr
+labs/localhost.ke
