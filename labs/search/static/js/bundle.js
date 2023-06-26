@@ -20864,40 +20864,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.esm-bundler.js");
 
 
-const _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<br><div class=\"text-center table-secondary\">Filter</div><label for=\"customRange2\" class=\"form-label\">Earliest Birthdate</label><div class=\"d-flex\"><input type=\"range\" class=\"form-range\" min=\"0\" max=\"2023\" value=\"0\"><input type=\"number\" class=\"input\"></div><label for=\"customRange2\" class=\"form-label\">Latest Birthdate</label><div class=\"d-flex\"><input type=\"range\" class=\"form-range\" min=\"0\" max=\"2023\" value=\"2023\"><input type=\"number\" class=\"input\"></div><div><div><label for=\"customRange2\" class=\"form-label\">Earliest Deathdate</label><div class=\"d-flex\"><input type=\"range\" class=\"form-range\" min=\"0\" max=\"2023\" value=\"0\"><input type=\"number\" class=\"input\"></div><label for=\"customRange2\" class=\"form-label\">Latest Deathdate</label><div class=\"d-flex\"><input type=\"range\" class=\"form-range\" min=\"0\" max=\"2023\" value=\"2023\"><input type=\"number\" class=\"input\"></div></div></div>", 7);
-
-const _hoisted_8 = {
-  class: "form-select"
-};
-
-const _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" {% for data in ordered_dataset %} {% for item in data %} {%if \"Birthlocation\" in item %} ");
-
-const _hoisted_10 = {
-  value: "{{ item | safe}}"
-};
-
-const _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" {% endif %} {% endfor %} {% endfor %} ");
-
-const _hoisted_12 = {
-  class: "form-select"
-};
-
-const _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" {% for data in ordered_dataset %} {% for item in data %} {%if \"Deathlocation\" in item %} ");
-
-const _hoisted_14 = {
-  value: "{{ item | safe}}"
-};
-
-const _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" {% endif %} {% endfor %} {% endfor %} ");
+const _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<br><div class=\"card mb-4 rounded-3 shadow-sm\"><div class=\"card-header\">Filter </div><div class=\"card-body\"><form name=\"py_facetFilter1\" id=\"py_facetFilter1\"><label for=\"py_facetFilter1\" class=\"form-label\">Birthdate</label><div class=\"row\"><div class=\"col-sm-5\"><label for=\"py_facetfrom\"> from: </label><input type=\"text\" class=\"form-control\" name=\"py_facetfrom\" id=\"py_facetfrom\" value=\"1897\" maxlength=\"4\"></div><div class=\"col-sm-5\"><label for=\"py_facetto\"> to: </label><input type=\"text\" class=\"form-control\" name=\"py_facetto\" id=\"py_facetto\" value=\"1923\" maxlength=\"4\"></div><div class=\"col-sm-2\"><label for=\"hits\"> hits: </label><br><h5><span name=\"hits\" class=\"badge bg-secondary mt-3\">+99</span></h5></div></div><input type=\"range\" class=\"form-range\" min=\"0\" max=\"2023\" value=\"2023\"><!-- must be a dual range slider --></form><label for=\"py_facetFilter2\" class=\"form-label\">Deathdate</label><form name=\"py_facetFilter2\" id=\"py_facetFilter2\"><div class=\"row\"><div class=\"col-sm-5\"><label for=\"py_facetfrom\"> from: </label><input type=\"text\" class=\"form-control\" name=\"py_facetfrom\" id=\"py_facetfrom\" value=\"1897\" maxlength=\"4\"></div><div class=\"col-sm-5\"><label for=\"py_facetto\"> to: </label><input type=\"text\" class=\"form-control\" name=\"py_facetto\" id=\"py_facetto\" value=\"1923\" maxlength=\"4\"></div><div class=\"col-sm-2\"><label for=\"hits\"> hits: </label><br><h5><span name=\"hits\" class=\"badge bg-secondary mt-3\">+99</span></h5></div></div><input type=\"range\" class=\"form-range\" min=\"0\" max=\"2023\" value=\"2023\"><!-- must be a dual range slider --></form><div class=\"row\"><div class=\"col-10\"><label for=\"birthloc\" class=\"form-label\">Birthlocation </label><select name=\"birthloc\" class=\"form-select\"><option value=\"\">Birthlocation A</option><option value=\"\">Birthlocation B</option><option value=\"\">Birthlocation C</option><option value=\"\">...</option></select></div><div class=\"col-auto\"><label for=\"hits\"> hits: </label><br><h5><span name=\"hits\" class=\"badge bg-secondary mt-3\">+99</span></h5></div></div><div class=\"row\"><div class=\"col-10\"><label for=\"deathloc\" class=\"form-label\">Deathlocation</label><select name=\"deathloc\" class=\"form-select\"><option value=\"\">Deathlocation A</option><option value=\"\">Deathlocation B</option><option value=\"\">Deathlocation C</option><option value=\"\">...</option></select></div><div class=\"col-auto\"><label for=\"hits\"> hits: </label><br><h5><span name=\"hits\" class=\"badge bg-secondary mt-3\">+99</span></h5></div></div><div class=\"row\"><div class=\"col-10\"><label for=\"language\" class=\"form-label\">Language</label><select name=\"language\" class=\"form-select\"><option value=\"\">English</option><option value=\"\">German</option><option value=\"\">French</option><option value=\"\">Ivrit</option><option value=\"\">...</option></select></div><div class=\"col-auto\"><label for=\"hits\"> hits: </label><br><h5><span name=\"hits\" class=\"badge bg-secondary mt-3\">+99</span></h5></div></div><div class=\"row\"><div class=\"col-10\"><label for=\"database\" class=\"form-label\">Database</label><select name=\"database\" class=\"form-select\"><!--does the ordered_dataset contain the\r\n                  datebase where th e information comes from? -- than we can make this dynamic --><option value=\"\">Gidal Image Archive</option><option value=\"\">Soundscape Synagogue</option><option value=\"\">Epidat - Epigraphical Database</option><option value=\"\">Entity Pages - Judaicalink</option><option value=\"\">Linking Compact Memory - Pages</option><option value=\"\">Linking Compact Memory - Resources and References</option><option value=\"\">DBpedia and Wikipedia Geographical External Links</option><option value=\"\">Yivo Encyclopedia</option><option value=\"\">Translations for Rujen (Google)</option><option value=\"\">Encyclopedia of Russian Jewry</option><option value=\"\">Enrichment of Birth- and Deathdates</option><option value=\"\">Geographic Enrichment</option><option value=\"\">Resources on German-Jewish Education and Religion</option><option value=\"\">The Library of Haskala</option><option value=\"\">Persons from NLI</option><option value=\"\">The Library of Haskala</option><option value=\"\">Persons from ubffm</option><option value=\"\">Persons from NLI</option><option value=\"\">Stolpersteine in Mainz</option><option value=\"\">Persons from DBPedia</option><option value=\"\">Eine Jüdische Familie aus Aschaffenburg</option><option value=\"\">Geographical Coordinates</option><option value=\"\">Persons from GND</option><option value=\"\">Encyclopedia Interlinks</option><option value=\"\">Biographisches Handbuch der Rabbiner</option><option value=\"\">Das Jüdische Hamburg</option><option value=\"\">Links to external sources</option></select></div><div class=\"col-auto\"><label for=\"hits\"> hits: </label><br><h5><span name=\"hits\" class=\"badge bg-secondary mt-3\">+99</span></h5></div></div><div class=\"row\"><div class=\"col-10\"><label for=\"entity\" class=\"form-label\">Entity</label><select name=\"entity\" class=\"form-select\"><option value=\"\">Person</option><option value=\"\">Entity A</option><option value=\"\">Entity B</option><option value=\"\">Entity C</option><option value=\"\">...</option></select></div><div class=\"col-auto\"><label for=\"hits\"> hits: </label><br><h5><span name=\"hits\" class=\"badge bg-secondary mt-3\">+99</span></h5></div></div><div class=\"row\"><div class=\"col-10\"><label for=\"occu\" class=\"form-label\">Occupation</label><select name=\"occu\" class=\"form-select\"><option value=\"\">Rabbi</option><option value=\"\">Lawyer</option><option value=\"\">Occupation A</option><option value=\"\">Occupation B</option><option value=\"\">Occupation C</option><option value=\"\">...</option></select></div><div class=\"col-auto\"><label for=\"hits\"> hits: </label><br><h5><span name=\"hits\" class=\"badge bg-secondary mt-3\">+99</span></h5></div></div><div class=\"row\"><div class=\"col-10\"><label for=\"keyword\" class=\"form-label\">Keyword</label><select name=\"keyword\" class=\"form-select\"><option value=\"\">Keyword A</option><option value=\"\">Keyword B</option><option value=\"\">Keyword C</option><option value=\"\">...</option></select></div><div class=\"col-auto\"><label for=\"hits\"> hits: </label><br><h5><span name=\"hits\" class=\"badge bg-secondary mt-3\">+99</span></h5></div></div><br><br><br><button type=\"submit\" class=\"btn btn-primary search_button position-absolute bottom-0 end-0 m-3\">Use filter</button></div></div>", 2);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.item | _ctx.safe), 1
-  /* TEXT */
-  ), _hoisted_11])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.item | _ctx.safe), 1
-  /* TEXT */
-  ), _hoisted_15])])])], 64
-  /* STABLE_FRAGMENT */
-  );
+  return _hoisted_1;
 }
 
 /***/ }),
@@ -42977,13 +42947,13 @@ exports["default"] = (sfc, props) => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _filter_vue_vue_type_template_id_d141178c__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./filter.vue?vue&type=template&id=d141178c */ "./src/vue/filter.vue?vue&type=template&id=d141178c");
 /* harmony import */ var _filter_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./filter.vue?vue&type=script&lang=js */ "./src/vue/filter.vue?vue&type=script&lang=js");
-/* harmony import */ var _Users_benni_coding_judaicalink_judaicalink_labs_labs_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_Users_chris_Documents_studium_hiwi_judaica_l_server_judaicalink_labs_labs_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_Users_benni_coding_judaicalink_judaicalink_labs_labs_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_filter_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_filter_vue_vue_type_template_id_d141178c__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"src/vue/filter.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_Users_chris_Documents_studium_hiwi_judaica_l_server_judaicalink_labs_labs_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_filter_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_filter_vue_vue_type_template_id_d141178c__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"src/vue/filter.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -43002,13 +42972,13 @@ if (false) {}
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _search_vue_vue_type_template_id_6ccf132c__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./search.vue?vue&type=template&id=6ccf132c */ "./src/vue/search.vue?vue&type=template&id=6ccf132c");
 /* harmony import */ var _search_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./search.vue?vue&type=script&lang=js */ "./src/vue/search.vue?vue&type=script&lang=js");
-/* harmony import */ var _Users_benni_coding_judaicalink_judaicalink_labs_labs_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_Users_chris_Documents_studium_hiwi_judaica_l_server_judaicalink_labs_labs_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_Users_benni_coding_judaicalink_judaicalink_labs_labs_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_search_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_search_vue_vue_type_template_id_6ccf132c__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"src/vue/search.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_Users_chris_Documents_studium_hiwi_judaica_l_server_judaicalink_labs_labs_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_search_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_search_vue_vue_type_template_id_6ccf132c__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"src/vue/search.vue"]])
 /* hot reload */
 if (false) {}
 
