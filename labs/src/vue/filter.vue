@@ -5,23 +5,21 @@ created by Christian Deuschle
 cd60@hdm-stuttgart.de
 20.06.2023
 */
+<script setup>
+  import { ref } from 'vue'
+
+  const value = ref([20, 40])
+</script>
 
 <script>
  // here comes the Javascript code
 
-
-
-
-
  export default {
-
-
    name: 'filter',
-
   data() {
     return {
       counter : 0,
-
+      value: [20, 40],
           };
   },
 
@@ -29,11 +27,7 @@ cd60@hdm-stuttgart.de
      mounted() {
        console.log('Filter component mounted.')
      },
-
    }
-
-
-
  };
 
 </script>
@@ -262,6 +256,18 @@ cd60@hdm-stuttgart.de
             </div>
   </div>
 
+  <!--begintest-->
+
+  <v-card>
+    <v-card-text>
+      <v-range-slider
+        v-model="value"
+        strict
+      ></v-range-slider>
+    </v-card-text>
+  </v-card>
+
+  <!--endtest-->
 </template>
 
 <style scoped>
