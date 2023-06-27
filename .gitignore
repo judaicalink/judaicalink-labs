@@ -160,4 +160,4 @@ dmypy.json
 # Keys
 labs/localhost.crt
 labs/localhost.csr
-labs/localhost.ke
+labs/localhost.ke!/labs/package.json
