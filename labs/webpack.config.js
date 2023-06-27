@@ -7,6 +7,7 @@ const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const {VueLoaderPlugin} = require('vue-loader')
 const CompressionPlugin = require("compression-webpack-plugin");
+const { VuetifyPlugin } = require('webpack-plugin-vuetify')
 require('dotenv-webpack');
 require('dotenv').config();
 const webpack = require('webpack');
@@ -59,6 +60,8 @@ module.exports = [
                     {from: './src/img/', to: __dirname + '/search/static/img/'},
                 ],
             }),
+
+            new VuetifyPlugin({ autoImport: true }), // Enabled by default
 
             //for vue
             new VueLoaderPlugin(),
