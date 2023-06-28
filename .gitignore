@@ -7,6 +7,7 @@
 /labs/backend/rdf_files
 /labs/data/rdf_files
 /labs/dumps
+/labs/search/static/js
 /data/
 /fuseki/
 /static
@@ -16,7 +17,6 @@ labs/labs/localsettings.py
 /labs/.env
 /labs/node_modules/
 /labs/static/
-/labs/search/static/
 
 
 # Byte-compiled / optimized / DLL files

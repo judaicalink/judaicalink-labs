@@ -7,7 +7,7 @@ const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const {VueLoaderPlugin} = require('vue-loader')
 const CompressionPlugin = require("compression-webpack-plugin");
-const { VuetifyPlugin } = require('webpack-plugin-vuetify')
+const {VuetifyPlugin} = require('webpack-plugin-vuetify')
 require('dotenv-webpack');
 require('dotenv').config();
 const webpack = require('webpack');
@@ -49,7 +49,15 @@ module.exports = [
                     test: /\.js$/,
                     loader: 'babel-loader',
                     exclude: /node_modules/
-                }
+                },
+                {
+                    test: /\.css$/,
+                    use: ['style-loader', 'css-loader'],
+                },
+                {
+                    test: /\.s(c|a)ss$/,
+                    use: ['style-loader', 'css-loader', 'sass-loader'],
+                },
             ]
         },
 
@@ -61,7 +69,7 @@ module.exports = [
                 ],
             }),
 
-            new VuetifyPlugin({ autoImport: true }), // Enabled by default
+            new VuetifyPlugin({autoImport: true}), // Enabled by default
 
             //for vue
             new VueLoaderPlugin(),
