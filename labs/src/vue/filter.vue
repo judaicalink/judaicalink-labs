@@ -8,7 +8,8 @@ cd60@hdm-stuttgart.de
 <script setup>
   import { ref } from 'vue'
 
-  const value = ref([20, 40])
+  const valueBD = ref([0, 2023])
+  const valueDD = ref([])
 </script>
 
 <script>
@@ -19,7 +20,8 @@ cd60@hdm-stuttgart.de
   data() {
     return {
       counter : 0,
-      value: [20, 40],
+      valueBD: [0, 2023],
+      valueDD: [0, 2023],
           };
   },
 
@@ -40,20 +42,20 @@ cd60@hdm-stuttgart.de
       </div>
           <div class="card-body">
 
-            <form name="py_facetFilter1" id="py_facetFilter1">
+      <form name="py_facetFilter1" id="py_facetFilter1">
               <label for="py_facetFilter1" class="form-label">Birthdate</label>
                 <div class="row">
                   <div class="col-sm-5">
                     <label for="py_facetfrom">
                     from:
                     </label>
-                    <input type="text" class="form-control" name="py_facetfrom" id="py_facetfrom" value="1897" maxlength="4" />
+                    <input type="text" class="form-control" name="py_facetfrom" id="py_facetfrom" v-model="valueBD[0]" maxlength="4" />
                   </div>
                   <div class="col-sm-5">
                     <label for="py_facetto">
                     to:
                     </label>
-                    <input type="text" class="form-control" name="py_facetto" id="py_facetto" value="1923" maxlength="4" />
+                    <input type="text" class="form-control" name="py_facetto" id="py_facetto" v-model="valueBD[1]" maxlength="4" />
                   </div>
                   <div class="col-sm-2">
                     <label for="hits">
@@ -63,22 +65,27 @@ cd60@hdm-stuttgart.de
                     <h5><span name="hits" class="badge bg-secondary mt-3">+99</span></h5>
                   </div>
                 </div>
-                  <input type="range" class="form-range" min="0" max="2023" value="2023"> <!-- must be a dual range slider -->
-            </form>
-            <label for="py_facetFilter2" class="form-label">Deathdate</label>
-            <form name="py_facetFilter2" id="py_facetFilter2">
-              <div class="row">
+        </form>
+
+      <v-range-slider
+       v-model="valueBD"
+        strict
+      ></v-range-slider>
+
+      <form name="py_facetFilter1" id="py_facetFilter1">
+              <label for="py_facetFilter1" class="form-label">Deathdate</label>
+                <div class="row">
                   <div class="col-sm-5">
                     <label for="py_facetfrom">
                     from:
                     </label>
-                    <input type="text" class="form-control" name="py_facetfrom" id="py_facetfrom" value="1897" maxlength="4" />
+                    <input type="text" class="form-control" name="py_facetfrom" id="py_facetfrom" v-model="valueDD[0]" maxlength="4" />
                   </div>
                   <div class="col-sm-5">
                     <label for="py_facetto">
                     to:
                     </label>
-                    <input type="text" class="form-control" name="py_facetto" id="py_facetto" value="1923" maxlength="4" />
+                    <input type="text" class="form-control" name="py_facetto" id="py_facetto" v-model="valueDD[1]" maxlength="4" />
                   </div>
                   <div class="col-sm-2">
                     <label for="hits">
@@ -87,9 +94,13 @@ cd60@hdm-stuttgart.de
                       <br>
                     <h5><span name="hits" class="badge bg-secondary mt-3">+99</span></h5>
                   </div>
-              </div>
-                <input type="range" class="form-range" min="0" max="2023" value="2023"> <!-- must be a dual range slider -->
-            </form>
+                </div>
+        </form>
+
+      <v-range-slider
+       v-model="valueDD"
+        strict
+      ></v-range-slider>
               <div class="row">
                   <div class="col-10">
                  <label for="birthloc" class="form-label">Birthlocation
@@ -257,15 +268,6 @@ cd60@hdm-stuttgart.de
   </div>
 
   <!--begintest-->
-
-  <v-card>
-    <v-card-text>
-      <v-range-slider
-        v-model="value"
-        strict
-      ></v-range-slider>
-    </v-card-text>
-  </v-card>
 
   <!--endtest-->
 </template>
