@@ -7,9 +7,10 @@ cd60@hdm-stuttgart.de
 */
 <script setup>
   import { ref } from 'vue'
-
+ // import filterSelect from "../components/filterSelect.vue";
   const valueBD = ref([0, 2023])
   const valueDD = ref([])
+
 </script>
 
 <script>
@@ -17,6 +18,9 @@ cd60@hdm-stuttgart.de
 
  export default {
    name: 'filter',
+  // components: {
+  //     filterSelect
+   //},
   data() {
     return {
       counter : 0,
@@ -41,6 +45,8 @@ cd60@hdm-stuttgart.de
       <div class="card-header ">Filter
       </div>
           <div class="card-body">
+
+<!--Birthdate-->
 
       <form name="py_facetFilter1" id="py_facetFilter1">
               <label for="py_facetFilter1" class="form-label">Birthdate</label>
@@ -72,6 +78,8 @@ cd60@hdm-stuttgart.de
         strict
       ></v-range-slider>
 
+<!--Deathdate-->
+
       <form name="py_facetFilter1" id="py_facetFilter1">
               <label for="py_facetFilter1" class="form-label">Deathdate</label>
                 <div class="row">
@@ -101,7 +109,10 @@ cd60@hdm-stuttgart.de
        v-model="valueDD"
         strict
       ></v-range-slider>
-              <div class="row">
+
+<!--Birthlocation-->
+    <!--   <filterSelect /> -->
+             <div class="row">
                   <div class="col-10">
                  <label for="birthloc" class="form-label">Birthlocation
                  </label>
@@ -120,6 +131,8 @@ cd60@hdm-stuttgart.de
                     <h5><span name="hits" class="badge bg-secondary mt-3">+99</span></h5>
                   </div>
               </div>
+
+<!--Deathlocation-->
 
                   <div class="row">
                   <div class="col-10">
@@ -158,6 +171,9 @@ cd60@hdm-stuttgart.de
                     <h5><span name="hits" class="badge bg-secondary mt-3">+99</span></h5>
                   </div>
               </div>
+
+              <!--Datebase-->
+
                   <div class="row">
                   <div class="col-10">
                   <label for="database" class="form-label">Database</label>
@@ -201,6 +217,9 @@ cd60@hdm-stuttgart.de
                     <h5><span name="hits" class="badge bg-secondary mt-3">+99</span></h5>
                   </div>
               </div>
+
+<!--Entity-->
+
               <div class="row">
                   <div class="col-10">
                   <label for="entity" class="form-label">Entity</label>
@@ -239,6 +258,8 @@ cd60@hdm-stuttgart.de
                       <br>
                     <h5><span name="hits" class="badge bg-secondary mt-3">+99</span></h5>
                   </div>
+
+<!--Keyword-->
 
               </div>
               <div class="row">
