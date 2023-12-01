@@ -12,9 +12,7 @@ In folder *labs* run ``` pip install -r requirements.txt --user```
 In *labs/labs* copy *settings_dev.py* in the same directory and name it *settings.py*  
 In *labs* run ```python manage.py migrate``` command.
 
-Download [Elasticsearch](https://www.elastic.co/de/downloads/elasticsearch) and unzip the downloaded file.  
-Run elasticsearch:   
-For Windows run the file in the unzipped folder *elasticsearch-x-x-x/bin/elasticsearch.bat*.
+Install Apache Solr.
 
 
 Create a super user for loading data:  
