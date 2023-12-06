@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.conf import settings
 from data.models import Dataset
-from elasticsearch import Elasticsearch
+import pysolr
 import json
 from django.conf import settings
 from django.views.decorators.cache import cache_page
@@ -19,7 +19,7 @@ from django.core.cache.backends.base import DEFAULT_TIMEOUT
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 # import SEARCH_URL from settings.py
-SEARCH_URL = getattr(settings, 'SEARCH_URL', 'https://localhost:9200')
+SEARCH_URL = getattr(settings, 'SEARCH_URL', 'https://localhost:8983/solr/')
 
 
 @cache_page(CACHE_TTL)
@@ -67,7 +67,7 @@ def search(request):
     # if user is changing between pages and search query stays the same
     # 'paging' is used as an indicator to check that
     if request.GET.get('paging') is not None:
-        # search query gets processed by elasticsearch again, but this time with the corresponding page
+        # search query gets processed by solr again, but this time with the corresponding page
         submitted_search = request.GET.get('paging').replace("'", '"')
         query = create_query_str(json.loads(submitted_search))
     # if new search query is generated
@@ -82,7 +82,7 @@ def search(request):
 
 def create_query_str(submitted_search):
     '''
-    creates strings that contain the search query in a format that elasticsearch can process and stores them in a dictionary
+    creates strings that contain the search query in a format that solr can process and stores them in a dictionary
     :param submitted_search: dictionary that contains the submitted search (either simple or advanced search query)
     :return: query_dic: dictionary with query strings
     '''
@@ -332,7 +332,7 @@ def generate_rows(submitted_search):
 
 def process_query(query_dic, page, alert):
     '''
-    search query is processed here: request to elasticsearch is made, search results are received, paging is generated according to the number of search results
+    search query is processed here: request to solr is made, search results are received, paging is generated according to the number of search results
     paging: implemented so 10 results will be displayed per page
     :param query_dic:
     :param page: integer, representing the page the user is currently on

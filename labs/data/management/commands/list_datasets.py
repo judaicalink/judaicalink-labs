@@ -1,6 +1,6 @@
 import json
 import re
-import elasticsearch
+import pysolr
 import rdflib
 import gzip
 from django.conf import settings

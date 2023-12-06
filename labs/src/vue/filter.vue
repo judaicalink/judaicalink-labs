@@ -21,6 +21,7 @@ cd60@hdm-stuttgart.de
    components: {
       filterSelect
    },
+   delimiters: ['[[', ']]'],
   data() {
     return {
       counter : 0,

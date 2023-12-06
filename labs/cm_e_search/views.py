@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from elasticsearch import Elasticsearch
+import pysolr
 import math, json, pprint
 from django.conf import settings
 from django.views.decorators.cache import cache_page
@@ -14,16 +14,8 @@ CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 def get_names():
 
 	names = []
-	es = Elasticsearch(
-		hosts=[settings.ELASTICSEARCH_SERVER],
-		http_auth=(settings.ELASTICSEARCH_USER, settings.ELASTICSEARCH_PASSWORD),
-		ca_certs=settings.ELASTICSEARCH_SERVER_CERT,
-		verify_certs=False,
-		timeout=30,
-		max_retries=10,
-		retry_on_timeout=True,
-	)
-	res = es.search(index='cm_entity_names', body={'size': 7000, "query": {"match_all": {}}})
+	solr = pysolr.Solr(settings.SOLR_SERVER, always_commit=True, timeout=10)
+	res = solr.search(index='cm_entity_names', body={'size': 7000, "query": {"match_all": {}}})
 
 	for doc in res['hits']['hits']:
 		names.append(doc['_source']['name'])
@@ -63,17 +55,11 @@ def result(request):
 
 	names = get_names()
 
-	es = Elasticsearch(
-		hosts=[settings.ELASTICSEARCH_SERVER],
-		http_auth=(settings.ELASTICSEARCH_USER, settings.ELASTICSEARCH_PASSWORD),
-		ca_certs=settings.ELASTICSEARCH_SERVER_CERT,
-		verify_certs=False,
-		timeout=30,
-		max_retries=10,
-		retry_on_timeout=True,)
+	solr = pysolr.Solr(settings.SOLR_SERVER, always_commit=True, timeout=10)
+
 	query = request.GET.get('query')
 
-	res = es.search(index='cm_entities', body={"query": {"match_phrase": {'name': query}}})
+	res = pysolr.Solr(index='cm_entities', body={"query": {"match_phrase": {'name': query}}})
 
 	result = []
 	for doc in res['hits']['hits']:

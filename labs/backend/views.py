@@ -1,17 +1,15 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.urls import reverse
-from django.conf import settings
 import json
-import requests
-from pathlib import Path
-from . import tasks
-from . import models
-from data import utils as dataset_loader
-from . import admin
-import time
 import shutil
 from datetime import datetime
+from pathlib import Path
+
+import requests
+from django.conf import settings
+from django.shortcuts import render, redirect
+from django.urls import reverse
+
+from . import admin
+from . import tasks
 
 
 # Create your views here.
@@ -26,9 +24,9 @@ def load_from_github(request):
     return redirect(reverse('admin:data_dataset_changelist'))
 
 
-def load_elasticsearch(request):
+def load_solr(request):
     '''
-    Fetches all data files and indexes them in ES.
+    Fetches all data files and indexes them in Solr.
     '''
     tasks.call_command_as_task('index_all_datasets')
     return redirect(reverse('admin:data_dataset_changelist'))
@@ -44,46 +42,52 @@ def load_fuseki(request):
 
 def dirsize(directory):
     root_directory = Path(directory)
-    return sum(f.stat().st_size for f in root_directory.glob('**/*') if f.is_file() )
+    return sum(f.stat().st_size for f in root_directory.glob('**/*') if f.is_file())
 
 
 def serverstatus(request):
     context = {
         'site_header': admin.admin_site.site_header,
-        'elasticsearch': [('Status', 'offline')],
+        'solr': [('Status', 'offline')],
         'fuseki': [('Status', 'offline')],
-            }
+    }
     try:
-        es_main = json.loads(requests.get(settings.ELASTICSEARCH_SERVER).content.decode('utf-8'))
-        es_stats = json.loads(requests.get(settings.ELASTICSEARCH_SERVER+'_stats').content.decode('utf-8'))
-        context['elasticsearch'] = [
-            ('Version', es_main['version']['number']),
-            ('Name', es_main['name']),
-            ('Cluster Name', es_main['cluster_name']),
-            ('Indices', '\n'.join(es_stats['indices']))
-            ]
-        for index in es_stats['indices']:
-            context['elasticsearch'].append((index + ' Docs', "{:,}".format(es_stats['indices'][index]['total']['docs']['count'])))
-            context['elasticsearch'].append((index + ' Size', "{:.2f} M".format(es_stats['indices'][index]['total']['store']['size_in_bytes']/1024/1024)))
-        if hasattr(settings, 'ELASTICSEARCH_STORAGE'):
-            df = shutil.disk_usage(settings.ELASTICSEARCH_STORAGE)
-            context['elasticsearch'].append(('Disk space (' + settings.ELASTICSEARCH_STORAGE + ')', "{:.2f} / {:.2f} G".format(df.free / 2**30, df.total/2**30)))
-            context['elasticsearch'].append(('Disk used (' + settings.ELASTICSEARCH_STORAGE + ')', "{:.2f} M".format(dirsize(settings.ELASTICSEARCH_STORAGE)/2**20)))
+        solr_main = json.loads(requests.get(settings.SOLR_SERVER).content.decode('utf-8'))
+        solr_stats = json.loads(requests.get(settings.SOLR_SERVER).content.decode('utf-8'))
+        context['solr'] = [
+            ('Version', solr_main['lucene']['solr-spec-version']),
+            ('Name', solr_main['solr_home']),
+            ('Uptime', solr_stats['uptime']),
+            ('Cores', '\n'.join(solr_stats['status'].keys())),
+        ]
+
+        for core in solr_stats['status']:
+            context['solr'].append((core + ' Docs', "{:,}".format(solr_stats['status'][core]['index']['numDocs'])))
+            context['solr'].append((core + ' Size', "{:.2f} M".format(
+                solr_stats['status'][core]['index']['sizeInBytes'] / 1024 / 1024)))
+        if hasattr(settings, 'SOLR_STORAGE'):
+            df = shutil.disk_usage(settings.SOLR_STORAGE)
+            context['solr'].append(('Disk space (' + settings.SOLR_STORAGE + ')',
+                                    "{:.2f} / {:.2f} G".format(df.free / 2 ** 30, df.total / 2 ** 30)))
+            context['solr'].append(('Disk used (' + settings.SOLR_STORAGE + ')',
+                                    "{:.2f} M".format(dirsize(settings.SOLR_STORAGE) / 2 ** 20)))
     except Exception as e:
         print(str(e))
-    
+
     try:
-        f_main = json.loads(requests.get(settings.FUSEKI_SERVER+'$/server').content.decode('utf-8'))
-        
+        f_main = json.loads(requests.get(settings.FUSEKI_SERVER + '$/server').content.decode('utf-8'))
+
         context['fuseki'] = [
             ('Version', f_main['version']),
             ('Started', datetime.fromisoformat(f_main['startDateTime']).strftime("%Y-%m-%d %H:%M")),
             ('Datasets', '\n'.join([ds['ds.name'] for ds in f_main['datasets']]))
-                ]
+        ]
         if hasattr(settings, 'FUSEKI_STORAGE'):
             df = shutil.disk_usage(settings.FUSEKI_STORAGE)
-            context['fuseki'].append(('Disk space (' + settings.FUSEKI_STORAGE + ')', "{:.2f} / {:.2f} G".format(df.free / 2**30, df.total/2**30)))
-            context['fuseki'].append(('Disk used (' + settings.FUSEKI_STORAGE  + ')', "{:.2f} M".format(dirsize(settings.FUSEKI_STORAGE)/2**20)))
+            context['fuseki'].append(('Disk space (' + settings.FUSEKI_STORAGE + ')',
+                                      "{:.2f} / {:.2f} G".format(df.free / 2 ** 30, df.total / 2 ** 30)))
+            context['fuseki'].append(('Disk used (' + settings.FUSEKI_STORAGE + ')',
+                                      "{:.2f} M".format(dirsize(settings.FUSEKI_STORAGE) / 2 ** 20)))
     except Exception as e:
         print(str(e))
     return render(request, 'admin/serverstatus.html', context)

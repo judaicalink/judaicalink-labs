@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from elasticsearch import Elasticsearch
+import pysolr
 import math
 from django.conf import settings
 from django.views.decorators.cache import cache_page
@@ -22,15 +22,8 @@ def result(request):
         '2431292', '2823768', '10112841', '4086896', '9038025', '4875667', '7938572', '8553624', '8823924', '9498581',
         '9572329', '9616703', '9620162')
 
-    es = Elasticsearch(
-        hosts=[settings.ELASTICSEARCH_SERVER],
-        http_auth=(settings.ELASTICSEARCH_USER, settings.ELASTICSEARCH_PASSWORD),
-        ca_certs=settings.ELASTICSEARCH_SERVER_CERT,
-        verify_certs=False,
-        timeout=30,
-        max_retries=10,
-        retry_on_timeout=True,
-    )
+    solr = pysolr.Solr(settings.SOLR_SERVER, always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
+
     query = request.GET.get('query')
     page = int(request.GET.get('page'))
     size = 10
@@ -61,9 +54,9 @@ def result(request):
             }
         }
     }
-    res = es.search(index='cm_meta', body=body)
+    res = solr.search(index='cm_meta', body=body)
     # added 'from': start, to indicate which results should be displayed
-    # 'from' is used to tell elasticsearch which results to return by index
+    # 'from' is used to tell solr which results to return by index
     # -> if page = 1 then results 0-9 will be displayed
     # -> if page = 2 then results 10-19 and so on
 
