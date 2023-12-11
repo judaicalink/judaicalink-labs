@@ -41,12 +41,14 @@ SECRET_KEY = env('SECRET_KEY')
 
 ALLOWED_HOSTS = [
     'labs.judaicalink.org',
-    'localhost'
+    'localhost',
+    'judaicalink.org',
 ]
 
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -67,6 +69,7 @@ INSTALLED_APPS = [
     'hcaptcha',
     'active_link',
     'environ',
+    "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [
@@ -169,7 +172,10 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 # Crispy form
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # Email settings
 EMAIL_BACKEND = env('EMAIL_BACKEND')

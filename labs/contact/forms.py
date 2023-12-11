@@ -1,5 +1,5 @@
 from django import forms
-from captcha.fields import CaptchaField
+#from captcha.fields import CaptchaField
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field
 
@@ -28,7 +28,7 @@ class ContactForm(forms.Form):
         label='I accept the <a href="http://web.judaicalink.org/legal">privacy policy</a>.'
     )
 
-    captcha = CaptchaField()
+    #captcha = CaptchaField()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -44,6 +44,6 @@ class ContactForm(forms.Form):
             Field('email', placeholder="Your Email"),
             Field('message', placeholder="Your Message"),
             'gdpr',
-            'captcha',
+            #'captcha',
             Submit('submit', 'Submit', css_class="btn-secondary"),
         )
