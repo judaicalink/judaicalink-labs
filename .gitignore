@@ -17,6 +17,9 @@ labs/labs/localsettings.py
 /labs/.env
 /labs/node_modules/
 /labs/static/
+update.sh
+update.log
+runserver.sh
 
 
 # Byte-compiled / optimized / DLL files
