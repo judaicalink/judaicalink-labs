@@ -21,6 +21,9 @@ update.sh
 update.log
 runserver.sh
 
+/node_modules/
+beacon-persons.txt
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

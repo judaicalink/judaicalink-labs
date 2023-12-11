@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.admin import AdminSite
 import django.db.models as django_models
-from django.conf.urls import url
+from django.urls import re_path
 
 from . import views
 from . import models
@@ -15,10 +15,10 @@ class MyAdminSite(AdminSite):
         # Note that custom urls get pushed to the list (not appended)
         # This doesn't work with urls += ...
         urls = [
-            url(r'^load_from_github/$', self.admin_view(views.load_from_github), name='load_from_github'),
-            url(r'^load_solr/$', self.admin_view(views.load_solr), name='load_solr'),
-            url(r'^load_fuseki/$', self.admin_view(views.load_fuseki), name='load_fuseki'),
-            url(r'^backend/serverstatus/$', self.admin_view(views.serverstatus), name='serverstatus'),
+            re_path(r'^load_from_github/$', self.admin_view(views.load_from_github), name='load_from_github'),
+            re_path(r'^load_elasticsearch/$', self.admin_view(views.load_elasticsearch), name='load_elasticsearch'),
+            re_path(r'^load_fuseki/$', self.admin_view(views.load_fuseki), name='load_fuseki'),
+            re_path(r'^backend/serverstatus/$', self.admin_view(views.serverstatus), name='serverstatus'),
         ] + urls
         return urls
 

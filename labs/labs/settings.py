@@ -13,7 +13,6 @@ import logging
 
 import environ
 import os
-from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 env = environ.Env(
     # set casting, default value
-    DEBUG=(bool, False)
+    DEBUG=(bool, False),
+    EMAIL_USE_TLS=(bool,False),
+    EMAIL_USE_SSL=(bool, False),
 )
 
 # Take environment variables from .env file
@@ -29,13 +30,6 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # False if not in os.environ because of casting above
 DEBUG = env('DEBUG')
-MODE = env('MODE')
-
-# if MODE = preduction, then DEBUG = False
-if env('MODE') == 'production':
-    DEBUG = False
-
-INTERNAL_IPS = env('INTERNAL_IPS').replace(" ", "").split(",")
 
 # Raises Django's ImproperlyConfigured
 # exception if SECRET_KEY not in os.environ
@@ -45,11 +39,16 @@ SECRET_KEY = env('SECRET_KEY')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
-ALLOWED_HOSTS = env('ALLOWED_HOSTS').replace(" ", "").split(",")
+ALLOWED_HOSTS = [
+    'labs.judaicalink.org',
+    'localhost',
+    'judaicalink.org',
+]
 
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -66,25 +65,21 @@ INSTALLED_APPS = [
     'dashboard',
     'data',
     'crispy_forms',
+    'captcha',
     'hcaptcha',
     'active_link',
     'environ',
-    'debug_toolbar',
-    'cookiebanner',
-    'django.contrib.sitemaps',
-    'django_extensions',
+    "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.middleware.gzip.GZipMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'labs.urls'
@@ -103,16 +98,11 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-            'libraries': {
-                'active_link_tags': 'active_link.templatetags.active_link_tags',
-                'cookiebanner': 'cookiebanner.templatetags.cookiebanner',
-            }
         },
     },
 ]
 
 WSGI_APPLICATION = 'labs.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -132,23 +122,17 @@ DATABASES = {
 }
 
 # Cache
-if 'CACHE_URL' in os.environ:
-    CACHES = {
-        'default': env.cache_url('CACHE_URL')
-    }
-elif 'REDIS_URL' in os.environ:
-    CACHES = {
-        'redis': env.cache_url('REDIS_URL')
-    }
-else:
-    CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-        }
-    }
 
+CACHES = {
+    # Read os.environ['CACHE_URL'] and raises
+    # ImproperlyConfigured exception if not found.
+    #
+    # The cache() method is an alias for cache_url().
+    'default': env.cache(),
 
-CACHE_TTL = 60 * 15
+    # read os.environ['REDIS_URL']
+    'redis': env.cache_url('REDIS_URL')
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -168,7 +152,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -182,15 +165,17 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, env('STATIC_ROOT') if env('STATIC_ROOT') else 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
-#Crispy form
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+# Crispy form
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # Email settings
 EMAIL_BACKEND = env('EMAIL_BACKEND')
@@ -199,6 +184,10 @@ EMAIL_PORT = env('EMAIL_PORT')
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_TO = env('EMAIL_TO')
+EMAIL_USE_TLS = env('EMAIL_USE_TLS')
+EMAIL_USE_SSL = env('EMAIL_USE_SSL')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+
 
 # Channels
 ASGI_APPLICATION = "labs.routing.application"
@@ -209,23 +198,26 @@ CHANNEL_LAYERS = {
     },
 }
 
-# Other Servers
-LABS_ROOT = env('LABS_ROOT')
-FUSEKI_SERVER = env('FUSEKI_SERVER')
-FUSEKI_STORAGE = env('FUSEKI_STORAGE')
+# labs settings
+LABS_ROOT = env('LABS_ROOT') if env('LABS_ROOT') is not None else 'http://localhost:8000'
+LABS_GIT_WEBROOT = env('LABS_GIT_WEBROOT') if env('LABS_GIT_WEBROOT') is not None else "https://github.com/wisslab/judaicalink-labs/blob/master/labs/"
+LABS_DUMPS_WEBROOT = env('LABS_DUMPS_WEBROOT') if env('LABS_DUMPS_WEBROOT') is not None else "http://data.judaicalink.org/dumps/"
+LABS_DUMPS_LOCAL = env('LABS_DUMPS_LOCAL') if env('LABS_DUMPS_LOCAL') is not None else "dumps/"
+
+# Fuseki
+FUSEKI_SERVER = env('FUSEKI_SERVER') if env('FUSEKI_SERVER') is not None else "http://localhost:3030"
+FUSEKI_STORAGE = env('FUSEKI_STORAGE') if env('FUSEKI_STORAGE') is not None else "."
 
 
-# Solr
-SOLR_SERVER = env('SOLR_SERVER') or "http://localhost:8983/solr/"
-SOLR_STORAGE = "/var/lib/solr"
-SOLR_SSL_ENABLED = False if SOLR_SERVER.startswith("http://") else True
-SOLR_USER = env('SOLR_USER') or "solr"
-SOLR_PASSWORD = env('SOLR_PASSWORD')
-SOLR_SERVER_CERT = env('SOLR_SERVER_CERT') or None
-
-JUDAICALINK_INDEX = env('JUDAICALINK_INDEX') or "judaicalink"
-COMPACT_MEMORY_INDEX = env('COMPACT_MEMORY_INDEX') or "cm"
-COMPACT_MEMORY_META_INDEX = env('COMPACT_MEMORY_META_INDEX') or "cm_meta"
+# Elasticsearch
+ELASTICSEARCH_SERVER = "https://localhost:9200/" if env('ELASTICSEARCH_SERVER') is None else env('ELASTICSEARCH_SERVER')
+ELASTICSEARCH_STORAGE = "/var/lib/elasticsearch"
+ELASTICSEARCH_SSL_ENABLED = False if ELASTICSEARCH_SERVER.startswith("http://") else True
+ELASTICSEARCH_USER = "elastic" if env('ELASTICSEARCH_USER') is None else env('ELASTICSEARCH_USER')
+ELASTICSEARCH_PASSWORD = None if env('ELASTICSEARCH_PASSWORD') is None else env('ELASTICSEARCH_PASSWORD')
+JUDAICALINK_INDEX = env('JUDAICALINK_INDEX') if env('JUDAICALINK_INDEX') is not None else "judaicalink"
+COMPACT_MEMORY_INDEX = env('COMPACT_MEMORY_INDEX') if env('COMPACT_MEMORY_INDEX') is not None else "cm"
+COMPACT_MEMORY_META_INDEX = env('COMPACT_MEMORY_META_INDEX') if env('COMPACT_MEMORY_META_INDEX') is not None else "cm_meta"
 
 # HCaptcha
 HCAPTCHA_SITEKEY = env('HCAPTCHA_SITEKEY')
@@ -238,52 +230,15 @@ HCAPTCHA_DEFAULT_CONFIG = {
     'size': 'normal',  # do not use data- prefix
 }
 
-GEONAMES_API_USER = "" # Configure in localsettings.py
 
-# removed
-#if os.path.isfile("labs/localsettings.py"):
-#    from .localsettings import *
+# if the settings in the .env contain the ELASTICSEARCH_SERVER_CERT_PATH use it, else throw an error
+if ELASTICSEARCH_SSL_ENABLED and env('ELASTICSEARCH_SERVER_CERT') is not None:
+    ELASTICSEARCH_SERVER_CERT = env('ELASTICSEARCH_SERVER_CERT')
+else:
+    logging.ERROR("ELASTICSEARCH_SERVER_CERT_PATH not set in .env file")
+    raise Exception('ELASTICSEARCH_SERVER_CERT_PATH not set in .env')
 
-
-# COOKIE_BANNER
-COOKIEBANNER = {
-    "title": _("Cookie settings"),
-    "header_text": _("We are using cookies on this website. A few are essential, others are not."),
-    "footer_text": _("Please accept our cookies"),
-    "footer_links": [
-        {"title": _("Imprint"), "href": "https://web.judaicalink.org/legal/"},
-        {"title": _("Privacy"), "href": "https://web.judaicalink.org/legal/"},
-    ],
-    "groups": [
-        {
-            "id": "essential",
-            "name": _("Essential"),
-            "description": _("Essential cookies allow this page to work."),
-            "cookies": [
-                {
-                    "pattern": "cookiebanner",
-                    "description": _("Meta cookie for the cookies that are set."),
-                },
-                {
-                    "pattern": "csrftoken",
-                    "description": _("This cookie prevents Cross-Site-Request-Forgery attacks."),
-                },
-                {
-                    "pattern": "sessionid",
-                    "description": _("This cookie is necessary to allow logging in, for example."),
-                },
-            ],
-        },
-        {
-            "id": "analytics",
-            "name": _("Analytics"),
-            "optional": False,
-            "cookies": [
-                {
-                    "pattern": "_pk_.*",
-                    "description": _("Matomo cookie for website analysis."),
-                },
-            ],
-        },
-    ],
-}
+# Geonames
+GEONAMES_API_USER = ""  # Configure in localsettings.py
+if os.path.isfile("labs/localsettings.py"):
+    from .localsettings import *
