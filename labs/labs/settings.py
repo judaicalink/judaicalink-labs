@@ -221,6 +221,13 @@ JUDAICALINK_INDEX = env('JUDAICALINK_INDEX') if env('JUDAICALINK_INDEX') is not 
 COMPACT_MEMORY_INDEX = env('COMPACT_MEMORY_INDEX') if env('COMPACT_MEMORY_INDEX') is not None else "cm"
 COMPACT_MEMORY_META_INDEX = env('COMPACT_MEMORY_META_INDEX') if env('COMPACT_MEMORY_META_INDEX') is not None else "cm_meta"
 
+# Solr
+SOLR_SERVER = env('SOLR_SERVER') if env('SOLR_SERVER') is not None else "http://localhost:8983/solr"
+SOLR_USER = env('SOLR_USER') if env('SOLR_USER') is not None else "solr"
+SOLR_PASSWORD = env('SOLR_PASSWORD') if env('SOLR_PASSWORD') is not None else "solr"
+SOLR_STORAGE = "/opt/solr"
+
+
 # HCaptcha
 HCAPTCHA_SITEKEY = env('HCAPTCHA_SITEKEY')
 HCAPTCHA_SECRET = env('HCAPTCHA_SECRET')
