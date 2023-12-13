@@ -341,7 +341,7 @@ def process_query(query_dic, page, alert):
     '''
     page = int(page)
 
-    solr = pysolr.Solr(SEARCH_URL, always_commit=True, timeout=10)
+    solr = pysolr.Solr(SEARCH_URL, always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
 
     size = 10
     start = (page - 1) * size
