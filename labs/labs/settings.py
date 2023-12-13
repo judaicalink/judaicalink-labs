@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     'active_link',
     'environ',
     "crispy_bootstrap5",
+    'cookiebanner',
 ]
 
 MIDDLEWARE = [
