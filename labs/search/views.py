@@ -19,7 +19,7 @@ from django.core.cache.backends.base import DEFAULT_TIMEOUT
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 # import SEARCH_URL from settings.py
-SEARCH_URL = getattr(settings, 'SOLR_URL', 'http://localhost:8983/solr/')
+SEARCH_URL = getattr(settings, 'SOLR_URL', 'http://localhost:8983/solr/#/')
 
 
 @cache_page(CACHE_TTL)
