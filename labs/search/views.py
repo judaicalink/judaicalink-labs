@@ -340,15 +340,9 @@ def process_query(query_dic, page, alert):
     :return: context that contains all the information needed to generate the template
     '''
     page = int(page)
-    es = Elasticsearch(
-        hosts=[settings.ELASTICSEARCH_SERVER],
-        http_auth=(settings.ELASTICSEARCH_USER, settings.ELASTICSEARCH_PASSWORD),
-        ca_certs=settings.ELASTICSEARCH_SERVER_CERT,
-        verify_certs=False,
-        timeout=30,
-        max_retries=10,
-        retry_on_timeout=True,
-        )
+
+    solr = pysolr.Solr(SEARCH_URL, always_commit=True, timeout=10)
+
     size = 10
     start = (page - 1) * size
     query_str = query_dic["query_str"]
@@ -376,7 +370,7 @@ def process_query(query_dic, page, alert):
             'number_of_fragments': 0,
         }
     }
-    result = es.search(index=settings.JUDAICALINK_INDEX, body=body)
+    result = solr.search(index=settings.JUDAICALINK_INDEX, **body)
 
     # For testing, never commit with a hardcoded path like this
     # with open('/tmp/test.json', 'w') as f:

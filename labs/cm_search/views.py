@@ -54,7 +54,7 @@ def result(request):
             }
         }
     }
-    res = solr.search(index='cm_meta', body=body)
+    res = solr.search(query, **body, index='cm_meta')
     # added 'from': start, to indicate which results should be displayed
     # 'from' is used to tell solr which results to return by index
     # -> if page = 1 then results 0-9 will be displayed
