@@ -16,7 +16,6 @@ class MyAdminSite(AdminSite):
         # This doesn't work with urls += ...
         urls = [
             re_path(r'^load_from_github/$', self.admin_view(views.load_from_github), name='load_from_github'),
-            re_path(r'^load_elasticsearch/$', self.admin_view(views.load_elasticsearch), name='load_elasticsearch'),
             re_path(r'^load_fuseki/$', self.admin_view(views.load_fuseki), name='load_fuseki'),
             re_path(r'^backend/serverstatus/$', self.admin_view(views.serverstatus), name='serverstatus'),
         ] + urls
