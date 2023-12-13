@@ -16,7 +16,7 @@ from django.core.cache.backends.base import DEFAULT_TIMEOUT
 # Create your views here.
 
 # see labs/urls.py def index to access root with http://localhost:8000
-CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
+CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT.)
 
 # import SEARCH_URL from settings.py
 SEARCH_URL = getattr(settings, 'SEARCH_URL', 'https://localhost:8983/solr/')
@@ -370,7 +370,7 @@ def process_query(query_dic, page, alert):
             'number_of_fragments': 0,
         }
     }
-    result = solr.search(index=settings.JUDAICALINK_INDEX, **body)
+    result = solr.search(query_str, **body, index=settings.JUDAICALINK_INDEX)
 
     # For testing, never commit with a hardcoded path like this
     # with open('/tmp/test.json', 'w') as f:
