@@ -18,7 +18,6 @@ def get_names():
 	res = solr.search('*.*', index='cm_entity_names', rows=10000)
 
 	for doc in res:
-		print(doc)
 		names.append(doc['name'])
 
 	return names
@@ -54,7 +53,7 @@ def create_graph_visualization():
 @cache_page(CACHE_TTL)
 def result(request):
 
-	names = get_names()
+	names = get_names() # searches for all names in cm_entity_names
 
 	query = request.GET.get('query')
 
@@ -63,10 +62,10 @@ def result(request):
 	res = solr.search(query, index='cm_entities', rows=10000)
 
 	result = []
-	for doc in res['hits']['hits']:
-		if doc['_source']['name'] == query:
+	for doc in res:
+		if doc['name'] == query:
 
-			result.append(doc['_source'])
+			result.append(doc)
 	#print(result[0]['related_entities'][0])
 	#print(type(result[0]['related_entities'][0][2]))
 	print(result)
