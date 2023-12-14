@@ -56,11 +56,9 @@ def result(request):
 
 	names = get_names()
 
-	solr = pysolr.Solr(settings.SOLR_SERVER, always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
-
 	query = request.GET.get('query')
 
-	res = pysolr.Solr(index='cm_entities', body={"query": {"match_phrase": {'name': query}}})
+	res = pysolr.Solr(query=query, index='cm_entities', rows=10000, always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
 
 	result = []
 	for doc in res['hits']['hits']:
