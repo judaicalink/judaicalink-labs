@@ -17,7 +17,8 @@ def get_names():
 	solr = pysolr.Solr(settings.SOLR_SERVER + 'cm_entity_names', always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
 	res = solr.search('*.*', index='cm_entity_names', rows=10000)
 
-	for doc in res['docs']:
+	for doc in res:
+		print(doc)
 		names.append(doc['name'])
 
 	return names
