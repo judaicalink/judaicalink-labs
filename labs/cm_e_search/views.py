@@ -12,13 +12,13 @@ CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 
 def get_names():
-
+	# gets all entity names from solr
 	names = []
-	solr = pysolr.Solr(settings.SOLR_SERVER, always_commit=True, timeout=10)
-	res = solr.search(index='cm_entity_names', body={'size': 7000, "query": {"match_all": {}}})
+	solr = pysolr.Solr(settings.SOLR_SERVER, always_commit=True, timeout=10, auth=(settings.SOLR_USERNAME, settings.SOLR_PASSWORD))
+	res = solr.search('*.*', index='cm_entity_names', rows=10000)
 
-	for doc in res['hits']['hits']:
-		names.append(doc['_source']['name'])
+	for doc in res['docs']:
+		names.append(doc['name'])
 
 	return names
 
@@ -55,7 +55,7 @@ def result(request):
 
 	names = get_names()
 
-	solr = pysolr.Solr(settings.SOLR_SERVER, always_commit=True, timeout=10)
+	solr = pysolr.Solr(settings.SOLR_SERVER, always_commit=True, timeout=10, auth=(settings.SOLR_USERNAME, settings.SOLR_PASSWORD))
 
 	query = request.GET.get('query')
 
