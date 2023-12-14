@@ -58,7 +58,9 @@ def result(request):
 
 	query = request.GET.get('query')
 
-	res = pysolr.Solr(query=query, index='cm_entities', rows=10000, always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
+	solr = pysolr.Solr(settings.SOLR_Server + 'cm_entities', always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
+
+	res = solr.search(query, index='cm_entities', rows=10000)
 
 	result = []
 	for doc in res['hits']['hits']:
