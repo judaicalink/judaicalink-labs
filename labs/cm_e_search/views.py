@@ -56,7 +56,7 @@ def result(request):
 
 	names = get_names()
 
-	solr = pysolr.Solr(settings.SOLR_SERVER, always_commit=True, timeout=10, auth=(settings.SOLR_USERNAME, settings.SOLR_PASSWORD))
+	solr = pysolr.Solr(settings.SOLR_SERVER, always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
 
 	query = request.GET.get('query')
 
