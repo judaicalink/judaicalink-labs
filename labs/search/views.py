@@ -344,7 +344,7 @@ def process_query(query_dic, page, alert):
     #zookeeper = pysolr.ZooKeeper("localhost:9983")
     #solr = pysolr.SolrCloud(zookeeper, "judaicalink", always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
 
-    solr = pysolr.Solr(settings.SOLR_URL+'judaicalink_shard1_replica_n2/', always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
+    solr = pysolr.Solr(settings.SOLR_SERVER + 'judaicalink_shard1_replica_n2/', always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
     size = 10
     start = (page - 1) * size
     query_str = query_dic["query_str"]
