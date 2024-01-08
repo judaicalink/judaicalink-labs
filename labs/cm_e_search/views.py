@@ -11,13 +11,14 @@ from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
 
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
-
+SOLR_SERVER = settings.SOLR_SERVER
+SOLR_INDEX = "cm_entity_names"
 
 def get_names():
 	# gets all entity names from solr
 	names = []
-	solr = pysolr.Solr(settings.SOLR_SERVER + 'cm_entity_names', always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
-	res = solr.search('*.*', index='cm_entity_names', rows=10000)
+	solr = pysolr.Solr(SOLR_SERVER + SOLR_INDEX, always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
+	res = solr.search('*.*', index=SOLR_INDEX, rows=10000)
 
 	for doc in res:
 		names.append(doc['name'])

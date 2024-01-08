@@ -8,7 +8,8 @@ from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
 
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
-
+SOLR_SERVER = settings.SOLR_SERVER
+SOLR_INDEX = "cm_meta"
 
 @cache_page(CACHE_TTL)
 def index(request):
@@ -17,12 +18,12 @@ def index(request):
 
 @cache_page(CACHE_TTL)
 def result(request):
-    # hardcoded list of journals that do not have external access on visual library UB Fra
+    # hardcoded list of journals that do not have external access on visual library UB Frankfurt
     blacklist = (
         '2431292', '2823768', '10112841', '4086896', '9038025', '4875667', '7938572', '8553624', '8823924', '9498581',
         '9572329', '9616703', '9620162')
 
-    solr = pysolr.Solr(settings.SOLR_SERVER, always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
+    solr = pysolr.Solr(SOLR_SERVER + SOLR_INDEX, always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
 
     query = request.GET.get('query')
     page = int(request.GET.get('page'))
