@@ -20,6 +20,7 @@ labs/labs/localsettings.py
 update.sh
 update.log
 runserver.sh
+/labs/search/static/
 
 /node_modules/
 beacon-persons.txt
