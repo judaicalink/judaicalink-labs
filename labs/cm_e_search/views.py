@@ -16,15 +16,22 @@ SOLR_INDEX = "cm_entity_names"
 
 def get_names():
 	# gets all entity names from solr
-	names = []
-	solr = pysolr.Solr(SOLR_SERVER + SOLR_INDEX, always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
-	res = solr.search('*.*', index=SOLR_INDEX, rows=10000)
+	try:
+		names = []
+		solr = pysolr.Solr(SOLR_SERVER + SOLR_INDEX, always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
+		res = solr.search('*.*', index=SOLR_INDEX, rows=10000)
+		logging.info(res)
 
-	for doc in res:
-		names.append(doc['name'])
-
-	return names
-
+		for doc in res:
+			names.append(doc['name'])
+			logging.info(doc['name'])
+		return names
+	except Exception as e:
+		logging.error(e)
+		return None
+	except pysolr.SolrError as e:
+		logging.error(e)
+		return None
 
 
 @cache_page(CACHE_TTL)
