@@ -22,8 +22,8 @@ def get_names():
         solr = pysolr.Solr(SOLR_SERVER + SOLR_INDEX, always_commit=True, timeout=10,
                            auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
         res = solr.search('*.*', index=SOLR_INDEX, rows=10000)
-        logger.debug("Got names from solr: ")
-        logger.debug(res)
+        logger.info("Got names from solr: ")
+        logger.info(res)
 
         for doc in res:
             names.append(doc['name'])
@@ -46,27 +46,10 @@ def index(request):
     return render(request, 'cm_e_search/search_index.html', context)
 
 
-def create_map(result):
-    # creates a map from locations
-    locations = []
-    for r in result:
-        if r.e_type == 'LOC':
-            locations.append(r.name)
-    pass
-
-
-def create_timeline():
-    pass
-
-
-def create_graph_visualization():
-    pass
-
-
 @cache_page(CACHE_TTL)
 def result(request):
     names = get_names()  # searches for all names in cm_entity_names
-    logger.debug("Name s: \n", names)
+    logger.info("Name s: \n", names)
 
     query = request.GET.get('query')
 
@@ -75,7 +58,8 @@ def result(request):
 
     res = solr.search(query, index='cm_entities', rows=10000)
     logger.info("Got results from solr: ")
-    logger.info(res)
+    logger.info(res.debug)
+    logger.info(res.docs)
 
     result = []
     for doc in res:
@@ -91,3 +75,20 @@ def result(request):
     }
 
     return render(request, 'cm_e_search/search_result.html', context)
+
+
+def create_map(result):
+    # creates a map from locations
+    locations = []
+    for r in result:
+        if r.e_type == 'LOC':
+            locations.append(r.name)
+    pass
+
+
+def create_timeline():
+    pass
+
+
+def create_graph_visualization():
+    pass
