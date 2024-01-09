@@ -1,5 +1,5 @@
 import logging
-
+import html
 from django.shortcuts import render
 from django.http import HttpResponse
 import pysolr
@@ -51,7 +51,8 @@ def result(request):
     names = get_names()  # searches for all names in cm_entity_names
     logger.info("Name s: \n", names)
 
-    query = request.GET.get('query')
+    query = html.escape(request.GET.get('query'))
+    print(query)
 
     solr = pysolr.Solr(settings.SOLR_SERVER + 'cm_entities', always_commit=True, timeout=10,
                        auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
