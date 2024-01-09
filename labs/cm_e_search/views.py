@@ -12,16 +12,14 @@ logger = logging.getLogger(__name__)
 #logger.setLevel(logging.DEBUG)
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 SOLR_SERVER = settings.SOLR_SERVER
-SOLR_INDEX = "cm_entity_names"
-
 
 def get_names():
     # gets all entity names from solr
     try:
         names = []
-        solr = pysolr.Solr(SOLR_SERVER + SOLR_INDEX, always_commit=True, timeout=10,
+        solr = pysolr.Solr(SOLR_SERVER + "cm_entity_names", always_commit=True, timeout=10,
                            auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
-        res = solr.search('*.*', index=SOLR_INDEX, rows=10000)
+        res = solr.search('*.*', index="cm_entity_names", rows=10000)
         logger.info("Got names from solr: ")
         logger.info(res)
 
@@ -49,10 +47,9 @@ def index(request):
 @cache_page(CACHE_TTL)
 def result(request):
     names = get_names()  # searches for all names in cm_entity_names
-    logger.info("Name s: \n", names)
 
     query = html.escape(request.GET.get('query'))
-    print(query)
+    logger.info("Query: " + query)
 
     solr = pysolr.Solr(settings.SOLR_SERVER + 'cm_entities', always_commit=True, timeout=10,
                        auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
