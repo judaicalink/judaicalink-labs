@@ -171,7 +171,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+STATIC_ROOT = env('STATIC_ROOT') if env('STATIC_ROOT') is not None else os.path.join(BASE_DIR, "static/")
 
 # Logging
 LOGGING = {
@@ -192,7 +192,7 @@ LOGGING = {
         'logfile': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'labs.log',
+            'filename': env('LOGFILE') if env('LOGFILE') is not None else os.path.join(BASE_DIR, 'logs/labs.log'),
         },
         'console': {
             'level': 'DEBUG',
@@ -219,9 +219,7 @@ LOGGING = {
 }
 
 # Crispy form
-
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # Email settings
@@ -239,9 +237,17 @@ DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 # Channels
 ASGI_APPLICATION = "labs.routing.application"
 
+# Redis
+REDIS_HOST = env('REDIS_HOST')
+REDIS_PORT = env('REDIS_PORT')
+
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            # "hosts": [("localhost", 6379)],
+            "hosts": [(REDIS_HOST, REDIS_PORT)],
+        },
     },
 }
 
@@ -293,9 +299,8 @@ else:
     raise Exception('ELASTICSEARCH_SERVER_CERT_PATH not set in .env')
 
 # Geonames
-GEONAMES_API_USER = ""  # Configure in localsettings.py
-if os.path.isfile("labs/localsettings.py"):
-    from .localsettings import *
+# https://www.geonames.org/login
+GEONAMES_API_USER = env('GEONAMES_API_USER') if env('GEONAMES_API_USER') is not None else ""
 
 # Django Cookie Banner
 COOKIEBANNER = {
