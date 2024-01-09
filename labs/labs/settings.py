@@ -130,6 +130,7 @@ CACHES = {
         'LOCATION': env('REDIS_URL') if env('REDIS_URL') is not None else 'redis://localhost:6379',
     },
  }
+CACHE_TTL = 60 * 15
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
