@@ -8,6 +8,7 @@ from django.conf import settings
 from django.views.decorators.cache import cache_page
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
+logger = logging.getLogger(__name__)
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 SOLR_SERVER = settings.SOLR_SERVER
 SOLR_INDEX = "cm_entity_names"
@@ -20,18 +21,18 @@ def get_names():
         solr = pysolr.Solr(SOLR_SERVER + SOLR_INDEX, always_commit=True, timeout=10,
                            auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
         res = solr.search('*.*', index=SOLR_INDEX, rows=10000)
-        logging.debug("Got names from solr: ")
-        logging.debug(res)
+        logger.debug("Got names from solr: ")
+        logger.debug(res)
 
         for doc in res:
             names.append(doc['name'])
-            logging.debug(doc['name'])
+            logger.debug(doc['name'])
         return names
     except Exception as e:
-        logging.error(e)
+        logger.error(e)
         return None
     except pysolr.SolrError as e:
-        logging.error(e)
+        logger.error(e)
         return None
 
 
@@ -39,7 +40,6 @@ def get_names():
 def index(request):
     names = get_names()
     data = names
-    logging.DEBUG(data)
     context = {'data': data}
 
     return render(request, 'cm_e_search/search_index.html', context)
@@ -65,7 +65,7 @@ def create_graph_visualization():
 @cache_page(CACHE_TTL)
 def result(request):
     names = get_names()  # searches for all names in cm_entity_names
-    logging.debug("Name s: \n", names)
+    logger.debug("Name s: \n", names)
 
     query = request.GET.get('query')
 
@@ -73,8 +73,8 @@ def result(request):
                        auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
 
     res = solr.search(query, index='cm_entities', rows=10000)
-    logging.info("Got results from solr: ")
-    logging.info(res)
+    logger.info("Got results from solr: ")
+    logger.info(res)
 
     result = []
     for doc in res:
