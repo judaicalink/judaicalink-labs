@@ -30,6 +30,8 @@ def result(request):
     size = 10
     # changed size from 15 to 10 to match the amount of results in judaicalink search
     start = (page - 1) * size
+
+    # FIXME: query does not work
     body = {
         "query": {
             "query_string": {
@@ -55,6 +57,7 @@ def result(request):
             }
         }
     }
+
     res = solr.search(query, **body, index=SOLR_INDEX)
     # added 'from': start, to indicate which results should be displayed
     # 'from' is used to tell solr which results to return by index
