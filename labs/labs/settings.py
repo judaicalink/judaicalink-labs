@@ -123,18 +123,13 @@ DATABASES = {
     )
 }
 
-# Cache
-
+# Cache Redis
 CACHES = {
-    # Read os.environ['CACHE_URL'] and raises
-    # ImproperlyConfigured exception if not found.
-    #
-    # The cache() method is an alias for cache_url().
-    'default': env.cache(),
-
-    # read os.environ['REDIS_URL']
-    'redis': env.cache_url('REDIS_URL')
-}
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': env('REDIS_URL') if env('REDIS_URL') is not None else 'redis://localhost:6379',
+    },
+ }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
