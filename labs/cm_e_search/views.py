@@ -9,6 +9,7 @@ from django.views.decorators.cache import cache_page
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 SOLR_SERVER = settings.SOLR_SERVER
 SOLR_INDEX = "cm_entity_names"

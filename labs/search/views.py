@@ -20,7 +20,8 @@ CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 # import SEARCH_URL from settings.py
 SEARCH_URL = getattr(settings, 'SOLR_URL', 'http://localhost:8983/solr/#/')
-
+SOLR_SERVER = settings.SOLR_SERVER
+SOLR_INDEX = "judaicalink"
 
 @cache_page(CACHE_TTL)
 def custom_error_404(request, exception):
