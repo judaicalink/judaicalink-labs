@@ -49,7 +49,7 @@ def index(request):
 def result(request):
     names = get_names()  # searches for all names in cm_entity_names
 
-    query = html.escape(request.GET.get('query'))
+    query = request.GET.get('query')
     logger.info("Query: " + query)
 
     solr = pysolr.Solr(settings.SOLR_SERVER + 'cm_entities', always_commit=True, timeout=10,
