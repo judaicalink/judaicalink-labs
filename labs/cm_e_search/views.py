@@ -21,7 +21,6 @@ def get_names():
                            auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
         res = solr.search('*.*', index="cm_entity_names", rows=10000)
         logger.info("Got names from solr: ")
-        logger.info(res.docs.count())
 
         for doc in res:
             names.append(doc['name'])
