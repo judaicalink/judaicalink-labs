@@ -11,8 +11,6 @@ from django.conf import settings
 from django.views.decorators.cache import cache_page
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
-
-
 # Create your views here.
 
 # see labs/urls.py def index to access root with http://localhost:8000
@@ -23,14 +21,28 @@ SEARCH_URL = getattr(settings, 'SOLR_URL', 'http://localhost:8983/solr/#/')
 SOLR_SERVER = settings.SOLR_SERVER
 SOLR_INDEX = "judaicalink"
 
+
 @cache_page(CACHE_TTL)
-def custom_error_404(request, exception):
+def error_400(request, exception):
+    print("Error 400", exception)
+    return render(request, 'search/400.html', {})
+
+
+
+@cache_page(CACHE_TTL)
+def error_404(request, exception):
     print("Error 404", exception)
     return render(request, 'search/404.html', {})
 
 
 @cache_page(CACHE_TTL)
-def custom_error_500(request):
+def error_403(request, exception):
+    print("Error 403", exception)
+    return render(request, 'search/403.html', {})
+
+
+@cache_page(CACHE_TTL)
+def error_500(request):
     return render(request, 'search/500.html', {})
 
 
@@ -105,9 +117,9 @@ def create_query_str(submitted_search):
         "query_str": query_str.strip(),
         "submitted_search": submitted_search,
     }
-    #print("--------------------------------query_str-----------------------------------------------")
+    # print("--------------------------------query_str-----------------------------------------------")
     # query_str = name:Albert
-    #print(query_str)
+    # print(query_str)
 
     return query_dic
 
@@ -143,7 +155,7 @@ def get_query(request):
             }
             inputs.append(dictionary)
 
-    #print(operators)
+    # print(operators)
 
     # sorting the lists by the "html_name" in the dictionarys
     # example result for inputs: ['einstein', 'herbert']
@@ -191,9 +203,9 @@ def get_query(request):
         else:
             submitted_search = [{'input': 'error_nothing_submitted'}]
 
-    #print("--------------------------------submitted_search-----------------------------------------------")
+    # print("--------------------------------submitted_search-----------------------------------------------")
     # submitted_search = [{'option': 'name:', 'input': 'Anders'}, {'operator': ' AND ', 'option': 'name:', 'input': ''}]
-    #print(submitted_search)
+    # print(submitted_search)
 
     cleared_submitted_search = submitted_search.copy()
     for dictionary in submitted_search:
@@ -226,7 +238,6 @@ def create_alert(submitted_search):
     if alert[0] == "AND" or alert[0] == "OR" or alert[0] == "NOT":
         del alert[0]
     return alert
-
 
 
 def generate_rows(submitted_search):
@@ -319,9 +330,9 @@ def generate_rows(submitted_search):
 
             rows.append(row)
 
-        #print("----------------- rows ---------------------")
-        #print(len(rows))
-        #print(rows)
+        # print("----------------- rows ---------------------")
+        # print(len(rows))
+        # print(rows)
         return rows
 
     # if we don't use the advanced search we still want to have displayed two empty rows in the advanced search
@@ -342,10 +353,11 @@ def process_query(query_dic, page, alert):
     '''
     page = int(page)
 
-    #zookeeper = pysolr.ZooKeeper("localhost:9983")
-    #solr = pysolr.SolrCloud(zookeeper, "judaicalink", always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
+    # zookeeper = pysolr.ZooKeeper("localhost:9983")
+    # solr = pysolr.SolrCloud(zookeeper, "judaicalink", always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
 
-    solr = pysolr.Solr(settings.SOLR_SERVER + 'judaicalink/', always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
+    solr = pysolr.Solr(settings.SOLR_SERVER + 'judaicalink/', always_commit=True, timeout=10,
+                       auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
     size = 10
     start = (page - 1) * size
     query_str = query_dic["query_str"]

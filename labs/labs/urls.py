@@ -45,7 +45,7 @@ urlpatterns = [
 #    path('captcha/', include('captcha.urls')),
 #    ]
 
-handler404 = 'search.views.custom_error_404'
-handler500 = 'search.views.custom_error_500'
-handler403 = 'search.views.custom_error_403'
-handler400 = 'search.views.custom_error_400'
+handler404 = 'search.views.error_404'
+handler500 = 'search.views.error_500'
+handler403 = 'search.views.error_403'
+handler400 = 'search.views.error_400'
