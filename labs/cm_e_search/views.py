@@ -19,16 +19,14 @@ def get_names():
         names = []
         solr = pysolr.Solr(SOLR_SERVER + "cm_entity_names", always_commit=True, timeout=10,
                            auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
-        print(solr)
         res = solr.search('*:*', index="cm_entity_names", rows=10000)
         logger.info("Got names from solr: ")
-        print(res.hits)
-        print(res.docs)
-        print(res.debug)
+        #print(res.hits)
+        #print(res.docs)
+        #print(res.debug)
         logger.info(res.debug)
         logger.info(res.hits)
 
-        # TODO: check if doc is empty
         for doc in res.docs:
             names.append(doc['name'])
             print("Doc: ", doc['name'])
@@ -69,12 +67,12 @@ def result(request):
     logger.info(res.docs)
 
     result = []
-    for doc in res:
+    for doc in res.docs:
         if doc['name'] == query:
             result.append(doc)
+            print("Doc: ", doc['name'])
     # print(result[0]['related_entities'][0])
     # print(type(result[0]['related_entities'][0][2]))
-    print(result)
 
     context = {
         "result": result,
