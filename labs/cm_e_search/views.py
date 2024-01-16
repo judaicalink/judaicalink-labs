@@ -54,13 +54,16 @@ def index(request):
 @cache_page(CACHE_TTL)
 def result(request):
     names = get_names()  # searches for all names in cm_entity_names
+    print("Got names from solr: ")
+    print(names.count())
 
     query = request.GET.get('query')
     logger.info("Query: " + query)
+    print("Query: " + query)
 
     solr = pysolr.Solr(settings.SOLR_SERVER + 'cm_entities', always_commit=True, timeout=10,
                        auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
-
+    print("Solr: " + str(solr))
     res = solr.search(query, index='cm_entities', rows=10000)
     logger.info("Got results from solr: ")
     logger.info(res.debug)
@@ -68,6 +71,7 @@ def result(request):
     print("Got results from solr: ")
     print(res.debug)
     print(res.docs)
+    print(res.hits)
 
 
     result = []
