@@ -27,9 +27,13 @@ def get_names():
         logger.info(res.debug)
         logger.info(res.hits)
 
+        #Todo: remove the backets from the names
+
         for doc in res.docs:
-            names.append(doc['name'])
-            #print("Doc: ", doc['name'])
+            # convert list to string
+            names = ''.join(doc['name'])
+            #names.append(doc['name'])
+            print("Doc: ", doc['name'])
             logger.info(doc['name'])
         return names
     except Exception as e:
@@ -72,16 +76,14 @@ def result(request):
     logger.info(res.debug)
     logger.info(res.docs)
     print("Got results from solr: ")
-    print(res.debug)
     print(res.docs)
     print(res.hits)
 
 
     result = []
     for doc in res.docs:
-        if doc['name'] == query:
-            result.append(doc)
-            print("Doc: ", doc['name'])
+        result.append(doc)
+        print("Doc: ", doc['name'])
     # print(result[0]['related_entities'][0])
     # print(type(result[0]['related_entities'][0][2]))
 
