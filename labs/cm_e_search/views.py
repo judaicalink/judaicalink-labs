@@ -55,7 +55,7 @@ def index(request):
 def result(request):
     names = get_names()  # searches for all names in cm_entity_names
     print("Got names from solr: ")
-    print(names
+    print(names)
 
     query = request.GET.get('query')
     logger.info("Query: " + query)
