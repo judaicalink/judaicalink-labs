@@ -29,7 +29,7 @@ def get_names():
 
         for doc in res.docs:
             names.append(doc['name'])
-            print("Doc: ", doc['name'])
+            #print("Doc: ", doc['name'])
             logger.info(doc['name'])
         return names
     except Exception as e:
