@@ -29,11 +29,12 @@ def get_names():
         logger.info(res.hits)
 
         # TODO: check if doc is empty
-        for doc in res.docs:
-            names.append(doc['name'])
-            print(doc['name'])
-            logger.info(doc['name'])
-        return names
+        #for doc in res.docs:
+        #    names.append(doc['name'])
+        #    print(doc['name'])
+        #    logger.info(doc['name'])
+        #return names
+        return None
     except Exception as e:
         logger.error(e)
         print("Error:", e)
