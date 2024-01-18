@@ -363,7 +363,7 @@ def process_query(query_dic, page, alert):
     highlight_fields = ['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathYear', 'deathDate', 'deathLocation', 'source', 'dataslug']
 
     # Construct the query
-    query = f'{query_str}~'
+    query = f'*{query_str}*'
     print("Query: " + query)
 
     # Construct the highlighting parameters
@@ -395,6 +395,8 @@ def process_query(query_dic, page, alert):
     print(result.hits)
     print(result.docs)
     print(result.highlighting)
+    #if result.hits == 0:
+    #    return None
 
     dataset = []
     for d in result["hits"]["hits"]:
