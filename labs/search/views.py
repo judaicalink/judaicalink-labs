@@ -363,7 +363,7 @@ def process_query(query_dic, page, alert):
     highlight_fields = ['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathYear', 'deathDate', 'deathLocation', 'source', 'dataslug']
 
     # Construct the query
-    query = f'*{query_str}*'
+    query = f'{query_str}~'
     print("Query: " + query)
 
     # Construct the highlighting parameters
@@ -381,6 +381,7 @@ def process_query(query_dic, page, alert):
         'q': query,
         'start': start,
         'rows': size,
+        'df': 'name'
         **highlight_params  # Include highlighting parameters
     }
     print("Params: ")
