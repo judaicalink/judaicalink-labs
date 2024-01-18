@@ -446,7 +446,7 @@ def process_query(query_dic, page, alert):
                 data.append(temp_data)
         ordered_dataset.append(data)
     """
-    total_hits = result["numFound"]
+    total_hits = result.hits
     pages = math.ceil(total_hits / size)  # number of needed pages for paging
     # round up number of pages
 
