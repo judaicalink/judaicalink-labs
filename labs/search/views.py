@@ -1,5 +1,6 @@
 import requests
 import math
+import responses
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -353,43 +354,42 @@ def process_query(query_dic, page, alert):
     '''
     page = int(page)
 
-    # zookeeper = pysolr.ZooKeeper("localhost:9983")
-    # solr = pysolr.SolrCloud(zookeeper, "judaicalink", always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
-
-    solr = pysolr.Solr(settings.SOLR_SERVER + 'judaicalink/', always_commit=True, timeout=10,
+    solr = pysolr.Solr(settings.SOLR_SERVER + 'judaicalink', always_commit=True, timeout=10,
                        auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
     size = 10
     start = (page - 1) * size
     query_str = query_dic["query_str"]
+    print("Query: " + query_str)
 
-    body = {
-        "from": start, "size": size,
-        "query": {
-            "query_string": {
-                "query": query_str,
-                "fields": ["name^4", "Alternatives^3", "birthDate", "birthLocation^2", "deathDate", "deathLocation^2",
-                           "Abstract", "Publication"]
-            }
-        },
-        "highlight": {
-            "fields": {
-                "name": {},
-                "Alternatives": {},
-                "birthDate": {},
-                "birthLocation": {},
-                "deathDate": {},
-                "deathLocation": {},
-                "Abstract": {},
-                "Publication": {},
-            },
-            'number_of_fragments': 0,
-        }
+    highlight_fields = ['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathYear', 'deathDate', 'deathLocation', 'source', 'dataslug']
+
+    # Construct the query
+    query = f'*{query_str}*'
+
+    # Construct the highlighting parameters
+    highlight_params = {
+        'hl': 'true',
+        'hl.fl': ','.join(highlight_fields),
+        'hl.simple.pre': '<em>',  # Prefix for highlighted terms
+        'hl.simple.post': '</em>',  # Postfix for highlighted terms
+        'hl.fragsize': 0
     }
-    result = solr.search(query_str, **body, index=settings.JUDAICALINK_INDEX)
 
-    # For testing, never commit with a hardcoded path like this
-    # with open('/tmp/test.json', 'w') as f:
-    #     json.dump(result, f)
+    params = {
+        'q': query,
+        'start': start,
+        'rows': size,
+        **highlight_params  # Include highlighting parameters
+    }
+
+    # Perform the query with highlighting
+    result = solr.search(query, **params)
+
+    # debug
+    print("Result: ")
+    print(result.hits)
+    print(result.docs)
+    print(result.highlighting)
 
     dataset = []
     for d in result["hits"]["hits"]:
