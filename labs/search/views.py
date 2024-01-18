@@ -364,6 +364,7 @@ def process_query(query_dic, page, alert):
 
     # Construct the query
     query = f'*{query_str}*'
+    print("Query: " + query)
 
     # Construct the highlighting parameters
     highlight_params = {
@@ -373,6 +374,8 @@ def process_query(query_dic, page, alert):
         'hl.simple.post': '</em>',  # Postfix for highlighted terms
         'hl.fragsize': 0
     }
+    print("Highlight params: ")
+    print(highlight_params)
 
     params = {
         'q': query,
@@ -380,6 +383,8 @@ def process_query(query_dic, page, alert):
         'rows': size,
         **highlight_params  # Include highlighting parameters
     }
+    print("Params: ")
+    print(params)
 
     # Perform the query with highlighting
     result = solr.search(**params)
