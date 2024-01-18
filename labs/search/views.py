@@ -381,14 +381,14 @@ def process_query(query_dic, page, alert):
         'q': query,
         'start': start,
         'rows': size,
-        'df': 'name'
+        'df': 'name',
         **highlight_params  # Include highlighting parameters
     }
     print("Params: ")
     print(params)
 
     # Perform the query with highlighting
-    result = solr.search(**params)
+    result = solr.search(q=query)
 
     # debug
     print("Result: ")
