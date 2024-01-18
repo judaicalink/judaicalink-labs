@@ -382,7 +382,7 @@ def process_query(query_dic, page, alert):
     }
 
     # Perform the query with highlighting
-    result = solr.search(query, **params)
+    result = solr.search(**params)
 
     # debug
     print("Result: ")
