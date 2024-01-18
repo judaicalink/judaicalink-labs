@@ -398,11 +398,13 @@ def process_query(query_dic, page, alert):
     #if result.hits == 0:
     #    return None
 
+    """
+    # Extract the highlighting
     dataset = []
-    for d in result["hits"]["hits"]:
+    for d in result["docs"]:
         data = {
-            "id": d["_id"],
-            "source": d["_source"],
+            "id": d["id"],
+            "source": d["dataslug"],
             "highlight": d["highlight"],
         }
         dataset.append(data)
@@ -443,8 +445,8 @@ def process_query(query_dic, page, alert):
                 temp_data = "<b>" + pretty_fieldname + ": " + "</b>" + d["source"][field]
                 data.append(temp_data)
         ordered_dataset.append(data)
-
-    total_hits = result["hits"]["total"]["value"]
+    """
+    total_hits = result["numFound"]
     pages = math.ceil(total_hits / size)  # number of needed pages for paging
     # round up number of pages
 
@@ -477,7 +479,7 @@ def process_query(query_dic, page, alert):
         "submitted_search": query_dic["submitted_search"],
         "query_str": query_dic["query_str"],
         "simple_search_input": query_dic["simple_search_input"],
-        "ordered_dataset": ordered_dataset,
+        #"ordered_dataset": ordered_dataset,
         # "dataslug_to_dataset": dataslug_to_dataset,
         "alert": alert,
         "rows": json.dumps(generate_rows(query_dic["submitted_search"])),
