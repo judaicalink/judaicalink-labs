@@ -75,7 +75,6 @@ def result(request):
     for doc in res.docs:
 
         formatted_doc = {}
-        print(doc.vlid_journal)
         print(doc['vlid_journal'])
 
         # append the prefix of the url to the journal and page
