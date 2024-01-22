@@ -8,10 +8,10 @@ from django.conf import settings
 from django.views.decorators.cache import cache_page
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
-
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 SOLR_SERVER = settings.SOLR_SERVER
 SOLR_INDEX = "cm_meta"
+
 
 @cache_page(CACHE_TTL)
 def index(request):
@@ -27,7 +27,8 @@ def result(request):
         '2431292', '2823768', '10112841', '4086896', '9038025', '4875667', '7938572', '8553624', '8823924', '9498581',
         '9572329', '9616703', '9620162')
 
-    solr = pysolr.Solr(SOLR_SERVER + SOLR_INDEX, always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
+    solr = pysolr.Solr(SOLR_SERVER + SOLR_INDEX, always_commit=True, timeout=10,
+                       auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
 
     query = request.GET.get('query')
     print("Query: ", query)
@@ -36,7 +37,8 @@ def result(request):
     # changed size from 15 to 10 to match the amount of results in judaicalink search
     start = (page - 1) * size
     # TODO: add the language, publisher and place to the query and in the index
-    highlight_fields = ["page", "text", "dateIssued", "j_title", "vlid_journal", "vlid_page", "volume", "heft", "aufsatz"]
+    highlight_fields = ["page", "text", "dateIssued", "j_title", "vlid_journal", "vlid_page", "volume", "heft",
+                        "aufsatz"]
     fields = ["page", "text", "dateIssued", "j_title", "volume", "vlid_journal", "vlid_page", "heft", "aufsatz", "id"]
     search_fields = ["text", "j_title", "aufsatz"]
     # create a dict from the fields and add the query
@@ -59,10 +61,10 @@ def result(request):
         "useParams": ""
     }
 
-    #print("Body: ", body)
+    # print("Body: ", body)
 
-    #res = solr.search(f'*:{query}*')
-    #res = solr.search('text:'+query)
+    # res = solr.search(f'*:{query}*')
+    # res = solr.search('text:'+query)
     res = solr.search(q=solr_query, search_handler="/select", **body)
     # added 'from': start, to indicate which results should be displayed
     # 'from' is used to tell solr which results to return by index
@@ -70,7 +72,7 @@ def result(request):
     # -> if page = 2 then results 10-19 and so on
 
     print("Hits: ", res.hits)
-    #print(res.docs)
+    # print(res.docs)
     print("Res: ", res.highlighting)
 
     results = []
@@ -80,8 +82,10 @@ def result(request):
         formatted_doc = doc
 
         # append the prefix of the url to the journal and page
-        journal_link = "https://sammlungen.ub.uni-frankfurt.de/cm/periodical/titleinfo/" + ''.join(map(str, doc['vlid_journal']))
-        page_link = "https://sammlungen.ub.uni-frankfurt.de/cm/periodical/pageview/" + ''.join(map(str, doc['vlid_page']))
+        journal_link = "https://sammlungen.ub.uni-frankfurt.de/cm/periodical/titleinfo/" + ''.join(
+            map(str, doc['vlid_journal']))
+        page_link = "https://sammlungen.ub.uni-frankfurt.de/cm/periodical/pageview/" + ''.join(
+            map(str, doc['vlid_page']))
 
         # check if the journal is in the blacklist
         if doc['vlid_journal'] in blacklist:
@@ -96,28 +100,29 @@ def result(request):
         # iterate over the highlighting, each highlight is a dict with an id and a text. The id is the id of the document. Match it with the id of the document in the results list and add the highlight to the document
         for highlight in res.highlighting:
             print(highlight)
-            #print(highlight['id'])
-            #print(highlight['text'])
+            # print(highlight['id'])
+            # print(highlight['text'])
 
             if highlight == formatted_doc['id']:
                 formatted_doc['highlight'] = res.highlighting[highlight]
 
-    #for highlight in res.highlighting:
-    #    print(highlight)
-    #    formatted_doc['highlight'] = highlight
+        # for highlight in res.highlighting:
+        #    print(highlight)
+        #    formatted_doc['highlight'] = highlight
 
         # convert all the lists in the formatted_doc to strings
         for key in formatted_doc:
             formatted_doc[key] = ''.join(map(str, formatted_doc[key]))
 
         # convert all the dates in formatted_doc['dateIssued'] to the format dd.mm.yyyy
-        formatted_doc['dateIssued'] = [datetime.strptime(date, "%Y-%m-%dT%H:%M:%SZ").strftime("%d.%m.%Y") for date in
-                                       formatted_doc['dateIssued']]
+
+        formatted_doc['dateIssued'] = [
+            datetime.strptime(date, "%Y-%m-%dT%H:%M:%SZ").strftime("%d.%m.%Y") if 'T' in date else datetime.strptime(
+                date, "%Y-%m-%d").strftime("%d.%m.%Y") for date in formatted_doc['dateIssued']]
 
         results.append(formatted_doc)
 
     print("Doc: ", formatted_doc)
-
 
     # paging
     # -> almost copy from jl-search, except some variable-names
