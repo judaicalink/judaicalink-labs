@@ -120,6 +120,7 @@ def result(request):
         #formatted_doc['dateIssued'] = [datetime.strptime(date, "%Y-%m-%dT%H:%M:%SZ").strftime("%d.%m.%Y") if 'T' in date else datetime.strptime(
         #        date, "%Y-%m-%d").strftime("%d.%m.%Y") for date in formatted_doc['dateIssued']]
 
+        formatted_doc['dateIssued'] = datetime.strptime(doc['dateIssued'], "%Y-%m-%dT%H:%M:%SZ").strftime("%d.%m.%Y")
         results.append(formatted_doc)
 
     print("Doc: ", formatted_doc)
