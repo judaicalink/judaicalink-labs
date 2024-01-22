@@ -105,7 +105,7 @@ def result(request):
         for highlight in res.highlighting:
 
             if highlight == formatted_doc['id']:
-                formatted_doc['highlight'] = res.highlighting[highlight]
+                formatted_doc['highlight'] = res.highlighting['text']
 
         # for highlight in res.highlighting:
         #    print(highlight)
