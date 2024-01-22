@@ -33,8 +33,8 @@ def result(request):
     size = 10
     # changed size from 15 to 10 to match the amount of results in judaicalink search
     start = (page - 1) * size
-    # TODO: add the language to the query and in the index
-    highlight_fields = ["page", "text", "dateIssued", "place", "j_title",
+    # TODO: add the language and place to the query and in the index
+    highlight_fields = ["page", "text", "dateIssued", "j_title",
                            "publisher", "volume", "heft", "aufsatz"]
 
 
