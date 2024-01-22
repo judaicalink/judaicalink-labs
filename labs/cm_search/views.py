@@ -106,12 +106,14 @@ def result(request):
     #    print(highlight)
     #    formatted_doc['highlight'] = highlight
 
-        # convert all the dates in formatted_doc['dateIssued'] to the format dd.mm.yyyy
-        formatted_doc['dateIssued'] = [date.strftime("%d.%m.%Y") for date in datetime.strptime(formatted_doc['dateIssued'], "%Y-%m-%dT%H:%M:%SZ")]
-
         # convert all the lists in the formatted_doc to strings
         for key in formatted_doc:
             formatted_doc[key] = ''.join(map(str, formatted_doc[key]))
+
+        # convert all the dates in formatted_doc['dateIssued'] to the format dd.mm.yyyy
+        formatted_doc['dateIssued'] = [date.strftime("%d.%m.%Y") for date in
+                                       datetime.strptime(formatted_doc['dateIssued'], "%Y-%m-%dT%H:%M:%SZ")]
+
         results.append(formatted_doc)
 
     print("Doc: ", formatted_doc)
