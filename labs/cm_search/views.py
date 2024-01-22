@@ -75,7 +75,6 @@ def result(request):
     for doc in res.docs:
 
         formatted_doc = {}
-        print(doc['vlid_journal'])
 
         # append the prefix of the url to the journal and page
         journal_link = "https://sammlungen.ub.uni-frankfurt.de/cm/periodical/titleinfo/" + ''.join(map(str, doc['vlid_journal']))
@@ -96,7 +95,7 @@ def result(request):
             else:
                 formatted_doc[field] = doc["_source"][field]
         """
-
+        print("Doc: ", formatted_doc)
         result.append(formatted_doc)
 
     # paging
