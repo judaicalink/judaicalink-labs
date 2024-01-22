@@ -38,7 +38,6 @@ def result(request):
     fields = ["page", "text", "dateIssued", "j_title", "volume", "vlid_journal", "vlid_page", "heft", "aufsatz"]
     search_fields = ["text", "j_title", "aufsatz"]
     # create a dict from the fields and add the query
-    #solr_query = {field: query for field in fields}
     # create a list for the fields that should be searched and add the query
     solr_query = [field + ":" + query for field in search_fields]
 
@@ -68,7 +67,7 @@ def result(request):
     # -> if page = 1 then results 0-9 will be displayed
     # -> if page = 2 then results 10-19 and so on
 
-    print(res.hits)
+    print("Hits: "+res.hits)
     #print(res.docs)
 
     results = []
@@ -89,15 +88,11 @@ def result(request):
             formatted_doc['jl'] = journal_link
             formatted_doc['pl'] = page_link
 
-        """
-        for field in doc:
-            if field in doc["highlight"]:
-                formatted_doc[field] = doc["highlight"][field][0]
-            else:
-                formatted_doc[field] = doc["_source"][field]
-        """
+        for highlight in results['highlighting']:
+            print(highlight)
+            formatted_doc['highlight'] = highlight
 
-        #print("Doc: ", formatted_doc)
+        print("Doc: ", formatted_doc)
         results.append(formatted_doc)
 
     # paging
