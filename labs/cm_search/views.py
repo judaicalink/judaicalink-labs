@@ -67,7 +67,7 @@ def result(request):
     i = 0  # generates a number that will be used as an id in the template
     for doc in res.docs:
 
-        formatted_doc = {}
+        formatted_doc = doc
 
         # append the prefix of the url to the journal and page
         journal_link = "https://sammlungen.ub.uni-frankfurt.de/cm/periodical/titleinfo/" + ''.join(map(str, doc['vlid_journal']))
