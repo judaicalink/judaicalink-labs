@@ -78,8 +78,8 @@ def result(request):
         print(doc['vlid_journal'])
 
         # append the prefix of the url to the journal and page
-        journal_link = "https://sammlungen.ub.uni-frankfurt.de/cm/periodical/titleinfo/" + ''.join(doc['vlid_journal'])
-        page_link = "https://sammlungen.ub.uni-frankfurt.de/cm/periodical/pageview/" + ''.join(doc['vlid_page'])
+        journal_link = "https://sammlungen.ub.uni-frankfurt.de/cm/periodical/titleinfo/" + ''.join(map(str, doc['vlid_journal']))
+        page_link = "https://sammlungen.ub.uni-frankfurt.de/cm/periodical/pageview/" + ''.join(map(str, doc['vlid_page']))
 
         # check if the journal is in the blacklist
         if doc['vlid_journal'] in blacklist:
