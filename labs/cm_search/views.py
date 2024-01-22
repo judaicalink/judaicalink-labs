@@ -115,11 +115,7 @@ def result(request):
             formatted_doc[key] = ''.join(map(str, formatted_doc[key]))
 
         # TODO: convert the dates to the format dd.mm.yyyy
-        # convert all the dates in formatted_doc['dateIssued'] to the format dd.mm.yyyy
-
-        #formatted_doc['dateIssued'] = [datetime.strptime(date, "%Y-%m-%dT%H:%M:%SZ").strftime("%d.%m.%Y") if 'T' in date else datetime.strptime(
-        #        date, "%Y-%m-%d").strftime("%d.%m.%Y") for date in formatted_doc['dateIssued']]
-
+        # convert all the date in formatted_doc['dateIssued'] to the format dd.mm.yyyy
         formatted_doc['dateIssued'] = datetime.strptime(doc['dateIssued'], "%Y-%m-%dT%H:%M:%SZ").strftime("%d.%m.%Y")
         results.append(formatted_doc)
 
