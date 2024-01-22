@@ -34,8 +34,8 @@ def result(request):
     # changed size from 15 to 10 to match the amount of results in judaicalink search
     start = (page - 1) * size
     # TODO: add the language, publisher and place to the query and in the index
-    highlight_fields = ["page", "text", "dateIssued", "j_title", "volume", "heft", "aufsatz"]
-    fields = ["page", "text", "dateIssued", "j_title", "volume", "heft", "aufsatz"]
+    highlight_fields = ["page", "text", "dateIssued", "j_title", "vlid_journal", "vlid_page", "volume", "heft", "aufsatz"]
+    fields = ["page", "text", "dateIssued", "j_title", "volume", "vlid_journal", "vlid_page", "heft", "aufsatz"]
     search_fields = ["text", "j_title", "aufsatz"]
     # create a dict from the fields and add the query
     #solr_query = {field: query for field in fields}
