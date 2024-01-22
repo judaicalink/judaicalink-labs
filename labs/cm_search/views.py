@@ -39,39 +39,16 @@ def result(request):
 
 
     # FIXME: query does not work
-    body = {
-        "query": {
-            "query_string": {
-                'query': query,
-                "fields": h
-            }
-        },
-        'size': size,
-        'from': start,
-        'highlight': {
-            'fields': {
-                "page": {},
-                "text": {},
-                "dateIssued": {},
-                "lang": {},
-                "place": {},
-                "j_title": {},
-                "publisher": {},
-                "volume": {},
-                "heft": {},
-                "aufsatz": {}
-            }
-        }
-    }
-
     # build the query for solr
     body = {
         "q": query,
         "hl": "true",
         "indent": "true",
         "hl.requireFieldMatch": "false",
+        "start": start,
         "q.op": "OR",
         "hl.fl": ','.join(highlight_fields),
+        "rows": size,
         "useParams": ""
     }
 
