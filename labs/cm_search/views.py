@@ -45,6 +45,7 @@ def result(request):
     body = {
         "hl": "true",
         "indent": "true",
+        'fl': ','.join(fields),
         "hl.requireFieldMatch": "false",
         "start": start,
         "q.op": "OR",
@@ -53,11 +54,11 @@ def result(request):
         "useParams": ""
     }
 
-    print("Body: ", body)
+    #print("Body: ", body)
 
     #res = solr.search(f'*:{query}*')
     #res = solr.search('text:'+query)
-    res = solr.search(q='text:'+query, search_handler="/select", **body)
+    res = solr.search(q=solr_query, search_handler="/select", **body)
     # added 'from': start, to indicate which results should be displayed
     # 'from' is used to tell solr which results to return by index
     # -> if page = 1 then results 0-9 will be displayed
@@ -92,7 +93,7 @@ def result(request):
                 formatted_doc[field] = doc["_source"][field]
         """
 
-        print("Doc: ", formatted_doc)
+        #print("Doc: ", formatted_doc)
         results.append(formatted_doc)
 
     # paging
