@@ -88,12 +88,15 @@ def result(request):
             formatted_doc['jl'] = journal_link
             formatted_doc['pl'] = page_link
 
-        for highlight in results['highlighting']:
-            print(highlight)
-            formatted_doc['highlight'] = highlight
-
-        print("Doc: ", formatted_doc)
         results.append(formatted_doc)
+
+    for highlight in results['highlighting']:
+        print(highlight)
+        formatted_doc['highlight'] = highlight
+
+        results.append(formatted_doc)
+
+    print("Doc: ", formatted_doc)
 
     # paging
     # -> almost copy from jl-search, except some variable-names
