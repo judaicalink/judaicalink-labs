@@ -38,69 +38,69 @@
     <div class="table-responsive">
     <table class="table table-light table-striped">
 
-    {% for r in result %}
+    {% for result in results %}
         <tr>
             <td class="p-3">
                 <b>Matching text</b>: <br>
-                    {% if r.text|wordcount > 56 %}
-                        <div class="half-content" id="half-{{forloop.counter}}">{{r.text|safe|linebreaks|truncatewords:50}}<br>
+                    {% if result.text|wordcount > 56 %}
+                        <div class="half-content" id="half-{{forloop.counter}}">{{result.text|safe|linebreaks|truncatewords:50}}<br>
                             <button type="button" data-id="{{forloop.counter}}" onclick="javascript:void(0)" class="show-hide-btn btn btn-primary btn-sm mb-2">Read more ></button>
                         </div>
-                        <div class="full-content" id="full-{{forloop.counter}}" style="display: none;">{{ r.text|safe|linebreaks }}
+                        <div class="full-content" id="full-{{forloop.counter}}" style="display: none;">{{ result.text|safe|linebreaks }}
                             <button data-id="{{forloop.counter}}" onclick="javascript:void(0)" class="show-hide-btn btn btn-primary btn-sm mb-2">< Read less</button>
                         </div>
                     {% else %}
                         <div>
-                            {{ r.text|safe|linebreaks }}
+                            {{ result.text|safe|linebreaks }}
                         </div>
                     {% endif %}
 
                 <div class="pt-1">
                     <b>Journal:</b>
-                    {% if r.jl != '' %}
-                    <a href={{r.jl}} target="_blank" rel="noopener noreferrer">{{r.j_title|safe}}</a><br>
+                    {% if result.jl != '' %}
+                    <a href={{result.jl}} target="_blank" rel="noopener noreferrer">{{result.j_title|safe}}</a><br>
                     {% else %}
-                    {{r.j_title|safe}}
+                    {{result.j_title|safe}}
                     {% endif %}
 
-                    {% if r.lang != '' %}
-                    <b>Language:</b> {{r.lang|safe}}<br>
+                    {% if result.lang != '' %}
+                    <b>Language:</b> {{result.lang|safe}}<br>
                     {% endif %}
 
-                    {% if r.dateIssued != '' %}
-                    <b>Date of Issue:</b> {{r.dateIssued|safe}}
+                    {% if result.dateIssued != '' %}
+                    <b>Date of Issue:</b> {{result.dateIssued|safe}}
                     <br>
                     {% endif %}
 
-                    {% if r.place != '' %}
-                    <b>Place:</b> {{r.place|safe}}
+                    {% if result.place != '' %}
+                    <b>Place:</b> {{result.place|safe}}
                     <br>
                     {% endif %}
 
-                    {% if r.publisher != '' %}
-                    <b>Publisher:</b> {{r.publisher|safe}}
+                    {% if result.publisher != '' %}
+                    <b>Publisher:</b> {{result.publisher|safe}}
                     <br>
                     {% endif %}
 
                     <b>Bibliographic reference</b><br>
 
-                    {% if r.volume != '' %}
-                    &nbsp; Volume: {{r.volume|safe}}<br>
+                    {% if result.volume != '' %}
+                    &nbsp; Volume: {{result.volume|safe}}<br>
                     {% endif %}
 
-                    {% if r.heft != '' %}
-                    &nbsp; Issue: {{r.heft|safe }}<br>
+                    {% if result.heft != '' %}
+                    &nbsp; Issue: {{result.heft|safe }}<br>
                     {% endif %}
 
-                    {% if r.aufsatz != '' %}
-                    &nbsp; Essay: {{r.aufsatz|safe}}<br>
+                    {% if result.aufsatz != '' %}
+                    &nbsp; Essay: {{result.aufsatz|safe}}<br>
                     {% endif %}
 
-                    {% if r.page != '' and r.page != 'None' %}
-                    {% if r.pl != '' %}
-                    <b>Page:</b> <a href={{r.pl|safe}} target="_blank" rel="noopener noreferrer">{{r.page|safe}}</a>
+                    {% if result.page != '' and result.page != 'None' %}
+                    {% if result.pl != '' %}
+                    <b>Page:</b> <a href={{result.pl|safe}} target="_blank" rel="noopener noreferrer">{{result.page|safe}}</a>
                     {% else %}
-                    <b>Page:</b> {{r.page|safe}} (Link to the page not available for this journal)
+                    <b>Page:</b> {{result.page|safe}} (Link to the page not available for this journal)
                     {% endif %}
                     {% endif %}
                 </div>
