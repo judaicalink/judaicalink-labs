@@ -101,12 +101,6 @@ def result(request):
 
         results.append(formatted_doc)
 
-        # iterate over the highlighting, each highlight is a dict with an id and a text. The id is the id of the document. Match it with the id of the document in the results list and add the highlight to the document
-        for highlight in res.highlighting:
-
-            if highlight == formatted_doc['id']:
-                formatted_doc['highlight'] = res.highlighting['text']
-
         # convert all the lists in the formatted_doc to strings
         for key in formatted_doc:
             formatted_doc[key] = ''.join(map(str, formatted_doc[key]))
