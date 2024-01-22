@@ -72,7 +72,7 @@ def result(request):
 
     result = []
     i = 0  # generates a number that will be used as an id in the template
-    for doc in res['docs']:
+    for doc in res.docs:
 
         formatted_doc = {}
 
