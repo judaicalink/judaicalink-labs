@@ -107,19 +107,25 @@ def result(request):
             if highlight == formatted_doc['id']:
                 formatted_doc['highlight'] = res.highlighting['text']
 
-        # for highlight in res.highlighting:
-        #    print(highlight)
-        #    formatted_doc['highlight'] = highlight
-
         # convert all the lists in the formatted_doc to strings
         for key in formatted_doc:
             formatted_doc[key] = ''.join(map(str, formatted_doc[key]))
 
         # convert all the date in formatted_doc['dateIssued'] to the format dd.mm.yyyy
         formatted_doc['dateIssued'] = datetime.strptime(formatted_doc['dateIssued'], "%Y-%m-%dT%H:%M:%SZ").strftime("%d.%m.%Y")
+
+        # TODO: highlight the search term in the results
+        # replace the text in formatted_doc['text'] with res.highlight[id]['text']
+        #formatted_doc['text'] = res.highlighting[formatted_doc['id']]['text'][0]
+
+        # replace text in formatted_doc['j_title'] with res.highlight[id]['j_title']
+        formatted_doc['j_title'] = res.highlighting[formatted_doc['id']]['j_title'][0]
+
         results.append(formatted_doc)
 
     print("Doc: ", formatted_doc)
+
+
 
     # paging
     # -> almost copy from jl-search, except some variable-names
