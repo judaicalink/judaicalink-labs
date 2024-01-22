@@ -94,8 +94,8 @@ def result(request):
         # iterate over the highlighting, each highlight is a dict with an id and a text. The id is the id of the document. Match it with the id of the document in the results list and add the highlight to the document
         for highlight in res.highlighting:
             print(highlight)
-            print(highlight['id'])
-            print(highlight['text'])
+            #print(highlight['id'])
+            #print(highlight['text'])
 
             if highlight == formatted_doc['id']:
                 formatted_doc['highlight'] = res.highlighting[highlight]
