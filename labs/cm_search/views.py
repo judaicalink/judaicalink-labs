@@ -18,6 +18,8 @@ def index(request):
 
 @cache_page(CACHE_TTL)
 def result(request):
+    # TODO: check if these journals are still blacklisted, if not remove them
+    # TODO: don't use hardcoding, use either the admin interface or a csv file
     # hardcoded list of journals that do not have external access on visual library UB Frankfurt
     blacklist = (
         '2431292', '2823768', '10112841', '4086896', '9038025', '4875667', '7938572', '8553624', '8823924', '9498581',
@@ -66,35 +68,40 @@ def result(request):
 
     print(res.hits)
     print(res.debug)
+    print(res.docs)
 
     result = []
     i = 0  # generates a number that will be used as an id in the template
-    for doc in res['hits']['hits']:
+    for doc in res['docs']:
 
         formatted_doc = {}
 
-        journal_link = "https://sammlungen.ub.uni-frankfurt.de/cm/periodical/titleinfo/" + doc['_source']['vlid_journal']
-        page_link = "https://sammlungen.ub.uni-frankfurt.de/cm/periodical/pageview/" + doc['_source']['vlid_page']
+        # append the prefix of the url to the journal and page
+        journal_link = "https://sammlungen.ub.uni-frankfurt.de/cm/periodical/titleinfo/" + doc['vlid_journal']
+        page_link = "https://sammlungen.ub.uni-frankfurt.de/cm/periodical/pageview/" + doc['vlid_page']
 
-        if doc['_source']['vlid_journal'] in blacklist:
+        # check if the journal is in the blacklist
+        if doc['vlid_journal'] in blacklist:
             formatted_doc['jl'] = ''
             formatted_doc['pl'] = ''
         else:
             formatted_doc['jl'] = journal_link
             formatted_doc['pl'] = page_link
 
-        for field in doc["_source"]:
+        """
+        for field in doc:
             if field in doc["highlight"]:
                 formatted_doc[field] = doc["highlight"][field][0]
             else:
                 formatted_doc[field] = doc["_source"][field]
+        """
 
         result.append(formatted_doc)
 
     # paging
     # -> almost copy from jl-search, except some variable-names
 
-    total_hits = res['hits']['total']['value']
+    total_hits = res.hits
     pages = math.ceil(total_hits / size)
     # pages containes necessary amount of pages for paging
 
@@ -119,7 +126,7 @@ def result(request):
 
     context = {
         "result": result,
-        "total_hits": res['hits']['total']['value'],
+        "total_hits": total_hits,
         "query": query,
         "pages": pages,
         "previous": page - 1,
