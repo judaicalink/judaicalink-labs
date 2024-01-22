@@ -35,7 +35,7 @@ def result(request):
     start = (page - 1) * size
     # TODO: add the language, publisher and place to the query and in the index
     highlight_fields = ["page", "text", "dateIssued", "j_title", "vlid_journal", "vlid_page", "volume", "heft", "aufsatz"]
-    fields = ["page", "text", "dateIssued", "j_title", "volume", "vlid_journal", "vlid_page", "heft", "aufsatz"]
+    fields = ["page", "text", "dateIssued", "j_title", "volume", "vlid_journal", "vlid_page", "heft", "aufsatz", "id"]
     search_fields = ["text", "j_title", "aufsatz"]
     # create a dict from the fields and add the query
     # create a list for the fields that should be searched and add the query
@@ -91,9 +91,18 @@ def result(request):
 
         results.append(formatted_doc)
 
-    for highlight in res['highlighting']:
-        print(highlight)
-        formatted_doc['highlight'] = highlight
+        # iterate over the highlighting, each highlight is a dict with an id and a text. The id is the id of the document. Match it with the id of the document in the results list and add the highlight to the document
+        for highlight in res.highlighting:
+            print(highlight)
+            print(highlight['id'])
+            print(highlight['text'])
+
+            if highlight == formatted_doc['id']:
+                formatted_doc['highlight'] = res.highlighting[highlight]
+
+    #for highlight in res.highlighting:
+    #    print(highlight)
+    #    formatted_doc['highlight'] = highlight
 
         # convert all the dates in formatted_doc['dateIssued'] to the format dd.mm.yyyy
         formatted_doc['dateIssued'] = [date.strftime("%d.%m.%Y") for date in formatted_doc['dateIssued']]
