@@ -37,7 +37,10 @@ def result(request):
     highlight_fields = ["page", "text", "dateIssued", "j_title", "volume", "heft", "aufsatz"]
     fields = ["page", "text", "dateIssued", "j_title", "volume", "heft", "aufsatz"]
     # create a dict from the fields and add the query
-    solr_query = {field: query for field in fields}
+    #solr_query = {field: query for field in fields}
+    # create a list for the fields that should be searched and add the query
+    solr_query = [field + ":" + query for field in fields]
+
     print("Solr query: ", solr_query)
 
     # FIXME: query does not work
