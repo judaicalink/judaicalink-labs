@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.shortcuts import render
 from django.http import HttpResponse
 import pysolr
@@ -105,7 +107,7 @@ def result(request):
     #    formatted_doc['highlight'] = highlight
 
         # convert all the dates in formatted_doc['dateIssued'] to the format dd.mm.yyyy
-        formatted_doc['dateIssued'] = [date.strftime("%d.%m.%Y") for date in formatted_doc['dateIssued']]
+        formatted_doc['dateIssued'] = [date.strftime("%d.%m.%Y") for date in datetime.strptime(formatted_doc['dateIssued'], "%Y-%m-%dT%H:%M:%SZ")]
 
         # convert all the lists in the formatted_doc to strings
         for key in formatted_doc:
