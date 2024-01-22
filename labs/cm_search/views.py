@@ -33,13 +33,17 @@ def result(request):
     # changed size from 15 to 10 to match the amount of results in judaicalink search
     start = (page - 1) * size
 
+    highlight_fields = ["page", "text", "dateIssued", "lang", "place", "j_title",
+                           "publisher", "volume", "heft", "aufsatz"]
+
+
+
     # FIXME: query does not work
     body = {
         "query": {
             "query_string": {
                 'query': query,
-                "fields": ["page", "text", "dateIssued", "lang", "place", "j_title",
-                           "publisher", "volume", "heft", "aufsatz"]
+                "fields": h
             }
         },
         'size': size,
@@ -60,7 +64,20 @@ def result(request):
         }
     }
 
-    res = solr.search("text:"+query)
+    # build the query for solr
+    body = {
+        "q": query,
+        "hl": "true",
+        "indent": "true",
+        "hl.requireFieldMatch": "false",
+        "q.op": "OR",
+        "hl.fl": ','.join(highlight_fields),
+        "useParams": ""
+    }
+
+    #res = solr.search(f'*:{query}*')
+    #res = solr.search('text:'+query)
+    res = solr.search(**body)
     # added 'from': start, to indicate which results should be displayed
     # 'from' is used to tell solr which results to return by index
     # -> if page = 1 then results 0-9 will be displayed
@@ -95,12 +112,14 @@ def result(request):
             else:
                 formatted_doc[field] = doc["_source"][field]
         """
+
         print("Doc: ", formatted_doc)
         result.append(formatted_doc)
 
     # paging
     # -> almost copy from jl-search, except some variable-names
 
+    # TODO: refactor paging
     total_hits = res.hits
     pages = math.ceil(total_hits / size)
     # pages containes necessary amount of pages for paging
