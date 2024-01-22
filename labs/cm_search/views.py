@@ -20,6 +20,8 @@ def index(request):
 
 @cache_page(CACHE_TTL)
 def result(request):
+    error_message = None
+
     # TODO: check if these journals are still blacklisted, if not remove them
     # TODO: don't use hardcoding, use either the admin interface or a csv file
     # hardcoded list of journals that do not have external access on visual library UB Frankfurt
@@ -72,7 +74,8 @@ def result(request):
         error_message = "No results found"
         context = {
             'error_message': error_message,
-            'total_hits': 0
+            'total_hits': 0,
+            'query': query,
         }
         return render(request, 'cm_search/search_result.html', context)
 
@@ -112,7 +115,6 @@ def result(request):
         for key in formatted_doc:
             formatted_doc[key] = ''.join(map(str, formatted_doc[key]))
 
-        # TODO: convert the dates to the format dd.mm.yyyy
         # convert all the date in formatted_doc['dateIssued'] to the format dd.mm.yyyy
         formatted_doc['dateIssued'] = datetime.strptime(formatted_doc['dateIssued'], "%Y-%m-%dT%H:%M:%SZ").strftime("%d.%m.%Y")
         results.append(formatted_doc)
