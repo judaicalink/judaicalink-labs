@@ -49,7 +49,7 @@ def result(request):
         "hl": "true",
         "indent": "true",
         'fl': ','.join(fields),
-        "hl.requireFieldMatch": "false",
+        "hl.requireFieldMatch": "true",
         "start": start,
         "q.op": "OR",
         "hl.fl": ','.join(highlight_fields),
@@ -91,7 +91,7 @@ def result(request):
 
         results.append(formatted_doc)
 
-    for highlight in res.highlighting:
+    for highlight in res['highlighting']:
         print(highlight)
         formatted_doc['highlight'] = highlight
 
