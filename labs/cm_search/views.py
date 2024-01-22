@@ -26,6 +26,7 @@ def result(request):
     blacklist = (
         '2431292', '2823768', '10112841', '4086896', '9038025', '4875667', '7938572', '8553624', '8823924', '9498581',
         '9572329', '9616703', '9620162')
+    try:
 
     solr = pysolr.Solr(SOLR_SERVER + SOLR_INDEX, always_commit=True, timeout=10,
                        auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
@@ -45,10 +46,7 @@ def result(request):
     # create a list for the fields that should be searched and add the query
     solr_query = [field + ":" + query for field in search_fields]
 
-    print("Solr query: ", solr_query)
-
-    # FIXME: query does not work
-    # build the query for solr
+    # build the body for solr
     body = {
         "hl": "true",
         "indent": "true",
@@ -61,10 +59,6 @@ def result(request):
         "useParams": ""
     }
 
-    # print("Body: ", body)
-
-    # res = solr.search(f'*:{query}*')
-    # res = solr.search('text:'+query)
     res = solr.search(q=solr_query, search_handler="/select", **body)
     # added 'from': start, to indicate which results should be displayed
     # 'from' is used to tell solr which results to return by index
@@ -75,8 +69,16 @@ def result(request):
     # print(res.docs)
     print("Res: ", res.highlighting)
 
+    if res.hits == 0:
+        error_message = "No results found"
+        context = {
+            'error_message': error_message,
+            'total_hits': 0
+        }
+        return render(request, 'cm_search/search_result.html', context)
+
     results = []
-    i = 0  # generates a number that will be used as an id in the template
+
     for doc in res.docs:
 
         formatted_doc = doc
@@ -99,9 +101,6 @@ def result(request):
 
         # iterate over the highlighting, each highlight is a dict with an id and a text. The id is the id of the document. Match it with the id of the document in the results list and add the highlight to the document
         for highlight in res.highlighting:
-            print(highlight)
-            # print(highlight['id'])
-            # print(highlight['text'])
 
             if highlight == formatted_doc['id']:
                 formatted_doc['highlight'] = res.highlighting[highlight]
@@ -157,7 +156,7 @@ def result(request):
         "page": page,
         "next": page + 1,
         "paging": real_paging,
-
+        'error_message': error_message,
     }
 
     return render(request, 'cm_search/search_result.html', context)
