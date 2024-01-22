@@ -62,8 +62,7 @@ def result(request):
     # -> if page = 2 then results 10-19 and so on
 
     print(res.hits)
-    print(res.debug)
-    print(res.docs)
+    #print(res.docs)
 
     results = []
     i = 0  # generates a number that will be used as an id in the template
@@ -122,7 +121,7 @@ def result(request):
             real_paging.append(number)
 
     context = {
-        "result": results,
+        "results": results,
         "total_hits": total_hits,
         "query": query,
         "pages": pages,
