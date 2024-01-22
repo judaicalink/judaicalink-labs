@@ -116,7 +116,7 @@ def result(request):
 
         # TODO: convert the dates to the format dd.mm.yyyy
         # convert all the date in formatted_doc['dateIssued'] to the format dd.mm.yyyy
-        formatted_doc['dateIssued'] = datetime.strptime(doc['dateIssued'], "%Y-%m-%dT%H:%M:%SZ").strftime("%d.%m.%Y")
+        formatted_doc['dateIssued'] = datetime.strptime(formatted_doc['dateIssued'], "%Y-%m-%dT%H:%M:%SZ").strftime("%d.%m.%Y")
         results.append(formatted_doc)
 
     print("Doc: ", formatted_doc)
