@@ -67,7 +67,7 @@ def result(request):
     # -> if page = 1 then results 0-9 will be displayed
     # -> if page = 2 then results 10-19 and so on
 
-    print("Hits: "+res.hits)
+    print("Hits: ", res.hits)
     #print(res.docs)
 
     results = []
