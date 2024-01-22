@@ -51,6 +51,8 @@ def result(request):
         "useParams": ""
     }
 
+    print("Body: ", body)
+
     #res = solr.search(f'*:{query}*')
     #res = solr.search('text:'+query)
     res = solr.search('text:'+query, **body)
@@ -63,7 +65,7 @@ def result(request):
     print(res.debug)
     print(res.docs)
 
-    result = []
+    results = []
     i = 0  # generates a number that will be used as an id in the template
     for doc in res.docs:
 
@@ -90,7 +92,7 @@ def result(request):
         """
 
         print("Doc: ", formatted_doc)
-        result.append(formatted_doc)
+        results.append(formatted_doc)
 
     # paging
     # -> almost copy from jl-search, except some variable-names
@@ -120,7 +122,7 @@ def result(request):
             real_paging.append(number)
 
     context = {
-        "result": result,
+        "result": results,
         "total_hits": total_hits,
         "query": query,
         "pages": pages,
