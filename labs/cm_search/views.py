@@ -41,7 +41,6 @@ def result(request):
     # FIXME: query does not work
     # build the query for solr
     body = {
-        "q": query,
         "hl": "true",
         "indent": "true",
         "hl.requireFieldMatch": "false",
@@ -54,7 +53,7 @@ def result(request):
 
     #res = solr.search(f'*:{query}*')
     #res = solr.search('text:'+query)
-    res = solr.search(body)
+    res = solr.search(q=query, **body)
     # added 'from': start, to indicate which results should be displayed
     # 'from' is used to tell solr which results to return by index
     # -> if page = 1 then results 0-9 will be displayed
