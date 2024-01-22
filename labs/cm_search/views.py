@@ -69,6 +69,7 @@ def result(request):
 
     print("Hits: ", res.hits)
     #print(res.docs)
+    print("Res: ", res.highlighting)
 
     results = []
     i = 0  # generates a number that will be used as an id in the template
@@ -90,7 +91,7 @@ def result(request):
 
         results.append(formatted_doc)
 
-    for highlight in results['highlighting']:
+    for highlight in res.highlighting:
         print(highlight)
         formatted_doc['highlight'] = highlight
 
