@@ -113,7 +113,7 @@ def result(request):
         #formatted_doc['text'] = res.highlighting[formatted_doc['id']]['text'][0]
 
         # replace text in formatted_doc['j_title'] with res.highlight[id]['j_title']
-        formatted_doc['j_title'] = res.highlighting[formatted_doc['id']]['j_title'][0]
+        #formatted_doc['j_title'] = res.highlighting[formatted_doc['id']]['j_title'][0]
 
         results.append(formatted_doc)
 
