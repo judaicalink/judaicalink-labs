@@ -28,6 +28,7 @@ def result(request):
     solr = pysolr.Solr(SOLR_SERVER + SOLR_INDEX, always_commit=True, timeout=10, auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
 
     query = request.GET.get('query')
+    print("Query: ", query)
     page = int(request.GET.get('page'))
     size = 10
     # changed size from 15 to 10 to match the amount of results in judaicalink search
