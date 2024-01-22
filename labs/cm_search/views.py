@@ -58,11 +58,14 @@ def result(request):
         }
     }
 
-    res = solr.search(query, **body, index=SOLR_INDEX)
+    res = solr.search(query)
     # added 'from': start, to indicate which results should be displayed
     # 'from' is used to tell solr which results to return by index
     # -> if page = 1 then results 0-9 will be displayed
     # -> if page = 2 then results 10-19 and so on
+
+    print(res.hits)
+    print(res.debug)
 
     result = []
     i = 0  # generates a number that will be used as an id in the template
