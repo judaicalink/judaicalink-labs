@@ -95,9 +95,16 @@ def result(request):
         print(highlight)
         formatted_doc['highlight'] = highlight
 
+        # convert all the dates in formatted_doc['dateIssued'] to the format dd.mm.yyyy
+        formatted_doc['dateIssued'] = [date.strftime("%d.%m.%Y") for date in formatted_doc['dateIssued']]
+
+        # convert all the lists in the formatted_doc to strings
+        for key in formatted_doc:
+            formatted_doc[key] = ''.join(map(str, formatted_doc[key]))
         results.append(formatted_doc)
 
     print("Doc: ", formatted_doc)
+
 
     # paging
     # -> almost copy from jl-search, except some variable-names
