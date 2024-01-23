@@ -114,7 +114,7 @@ def result(request):
 
         # create a dict for the related entities
         related_entities = {}
-        for entity, index in doc['related_entities']:
+        for index, entity in enumerate(doc['related_entities']):
             # entity is a list with 4 elements
             # 0: ep
             # 1: name
