@@ -114,26 +114,16 @@ def result(request):
 
         # create a dict for the related entities
         related_entities = {}
-        for index, entity in enumerate(doc['related_entities']):
+        for item in range(0, len(doc['related_entities']), 4):
             # entity is a list with 4 elements
             # 0: ep
             # 1: name
             # 2: score
             # 3: type
-
-            match index:
-                case 0:
-                    related_entities['ep'] = entity
-                case 1:
-                    related_entities['name'] = entity
-                case 2:
-                    related_entities['score'] = entity
-                case 3:
-                    related_entities['type'] = entity
-                case _:
-                    print("Error: Index out of range")
-                    logger.error("Error: Index out of range")
-                    break
+            related_entities['ep'] = doc['related_entities'][item]
+            related_entities['name'] = doc['related_entities'][item + 1]
+            related_entities['score'] = doc['related_entities'][item + 2]
+            related_entities['type'] = doc['related_entities'][item + 3]
 
         doc['related_entities'] = related_entities
         print("Related entities: ")
