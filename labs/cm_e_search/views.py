@@ -21,21 +21,19 @@ def get_names():
                            auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
         res = solr.search('*:*', index="cm_entity_names", rows=10000)
         logger.info("Got names from solr: ")
-        #print(res.hits)
+        print("Name found: ", res.hits)
         #print(res.docs)
-        #print(res.debug)
         logger.info(res.debug)
         logger.info(res.hits)
 
-        #Todo: remove the backets from the names
-
         for doc in res.docs:
             # convert list to string
-            names = ''.join(doc['name'])
-            #names.append(doc['name'])
+            doc['name'] = ''.join(map(str, doc['name']))
+            names.append(doc['name'])
             print("Doc: ", doc['name'])
             logger.info(doc['name'])
         return names
+
     except Exception as e:
         logger.error(e)
         print("Error:", e)
@@ -51,7 +49,6 @@ def index(request):
     names = get_names()
     data = names
     context = {'data': data}
-
     return render(request, 'cm_e_search/search_index.html', context)
 
 
