@@ -3,63 +3,64 @@
 
 <div class="wrapper">
 
-      <!-- Page Navigation -->
+    <!-- Page Navigation -->
 
-      <nav id="sidebar" class="navbar">
-            <ul class="list-unstyled navbar-nav">
-                {% with url_name=request.resolver_match.url_name %}
-                <li class="nav-item {% if url_name == 'index' %}active{% endif %}">
-                    <a href="{% url 'index' %}" ><i class="fas fa-home"></i>  Labs Home</a>
-                </li>
-                {% endwith %}
-                <li class="nav-item {% active_link 'search:all_search_nav' 'active' %}">
-                    <a href="{% url 'search:all_search_nav'%}"><i class="fas fa-search"></i>  Search</a>
-                </li>
-                <li class="nav-item">
-                    <a href="http://web.judaicalink.org/datasets/"><i class="fa fa-database"></i>  Datasets</a>
-                </li>
-                <li class="nav-item">
-                    <a href="http://web.judaicalink.org/news"><i class="fas fa-comment"></i>  News</a>
-                </li>
-                <li>
-                    <a href="https://www.ub.uni-frankfurt.de/judaica3/home.html" target="_blank" rel="noopener noreferrer">
-                   <!-----FID SVG Icon----->
-                   <svg class="svg"
-                   xmlns="http://www.w3.org/2000/svg"
-                   version="1.1"
-                   width="1.2em"
-                   height="1.2em"
-                   viewBox="2 5 40 40">
-                   <path
-                   fill="#505050"
-                   d="M 20.387,3.709 H 18.474 V 6.292 L 17.557,6.294 V 7.03 h 0.911 l 0.014,7.32 c -2.081,-0.223 -4.566,-1.049 -4.9,-4.705 H 14.5 V 8.908 H 13.581 V 8.222 H 11.876 V 8.909 H 10.96 v 0.74 l 0.916,-0.003 c 0.292,4.326 3.555,6.399 6.598,6.513 0.004,0 -0.003,3.749 -0.008,3.748 C 14.649,19.091 8.413,16.651 8.88,9.642 L 9.789,9.645 9.791,8.908 H 8.88 V 8.222 H 7.181 V 8.909 H 6.266 L 6.271,9.646 7.185,9.643 C 6.93,18.246 14.379,20.974 18.474,21.7 v 3.795 C 9.514,24.666 4.346,18.828 3.868,9.642 L 4.66,9.645 4.662,8.908 H 3.868 V 8.222 H 2.163 V 8.909 H 1.248 v 0.737 h 0.915 c 0.206,7.628 3.739,16.886 16.303,17.645 0.008,0.001 0.003,5.854 0,5.854 L 16.32,33.136 c 0,3.739 -2.009,3.733 -2.009,3.733 h -1.914 v 1.961 h 7.99 z"
-                   />
-                   <path
-                   fill="#505050"
-                   d="m 18.537,3.709 h 1.914 v 2.583 l 0.917,0.002 V 7.03 h -0.911 l -0.015,7.32 c 2.082,-0.223 4.566,-1.049 4.901,-4.705 H 24.424 V 8.908 h 0.919 V 8.222 h 1.705 v 0.687 h 0.915 v 0.74 L 27.048,9.646 c -0.293,4.326 -3.555,6.399 -6.598,6.513 -0.003,0 0.002,3.749 0.008,3.748 3.815,-0.814 10.053,-3.254 9.586,-10.263 L 29.135,9.647 29.132,8.91 h 0.913 V 8.222 h 1.698 v 0.687 h 0.916 L 32.653,9.646 31.74,9.643 c 0.254,8.604 -7.194,11.332 -11.29,12.058 v 3.795 C 29.41,24.667 34.577,18.829 35.056,9.643 L 34.263,9.646 34.262,8.909 h 0.794 V 8.222 h 1.704 v 0.687 h 0.916 V 9.646 H 36.76 c -0.205,7.628 -3.738,16.886 -16.302,17.645 -0.008,0.001 -0.004,5.854 0,5.854 l 2.145,-0.009 c 0,3.739 2.01,3.733 2.01,3.733 h 1.914 V 38.83 H 18.536 V 3.709 Z"
-                   />
-                   </svg>FID Jewish Studies</a>
-                   <!-----FID SVG Icon----->
-                </li>
-                <li>
-                    <a href="http://web.judaicalink.org/faq"><i class="fas fa-question-circle"></i> FAQ</a>
-                </li>
-                <li>
-                    <a href="http://web.judaicalink.org/about-us"><i class="fas fa-info-circle"></i> About</a>
-                </li>
-                <li>
-                    <a href="http://web.judaicalink.org/legal"><i class="fas fa-shield-alt"></i> Disclaimer</a>
-                </li>
-                <li class="nav-item {% active_link 'contact:contact' 'active' %}">
-                    <a href="{% url 'contact:contact' %}"><i class="fas fa-envelope"></i> Contact</a>
-                </li>
-                <br>
-                <li>
-                    <small><a href="https://web.judaicalink.org/"><i class="fas fa-door-open"></i> Web Home</a></small>
-                </li>
-            </ul>
-        </nav>
+    <nav id="sidebar" class="navbar">
+        <ul class="list-unstyled navbar-nav">
+            {% with url_name=request.resolver_match.url_name %}
+            <li class="nav-item {% if url_name == 'index' %}active{% endif %}">
+                <a href="{% url 'index' %}"><i class="fas fa-home"></i> Labs Home</a>
+            </li>
+            {% endwith %}
+            <li class="nav-item {% active_link 'search:all_search_nav' 'active' %}">
+                <a href="{% url 'search:all_search_nav'%}"><i class="fas fa-search"></i> Search</a>
+            </li>
+            <li class="nav-item">
+                <a href="http://web.judaicalink.org/datasets/"><i class="fa fa-database"></i> Datasets</a>
+            </li>
+            <li class="nav-item">
+                <a href="http://web.judaicalink.org/news"><i class="fas fa-comment"></i> News</a>
+            </li>
+            <li>
+                <a href="https://www.ub.uni-frankfurt.de/judaica3/home.html" target="_blank" rel="noopener noreferrer">
+                    <!-----FID SVG Icon----->
+                    <svg class="svg"
+                         xmlns="http://www.w3.org/2000/svg"
+                         version="1.1"
+                         width="1.2em"
+                         height="1.2em"
+                         viewBox="2 5 40 40">
+                        <path
+                                fill="#505050"
+                                d="M 20.387,3.709 H 18.474 V 6.292 L 17.557,6.294 V 7.03 h 0.911 l 0.014,7.32 c -2.081,-0.223 -4.566,-1.049 -4.9,-4.705 H 14.5 V 8.908 H 13.581 V 8.222 H 11.876 V 8.909 H 10.96 v 0.74 l 0.916,-0.003 c 0.292,4.326 3.555,6.399 6.598,6.513 0.004,0 -0.003,3.749 -0.008,3.748 C 14.649,19.091 8.413,16.651 8.88,9.642 L 9.789,9.645 9.791,8.908 H 8.88 V 8.222 H 7.181 V 8.909 H 6.266 L 6.271,9.646 7.185,9.643 C 6.93,18.246 14.379,20.974 18.474,21.7 v 3.795 C 9.514,24.666 4.346,18.828 3.868,9.642 L 4.66,9.645 4.662,8.908 H 3.868 V 8.222 H 2.163 V 8.909 H 1.248 v 0.737 h 0.915 c 0.206,7.628 3.739,16.886 16.303,17.645 0.008,0.001 0.003,5.854 0,5.854 L 16.32,33.136 c 0,3.739 -2.009,3.733 -2.009,3.733 h -1.914 v 1.961 h 7.99 z"
+                        />
+                        <path
+                                fill="#505050"
+                                d="m 18.537,3.709 h 1.914 v 2.583 l 0.917,0.002 V 7.03 h -0.911 l -0.015,7.32 c 2.082,-0.223 4.566,-1.049 4.901,-4.705 H 24.424 V 8.908 h 0.919 V 8.222 h 1.705 v 0.687 h 0.915 v 0.74 L 27.048,9.646 c -0.293,4.326 -3.555,6.399 -6.598,6.513 -0.003,0 0.002,3.749 0.008,3.748 3.815,-0.814 10.053,-3.254 9.586,-10.263 L 29.135,9.647 29.132,8.91 h 0.913 V 8.222 h 1.698 v 0.687 h 0.916 L 32.653,9.646 31.74,9.643 c 0.254,8.604 -7.194,11.332 -11.29,12.058 v 3.795 C 29.41,24.667 34.577,18.829 35.056,9.643 L 34.263,9.646 34.262,8.909 h 0.794 V 8.222 h 1.704 v 0.687 h 0.916 V 9.646 H 36.76 c -0.205,7.628 -3.738,16.886 -16.302,17.645 -0.008,0.001 -0.004,5.854 0,5.854 l 2.145,-0.009 c 0,3.739 2.01,3.733 2.01,3.733 h 1.914 V 38.83 H 18.536 V 3.709 Z"
+                        />
+                    </svg>
+                    FID Jewish Studies</a>
+                <!-----FID SVG Icon----->
+            </li>
+            <li>
+                <a href="http://web.judaicalink.org/faq"><i class="fas fa-question-circle"></i> FAQ</a>
+            </li>
+            <li>
+                <a href="http://web.judaicalink.org/about-us"><i class="fas fa-info-circle"></i> About</a>
+            </li>
+            <li>
+                <a href="http://web.judaicalink.org/legal"><i class="fas fa-shield-alt"></i> Disclaimer</a>
+            </li>
+            <li class="nav-item {% active_link 'contact:contact' 'active' %}">
+                <a href="{% url 'contact:contact' %}"><i class="fas fa-envelope"></i> Contact</a>
+            </li>
+            <br>
+            <li>
+                <small><a href="https://web.judaicalink.org/"><i class="fas fa-door-open"></i> Web Home</a></small>
+            </li>
+        </ul>
+    </nav>
 </div>
-      <!-- Page Navigation -->
+<!-- Page Navigation -->
 
 
