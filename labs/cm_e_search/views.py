@@ -111,7 +111,18 @@ def result(request):
             doc['ep'] = None
 
         print("Name: ", doc['name'])
-        print("Related entities: ", doc['related_entities'])
+
+        # create a dict for the related entities
+        related_entities = {}
+        for entity in doc['related_entities']:
+            related_entities['ep'] = entity[0]
+            related_entities['name'] = entity[1]
+            related_entities['score'] = entity[2]
+            related_entities['type'] = entity[2]
+
+        doc['related_entities'] = related_entities
+        print("Related entities: ")
+        pprint.pprint(doc['related_entities'])
 
     # print(result[0]['related_entities'][0])
     # print(type(result[0]['related_entities'][0][2]))
