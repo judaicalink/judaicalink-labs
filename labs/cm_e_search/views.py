@@ -112,10 +112,11 @@ def result(request):
 
         print("Name: ", doc['name'])
         print("Related entities: ", len(doc['related_entities']))
+        related_entities = []
 
         # create a dict for the related entities
         if 'related_entities' in doc:
-            related_entities = {}
+            entity = {}
             for index in range(0, len(doc['related_entities']), 4):
                 if index + 3 < len(doc['related_entities']):
                     # entity is a list with 4 elements
@@ -123,14 +124,19 @@ def result(request):
                     # 1: name
                     # 2: score
                     # 3: type
-                    related_entities['ep'] = doc['related_entities'][index]
-                    related_entities['name'] = doc['related_entities'][index + 1]
-                    related_entities['score'] = doc['related_entities'][index + 2]
-                    related_entities['type'] = doc['related_entities'][index + 3]
+                    entity['ep'] = doc['related_entities'][index]
+                    entity['name'] = doc['related_entities'][index + 1]
+                    entity['score'] = doc['related_entities'][index + 2]
+                    entity['type'] = doc['related_entities'][index + 3]
 
-                    doc['related_entities'] = related_entities
-                    print("Related entities: ")
-                    print(doc['related_entities'])
+                    print("Entity: ", entity)
+                    related_entities.append(entity)
+                    entity = {}
+            doc['related_entities'] = related_entities
+        else:
+            doc['related_entities'] = []
+
+        print("Related entities: ", related_entities)
 
     # print(result[0]['related_entities'][0])
     # print(type(result[0]['related_entities'][0][2]))
