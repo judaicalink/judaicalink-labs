@@ -110,11 +110,7 @@ def result(request):
 
         # TODO: highlight the search term in the results
         # replace the text in formatted_doc['text'] with res.highlight[id]['text']
-        #formatted_doc['text'] = res.highlighting[formatted_doc['id']]['text'][0]
-
-        # replace text in formatted_doc['j_title'] with res.highlight[id]['j_title']
-        #formatted_doc['j_title'] = res.highlighting[formatted_doc['id']]['j_title'][0]
-        print("Highlighting: ", res.highlighting)
+        formatted_doc['text'] = res.highlighting[formatted_doc['id']]['text'][0]
 
         results.append(formatted_doc)
 
