@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime
 
 from django.shortcuts import render
@@ -8,6 +9,7 @@ from django.conf import settings
 from django.views.decorators.cache import cache_page
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
+logger = logging.getLogger(__name__)
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 SOLR_SERVER = settings.SOLR_SERVER
 SOLR_INDEX = "cm_meta"
@@ -33,7 +35,7 @@ def result(request):
                        auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
 
     query = request.GET.get('query')
-    #print("Query: ", query)
+    logger.debug("Query: ", query)
     page = int(request.GET.get('page'))
     size = 10
     # changed size from 15 to 10 to match the amount of results in judaicalink search
@@ -69,9 +71,9 @@ def result(request):
     # -> if page = 1 then results 0-9 will be displayed
     # -> if page = 2 then results 10-19 and so on
 
-    #print("Hits: ", res.hits)
-    #print(res.docs)
-    #print("Res: ", res.highlighting)
+    logger.debug("Hits: ", res.hits)
+    logger.debug(res.docs)
+    logger.debug("Res: ", res.highlighting)
 
     if res.hits == 0:
         error_message = "No results found"
@@ -116,7 +118,7 @@ def result(request):
 
         results.append(formatted_doc)
 
-    #print("Doc: ", formatted_doc)
+    logger.debug("Doc: ", formatted_doc)
 
 
 
