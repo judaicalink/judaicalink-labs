@@ -53,6 +53,9 @@ def result(request):
         "indent": "true",
         'fl': ','.join(fields),
         "hl.requireFieldMatch": "true",
+        "hl.tag.pre": "<strong>",
+        "hl.tag.post": "</strong>",
+        "hl.fragsize": "0",
         "start": start,
         "q.op": "OR",
         "hl.fl": ','.join(highlight_fields),
@@ -108,8 +111,7 @@ def result(request):
         # convert all the date in formatted_doc['dateIssued'] to the format dd.mm.yyyy
         formatted_doc['dateIssued'] = datetime.strptime(formatted_doc['dateIssued'], "%Y-%m-%dT%H:%M:%SZ").strftime("%d.%m.%Y")
 
-        # TODO: highlight the search term in the results
-        # replace the text in formatted_doc['text'] with res.highlight[id]['text']
+        # Highlight the search term in the results
         formatted_doc['text'] = res.highlighting[formatted_doc['id']]['text'][0]
 
         results.append(formatted_doc)
