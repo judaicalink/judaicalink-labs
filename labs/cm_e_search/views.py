@@ -114,7 +114,7 @@ def result(request):
 
         # create a dict for the related entities
         if 'related_entities' in doc:
-            print("Related entities: ", len(doc['related_entities'])/4)
+            #print("Related entities: ", len(doc['related_entities'])/4)
             related_entities = []
             entity = {}
             for index in range(0, len(doc['related_entities']), 4):
@@ -129,7 +129,7 @@ def result(request):
                     entity['score'] = doc['related_entities'][index + 2]
                     entity['type'] = doc['related_entities'][index + 3]
 
-                    print("Entity: ", entity)
+                    #print("Entity: ", entity)
                     related_entities.append(entity)
                     entity = {}
 
@@ -138,7 +138,7 @@ def result(request):
         else:
             doc['related_entities'] = []
 
-    # print("Results: ", results)
+    print("Results: ", results)
     context = {
         "results": results,
         "data": json.dumps(names)
