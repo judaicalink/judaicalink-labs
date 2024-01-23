@@ -136,10 +136,6 @@ def result(request):
         else:
             doc['related_entities'] = []
 
-        print("Related entities: ", related_entities)
-
-    # print(result[0]['related_entities'][0])
-    # print(type(result[0]['related_entities'][0][2]))
     # print("Results: ", results)
     context = {
         "results": results,
