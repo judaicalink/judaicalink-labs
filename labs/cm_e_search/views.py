@@ -105,7 +105,8 @@ def result(request):
         results.append(doc)
         doc['name'] = ''.join(map(str, doc['name']))
         doc['e_type'] = ''.join(map(str, doc['e_type']))
-        doc['ep'] = ''.join(map(str, doc['ep']))
+        if 'ep' in doc:
+            doc['ep'] = ''.join(map(str, doc['ep']))
 
         print("Name: ", doc['name'])
         print("Related entities: ", doc['related_entities'])
