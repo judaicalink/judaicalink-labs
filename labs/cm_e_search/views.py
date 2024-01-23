@@ -113,21 +113,22 @@ def result(request):
         print("Name: ", doc['name'])
 
         # create a dict for the related entities
-        related_entities = {}
-        for item in range(0, len(doc['related_entities']), 4):
-            # entity is a list with 4 elements
-            # 0: ep
-            # 1: name
-            # 2: score
-            # 3: type
-            related_entities['ep'] = doc['related_entities'][item]
-            related_entities['name'] = doc['related_entities'][item + 1]
-            related_entities['score'] = doc['related_entities'][item + 2]
-            related_entities['type'] = doc['related_entities'][item + 3]
+        if 'related_entities' in doc:
+            related_entities = {}
+            for item in range(0, len(doc['related_entities']), 4):
+                # entity is a list with 4 elements
+                # 0: ep
+                # 1: name
+                # 2: score
+                # 3: type
+                related_entities['ep'] = doc['related_entities'][item]
+                related_entities['name'] = doc['related_entities'][item + 1]
+                related_entities['score'] = doc['related_entities'][item + 2]
+                related_entities['type'] = doc['related_entities'][item + 3]
 
-        doc['related_entities'] = related_entities
-        print("Related entities: ")
-        pprint.pprint(doc['related_entities'])
+                doc['related_entities'] = related_entities
+                print("Related entities: ")
+                pprint.pprint(doc['related_entities'])
 
     # print(result[0]['related_entities'][0])
     # print(type(result[0]['related_entities'][0][2]))
