@@ -107,13 +107,15 @@ def result(request):
         doc['e_type'] = ''.join(map(str, doc['e_type']))
         if 'ep' in doc:
             doc['ep'] = ''.join(map(str, doc['ep']))
+        else:
+            doc['ep'] = None
 
         print("Name: ", doc['name'])
         print("Related entities: ", doc['related_entities'])
 
     # print(result[0]['related_entities'][0])
     # print(type(result[0]['related_entities'][0][2]))
-    print("Results: ", results)
+    # print("Results: ", results)
     context = {
         "results": results,
         "data": json.dumps(names)
