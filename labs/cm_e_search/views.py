@@ -9,17 +9,25 @@ from django.views.decorators.cache import cache_page
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
 logger = logging.getLogger(__name__)
-#logger.setLevel(logging.DEBUG)
+# logger.setLevel(logging.DEBUG)
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 SOLR_SERVER = settings.SOLR_SERVER
 
+
 def get_names():
+    """
+    This function gets all the names from the solr index cm_entity_names
+    :return:
+    """
     # gets all entity names from solr
     try:
         names = []
+
         solr = pysolr.Solr(SOLR_SERVER + "cm_entity_names", always_commit=True, timeout=10,
                            auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
         res = solr.search('*:*', index="cm_entity_names", rows=10000)
+
+        # logging
         logger.info("Got names from solr: ")
         logger.debug("Names found: ", res.hits)
         logger.info(res.debug)
@@ -57,7 +65,7 @@ def result(request):
     logger.debug("Got names from solr: ")
     logger.debug(names)
 
-    query = html.escape(request.GET.get('query'))
+    query = request.GET.get('query')
     logger.info("Query: " + query)
     print("Query: " + query)
     # add name: to query
@@ -65,8 +73,10 @@ def result(request):
     solr = pysolr.Solr(settings.SOLR_SERVER + 'cm_entities', always_commit=True, timeout=10,
                        auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
 
-    # TODO: fix query
-    fields = ["name", "e_type", "related_entities", 'ep', 'id', 'journal_occurs.j_name', 'journal_occurs.j_id', 'journal_occurs.first', 'journal_occurs.last', 'journal_occurs.mentions.p_id', 'journal_occurs.mentions.spot', 'journal_occurs.mentions.start', 'journal_occurs.mentions.end', 'journal_occurs.mentions.p_link', 'journal_occurs.mentions.date', 'journal_occurs.mentions.year' ]
+    fields = ["name", "e_type", "related_entities", 'ep', 'id', 'journal_occurs.j_name', 'journal_occurs.j_id',
+              'journal_occurs.first', 'journal_occurs.last', 'journal_occurs.mentions.p_id',
+              'journal_occurs.mentions.spot', 'journal_occurs.mentions.start', 'journal_occurs.mentions.end',
+              'journal_occurs.mentions.p_link', 'journal_occurs.mentions.date', 'journal_occurs.mentions.year']
     search_fields = ["name", "journal_occurs.mentions.spot"]
 
     # create a dict from the fields and add the query
@@ -93,10 +103,9 @@ def result(request):
     print("Got results from solr: ")
     print(res.docs)
 
-
     results = []
     for doc in res.docs:
-        result.append(doc)
+        results.append(doc)
         print("Name: ", doc['name'])
 
     # print(result[0]['related_entities'][0])
