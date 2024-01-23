@@ -51,7 +51,7 @@ def get_names():
         return None
 
 
-@cache_page(CACHE_TTL)
+#@cache_page(CACHE_TTL)
 def index(request):
     names = get_names()
     data = names
@@ -111,11 +111,11 @@ def result(request):
             doc['ep'] = ''
 
         print("Name: ", doc['name'])
-        print("Related entities: ", len(doc['related_entities']))
-        related_entities = []
 
         # create a dict for the related entities
         if 'related_entities' in doc:
+            print("Related entities: ", len(doc['related_entities']))
+            related_entities = []
             entity = {}
             for index in range(0, len(doc['related_entities']), 4):
                 if index + 3 < len(doc['related_entities']):
