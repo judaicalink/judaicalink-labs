@@ -54,8 +54,8 @@ def index(request):
 @cache_page(CACHE_TTL)
 def result(request):
     names = get_names()  # searches for all names in cm_entity_names
-    print("Got names from solr: ")
-    print(names)
+    logger.debug("Got names from solr: ")
+    logger.debug(names)
 
     query = html.escape(request.GET.get('query'))
     logger.info("Query: " + query)
@@ -63,10 +63,32 @@ def result(request):
     # add name: to query
     query = 'name:"' + query + '"'
     print("Query: " + query)
+
+
     solr = pysolr.Solr(settings.SOLR_SERVER + 'cm_entities', always_commit=True, timeout=10,
                        auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
+
     # TODO: fix query
-    res = solr.search(query, index='cm_entities', rows=10000)
+    fields = ["name", "e_type", "related_entities", 'ep', 'id', 'journal_occurs.j_name', 'journal_occurs.j_id', 'journal_occurs.first', 'journal_occurs.last', 'journal_occurs.mentions.p_id', 'journal_occurs.mentions.spot', 'journal_occurs.mentions.start', 'journal_occurs.mentions.end', 'journal_occurs.mentions.p_link', 'journal_occurs.mentions.date', 'journal_occurs.mentions.year' ]
+    search_fields = ["name", "journal_occurs.mentions.spot"]
+
+    # create a dict from the fields and add the query
+    # create a list for the fields that should be searched and add the query
+    solr_query = [field + ":" + query for field in search_fields]
+
+    # build the body for solr
+    body = {
+        "hl": "false",
+        "indent": "true",
+        'fl': ','.join(fields),
+        "start": 0,
+        "q.op": "OR",
+        "rows": 1000,
+        "useParams": ""
+    }
+
+    res = solr.search(q=solr_query, search_handler="/select", **body)
+
     logger.info("Got results from solr: ")
     logger.info(res.debug)
     logger.info(res.docs)
