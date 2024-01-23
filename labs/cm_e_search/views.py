@@ -61,9 +61,6 @@ def result(request):
     logger.info("Query: " + query)
     print("Query: " + query)
     # add name: to query
-    query = 'name:"' + query + '"'
-    print("Query: " + query)
-
 
     solr = pysolr.Solr(settings.SOLR_SERVER + 'cm_entities', always_commit=True, timeout=10,
                        auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
