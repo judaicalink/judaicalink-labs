@@ -21,8 +21,7 @@ def get_names():
                            auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
         res = solr.search('*:*', index="cm_entity_names", rows=10000)
         logger.info("Got names from solr: ")
-        print("Name found: ", res.hits)
-        #print(res.docs)
+        logger.debug("Names found: ", res.hits)
         logger.info(res.debug)
         logger.info(res.hits)
 
@@ -30,16 +29,16 @@ def get_names():
             # convert list to string
             doc['name'] = ''.join(map(str, doc['name']))
             names.append(doc['name'])
-            print("Doc: ", doc['name'])
+            logger.debug("Doc: ", doc['name'])
             logger.info(doc['name'])
         return names
 
     except Exception as e:
-        logger.error(e)
+        logger.error("Error:", e)
         print("Error:", e)
         return None
     except pysolr.SolrError as e:
-        logger.error(e)
+        logger.error("Error:", e)
         print("Error:", e)
         return None
 
@@ -55,8 +54,8 @@ def index(request):
 @cache_page(CACHE_TTL)
 def result(request):
     names = get_names()  # searches for all names in cm_entity_names
-    #print("Got names from solr: ")
-    #print(names)
+    print("Got names from solr: ")
+    print(names)
 
     query = html.escape(request.GET.get('query'))
     logger.info("Query: " + query)
@@ -66,7 +65,6 @@ def result(request):
     print("Query: " + query)
     solr = pysolr.Solr(settings.SOLR_SERVER + 'cm_entities', always_commit=True, timeout=10,
                        auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
-    print("Solr: " + str(solr))
     # TODO: fix query
     res = solr.search(query, index='cm_entities', rows=10000)
     logger.info("Got results from solr: ")
@@ -80,7 +78,7 @@ def result(request):
     result = []
     for doc in res.docs:
         result.append(doc)
-        print("Doc: ", doc['name'])
+        #print("Doc: ", doc['name'])
     # print(result[0]['related_entities'][0])
     # print(type(result[0]['related_entities'][0][2]))
 
