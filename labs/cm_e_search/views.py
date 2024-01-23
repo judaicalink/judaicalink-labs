@@ -89,20 +89,21 @@ def result(request):
     logger.info("Got results from solr: ")
     logger.info(res.debug)
     logger.info(res.docs)
+    print("Results found: ", res.hits)
     print("Got results from solr: ")
     print(res.docs)
-    print(res.hits)
 
 
-    result = []
+    results = []
     for doc in res.docs:
         result.append(doc)
-        #print("Doc: ", doc['name'])
+        print("Name: ", doc['name'])
+
     # print(result[0]['related_entities'][0])
     # print(type(result[0]['related_entities'][0][2]))
 
     context = {
-        "result": result,
+        "result": results,
         "data": json.dumps(names)
     }
 
