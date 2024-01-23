@@ -27,7 +27,9 @@
 {% cookiebanner_modal 'vanilla' %}
 
 <div class="wrapper">
+
     {% include "search/navbar.html" %}
+
     <div id="content">
         <div class="container-fluid">
             {% block content %}
@@ -37,14 +39,15 @@
     </div>
 </div>
 
+{% include "search/footer.html" %}
 
 {% block footer_scripts %}
 
-{% endblock %}
 
 <script src="{% static 'js/bundle.js' %}"></script>
 
 {% cookie_accepted 'analytics' as cookie_analytics %}
+
 {% if cookie_analytics %}
 <!-- Matomo -->
 <script type="text/javascript">
