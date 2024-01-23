@@ -132,6 +132,8 @@ def result(request):
                     print("Entity: ", entity)
                     related_entities.append(entity)
                     entity = {}
+
+            # Replace the whole data
             doc['related_entities'] = related_entities
         else:
             doc['related_entities'] = []

@@ -119,16 +119,16 @@ function show_journal(counter) {
                                 {% else %}
                                 <li style="display:none;" class="related_item">
                                 {% endif %}
-                                    {% if related_entity.3 == 'PER' %}
+                                    {% if related_entity.type == 'PER' %}
                                         <span class="badge rounded-pill text-white bg-primary">person</span>
-                                    {% elif related_entity.3 == 'LOC' %}
+                                    {% elif related_entity.type == 'LOC' %}
                                         <span class="badge rounded-pill text-white bg-info">location</span>
                                     {% else %}
                                         <span class="badge rounded-pill text-white bg-dark">other</span>
                                     {% endif %}
-                                    <a href="{{related_entity.0}}">{{related_entity.1}}</a>
-                                    ({{ related_entity.2|truncatechars:6}})
-                                    <a href="/cm_e_search/search_result/?query={{related_entity.1}}" role="button" alt='Query this entity'><i class="fas fa-search"></i></a>
+                                    <a href="{{related_entity.ep}}">{{related_entity.name}}</a>
+                                    ({{ related_entity.score|truncatechars:6}})
+                                    <a href="/cm_e_search/search_result/?query={{related_entity.name}}" role="button" alt='Query this entity'><i class="fas fa-search"></i></a>
                                 </li>
                             {% endfor %}
                             
