@@ -73,11 +73,11 @@ def result(request):
     solr = pysolr.Solr(settings.SOLR_SERVER + 'cm_entities', always_commit=True, timeout=10,
                        auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
 
-    fields = ["name", "e_type", "related_entities", 'ep', 'id', 'journal_occurs.j_name', 'journal_occurs.j_id',
-              'journal_occurs.first', 'journal_occurs.last', 'journal_occurs.mentions.p_id',
-              'journal_occurs.mentions.spot', 'journal_occurs.mentions.start', 'journal_occurs.mentions.end',
-              'journal_occurs.mentions.p_link', 'journal_occurs.mentions.date', 'journal_occurs.mentions.year']
-    search_fields = ["name", "journal_occurs.mentions.spot"]
+    fields = ["name", "e_type", "related_entities", 'ep', 'id', 'journal_occs.j_name', 'journal_occs.j_id',
+              'journal_occs.first', 'journal_occs.last', 'journal_occs.mentions.p_id',
+              'journal_occs.mentions.spot', 'journal_occs.mentions.start', 'journal_occs.mentions.end',
+              'journal_occs.mentions.p_link', 'journal_occs.mentions.date', 'journal_occs.mentions.year']
+    search_fields = ["name", "journal_occs.mentions.spot"]
 
     # create a dict from the fields and add the query
     # create a list for the fields that should be searched and add the query
@@ -114,7 +114,7 @@ def result(request):
 
         # create a dict for the related entities
         if 'related_entities' in doc:
-            print("Related entities: ", len(doc['related_entities']))
+            print("Related entities: ", len(doc['related_entities'])/4)
             related_entities = []
             entity = {}
             for index in range(0, len(doc['related_entities']), 4):
