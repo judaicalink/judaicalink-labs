@@ -96,23 +96,25 @@ def result(request):
 
     res = solr.search(q=solr_query, search_handler="/select", **body)
 
-    logger.info("Got results from solr: ")
-    logger.info(res.debug)
-    logger.info(res.docs)
-    print("Results found: ", res.hits)
-    print("Got results from solr: ")
-    print(res.docs)
+    logger.debug("Results found: ", res.hits)
+    logger.debug("Got results from solr: ")
+    logger.debug(res.docs)
 
     results = []
     for doc in res.docs:
         results.append(doc)
+        doc['name'] = ''.join(map(str, doc['name']))
+        doc['e_type'] = ''.join(map(str, doc['e_type']))
+        doc['ep'] = ''.join(map(str, doc['ep']))
+
         print("Name: ", doc['name'])
+        print("Related entities: ", doc['related_entities'])
 
     # print(result[0]['related_entities'][0])
     # print(type(result[0]['related_entities'][0][2]))
-
+    print("Results: ", results)
     context = {
-        "result": results,
+        "results": results,
         "data": json.dumps(names)
     }
 

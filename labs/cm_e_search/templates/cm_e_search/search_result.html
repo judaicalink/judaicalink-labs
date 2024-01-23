@@ -84,7 +84,7 @@ function show_journal(counter) {
 
     <br>
 
-    {% if result|length < 1 %}
+    {% if results|length < 1 %}
     <div class="alert alert-danger text-center mb-5" role="alert">
     No entity matching your query!
     </div>
@@ -93,27 +93,27 @@ function show_journal(counter) {
     <div>
 
 
-        {% for r in result %}
+        {% for result in results %}
 
         <div class="alert alert-success text-center" role="alert">
-                    {% if r.e_type == 'PER' %}
-                        <b>Name</b>: {{ r.name }} <span class="badge rounded-pill text-white bg-primary">person</span>
-                    {% elif r.e_type == 'LOC' %}
-                        <b>Name</b>: {{ r.name }} <span class="badge rounded-pill text-white bg-info">location</span>
+                    {% if result.e_type == 'PER' %}
+                        <b>Name</b>: {{ result.name }} <span class="badge rounded-pill text-white bg-primary">person</span>
+                    {% elif result.e_type == 'LOC' %}
+                        <b>Name</b>: {{ result.name }} <span class="badge rounded-pill text-white bg-info">location</span>
                     {% else %}
-                        <p><b>Name</b>: {{ r.name }} <span class="badge rounded-pill text-white bg-dark">other</span>
+                        <p><b>Name</b>: {{ result.name }} <span class="badge rounded-pill text-white bg-dark">other</span>
                     {% endif %}
 
-                    {% if r.ep != '' %}
-                        <br><b>Entity Page</b>: <a href={{ r.ep }} target='_blank'>{{r.ep}}</a>
+                    {% if result.ep != '' %}
+                        <br><b>Entity Page</b>: <a href={{ result.ep }} target='_blank'>{{result.ep}}</a>
                     {% endif %}
         </div>
 
         <div>
-                    <b>Related entities</b>: {{r.related_entities|length}}<br>
+                    <b>Related entities</b>: {{result.related_entities|length}}<br>
                     <p>Label | Dataset | (Related Score) | Entity Search</p>
                         <ol>
-                            {% for related_entity in r.related_entities %} <!-- |slice:":10" -->
+                            {% for related_entity in result.related_entities %} <!-- |slice:":10" -->
                                 {% if forloop.counter <= 10 %}
                                 <li style="display:list-item;" class="related_item">
                                 {% else %}
@@ -133,7 +133,7 @@ function show_journal(counter) {
                             {% endfor %}
                             
                         </ol>
-                        {% if r.related_entities|length > 10 %}
+                        {% if result.related_entities|length > 10 %}
 
                             <button onclick="more_items('related_item')" class="btn btn-secondary btn-sm" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More</button>
                             <button onclick="less_items('related_item')" class="btn btn-outline-secondary btn-sm" type="button" id="less_e" style="display: inline-block; margin: 0 auto;">Less</button>
@@ -146,10 +146,10 @@ function show_journal(counter) {
                     
                     <!-- BEGIN JOURNAL MENTIONS -->
         <div>
-                    <b>Occurs in Journals</b>: {{r.journal_occs|length}}<br>
+                    <b>Occurs in Journals</b>: {{result.journal_occs|length}}<br>
                     <p>(Number of mentions) | Journal | [Oldest mention - Latest mention]</p>
                         <ul style="list-style-type: none;">
-                            {% for journal_occ in r.journal_occs %} <!-- |slice:":10" -->
+                            {% for journal_occ in result.journal_occs %} <!-- |slice:":10" -->
                                 {% if  forloop.counter < 10 %}
                                     <li style="display:list-item;" class="journal">
                                 {% else %}
@@ -174,7 +174,7 @@ function show_journal(counter) {
                             {% endfor %}
                             
                         </ul>
-                        {% if r.journal_occs|length > 10 %}
+                        {% if result.journal_occs|length > 10 %}
 
                             <button onclick="more_items('journal')" class="btn btn-secondary btn-sm" type="button" id="more_e" style="display: inline-block; margin: 0 auto;">More</button>
                             <button onclick="less_items('journal')" class="btn btn-outline-secondary btn-sm" type="button" id="less_e" style="display: inline-block; margin: 0 auto;">Less</button>
