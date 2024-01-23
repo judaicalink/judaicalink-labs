@@ -33,7 +33,7 @@ def result(request):
                        auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
 
     query = request.GET.get('query')
-    print("Query: ", query)
+    #print("Query: ", query)
     page = int(request.GET.get('page'))
     size = 10
     # changed size from 15 to 10 to match the amount of results in judaicalink search
@@ -69,9 +69,9 @@ def result(request):
     # -> if page = 1 then results 0-9 will be displayed
     # -> if page = 2 then results 10-19 and so on
 
-    print("Hits: ", res.hits)
-    # print(res.docs)
-    print("Res: ", res.highlighting)
+    #print("Hits: ", res.hits)
+    #print(res.docs)
+    #print("Res: ", res.highlighting)
 
     if res.hits == 0:
         error_message = "No results found"
@@ -116,7 +116,7 @@ def result(request):
 
         results.append(formatted_doc)
 
-    print("Doc: ", formatted_doc)
+    #print("Doc: ", formatted_doc)
 
 
 
