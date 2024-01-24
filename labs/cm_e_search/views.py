@@ -138,6 +138,23 @@ def result(request):
         else:
             doc['related_entities'] = []
 
+        # rebuild the occurences
+        for index in range(0, len(doc['journal_occs.j_name'])):
+            doc['journal_occs'][index]['j_name'] = doc['journal_occs.j_name'][index]
+            doc['journal_occs'][index]['j_id'] = doc['journal_occs.j_id'][index]
+            doc['journal_occs'][index]['first'] = doc['journal_occs.first'][index]
+            doc['journal_occs'][index]['last'] = doc['journal_occs.last'][index]
+            doc['journal_occs'][index]['mentions']['p_id'] = doc['journal_occs.mentions.p_id'][index]
+            doc['journal_occs'][index]['mentions']['spot'] = doc['journal_occs.mentions.spot'][index]
+            doc['journal_occs'][index]['mentions']['start'] = doc['journal_occs.mentions.start'][index]
+            doc['journal_occs'][index]['mentions']['end'] = doc['journal_occs.mentions.emd'][index]
+            doc['journal_occs'][index]['mentions']['p_link'] = doc['journal_occs.mentions.p_link'][index]
+            doc['journal_occs'][index]['mentions']['date'] = doc['journal_occs.mentions.date'][index]
+            doc['journal_occs'][index]['mentions']['year'] = doc['journal_occs.mentions.year'][index]
+
+            # add the data to the results
+            results.append(doc)
+
     print("Results: ", results)
     context = {
         "results": results,
