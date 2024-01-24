@@ -51,7 +51,7 @@ def get_names():
         return None
 
 
-#@cache_page(CACHE_TTL)
+@cache_page(CACHE_TTL)
 def index(request):
     names = get_names()
     data = names
@@ -59,7 +59,7 @@ def index(request):
     return render(request, 'cm_e_search/search_index.html', context)
 
 
-@cache_page(CACHE_TTL)
+#@cache_page(CACHE_TTL)
 def result(request):
     names = get_names()  # searches for all names in cm_entity_names
     logger.debug("Got names from solr: ")

@@ -1,8 +1,9 @@
 {% extends 'search/base.html' %}
 {% load static %}
 {% block meta_cme_index %}
-    <meta name="keywords" content="judaicalink, search, entity search, compact memory, access">
-    <meta name="description" content="Through this interface the user can search persons and places automatically extracted from Compact Memory and linked to Judaicalink entries.">
+<meta name="keywords" content="judaicalink, search, entity search, compact memory, access">
+<meta name="description"
+      content="Through this interface the user can search persons and places automatically extracted from Compact Memory and linked to Judaicalink entries.">
 {% endblock %}
 
 
@@ -17,30 +18,37 @@
 <!--content-->
 <main class="row">
 
-	<div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-9 col-xl-8">
+    <div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-9 col-xl-8">
+        <div class="row">
+            <h1 class="text-center">Compact Memory Entity Search</h1>
+        </div>
 
-    {% include "cm_e_search/search_form.html" %}
-
-<!--
-{% for name in data %}
-    <p>{{name}}</p>
-{% endfor%}
--->
-
-
-<p>The Compact Memory collection comprises over 300 Jewish newspapers and journals of the German speaking area of the years 1768–1938 and beyond.
-<br>Through this interface the user can search <b>persons</b> and <b>places</b> automatically extracted from Compact Memory and <b>linked to Judaicalink entries</b>.
-</p>
+        {% include "cm_e_search/search_form.html" %}
+        <div class="row">
+            <p>The Compact Memory collection comprises over 300 Jewish newspapers and journals of the German speaking
+                area of the years 1768–1938 and beyond.
+                <br>Through this interface the user can search <b>persons</b> and <b>places</b> automatically extracted
+                from Compact Memory and <b>linked to Judaicalink entries</b>.
+            </p>
+        </div>
     </div>
 
     <div class="col-md-0 col-lg-3 col-xl-4">
         <div class="alert alert-info text-center mt-4 sticky-top" id="picturemargintop30" role="alert">
             <b>Try some search keywords:</b>
             <ul class="list-unstyled">
-                <li><i class="fa fa-search-plus"></i> <a href="https://labs.judaicalink.org/cm_e_search/search_result/?page=1&query=Albert+Einstein">Albert Einstein</a></li>
-                <li><i class="fa fa-search-plus"></i> <a href="https://labs.judaicalink.org/cm_e_search/search_result/?page=1&query=Berlin">Berlin</a></li>
-                <li><i class="fa fa-search-plus"></i> <a href="https://labs.judaicalink.org/cm_e_search/search_result/?page=1&query=Theodor+Herzl">Theodor Herzl</a></li>
-                <li><i class="fa fa-search-plus"></i> <a href="https://labs.judaicalink.org/cm_e_search/search_result/?page=1&query=Gershom+Scholem">Gershom Scholem</a></li>
+                <li><i class="fa fa-search-plus"></i> <a
+                        href="https://labs.judaicalink.org/cm_e_search/search_result/?page=1&query=Albert+Einstein">Albert
+                    Einstein</a></li>
+                <li><i class="fa fa-search-plus"></i> <a
+                        href="https://labs.judaicalink.org/cm_e_search/search_result/?page=1&query=Berlin">Berlin</a>
+                </li>
+                <li><i class="fa fa-search-plus"></i> <a
+                        href="https://labs.judaicalink.org/cm_e_search/search_result/?page=1&query=Theodor+Herzl">Theodor
+                    Herzl</a></li>
+                <li><i class="fa fa-search-plus"></i> <a
+                        href="https://labs.judaicalink.org/cm_e_search/search_result/?page=1&query=Gershom+Scholem">Gershom
+                    Scholem</a></li>
             </ul>
         </div>
     </div>
