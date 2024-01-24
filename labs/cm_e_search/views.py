@@ -59,7 +59,7 @@ def index(request):
     return render(request, 'cm_e_search/search_index.html', context)
 
 
-#@cache_page(CACHE_TTL)
+@cache_page(CACHE_TTL)
 def result(request):
     names = get_names()  # searches for all names in cm_entity_names
     logger.debug("Got names from solr: ")
@@ -139,6 +139,8 @@ def result(request):
             doc['related_entities'] = []
 
         # rebuild the occurences
+        print("Journal occs: ", doc['journal_occs.j_name'])
+        """      
         for index in range(0, len(doc['journal_occs.j_name'])):
             doc['journal_occs'][index]['j_name'] = doc['journal_occs.j_name'][index]
             doc['journal_occs'][index]['j_id'] = doc['journal_occs.j_id'][index]
@@ -154,8 +156,10 @@ def result(request):
 
             # add the data to the results
             results.append(doc)
+            
+        """
 
-    print("Results: ", results)
+    #print("Results: ", results)
     context = {
         "results": results,
         "data": json.dumps(names)
