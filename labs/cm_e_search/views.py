@@ -141,7 +141,7 @@ def result(request):
         # rebuild the occurences
         print("Journal occs: ", doc['journal_occs.j_name'])
 
-        occurrence = []
+        occurrence = {}
         for index in range(0, len(doc['journal_occs.j_name'])- 1):
 
             occurrence['j_name'] = doc['journal_occs.j_name'][index]
