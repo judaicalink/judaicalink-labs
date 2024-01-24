@@ -141,20 +141,21 @@ def result(request):
         # rebuild the occurences
         print("Journal occs: ", doc['journal_occs.j_name'])
 
-        occurence = []
-        for index in range(0, len(doc['journal_occs.j_name'])):
-            occurence[index]['j_name'] = doc['journal_occs.j_name'][index]
-            occurence[index]['j_id'] = doc['journal_occs.j_id'][index]
-            occurence[index]['first'] = doc['journal_occs.first'][index]
-            occurence[index]['last'] = doc['journal_occs.last'][index]
-            occurence[index]['mentions']['p_id'] = doc['journal_occs.mentions.p_id'][index]
-            occurence[index]['mentions']['spot'] = doc['journal_occs.mentions.spot'][index]
-            occurence[index]['mentions']['start'] = doc['journal_occs.mentions.start'][index]
-            occurence[index]['mentions']['end'] = doc['journal_occs.mentions.emd'][index]
-            occurence[index]['mentions']['p_link'] = doc['journal_occs.mentions.p_link'][index]
-            occurence[index]['mentions']['date'] = doc['journal_occs.mentions.date'][index]
-            occurence[index]['mentions']['year'] = doc['journal_occs.mentions.year'][index]
-            print("Occurence: ", occurences[index])
+        occurrence = []
+        for index in range(0, len(doc['journal_occs.j_name'] - 1)):
+
+            occurrence[index]['j_name'] = doc['journal_occs.j_name'][index]
+            occurrence[index]['j_id'] = doc['journal_occs.j_id'][index]
+            occurrence[index]['first'] = doc['journal_occs.first'][index]
+            occurrence[index]['last'] = doc['journal_occs.last'][index]
+            occurrence[index]['mentions']['p_id'] = doc['journal_occs.mentions.p_id'][index]
+            occurrence[index]['mentions']['spot'] = doc['journal_occs.mentions.spot'][index]
+            occurrence[index]['mentions']['start'] = doc['journal_occs.mentions.start'][index]
+            occurrence[index]['mentions']['end'] = doc['journal_occs.mentions.emd'][index]
+            occurrence[index]['mentions']['p_link'] = doc['journal_occs.mentions.p_link'][index]
+            occurrence[index]['mentions']['date'] = doc['journal_occs.mentions.date'][index]
+            occurrence[index]['mentions']['year'] = doc['journal_occs.mentions.year'][index]
+            print("Occurence: ", occurrence[index])
 
             # add the data to the results
             #results.append(doc)
