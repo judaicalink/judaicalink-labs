@@ -152,7 +152,7 @@ def result(request):
             occurrence['mentions']['p_id'] = doc['journal_occs.mentions.p_id'][index]
             occurrence['mentions']['spot'] = doc['journal_occs.mentions.spot'][index]
             occurrence['mentions']['start'] = doc['journal_occs.mentions.start'][index]
-            occurrence['mentions']['end'] = doc['journal_occs.mentions.emd'][index]
+            occurrence['mentions']['end'] = doc['journal_occs.mentions.end'][index]
             occurrence['mentions']['p_link'] = doc['journal_occs.mentions.p_link'][index]
             occurrence['mentions']['date'] = doc['journal_occs.mentions.date'][index]
             occurrence['mentions']['year'] = doc['journal_occs.mentions.year'][index]
