@@ -144,18 +144,18 @@ def result(request):
         occurrence = []
         for index in range(0, len(doc['journal_occs.j_name'])- 1):
 
-            occurrence[index]['j_name'] = doc['journal_occs.j_name'][index]
-            occurrence[index]['j_id'] = doc['journal_occs.j_id'][index]
-            occurrence[index]['first'] = doc['journal_occs.first'][index]
-            occurrence[index]['last'] = doc['journal_occs.last'][index]
-            occurrence[index]['mentions']['p_id'] = doc['journal_occs.mentions.p_id'][index]
-            occurrence[index]['mentions']['spot'] = doc['journal_occs.mentions.spot'][index]
-            occurrence[index]['mentions']['start'] = doc['journal_occs.mentions.start'][index]
-            occurrence[index]['mentions']['end'] = doc['journal_occs.mentions.emd'][index]
-            occurrence[index]['mentions']['p_link'] = doc['journal_occs.mentions.p_link'][index]
-            occurrence[index]['mentions']['date'] = doc['journal_occs.mentions.date'][index]
-            occurrence[index]['mentions']['year'] = doc['journal_occs.mentions.year'][index]
-            print("Occurence: ", occurrence[index])
+            occurrence['j_name'] = doc['journal_occs.j_name'][index]
+            occurrence['j_id'] = doc['journal_occs.j_id'][index]
+            occurrence['first'] = doc['journal_occs.first'][index]
+            occurrence['last'] = doc['journal_occs.last'][index]
+            occurrence['mentions']['p_id'] = doc['journal_occs.mentions.p_id'][index]
+            occurrence['mentions']['spot'] = doc['journal_occs.mentions.spot'][index]
+            occurrence['mentions']['start'] = doc['journal_occs.mentions.start'][index]
+            occurrence['mentions']['end'] = doc['journal_occs.mentions.emd'][index]
+            occurrence['mentions']['p_link'] = doc['journal_occs.mentions.p_link'][index]
+            occurrence['mentions']['date'] = doc['journal_occs.mentions.date'][index]
+            occurrence['mentions']['year'] = doc['journal_occs.mentions.year'][index]
+            print("Occurence: ", occurrence)
 
             # add the data to the results
             #results.append(doc)
