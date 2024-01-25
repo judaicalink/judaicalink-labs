@@ -141,8 +141,10 @@ def result(request):
         # rebuild the occurences
         print("Journal occs: ", doc['journal_occs.j_name'])
 
+        doc['occurrences'] = []
+
         occurrence = {}
-        for index in range(0, len(doc['journal_occs.j_name'])- 1):
+        for index in range(0, len(doc['journal_occs.j_name'])-1):
 
             occurrence['j_name'] = doc['journal_occs.j_name'][index]
             occurrence['j_id'] = doc['journal_occs.j_id'][index]
@@ -160,8 +162,9 @@ def result(request):
 
             # add the data to the results
             #results.append(doc)
+            doc['occurrences'].append(occurrence)
             
-
+    print("Occurences: ", doc['occurrences'])
 
     #print("Results: ", results)
     context = {
