@@ -153,10 +153,10 @@
             <!-- BEGIN JOURNAL MENTIONS -->
             {% comment %}
             <div>
-                <b>Occurs in Journals</b>: {{ result.journal_occs.j_id|length }}<br>
+                <b>Occurs in Journals</b>: {{ result.occurrences|length }}<br>
                 <p>(Number of mentions) | Journal | [Oldest mention - Latest mention]</p>
                 <ul style="list-style-type: none;">
-                    {% for occurence in result.journal_occs.j_id %}
+                    {% for occurrence in occurrences %}
 
                     {% if forloop.counter < 10 %}
                     <li style="display:list-item;" class="journal">
