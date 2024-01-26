@@ -175,7 +175,7 @@
                                     <li><i>Date</i>: {{ occurrence.mentions.date }}</li>
                                     <li><i>Position (offset)</i>: {{ occurrence.mentions.start }} - {{ occurrence.mentions.end }}</li>
                                     <li><i>Ref. in Visual Library</i>: <a
-                                            href="http://sammlungen.ub.uni-frankfurt.de/cm/periodical/pageview/{{ result.journal_occ.mentions.p_link[forloop.counter0]}}">Visual
+                                            href="http://sammlungen.ub.uni-frankfurt.de/cm/periodical/pageview/{{ occurrence.mentions.p_link }}">Visual
                                         Library</a></li>
                                 </ul>
                                 {% endfor %}
