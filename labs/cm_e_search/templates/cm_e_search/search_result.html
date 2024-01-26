@@ -164,12 +164,12 @@
                         {% endif %}
 
                         ({{ occurrence |length }}) <a href="javascript:void(0);"
-                                                                onclick="show_journal('{{forloop.counter}}')">{{ occurnce.j_name }}</a>
+                                                                onclick="show_journal('{{forloop.counter}}')">{{ occurrence.j_name }}</a>
                         [{{ occurrence.first }} - {{ occurrence.last }}]
                         <div class="mentions mb-3" id="{{forloop.counter}}"
                              style="display: none; overflow-y: scroll; max-height: 400px;">
                             <ul>
-                                {% for mention in occurence %}
+                                {% for mention in occurence.mentions %}
                                 <ul style="list-style-type: none;">
                                     <li><i>Text</i>: {{ mention.spot }}</li>
                                     <li><i>Date</i>: {{ mention.date }}</li>
@@ -186,7 +186,7 @@
                     {% endfor %}
 
                 </ul>
-                {% if result.journal_occs|length > 10 %}
+                {% if occurrences |length > 10 %}
 
                 <button onclick="more_items('journal')" class="btn btn-secondary btn-sm" type="button" id="more_e"
                         style="display: inline-block; margin: 0 auto;">More
