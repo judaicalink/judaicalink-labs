@@ -166,7 +166,7 @@ def result(request):
                 #results.append(doc)
                 doc['occurrences'].append(occurrence)
 
-        print("Occurences: ", doc['occurrences'])
+            print("Occurences: ", doc['occurrences'])
 
     print("Results: ", results)
     context = {
