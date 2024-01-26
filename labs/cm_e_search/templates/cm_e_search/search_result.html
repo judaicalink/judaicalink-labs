@@ -171,11 +171,11 @@
                             <ul>
                                 {% for mention in occurence %}
                                 <ul style="list-style-type: none;">
-                                    <li><i>Text</i>: {{ occurrence.mentions.spot }}</li>
-                                    <li><i>Date</i>: {{ occurrence.mentions.date }}</li>
-                                    <li><i>Position (offset)</i>: {{ occurrence.mentions.start }} - {{ occurrence.mentions.end }}</li>
+                                    <li><i>Text</i>: {{ mention.spot }}</li>
+                                    <li><i>Date</i>: {{ mention.date }}</li>
+                                    <li><i>Position (offset)</i>: {{ mention.start }} - {{ mention.end }}</li>
                                     <li><i>Ref. in Visual Library</i>: <a
-                                            href="http://sammlungen.ub.uni-frankfurt.de/cm/periodical/pageview/{{ occurrence.mentions.p_link }}">Visual
+                                            href="http://sammlungen.ub.uni-frankfurt.de/cm/periodical/pageview/{{ mention.p_link }}">Visual
                                         Library</a></li>
                                 </ul>
                                 {% endfor %}
