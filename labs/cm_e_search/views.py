@@ -141,7 +141,7 @@ def result(request):
         # check for journal occurences
         if 'journal_occs.j_name' in doc:
             # rebuild the occurences
-            print("Journal occs: ", doc['journal_occs.j_name'])
+            #print("Journal occs: ", doc['journal_occs.j_name'])
 
             doc['occurrences'] = []
 
@@ -160,7 +160,7 @@ def result(request):
                 occurrence['mentions']['p_link'] = doc['journal_occs.mentions.p_link'][index]
                 occurrence['mentions']['date'] = doc['journal_occs.mentions.date'][index]
                 occurrence['mentions']['year'] = doc['journal_occs.mentions.year'][index]
-                print("Occurence: ", occurrence)
+                #print("Occurence: ", occurrence)
 
                 # add the data to the results
                 #results.append(doc)
@@ -168,7 +168,7 @@ def result(request):
 
             print("Occurences: ", doc['occurrences'])
 
-    print("Results: ", results)
+    #print("Results: ", results)
     context = {
         "results": results,
         "data": json.dumps(names)
