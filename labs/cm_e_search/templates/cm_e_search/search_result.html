@@ -169,7 +169,7 @@
                         <div class="mentions mb-3" id="{{forloop.counter}}"
                              style="display: none; overflow-y: scroll; max-height: 400px;">
                             <ul>
-                                {% for mention in result.journal_occ.mentions.p_id %}
+                                {% for mention in occurence %}
                                 <ul style="list-style-type: none;">
                                     <li><i>Text</i>: {{ occurrence.mentions.spot }}</li>
                                     <li><i>Date</i>: {{ occurrence.mentions.date }}</li>
