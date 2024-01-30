@@ -81,7 +81,7 @@ def result(request):
 
     # create a dict from the fields and add the query
     # create a list for the fields that should be searched and add the query
-    solr_query = [field + ":" + query for field in search_fields]
+    solr_query = [field + ':"' + query + '"' for field in search_fields]
 
     # build the body for solr
     body = {
@@ -112,6 +112,7 @@ def result(request):
 
         print("Name: ", doc['name'])
 
+        # TODO: Check if the results are correct
         # create a dict for the related entities
         if 'related_entities' in doc:
             #print("Related entities: ", len(doc['related_entities'])/4)
@@ -138,6 +139,8 @@ def result(request):
         else:
             doc['related_entities'] = []
 
+
+        # FIXME: Fix the results
         # check for journal occurences
         if 'journal_occs.j_name' in doc:
             # rebuild the occurences
