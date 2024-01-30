@@ -94,6 +94,8 @@ def result(request):
         "useParams": ""
     }
 
+    print("Solr query: ", solr_query)
+
     res = solr.search(q=solr_query, search_handler="/select", **body)
 
     logger.debug("Results found: ", res.hits)
