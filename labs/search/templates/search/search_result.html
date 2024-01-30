@@ -85,10 +85,7 @@
             <tr>
                 <td>
                     {% for key, value in values.items %}
-                    {{ value }}<br>
-                         {% for item in value.items %}
-                            {{ item }}<br>
-                         {% endfor %}
+                    {{ key }}:{{ value }}<br>
                     {% endfor %}
                 </td>
             </tr>
