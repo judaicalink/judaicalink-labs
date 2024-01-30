@@ -426,7 +426,7 @@ def process_query(query_dic, page, alert):
         data = []
 
         # linking to detailed view
-        id = "<a href='" + d["id"] + "'>" + d["source"]["name"] + "</a>"
+        id = "<a href='" + d["id"] + "'>" + d["name"] + "</a>"
         data.append(id)
 
         # extracting fields (named in field_order) and ordering them like field_order
