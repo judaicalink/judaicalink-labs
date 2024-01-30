@@ -85,9 +85,9 @@
             <tr>
                 <td>
                     {% for key, value in values.items %}
-                    {% if key == "id" %}
+                        {% if key == "id" %}
                         <a href="{{ value }}">{{ values.name }}</a>
-                    {% else %}
+                        {% endif %}
                     {{ key }}: {{ value }}<br>
                     {% endfor %}
                 </td>
