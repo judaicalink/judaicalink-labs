@@ -399,6 +399,8 @@ def process_query(query_dic, page, alert):
     for entry in data:
         for key in entry:
             entry[key] = ''.join(map(str, entry[key]))
+
+    print(data)
     """
     # Extract the highlighting
     dataset = []
