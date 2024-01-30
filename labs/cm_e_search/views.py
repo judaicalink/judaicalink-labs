@@ -172,7 +172,7 @@ def result(request):
             #print("Occurences: ", doc['occurrences'])
         results.append(doc)
 
-    #print("Results: ", results)
+    print("Results: ", results)
     context = {
         "results": results,
         "data": json.dumps(names)
