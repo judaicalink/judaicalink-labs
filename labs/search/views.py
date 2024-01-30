@@ -362,7 +362,7 @@ def process_query(query_dic, page, alert):
     # Fields that should be highlighted
     highlight_fields =['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathYear', 'deathDate', 'deathLocation', 'dataslug']
 
-    fields = ['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathYear', 'deathDate', 'deathLocation', 'dataslug']
+    fields = ['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathYear', 'deathDate', 'deathLocation', 'dataslug', "id"]
 
     solr_query = [field + ":" + query_str for field in fields]
 
