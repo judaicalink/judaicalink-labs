@@ -85,7 +85,7 @@
             <tr>
                 <td>
                     {% for key, value in values.items %}
-                        {% if key == "id" or "link" %}
+                        {% if key == "id" or key == "link" %}
                         <p></p><a href="{{ value }}">{{ values.name }}</a></p>
                         {% else %}
                         <p>{{ key }}: {{ value }}</p>
