@@ -395,6 +395,8 @@ def process_query(query_dic, page, alert):
         return None
 
     data = result.docs
+    for key in data:
+        data[key] = ''.join(map(str, data[key]))
 
     """
     # Extract the highlighting
