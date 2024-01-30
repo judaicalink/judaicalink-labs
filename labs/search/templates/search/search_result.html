@@ -87,7 +87,8 @@
                     {{ values }}
 
                     {% for value in values.items %}
-                    {{ value }}
+                    {{ value.value }}
+                    {{ value.key}}
                     {% endfor %}
                 </td>
             </tr>
