@@ -396,11 +396,11 @@ def process_query(query_dic, page, alert):
 
     data = result.docs
     # remove all the lists
-    for entry in data:
-        for key in entry:
-            entry[key] = ''.join(map(str, entry[key]))
+    #for entry in data:
+    #    for key in entry:
+    #        entry[key] = ''.join(map(str, entry[key]))
 
-    print(data)
+    #print(data)
     """
     # Extract the highlighting
     dataset = []

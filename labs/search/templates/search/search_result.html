@@ -81,13 +81,13 @@
     <div class="table-responsive mb-3">
         <table class="table table-light table-striped">
 
-            {% for data in ordered_dataset %}
+            {% for key, values in ordered_dataset %}
             <tr>
                 <td>
-                    {{ data }}
+                    {{ key }}
 
-                    {% for key in data %}
-                    {{ key }}: {{ data.key }}
+                    {% for value in values[0] %}
+                    {{ value }}
                     {% endfor %}
                 </td>
             </tr>
