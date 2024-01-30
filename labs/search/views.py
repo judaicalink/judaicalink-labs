@@ -399,8 +399,8 @@ def process_query(query_dic, page, alert):
     for entry in data:
         for key in entry:
             entry[key] = ''.join(map(str, entry[key]))
-        entry['link'] = "<a href='{}'>{}</a>".format(entry["id"], entry["name"])
-        del entry["id"]
+        #entry['link'] = "<a href='{}'>{}</a>".format(entry["id"], entry["name"])
+        #del entry["id"]
 
     #print(data)
     """
