@@ -82,7 +82,7 @@
         <table class="table table-light table-striped">
 
             {% for data in ordered_dataset %}
-
+            {{ data }}
             <tr>
                 <td>
                     {% for item in data %}
@@ -92,7 +92,6 @@
                     {% endfor %}
                 </td>
             </tr>
-
             {% endfor %}
 
         </table>
