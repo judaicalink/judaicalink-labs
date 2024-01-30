@@ -349,6 +349,7 @@ def process_query(query_dic, page, alert):
     :param alert: string, built from the search query in a readable form, displayed when a search was requested
     :return: context that contains all the information needed to generate the template
     '''
+
     page = int(page)
     # FIXME: proces query
     solr = pysolr.Solr(SOLR_SERVER + SOLR_INDEX, always_commit=True, timeout=10,
@@ -394,19 +395,19 @@ def process_query(query_dic, page, alert):
 
     # Extract the highlighting
     dataset = []
-    for d in result["docs"]:
+    for doc in result.docs:
         data = {
-            "id": d["id"],
-            "source": d["dataslug"],
-            "highlight": d["highlight"],
+            "id": doc["id"],
+            "source": doc["dataslug"],
+            "highlight": doc["highlight"],
         }
         dataset.append(data)
 
     # replace data in source with data in highlight
-    for d in dataset:
-        for s in d["source"]:
-            if s in d["highlight"]:
-                d["source"][s] = d["highlight"][s][0]
+    for doc in dataset:
+        for source in doc["source"]:
+            if source in doc["highlight"]:
+                doc["source"][source] = doc["highlight"][source][0]
 
     field_order = ["name", "Alternatives", "birthDate", "birthLocation", "deathDate", "deathYear",
                    "deathLocation", "Abstract", "Publication"]
