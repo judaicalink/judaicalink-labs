@@ -27,7 +27,6 @@ def error_400(request, exception):
     return render(request, 'search/400.html', {})
 
 
-
 @cache_page(CACHE_TTL)
 def error_404(request, exception):
     print("Error 404", exception)
@@ -94,11 +93,11 @@ def search(request):
 
 
 def create_query_str(submitted_search):
-    '''
+    """
     creates strings that contain the search query in a format that solr can process and stores them in a dictionary
     :param submitted_search:  that contains the submitted search (either simple or advanced search query)
     :return: query_dic: dictionary with query strings
-    '''
+    """
 
     query_str = ""
     simple_search_input = ""
@@ -123,11 +122,11 @@ def create_query_str(submitted_search):
 
 
 def get_query(request):
-    '''
+    """
     creates a dictionary that contains the searched query for the advanced search
     :param request:
     :return: submitted_search: dictionary that contains search query
-    '''
+    """
     operators = []
     options = []
     inputs = []
@@ -155,7 +154,7 @@ def get_query(request):
 
     # print(operators)
 
-    # sorting the lists by the "html_name" in the dictionarys
+    # sorting the lists by the "html_name" in the dictionaries
     # example result for inputs: ['einstein', 'herbert']
     # special treatment for operators: after sorting a placeholder is inserted
     # to keep the right order when creating the list "submitted_search"
@@ -360,9 +359,11 @@ def process_query(query_dic, page, alert):
     print("Query: " + query_str)
 
     # Fields that should be highlighted
-    highlight_fields =['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathYear', 'deathDate', 'deathLocation', 'dataslug']
+    highlight_fields = ['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathYear', 'deathDate', 'deathLocation',
+                        'dataslug']
 
-    fields = ['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathYear', 'deathDate', 'deathLocation', 'dataslug', "id"]
+    fields = ['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathYear', 'deathDate', 'deathLocation',
+              'dataslug', "id"]
 
     solr_query = [field + ":" + query_str for field in fields]
 
@@ -393,15 +394,19 @@ def process_query(query_dic, page, alert):
     if result.hits == 0:
         return None
 
+    data = result.docs
+
+    """
     # Extract the highlighting
     dataset = []
     for doc in result.docs:
         data = {
             "id": doc["id"],
-            "source": doc["dataslug"], # source is dataslug
-            "highlight": result.highlighting,
+            "source": doc["dataslug"],  # source is dataslug
+            "highlight": result.highlighting[0],
         }
         dataset.append(data)
+    """
 
     # FIXME: add the source to the data
     """
@@ -415,24 +420,15 @@ def process_query(query_dic, page, alert):
     field_order = ["name", "Alternatives", "birthDate", "birthLocation", "deathDate", "deathYear",
                    "deathLocation", "Abstract", "Publication"]
                    
-    """
-
-    # What does this do?
-    dataset_objects = Dataset.objects.all()
-    dataslug_to_dataset = {}
-    for i in dataset_objects:
-        dataslug_to_dataset[i.dataslug] = i.title
-
+ 
 
     ordered_dataset = []
     for data in dataset:
-
         # linking to detailed view
         link = "<a href='{}'>{}</a>".format(data["id"], data["name"])
         data.append(link)
 
         # extracting fields (named in field_order) and ordering them like field_order
-        """
         for field in field_order:
             if field in d["source"] and d["source"][field] != "NA":
                 pretty_fieldname = field.capitalize()
@@ -445,14 +441,13 @@ def process_query(query_dic, page, alert):
                 pretty_fieldname = field.capitalize()
                 temp_data = "<b>" + pretty_fieldname + ": " + "</b>" + d["source"][field]
                 data.append(temp_data)
-        """
         ordered_dataset.append(data)
-
+        
+        """
 
     total_hits = result.hits
     pages = math.ceil(total_hits / size)  # number of needed pages for paging
     # round up number of pages
-
 
     # TODO: clean up Pagination
     paging = []
@@ -484,8 +479,7 @@ def process_query(query_dic, page, alert):
         "submitted_search": query_dic["submitted_search"],
         "query_str": query_dic["query_str"],
         "simple_search_input": query_dic["simple_search_input"],
-        "ordered_dataset": ordered_dataset,
-        "dataslug_to_dataset": dataslug_to_dataset,
+        "ordered_dataset": data, # ordered_dataset,
         "alert": alert,
         "rows": json.dumps(generate_rows(query_dic["submitted_search"])),
     }

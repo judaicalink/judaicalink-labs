@@ -15,7 +15,7 @@
 
     <div id="accordion">
 
-    <!-- Simple Search -->
+    <!-- Begin Simple Search -->
 
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                 <form method="get" action="search">
@@ -31,7 +31,9 @@
                 </form>
         </div>
 
-    <!-- Advanced Search -->
+    <!-- End Simple Search -->
+
+    <!-- Begin Advanced Search -->
 
         <div id="headingOne">
                 <button id="buttonadvancedsearch" type="button" class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color:#0056b3">
@@ -54,7 +56,7 @@
     <!-- End Advanced Search -->
     <br>
 
-    <!--Alert--->
+    <!-- Begin Alert -->
 
             {% if total_hits > 0 %}
                 <div class="alert alert-success text-center" role="alert">
@@ -72,34 +74,32 @@
             </div>
             {% endif %}
 
+    <!-- End Alert -->
 
-    <!--Results-->
+    <!-- Begin Results -->
 
-    <div class="table-responsive">
-    <table class="table table-light table-striped">
+    <div class="table-responsive mb-3">
+        <table class="table table-light table-striped">
 
-        {% for data in ordered_dataset %}
+            {% for data in ordered_dataset %}
 
-        <tr>
+            <tr>
+                <td>
+                    {% for item in data %}
+                        {%if "Dataslug" not in item  %}
+                            {{ item | safe}} <br>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
 
-            <td>
-                {% for item in data %}
-                    {%if "Dataslug" not in item  %}
-                        {{ item | safe}} <br>
-                    {% endif %}
-                {% endfor %}
-            </td>
+            {% endfor %}
 
-        </tr>
-
-        {% endfor %}
-
-    </table>
+        </table>
     </div>
-    <br> <br>
+    <!-- End Results-->
 
-
-    <!--Pagination-->
+    <!-- Begin Pagination-->
     {% include 'search/pagination.html' %}
 
     {% if pages > 1 %}
@@ -163,10 +163,11 @@
         {% endif %}
 
     {% endif %}
+    <!-- End Pagination-->
 
     </div>
 
-    <!--Picture-->
+    <!-- Begin Picture -->
 
     <div class="col-md-0 col-lg-3 col-xl-4">
         <div class="img-fluid mt-4" id="picturemargintop30">
@@ -177,6 +178,7 @@
         <div id="filter-app"></div>
         <!-- End filter-->
     </div>
+    <!-- End Picture -->
 
 </main>
 {% endblock content %}

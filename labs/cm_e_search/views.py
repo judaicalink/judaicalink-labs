@@ -154,8 +154,11 @@ def result(request):
                 occurrence['j_id'] = doc['journal_occs.j_id'][index]
                 occurrence['first'] = doc['journal_occs.first'][index]
                 occurrence['last'] = doc['journal_occs.last'][index]
-                occurrence['mentions'] = {}
-                occurrence['p_id'] = doc['journal_occs.mentions.p_id'][index]
+                occurrence['mentions'] = []
+                for mention in doc['journal_occs.mentions']:
+                    occurrence['mentions'].append(mention)
+
+                occurrence['mentions']['p_id'] = doc['journal_occs.mentions.p_id'][index]
                 occurrence['mentions']['spot'] = doc['journal_occs.mentions.spot'][index]
                 occurrence['mentions']['start'] = doc['journal_occs.mentions.start'][index]
                 occurrence['mentions']['end'] = doc['journal_occs.mentions.end'][index]
