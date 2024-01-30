@@ -163,7 +163,7 @@
                         <li style="display:none;" class="journal">
                     {% endif %}
 
-                            ({{ occurrence.mentions | length }})
+                            ({{ result.occurrences.mentions | length }})
                             <a href="#" onclick="show_journal('{{forloop.counter}}')">{{ occurrence.j_name }}</a>
 
                             [{{ occurrence.first }} - {{ occurrence.last }}]
