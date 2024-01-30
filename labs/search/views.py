@@ -396,16 +396,8 @@ def process_query(query_dic, page, alert):
 
     data = result.docs
     for entry in data:
-        entry["name"] = ''.join(map(str, entry["name"]))
-        entry["birthDate"] = ''.join(map(str, entry["birthDate"]))
-        entry["birthLocation"] = ''.join(map(str, entry["birthLocation"]))
-        entry["Alternatives"] = ''.join(map(str, entry["Alternatives"]))
-        entry["deathYear"] = ''.join(map(str, entry["deathYear"]))
-        entry["deathDate"] = ''.join(map(str, entry["deathDate"]))
-        entry["deathLocation"] = ''.join(map(str, entry["deathLocation"]))
-        entry["dataslug"] = ''.join(map(str, entry["dataslug"]))
-        entry["id"] = ''.join(map(str, entry["id"]))
-
+        for key in entry:
+            entry[key] = ''.join(map(str, entry[key]))
     """
     # Extract the highlighting
     dataset = []
