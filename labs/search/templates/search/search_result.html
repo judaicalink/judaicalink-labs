@@ -85,11 +85,7 @@
             {{ data }}
             <tr>
                 <td>
-                    {% for key, value in data %}
-                        {% if "Dataslug" not in item  %}
-                            {{ key | safe}} {{ value | safe }} <br>
-                        {% endif %}
-                    {% endfor %}
+
                 </td>
             </tr>
             {% endfor %}
