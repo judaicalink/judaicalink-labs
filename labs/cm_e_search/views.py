@@ -155,7 +155,7 @@ def result(request):
                 occurrence['first'] = doc['journal_occs.first'][index]
                 occurrence['last'] = doc['journal_occs.last'][index]
                 occurrence['mentions'] = {}
-                occurrence['mentions']['p_id'] = doc['journal_occs.mentions.p_id'][index]
+                occurrence['p_id'] = doc['journal_occs.mentions.p_id'][index]
                 occurrence['mentions']['spot'] = doc['journal_occs.mentions.spot'][index]
                 occurrence['mentions']['start'] = doc['journal_occs.mentions.start'][index]
                 occurrence['mentions']['end'] = doc['journal_occs.mentions.end'][index]

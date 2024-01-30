@@ -163,25 +163,21 @@
                         <li style="display:none;" class="journal">
                     {% endif %}
 
-                            ({{ result.occurrences.mentions | length }})
+                            ({{ occurrence.mentions | length }})
                             <a href="#" onclick="show_journal('{{forloop.counter}}')">{{ occurrence.j_name }}</a>
 
                             [{{ occurrence.first }} - {{ occurrence.last }}]
 
                             <div class="mentions mb-3" id="{{forloop.counter}}" style="display: none; overflow-y: scroll; max-height: 400px;">
                                 <ul>
-                                    {% for mention in occurrence.mentions %}
-                                    <p>Mentions: {{ occurrence.mentions }}</p>
-                                    <p>Mention: {{ mention }}</p>
-                                        <ul style="list-style-type: none;">
-                                            <li><i>Text</i>: {{ occurrence.mentions.spot }}</li>
-                                            <li><i>Date</i>: {{ occurrence.mentions.date }}</li>
-                                            <li><i>Position (offset)</i>: {{ mention.start }} - {{ mention.end }}</li>
-                                            <li><i>Ref. in Visual Library</i>: <a
-                                                    href="http://sammlungen.ub.uni-frankfurt.de/cm/periodical/pageview/{{ mention.p_link }}">Visual
-                                                Library</a></li>
-                                        </ul>
-                                    {% endfor %}
+                                    <ul style="list-style-type: none;">
+                                        <li><i>Text</i>: {{ occurrence.mentions.spot }}</li>
+                                        <li><i>Date</i>: {{ occurrence.mentions.date }}</li>
+                                        <li><i>Position (offset)</i>: {{ occurrence.mentions.start }} - {{ occurrence.mentions.end }}</li>
+                                        <li><i>Ref. in Visual Library</i>: <a
+                                                href="http://sammlungen.ub.uni-frankfurt.de/cm/periodical/pageview/{{ occurrence.mentions.p_link }}">Visual
+                                            Library</a></li>
+                                    </ul>
                                 </ul>
                             </div>
                         </li>
