@@ -17,7 +17,6 @@ from django.core.cache.backends.base import DEFAULT_TIMEOUT
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 # import SEARCH_URL from settings.py
-SEARCH_URL = getattr(settings, 'SOLR_URL', 'http://localhost:8983/solr/#/')
 SOLR_SERVER = settings.SOLR_SERVER
 SOLR_INDEX = "judaicalink"
 
@@ -67,6 +66,7 @@ def load(request):
         data = f.read()
         print(data)
         headers = {'content-type': 'application/json'}
+        # FIXME: change the URL
         response = requests.post(f'http://localhost:8389/{settings.JUDAICALINK_INDEX}/doc/_bulk?pretty', data=data,
                                  headers=headers)
         return HttpResponse(response)
@@ -96,9 +96,10 @@ def search(request):
 def create_query_str(submitted_search):
     '''
     creates strings that contain the search query in a format that solr can process and stores them in a dictionary
-    :param submitted_search: dictionary that contains the submitted search (either simple or advanced search query)
+    :param submitted_search:  that contains the submitted search (either simple or advanced search query)
     :return: query_dic: dictionary with query strings
     '''
+
     query_str = ""
     simple_search_input = ""
     for dictionary in submitted_search:
@@ -117,9 +118,6 @@ def create_query_str(submitted_search):
         "query_str": query_str.strip(),
         "submitted_search": submitted_search,
     }
-    # print("--------------------------------query_str-----------------------------------------------")
-    # query_str = name:Albert
-    # print(query_str)
 
     return query_dic
 
@@ -169,7 +167,7 @@ def get_query(request):
     inputs.sort(key=lambda r: r['html_name'])
     inputs = [d['value'] for d in inputs]
 
-    # create a list that holds dictionarys that hold the according operator, option and input
+    # create a list that holds dictionaries that hold the according operator, option and input
     # submitted_search will look like this:
     # [{'option': 'name:', 'input': 'einstein'}, {'operator': ' OR ', 'option': 'name:', 'input': 'herbert'}]
     submitted_search = []
@@ -352,51 +350,47 @@ def process_query(query_dic, page, alert):
     :return: context that contains all the information needed to generate the template
     '''
     page = int(page)
-
-    solr = pysolr.Solr(settings.SOLR_SERVER + 'judaicalink', always_commit=True, timeout=10,
+    # FIXME: proces query
+    solr = pysolr.Solr(SOLR_SERVER + SOLR_INDEX, always_commit=True, timeout=10,
                        auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
     size = 10
     start = (page - 1) * size
     query_str = query_dic["query_str"]
     print("Query: " + query_str)
 
-    highlight_fields = ['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathYear', 'deathDate', 'deathLocation', 'source', 'dataslug']
+    # Fields that should be highlighted
+    highlight_fields =['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathYear', 'deathDate', 'deathLocation', 'dataslug']
 
-    # Construct the query
-    query = f'*{query_str}*'
-    print("Query: " + query)
+    fields = ['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathYear', 'deathDate', 'deathLocation', 'dataslug']
 
-    # Construct the highlighting parameters
-    highlight_params = {
-        'hl': 'true',
-        'hl.fl': ','.join(highlight_fields),
-        'hl.simple.pre': '<em>',  # Prefix for highlighted terms
-        'hl.simple.post': '</em>',  # Postfix for highlighted terms
-        'hl.fragsize': 0
+    solr_query = [field + ":" + query_str for field in fields]
+
+    # build the body for solr
+    body = {
+        "hl": "true",
+        "indent": "true",
+        'fl': ','.join(fields),
+        "hl.requireFieldMatch": "true",
+        "hl.tag.pre": "<strong>",
+        "hl.tag.post": "</strong>",
+        "hl.fragsize": "0",
+        "start": start,
+        "q.op": "OR",
+        "hl.fl": ','.join(highlight_fields),
+        "rows": size,
+        "useParams": ""
     }
-    print("Highlight params: ")
-    print(highlight_params)
-
-    params = {
-        'q': query,
-        'start': start,
-        'rows': size,
-        'df': 'name',
-        **highlight_params  # Include highlighting parameters
-    }
-    print("Params: ")
-    print(params)
 
     # Perform the query with highlighting
-    result = solr.search(q=query)
+    result = solr.search(q=solr_query, search_handler="/select", **body)
 
     # debug
     print("Result: ")
     print(result.hits)
     print(result.docs)
     print(result.highlighting)
-    #if result.hits == 0:
-    #    return None
+    if result.hits == 0:
+        return None
 
     # Extract the highlighting
     dataset = []
@@ -449,6 +443,8 @@ def process_query(query_dic, page, alert):
     pages = math.ceil(total_hits / size)  # number of needed pages for paging
     # round up number of pages
 
+
+    # TODO: clean up Pagination
     paging = []
     # if page = 1, paging contains -2, -1, 0, 1, 2, 3, 4
 
