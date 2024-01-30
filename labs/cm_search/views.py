@@ -24,13 +24,6 @@ def index(request):
 def result(request):
     error_message = None
 
-    # TODO: check if these journals are still blacklisted, if not remove them
-    # TODO: don't use hardcoding, use either the admin interface or a csv file
-    # hardcoded list of journals that do not have external access on visual library UB Frankfurt
-    blacklist = (
-        '2431292', '2823768', '10112841', '4086896', '9038025', '4875667', '7938572', '8553624', '8823924', '9498581',
-        '9572329', '9616703', '9620162')
-
     solr = pysolr.Solr(SOLR_SERVER + SOLR_INDEX, always_commit=True, timeout=10,
                        auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
 
@@ -40,6 +33,7 @@ def result(request):
     size = 10
     # changed size from 15 to 10 to match the amount of results in judaicalink search
     start = (page - 1) * size
+
     # TODO: add the language, publisher and place to the query and in the index
     highlight_fields = ["page", "text", "dateIssued", "j_title", "vlid_journal", "vlid_page", "volume", "heft",
                         "aufsatz"]
@@ -96,13 +90,8 @@ def result(request):
         page_link = "https://sammlungen.ub.uni-frankfurt.de/cm/periodical/pageview/" + ''.join(
             map(str, doc['vlid_page']))
 
-        # check if the journal is in the blacklist
-        if doc['vlid_journal'] in blacklist:
-            formatted_doc['jl'] = ''
-            formatted_doc['pl'] = ''
-        else:
-            formatted_doc['jl'] = journal_link
-            formatted_doc['pl'] = page_link
+        formatted_doc['jl'] = journal_link
+        formatted_doc['pl'] = page_link
 
         results.append(formatted_doc)
 
