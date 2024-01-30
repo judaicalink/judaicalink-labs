@@ -84,7 +84,7 @@
             {% for values in ordered_dataset %}
             <tr>
                 <td>
-                    {% for value in values.items %}
+                    {% for key, value in values.items %}
                     {{ value }}<br>
                          {% for item in value.items %}
                             {{ item }}<br>
