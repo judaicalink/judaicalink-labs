@@ -102,7 +102,6 @@ def result(request):
 
     results = []
     for doc in res.docs:
-        results.append(doc)
         doc['name'] = ''.join(map(str, doc['name']))
         doc['e_type'] = ''.join(map(str, doc['e_type']))
         if 'ep' in doc:
@@ -171,6 +170,7 @@ def result(request):
 
 
             #print("Occurences: ", doc['occurrences'])
+        results.append(doc)
 
     #print("Results: ", results)
     context = {
