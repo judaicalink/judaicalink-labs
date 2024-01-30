@@ -395,6 +395,7 @@ def process_query(query_dic, page, alert):
         return None
 
     data = result.docs
+    # remove all the lists
     for entry in data:
         for key in entry:
             entry[key] = ''.join(map(str, entry[key]))

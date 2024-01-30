@@ -86,9 +86,8 @@
                 <td>
                     {{ data }}
 
-                    {% for entry in data %}
-                    {{ entry }}
-
+                    {% for key, value in data %}
+                    {{ key }}: {{ value }}
                     {% endfor %}
                 </td>
             </tr>
