@@ -94,8 +94,6 @@ def result(request):
         "useParams": ""
     }
 
-    print("Solr query: ", solr_query)
-
     res = solr.search(q=solr_query, search_handler="/select", **body)
 
     logger.debug("Results found: ", res.hits)
@@ -145,14 +143,13 @@ def result(request):
         # FIXME: Fix the results
         # check for journal occurences
         if 'journal_occs.j_name' in doc:
-            # rebuild the occurences
+            # rebuild the occurrences
             #print("Journal occs: ", doc['journal_occs.j_name'])
 
             doc['occurrences'] = []
 
             occurrence = {}
             for index in range(0, len(doc['journal_occs.j_name'])-1):
-
                 occurrence['j_name'] = doc['journal_occs.j_name'][index]
                 occurrence['j_id'] = doc['journal_occs.j_id'][index]
                 occurrence['first'] = doc['journal_occs.first'][index]
@@ -165,13 +162,14 @@ def result(request):
                 occurrence['mentions']['p_link'] = doc['journal_occs.mentions.p_link'][index]
                 occurrence['mentions']['date'] = doc['journal_occs.mentions.date'][index]
                 occurrence['mentions']['year'] = doc['journal_occs.mentions.year'][index]
-                #print("Occurence: ", occurrence)
+                print("Occurence: ", occurrence)
 
                 # add the data to the results
                 #results.append(doc)
                 doc['occurrences'].append(occurrence)
 
-            print("Occurences: ", doc['occurrences'])
+
+            #print("Occurences: ", doc['occurrences'])
 
     #print("Results: ", results)
     context = {
