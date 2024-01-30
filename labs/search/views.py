@@ -398,7 +398,7 @@ def process_query(query_dic, page, alert):
     for doc in result.docs:
         data = {
             "id": doc["id"],
-            "source": doc["dataslug"],
+            "source": doc["dataslug"], # source is dataslug
             "highlight": result.highlighting,
         }
         dataset.append(data)
@@ -411,23 +411,25 @@ def process_query(query_dic, page, alert):
             if source in doc["highlight"]:
                 doc["source"][source] = doc["highlight"][source][0]
                 
-    """
 
     field_order = ["name", "Alternatives", "birthDate", "birthLocation", "deathDate", "deathYear",
                    "deathLocation", "Abstract", "Publication"]
+                   
+    """
 
+    # What does this do?
     dataset_objects = Dataset.objects.all()
     dataslug_to_dataset = {}
     for i in dataset_objects:
         dataslug_to_dataset[i.dataslug] = i.title
 
+
     ordered_dataset = []
-    for d in dataset:
-        data = []
+    for data in dataset:
 
         # linking to detailed view
-        id = "<a href='" + d["id"] + "'>" + d["name"] + "</a>"
-        data.append(id)
+        link = "<a href='{}'>{}</a>".format(data["id"], data["name"])
+        data.append(link)
 
         # extracting fields (named in field_order) and ordering them like field_order
         """
@@ -445,6 +447,7 @@ def process_query(query_dic, page, alert):
                 data.append(temp_data)
         """
         ordered_dataset.append(data)
+
 
     total_hits = result.hits
     pages = math.ceil(total_hits / size)  # number of needed pages for paging
