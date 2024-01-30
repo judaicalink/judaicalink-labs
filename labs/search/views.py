@@ -351,7 +351,7 @@ def process_query(query_dic, page, alert):
     '''
 
     page = int(page)
-    # FIXME: proces query
+
     solr = pysolr.Solr(SOLR_SERVER + SOLR_INDEX, always_commit=True, timeout=10,
                        auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
     size = 10
@@ -399,15 +399,19 @@ def process_query(query_dic, page, alert):
         data = {
             "id": doc["id"],
             "source": doc["dataslug"],
-            "highlight": doc["highlight"],
+            "highlight": result.highlighting,
         }
         dataset.append(data)
 
+    # FIXME: add the source to the data
+    """
     # replace data in source with data in highlight
     for doc in dataset:
         for source in doc["source"]:
             if source in doc["highlight"]:
                 doc["source"][source] = doc["highlight"][source][0]
+                
+    """
 
     field_order = ["name", "Alternatives", "birthDate", "birthLocation", "deathDate", "deathYear",
                    "deathLocation", "Abstract", "Publication"]
