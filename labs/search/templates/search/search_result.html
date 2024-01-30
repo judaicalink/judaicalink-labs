@@ -87,6 +87,11 @@
                     {{ data }}
                     {{ data.first }}
                     {{ data.last }}
+                    {% for entry in data %}
+                    {{ entry }}
+                    {{ entry.first }}
+                    {{ entry.last }}
+                    {% endfor %}
                 </td>
             </tr>
             {% endfor %}
