@@ -84,7 +84,8 @@
             {% for data in ordered_dataset %}
             <tr>
                 <td>
-                    {{ data.id }}
+                    {{ data.first }}
+                    {{ data.last }}
                 </td>
             </tr>
             {% endfor %}
