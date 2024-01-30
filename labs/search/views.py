@@ -430,6 +430,7 @@ def process_query(query_dic, page, alert):
         data.append(id)
 
         # extracting fields (named in field_order) and ordering them like field_order
+        """
         for field in field_order:
             if field in d["source"] and d["source"][field] != "NA":
                 pretty_fieldname = field.capitalize()
@@ -442,6 +443,7 @@ def process_query(query_dic, page, alert):
                 pretty_fieldname = field.capitalize()
                 temp_data = "<b>" + pretty_fieldname + ": " + "</b>" + d["source"][field]
                 data.append(temp_data)
+        """
         ordered_dataset.append(data)
 
     total_hits = result.hits
