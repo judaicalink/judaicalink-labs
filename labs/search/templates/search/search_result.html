@@ -84,12 +84,12 @@
             {% for values in ordered_dataset %}
             <tr>
                 <td>
-                    {{ values }}
+                    {{ values }} <br>
 
                     {% for value in values.items %}
-                    {{ value }}
+                    {{ value }}<br>
                          {% for item in value.items %}
-                            {{ item }}
+                            {{ item }}<br>
                          {% endfor %}
                     {% endfor %}
                 </td>
