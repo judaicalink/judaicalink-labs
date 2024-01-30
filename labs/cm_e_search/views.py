@@ -142,6 +142,7 @@ def result(request):
 
         # FIXME: Fix the results
         # check for journal occurences
+        # check if doc has journal_occs.j_name
         if 'journal_occs.j_name' in doc:
             # rebuild the occurrences
             print("Journal occs: ", doc['journal_occs.j_name'])
@@ -149,7 +150,7 @@ def result(request):
             doc['occurrences'] = []
 
             occurrence = {}
-            for index in range(0, len(doc['journal_occs.j_name'])-1):
+            for index in range(0, len(doc['journal_occs.j_name'])):
                 occurrence['j_name'] = doc['journal_occs.j_name'][index]
                 occurrence['j_id'] = doc['journal_occs.j_id'][index]
                 occurrence['first'] = doc['journal_occs.first'][index]
@@ -162,7 +163,7 @@ def result(request):
                 occurrence['mentions']['p_link'] = doc['journal_occs.mentions.p_link'][index]
                 occurrence['mentions']['date'] = doc['journal_occs.mentions.date'][index]
                 occurrence['mentions']['year'] = doc['journal_occs.mentions.year'][index]
-                print("Occurence: ", occurrence)
+                print("Occurrence: ", occurrence)
 
                 # add the data to the results
                 #results.append(doc)
