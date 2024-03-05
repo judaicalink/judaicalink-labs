@@ -89,6 +89,7 @@ def search(request):
     alert = create_alert(query["submitted_search"])
     page = int(request.GET.get('page'))
     context = process_query(query, page, alert)
+
     return render(request, 'search/search_result.html', context)
 
 
@@ -385,14 +386,14 @@ def process_query(query_dic, page, alert):
 
     # Perform the query with highlighting
     result = solr.search(q=solr_query, search_handler="/select", **body)
-
     # debug
     print("Result: ")
     print(result.hits)
     print(result.docs)
     print(result.highlighting)
     if result.hits == 0:
-        return None
+        context = {"query_str": query_dic["query_str"]}
+        return context
 
     data = result.docs
     # remove all the lists
