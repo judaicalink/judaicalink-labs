@@ -89,6 +89,8 @@ def search(request):
     alert = create_alert(query["submitted_search"])
     page = int(request.GET.get('page'))
     context = process_query(query, page, alert)
+    if context is None:
+        alert = "No results found"
 
     return render(request, 'search/search_result.html', context)
 
@@ -392,8 +394,7 @@ def process_query(query_dic, page, alert):
     print(result.docs)
     print(result.highlighting)
     if result.hits == 0:
-        context = {"query_str": query_dic["query_str"]}
-        return context
+        return None
 
     data = result.docs
     # remove all the lists
