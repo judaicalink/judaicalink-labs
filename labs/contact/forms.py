@@ -24,9 +24,7 @@ class ContactForm(forms.Form):
     )
 
     gdpr = forms.BooleanField(
-        required=True,
-        label='I accept the <a href="http://web.judaicalink.org/legal">privacy policy</a>.',
-        mark_safe=True,
+        attrs={'required': 'required', 'label': 'I accept the <a href="http://web.judaicalink.org/legal">privacy policy</a>.', 'mark_safe': 'True'},
     )
 
     # captcha = CaptchaField()
