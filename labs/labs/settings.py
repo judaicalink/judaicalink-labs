@@ -331,3 +331,12 @@ COOKIEBANNER = {
         },
     ],
 }
+
+# CSRF Trusted Origins
+CSRF_TRUSTED_ORIGINS = [
+    'judaicalink.org',
+    'labs.judaicalink.org',
+    'www.judaicalink.org',
+    'web.judaicalink.org',
+    'data.judaicalink.org',
+]
