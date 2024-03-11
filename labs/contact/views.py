@@ -51,7 +51,7 @@ def index(request):
                     # email not sent
                     print('Error, Email not sent', e, now())
                     error_message = "Email not sent. Please try again."
-                    return render(request, 'contact/contact.html', {'form': form, 'error_message': error_message})
+                    return HttpResponse('Email not sent. Please try again..')
             else:
                 error_message = 'Form is not valid.'
 
