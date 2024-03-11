@@ -2,6 +2,7 @@ from django import forms
 # from captcha.fields import CaptchaField
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field, HTML
+from django.utils.safestring import mark_safe
 
 
 class ContactForm(forms.Form):
@@ -25,7 +26,7 @@ class ContactForm(forms.Form):
 
     gdpr = forms.BooleanField(
         required=True,
-        label='I accept the <a href="https://web.judaicalink.org/legal">Privacy Policy</a>.',
+        label=mark_safe('I accept the <a href="https://web.judaicalink.org/legal">Privacy Policy</a>.'),
     )
 
     # captcha = CaptchaField()
