@@ -25,7 +25,7 @@ class ContactForm(forms.Form):
 
     gdpr = forms.BooleanField(
         required=True,
-        label='I accept the &gt;a href="http://web.judaicalink.org/legal">privacy policy</a>.',
+        label='I accept the Privacy Policy.',
     )
 
     # captcha = CaptchaField()
@@ -42,7 +42,7 @@ class ContactForm(forms.Form):
             Field('name', placeholder="Your Name"),
             Field('email', placeholder="Your Email"),
             Field('message', placeholder="Your Message"),
-            HTML('<p>GDPR</p>'),
+            HTML('<a href="http://web.judaicalink.org/legal">Privacy Policy</a>'),
             'gdpr',
             # 'captcha',
             Submit('submit', 'Submit', css_class="btn-secondary"),
