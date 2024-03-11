@@ -3,6 +3,7 @@ from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field, HTML
 from django.utils.safestring import mark_safe
+from hcaptcha.fields import hCaptchaField
 
 
 class ContactForm(forms.Form):
@@ -29,7 +30,7 @@ class ContactForm(forms.Form):
         label=mark_safe('I accept the <a href="https://web.judaicalink.org/legal">Privacy Policy</a>.'),
     )
 
-    # captcha = CaptchaField()
+    captcha = hCaptchaField()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -44,6 +45,6 @@ class ContactForm(forms.Form):
             Field('email', placeholder="Your Email"),
             Field('message', placeholder="Your Message"),
             'gdpr',
-            # 'captcha',
+            'captcha',
             Submit('submit', 'Submit', css_class="btn-secondary"),
         )
