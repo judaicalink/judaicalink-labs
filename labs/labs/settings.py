@@ -334,9 +334,9 @@ COOKIEBANNER = {
 
 # CSRF Trusted Origins
 CSRF_TRUSTED_ORIGINS = [
-    'judaicalink.org',
-    'labs.judaicalink.org',
-    'www.judaicalink.org',
-    'web.judaicalink.org',
-    'data.judaicalink.org',
+    'https://judaicalink.org',
+    'https://labs.judaicalink.org',
+    'https://www.judaicalink.org',
+    'https://web.judaicalink.org',
+    'https://data.judaicalink.org',
 ]
