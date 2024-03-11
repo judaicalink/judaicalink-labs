@@ -35,7 +35,8 @@ def index(request):
                 try:
                     print('Email to:', settings.EMAIL_TO)
                     mail_sent = send_mail(subject=subject, message=content, from_email=from_name_mail,  recipient_list=[settings.EMAIL_TO], fail_silently=False, html_message=False, auth_user=settings.EMAIL_HOST_USER, auth_password=settings.EMAIL_HOST_PASSWORD)
-                    if mail_sent > 0:
+                    print('Mail sent:', mail_sent)
+                    if mail_sent is 1:
                         print('Mail sent')
                         return HttpResponseRedirect(reverse('contact:sent'))
                     else:
