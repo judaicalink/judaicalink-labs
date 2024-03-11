@@ -42,7 +42,6 @@ class ContactForm(forms.Form):
             Field('name', placeholder="Your Name"),
             Field('email', placeholder="Your Email"),
             Field('message', placeholder="Your Message"),
-            HTML('<a href="https://web.judaicalink.org/legal">Privacy Policy</a>'),
             'gdpr',
             # 'captcha',
             Submit('submit', 'Submit', css_class="btn-secondary"),
