@@ -31,10 +31,9 @@ def index(request):
             from_name_mail = '{} <{}>'.format(name, from_mail)
             content = request.POST.get('message', '')
             if content and from_mail:
-                print('sending mail')
+                print('Sending mail')
                 try:
-                    print('Sending mail...')
-                    print(settings.EMAIL_TO)
+                    print('Email to:', settings.EMAIL_TO)
                     mail_sent = send_mail(subject=subject, message=content, from_email=from_name_mail,  recipient_list=[settings.EMAIL_TO], fail_silently=False, html_message=False, auth_user=settings.EMAIL_HOST_USER, auth_password=settings.EMAIL_HOST_PASSWORD)
                     if mail_sent > 0:
                         print('Mail sent')
@@ -42,6 +41,7 @@ def index(request):
                     else:
                         print('Mail not sent')
                         error_message = 'Mail not sent'
+                        return render(request, 'contact/contact.html', {'form': form, 'error_message': error_message})
 
                 except BadHeaderError:
                     return HttpResponse('Invalid header found.')
@@ -50,6 +50,7 @@ def index(request):
                     # email not sent
                     print('Error, Email not sent', e, now())
                     error_message = "Email not sent. Please try again."
+                    return render(request, 'contact/contact.html', {'form': form, 'error_message': error_message})
             else:
                 error_message = 'Form is not valid.'
 
