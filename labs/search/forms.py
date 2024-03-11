@@ -6,5 +6,8 @@ b.schnabel@hs-mannheim.de
 """
 
 from crispy_forms.helper import FormHelper
+from django import forms
+
 
 class SearchForm(forms.Form):
+    pass

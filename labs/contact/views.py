@@ -66,3 +66,8 @@ def index(request):
 @cache_page(CACHE_TTL)
 def sent(request):
     return render(request, 'contact/sent.html')
+
+
+def csrf_faiure(request, reason=""):
+    context = {'reason': reason}
+    return render(request, 'contact/csrf_failure.html', context=context)

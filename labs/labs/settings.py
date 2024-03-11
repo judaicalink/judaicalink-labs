@@ -340,3 +340,5 @@ CSRF_TRUSTED_ORIGINS = [
     'https://web.judaicalink.org',
     'https://data.judaicalink.org',
 ]
+
+CSRF_FAILURE_VIEW = 'contact.views.csrf_failure'
