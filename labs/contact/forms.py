@@ -1,21 +1,21 @@
 from django import forms
-#from captcha.fields import CaptchaField
+# from captcha.fields import CaptchaField
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field
 
-class ContactForm(forms.Form):
 
+class ContactForm(forms.Form):
     # error message
 
     name = forms.CharField(
-        label = "Name",
+        label="Name",
         max_length=100,
         required=True,
     )
 
     email = forms.CharField(
-        label = "Email",
-        max_length = 100,
+        label="Email",
+        max_length=100,
         required=True,
     )
 
@@ -25,10 +25,11 @@ class ContactForm(forms.Form):
 
     gdpr = forms.BooleanField(
         required=True,
-        label='I accept the <a href="http://web.judaicalink.org/legal">privacy policy</a>.'
+        label='I accept the <a href="http://web.judaicalink.org/legal">privacy policy</a>.',
+        mark_safe=True,
     )
 
-    #captcha = CaptchaField()
+    # captcha = CaptchaField()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -38,12 +39,12 @@ class ContactForm(forms.Form):
         self.helper.label_class = "col-sm-4 col-lg-2"
         self.helper.field_class = "col-sm-8 col-lg-10"
 
-
         self.helper.layout = Layout(
             Field('name', placeholder="Your Name"),
             Field('email', placeholder="Your Email"),
             Field('message', placeholder="Your Message"),
+            HTML('<p>GDPR</p>'),
             'gdpr',
-            #'captcha',
+            # 'captcha',
             Submit('submit', 'Submit', css_class="btn-secondary"),
         )
