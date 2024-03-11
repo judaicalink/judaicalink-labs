@@ -37,6 +37,7 @@
 
     <div class="container">
         <div class="row">
+            {% csrf_token %}
             {% crispy form %}
         </div>
     </div>
