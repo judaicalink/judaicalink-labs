@@ -68,6 +68,6 @@ def sent(request):
     return render(request, 'contact/sent.html')
 
 
-def csrf_faiure(request, reason=""):
+def csrf_failure(request, reason=""):
     context = {'reason': reason}
     return render(request, 'contact/csrf_failure.html', context=context)
