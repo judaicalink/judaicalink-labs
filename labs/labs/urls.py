@@ -39,6 +39,9 @@ urlpatterns = [
     path('data', include('data.urls')),
     #path('captcha/', include('captcha.urls')),
     path('contact/', include('contact.urls', namespace='contact')),
+    path('pubby/', include(('pubby.urls', 'pubby'), namespace='pubby')),
+    path('server/', include(('server.urls', 'server'), namespace='server')),
+    path('sparql/', include(('sparql.urls', 'sparql'), namespace='sparql')),
 ]
 
 #urlpatterns += [

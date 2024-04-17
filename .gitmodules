@@ -1,0 +1,3 @@
+[submodule "pubby-django"]
+	path = pubby-django
+	url = git@github.com:lod-pubby/pubby-django.git

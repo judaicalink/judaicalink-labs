@@ -12,11 +12,16 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import logging
 
 import environ
+import sys
 import os
 from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Add the path to the submodule's directory
+submodule_path = os.path.join(BASE_DIR, '../pubby-django/server')
+sys.path.append(submodule_path)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 env = environ.Env(
@@ -64,6 +69,9 @@ INSTALLED_APPS = [
     'cm_e_search',
     'lodjango',
     'dashboard',
+    'server', # For pubby-django
+    #'pubby', # For pubby-django
+    'sparql', # For pubby-django
     'data',
     'crispy_forms',
     'captcha',
@@ -91,6 +99,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
              os.path.join(BASE_DIR, 'templates'),
+             os.path.join(BASE_DIR, '../pubby-django/server/pubby/templates'),
+             os.path.join(BASE_DIR, '../pubby-django/server/sparql/templates'),
             ],
         'APP_DIRS': True,
         'OPTIONS': {
