@@ -253,7 +253,7 @@ def generate_rows(submitted_search):
         while counter != len(submitted_search):
             for part in submitted_search:
                 all_operators = [" AND ", " OR ", " NOT "]
-                all_options = ["name:", "Alternatives:", "Publication:", "birthDate:", "deathDate:", "birthLocation:",
+                all_options = ["name:", "alternatives:", "publication:", "birthDate:", "deathDate:", "birthLocation:",
                                "deathLocation:"]
                 counter += 1
                 row = {}
