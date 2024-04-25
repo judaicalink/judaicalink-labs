@@ -152,9 +152,13 @@ def result(request):
             if 'journal_occs' in doc:
                 for journal_occ in doc['journal_occs']:
                     print("\tJournal Name:", journal_occ.get('j_name'))
+                    occurrence.append(journal_occ.get('j_name'))
                     print("\tJournal ID:", journal_occ.get('j_id'))
+                    occurrence.append(journal_occ.get('j_id'))
                     print("\tFirst:", journal_occ.get('first'))
+                    occurrence.append(journal_occ.get('first'))
                     print("\tLast:", journal_occ.get('last'))
+                    occurrence.append(journal_occ.get('last'))
 
                     # Check if 'mentions' exists in the journal_occ
                     mentions = journal_occ.get('mentions', [])
