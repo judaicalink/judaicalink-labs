@@ -142,7 +142,7 @@ def result(request):
         # check for journal occurrences
         # check if doc has journal_occs.j_name
         if 'journal_occs.j_name' in doc:
-            print("Journal occs: ", doc['journal_occs.j_name'])
+            #print("Journal occs: ", doc['journal_occs.j_name'])
             # rebuild the occurrences
             # doc['occurrences'] = []
             #occurrence = {}
