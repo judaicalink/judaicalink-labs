@@ -167,7 +167,7 @@ def result(request):
                         print("\t\tDate:", mention.get('date'))
                         print("\t\tYear:", mention.get('year'))
 
-                print("Occurrence: ", occurrence)
+                #print("Occurrence: ", occurrence)
 
                 # add the data to the results
                 #results.append(doc)
