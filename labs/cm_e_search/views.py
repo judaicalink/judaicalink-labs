@@ -144,18 +144,18 @@ def result(request):
         if 'journal_occs.j_name' in doc:
             print("Journal occs: ", doc['journal_occs.j_name'])
             # rebuild the occurrences
-            doc['occurrences'] = []
-            occurrence = {}
+            # doc['occurrences'] = []
+            #occurrence = {}
             if 'journal_occs' in doc:
                 for journal_occ in doc['journal_occs']:
                     print("\tJournal Name:", journal_occ.get('j_name'))
-                    occurrence.append(journal_occ.get('j_name'))
+                    #occurrence.append(journal_occ.get('j_name'))
                     print("\tJournal ID:", journal_occ.get('j_id'))
-                    occurrence.append(journal_occ.get('j_id'))
+                    #occurrence.append(journal_occ.get('j_id'))
                     print("\tFirst:", journal_occ.get('first'))
-                    occurrence.append(journal_occ.get('first'))
+                    #occurrence.append(journal_occ.get('first'))
                     print("\tLast:", journal_occ.get('last'))
-                    occurrence.append(journal_occ.get('last'))
+                    #occurrence.append(journal_occ.get('last'))
 
                     # Check if 'mentions' exists in the journal_occ
                     mentions = journal_occ.get('mentions', [])
@@ -168,11 +168,11 @@ def result(request):
                         print("\t\tDate:", mention.get('date'))
                         print("\t\tYear:", mention.get('year'))
 
-                print("Occurrence: ", occurrence)
+                #print("Occurrence: ", occurrence)
 
                 # add the data to the results
                 # results.append(doc)
-                doc['occurrences'].append(occurrence)
+                #doc['occurrences'].append(occurrence)
 
 
             #print("Occurences: ", doc['occurrences'])
