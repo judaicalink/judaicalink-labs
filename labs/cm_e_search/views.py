@@ -149,15 +149,14 @@ def result(request):
                 print("\tFirst:", result['journal_occs.first'][i])
                 print("\tLast:", result['journal_occs.last'][i])
                 print("\tMentions:")
-                for j, spot in enumerate(result['journal_occs.mentions.spot']):
-                    if i == j:
-                        print("\t\tSpot:", spot)
-                        print("\t\tStart:", result['journal_occs.mentions.start'][j])
-                        print("\t\tEnd:", result['journal_occs.mentions.end'][j])
-                        print("\t\tP ID:", result['journal_occs.mentions.p_id'][j])
-                        print("\t\tP Link:", result['journal_occs.mentions.p_link'][j])
-                        print("\t\tDate:", result['journal_occs.mentions.date'][j])
-                        print("\t\tYear:", result['journal_occs.mentions.year'][j])
+                for j, spot in enumerate(result['journal_occs.mentions'][i]['spot']):
+                    print("\t\tSpot:", spot)
+                    print("\t\tStart:", result['journal_occs.mentions'][i]['start'][j])
+                    print("\t\tEnd:", result['journal_occs.mentions'][i]['end'][j])
+                    print("\t\tP ID:", result['journal_occs.mentions'][i]['p_id'][j])
+                    print("\t\tP Link:", result['journal_occs.mentions'][i]['p_link'][j])
+                    print("\t\tDate:", result['journal_occs.mentions'][i]['date'][j])
+                    print("\t\tYear:", result['journal_occs.mentions'][i]['year'][j])
 
         results.append(doc)
 
