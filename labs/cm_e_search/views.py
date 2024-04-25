@@ -99,6 +99,9 @@ def result(request):
     logger.debug("Results found: ", res.hits)
     logger.debug("Got results from solr: ")
     logger.debug(res.docs)
+    print("Results found: ", res.hits)
+    print("Got results from solr: ")
+    print(res.docs)
 
     results = []
     for doc in res.docs:
