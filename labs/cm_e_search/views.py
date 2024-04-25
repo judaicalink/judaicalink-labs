@@ -149,22 +149,24 @@ def result(request):
             doc['occurrences'] = []
 
             occurrence = {}
-            for index in range(0, len(doc['journal_occs.j_name'])):
-                occurrence['j_name'] = doc['journal_occs.j_name'][index]
-                occurrence['j_id'] = doc['journal_occs.j_id'][index]
-                occurrence['first'] = doc['journal_occs.first'][index]
-                occurrence['last'] = doc['journal_occs.last'][index]
-                occurrence['mentions'] = []
-                for mention in doc['journal_occs.mentions']:
-                    occurrence['mentions'].append(mention)
+            if 'journal_occs' in result:
+                for journal_occ in result['journal_occs']:
+                    print("\tJournal Name:", journal_occ.get('j_name'))
+                    print("\tJournal ID:", journal_occ.get('j_id'))
+                    print("\tFirst:", journal_occ.get('first'))
+                    print("\tLast:", journal_occ.get('last'))
 
-                occurrence['mentions']['p_id'] = doc['journal_occs.mentions.p_id'][index]
-                occurrence['mentions']['spot'] = doc['journal_occs.mentions.spot'][index]
-                occurrence['mentions']['start'] = doc['journal_occs.mentions.start'][index]
-                occurrence['mentions']['end'] = doc['journal_occs.mentions.end'][index]
-                occurrence['mentions']['p_link'] = doc['journal_occs.mentions.p_link'][index]
-                occurrence['mentions']['date'] = doc['journal_occs.mentions.date'][index]
-                occurrence['mentions']['year'] = doc['journal_occs.mentions.year'][index]
+                    # Check if 'mentions' exists in the journal_occ
+                    mentions = journal_occ.get('mentions', [])
+                    for mention in mentions:
+                        print("\t\tSpot:", mention.get('spot'))
+                        print("\t\tStart:", mention.get('start'))
+                        print("\t\tEnd:", mention.get('end'))
+                        print("\t\tP ID:", mention.get('p_id'))
+                        print("\t\tP Link:", mention.get('p_link'))
+                        print("\t\tDate:", mention.get('date'))
+                        print("\t\tYear:", mention.get('year'))
+
                 print("Occurrence: ", occurrence)
 
                 # add the data to the results
