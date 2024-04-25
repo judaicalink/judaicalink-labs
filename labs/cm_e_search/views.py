@@ -114,7 +114,7 @@ def result(request):
         # TODO: Check if the results are correct
         # create a dict for the related entities
         if 'related_entities' in doc:
-            #print("Related entities: ", len(doc['related_entities'])/4)
+            # print("Related entities: ", len(doc['related_entities'])/4)
             related_entities = []
             entity = {}
             for index in range(0, len(doc['related_entities']), 4):
@@ -129,7 +129,7 @@ def result(request):
                     entity['score'] = doc['related_entities'][index + 2]
                     entity['type'] = doc['related_entities'][index + 3]
 
-                    #print("Entity: ", entity)
+                    # print("Entity: ", entity)
                     related_entities.append(entity)
                     entity = {}
 
@@ -138,41 +138,27 @@ def result(request):
         else:
             doc['related_entities'] = []
 
-
         # FIXME: Fix the results
         # check for journal occurences
         # check if doc has journal_occs.j_name
         if 'journal_occs.j_name' in doc:
-            # rebuild the occurrences
-            print("Journal occs: ", doc['journal_occs.j_name'])
+            print("Journal Occurrences:")
+            for i, j_name in enumerate(result['journal_occs.j_name']):
+                print("\tJournal Name:", j_name)
+                print("\tJournal ID:", result['journal_occs.j_id'][i])
+                print("\tFirst:", result['journal_occs.first'][i])
+                print("\tLast:", result['journal_occs.last'][i])
+                print("\tMentions:")
+                for j, spot in enumerate(result['journal_occs.mentions.spot']):
+                    if i == j:
+                        print("\t\tSpot:", spot)
+                        print("\t\tStart:", result['journal_occs.mentions.start'][j])
+                        print("\t\tEnd:", result['journal_occs.mentions.end'][j])
+                        print("\t\tP ID:", result['journal_occs.mentions.p_id'][j])
+                        print("\t\tP Link:", result['journal_occs.mentions.p_link'][j])
+                        print("\t\tDate:", result['journal_occs.mentions.date'][j])
+                        print("\t\tYear:", result['journal_occs.mentions.year'][j])
 
-            doc['occurrences'] = []
-
-            occurrence = {}
-            for index in range(0, len(doc['journal_occs.j_name'])):
-                occurrence['j_name'] = doc['journal_occs.j_name'][index]
-                occurrence['j_id'] = doc['journal_occs.j_id'][index]
-                occurrence['first'] = doc['journal_occs.first'][index]
-                occurrence['last'] = doc['journal_occs.last'][index]
-                occurrence['mentions'] = []
-                for mention in doc['journal_occs.mentions']:
-                    occurrence['mentions'].append(mention)
-
-                occurrence['mentions']['p_id'] = doc['journal_occs.mentions.p_id'][index]
-                occurrence['mentions']['spot'] = doc['journal_occs.mentions.spot'][index]
-                occurrence['mentions']['start'] = doc['journal_occs.mentions.start'][index]
-                occurrence['mentions']['end'] = doc['journal_occs.mentions.end'][index]
-                occurrence['mentions']['p_link'] = doc['journal_occs.mentions.p_link'][index]
-                occurrence['mentions']['date'] = doc['journal_occs.mentions.date'][index]
-                occurrence['mentions']['year'] = doc['journal_occs.mentions.year'][index]
-                print("Occurrence: ", occurrence)
-
-                # add the data to the results
-                #results.append(doc)
-                doc['occurrences'].append(occurrence)
-
-
-            #print("Occurences: ", doc['occurrences'])
         results.append(doc)
 
     print("Results: ", results)
@@ -184,6 +170,8 @@ def result(request):
     return render(request, 'cm_e_search/search_result.html', context)
 
 
+# TODO: Visualizations
+# TODO: Map
 def create_map(result):
     # creates a map from locations
     locations = []
@@ -193,9 +181,11 @@ def create_map(result):
     pass
 
 
+# TODO: Timeline
 def create_timeline():
     pass
 
 
+# TODO: Graph visualization
 def create_graph_visualization():
     pass
