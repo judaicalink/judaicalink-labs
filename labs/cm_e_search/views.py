@@ -149,8 +149,8 @@ def result(request):
             doc['occurrences'] = []
 
             occurrence = {}
-            if 'journal_occs' in result:
-                for journal_occ in result['journal_occs']:
+            if 'journal_occs' in doc:
+                for journal_occ in doc['journal_occs']:
                     print("\tJournal Name:", journal_occ.get('j_name'))
                     print("\tJournal ID:", journal_occ.get('j_id'))
                     print("\tFirst:", journal_occ.get('first'))
