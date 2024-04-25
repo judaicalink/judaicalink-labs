@@ -137,7 +137,6 @@ def result(request):
         else:
             doc['related_entities'] = []
 
-
         # FIXME: Fix the results
         # check for journal occurrences
         # check if doc has journal_occs.j_name
@@ -145,29 +144,29 @@ def result(request):
             print("Journal occs: ", doc['journal_occs.j_name'])
             # rebuild the occurrences
             # doc['occurrences'] = []
-            #occurrence = {}
-            if 'journal_occs' in doc:
-                print("Journal Occs: ", len(doc['journal_occs']))
-                for journal_occ in doc['journal_occs']:
-                    print("\tJournal Name:", journal_occ.get('j_name'))
-                    #occurrence.append(journal_occ.get('j_name'))
-                    print("\tJournal ID:", journal_occ.get('j_id'))
-                    #occurrence.append(journal_occ.get('j_id'))
-                    print("\tFirst:", journal_occ.get('first'))
-                    #occurrence.append(journal_occ.get('first'))
-                    print("\tLast:", journal_occ.get('last'))
-                    #occurrence.append(journal_occ.get('last'))
+            # occurrence = {}
 
-                    # Check if 'mentions' exists in the journal_occ
-                    mentions = journal_occ.get('mentions', [])
-                    for mention in mentions:
-                        print("\t\tSpot:", mention.get('spot'))
-                        print("\t\tStart:", mention.get('start'))
-                        print("\t\tEnd:", mention.get('end'))
-                        print("\t\tP ID:", mention.get('p_id'))
-                        print("\t\tP Link:", mention.get('p_link'))
-                        print("\t\tDate:", mention.get('date'))
-                        print("\t\tYear:", mention.get('year'))
+            print("Journal Occs: ", len(doc['journal_occs']))
+            for journal_occ in doc['journal_occs']:
+                print("\tJournal Name:", journal_occ.get('j_name'))
+                #occurrence.append(journal_occ.get('j_name'))
+                print("\tJournal ID:", journal_occ.get('j_id'))
+                #occurrence.append(journal_occ.get('j_id'))
+                print("\tFirst:", journal_occ.get('first'))
+                #occurrence.append(journal_occ.get('first'))
+                print("\tLast:", journal_occ.get('last'))
+                #occurrence.append(journal_occ.get('last'))
+
+                # Check if 'mentions' exists in the journal_occ
+                mentions = journal_occ.get('mentions', [])
+                for mention in mentions:
+                    print("\t\tSpot:", mention.get('spot'))
+                    print("\t\tStart:", mention.get('start'))
+                    print("\t\tEnd:", mention.get('end'))
+                    print("\t\tP ID:", mention.get('p_id'))
+                    print("\t\tP Link:", mention.get('p_link'))
+                    print("\t\tDate:", mention.get('date'))
+                    print("\t\tYear:", mention.get('year'))
 
                 #print("Occurrence: ", occurrence)
 
