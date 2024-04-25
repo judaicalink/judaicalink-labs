@@ -146,20 +146,20 @@ def result(request):
         # check if doc has journal_occs.j_name
         if 'journal_occs.j_name' in doc:
             print("Journal Occurrences:")
-            for i, j_name in enumerate(result['journal_occs.j_name']):
+            for i, j_name in enumerate(doc['journal_occs.j_name']):
                 print("\tJournal Name:", j_name)
-                print("\tJournal ID:", result['journal_occs.j_id'][i])
-                print("\tFirst:", result['journal_occs.first'][i])
-                print("\tLast:", result['journal_occs.last'][i])
+                print("\tJournal ID:", doc['journal_occs.j_id'][i])
+                print("\tFirst:", doc['journal_occs.first'][i])
+                print("\tLast:", doc['journal_occs.last'][i])
                 print("\tMentions:")
-                for j, spot in enumerate(result['journal_occs.mentions'][i]['spot']):
+                for j, spot in enumerate(doc['journal_occs.mentions'][i]['spot']):
                     print("\t\tSpot:", spot)
-                    print("\t\tStart:", result['journal_occs.mentions'][i]['start'][j])
-                    print("\t\tEnd:", result['journal_occs.mentions'][i]['end'][j])
-                    print("\t\tP ID:", result['journal_occs.mentions'][i]['p_id'][j])
-                    print("\t\tP Link:", result['journal_occs.mentions'][i]['p_link'][j])
-                    print("\t\tDate:", result['journal_occs.mentions'][i]['date'][j])
-                    print("\t\tYear:", result['journal_occs.mentions'][i]['year'][j])
+                    print("\t\tStart:", doc['journal_occs.mentions'][i]['start'][j])
+                    print("\t\tEnd:", doc['journal_occs.mentions'][i]['end'][j])
+                    print("\t\tP ID:", doc['journal_occs.mentions'][i]['p_id'][j])
+                    print("\t\tP Link:", doc['journal_occs.mentions'][i]['p_link'][j])
+                    print("\t\tDate:", doc['journal_occs.mentions'][i]['date'][j])
+                    print("\t\tYear:", doc['journal_occs.mentions'][i]['year'][j])
 
         results.append(doc)
 
