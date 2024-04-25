@@ -111,7 +111,6 @@ def result(request):
 
         print("Name: ", doc['name'])
 
-        # TODO: Check if the results are correct
         # create a dict for the related entities
         if 'related_entities' in doc:
             #print("Related entities: ", len(doc['related_entities'])/4)
@@ -120,7 +119,7 @@ def result(request):
             for index in range(0, len(doc['related_entities']), 4):
                 if index + 3 < len(doc['related_entities']):
                     # entity is a list with 4 elements
-                    # 0: ep
+                    # 0: ep - entity page
                     # 1: name
                     # 2: score
                     # 3: type
@@ -140,14 +139,12 @@ def result(request):
 
 
         # FIXME: Fix the results
-        # check for journal occurences
+        # check for journal occurrences
         # check if doc has journal_occs.j_name
         if 'journal_occs.j_name' in doc:
-            # rebuild the occurrences
             print("Journal occs: ", doc['journal_occs.j_name'])
-
+            # rebuild the occurrences
             doc['occurrences'] = []
-
             occurrence = {}
             if 'journal_occs' in doc:
                 for journal_occ in doc['journal_occs']:
@@ -174,14 +171,14 @@ def result(request):
                 print("Occurrence: ", occurrence)
 
                 # add the data to the results
-                #results.append(doc)
+                # results.append(doc)
                 doc['occurrences'].append(occurrence)
 
 
             #print("Occurences: ", doc['occurrences'])
         results.append(doc)
 
-    print("Results: ", results)
+    #print("Results: ", results)
     context = {
         "results": results,
         "data": json.dumps(names)
