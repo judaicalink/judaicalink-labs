@@ -97,7 +97,7 @@ def search(request):
 
 def create_query_str(submitted_search):
     """
-    creates strings that contain the search query in a format that solr can process and stores them in a dictionary
+    Creates strings that contain the search query in a format that solr can process and stores them in a dictionary
     :param submitted_search:  that contains the submitted search (either simple or advanced search query)
     :return: query_dic: dictionary with query strings
     """
@@ -126,7 +126,7 @@ def create_query_str(submitted_search):
 
 def get_query(request):
     """
-    creates a dictionary that contains the searched query for the advanced search
+    Creates a dictionary that contains the searched query for the advanced search
     :param request:
     :return: submitted_search: dictionary that contains search query
     """
@@ -219,6 +219,12 @@ def get_query(request):
 
 
 def create_alert(submitted_search):
+    """
+    Creates a string that shows the error response.
+    :param submitted_search:
+    :return: alert: string that contains the error response
+    """
+
     # receives dictionary query_dic ["submitted_search"] submitted_search may look like this: [{'Option1': 'name:',
     # 'Input1': 'einstein'}, {'Operator3': ' OR ', 'Option3': 'birthDate:', 'Input3': '1900'}] creates a string for
     # each part of the query that will be stored in a list (alert)
@@ -343,14 +349,14 @@ def generate_rows(submitted_search):
 
 
 def process_query(query_dic, page, alert):
-    '''
+    """
     search query is processed here: request to solr is made, search results are received, paging is generated according to the number of search results
     paging: implemented so 10 results will be displayed per page
     :param query_dic:
     :param page: integer, representing the page the user is currently on
     :param alert: string, built from the search query in a readable form, displayed when a search was requested
     :return: context that contains all the information needed to generate the template
-    '''
+    """
 
     page = int(page)
 
@@ -369,6 +375,7 @@ def process_query(query_dic, page, alert):
               'dataslug', "id"]
 
     solr_query = [field + ":" + query_str for field in fields]
+    print(solr_query)
 
     # build the body for solr
     body = {
@@ -458,7 +465,8 @@ def process_query(query_dic, page, alert):
     pages = math.ceil(total_hits / size)  # number of needed pages for paging
     # round up number of pages
 
-    # TODO: clean up Pagination
+    # FIXME: repair pagination
+    # TODO: clean up pagination
     paging = []
     # if page = 1, paging contains -2, -1, 0, 1, 2, 3, 4
 
