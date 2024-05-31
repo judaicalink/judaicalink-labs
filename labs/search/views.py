@@ -368,10 +368,10 @@ def process_query(query_dic, page, alert):
     print("Query: " + query_str)
 
     # Fields that should be highlighted
-    highlight_fields = ['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathYear', 'deathDate', 'deathLocation',
+    highlight_fields = ['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathDate', 'deathLocation',
                         'dataslug']
 
-    fields = ['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathYear', 'deathDate', 'deathLocation',
+    fields = ['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathDate', 'deathLocation',
               'dataslug', "id"]
 
     solr_query = [field + ":" + query_str for field in fields]
@@ -467,8 +467,6 @@ def process_query(query_dic, page, alert):
         # number of needed pages for paging
         # round up number of pages
         pages.append(page+1)
-
-    # FIXME: repair pagination
 
     context = {
         "pages": pages,  # amount of pages that need to be generated
