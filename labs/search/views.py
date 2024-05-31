@@ -367,7 +367,7 @@ def process_query(query_dic, page, alert):
     size = 10
     start = (page - 1) * size
     query_str = query_dic["query_str"]
-    print("Query: " + query_str)
+    logging.debug("Query: " + query_str)
 
     # Fields that should be highlighted
     highlight_fields = ['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathDate', 'deathLocation',
@@ -377,7 +377,7 @@ def process_query(query_dic, page, alert):
               'dataslug', "id"]
 
     solr_query = [field + ":" + query_str for field in fields]
-    print(solr_query)
+    logging.debug(solr_query)
 
     # build the body for solr
     body = {
@@ -398,10 +398,10 @@ def process_query(query_dic, page, alert):
     # Perform the query with highlighting
     result = solr.search(q=solr_query, search_handler="/select", **body)
     # debug
-    logging.info("Result: ")
-    print(result.hits)
-    print(result.docs)
-    print(result.highlighting)
+    logging.debug("Result: ")
+    logging.debug(result.hits)
+    logging.debug(result.docs)
+    logging.debug(result.highlighting)
     if result.hits == 0:
         return None
 
