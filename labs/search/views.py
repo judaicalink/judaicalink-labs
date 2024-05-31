@@ -462,35 +462,13 @@ def process_query(query_dic, page, alert):
         """
 
     total_hits = result.hits
-    pages = math.ceil(total_hits / size)  # number of needed pages for paging
+    pages = int(math.ceil(total_hits / size) ) # number of needed pages for paging
     # round up number of pages
 
     # FIXME: repair pagination
-    # TODO: clean up pagination
-    paging = []
-    # if page = 1, paging contains -2, -1, 0, 1, 2, 3, 4
-
-    paging.append(page - 3)
-    paging.append(page - 2)
-    paging.append(page - 1)
-    paging.append(page)
-    paging.append(page + 1)
-    paging.append(page + 2)
-    paging.append(page + 3)
-
-    real_paging = []
-    # if page = 1, paging contains 1, 2, 3, 4
-    # -> non-existing (like -2, -1, ...) pages are removed
-
-    for number in paging:
-        if number > 1 and number < pages:
-            real_paging.append(number)
 
     context = {
         "pages": pages,  # amount of pages that need to be generated
-        "paging": real_paging,  # numbers of pages that need to be displayed for the paging
-        "next": page + 1,
-        "previous": page - 1,
         "total_hits": total_hits,  # amount of search results
         "current_page": page,  # page the user has selected
         "submitted_search": query_dic["submitted_search"],
