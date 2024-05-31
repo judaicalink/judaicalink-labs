@@ -1,3 +1,5 @@
+import logging
+
 import requests
 import math
 from django.http import HttpResponse, HttpResponseRedirect
@@ -396,7 +398,7 @@ def process_query(query_dic, page, alert):
     # Perform the query with highlighting
     result = solr.search(q=solr_query, search_handler="/select", **body)
     # debug
-    print("Result: ")
+    logging.info("Result: ")
     print(result.hits)
     print(result.docs)
     print(result.highlighting)
