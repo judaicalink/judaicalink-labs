@@ -462,8 +462,11 @@ def process_query(query_dic, page, alert):
         """
 
     total_hits = result.hits
-    pages = int(math.ceil(total_hits / size) ) # number of needed pages for paging
-    # round up number of pages
+    pages = []
+    for page in range(0, math.ceil(total_hits / size)):
+        # number of needed pages for paging
+        # round up number of pages
+        pages.append(page )
 
     # FIXME: repair pagination
 
