@@ -2,13 +2,13 @@
 <nav>
     <ul class="pagination">
         {% for page in pages %}
-        {% if page > 1 %}
-        <li class="page-item"><a class="page-link" href="{{ pages.first}}">Previous</a></li>
-        {% endif %}
-        <li class="page-item"><a class="page-link" href="{{page }}">{{ page }}}</a></li>
-        {% if page < pages %}
-        <li class="page-item"><a class="page-link" href="{{pages.last }}">Next</a></li>
-        {% endif %}
+            {% if page > 1 %}
+            <li class="page-item"><a class="page-link" href="{{ pages.first}}">Previous</a></li>
+            {% endif %}
+            <li class="page-item"><a class="page-link" href="{{page }}">{{ page }}}</a></li>
+            {% if page < pages %}
+            <li class="page-item"><a class="page-link" href="{{pages.last }}">Next</a></li>
+            {% endif %}
         {% endfor %}
     </ul>
 </nav>

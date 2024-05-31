@@ -492,7 +492,7 @@ def process_query(query_dic, page, alert):
         "next": page + 1,
         "previous": page - 1,
         "total_hits": total_hits,  # amount of search results
-        "page": page,  # page the user has selected
+        "current_page": page,  # page the user has selected
         "submitted_search": query_dic["submitted_search"],
         "query_str": query_dic["query_str"],
         "simple_search_input": query_dic["simple_search_input"],
