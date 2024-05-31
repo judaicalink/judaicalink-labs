@@ -5,7 +5,7 @@
             {% if pages > 1 %}
             <li class="page-item"><a class="page-link" href="{% url 'search:search'}?page={{pages.first}}&input0={{simple_search_input}}">Previous</a></li>
             {% endif %}
-            <li class="page-item"><a class="page-link" href="{% url 'search:search2'%}?page={{page}}&input0={{simple_search_input}}">{{ page }}</a></li>
+            <li class="page-item"><a class="page-link" href="{% url 'search:search'%}?page={{page}}&input0={{simple_search_input}}">{{ page }}</a></li>
             {% if page < pages %}
             <li class="page-item"><a class="page-link" href="{% url 'search:search'%}?page={{pages.last}}&input0={{simple_search_input}}">Next</a></li>
             {% endif %}
