@@ -3,11 +3,11 @@
     <ul class="pagination">
         {% for page in pages %}
             {% if pages > 1 %}
-            <li class="page-item"><a class="page-link" href="{% url 'search' page=pages.first %}">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="{% url 'search.search' page=pages.first %}">Previous</a></li>
             {% endif %}
-            <li class="page-item"><a class="page-link" href="{% url 'search' page=page %}">{{ page }}</a></li>
+            <li class="page-item"><a class="page-link" href="{% url 'search.search' page=page %}">{{ page }}</a></li>
             {% if page < pages %}
-            <li class="page-item"><a class="page-link" href="{% url 'search' page=pages.last %}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="{% url 'search.search' page=pages.last %}">Next</a></li>
             {% endif %}
         {% endfor %}
     </ul>
