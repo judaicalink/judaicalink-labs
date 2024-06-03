@@ -89,7 +89,7 @@
                         <p><a href="{{ value }}">{{ values.name }}</a></p>
                         {% elif key == "link"  %}
                         {% else %}
-                        <p>{{ key }}: {{ value }}</p>
+                        <p>{{ key }}: {{ value | safe | escape }}</p>
                         {% endif %}
                     {% endfor %}
                 </td>
