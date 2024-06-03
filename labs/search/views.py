@@ -429,10 +429,10 @@ def process_query(query_dic, page, alert):
                     # Replace the original field value with the flattened highlighted value
                     doc[field] = "".join(highlighting[doc_id][field])
 
-        # reorder the data according to the field_order, ignore key errors
-    field_order = ["name", "Alternatives", "birthDate", "birthLocation", "deathDate", "deathLocation", "Abstract",
-                   "Publication", "dataslug", "id", "link"]
-    data = [{key: doc[key] for key in field_order if key in doc} for doc in data]
+    # reorder the data according to the field_order, ignore key errors
+    #field_order = ["name", "Alternatives", "birthDate", "birthLocation", "deathDate", "deathLocation", "Abstract",
+    #               "Publication", "dataslug", "id", "link"]
+    #data = [{key: doc[key] for key in field_order if key in doc} for doc in data]
 
     for doc in data:
         capitalized_doc = {key.capitalize(): value for key, value in doc.items()}
