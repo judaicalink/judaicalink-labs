@@ -415,15 +415,15 @@ def process_query(query_dic, page, alert):
         #del entry["id"]
 
     # Extract the highlighting
+    highlighting = result.highlighting
 
-    # Print the highlighting information for each document
-    for doc_id, highlights in result.highlighting.items():
-        print(f"Document ID: {doc_id}")
-        for field in highlight_fields:
-            if field in highlights:
-                print(f"  Field: {field}")
-                for snippet in highlights[field]:
-                    print(f"    Snippet: {snippet}")
+    for doc in data:
+        doc_id = doc['id']
+        if doc_id in highlighting:
+            for field in highlight_fields:
+                if field in highlighting[doc_id]:
+                    # Replace the original field value with the highlighted value
+                    doc[field] = highlighting[doc_id][field]
 
     # FIXME: add the source to the data
     """
