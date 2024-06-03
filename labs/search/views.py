@@ -413,7 +413,7 @@ def process_query(query_dic, page, alert):
 
     # reorder the data according to the field_order, ignore key errors
     field_order = ["name", "Alternatives", "birthDate", "birthLocation", "deathDate", "deathLocation", "Abstract",
-                   "Publication", "dataslug", "link"]
+                   "Publication", "dataslug", "link", "id"]
     data = [{key: doc[key] for key in field_order if key in doc} for doc in data]
 
     # FIXME: get the correct link
