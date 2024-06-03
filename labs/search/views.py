@@ -22,7 +22,6 @@ CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 SOLR_SERVER = settings.SOLR_SERVER
 SOLR_INDEX = "judaicalink"
 
-
 # setup logging
 logger = logging.getLogger(__name__)
 
@@ -416,7 +415,11 @@ def process_query(query_dic, page, alert):
     for doc in data:
         for key in doc:
             doc[key] = ''.join(map(str, doc[key]))
-        doc['link'] = "<a href='{}'>{}</a>".format(doc["id"], doc["name"])
+        # doc['link'] = "<a href='{}'>{}</a>".format(doc["id"], doc["name"])
+        doc['link'] = "<a href='https://data.judaicalink.org/data/html/{}/{}'>{}</a>".format(doc['dataslug'],
+                                                                                             str(doc['name']).replace(
+                                                                                                 ',', '_'),
+                                                                                             doc["name"])
 
     # Extract the highlighting
     highlighting = result.highlighting
@@ -445,7 +448,7 @@ def process_query(query_dic, page, alert):
     for page in range(0, math.ceil(total_hits / size)):
         # number of needed pages for paging
         # round up number of pages
-        pages.append(page+1)
+        pages.append(page + 1)
 
     context = {
         "pages": pages,  # amount of pages that need to be generated
@@ -454,7 +457,7 @@ def process_query(query_dic, page, alert):
         "submitted_search": query_dic["submitted_search"],
         "query_str": query_dic["query_str"],
         "simple_search_input": query_dic["simple_search_input"],
-        "ordered_dataset": data, # ordered_dataset,
+        "ordered_dataset": data,  # ordered_dataset,
         "alert": alert,
         "rows": json.dumps(generate_rows(query_dic["submitted_search"])),
     }
