@@ -427,7 +427,7 @@ def process_query(query_dic, page, alert):
             for field in highlight_fields:
                 if field in highlighting[doc_id]:
                     # Replace the original field value with the flattened highlighted value
-                    doc[field] = highlighting[doc_id][field][0]
+                    doc[field] = "".join(highlighting[doc_id][field])
 
     # FIXME: add the source to the data
     """
