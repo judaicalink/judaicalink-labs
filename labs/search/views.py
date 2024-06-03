@@ -437,6 +437,9 @@ def process_query(query_dic, page, alert):
         doc.clear()
         doc.update(capitalized_doc)
 
+    # reorder the data according to the field_order
+    data = [{key: doc[key] for key in field_order} for doc in data]
+
     total_hits = result.hits
     pages = []
     for page in range(0, math.ceil(total_hits / size)):
