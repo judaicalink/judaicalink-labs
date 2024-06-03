@@ -431,14 +431,13 @@ def process_query(query_dic, page, alert):
 
     field_order = ["name", "Alternatives", "birthDate", "birthLocation", "deathDate", "deathLocation", "Abstract", "Publication"]
 
+    # reorder the data according to the field_order, ignore key errors
+    data = [{key: doc[key] for key in field_order} for doc in data]
     for doc in data:
         capitalized_doc = {key.capitalize(): value for key, value in doc.items()}
         capitalized_doc.pop('Id', None)
         doc.clear()
         doc.update(capitalized_doc)
-
-    # reorder the data according to the field_order
-    data = [{key: doc[key] for key in field_order} for doc in data]
 
     total_hits = result.hits
     pages = []
