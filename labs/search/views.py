@@ -376,10 +376,7 @@ def process_query(query_dic, page, alert):
     fields = ['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathDate', 'deathLocation',
               'dataslug', "id"]
 
-    #solr_query = [field + ":" + query_str for field in fields]
-    solr_query = ""
-    for field in fields:
-        solr_query += field + ":" + query_str + "\n"
+    solr_query = "\n".join(f"{field}:{query_str}" for field in fields)
 
     logging.debug(solr_query)
 
