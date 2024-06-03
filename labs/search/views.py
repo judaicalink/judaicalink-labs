@@ -252,11 +252,11 @@ def create_alert(submitted_search):
 
 
 def generate_rows(submitted_search):
-    '''
-    generates a dictionary containing the search request for an advanced search
+    """
+    Generates a dictionary containing the search request for the advanced search
     :param submitted_search:
     :return: rows (dictionary containing advanced search request)
-    '''
+    """
     counter = 0
     rows = []
     if "option" in submitted_search[0]:
@@ -355,7 +355,7 @@ def generate_rows(submitted_search):
 
 def process_query(query_dic, page, alert):
     """
-    search query is processed here: request to solr is made, search results are received, paging is generated according to the number of search results
+    The search query is processed here: request to solr is made, search results are received, paging is generated according to the number of search results
     paging: implemented so 10 results will be displayed per page
     :param query_dic:
     :param page: integer, representing the page the user is currently on
@@ -373,10 +373,10 @@ def process_query(query_dic, page, alert):
     logger.debug("Query: " + query_str)
 
     # Fields that should be highlighted
-    highlight_fields = ['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathDate', 'deathLocation',
+    highlight_fields = ['name', 'birthDate', 'birthLocation', 'alternatives', 'deathDate', 'deathLocation',
                         'dataslug']
 
-    fields = ['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathDate', 'deathLocation',
+    fields = ['name', 'birthDate', 'birthLocation', 'alternatives', 'deathDate', 'deathLocation',
               'dataslug', "Abstract", "id"]
 
     solr_query = "\n".join(f"{field}:{query_str}" for field in fields)
@@ -430,7 +430,7 @@ def process_query(query_dic, page, alert):
                     doc[field] = "".join(highlighting[doc_id][field])
 
     # reorder the data according to the field_order, ignore key errors
-    field_order = ["name", "Alternatives", "birthDate", "birthLocation", "deathDate", "deathLocation", "Abstract",
+    field_order = ["name", "alternatives", "birthDate", "birthLocation", "deathDate", "deathLocation", "Abstract",
                    "Publication", "dataslug", "id", "link"]
     data = [{key: doc[key] for key in field_order if key in doc} for doc in data]
 
