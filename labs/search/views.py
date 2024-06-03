@@ -433,13 +433,9 @@ def process_query(query_dic, page, alert):
 
     for doc in data:
         capitalized_doc = {key.capitalize(): value for key, value in doc.items()}
+        capitalized_doc.pop('Id', None)
         doc.clear()
         doc.update(capitalized_doc)
-
-    # Remove the 'id' key from each document
-    for doc in data:
-        doc.pop('Id', None)
-
 
     total_hits = result.hits
     pages = []
