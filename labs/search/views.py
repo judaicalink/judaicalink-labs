@@ -377,7 +377,7 @@ def process_query(query_dic, page, alert):
                         'dataslug']
 
     fields = ['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathDate', 'deathLocation',
-              'dataslug', "id"]
+              'dataslug', "Publication", "Abstract", "id"]
 
     solr_query = "\n".join(f"{field}:{query_str}" for field in fields)
 
@@ -412,11 +412,11 @@ def process_query(query_dic, page, alert):
     data = result.docs
 
     # FIXME: get the correct link
-    # add the lint to the source
-    for entry in data:
-        for key in entry:
-            entry[key] = ''.join(map(str, entry[key]))
-        entry['link'] = "<a href='{}'>{}</a>".format(entry["id"], entry["name"])
+    # add the link to the data
+    for doc in data:
+        for key in doc:
+            doc[key] = ''.join(map(str, doc[key]))
+        doc['link'] = "<a href='{}'>{}</a>".format(doc["id"], doc["name"])
 
     # Extract the highlighting
     highlighting = result.highlighting
@@ -436,7 +436,7 @@ def process_query(query_dic, page, alert):
 
     for doc in data:
         capitalized_doc = {key.capitalize(): value for key, value in doc.items()}
-        #capitalized_doc.pop('Id', None)
+        capitalized_doc.pop('Id', None)
         doc.clear()
         doc.update(capitalized_doc)
 
