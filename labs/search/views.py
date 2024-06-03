@@ -414,18 +414,16 @@ def process_query(query_dic, page, alert):
         entry['link'] = "<a href='{}'>{}</a>".format(entry["id"], entry["name"])
         #del entry["id"]
 
-    #print(data)
-    """
     # Extract the highlighting
-    dataset = []
-    for doc in result.docs:
-        data = {
-            "id": doc["id"],
-            "source": doc["dataslug"],  # source is dataslug
-            "highlight": result.highlighting[0],
-        }
-        dataset.append(data)
-    """
+
+    # Print the highlighting information for each document
+    for doc_id, highlights in result.highlighting.items():
+        print(f"Document ID: {doc_id}")
+        for field in highlight_fields:
+            if field in highlights:
+                print(f"  Field: {field}")
+                for snippet in highlights[field]:
+                    print(f"    Snippet: {snippet}")
 
     # FIXME: add the source to the data
     """
