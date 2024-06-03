@@ -377,7 +377,7 @@ def process_query(query_dic, page, alert):
                         'dataslug']
 
     fields = ['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathDate', 'deathLocation',
-              'dataslug', "Publication", "Abstract", "id"]
+              'dataslug', "Abstract", "id"]
 
     solr_query = "\n".join(f"{field}:{query_str}" for field in fields)
 
