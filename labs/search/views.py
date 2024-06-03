@@ -23,6 +23,10 @@ SOLR_SERVER = settings.SOLR_SERVER
 SOLR_INDEX = "judaicalink"
 
 
+# setup logging
+logger = logging.getLogger(__name__)
+
+
 @cache_page(CACHE_TTL)
 def error_400(request, exception):
     print("Error 400", exception)
@@ -367,7 +371,7 @@ def process_query(query_dic, page, alert):
     size = 10
     start = (page - 1) * size
     query_str = query_dic["query_str"]
-    logging.debug("Query: " + query_str)
+    logger.debug("Query: " + query_str)
 
     # Fields that should be highlighted
     highlight_fields = ['name', 'birthDate', 'birthLocation', 'Alternatives', 'deathDate', 'deathLocation',
@@ -378,7 +382,7 @@ def process_query(query_dic, page, alert):
 
     solr_query = "\n".join(f"{field}:{query_str}" for field in fields)
 
-    logging.debug(solr_query)
+    logger.debug(solr_query)
 
     # build the body for solr
     body = {
@@ -399,10 +403,10 @@ def process_query(query_dic, page, alert):
     # Perform the query with highlighting
     result = solr.search(q=solr_query, search_handler="/select", **body)
     # debug
-    logging.debug("Result: ")
-    logging.debug(result.hits)
-    logging.debug(result.docs)
-    logging.debug(result.highlighting)
+    logger.debug("Result: ")
+    logger.debug(result.hits)
+    logger.debug(result.docs)
+    logger.debug(result.highlighting)
     if result.hits == 0:
         return None
 
@@ -423,7 +427,7 @@ def process_query(query_dic, page, alert):
             for field in highlight_fields:
                 if field in highlighting[doc_id]:
                     # Replace the original field value with the highlighted value
-                    logging.info("Highlighting: " + highlighting[doc_id][field])
+                    logger.info("Highlighting: " + highlighting[doc_id][field])
                     doc[field] = highlighting[doc_id][field]
 
     # FIXME: add the source to the data
