@@ -377,7 +377,10 @@ def process_query(query_dic, page, alert):
               'dataslug', "id"]
 
     #solr_query = [field + ":" + query_str for field in fields]
-    solr_query = f"name:{query_str}\nbirthDate:{query_str}\nbirthLocation:{query_str}\nAlternatives:{query_str}\ndeathDate:{query_str}\ndeathLocation:{query_str}\ndataslug:{query_str}\nid:{query_str}"
+    solr_query = ""
+    for field in fields:
+        solr_query += field + ":" + query_str + "\n"
+
     logging.debug(solr_query)
 
     # build the body for solr
