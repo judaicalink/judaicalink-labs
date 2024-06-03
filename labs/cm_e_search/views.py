@@ -97,9 +97,9 @@ def result(request):
 
     res = solr.search(q=solr_query, search_handler="/select", **body)
 
-    logger.debug("Results found: ", res.hits)
-    logger.debug("Got results from solr: ")
-    logger.debug(res.docs)
+    logger.info("Results found: ", res.hits)
+    logger.info("Got results from solr: ")
+    logger.info(res.docs)
 
     results = []
     for doc in res.docs:
