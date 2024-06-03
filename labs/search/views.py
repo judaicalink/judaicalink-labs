@@ -374,7 +374,7 @@ def process_query(query_dic, page, alert):
 
     # Fields that should be highlighted
     highlight_fields = ['name', 'birthDate', 'birthLocation', 'alternatives', 'deathDate', 'deathLocation',
-                        'dataslug']
+                        'dataslug', 'Abstract']
 
     fields = ['name', 'birthDate', 'birthLocation', 'alternatives', 'deathDate', 'deathLocation',
               'dataslug', "Abstract", "id"]

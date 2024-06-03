@@ -86,9 +86,9 @@
                 <td>
                     {% for key, value in values.items %}
                         {% if key == "Id" %}
-                        <p><a href="{{ value }}">{{ values.name | safe | escape }}</a></p>
+                        <a href="{{ value }}">{{ values.name | safe | escape }}</a>
                         {% elif key == "Link"  %}
-                         <p><a href="{{ value }}">{{ values.name | safe | escape }}</a></p>
+                        <a href="{{ value }}">{{ values.name | safe | escape }}</a>
                         {% else %}
                         <p>{{ key }}: {{ value | safe | escape }}</p>
                         {% endif %}
