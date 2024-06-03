@@ -88,7 +88,7 @@
                         {% if key == "Id" %}
                         <a href="{{ value }}">{{ values.name | safe | escape }}</a>
                         {% elif key == "Link"  %}
-                        <a href="{{ value }}">{{ values.name | safe | escape }}</a>
+                        {{ value | safe | escape }}
                         {% else %}
                         <p>{{ key }}: {{ value | safe | escape }}</p>
                         {% endif %}
