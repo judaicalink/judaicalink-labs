@@ -418,7 +418,8 @@ def process_query(query_dic, page, alert):
         # doc['link'] = "<a href='{}'>{}</a>".format(doc["id"], doc["name"])
         doc['link'] = "<a href='https://data.judaicalink.org/data/html/{}/{}'>{}</a>".format(doc['dataslug'],
                                                                                              str(doc['name']).replace(
-                                                                                                 ',', '_'),
+                                                                                                 ',', '_')
+                                                                                             .replace(' ', ''),
                                                                                              doc["name"])
 
     # Extract the highlighting
