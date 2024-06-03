@@ -411,6 +411,7 @@ def process_query(query_dic, page, alert):
 
     data = result.docs
 
+    # FIXME: get the correct link
     # add the lint to the source
     for entry in data:
         for key in entry:
@@ -430,30 +431,10 @@ def process_query(query_dic, page, alert):
 
     field_order = ["name", "Alternatives", "birthDate", "birthLocation", "deathDate", "deathLocation", "Abstract", "Publication"]
 
-    for i, doc in enumerate(data):
-        # Capitalize the first letter of each field
+    for doc in data:
         capitalized_doc = {key.capitalize(): value for key, value in doc.items()}
-        # Order the fields according to field_order
-        ordered_doc = {field: capitalized_doc[field] for field in field_order if field in capitalized_doc}
-        data[i] = ordered_doc
-
-    # FIXME: add the source to the data
-    """         
-
-    ordered_dataset = []
-    for data in dataset:
-        # linking to detailed view
-        link = "<a href='{}'>{}</a>".format(data["id"], data["name"])
-        data.append(link)
-
-        # extracting fields (named in field_order) and ordering them like field_order
-        for field in field_order:
-            if field in d["source"] and d["source"][field] != "NA":
-                pretty_fieldname = field.capitalize()
-                temp_data = "<b>" + pretty_fieldname + ": " + "</b>" + d["source"][field]
-                data.append(temp_data)
-        
-        """
+        doc.clear()
+        doc.update(capitalized_doc)
 
     total_hits = result.hits
     pages = []
