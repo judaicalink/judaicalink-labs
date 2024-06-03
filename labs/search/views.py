@@ -433,7 +433,7 @@ def process_query(query_dic, page, alert):
 
     for doc in data:
         capitalized_doc = {key.capitalize(): value for key, value in doc.items()}
-        doc['id'].delete()
+        doc.pop("id", None)
         doc.clear()
         doc.update(capitalized_doc)
 
