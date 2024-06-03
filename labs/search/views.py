@@ -71,7 +71,6 @@ def load(request):
         data = f.read()
         print(data)
         headers = {'content-type': 'application/json'}
-        # FIXME: change the URL
         response = requests.post(f'http://localhost:8389/{settings.JUDAICALINK_INDEX}/doc/_bulk?pretty', data=data,
                                  headers=headers)
         return HttpResponse(response)
@@ -429,19 +428,20 @@ def process_query(query_dic, page, alert):
                     # Replace the original field value with the flattened highlighted value
                     doc[field] = "".join(highlighting[doc_id][field])
 
-    # FIXME: add the source to the data
-    """
-    # replace data in source with data in highlight
-    for doc in dataset:
-        for source in doc["source"]:
-            if source in doc["highlight"]:
-                doc["source"][source] = doc["highlight"][source][0]
-                
+    field_order = ["name", "Alternatives", "birthDate", "birthLocation", "deathDate", "deathLocation", "Abstract", "Publication"]
 
-    field_order = ["name", "Alternatives", "birthDate", "birthLocation", "deathDate", "deathYear",
-                   "deathLocation", "Abstract", "Publication"]
-                   
- 
+    updated_data = []
+    for doc in data:
+        # Capitalize all keys in each document
+        capitalized_doc = {key.capitalize(): value for key, value in doc.items()}
+        # Order the fields in each document
+        ordered_doc = {field: capitalized_doc[field] for field in field_order if field in capitalized_doc}
+        updated_data.append(ordered_doc)
+
+    data = updated_data
+
+    # FIXME: add the source to the data
+    """         
 
     ordered_dataset = []
     for data in dataset:
@@ -455,14 +455,6 @@ def process_query(query_dic, page, alert):
                 pretty_fieldname = field.capitalize()
                 temp_data = "<b>" + pretty_fieldname + ": " + "</b>" + d["source"][field]
                 data.append(temp_data)
-
-        # extracting additional fields (that are not mentioned in field_order) except for birthYear
-        for field in d["source"]:
-            if field not in field_order and field != "birthYear":
-                pretty_fieldname = field.capitalize()
-                temp_data = "<b>" + pretty_fieldname + ": " + "</b>" + d["source"][field]
-                data.append(temp_data)
-        ordered_dataset.append(data)
         
         """
 

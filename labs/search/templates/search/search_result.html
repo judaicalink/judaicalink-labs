@@ -88,7 +88,7 @@
                         {% if key == "id" %}
                         <p><a href="{{ value }}">{{ values.name | safe | escape }}</a></p>
                         {% elif key == "link"  %}
-                        {% comment  "does nothing on purpose not to show the link"%}
+                        {% comment "does nothing on purpose not to show the link" %}
                         {% endcomment %}
                         {% else %}
                         <p>{{ key }}: {{ value | safe | escape }}</p>
