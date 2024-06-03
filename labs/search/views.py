@@ -411,12 +411,12 @@ def process_query(query_dic, page, alert):
         return None
 
     data = result.docs
-    # remove all the lists
+
+    # add the lint to the source
     for entry in data:
         for key in entry:
             entry[key] = ''.join(map(str, entry[key]))
         entry['link'] = "<a href='{}'>{}</a>".format(entry["id"], entry["name"])
-        #del entry["id"]
 
     # Extract the highlighting
     highlighting = result.highlighting
@@ -426,8 +426,9 @@ def process_query(query_dic, page, alert):
         if doc_id in highlighting:
             for field in highlight_fields:
                 if field in highlighting[doc_id]:
-                    # Replace the original field value with the flattened highlighted value
-                    doc[field] = "".join(highlighting[doc_id][field])
+                    if not field['link']:
+                        # Replace the original field value with the flattened highlighted value
+                        doc[field] = "".join(highlighting[doc_id][field])
 
     # FIXME: add the source to the data
     """
