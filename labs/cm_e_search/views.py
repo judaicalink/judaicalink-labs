@@ -28,17 +28,17 @@ def get_names():
         res = solr.search('*:*', index="cm_entity_names", rows=10000)
 
         # logging
-        logger.info("Got names from solr: ")
-        logger.debug("Names found: ", res.hits)
-        logger.info(res.debug)
-        logger.info(res.hits)
+        #logger.info("Got names from solr: ")
+        #logger.debug("Names found: ", res.hits)
+        #logger.info(res.debug)
+        #logger.info(res.hits)
 
         for doc in res.docs:
             # convert list to string
             doc['name'] = ''.join(map(str, doc['name']))
             names.append(doc['name'])
-            logger.debug("Doc: ", doc['name'])
-            logger.info(doc['name'])
+            #logger.debug("Doc: ", doc['name'])
+            #logger.info(doc['name'])
         return names
 
     except Exception as e:
@@ -77,6 +77,7 @@ def result(request):
               'journal_occs.first', 'journal_occs.last', 'journal_occs.mentions.p_id',
               'journal_occs.mentions.spot', 'journal_occs.mentions.start', 'journal_occs.mentions.end',
               'journal_occs.mentions.p_link', 'journal_occs.mentions.date', 'journal_occs.mentions.year']
+
     search_fields = ["name", "journal_occs.mentions.spot"]
 
     # create a dict from the fields and add the query
