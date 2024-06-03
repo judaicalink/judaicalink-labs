@@ -430,13 +430,12 @@ def process_query(query_dic, page, alert):
 
     field_order = ["name", "Alternatives", "birthDate", "birthLocation", "deathDate", "deathLocation", "Abstract", "Publication"]
 
-    updated_data = []
-    for doc in data:
-        # Capitalize all keys in each document
+    for i, doc in enumerate(data):
+        # Capitalize the first letter of each field
         capitalized_doc = {key.capitalize(): value for key, value in doc.items()}
-        # Order the fields in each document
+        # Order the fields according to field_order
         ordered_doc = {field: capitalized_doc[field] for field in field_order if field in capitalized_doc}
-        updated_data.append(ordered_doc)
+        data[i] = ordered_doc
 
     # FIXME: add the source to the data
     """         
@@ -470,7 +469,7 @@ def process_query(query_dic, page, alert):
         "submitted_search": query_dic["submitted_search"],
         "query_str": query_dic["query_str"],
         "simple_search_input": query_dic["simple_search_input"],
-        "ordered_dataset": updated_data, # ordered_dataset,
+        "ordered_dataset": data, # ordered_dataset,
         "alert": alert,
         "rows": json.dumps(generate_rows(query_dic["submitted_search"])),
     }
