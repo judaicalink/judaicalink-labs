@@ -431,7 +431,7 @@ def process_query(query_dic, page, alert):
 
     field_order = ["name", "Alternatives", "birthDate", "birthLocation", "deathDate", "deathLocation", "Abstract", "Publication"]
 
-    data.pop("id", None)
+    data.pop("id")
     for doc in data:
         capitalized_doc = {key.capitalize(): value for key, value in doc.items()}
         doc.clear()
