@@ -438,8 +438,6 @@ def process_query(query_dic, page, alert):
         ordered_doc = {field: capitalized_doc[field] for field in field_order if field in capitalized_doc}
         updated_data.append(ordered_doc)
 
-    data = updated_data
-
     # FIXME: add the source to the data
     """         
 
@@ -472,7 +470,7 @@ def process_query(query_dic, page, alert):
         "submitted_search": query_dic["submitted_search"],
         "query_str": query_dic["query_str"],
         "simple_search_input": query_dic["simple_search_input"],
-        "ordered_dataset": data, # ordered_dataset,
+        "ordered_dataset": updated_data, # ordered_dataset,
         "alert": alert,
         "rows": json.dumps(generate_rows(query_dic["submitted_search"])),
     }
