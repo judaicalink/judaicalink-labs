@@ -139,40 +139,7 @@ def result(request):
         # check if doc has journal_occs.j_name
         if 'journal_occs' in doc:
             logger.info("Journal occs: %s", doc['journal_occs']['j_name'])
-            # rebuild the occurrences
-            # doc['occurrences'] = []
-            # occurrence = {}
 
-            logger.info("Journal Occs: %s ", len(doc['journal_occs']))
-            for journal_occ in doc['journal_occs']:
-                logger.info("\tJournal Name:", journal_occ.get('j_name'))
-                #occurrence.append(journal_occ.get('j_name'))
-                logger.info("\tJournal ID:", journal_occ.get('j_id'))
-                #occurrence.append(journal_occ.get('j_id'))
-                logger.info("\tFirst:", journal_occ.get('first'))
-                #occurrence.append(journal_occ.get('first'))
-                logger.info("\tLast:", journal_occ.get('last'))
-                #occurrence.append(journal_occ.get('last'))
-
-                # Check if 'mentions' exists in the journal_occ
-                mentions = journal_occ.get('mentions', [])
-                for mention in mentions:
-                    logger.info("\t\tSpot:", mention.get('spot'))
-                    logger.info("\t\tStart:", mention.get('start'))
-                    logger.info("\t\tEnd:", mention.get('end'))
-                    logger.info("\t\tP ID:", mention.get('p_id'))
-                    logger.info("\t\tP Link:", mention.get('p_link'))
-                    logger.info("\t\tDate:", mention.get('date'))
-                    logger.info("\t\tYear:", mention.get('year'))
-
-                #print("Occurrence: ", occurrence)
-
-                # add the data to the results
-                # results.append(doc)
-                #doc['occurrences'].append(occurrence)
-
-
-            #print("Occurences: ", doc['occurrences'])
         results.append(doc)
 
     #print("Results: ", results)

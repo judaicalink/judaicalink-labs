@@ -155,7 +155,7 @@
                 <b>Occurs in Journals</b>: {{ result.occurrences|length }}<br>
                 <p>(Number of mentions) | Journal | [Oldest mention - Latest mention]</p>
                 <ul style="list-style-type: none;">
-                    {% for occurrence in result.occurrences %}
+                    {% for occurrence in result.journal_occs %}
 
                     {% if forloop.counter < 10 %}
                         <li style="display:list-item;" class="journal">
