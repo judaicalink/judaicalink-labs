@@ -152,7 +152,7 @@
 
             <!-- BEGIN JOURNAL MENTIONS -->
             <div>
-                <b>Occurs in Journals</b>: {{ result.occurrences|length }}<br>
+                <b>Occurs in Journals</b>: {{ result.journal_occs|length }}<br>
                 <p>(Number of mentions) | Journal | [Oldest mention - Latest mention]</p>
                 <ul style="list-style-type: none;">
                     {% for occurrence in result.journal_occs %}
