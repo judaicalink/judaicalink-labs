@@ -110,7 +110,7 @@ def result(request):
         else:
             doc['ep'] = ''
 
-        logger.info("Name: ", doc['name'])
+        logger.info("Name: %s", doc['name'])
 
         # create a dict for the related entities
         if 'related_entities' in doc:
