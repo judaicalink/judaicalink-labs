@@ -29,7 +29,7 @@ def get_names():
 
         # logging
         #logger.info("Got names from solr: ")
-        #logger.debug("Names found: ", res.hits)
+        #logger.debug("Names found: %s", res.hits)
         #logger.info(res.debug)
         #logger.info(res.hits)
 
@@ -37,16 +37,15 @@ def get_names():
             # convert list to string
             doc['name'] = ''.join(map(str, doc['name']))
             names.append(doc['name'])
-            #logger.debug("Doc: ", doc['name'])
-            #logger.info(doc['name'])
+            #logger.debug("Doc: %s", doc['name'])
         return names
 
     except Exception as e:
-        logger.error("Error:", e)
+        logger.error("Error: %s", e)
         print("Error:", e)
         return None
     except pysolr.SolrError as e:
-        logger.error("Error:", e)
+        logger.error("Error: %s", e)
         print("Error:", e)
         return None
 
@@ -62,12 +61,10 @@ def index(request):
 @cache_page(CACHE_TTL)
 def result(request):
     names = get_names()  # searches for all names in cm_entity_names
-    #logger.debug("Got names from solr: ")
-    #logger.debug(names)
+    #logger.debug("Got names from solr: %s", names)
 
     query = request.GET.get('query')
-    logger.info("Query: " + query)
-    print("Query: " + query)
+    logger.info("Query: %s",  query)
     # add name: to query
 
     solr = pysolr.Solr(SOLR_SERVER + 'cm_entities', always_commit=True, timeout=10,
@@ -98,8 +95,7 @@ def result(request):
     res = solr.search(q=solr_query, search_handler="/select", **body)
 
     logger.info("Results found: %s", res.hits)
-    logger.info("Got results from solr: ")
-    logger.info(res.docs)
+    logger.info("Got results from solr: %s", res.docs)
 
     results = []
     for doc in res.docs:
@@ -142,12 +138,12 @@ def result(request):
         # check for journal occurrences
         # check if doc has journal_occs.j_name
         if 'journal_occs' in doc:
-            logger.info("Journal occs: ", doc['journal_occs'][0]['j_name'])
+            logger.info("Journal occs: %s", doc['journal_occs'][0]['j_name'])
             # rebuild the occurrences
             # doc['occurrences'] = []
             # occurrence = {}
 
-            logger.info("Journal Occs: ", len(doc['journal_occs']))
+            logger.info("Journal Occs: %s ", len(doc['journal_occs']))
             for journal_occ in doc['journal_occs']:
                 logger.info("\tJournal Name:", journal_occ.get('j_name'))
                 #occurrence.append(journal_occ.get('j_name'))
