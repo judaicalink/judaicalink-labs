@@ -75,7 +75,7 @@ def result(request):
               'journal_occs.mentions.spot', 'journal_occs.mentions.start', 'journal_occs.mentions.end',
               'journal_occs.mentions.p_link', 'journal_occs.mentions.date', 'journal_occs.mentions.year']
 
-    search_fields = ["name", "journal_occs.mentions.spot"]
+    search_fields = ["name", "spot"]
 
     # create a dict from the fields and add the query
     # create a list for the fields that should be searched and add the query
@@ -85,7 +85,7 @@ def result(request):
     body = {
         "hl": "false",
         "indent": "true",
-        'fl': ','.join(fields),
+        'fl': '*,[child ]',
         "start": 0,
         "q.op": "OR",
         "rows": 1000,
@@ -110,7 +110,7 @@ def result(request):
 
         # create a dict for the related entities
         if 'related_entities' in doc:
-            #print("Related entities: ", len(doc['related_entities'])/4)
+            #logger.info("Related entities: ", len(doc['related_entities'])/4)
             related_entities = []
             entity = {}
             for index in range(0, len(doc['related_entities']), 4):
@@ -125,7 +125,7 @@ def result(request):
                     entity['score'] = doc['related_entities'][index + 2]
                     entity['type'] = doc['related_entities'][index + 3]
 
-                    #print("Entity: ", entity)
+                    #logger.info("Entity: ", entity)
                     related_entities.append(entity)
                     entity = {}
 
