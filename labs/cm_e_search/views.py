@@ -138,7 +138,7 @@ def result(request):
         # check for journal occurrences
         # check if doc has journal_occs.j_name
         if 'journal_occs' in doc:
-            logger.info("Journal occs: %s", doc['journal_occs'][0]['j_name'])
+            logger.info("Journal occs: %s", doc['journal_occs']['j_name'])
             # rebuild the occurrences
             # doc['occurrences'] = []
             # occurrence = {}
