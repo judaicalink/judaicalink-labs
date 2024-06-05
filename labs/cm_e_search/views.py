@@ -97,7 +97,7 @@ def result(request):
 
     res = solr.search(q=solr_query, search_handler="/select", **body)
 
-    logger.info("Results found: " + res.hits)
+    logger.info("Results found: %s", res.hits)
     logger.info("Got results from solr: ")
     logger.info(res.docs)
 
