@@ -5,7 +5,7 @@
     <div v-for="(row, index) in rows" class="row">
 
       <!--Operator-->
-      <div v-if="row = 0" class="form-group col-2">
+      <div v-if="index <= 0" class="form-group col-2">
         <!--Placeholder for missing Operators in first row-->
       </div>
 
