@@ -17,7 +17,7 @@ cd60@hdm-stuttgart.de
  // here comes the Javascript code
 
  export default {
-   name: 'filter',
+   name: 'FilterApp',
    components: {
       filterSelect
    },

@@ -23,7 +23,7 @@ filter_app.use(vuetify);
 filter_app.mount('#filter-app');
 
 
-module.exports = {
+module =  {
   chainWebpack: config => {
     config.module
       .rule('vue')
@@ -38,4 +38,7 @@ module.exports = {
 };
 
 
-export default createVuetify()
+//export default createVuetify()
+
+createApp(SearchApp).use(vuetify).mount('#search-app').config('delimiters', ['[[', ']]'])
+createApp(FilterApp).use(vuetify).mount('#filter-app').config('delimiters', ['[[', ']]'])

@@ -51,7 +51,7 @@
 <script>
 export default {
   // export the function and name it search
-  name : 'search',
+  name : 'SearchApp',
 
   // create empty data
   data() {
