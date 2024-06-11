@@ -32,5 +32,5 @@ module =  {
 
 //export default createVuetify()
 
-createApp(SearchApp).use(vuetify).mount('#search-app').config('delimiters', ['[[', ']]'])
-createApp(FilterApp).use(vuetify).mount('#filter-app').config('delimiters', ['[[', ']]'])
+createApp(SearchApp).use(vuetify).mount('#search-app')
+createApp(FilterApp).use(vuetify).mount('#filter-app')

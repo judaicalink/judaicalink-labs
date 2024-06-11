@@ -52,6 +52,7 @@
 export default {
   // export the function and name it search
   name : 'SearchApp',
+  delimiter: ['[[', ']]'],
 
   // create empty data
   data() {
