@@ -87,6 +87,8 @@
                     {% for key, value in values.items %}
                         {% if key == "Link"  %}
                         {{ value | safe | escape }}
+                        {% elif key == "Slug" %}
+                    <p><span class="badge text-bg-secondary">{{value}}</span></p>
                         {% else %}
                         <p>{{ key }}: {{ value | safe | escape }}</p>
                         {% endif %}
