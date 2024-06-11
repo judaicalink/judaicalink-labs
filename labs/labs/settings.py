@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     'environ',
     "crispy_bootstrap5",
     'cookiebanner',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -345,3 +346,11 @@ CSRF_FAILURE_VIEW = 'contact.views.csrf_failure'
 
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}

@@ -39,6 +39,7 @@ urlpatterns = [
     path('data', include('data.urls')),
     #path('captcha/', include('captcha.urls')),
     path('contact/', include('contact.urls', namespace='contact')),
+    path('api-auth/', include('rest_framework.urls'))
 ]
 
 #urlpatterns += [

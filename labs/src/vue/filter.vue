@@ -42,10 +42,10 @@ export default {
 
 <template>
 
-  <div class="card mt-4 rounded-3 shadow-sm">
-    <div class="accordion" id="accordionPanelsStayOpenExample">
+  <div class="pt-4 shadow-sm">
+    <div class="accordion" id="accordionFilter">
       <div class="accordion-item">
-        <h2 class="accordion-header">
+        <h2 class="accordion-header mt-0">
           <button class="accordion-button" type="button" data-bs-toggle="collapse"
                   data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
                   aria-controls="panelsStayOpen-collapseOne">
@@ -55,8 +55,6 @@ export default {
 
         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
           <div class="accordion-body">
-
-
             <!--Birthdate-->
 
             <form name="py_facetFilter1" id="py_facetFilter1">

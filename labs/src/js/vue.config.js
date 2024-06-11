@@ -3,6 +3,7 @@ import Vue from 'vue';
 import { createApp } from 'vue';
 import SearchApp  from "../vue/search.vue";
 import FilterApp  from "../vue/filter.vue";
+import AutocompleteApp  from "../vue/autocomplete.vue";
 
 // Vuetify
 import 'vuetify/styles'
@@ -17,3 +18,4 @@ const vuetify = createVuetify({
 
 createApp(SearchApp).use(vuetify).mount('#search-app')
 createApp(FilterApp).use(vuetify).mount('#filter-app')
+createApp(AutocompleteApp).use(vuetify).mount('#autocomplete-app')

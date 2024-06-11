@@ -4,16 +4,11 @@
     </div>
 
     <div class="col-xs-6">
-
         <div class="input-group">
 
             <input class="form-control" id="entities" list="datalistEntities" name="query" value="" placeholder="Enter your search keyword">
-
-            <datalist id="datalistEntities">
-                {% for entity in data %}
-                    <option value="{{ entity }}">{{entitiy}}</option>
-                {% endfor %}
-            </datalist>
+            <div id="autocomplete-app">
+            </div>
 
             <div class="input-group-btn">
                 <button type="submit" class="btn btn-primary search_button"><i class="fas fa-search"></i></button>
