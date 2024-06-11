@@ -14,6 +14,7 @@
         <h1 class="text-center">JudaicaLink Search</h1>
         <p>Here you can access the JudaicaLink Knowledge Graph via a full text search on fields such as label, birth and death dates as well as locations.</p>
 
+        {{}}
 
     <div id="accordion">
 
@@ -45,7 +46,7 @@
             <div class="card">
                 <div class="card-body">
 
-                    <div id="app">
+                    <div id="search-app">
 
                     </div>
                 </div>
@@ -63,16 +64,18 @@
             <div class="alert alert-info text-center mt-4 sticky-top" id="picturemargintop30" role="alert">
                 <b>Try some search keywords:</b>
                 <ul class="list-unstyled">
-                    <li><i class="fa fa-search-plus"></i> Hamburg</li>
-                    <li><i class="fa fa-search-plus"></i> Ascher Saul</li>
-                    <li><i class="fa fa-search-plus"></i> Moscow</li>
-                    <li><i class="fa fa-search-plus"></i> Braude Markus</li>
-                    <li><i class="fa fa-search-plus"></i> Ulm</li>
-                    <li><i class="fa fa-search-plus"></i> 1879-03-14</li>
-                    <li><i class="fa fa-search-plus"></i> Edel, Peter</li>
-                    <li><i class="fa fa-search-plus"></i> 1861</li>
-                    <li><i class="fa fa-search-plus"></i> Universität</li>
-                    <li><i class="fa fa-search-plus"></i> Peláez del Rosal, Jesús</li>
+                    <li><i class="fa fa-search-plus"></i><a href="{% url 'search:search' %}?page=1&input0=Hamburg"> Hamburg</a></li>
+                    <li><i class="fa fa-search-plus"></i><a href="{% url 'search:search' %}?page=1&input0=Ascher+Saul"> Ascher Saul</a></li>
+                    <li><i class="fa fa-search-plus"></i><a href="{% url 'search:search' %}?page=1&input0=Moscow"> Moscow</a></li>
+                    <li><i class="fa fa-search-plus"></i><a href="{% url 'search:search' %}?page=1&input0=Auerbach%2C+Isaak+Emil"> Auerbach, Isaak Emil</a></li>
+                    <li><i class="fa fa-search-plus"></i><a href="{% url 'search:search' %}?page=1&input0=Ulm"> Ulm</a></li>
+                    <li><i class="fa fa-search-plus"></i><a href="{% url 'search:search' %}?page=1&input0=1879-03-14">1879-03-14</a></li>
+                    <li><i class="fa fa-search-plus"></i><a href="{% url 'search:search' %}?page=1&input0=Hamburg"> Edel, Peter</a></li>
+                    <li><i class="fa fa-search-plus"></i><a href="{% url 'search:search' %}?page=1&input0=1861"> 1861</a></li>
+                    <li><i class="fa fa-search-plus"></i><a href="{% url 'search:search' %}?page=1&input0=Universität"> Universität</a></li>
+                    <li><i class="fa fa-search-plus"></i><a href="{% url 'search:search' %}?page=1&input0=Spinoza"> Spinoza</a></li>
+                    <li><i class="fa fa-search-plus"></i><a href="{% url 'search:search' %}?page=1&input0=Zunz"> Zunz</a></li>
+                    <li><i class="fa fa-search-plus"></i><a href="{% url 'search:search' %}?page=1&input0=Mendelsohn%2B1782"> Mendelsohn+1782</a></li>
                 </ul>
             </div>
         </div>

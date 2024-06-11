@@ -15,22 +15,5 @@ const vuetify = createVuetify({
   directives,
 })
 
-module =  {
-  chainWebpack: config => {
-    config.module
-      .rule('vue')
-      .use('vue-loader')
-      .tap(options => {
-        options.compilerOptions = {
-          delimiters: ['[[', ']]']  // Set the delimiters to [[ and ]]
-        };
-        return options;
-      });
-  }
-};
-
-
-//export default createVuetify()
-
 createApp(SearchApp).use(vuetify).mount('#search-app')
 createApp(FilterApp).use(vuetify).mount('#filter-app')
