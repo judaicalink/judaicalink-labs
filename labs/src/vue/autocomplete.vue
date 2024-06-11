@@ -17,6 +17,7 @@ export default {
   delimiters: ['[[', ']]'],
   methods: {
     mounted() {
+      data = availableTags
       console.log('Autocomplete component mounted.')
     },
   }
@@ -30,7 +31,7 @@ export default {
     <v-autocomplete
   clearable
   label="Autocomplete"
-  :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+  :items=data
 ></v-autocomplete>
     </v-container>
   </v-app>
