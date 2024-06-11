@@ -5,14 +5,16 @@
     <div v-for="(row, index) in rows" class="row">
 
       <!--Operator-->
-      <div v-if="index > 0">
+      <div v-if="index > 0" class="form-group col-2">
         <select v-model="row.selected_operator" class="form-select" :name="row.operator">
           <option v-for="(operator) in row.other_operators" v-bind:value="operator.fieldname">{{operator.display}}</option>
         </select>
       </div>
+
       <div v-if="index < 1" class="form-group col-2">
         <!--Placeholder for missing Operators in first row-->
       </div>
+
       <!--Option-->
       <div class="form-group col-4">
         <select v-model="row.selected_option" class="form-select" :name="row.option">
