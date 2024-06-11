@@ -21,7 +21,6 @@ search_app.mount('#search-app');
 const filter_app = createApp(filter);
 filter_app.use(vuetify);
 filter_app.mount('#filter-app');
-filter_app.config.
 
 
 module.exports = {
