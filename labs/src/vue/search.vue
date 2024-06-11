@@ -26,21 +26,21 @@
       <!--@click="removeElement(index);"-->
 
       <div class="form-group col-1">
-          <span role="button" class="btn btn-danger" @click="removeElement(index)"><i class="fas fa-trash"></i></span>
+          <span role="button" class="btn btn-danger text-white" @click="removeElement(index)"><i class="fas fa-trash"></i></span>
       </div>
     </div>
 
     <div class="row">
         <div class ="col-auto">
-            <span role="button" class="btn btn-primary search_button" @click="addRow()"><i class="fas fa-plus"></i> Add</span>
+            <span role="button" class="btn btn-primary search_button text-white" @click="addRow()"><i class="fas fa-plus"></i> Add</span>
         </div>
 
          <div class ="col-auto">
-             <span role="button" class="btn btn-danger" @click="clearElements(); addRow(); addRow()">Clear all</span>
+             <span role="button" class="btn btn-danger text-white" @click="clearElements(); addRow(); addRow()">Clear all</span>
          </div>
 
         <div class ="col-md-3 ms-md-auto">
-            <button type="submit" class="btn btn-primary search_button float-right"><i class="fas fa-search"></i> Search</button>
+            <button type="submit" class="btn btn-primary search_button float-right text-white"><i class="fas fa-search"></i> Search</button>
         </div>
     </div>
 </form>
