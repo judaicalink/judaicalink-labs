@@ -1,8 +1,8 @@
 // config for vue
 import Vue from 'vue';
 import { createApp } from 'vue';
-import search  from "../vue/search.vue";
-import filter  from "../vue/filter.vue";
+import SearchApp  from "../vue/search.vue";
+import FilterApp  from "../vue/filter.vue";
 
 // Vuetify
 import 'vuetify/styles'
@@ -14,14 +14,6 @@ const vuetify = createVuetify({
   components,
   directives,
 })
-
-const search_app = createApp(search);
-search_app.mount('#search-app');
-
-const filter_app = createApp(filter);
-filter_app.use(vuetify);
-filter_app.mount('#filter-app');
-
 
 module =  {
   chainWebpack: config => {
