@@ -14,47 +14,7 @@
         <h1 class="text-center">JudaicaLink Search</h1>
         <p>Here you can access the JudaicaLink Knowledge Graph via a full text search on fields such as label, birth and death dates as well as locations.</p>
 
-        {{}}
-
-    <div id="accordion">
-
-    <!-- Simple Search -->
-
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                <form method="get" action="search">
-                    <div class="col-xs-6">
-                        <input type="hidden" name="page" value="1">
-                        <div class="input-group">
-                            <input class="form-control" type="text" name="input0" value="" placeholder="Search...">
-                            <div class="input-group-btn" >
-                                <button type="submit" class="btn btn-primary search_button"><i class="fas fa-search"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-        </div>
-
-    <!-- Advanced Search -->
-
-        <div id="headingOne">
-                <button id="buttonadvancedsearch" type="button" class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color:#0056b3">
-                    Advanced Search
-                </button>
-        </div >
-
-        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-            <div class="card">
-                <div class="card-body">
-
-                    <div id="search-app">
-
-                    </div>
-                </div>
-            </div>
-
-        </div> <!--close collapse div-->
-    </div> <!--close accordion div-->
-    <!-- End Advanced Search -->
+        {% include 'search/search_form.html' %}
 
         <img src="/static/img/JudaicaLink_Knowledge_Graph.jpg" class="img-thumbnail img-fluid mt-4" alt="Judaicalink Knowledge Graph">
     </div>
