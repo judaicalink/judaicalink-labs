@@ -15,6 +15,11 @@ b.schnabel@hs-mannheim.de
 export default {
   name: 'AutocompleteApp',
   delimiters: ['[[', ']]'],
+  data() {
+    return {
+      data: [],
+    };
+  },
   methods: {
     mounted() {
       data = availableTags
