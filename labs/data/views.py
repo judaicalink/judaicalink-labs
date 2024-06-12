@@ -13,7 +13,7 @@ def index(request):
     all_cmds = management.get_commands()
     cmds = []
     for cmd, app in all_cmds.items():
-        if app=='data':
+        if app == 'data':
             cmd_class = management.load_command_class("data", cmd)
             cmd_class.name = cmd
             cmds.append(cmd_class)
