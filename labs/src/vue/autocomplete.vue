@@ -26,7 +26,7 @@ export default {
   methods: {
     async fetchNames() {
       try {
-        let response = await fetch('/get-names/');
+        let response = await fetch('/cm_e_search/get-names/');
         if (response.ok) {
           let data = await response.json();
           this.names = data.names;
@@ -47,7 +47,7 @@ export default {
     <v-container>
     <v-autocomplete
   clearable
-  label="Autocomplete"
+  label="Search"
   :items="names"
   variant="outlined"
 ></v-autocomplete>
