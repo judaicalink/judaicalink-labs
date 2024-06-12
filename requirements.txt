@@ -68,4 +68,4 @@ markdown
 django-filter
 beautifulsoup4
 Scrapy
-
+googletrans
