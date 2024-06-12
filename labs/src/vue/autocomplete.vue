@@ -26,7 +26,7 @@ export default {
   methods: {
     async fetchNames() {
       try {
-        let response = await fetch('get-names/');
+        let response = await fetch('/get-names/');
         if (response.ok) {
           let data = await response.json();
           this.names = data.names;
@@ -48,7 +48,8 @@ export default {
     <v-autocomplete
   clearable
   label="Autocomplete"
-  :items=data.names
+  :items="names"
+  variant="outlined"
 ></v-autocomplete>
     </v-container>
   </v-app>
