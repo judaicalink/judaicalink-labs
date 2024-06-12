@@ -1,7 +1,7 @@
 import logging
 import html
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 import pysolr
 import math, json, pprint
 from django.conf import settings
@@ -150,6 +150,11 @@ def result(request):
     }
 
     return render(request, 'cm_e_search/search_result.html', context)
+
+
+def get_names_json(request):
+    names = get_names()
+    return JsonResponse({'names': names})
 
 
 def create_map(result):

@@ -17,14 +17,26 @@ export default {
   delimiters: ['[[', ']]'],
   data() {
     return {
-      data: [],
+      names: []
     };
   },
+  created() {
+    this.fetchNames();
+  },
   methods: {
-    mounted() {
-      data = availableTags
-      console.log('Autocomplete component mounted.')
-    },
+    async fetchNames() {
+      try {
+        let response = await fetch('get-names/');
+        if (response.ok) {
+          let data = await response.json();
+          this.names = data.names;
+        } else {
+          console.error('Failed to fetch names:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Failed to fetch names:', error);
+      }
+    }
   }
 };
 
@@ -36,7 +48,7 @@ export default {
     <v-autocomplete
   clearable
   label="Autocomplete"
-  :items=data
+  :items=names
 ></v-autocomplete>
     </v-container>
   </v-app>
