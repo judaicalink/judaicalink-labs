@@ -64,5 +64,8 @@ urllib3==1.26.14
 wrapt==1.14.1
 zope.interface==6.1
 djangorestframework
-markdown       # Markdown support for the browsable API.
-django-filter  # Filtering support
+markdown
+django-filter
+beautifulsoup4
+Scrapy
+
