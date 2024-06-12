@@ -36,7 +36,7 @@ def get_names():
         for doc in res.docs:
             # convert list to string
             doc['name'] = ''.join(map(str, doc['name']))
-            names.append(doc['name'])
+            names.append(html.escape(doc['name']))
             #logger.debug("Doc: %s", doc['name'])
         return names
 

@@ -9,7 +9,7 @@
 
 {% block header_scripts %}
 <script>
-    var availableTags = "{{data | safe}}"
+    var availableTags = "{{data | safe | escape }}";
     var availableTags = JSON.parse(availableTags);
 </script>
 {% endblock header_scripts %}
