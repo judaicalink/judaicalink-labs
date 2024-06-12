@@ -48,7 +48,7 @@ export default {
     <v-autocomplete
   clearable
   label="Autocomplete"
-  :items=names
+  :items=data.names
 ></v-autocomplete>
     </v-container>
   </v-app>
