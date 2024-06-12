@@ -26,7 +26,7 @@ export default {
   methods: {
     async fetchNames() {
       try {
-        let response = await fetch('/cm_e_search/get-names/');
+        let response = await fetch('/cm_e_search/get-names');
         if (response.ok) {
           let data = await response.json();
           this.names = data.names;
