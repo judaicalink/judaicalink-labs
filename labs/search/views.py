@@ -415,7 +415,7 @@ def process_query(query_dic, page, alert):
     for doc in data:
         for key in doc:
             doc[key] = ''.join(map(str, doc[key]))
-        doc['link'] = "<a href='{}'>{}</a>".format(doc["id"], doc["name"][0])
+        doc['link'] = "<a href='{}'>{}</a>".format(doc["id"], doc["name"])
 
     # Extract the highlighting
     highlighting = result.highlighting
