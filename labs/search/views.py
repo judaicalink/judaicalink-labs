@@ -410,7 +410,6 @@ def process_query(query_dic, page, alert):
 
     data = result.docs
 
-    # FIXME: get the correct link
     # add the link to the data
     for doc in data:
         for key in doc:
