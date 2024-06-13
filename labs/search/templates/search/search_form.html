@@ -1,13 +1,13 @@
 <div id="accordion">
 
-    <!-- Simple Search -->
+    <!-- Begin Simple Search -->
 
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                 <form method="get" action="{% url 'search:search' %}">
                     <div class="col-xs-6">
                         <input type="hidden" name="page" value="1">
                         <div class="input-group">
-                            <input class="form-control" type="text" name="input0" value="" placeholder="Search...">
+                            <input class="form-control" type="text" name="input0" value="{{ simple_search_input }}" placeholder="Search...">
                             <div class="input-group-btn" >
                                 <button type="submit" class="btn btn-primary search_button text-white"><i class="fas fa-search"></i></button>
                             </div>
@@ -15,8 +15,9 @@
                     </div>
                 </form>
         </div>
+    <!-- End Simple Search -->
 
-    <!-- Advanced Search -->
+    <!-- Begin Advanced Search -->
 
         <div id="headingOne">
                 <button id="buttonadvancedsearch" type="button" class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color:#0056b3">
