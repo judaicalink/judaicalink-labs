@@ -179,3 +179,6 @@ for i in range(0, len(namelinklist2)):
                     graph.add((URIRef(uri), skos.scopeNote, (Literal(remarktextlist[y]))))
 
 graph.serialize(destination='stolpersteine.ttl', format="turtle")
+
+
+class Command(DatasetCommand):
