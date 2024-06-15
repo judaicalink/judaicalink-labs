@@ -51,21 +51,33 @@ def error_500(request):
 
 @cache_page(CACHE_TTL)
 def index(request):
+    """
+    This function gets all the names from the solr index.
+    """
     return HttpResponse(Dataset.objects.all())
     # return render(request, "search/root.html")
 
 
 @cache_page(CACHE_TTL)
 def search_index(request):
+    """
+    Renders the search index page.
+    """
     return render(request, "search/search_index.html")
 
 
 @cache_page(CACHE_TTL)
 def all_search_nav(request):
+    """
+    Renders the search for all searches.
+    """
     return render(request, "search/all_search_nav.html")
 
 
 def load(request):
+    """
+    Loads the data from the textfile-djh.json file into the Judaicalink index.
+    """
     with open('../data/textfile-djh.json', 'rb') as f:
         data = f.read()
         print(data)
@@ -76,6 +88,10 @@ def load(request):
 
 
 def search(request):
+    """
+    Renders the search results.
+    """
+
     # for key, value in request.GET.items():
     #    print(f'Key: {key}')
     #    print(f'Value: {value}')
@@ -126,6 +142,28 @@ def create_query_str(submitted_search):
     }
 
     return query_dic
+
+
+def advanced(request):
+    """
+    Renders the advanced search form.
+    """
+    if request.GET.get('paging') is not None:
+        # search query gets processed by solr again, but this time with the corresponding page
+        submitted_search = request.GET.get('paging').replace("'", '"')
+        query = create_query_str(json.loads(submitted_search))
+    # if new search query is generated
+    else:
+        query = create_query_str(get_query(request))
+
+    alert = create_alert(query["submitted_search"])
+    page = int(request.GET.get('page'))
+    context = process_query(query, page, alert)
+    if context is None:
+        alert = "No results found"
+
+    return render(request, 'search/search_result.html', context)
+
 
 
 def get_query(request):
