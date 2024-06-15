@@ -20,6 +20,7 @@ urlpatterns = [
     path('all_search_nav', views.all_search_nav, name='all_search_nav'),
     path('load', views.load, name='load'),
     path('search', views.search, name='search'),
+    path('advanced', views.advanced, name='advanced'),
     # the sitemap
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
