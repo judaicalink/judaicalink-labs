@@ -7,12 +7,6 @@
 {% endblock %}
 
 
-{% block header_scripts %}
-<script>
-    var availableTags = "{{data | safe | escape }}";
-</script>
-{% endblock header_scripts %}
-
 {% block content %}
 <!--content-->
 <main class="row">
@@ -23,6 +17,7 @@
         </div>
 
         {% include "cm_e_search/search_form.html" %}
+
         <div class="row">
             <p>The Compact Memory collection comprises over 300 Jewish newspapers and journals of the German speaking
                 area of the years 1768–1938 and beyond.
