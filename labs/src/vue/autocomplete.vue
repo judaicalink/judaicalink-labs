@@ -36,6 +36,9 @@ export default {
       } catch (error) {
         console.error('Failed to fetch names:', error);
       }
+    },
+    submit() {
+      this.$emit('submit', this.names)
     }
   }
 };
@@ -51,6 +54,11 @@ export default {
   :items="names"
   variant="outlined"
 ></v-autocomplete>
+     <v-btn prepend-icon="$mdi-magnify"
+     class="mt-2"
+        text="Search"
+        type="submit">
+</v-btn>
     </v-container>
   </v-app>
 </template>
