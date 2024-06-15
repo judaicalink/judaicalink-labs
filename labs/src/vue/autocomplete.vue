@@ -49,7 +49,7 @@ export default {
     <v-app>
     <v-container>
     <v-autocomplete
-  clearable
+        clearable="true"
   label="Search"
   :items="names"
   variant="outlined"
