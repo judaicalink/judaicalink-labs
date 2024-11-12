@@ -25,27 +25,26 @@ SOLR_INDEX = "judaicalink"
 # setup logging
 logger = logging.getLogger(__name__)
 
-
 @cache_page(CACHE_TTL)
 def error_400(request, exception):
-    print("Error 400", exception)
+    logger.error("Error 400 %s", exception)
     return render(request, 'search/400.html', {})
-
 
 @cache_page(CACHE_TTL)
 def error_404(request, exception):
-    print("Error 404", exception)
+    logger.error("Error 404 %s", exception)
     return render(request, 'search/404.html', {})
 
 
 @cache_page(CACHE_TTL)
 def error_403(request, exception):
-    print("Error 403", exception)
+    logger.error("Error 403 %s", exception)
     return render(request, 'search/403.html', {})
 
 
 @cache_page(CACHE_TTL)
 def error_500(request):
+    logger.error('Error 500')
     return render(request, 'search/500.html', {})
 
 
@@ -80,7 +79,7 @@ def load(request):
     """
     with open('../data/textfile-djh.json', 'rb') as f:
         data = f.read()
-        print(data)
+        logger.info(data)
         headers = {'content-type': 'application/json'}
         response = requests.post(f'http://localhost:8389/{settings.JUDAICALINK_INDEX}/doc/_bulk?pretty', data=data,
                                  headers=headers)
@@ -93,8 +92,8 @@ def search(request):
     """
 
     # for key, value in request.GET.items():
-    #    print(f'Key: {key}')
-    #    print(f'Value: {value}')
+        #logger.info(f'Key: {key}')
+        #logger.info(f'Value: {value}')
 
     # if user is changing between pages and search query stays the same
     # 'paging' is used as an indicator to check that
@@ -197,7 +196,7 @@ def get_query(request):
             }
             inputs.append(dictionary)
 
-    # print(operators)
+    # logger.info(operators)
 
     # sorting the lists by the "html_name" in the dictionaries
     # example result for inputs: ['einstein', 'herbert']
@@ -245,9 +244,9 @@ def get_query(request):
         else:
             submitted_search = [{'input': 'error_nothing_submitted'}]
 
-    # print("--------------------------------submitted_search-----------------------------------------------")
+    # logger.info("--------------------------------submitted_search-----------------------------------------------")
     # submitted_search = [{'option': 'name:', 'input': 'Anders'}, {'operator': ' AND ', 'option': 'name:', 'input': ''}]
-    # print(submitted_search)
+    # logger.info(submitted_search)
 
     cleared_submitted_search = submitted_search.copy()
     for dictionary in submitted_search:
