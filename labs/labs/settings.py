@@ -270,10 +270,8 @@ SOLR_STORAGE = "/opt/solr"
 
 # HCaptcha
 HCAPTCHA_SITEKEY = env('HCAPTCHA_SITEKEY')
-HCAPTCHA_SECRET = env('HCAPTCHA_SECRET')
 
 HCAPTCHA_DEFAULT_CONFIG = {
-    'onload': 'name_of_js_function',
     'render': 'explicit',
     'theme': 'light',  # do not use data- prefix
     'size': 'normal',  # do not use data- prefix
