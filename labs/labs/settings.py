@@ -30,7 +30,7 @@ env = environ.Env(
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # False if not in os.environ because of casting above
-DEBUG = env('DEBUG')
+DEBUG = env('DEBUG') if env('DEBUG') is not None else False
 
 # Raises Django's ImproperlyConfigured
 # exception if SECRET_KEY not in os.environ
