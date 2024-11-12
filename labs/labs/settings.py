@@ -84,6 +84,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'labs.middleware.SuppressVariableDoesNotExistMiddleware',
 ]
 
 ROOT_URLCONF = 'labs.urls'
@@ -204,7 +205,7 @@ LOGGING = {
         },
     },
     'loggers': {
-        'django': {
+        'labs': {
             'handlers': ['logfile', 'console'],
             'level': 'DEBUG',
             'propagate': True,
