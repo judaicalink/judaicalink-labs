@@ -407,7 +407,7 @@ def process_query(query_dic, page, alert):
     size = 10
     start = (page - 1) * size
     query_str = query_dic["query_str"]
-    logger.debug("Query: " + query_str)
+    #logger.debug("Query: " + query_str)
 
     # Fields that should be highlighted
     highlight_fields = ['name', 'birthDate', 'birthLocation', 'alternatives', 'deathDate', 'deathLocation',
@@ -418,7 +418,7 @@ def process_query(query_dic, page, alert):
 
     solr_query = "\n".join(f"{field}:{query_str}" for field in fields)
 
-    logger.debug(solr_query)
+    #logger.debug(solr_query)
 
     # build the body for solr
     body = {
@@ -439,10 +439,11 @@ def process_query(query_dic, page, alert):
     # Perform the query with highlighting
     result = solr.search(q=solr_query, search_handler="/select", **body)
     # debug
-    logger.debug("Result: ")
-    logger.debug(result.hits)
-    logger.debug(result.docs)
-    logger.debug(result.highlighting)
+    #logger.debug("Result: ")
+    #logger.debug(result.hits)
+    #logger.debug(result.docs)
+    #logger.debug
+
     if result.hits == 0:
         return None
 
