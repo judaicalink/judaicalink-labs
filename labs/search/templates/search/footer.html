@@ -35,4 +35,19 @@
         </div>
     </div>
 
+    {% if settings.DEBUG %}
+    <div class="col-md-12 alert alert-danger">
+        <a class="btn btn-danger" data-bs-toggle="collapse" href="#debug" role="button" aria-expanded="false"
+           aria-controls="debug">
+            Debug
+        </a>
+        <div class="collapse" id="debug">
+            <div class="card card-body alert alert-danger">
+                <pre> {% filter force_escape %} {% debug %} {% endfilter %}</pre>
+            </div>
+        </div>
+
+    </div>
+    {% endif %}
+
 </footer>
