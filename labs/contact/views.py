@@ -34,14 +34,14 @@ def index(request):
             message = request.POST.get('message')
 
             # For debugging
-            #logger.debug('Name: %s', name)
-            #logger.debug('Email: %s', from_email)
-            #logger.debug('Message: %s', message)
-            #logger.debug('Subject: %s', subject)
+            logger.debug('Name: %s', name)
+            logger.debug('Email: %s', from_email)
+            logger.debug('Message: %s', message)
+            logger.debug('Subject: %s', subject)
 
             # TODO: Add hCaptcha verification
             captcha = request.POST.get('h-captcha-response')
-            #logger.debug('Captcha: %s', captcha)
+            logger.debug('Captcha: %s', captcha)
 
             if message and from_name_email and name and captcha:
                 logger.info('Sending mail')
@@ -57,7 +57,8 @@ def index(request):
 
                 except Exception as e:
                     # email not sent
-                    print('Error, Email not sent', e, now())
+                    logger.debug('Error, Email not sent', e)
+                    error_message = f'Email not sent. Please try again. {e}'
                     return render(request, 'contact/contact.html', {'form': form, 'error_message': error_message})
 
                 logger.info('Mail sent')
