@@ -144,8 +144,7 @@ def result(request):
     #print("Results: ", results)
     context = {
         "results": results,
-        "data": json.dumps(names),
-        'debug': settings.DEBUG,  # Pass Django DEBUG setting
+        "data": json.dumps(names)
     }
 
     return render(request, 'cm_e_search/search_result.html', context)
