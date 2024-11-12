@@ -5,12 +5,16 @@ from django.utils.timezone import now
 from django.conf import settings
 from django.views.decorators.cache import cache_page
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
+import logging
 
 from .forms import ContactForm
 from django.core.mail import BadHeaderError, send_mail
 
 # Create your views here.
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 
 # Contact index page
 #@cache_page(CACHE_TTL)
@@ -30,19 +34,19 @@ def index(request):
             message = request.POST.get('message')
 
             # For debugging
-            print('Name:', name)
-            print('Email:', from_email)
-            print('Message:', message)
-            print('Subject:', subject)
+            logger.debug('Name: %s', name)
+            logger.debug('Email: %s', from_email)
+            logger.debug('Message: %s', message)
+            logger.debug('Subject: %s', subject)
 
             # TODO: Add hCaptcha verification
             captcha = request.POST.get('h-captcha-response')
-            print('Captcha:', captcha)
+            logger.debug('Captcha: %s', captcha)
 
             if message and from_name_email and name and captcha:
-                print('Sending mail')
+                logger.info('Sending mail')
                 try:
-                    print('Email to:', settings.EMAIL_TO)
+                    logger.debug('Email to: %s', settings.EMAIL_TO)
                     # Send mail
                     # TODO: change mailing system
                     #send_mail(subject=subject, message=content, from_email=from_name_mail,  recipient_list=[settings.EMAIL_TO], fail_silently=False, html_message=False, auth_user=settings.EMAIL_HOST_USER, auth_password=settings.EMAIL_HOST_PASSWORD)
@@ -57,12 +61,11 @@ def index(request):
                     print('Error, Email not sent', e, now())
                     return render(request, 'contact/contact.html', {'form': form, 'error_message': error_message})
 
-                print('Mail sent')
+                logger.info('Mail sent')
                 return HttpResponseRedirect(reverse('contact:sent'))
 
             else:
                 error_message = 'Form is not valid.'
-
 
         else:
             error_message = 'Form is not valid.'
