@@ -42,11 +42,9 @@ def get_names():
 
     except Exception as e:
         logger.error("Error: %s", e)
-        print("Error:", e)
         return None
     except pysolr.SolrError as e:
         logger.error("Error: %s", e)
-        print("Error:", e)
         return None
 
 
