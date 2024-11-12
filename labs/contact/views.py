@@ -34,19 +34,18 @@ def index(request):
             message = request.POST.get('message')
 
             # For debugging
-            logger.debug('Name: %s', name)
-            logger.debug('Email: %s', from_email)
-            logger.debug('Message: %s', message)
-            logger.debug('Subject: %s', subject)
+            #logger.debug('Name: %s', name)
+            #logger.debug('Email: %s', from_email)
+            #logger.debug('Message: %s', message)
+            #logger.debug('Subject: %s', subject)
 
             # TODO: Add hCaptcha verification
             captcha = request.POST.get('h-captcha-response')
-            logger.debug('Captcha: %s', captcha)
+            #logger.debug('Captcha: %s', captcha)
 
             if message and from_name_email and name and captcha:
                 logger.info('Sending mail')
                 try:
-                    logger.debug('Email to: %s', settings.EMAIL_TO)
                     # Send mail
                     # TODO: change mailing system
                     #send_mail(subject=subject, message=content, from_email=from_name_mail,  recipient_list=[settings.EMAIL_TO], fail_silently=False, html_message=False, auth_user=settings.EMAIL_HOST_USER, auth_password=settings.EMAIL_HOST_PASSWORD)
