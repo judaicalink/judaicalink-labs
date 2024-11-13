@@ -70,4 +70,4 @@ beautifulsoup4
 Scrapy
 googletrans
 psycopg2
-django-debug-toolbar
+django-debug-toolbar<4.3
