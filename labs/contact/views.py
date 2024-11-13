@@ -26,6 +26,9 @@ def index(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             # Send mail
+            logger.info('DEBUG: %s', settings.DEBUG)
+            logger.info('Request: %s', request)
+            logger.info('Form: %s', form)
             name = request.POST.get('name')
 
             subject = "New request from Judaicalink.org."
