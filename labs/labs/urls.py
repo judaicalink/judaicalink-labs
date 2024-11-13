@@ -18,7 +18,7 @@ from django.contrib.admin import AdminSite
 from django.urls import include, path
 from backend.admin import admin_site
 from django.shortcuts import render
-from debug_toolbar import urls as debug_toolbar_urls
+from debug_toolbar.toolbar import debug_toolbar_urls
 
 
 def index(request):
