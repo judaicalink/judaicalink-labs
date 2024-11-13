@@ -21,9 +21,10 @@ logger = logging.getLogger(__name__)
 def index(request):
     error_message = '' # Default error message
     logger.info('Search index page')
-    logger.info('DEBUG: %s', settings.DEBUG)
+    logger.debug('DEBUG: %s', settings.DEBUG)
 
     if request.POST:
+        logger.info('POST request')
         # Process the form
         form = ContactForm(request.POST)
         if form.is_valid():
