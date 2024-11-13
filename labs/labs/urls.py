@@ -19,7 +19,7 @@ from django.urls import include, path
 from backend.admin import admin_site
 from django.conf import settings
 
-from labs.search import views as search_views
+from search import views as search_views
 
 admin.autodiscover()
 
