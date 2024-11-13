@@ -70,25 +70,6 @@ def index(request):
 
         else:
             error_message = 'Form is not valid.'
-            # if the message is empty add an error message
-            if not message:
-                form.add_error('message', 'Please fill in the message.')
-            # if the email is empty add an error message
-            elif not from_email:
-                form.add_error('email', 'Please fill in the email.')
-            # if the name is empty add an error message
-            elif not name:
-                form.add_error('name', 'Please fill in the name.')
-            # if the captcha is empty add an error message
-            elif not captcha:
-                form.add_error('captcha', 'Please fill in the captcha.')
-            # if the gdpr is empty add an error message
-            elif not gdpr:
-                form.add_error('gdpr', 'Please accept the privacy policy.')
-            else:
-                form.add_error(None, 'Please fill in all fields.')
-
-
 
     else:
         # Render the default form
