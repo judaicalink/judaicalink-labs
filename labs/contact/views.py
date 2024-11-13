@@ -70,6 +70,7 @@ def index(request):
 
         else:
             error_message = 'Form is not valid.'
+            logger.error('Form is not valid')
 
     else:
         # Render the default form
