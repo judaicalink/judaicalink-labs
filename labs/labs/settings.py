@@ -182,12 +182,12 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
-        'verbose': {  # VerboseFormatter
+        'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s',
             'datefmt': '%Y-%m-%dT%H:%M:%S',
             'style': '%',
         },
-        'simple': {  # SimpleFormatter
+        'simple': {
             'format': '%(levelname)s %(message)s',
             'style': '%',
         },
@@ -196,7 +196,8 @@ LOGGING = {
         'logfile': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': env('LOGFILE') if env('LOGFILE') is not None else os.path.join(BASE_DIR, 'logs/labs.log'),
+            'filename': os.path.join(BASE_DIR, env('LOGFILE')) if env('LOGFILE') is not None else os.path.join(BASE_DIR, 'logs/labs.log'),
+            'formatter': 'verbose'
         },
         'console': {
             'level': 'DEBUG',
@@ -209,13 +210,14 @@ LOGGING = {
         },
     },
     'loggers': {
-        "django": {
-            "handlers": ["console"],
-            "propagate": True,
+        'django': {
+            'handlers': ['console'],
+            'propagate': True,
         },
         'labs': {
             'handlers': ['logfile', 'console'],
-            'propagate': True,
+            'level': 'DEBUG',
+            'propagate': False,
         },
         'django.request': {
             'handlers': ['mail_admins'],
