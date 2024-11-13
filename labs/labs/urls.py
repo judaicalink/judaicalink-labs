@@ -19,12 +19,9 @@ from django.urls import include, path
 from backend.admin import admin_site
 from django.shortcuts import render
 from debug_toolbar.toolbar import debug_toolbar_urls
+from django.conf import settings
 
-
-def index(request):
-    # return HttpResponse(Dataset.objects.all())
-    return render(request, "search/root.html")
-
+from labs.search.views import search_index
 
 admin.autodiscover()
 
@@ -33,7 +30,7 @@ urlpatterns = [
     path('backend/', include('backend.urls', namespace='backend')),
     path('search/', include('search.urls', namespace='search')),
     path('lod/', include('lodjango.urls')),
-    path('', index, name='index'),
+    path('', search_index, name='index'),
     path('cm_search/', include('cm_search.urls')),
     path('cm_e_search/', include('cm_e_search.urls')),
     #path('dashboard/', include('dashboard.urls')),
@@ -41,7 +38,13 @@ urlpatterns = [
     #path('captcha/', include('captcha.urls')),
     path('contact/', include('contact.urls', namespace='contact')),
     path('api-auth/', include('rest_framework.urls'))
-] + debug_toolbar_urls()
+]
+
+
+if settings.DEBUG:
+    urlpatterns = [
+        *urlpatterns,
+    ] + debug_toolbar_urls()
 
 #urlpatterns += [
 #    path('captcha/', include('captcha.urls')),
