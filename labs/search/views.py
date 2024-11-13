@@ -25,32 +25,21 @@ SOLR_SERVER = settings.SOLR_SERVER
 SOLR_INDEX = "judaicalink"
 
 # setup logging
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('labs')
 
 # error handling
-# Error 400
-@cache_page(CACHE_TTL)
-def error_400(request, exception):
-    logger.error("Error 400 %s", exception)
-    return render(request, 'search/400.html', {})
+def handle_error(request, template_name, log_message, exception=None):
+    if exception:
+        logger.error(f"{log_message}: {exception}")
+    else:
+        logger.error(log_message)
+    return render(request, template_name)
 
-# Error 404
-@cache_page(CACHE_TTL)
-def error_404(request, exception):
-    logger.error("Error 404 %s", exception)
-    return render(request, 'search/404.html', {})
-
-# Error 403
-@cache_page(CACHE_TTL)
-def error_403(request, exception):
-    logger.error("Error 403 %s", exception)
-    return render(request, 'search/403.html', {})
-
-# Error 500
-@cache_page(CACHE_TTL)
-def error_500(request):
-    logger.error('Error 500')
-    return render(request, 'search/500.html', {})
+# Usage in URL routing or within views
+error_400 = lambda request, exception: handle_error(request, 'search/400.html', "Error 400", exception)
+error_404 = lambda request, exception: handle_error(request, 'search/404.html', "Error 404", exception)
+error_403 = lambda request, exception: handle_error(request, 'search/403.html', "Error 403", exception)
+error_500 = lambda request: handle_error(request, 'search/500.html', "Error 500")
 
 
 # Index page (root)
