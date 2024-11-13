@@ -20,6 +20,8 @@ logger = logging.getLogger(__name__)
 #@cache_page(CACHE_TTL)
 def index(request):
     error_message = '' # Default error message
+    logger.info('Search index page')
+    logger.info('DEBUG: %s', settings.DEBUG)
 
     if request.POST:
         # Process the form
