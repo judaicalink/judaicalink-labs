@@ -28,8 +28,6 @@ def index(request):
 
         # Send mail
         logger.info('DEBUG: %s', settings.DEBUG)
-        logger.info('Request: %s', request)
-        logger.info('Form: %s', form)
         name = request.POST.get('name')
 
         subject = "New request from Judaicalink.org."
@@ -73,7 +71,7 @@ def index(request):
             error_message = 'Form is not valid.'
             form.add_error('message', 'Please fill in the message.')
             form.add_error('email', 'Please fill in the email.')
-            form.add_error('Name', 'Please fill in the name.')
+            form.add_error('name', 'Please fill in the name.')
             form.add_error('captcha', 'Please fill in the captcha.')
             form.add_error(None, 'Please fill in all fields.')
 
