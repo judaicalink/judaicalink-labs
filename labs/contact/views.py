@@ -22,36 +22,30 @@ def index(request):
     error_message = '' # Default error message
 
     if request.POST:
-        logger.info('POST request')
         # Process the form
         form = ContactForm(request.POST)
 
         # Send mail
-        logger.info('DEBUG: %s', settings.DEBUG)
         name = request.POST.get('name')
 
         subject = "New request from Judaicalink.org"
         from_email = request.POST.get('email')
         from_name_email = '{} <{}>'.format(name, from_email)
         message = request.POST.get('message')
-        gdpr = request.POST.get('gdpr')
+        captcha = request.POST.get('h-captcha-response')
 
         # For debugging
-        logger.debug('Name: %s', name)
-        logger.debug('Email: %s', from_email)
-        logger.debug('Message: %s', message)
-        logger.debug('Subject: %s', subject)
-
-        # TODO: Add hCaptcha verification
-        captcha = request.POST.get('h-captcha-response')
-        logger.debug('Captcha: %s', captcha)
+        #logger.debug('Name: %s', name)
+        #logger.debug('Email: %s', from_email)
+        #logger.debug('Message: %s', message)
+        #logger.debug('Subject: %s', subject)
+        #logger.debug('Captcha: %s', captcha)
 
         # if the message, the from_email, the name and the captcha are not empty
         if message and from_name_email and name and captcha:
-            logger.info('Sending mail')
+            #logger.info('Sending mail')
             try:
                 # Send mail
-                # TODO: change mailing system
                 send_mail(subject=subject,
                           message=message,
                           from_email=from_name_email,
@@ -72,7 +66,7 @@ def index(request):
                 error_message = f'Email not sent. Please try again. {e}'
                 return render(request, 'contact/contact.html', {'form': form, 'error_message': error_message})
 
-            logger.info('Mail sent')
+            #logger.info('Mail sent')
             return HttpResponseRedirect(reverse('contact:sent'))
 
         else:
