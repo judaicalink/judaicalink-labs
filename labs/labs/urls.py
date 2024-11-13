@@ -19,7 +19,7 @@ from django.urls import include, path
 from backend.admin import admin_site
 from django.conf import settings
 
-from labs.search.views import search_index
+from labs.search import views as search_views
 
 admin.autodiscover()
 
@@ -28,7 +28,7 @@ urlpatterns = [
     path('backend/', include('backend.urls', namespace='backend')),
     path('search/', include('search.urls', namespace='search')),
     path('lod/', include('lodjango.urls')),
-    path('', search_index(), name='index'),
+    path('', search_views.search_index, name='index'),
     path('cm_search/', include('cm_search.urls')),
     path('cm_e_search/', include('cm_e_search.urls')),
     #path('dashboard/', include('dashboard.urls')),
