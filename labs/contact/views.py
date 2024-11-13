@@ -28,7 +28,7 @@ def index(request):
         # Send mail
         name = request.POST.get('name')
 
-        subject = "New request from Judaicalink.org"
+        subject = "New request from Judaicalink"
         from_email = request.POST.get('email')
         from_name_email = '{} <{}>'.format(name, from_email)
         message = request.POST.get('message')
@@ -62,7 +62,7 @@ def index(request):
 
             except Exception as e:
                 # email not sent
-                logger.debug('Error, Email not sent', e)
+                logger.error('Error, Email not sent', e)
                 error_message = f'Email not sent. Please try again. {e}'
                 return render(request, 'contact/contact.html', {'form': form, 'error_message': error_message})
 
