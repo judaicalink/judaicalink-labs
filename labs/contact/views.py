@@ -34,6 +34,7 @@ def index(request):
         from_email = request.POST.get('email')
         from_name_email = '{} <{}>'.format(name, from_email)
         message = request.POST.get('message')
+        gdpr = request.POST.get('gdpr')
 
         # For debugging
         logger.debug('Name: %s', name)
@@ -69,10 +70,25 @@ def index(request):
 
         else:
             error_message = 'Form is not valid.'
-            form.add_error('message', 'Please fill in the message.')
-            form.add_error('email', 'Please fill in the email.')
-            form.add_error('name', 'Please fill in the name.')
-            form.add_error('captcha', 'Please fill in the captcha.')
+            # if the message is empty add an error message
+            if not message:
+                form.add_error('message', 'Please fill in the message.')
+            # if the email is empty add an error message
+            if not from_email:
+                form.add_error('email', 'Please fill in the email.')
+
+            # if the name is empty add an error message
+            if not name:
+                form.add_error('name', 'Please fill in the name.')
+
+            # if the captcha is empty add an error message
+            if not captcha:
+                form.add_error('h-captcha-response', 'Please fill in the captcha.')
+
+            # if the gdpr is empty add an error message
+            if not gdpr:
+                form.add_error('gdpr', 'Please accept the privacy policy.')
+
             form.add_error(None, 'Please fill in all fields.')
 
 
