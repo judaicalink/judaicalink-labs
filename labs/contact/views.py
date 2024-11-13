@@ -1,3 +1,4 @@
+import logging
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -5,7 +6,6 @@ from django.utils.timezone import now
 from django.conf import settings
 from django.views.decorators.cache import cache_page
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
-import logging
 
 from .forms import ContactForm
 from django.core.mail import BadHeaderError, send_mail
