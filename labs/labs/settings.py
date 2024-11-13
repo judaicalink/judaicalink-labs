@@ -209,7 +209,7 @@ LOGGING = {
         },
     },
     'loggers': {
-        'labs': {
+        'django': {
             'handlers': ['logfile', 'console'],
             'level': 'DEBUG',
             'propagate': True,
