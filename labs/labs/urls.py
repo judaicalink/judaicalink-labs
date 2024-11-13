@@ -17,8 +17,6 @@ from django.contrib import admin
 from django.contrib.admin import AdminSite
 from django.urls import include, path
 from backend.admin import admin_site
-from django.shortcuts import render
-from debug_toolbar.toolbar import debug_toolbar_urls
 from django.conf import settings
 
 from labs.search.views import search_index
@@ -42,9 +40,11 @@ urlpatterns = [
 
 
 if settings.DEBUG:
+    import debug_toolbar
     urlpatterns = [
-        *urlpatterns,
-    ] + debug_toolbar_urls()
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
+
 
 #urlpatterns += [
 #    path('captcha/', include('captcha.urls')),
