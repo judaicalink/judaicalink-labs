@@ -50,7 +50,7 @@ def index(request):
                           from_email=from_name_email,
                           recipient_list=[settings.EMAIL_TO],
                           fail_silently=False,
-                          #html_message=False,
+                          html_message=False,
                           #auth_user=settings.EMAIL_HOST_USER,
                           #auth_password=settings.EMAIL_HOST_PASSWORD,
                           )
