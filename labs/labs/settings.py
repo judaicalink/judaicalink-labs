@@ -30,7 +30,7 @@ env = environ.Env(
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # False if not in os.environ because of casting above
-DEBUG = env('DEBUG')
+DEBUG = env('DEBUG') if env('DEBUG') is not None else False
 
 # Raises Django's ImproperlyConfigured
 # exception if SECRET_KEY not in os.environ
@@ -74,16 +74,19 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     'cookiebanner',
     'rest_framework',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'labs.middleware.SuppressVariableDoesNotExistMiddleware',
 ]
 
 ROOT_URLCONF = 'labs.urls'
@@ -105,6 +108,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'labs.wsgi.application'
 
@@ -133,6 +137,8 @@ CACHES = {
     },
  }
 CACHE_TTL = 60 * 15
+
+INTERNAL_IPS = [ "127.0.0.1"]
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -203,9 +209,12 @@ LOGGING = {
         },
     },
     'loggers': {
+        "django": {
+            "handlers": ["console"],
+            "propagate": True,
+        },
         'labs': {
             'handlers': ['logfile', 'console'],
-            'level': 'DEBUG',
             'propagate': True,
         },
         'django.request': {
@@ -270,10 +279,8 @@ SOLR_STORAGE = "/opt/solr"
 
 # HCaptcha
 HCAPTCHA_SITEKEY = env('HCAPTCHA_SITEKEY')
-HCAPTCHA_SECRET = env('HCAPTCHA_SECRET')
 
 HCAPTCHA_DEFAULT_CONFIG = {
-    'onload': 'name_of_js_function',
     'render': 'explicit',
     'theme': 'light',  # do not use data- prefix
     'size': 'normal',  # do not use data- prefix

@@ -53,8 +53,8 @@ for ns in namespaces:
 
 
 # Logging for our scripts
-log = logging.getLogger("log")
-error = logging.getLogger("error")
+log = logging.getLogger(__name__)
+error = logging.getLogger(__name__)
 
 # Helper to zip files, obviously...
 def gzip_file(filename):

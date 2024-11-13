@@ -45,10 +45,10 @@ def save_file(text):
     try:
         with open(filename, 'w') as f:
             result = f.write(text)
-            print("File written successfully")
+            logger.info("File written successfully")
             return filename
     except IOError:
-        print("Error writing file")
+        logger.error("Error writing file")
         return False
 
 

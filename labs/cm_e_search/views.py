@@ -42,11 +42,9 @@ def get_names():
 
     except Exception as e:
         logger.error("Error: %s", e)
-        print("Error:", e)
         return None
     except pysolr.SolrError as e:
         logger.error("Error: %s", e)
-        print("Error:", e)
         return None
 
 
@@ -64,7 +62,7 @@ def result(request):
     #logger.debug("Got names from solr: %s", names)
 
     query = request.GET.get('query')
-    logger.info("Query: %s",  query)
+    #logger.info("Query: %s",  query)
     # add name: to query
 
     solr = pysolr.Solr(SOLR_SERVER + 'cm_entities', always_commit=True, timeout=10,
@@ -94,8 +92,8 @@ def result(request):
 
     res = solr.search(q=solr_query, search_handler="/select", **body)
 
-    logger.info("Results found: %s", res.hits)
-    logger.info("Got results from solr: %s", res.docs)
+    #logger.info("Results found: %s", res.hits)
+    #logger.info("Got results from solr: %s", res.docs)
 
     results = []
     for doc in res.docs:
