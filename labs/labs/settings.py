@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     'cookiebanner',
     'rest_framework',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -85,6 +86,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'labs.middleware.SuppressVariableDoesNotExistMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'labs.urls'
@@ -135,6 +137,8 @@ CACHES = {
     },
  }
 CACHE_TTL = 60 * 15
+
+INTERNAL_IPS = [ "127.0.0.1"]
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

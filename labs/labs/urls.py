@@ -18,6 +18,7 @@ from django.contrib.admin import AdminSite
 from django.urls import include, path
 from backend.admin import admin_site
 from django.shortcuts import render
+from debug_toolbar import urls as debug_toolbar_urls
 
 
 def index(request):
@@ -40,7 +41,7 @@ urlpatterns = [
     #path('captcha/', include('captcha.urls')),
     path('contact/', include('contact.urls', namespace='contact')),
     path('api-auth/', include('rest_framework.urls'))
-]
+] + debug_toolbar_urls()
 
 #urlpatterns += [
 #    path('captcha/', include('captcha.urls')),
