@@ -47,13 +47,20 @@ def index(request):
         logger.debug('Captcha: %s', captcha)
 
         # if the message, the from_email, the name and the captcha are not empty
-        if message and from_email and name and captcha:
+        if message and from_name_email and name and captcha:
             logger.info('Sending mail')
             try:
                 # Send mail
                 # TODO: change mailing system
-                #send_mail(subject=subject, message=content, from_email=from_name_mail,  recipient_list=[settings.EMAIL_TO], fail_silently=False, html_message=False, auth_user=settings.EMAIL_HOST_USER, auth_password=settings.EMAIL_HOST_PASSWORD)
-                send_mail(subject, message=message, from_email=from_name_email, recipient_list=["b.schnabel@hs-mannheim.de"], fail_silently=False)
+                send_mail(subject=subject,
+                          message=message,
+                          from_email=from_name_email,
+                          recipient_list=[settings.EMAIL_TO],
+                          fail_silently=False,
+                          html_message=False,
+                          #auth_user=settings.EMAIL_HOST_USER,
+                          #auth_password=settings.EMAIL_HOST_PASSWORD,
+                          )
 
             except BadHeaderError:
                 error_message = 'Invalid header found.'
