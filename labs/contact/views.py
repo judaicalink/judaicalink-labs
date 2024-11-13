@@ -2,7 +2,6 @@ import logging
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from django.utils.timezone import now
 from django.conf import settings
 from django.views.decorators.cache import cache_page
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
@@ -49,7 +48,7 @@ def index(request):
                 send_mail(subject=subject,
                           message=message,
                           from_email=from_name_email,
-                          recipient_list=['b.schnabel@hs-mannheim.de'],
+                          recipient_list=[settings.EMAIL_TO],
                           fail_silently=False,
                           #html_message=False,
                           #auth_user=settings.EMAIL_HOST_USER,
