@@ -49,9 +49,9 @@ def index(request):
                 send_mail(subject=subject,
                           message=message,
                           from_email=from_name_email,
-                          recipient_list=[settings.EMAIL_TO, 'b.schnabel@hs-mannheim.de'],
+                          recipient_list=['b.schnabel@hs-mannheim.de'],
                           fail_silently=False,
-                          html_message=False,
+                          #html_message=False,
                           #auth_user=settings.EMAIL_HOST_USER,
                           #auth_password=settings.EMAIL_HOST_PASSWORD,
                           )
