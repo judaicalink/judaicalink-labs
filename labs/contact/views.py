@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 def index(request):
     error_message = '' # Default error message
 
-    if request.method == 'POST':
+    if request.POST:
         # Process the form
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -43,7 +43,8 @@ def index(request):
             captcha = request.POST.get('h-captcha-response')
             logger.debug('Captcha: %s', captcha)
 
-            if message and from_name_email and name and captcha:
+            # if the message, the from_email, the name and the captcha are not empty
+            if message and from_email and name and captcha:
                 logger.info('Sending mail')
                 try:
                     # Send mail
