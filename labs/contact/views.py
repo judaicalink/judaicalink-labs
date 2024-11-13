@@ -43,7 +43,7 @@ def index(request):
 
         # if the message, the from_email, the name and the captcha are not empty
         if message and from_name_email and name and captcha:
-            #logger.info('Sending mail')
+            logger.info('Sending mail')
             try:
                 # Send mail
                 send_mail(subject=subject,
@@ -66,7 +66,7 @@ def index(request):
                 error_message = f'Email not sent. Please try again. {e}'
                 return render(request, 'contact/contact.html', {'form': form, 'error_message': error_message})
 
-            #logger.info('Mail sent')
+            logger.info('Mail sent')
             return HttpResponseRedirect(reverse('contact:sent'))
 
         else:
