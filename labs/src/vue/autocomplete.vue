@@ -49,7 +49,7 @@ export default {
     async fetchResults() {
   this.loading = true;
   try {
-    const response = await fetch(`/api/get_names?query=${encodeURIComponent(this.searchQuery)}`);
+    const response = await fetch(`/get_names?query=${encodeURIComponent(this.searchQuery)}`);
     const data = await response.json();
 
     if (Array.isArray(data.results)) {
