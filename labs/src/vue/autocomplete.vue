@@ -46,12 +46,9 @@ import { debounce } from "lodash";
 export default {
   data() {
     return {
-      searchQuery: "",
-      results: [],
-      start: 0,
-      rows: 20, // Number of results to fetch per request
+      results: [], // Ensure this is properly initialized
+      searchQuery: '',
       loading: false,
-      noMoreResults: false,
     };
   },
   methods: {
@@ -83,6 +80,7 @@ export default {
       } finally {
         this.loading = false;
       }
+      console.log("Results fetched:", this.results);
     },
     debouncedFetchResults: debounce(function () {
       this.start = 0; // Reset to the beginning for new searches
