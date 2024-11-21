@@ -1,36 +1,38 @@
-/*
-autocomplete.vue
-This file handles the autocomplete dropdown for CM Entity Search.
-Using vuetify components.
-https://vuetifyjs.com/en/components/autocompletes/#usage
-created by Benjamin Schnabel
-b.schnabel@hs-mannheim.de
-*/
-
 <template>
   <div>
     <v-text-field
       v-model="searchQuery"
       label="Search"
-      @input="debouncedFetchResults"
       outlined
+      clearable
+      @input="debouncedFetchResults"
     />
-    <div v-if="results.length === 0" class="mt-3">
+    <div v-if="results.length === 0 && !loading" class="mt-3">
       No results found.
     </div>
-<v-virtual-scroller
-  :items="results"
-  item-height="48"
->
-  <template #default="{ item }">
-    <v-list-item>
-      <v-list-item-content>
-        <v-list-item-title>{{ item.name }}</v-list-item-title>
-      </v-list-item-content>
-    </v-list-item>
-  </template>
-</v-virtual-scroller>
-
+    <v-virtual-scroller
+      v-else
+      :items="results"
+      item-height="48"
+      class="mt-3"
+    >
+      <template #default="{ item }">
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title>{{ item?.name || 'Unknown' }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </template>
+    </v-virtual-scroller>
+    <v-btn
+      v-if="loading"
+      block
+      disabled
+      outlined
+      class="mt-3"
+    >
+      Loading...
+    </v-btn>
   </div>
 </template>
 
@@ -40,40 +42,61 @@ import { debounce } from "lodash";
 export default {
   data() {
     return {
-      results: [], // Ensure this is properly initialized
-      searchQuery: '',
+      searchQuery: "",
+      results: [],
+      start: 0,
+      rows: 20, // Number of results to fetch per request
       loading: false,
+      noMoreResults: false,
     };
   },
   methods: {
     async fetchResults() {
-  this.loading = true;
-  try {
-    const response = await fetch(`/get_names?query=${encodeURIComponent(this.searchQuery)}`);
-    const data = await response.json();
+      if (this.searchQuery.length < 2) {
+        this.results = [];
+        return;
+      }
 
-    if (Array.isArray(data.results)) {
-      this.results = data.results;
-    } else {
-      console.error("API did not return an array:", data);
-      this.results = [];
-    }
-  } catch (error) {
-    console.error("Error fetching results:", error);
-    this.results = [];
-  } finally {
-    this.loading = false;
-  }
-},
+      this.loading = true;
+
+      try {
+        const response = await fetch(
+          `/api/get_names?query=${encodeURIComponent(this.searchQuery)}&start=${this.start}&rows=${this.rows}`
+        );
+        const data = await response.json();
+
+        if (Array.isArray(data.results)) {
+          console.log("Fetched results:", data.results); // Debugging output
+
+          if (this.start === 0) {
+            this.results = data.results; // Reset results for new queries
+          } else {
+            this.results = [...this.results, ...data.results]; // Append for lazy loading
+          }
+
+          if (data.results.length < this.rows) {
+            this.noMoreResults = true; // Stop further loading
+          }
+        } else {
+          console.error("API response format invalid:", data);
+          this.results = [];
+        }
+      } catch (error) {
+        console.error("Error fetching results:", error);
+        this.results = [];
+      } finally {
+        this.loading = false;
+      }
+    },
     debouncedFetchResults: debounce(function () {
-      this.start = 0; // Reset to the beginning for new searches
+      this.start = 0; // Reset pagination for new searches
       this.noMoreResults = false;
       this.fetchResults();
     }, 300),
     async loadMoreResults() {
       if (this.noMoreResults || this.loading) return;
 
-      this.start += this.rows; // Update the starting point
+      this.start += this.rows; // Update starting point
       await this.fetchResults();
     },
   },
@@ -103,5 +126,5 @@ export default {
 </script>
 
 <style scoped>
-/* Customize styles as needed */
+/* Add any custom styles as needed */
 </style>

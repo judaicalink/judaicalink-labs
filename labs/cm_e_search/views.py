@@ -131,7 +131,7 @@ def result(request):
 
 
 def get_names_json(request):
-    names = get_names()
+    names = get_names(request=request)
     return JsonResponse({'names': names})
 
 
