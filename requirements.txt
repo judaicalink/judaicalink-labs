@@ -71,3 +71,4 @@ Scrapy
 googletrans
 psycopg2
 django-debug-toolbar<4.3
+django-cors-headers

@@ -1,3 +1,4 @@
+# Views for CM Entity Search
 import logging
 import html
 from django.shortcuts import render
@@ -13,39 +14,18 @@ logger = logging.getLogger(__name__)
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 SOLR_SERVER = settings.SOLR_SERVER
 
+def get_names(request):
+    query = request.GET.get('query', '')
+    start = int(request.GET.get('start', 0))
+    rows = int(request.GET.get('rows', 20))
 
-def get_names():
-    """
-    This function gets all the names from the solr index cm_entity_names
-    :return:
-    """
-    # gets all entity names from solr
-    try:
-        names = []
+    solr = pysolr.Solr(SOLR_SERVER + "cm_entity_names", always_commit=True, timeout=10,
+                       auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
+    res = solr.search(f'name:*{query}*', start=start, rows=rows)
+    results = [{'id': doc['id'], 'name': doc['name']} for doc in res.docs]
 
-        solr = pysolr.Solr(SOLR_SERVER + "cm_entity_names", always_commit=True, timeout=10,
-                           auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
-        res = solr.search('*:*', index="cm_entity_names", rows=10000)
+    return JsonResponse({'results': results})
 
-        # logging
-        #logger.info("Got names from solr: ")
-        #logger.debug("Names found: %s", res.hits)
-        #logger.info(res.debug)
-        #logger.info(res.hits)
-
-        for doc in res.docs:
-            # convert list to string
-            doc['name'] = ''.join(map(str, doc['name']))
-            names.append(html.escape(doc['name']).replace("'", "\\'").replace('"', '\\"'))
-            #logger.debug("Doc: %s", doc['name'])
-        return names
-
-    except Exception as e:
-        logger.error("Error: %s", e)
-        return None
-    except pysolr.SolrError as e:
-        logger.error("Error: %s", e)
-        return None
 
 
 @cache_page(CACHE_TTL)

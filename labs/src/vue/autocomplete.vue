@@ -6,69 +6,121 @@ https://vuetifyjs.com/en/components/autocompletes/#usage
 created by Benjamin Schnabel
 b.schnabel@hs-mannheim.de
 */
-<script setup>
-</script>
-
-<script>
-// here comes the Javascript code
-
-export default {
-  name: 'AutocompleteApp',
-  delimiters: ['[[', ']]'],
-  data() {
-    return {
-      names: []
-    };
-  },
-  created() {
-    this.fetchNames();
-  },
-  methods: {
-    async fetchNames() {
-      try {
-        let response = await fetch('/cm_e_search/get-names');
-        if (response.ok) {
-          let data = await response.json();
-          this.names = data.names;
-        } else {
-          console.error('Failed to fetch names:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Failed to fetch names:', error);
-      }
-    },
-    submit() {
-      this.$emit('submit', this.names)
-    }
-  }
-};
-
-</script>
 
 <template>
-    <v-app>
-      <v-container>
-        <v-row>
-          <v-autocomplete
-              clearable="true"
-              label="Type to search..."
-              :items="names"
-              variant="outlined"
-                >
-          </v-autocomplete>
-        <v-btn prepend-icon="fas fa-search"
-               class="mt-2"
-               text="Search"
-               type="submit"
-        >
-
-        </v-btn>
-      </v-row>
-    </v-container>
-  </v-app>
+  <div>
+    <v-text-field
+      v-model="searchQuery"
+      label="Search"
+      @input="debouncedFetchResults"
+      outlined
+    />
+    <v-virtual-scroller
+      :items="results"
+      item-height="48"
+      class="mt-3"
+    >
+      <template #default="{ item }">
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.name }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </template>
+    </v-virtual-scroller>
+    <v-btn
+      v-if="loading"
+      block
+      disabled
+      outlined
+      class="mt-3"
+    >
+      Loading...
+    </v-btn>
+  </div>
 </template>
 
+<script>
+import { debounce } from "lodash";
+
+export default {
+  data() {
+    return {
+      searchQuery: "",
+      results: [],
+      start: 0,
+      rows: 20, // Number of results to fetch per request
+      loading: false,
+      noMoreResults: false,
+    };
+  },
+  methods: {
+    async fetchResults() {
+      if (this.searchQuery.length < 2) {
+        this.results = [];
+        return;
+      }
+
+      this.loading = true;
+
+      try {
+        const response = await fetch(
+          `/api/get_names?query=${encodeURIComponent(this.searchQuery)}&start=${this.start}&rows=${this.rows}`
+        );
+        const data = await response.json();
+
+        if (data.results.length < this.rows) {
+          this.noMoreResults = true; // Stop loading more if fewer results returned
+        }
+
+        if (this.start === 0) {
+          this.results = data.results; // Initial fetch
+        } else {
+          this.results = [...this.results, ...data.results]; // Append new results
+        }
+      } catch (error) {
+        console.error("Error fetching results:", error);
+      } finally {
+        this.loading = false;
+      }
+    },
+    debouncedFetchResults: debounce(function () {
+      this.start = 0; // Reset to the beginning for new searches
+      this.noMoreResults = false;
+      this.fetchResults();
+    }, 300),
+    async loadMoreResults() {
+      if (this.noMoreResults || this.loading) return;
+
+      this.start += this.rows; // Update the starting point
+      await this.fetchResults();
+    },
+  },
+  mounted() {
+    // Add infinite scroll listener
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const lastEntry = entries[0];
+        if (lastEntry.isIntersecting) {
+          this.loadMoreResults();
+        }
+      },
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 1.0,
+      }
+    );
+
+    const sentinel = document.createElement("div");
+    sentinel.setAttribute("id", "scroll-sentinel");
+    document.body.appendChild(sentinel);
+
+    observer.observe(sentinel);
+  },
+};
+</script>
+
 <style scoped>
-
-
+/* Customize styles as needed */
 </style>

@@ -16,6 +16,12 @@ const vuetify = createVuetify({
   directives,
 })
 
+module.exports = {
+  devServer: {
+    proxy: "http://localhost:8000", // Proxy requests to Django
+  },
+};
+
 createApp(SearchApp).use(vuetify).mount('#search-app')
 createApp(FilterApp).use(vuetify).mount('#filter-app')
 createApp(AutocompleteApp).use(vuetify).mount('#autocomplete-app')

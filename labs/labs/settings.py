@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'channels',
     'core',
+    'corsheaders',
     'backend.apps.BackendConfig',
     'search',
     'cm_search',
@@ -87,6 +88,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'labs.middleware.SuppressVariableDoesNotExistMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8080",  # Your Vue development server
 ]
 
 ROOT_URLCONF = 'labs.urls'
