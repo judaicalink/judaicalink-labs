@@ -38,7 +38,7 @@ def index(request):
 
 @cache_page(CACHE_TTL)
 def result(request):
-    names = get_names()  # searches for all names in cm_entity_names
+    names = get_names(request=request)  # searches for all names in cm_entity_names
     #logger.debug("Got names from solr: %s", names)
 
     query = request.GET.get('query')
