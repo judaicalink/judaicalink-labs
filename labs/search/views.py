@@ -86,31 +86,34 @@ def load(request):
 
 # Search results page
 def search(request):
-    """
-    Renders the search results.
-    """
+    """Handles advanced search query from Vue component"""
+    # Check for advanced search and process accordingly
+    query = build_advanced_query(request)
 
-    # for key, value in request.GET.items():
-        #logger.info(f'Key: {key}')
-        #logger.info(f'Value: {value}')
-
-    # if user is changing between pages and search query stays the same
-    # 'paging' is used as an indicator to check that
-    if request.GET.get('paging') is not None:
-        # search query gets processed by solr again, but this time with the corresponding page
-        submitted_search = request.GET.get('paging').replace("'", '"')
-        query = create_query_str(json.loads(submitted_search))
-    # if new search query is generated
-    else:
-        query = create_query_str(get_query(request))
-
-    alert = create_alert(query["submitted_search"])
-    page = int(request.GET.get('page'))
-    context = process_query(query, page, alert)
-    if context is None:
-        context['alert'] = "No results found"
-
+    solr = pysolr.Solr(f"{SOLR_SERVER}/{SOLR_INDEX}", timeout=10)
+    response = solr.search(query)
+    context = {
+        'total_hits': response.hits,
+        'ordered_dataset': response.docs,
+        'alert': query,
+    }
     return render(request, 'search/search_result.html', context)
+
+def build_advanced_query(request):
+    """Builds a Solr-compatible query string from the form inputs"""
+    query_parts = []
+    for i in range(1, 10):  # Adjust the range for the maximum number of rows
+        operator = request.GET.get(f'operator{i}', '').strip()
+        option = request.GET.get(f'option{i}', 'name')
+        input_value = request.GET.get(f'input{i}', '').strip()
+
+        if input_value:  # Only add if there is input
+            query_part = f"{option}:{input_value}"
+            if query_parts:
+                query_parts.append(f"{operator} {query_part}")
+            else:
+                query_parts.append(query_part)
+    return " ".join(query_parts)
 
 
 # Create query string
