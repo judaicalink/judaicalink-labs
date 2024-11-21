@@ -64,6 +64,7 @@ export default {
           `cm_e_search/api/get_names?query=${encodeURIComponent(this.searchQuery)}&start=${this.start}&rows=${this.rows}`
         );
         const data = await response.json();
+        console.log("API response:", data); // Debugging output
 
         if (Array.isArray(data.results)) {
           console.log("Fetched results:", data.results); // Debugging output
