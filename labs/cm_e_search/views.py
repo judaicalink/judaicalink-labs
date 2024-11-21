@@ -124,7 +124,7 @@ def result(request):
     #print("Results: ", results)
     context = {
         "results": results,
-        "data": json.dumps(names)
+        "data": names
     }
 
     return render(request, 'cm_e_search/search_result.html', context)
