@@ -61,7 +61,7 @@ export default {
 
       try {
         const response = await fetch(
-          `https://labs.judaicalink.org/cm_e_search/api/get_names?query=${encodeURIComponent(this.searchQuery)}&start=${this.start}&rows=${this.rows}`
+          `https://labs.judaicalink.org/api/get_names?query=${encodeURIComponent(this.searchQuery)}&start=${this.start}&rows=${this.rows}`
         );
         const data = await response.json();
         console.log("API response:", data); // Debugging output
