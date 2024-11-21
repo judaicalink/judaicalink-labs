@@ -54,7 +54,7 @@ export default {
   :items="names"
   variant="outlined"
 ></v-autocomplete>
-     <v-btn prepend-icon="fa:fas fa-search"
+     <v-btn prepend-icon="fas fa-search"
      class="mt-2"
         text="Search"
         type="submit">
