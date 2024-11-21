@@ -59,7 +59,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'channels',
     'core',
-    'corsheaders',
     'backend.apps.BackendConfig',
     'search',
     'cm_search',
