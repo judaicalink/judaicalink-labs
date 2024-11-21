@@ -38,12 +38,11 @@ def index(request):
 
 @cache_page(CACHE_TTL)
 def result(request):
-    names = get_names(request=request)  # searches for all names in cm_entity_names
-    #logger.debug("Got names from solr: %s", names)
+    names = get_names()  # Searches for all names in cm_entity_names
 
-    query = request.GET.get('query')
-    #logger.info("Query: %s",  query)
-    # add name: to query
+    query = request.GET.get('query', '')  # Default to an empty string if 'query' is not provided
+    if not query:
+        query = ''  # Ensure 'query' is a string
 
     solr = pysolr.Solr(SOLR_SERVER + 'cm_entities', always_commit=True, timeout=10,
                        auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
@@ -55,11 +54,10 @@ def result(request):
 
     search_fields = ["name", "spot"]
 
-    # create a dict from the fields and add the query
-    # create a list for the fields that should be searched and add the query
-    solr_query = [field + ':"' + query + '"' for field in search_fields]
+    # Create a list for the fields that should be searched and add the query
+    solr_query = [field + ':"' + query + '"' for field in search_fields if query]  # Avoid empty queries
 
-    # build the body for solr
+    # Build the body for Solr
     body = {
         "hl": "false",
         "indent": "true",
@@ -70,11 +68,12 @@ def result(request):
         "useParams": ""
     }
 
-    res = solr.search(q=solr_query, search_handler="/select", **body)
+    try:
+        res = solr.search(q=solr_query, search_handler="/select", **body)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
 
-    #logger.info("Results found: %s", res.hits)
-    #logger.info("Got results from solr: %s", res.docs)
-
+    # Process the results
     results = []
     for doc in res.docs:
         doc['name'] = ''.join(map(str, doc['name']))
@@ -84,50 +83,31 @@ def result(request):
         else:
             doc['ep'] = ''
 
-        logger.info("Name: %s", doc['name'])
-
-        # create a dict for the related entities
         if 'related_entities' in doc:
-            #logger.info("Related entities: ", len(doc['related_entities'])/4)
             related_entities = []
             entity = {}
             for index in range(0, len(doc['related_entities']), 4):
                 if index + 3 < len(doc['related_entities']):
-                    # entity is a list with 4 elements
-                    # 0: ep - entity page
-                    # 1: name
-                    # 2: score
-                    # 3: type
                     entity['ep'] = doc['related_entities'][index]
                     entity['name'] = doc['related_entities'][index + 1]
                     entity['score'] = doc['related_entities'][index + 2]
                     entity['type'] = doc['related_entities'][index + 3]
-
-                    #logger.info("Entity: ", entity)
                     related_entities.append(entity)
                     entity = {}
 
-            # Replace the whole data
             doc['related_entities'] = related_entities
         else:
             doc['related_entities'] = []
 
-        # FIXME: Fix the results
-        # check for journal occurrences
-        # check if doc has journal_occs.j_name
-        #if 'journal_occs' in doc:
-        #    for occurrence in doc['journal_occs']:
-        #        logger.info("Journal occs: ", occurrence['j_name'])
-
         results.append(doc)
 
-    #print("Results: ", results)
     context = {
         "results": results,
-        "data": names
+        "data": json.dumps(names)
     }
 
     return render(request, 'cm_e_search/search_result.html', context)
+
 
 
 def get_names_json(request):
