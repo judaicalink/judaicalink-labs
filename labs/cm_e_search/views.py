@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 SOLR_SERVER = settings.SOLR_SERVER
 
+
 def get_names(request):
     query = request.GET.get('query', '')
     start = int(request.GET.get('start', 0))
@@ -27,10 +28,9 @@ def get_names(request):
     return JsonResponse({'results': results})
 
 
-
 @cache_page(CACHE_TTL)
 def index(request):
-    names = get_names()
+    names = get_names(request=request)
     data = names
     context = {'data': data}
     return render(request, 'cm_e_search/search_index.html', context)
