@@ -47,18 +47,23 @@ export default {
 
 <template>
     <v-app>
-    <v-container>
-    <v-autocomplete
-        clearable="true"
-  label="Search"
-  :items="names"
-  variant="outlined"
-></v-autocomplete>
-     <v-btn prepend-icon="fas fa-search"
-     class="mt-2"
-        text="Search"
-        type="submit">
-</v-btn>
+      <v-container>
+        <v-row>
+          <v-autocomplete
+              clearable="true"
+              label="Type to search..."
+              :items="names"
+              variant="outlined"
+                >
+          </v-autocomplete>
+        <v-btn prepend-icon="fas fa-search"
+               class="mt-2"
+               text="Search"
+               type="submit"
+        >
+
+        </v-btn>
+      </v-row>
     </v-container>
   </v-app>
 </template>
