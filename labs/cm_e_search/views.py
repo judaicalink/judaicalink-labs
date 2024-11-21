@@ -38,11 +38,15 @@ def index(request):
 
 @cache_page(CACHE_TTL)
 def result(request):
-    names = get_names(request=request)  # Searches for all names in cm_entity_names
+    # Get names and extract the data if it's a JsonResponse
+    raw_names = get_names(request)  # Call get_names with the request
+    if isinstance(raw_names, JsonResponse):
+        names = raw_names.content  # Extract the raw content of JsonResponse
+        names = json.loads(names)  # Deserialize the JSON string back to Python data
+    else:
+        names = []
 
     query = request.GET.get('query', '')  # Default to an empty string if 'query' is not provided
-    if not query:
-        query = ''  # Ensure 'query' is a string
 
     solr = pysolr.Solr(SOLR_SERVER + 'cm_entities', always_commit=True, timeout=10,
                        auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
@@ -103,10 +107,11 @@ def result(request):
 
     context = {
         "results": results,
-        "data": json.dumps(names)
+        "data": json.dumps(names)  # Names should now be serialized properly
     }
 
     return render(request, 'cm_e_search/search_result.html', context)
+
 
 
 
