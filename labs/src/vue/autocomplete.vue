@@ -61,7 +61,7 @@ export default {
 
       try {
         const response = await fetch(
-          `/api/get_names?query=${encodeURIComponent(this.searchQuery)}&start=${this.start}&rows=${this.rows}`
+          `/cm_e_search/api/get_names?query=${encodeURIComponent(this.searchQuery)}&start=${this.start}&rows=${this.rows}`
         );
         const data = await response.json();
 
