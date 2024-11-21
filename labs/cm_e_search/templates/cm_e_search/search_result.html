@@ -2,12 +2,6 @@
 {% block content %}
 
 {% load static %}
-<script src="{% static 'js/autocomplete.js' %}" type="text/javascript"></script>
-<script>
-    var availableTags = "{{data}}".replace(/&quot;/g, '"');
-    var availableTags = JSON.parse(availableTags);
-</script>
-<script language="JavaScript" type="text/javascript" src="{% static 'js/jquery-1.12.4.min.js'%}"></script>
 
 <script>
     function more_items(classname) {
