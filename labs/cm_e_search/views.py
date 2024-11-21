@@ -38,7 +38,7 @@ def index(request):
 
 @cache_page(CACHE_TTL)
 def result(request):
-    names = get_names()  # Searches for all names in cm_entity_names
+    names = get_names(request=request)  # Searches for all names in cm_entity_names
 
     query = request.GET.get('query', '')  # Default to an empty string if 'query' is not provided
     if not query:
