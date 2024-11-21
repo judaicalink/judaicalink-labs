@@ -19,7 +19,8 @@
       <template #default="{ item }">
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title>{{ item?.name || 'Unknown' }}</v-list-item-title>
+            <!-- Accessing the name property directly -->
+            <v-list-item-title>{{ item.name || 'Unknown' }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </template>
@@ -43,9 +44,9 @@ export default {
   data() {
     return {
       searchQuery: "",
-      results: [],
+      results: [], // Array to hold results
       start: 0,
-      rows: 20, // Number of results to fetch per request
+      rows: 20, // Number of results per request
       loading: false,
       noMoreResults: false,
     };
@@ -64,22 +65,19 @@ export default {
           `https://labs.judaicalink.org/cm_e_search/api/get_names?query=${encodeURIComponent(this.searchQuery)}&start=${this.start}&rows=${this.rows}`
         );
         const data = await response.json();
-        console.log("API response:", data); // Debugging output
 
         if (Array.isArray(data.results)) {
-          console.log("Fetched results:", data.results); // Debugging output
-
           if (this.start === 0) {
-            this.results = data.results; // Reset results for new queries
+            this.results = data.results; // Set results to the array directly
           } else {
-            this.results = [...this.results, ...data.results]; // Append for lazy loading
+            this.results = [...this.results, ...data.results]; // Append new results for lazy loading
           }
 
           if (data.results.length < this.rows) {
-            this.noMoreResults = true; // Stop further loading
+            this.noMoreResults = true; // No more results to fetch
           }
         } else {
-          console.error("API response format invalid:", data);
+          console.error("Invalid API response format:", data);
           this.results = [];
         }
       } catch (error) {
@@ -90,42 +88,20 @@ export default {
       }
     },
     debouncedFetchResults: debounce(function () {
-      this.start = 0; // Reset pagination for new searches
+      this.start = 0;
       this.noMoreResults = false;
       this.fetchResults();
     }, 300),
     async loadMoreResults() {
       if (this.noMoreResults || this.loading) return;
 
-      this.start += this.rows; // Update starting point
+      this.start += this.rows;
       await this.fetchResults();
     },
-  },
-  mounted() {
-    // Add infinite scroll listener
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const lastEntry = entries[0];
-        if (lastEntry.isIntersecting) {
-          this.loadMoreResults();
-        }
-      },
-      {
-        root: null,
-        rootMargin: "0px",
-        threshold: 1.0,
-      }
-    );
-
-    const sentinel = document.createElement("div");
-    sentinel.setAttribute("id", "scroll-sentinel");
-    document.body.appendChild(sentinel);
-
-    observer.observe(sentinel);
   },
 };
 </script>
 
 <style scoped>
-/* Add any custom styles as needed */
+/* Add custom styles as needed */
 </style>
