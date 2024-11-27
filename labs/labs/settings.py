@@ -365,3 +365,8 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+# Debug Toolbar
+DEBUG_TOOLBAR_CONFIG = {
+    'RENDER_PANELS': False,
+}
