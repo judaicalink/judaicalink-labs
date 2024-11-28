@@ -91,7 +91,7 @@ def search(request):
     logger.debug(f"Solr Query: {query}")
 
     if not query.strip():
-        return render(request, 'search/no_results.html', {'message': 'No search terms provided.'})
+        return render(request, 'search/search_result.html', {'error_message': 'No search terms provided.'})
 
     solr = pysolr.Solr(f"{SOLR_SERVER}/{SOLR_INDEX}", timeout=10)
     try:
@@ -100,7 +100,7 @@ def search(request):
         response = solr.search(encoded_query)
     except pysolr.SolrError as e:
         logger.error(f"Solr query failed: {e}")
-        return render(request, 'search/error.html', {'message': 'An error occurred while querying Solr.'})
+        return render(request, 'search/search_result.html', {'error_message': 'An error occurred while querying Solr.'})
 
     context = {
         'total_hits': response.hits,

@@ -18,21 +18,28 @@
 
     <!-- Begin Alert -->
     <div class="row mt-4">
-                {% if total_hits > 0 %}
-                    <div class="alert alert-success text-center" role="alert">
-                    Found {{ total_hits }} results for your query:
-                    <b>{% for entry in alert %}
-                        {{entry}}
-                        {% endfor %}</b>
-                    </div>
-                {% else %}
-                <div class="alert alert-danger text-center" role="alert">
-                    No results matching your query:
-                    <b>{% for entry in alert %}
-                        {{entry}}
-                        {% endfor %}</b>
-                </div>
-                {% endif %}
+        {% if error_message %}
+            <div class="alert alert-danger text-center" role="alert">
+                {{ error_message }}
+            </div>
+        {% endif %}
+
+
+        {% if total_hits > 0 %}
+            <div class="alert alert-success text-center" role="alert">
+            Found {{ total_hits }} results for your query:
+            <b>{% for entry in alert %}
+                {{entry}}
+                {% endfor %}</b>
+            </div>
+        {% else %}
+        <div class="alert alert-danger text-center" role="alert">
+            No results matching your query:
+            <b>{% for entry in alert %}
+                {{entry}}
+                {% endfor %}</b>
+        </div>
+        {% endif %}
     </div>
     <!-- End Alert -->
 
