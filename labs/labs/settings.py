@@ -116,18 +116,17 @@ WSGI_APPLICATION = 'labs.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    "backup": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-    },
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": env('POSTGRES_DB') if env('POSTGRES_DB') is not None else "judaicalink",
-        "USER": env('POSTGRES_USER') if env('POSTGRES_USER') is not None else "judaicalink",
-        "PASSWORD": env('POSTGRES_PASSWORD') if env('POSTGRES_PASSWORD') is not None else "judaicalink",
-        "HOST": env('POSTGRES_HOST') if env('POSTGRES_HOST') is not None else "localhost",
-        "PORT": env('POSTGRES_PORT') if env('POSTGRES_PORT') is not None else "5432",
-    },
+    # read os.environ['DATABASE_URL'] and raises
+    # ImproperlyConfigured exception if not found
+    #
+    # The db() method is an alias for db_url().
+    'default': env.db(),
+
+    # read os.environ['SQLITE_URL']
+    'extra': env.db_url(
+        'SQLITE_URL',
+        default='sqlite:///db.sqlite3'
+    )
 }
 
 # Cache Redis
@@ -139,7 +138,7 @@ CACHES = {
  }
 CACHE_TTL = 60 * 15
 
-INTERNAL_IPS = [ "127.0.0.1"]
+INTERNAL_IPS = ["127.0.0.1"]
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
