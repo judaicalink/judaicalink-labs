@@ -116,20 +116,29 @@ def search(request):
 def build_advanced_query(request):
     """Builds a Solr-compatible query string from the form inputs"""
     query_parts = []
-    for i in range(1, 10):  # Adjust the range for the maximum number of rows
+
+    # Handle up to 10 fields, starting from input0
+    for i in range(0, 10):  # Allow input0
         operator = request.GET.get(f'operator{i}', '').strip()
         option = request.GET.get(f'option{i}', 'name').strip()
         input_value = request.GET.get(f'input{i}', '').strip()
 
-        if input_value:  # Only add if there is input
+        logger.debug(f"Operator {i}: {operator}, Option {i}: {option}, Input {i}: {input_value}")
+
+        if input_value:
             query_part = f"{option}:{input_value}"
             if query_parts:
-                if operator:  # Add only valid operators
+                if operator:
                     query_parts.append(f"{operator} {query_part}")
             else:
                 query_parts.append(query_part)
-    return " ".join(query_parts)
 
+    # Handle case where input0 is the only valid input
+    if len(query_parts) == 0 and request.GET.get('input0'):
+        query_parts.append(f"name:{request.GET.get('input0').strip()}")
+
+    logger.debug(f"Constructed Query: {' '.join(query_parts)}")
+    return " ".join(query_parts)
 
 
 # Create query string
