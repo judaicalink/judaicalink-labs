@@ -15,6 +15,7 @@
 
     <div id="accordion">
            {% include 'search/search_form.html' %}
+    </div>
 
     <!-- Begin Alert -->
     <div class="row mt-4">
@@ -23,9 +24,7 @@
                 {{ error_message }}
             </div>
         {% endif %}
-
-
-        {% if total_hits > 0 %}
+        {% elif total_hits > 0 %}
             <div class="alert alert-success text-center" role="alert">
             Found {{ total_hits }} results for your query:
             <b>{% for entry in alert %}
