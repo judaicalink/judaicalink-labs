@@ -87,6 +87,7 @@ def load(request):
 # Search results page
 def search(request):
     """Handles advanced search query from Vue component"""
+    logger.debug(f"GET: {request.GET}")
     query = build_advanced_query(request)
     logger.debug(f"Solr Query: {query}")
 
@@ -94,10 +95,12 @@ def search(request):
         return render(request, 'search/search_result.html', {'error_message': 'No search terms provided.'})
 
     solr = pysolr.Solr(f"{SOLR_SERVER}/{SOLR_INDEX}", timeout=10)
+    print(f"Solr URL: {solr.url}")
     try:
         # Ensure inputs are encoded to avoid issues with special characters
         encoded_query = quote(query, safe=":")
         response = solr.search(encoded_query)
+        print(f"Response: {response}")
     except pysolr.SolrError as e:
         logger.error(f"Solr query failed: {e}")
         return render(request, 'search/search_result.html', {'error_message': 'An error occurred while querying Solr.'})
