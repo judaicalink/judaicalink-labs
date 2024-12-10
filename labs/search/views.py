@@ -87,27 +87,19 @@ def load(request):
         return HttpResponse(response)
 
 # Search results page
-from django.http import HttpResponse
-import pysolr
-import logging
-
-logger = logging.getLogger('labs')
-
 def search(request):
     query = build_advanced_query(request)
     logger.debug(f"Constructed Query: {query}")
 
-    # Ensure SOLR_URL is constructed correctly
-    SOLR_URL = f"{SOLR_SERVER}/{SOLR_INDEX}/select"
+    SOLR_URL = f"{SOLR_SERVER.rstrip('/')}/{SOLR_INDEX.lstrip('/')}/select"
     solr = pysolr.Solr(SOLR_URL, timeout=10)
 
     try:
-        # Query Solr
         response = solr.search(q=query, params={"q.op": "OR", "wt": "json"})
     except pysolr.SolrError as e:
         logger.error(f"Solr query failed: {e}")
         logger.error(f"Request URL: {SOLR_URL}?q={query}")
-        return HttpResponse(f"Solr query failed: {e}", status=400)
+        return HttpResponse(f"Solr query failed: {e}", status=404)
 
     context = {
         'total_hits': response.hits,
