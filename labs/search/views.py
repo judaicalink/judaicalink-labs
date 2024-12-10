@@ -23,6 +23,8 @@ CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 # import SEARCH_URL from settings.py
 SOLR_SERVER = settings.SOLR_SERVER
 SOLR_INDEX = "judaicalink"
+SOLR_SERVER = SOLR_SERVER.rstrip('/')
+SOLR_INDEX = SOLR_INDEX.lstrip('/')
 
 # setup logging
 logger = logging.getLogger('labs')
@@ -85,28 +87,35 @@ def load(request):
         return HttpResponse(response)
 
 # Search results page
+from django.http import HttpResponse
+import pysolr
+import logging
+
+logger = logging.getLogger('labs')
+
 def search(request):
     query = build_advanced_query(request)
     logger.debug(f"Constructed Query: {query}")
-    solr = pysolr.Solr(f"{SOLR_SERVER}/{SOLR_INDEX}/select", timeout=10)
 
-    solr = pysolr.Solr(f"{SOLR_SERVER}/{SOLR_INDEX}/select", timeout=10)
+    # Ensure SOLR_URL is constructed correctly
+    SOLR_URL = f"{SOLR_SERVER}/{SOLR_INDEX}/select"
+    solr = pysolr.Solr(SOLR_URL, timeout=10)
+
     try:
-        response = solr.search(q=query, search_handler="/select", params={"q.op": "OR"})
+        # Query Solr
+        response = solr.search(q=query, params={"q.op": "OR", "wt": "json"})
     except pysolr.SolrError as e:
         logger.error(f"Solr query failed: {e}")
-        # Log the request URL for debugging
-        logger.error(f"Request URL: {solr.url}?q={query}")
+        logger.error(f"Request URL: {SOLR_URL}?q={query}")
         return HttpResponse(f"Solr query failed: {e}", status=400)
 
-    if not query or query == "*:*":
-        logger.warning("Empty or default query. Returning empty results.")
-        context = {
-            'total_hits': 0,
-            'ordered_dataset': [],
-            'alert': "No search criteria provided.",
-        }
-        return render(request, 'search/search_result.html', context)
+    context = {
+        'total_hits': response.hits,
+        'ordered_dataset': response.docs,
+        'alert': query,
+    }
+    return render(request, 'search/search_result.html', context)
+
 
 
 # Build advanced query
