@@ -111,12 +111,13 @@ def search(request):
     return render(request, 'search/search_result.html', context)
 
 
-
-
 # Build advanced query
 def build_advanced_query(request):
+    """
+    Builds the advanced query for the search.
+    """
     query_parts = []
-    for i in range(1, 10):
+    for i in range(0, 10):
         operator = request.GET.get(f'operator{i}', '').strip()
         option = request.GET.get(f'option{i}', 'name').strip()
         input_value = request.GET.get(f'input{i}', '').strip()
