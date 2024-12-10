@@ -93,7 +93,7 @@ def search(request):
     query = build_advanced_query(request)
     logger.debug(f"Constructed Query: {query}")
 
-    SOLR_URL = f"{SOLR_SERVER}/{SOLR_INDEX}/select"
+    SOLR_URL = f"{SOLR_SERVER}/{SOLR_INDEX}"
     solr = pysolr.Solr(SOLR_URL, timeout=10)
 
     try:
