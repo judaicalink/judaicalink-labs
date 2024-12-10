@@ -110,6 +110,7 @@ def search(request):
 
 
 
+
 # Build advanced query
 def build_advanced_query(request):
     query_parts = []
