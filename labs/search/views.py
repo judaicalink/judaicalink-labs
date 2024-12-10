@@ -88,39 +88,44 @@ def load(request):
 def search(request):
     query = build_advanced_query(request)
     logger.debug(f"Constructed Query: {query}")
-    solr = pysolr.Solr(f"{SOLR_SERVER}/{SOLR_INDEX}", timeout=10)
+    solr = pysolr.Solr(f"{SOLR_SERVER}/{SOLR_INDEX}/select", timeout=10)
 
+    solr = pysolr.Solr(f"{SOLR_SERVER}/{SOLR_INDEX}/select", timeout=10)
     try:
-        response = solr.search(query)
+        response = solr.search(q=query, search_handler="/select", params={"q.op": "OR"})
     except pysolr.SolrError as e:
         logger.error(f"Solr query failed: {e}")
+        # Log the request URL for debugging
+        logger.error(f"Request URL: {solr.url}?q={query}")
         return HttpResponse(f"Solr query failed: {e}", status=400)
 
-    context = {
-        'total_hits': response.hits,
-        'ordered_dataset': response.docs,
-        'alert': query,
-    }
-    return render(request, 'search/search_result.html', context)
+    if not query or query == "*:*":
+        logger.warning("Empty or default query. Returning empty results.")
+        context = {
+            'total_hits': 0,
+            'ordered_dataset': [],
+            'alert': "No search criteria provided.",
+        }
+        return render(request, 'search/search_result.html', context)
 
 
 # Build advanced query
 def build_advanced_query(request):
-    """Builds a Solr-compatible query string from the form inputs."""
     query_parts = []
-    for i in range(1, 10):  # Adjust for max number of rows
+    for i in range(1, 10):
         operator = request.GET.get(f'operator{i}', '').strip()
-        option = request.GET.get(f'option{i}', 'name')
+        option = request.GET.get(f'option{i}', 'name').strip()
         input_value = request.GET.get(f'input{i}', '').strip()
 
-        if input_value:  # Add query only if input is valid
+        if input_value:
             query_part = f"{option}:{input_value}"
             if query_parts:
-                query_parts.append(f"{operator.strip()} {query_part}")
+                query_parts.append(f"{operator} {query_part}")
             else:
                 query_parts.append(query_part)
-    # Ensure query is non-empty and properly formatted
-    return " ".join(query_parts).strip() if query_parts else "*:*"  # Default to match-all query if empty
+
+    return " ".join(query_parts) if query_parts else "*:*"
+
 
 
 
