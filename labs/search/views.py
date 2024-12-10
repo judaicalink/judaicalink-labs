@@ -87,12 +87,13 @@ def load(request):
 # Search results page
 def search(request):
     query = build_advanced_query(request)
-    logger.debug(f"Constructed Query: {query}")  # Debug log
+    logger.debug(f"Constructed Query: {query}")
     solr = pysolr.Solr(f"{SOLR_SERVER}/{SOLR_INDEX}", timeout=10)
 
     try:
         response = solr.search(query)
     except pysolr.SolrError as e:
+        logger.error(f"Solr query failed: {e}")
         return HttpResponse(f"Solr query failed: {e}", status=400)
 
     context = {
@@ -120,6 +121,7 @@ def build_advanced_query(request):
                 query_parts.append(query_part)
     # Ensure query is non-empty and properly formatted
     return " ".join(query_parts).strip() if query_parts else "*:*"  # Default to match-all query if empty
+
 
 
 
