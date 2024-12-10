@@ -86,12 +86,15 @@ def load(request):
 
 # Search results page
 def search(request):
-    """Handles advanced search query from Vue component"""
-    # Check for advanced search and process accordingly
     query = build_advanced_query(request)
-
+    print(f"Constructed Query: {query}")  # Debug log
     solr = pysolr.Solr(f"{SOLR_SERVER}/{SOLR_INDEX}", timeout=10)
-    response = solr.search(query)
+
+    try:
+        response = solr.search(query)
+    except pysolr.SolrError as e:
+        return HttpResponse(f"Solr query failed: {e}", status=400)
+
     context = {
         'total_hits': response.hits,
         'ordered_dataset': response.docs,
@@ -99,21 +102,24 @@ def search(request):
     }
     return render(request, 'search/search_result.html', context)
 
+
+# Build advanced query
 def build_advanced_query(request):
     """Builds a Solr-compatible query string from the form inputs"""
     query_parts = []
-    for i in range(1, 10):  # Adjust the range for the maximum number of rows
+    for i in range(1, 10):  # Adjust for max number of rows
         operator = request.GET.get(f'operator{i}', '').strip()
         option = request.GET.get(f'option{i}', 'name')
         input_value = request.GET.get(f'input{i}', '').strip()
 
-        if input_value:  # Only add if there is input
+        if input_value:  # Add query only if input is valid
             query_part = f"{option}:{input_value}"
             if query_parts:
-                query_parts.append(f"{operator} {query_part}")
+                query_parts.append(f"{operator.strip()} {query_part}")
             else:
                 query_parts.append(query_part)
-    return " ".join(query_parts)
+    # Join parts and return valid query string
+    return " ".join(query_parts).strip()
 
 
 # Create query string
@@ -144,6 +150,7 @@ def create_query_str(submitted_search):
     }
 
     return query_dic
+
 
 
 # Advanced search page
