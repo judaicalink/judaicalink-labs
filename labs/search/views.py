@@ -105,7 +105,7 @@ def search(request):
 
 # Build advanced query
 def build_advanced_query(request):
-    """Builds a Solr-compatible query string from the form inputs"""
+    """Builds a Solr-compatible query string from the form inputs."""
     query_parts = []
     for i in range(1, 10):  # Adjust for max number of rows
         operator = request.GET.get(f'operator{i}', '').strip()
@@ -118,8 +118,9 @@ def build_advanced_query(request):
                 query_parts.append(f"{operator.strip()} {query_part}")
             else:
                 query_parts.append(query_part)
-    # Join parts and return valid query string
-    return " ".join(query_parts).strip()
+    # Ensure query is non-empty and properly formatted
+    return " ".join(query_parts).strip() if query_parts else "*:*"  # Default to match-all query if empty
+
 
 
 # Create query string
