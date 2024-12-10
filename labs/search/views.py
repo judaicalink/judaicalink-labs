@@ -78,7 +78,7 @@ def load(request):
     """
     with open('../data/textfile-djh.json', 'rb') as f:
         data = f.read()
-        logger.info(data)
+        logger.debug(data)
         headers = {'content-type': 'application/json'}
         response = requests.post(f'http://localhost:8389/{settings.JUDAICALINK_INDEX}/doc/_bulk?pretty', data=data,
                                  headers=headers)
@@ -87,7 +87,7 @@ def load(request):
 # Search results page
 def search(request):
     query = build_advanced_query(request)
-    print(f"Constructed Query: {query}")  # Debug log
+    logger.debug(f"Constructed Query: {query}")  # Debug log
     solr = pysolr.Solr(f"{SOLR_SERVER}/{SOLR_INDEX}", timeout=10)
 
     try:
@@ -208,7 +208,7 @@ def get_query(request):
             }
             inputs.append(dictionary)
 
-    logger.info( 'Operators: %s', operators)
+    logger.debug( 'Operators: %s', operators)
 
     # sorting the lists by the "html_name" in the dictionaries
     # example result for inputs: ['einstein', 'herbert']
@@ -256,9 +256,9 @@ def get_query(request):
         else:
             submitted_search = [{'input': 'error_nothing_submitted'}]
 
-    logger.info("--------------------------------submitted_search-----------------------------------------------")
+    logger.debug("--------------------------------submitted_search-----------------------------------------------")
     submitted_search = [{'option': 'name:', 'input': 'Anders'}, {'operator': ' AND ', 'option': 'name:', 'input': ''}]
-    logger.info(submitted_search)
+    logger.debug(submitted_search)
 
     cleared_submitted_search = submitted_search.copy()
     for dictionary in submitted_search:
@@ -389,9 +389,9 @@ def generate_rows(submitted_search):
 
             rows.append(row)
 
-        # print("----------------- rows ---------------------")
-        # print(len(rows))
-        # print(rows)
+        # logger.debug("----------------- rows ---------------------")
+        # logger.debug(len(rows))
+        # logger.debug(rows)
         return rows
 
     # if we don't use the advanced search we still want to have displayed two empty rows in the advanced search
