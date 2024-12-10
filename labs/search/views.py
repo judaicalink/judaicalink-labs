@@ -88,6 +88,8 @@ def load(request):
 
 # Search results page
 def search(request):
+    logger.debug("Searching...")
+    logger.debug(f"Request: {request}")
     query = build_advanced_query(request)
     logger.debug(f"Constructed Query: {query}")
 
