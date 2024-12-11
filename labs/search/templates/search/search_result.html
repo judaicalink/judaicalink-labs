@@ -29,26 +29,22 @@
         {% endif %}
         <!-- End Alert -->
 
-        <!-- Begin Results -->
+        <!-- Begin Sorting -->
         <div>
             {% if sort_order == "asc" %}
-            <b>
-                <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=asc">Sort A-Z</a>
-            </b>
-            <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=desc">Sort Z-A</a>
-
-            {% elif sort_order == "desc" %}
-            <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=asc">Sort A-Z</a>
-            <b>
+                <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=asc"><strong>Sort A-Z</strong></a>
                 <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=desc">Sort Z-A</a>
-            </b>
+            {% elif sort_order == "desc" %}
+                <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=asc">Sort A-Z</a>
+                <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=desc"><strong>Sort Z-A</strong></a>
             {% else %}
                 <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=asc">Sort A-Z</a>
                 <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=desc">Sort Z-A</a>
             {% endif %}
-
         </div>
+        <!-- End Sorting -->
 
+        <!-- Begin Results-->
         <div class="table-responsive mb-3">
             <table class="table table-light table-striped">
 
