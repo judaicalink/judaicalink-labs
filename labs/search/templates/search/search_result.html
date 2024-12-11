@@ -51,7 +51,7 @@
                             {% if key == "Alternatives" %}
                                 <p><strong>Alternatives:</strong></p>
                                 {{ value | safe }}
-                            {% if key == "Link"  %}
+                            {% elif key == "Link"  %}
                                 {{ value | safe | escape }}
                             {% elif key == "Dataslug" %}
                                 <p>Dataslug: <span class="badge text-bg-secondary text-white">{{value}}</span></p>
