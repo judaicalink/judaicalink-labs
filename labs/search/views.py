@@ -147,6 +147,7 @@ def search(request):
     logger.debug(f"Sort Order: {sort_order}")
     rows_per_page = 20
     start = (page - 1) * rows_per_page
+    logger.debug(f"Start: {start}")
 
     SOLR_URL = f"{SOLR_SERVER}/{SOLR_INDEX}"
     solr = pysolr.Solr(SOLR_URL, timeout=10)
