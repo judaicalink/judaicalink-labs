@@ -92,11 +92,15 @@ def load(request):
                                  headers=headers)
         return HttpResponse(response)
 
-def format_results(docs):
+# Formats the results for display
+def format_results(docs, highlighting):
     formatted = []
     for doc in docs:
         result = {}
+        doc_id = doc.get("id", "")
         for key, value in doc.items():
+            if key == "_version_":
+                continue  # Skip version field
             if key == "id":
                 # Convert id into a clickable link
                 result["ID"] = f"<a href='{value}'>{value}</a>"
@@ -104,10 +108,13 @@ def format_results(docs):
                 # Keep alternatives as a list
                 result["Alternatives"] = value
             else:
-                # Flatten other fields to strings
-                result[key.capitalize()] = " ".join(value) if isinstance(value, list) else str(value)
+                # Highlight text if available
+                highlighted_value = highlighting.get(doc_id, {}).get(key, value)
+                result[key.capitalize()] = " ".join(highlighted_value) if isinstance(highlighted_value, list) else str(highlighted_value)
         formatted.append(result)
     return formatted
+
+
 
 
 # Search results page
@@ -116,7 +123,6 @@ def search(request):
     query = build_advanced_query(request)
     logger.debug(f"Constructed Query: {query}")
 
-    # If the query is empty, return an appropriate response
     if not query or query == "*:*":
         context = {
             'total_hits': 0,
@@ -129,20 +135,26 @@ def search(request):
     solr = pysolr.Solr(SOLR_URL, timeout=10)
 
     try:
-        response = solr.search(q=query, params={"q.op": "OR", "wt": "json"})
+        response = solr.search(
+            q=query,
+            params={
+                "q.op": "OR",
+                "wt": "json",
+                "hl": "true",
+                "hl.fl": "*",
+                "hl.simple.pre": "<mark>",
+                "hl.simple.post": "</mark>",
+            },
+        )
     except pysolr.SolrError as e:
         logger.error(f"Solr query failed: {e}")
         logger.error(f"Request URL: {SOLR_URL}?q={query}")
         return HttpResponse(f"Solr query failed: {e}", status=404)
 
-    # Prepare alert based on query type
-    if "AND" in query or "OR" in query or "NOT" in query:
-        alert = query  # Advanced search shows the full query
-    else:
-        alert = query.split(":")[-1]  # Simple search shows just the term
+    highlighting = response.highlighting
+    formatted_results = format_results(response.docs, highlighting)
 
-    # Clean up the results for display
-    formatted_results = format_results(response.docs)
+    alert = query if "AND" in query or "OR" in query or "NOT" in query else query.split(":")[-1]
 
     context = {
         'total_hits': response.hits,
@@ -153,12 +165,13 @@ def search(request):
 
 
 
+
 # Build advanced query
 def build_advanced_query(request):
     query_parts = []
-    for i in range(0, 10):
+    for i in range(1, 10):
         operator = request.GET.get(f'operator{i}', '').strip()
-        option = request.GET.get(f'option{i}', 'name').strip()
+        option = request.GET.get(f'option{i}', 'name').strip().rstrip(":")  # Remove trailing colon
         input_value = request.GET.get(f'input{i}', '').strip()
 
         if input_value:
@@ -169,6 +182,7 @@ def build_advanced_query(request):
                 query_parts.append(query_part)
 
     return " ".join(query_parts) if query_parts else None
+
 
 
 
