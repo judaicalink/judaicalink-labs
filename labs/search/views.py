@@ -142,7 +142,9 @@ def search(request):
 
     # Pagination and sorting parameters
     page = int(request.GET.get("page", 1))
+    logger.debug(f"Page: {page}")
     sort_order = request.GET.get("sort", "asc")  # Default: ascending
+    logger.debug(f"Sort Order: {sort_order}")
     rows_per_page = 20
     start = (page - 1) * rows_per_page
 
