@@ -63,14 +63,17 @@
                         </p>
                         <div>
                             {% if value|length > 200 %}
-                            <p>{{ value|safe|slice:":200" }}...</p>
+                            <!-- First 200 characters are always visible -->
+                            <p>{{ value|slice:":200"|safe }}...</p>
+                            <!-- "Read More" button -->
                             <button class="btn btn-link p-0" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#abstract-{{ forloop.counter }}" aria-expanded="false"
                                     aria-controls="abstract-{{ forloop.counter }}">
                                 Read more >>
                             </button>
+                            <!-- Remaining text -->
                             <div id="abstract-{{ forloop.counter }}" class="collapse mt-2">
-                                {{ value|safe }}
+                                {{ value|slice:"200:"|safe }}
                             </div>
                             {% else %}
                             <p>{{ value|safe }}</p>
@@ -87,6 +90,7 @@
                 {% endfor %}
             </table>
         </div>
+
 
         <!-- End Results-->
 
