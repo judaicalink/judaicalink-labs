@@ -105,7 +105,7 @@ def format_results(docs, highlighting):
                 continue  # Exclude `_version_`
             if key == "id":
                 # Only show ID if it's a valid link
-                result["ID"] = f"<a href='{value}'>{value}</a>" if value.startswith("http") else None
+                result["ID"] = f"<a href='{value}'>{value}</a>" if value.startswith("http") else key['id'].pop()
             elif key == "alternatives":
                 # Format alternatives as an unordered list
                 result["Alternatives"] = "<ul>" + "".join(
