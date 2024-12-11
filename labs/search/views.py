@@ -171,6 +171,7 @@ def search(request):
                 "sort": f"name {sort_order}"
             },
         )
+        logger.debug(f"Response: {response}")
     except pysolr.SolrError as e:
         logger.error(f"Solr query failed: {e}")
         logger.error(f"Request URL: {SOLR_URL}?q={query}")
