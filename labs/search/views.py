@@ -173,7 +173,7 @@ def search(request):
         solr_params["sort"] = f"name_sort {sort_order}"
 
     try:
-        response = solr.search(q=query, params=solr_params)
+        response = solr.search(q=query, **solr_params)
 
     except pysolr.SolrError as e:
         logger.error(f"Solr query failed: {e}")
