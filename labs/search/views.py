@@ -153,6 +153,9 @@ def search(request):
     solr = pysolr.Solr(SOLR_URL, timeout=10)
 
     try:
+        logger.debug(
+            f"Solr Query: {SOLR_URL}?q={query}&start={start}&rows={rows_per_page}&sort=name {'asc' if sort_order == 'asc' else 'desc'}")
+
         response = solr.search(
             q=query,
             params={
