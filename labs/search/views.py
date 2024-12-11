@@ -183,6 +183,7 @@ def search(request):
         'current_page': page,
         'pages': pages,
         'sort_order': sort_order,
+        'query': query,
     }
     return render(request, 'search/search_result.html', context)
 
