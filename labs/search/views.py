@@ -92,13 +92,38 @@ def load(request):
                                  headers=headers)
         return HttpResponse(response)
 
+def format_results(docs):
+    formatted = []
+    for doc in docs:
+        result = {}
+        for key, value in doc.items():
+            if key == "id":
+                # Convert id into a clickable link
+                result["ID"] = f"<a href='{value}'>{value}</a>"
+            elif key == "alternatives":
+                # Keep alternatives as a list
+                result["Alternatives"] = value
+            else:
+                # Flatten other fields to strings
+                result[key.capitalize()] = " ".join(value) if isinstance(value, list) else str(value)
+        formatted.append(result)
+    return formatted
+
 
 # Search results page
 def search(request):
     logger.debug("Searching...")
-    logger.debug(f"Request: {request}")
     query = build_advanced_query(request)
     logger.debug(f"Constructed Query: {query}")
+
+    # If the query is empty, return an appropriate response
+    if not query or query == "*:*":
+        context = {
+            'total_hits': 0,
+            'ordered_dataset': [],
+            'alert': "No search criteria provided.",
+        }
+        return render(request, 'search/search_result.html', context)
 
     SOLR_URL = f"{SOLR_SERVER}/{SOLR_INDEX}"
     solr = pysolr.Solr(SOLR_URL, timeout=10)
@@ -110,21 +135,28 @@ def search(request):
         logger.error(f"Request URL: {SOLR_URL}?q={query}")
         return HttpResponse(f"Solr query failed: {e}", status=404)
 
+    # Prepare alert based on query type
+    if "AND" in query or "OR" in query or "NOT" in query:
+        alert = query  # Advanced search shows the full query
+    else:
+        alert = query.split(":")[-1]  # Simple search shows just the term
+
+    # Clean up the results for display
+    formatted_results = format_results(response.docs)
+
     context = {
         'total_hits': response.hits,
-        'ordered_dataset': response.docs,
-        'alert': query,
+        'ordered_dataset': formatted_results,
+        'alert': alert,
     }
     return render(request, 'search/search_result.html', context)
 
 
+
 # Build advanced query
 def build_advanced_query(request):
-    """
-    Builds the advanced query for the search.
-    """
     query_parts = []
-    for i in range(0, 10):
+    for i in range(1, 10):
         operator = request.GET.get(f'operator{i}', '').strip()
         option = request.GET.get(f'option{i}', 'name').strip()
         input_value = request.GET.get(f'input{i}', '').strip()
@@ -136,7 +168,8 @@ def build_advanced_query(request):
             else:
                 query_parts.append(query_part)
 
-    return " ".join(query_parts) if query_parts else "*:*"
+    return " ".join(query_parts) if query_parts else None
+
 
 
 # Create query string

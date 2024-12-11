@@ -71,14 +71,40 @@
 
         {% include "cm_e_search/search_form.html" %}
 
-        {% if results|length < 1 %}
-        <div class="alert alert-danger text-center mb-5" role="alert">
-            No entity matching your query!
+        <div class="alert alert-info">
+            <strong>Query:</strong> {{ alert }}
+        </div>
+
+        {% if total_hits > 0 %}
+        <div class="alert alert-success">
+            <strong>Found {{ total_hits }} results.</strong>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                {% for key in ordered_dataset.0.keys %}
+                <th>{{ key }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for result in ordered_dataset %}
+            <tr>
+                {% for value in result.values %}
+                <td>{{ value|safe }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="alert alert-danger">
+            <strong>No results found.</strong>
         </div>
         {% endif %}
 
-        <div>
 
+        <div>
 
 
             {% for result in results %}
@@ -145,29 +171,32 @@
                     {% for occurrence in result.journal_occs %}
 
                     {% if forloop.counter < 10 %}
-                        <li style="display:list-item;" class="journal">
-                    {% else %}
-                        <li style="display:none;" class="journal">
-                    {% endif %}
+                    <li style="display:list-item;" class="journal">
+                        {% else %}
+                    <li style="display:none;" class="journal">
+                        {% endif %}
 
-                            ({{ occurrence.mentions | length }})
-                            <a href="#" onclick="show_journal('{{forloop.counter}}')">{{ occurrence.j_name }}</a>
+                        ({{ occurrence.mentions | length }})
+                        <a href="#" onclick="show_journal('{{forloop.counter}}')">{{ occurrence.j_name }}</a>
 
-                            [{{ occurrence.first }} - {{ occurrence.last }}]
+                        [{{ occurrence.first }} - {{ occurrence.last }}]
 
-                            <div class="mentions mb-3" id="{{forloop.counter}}" style="display: none; overflow-y: scroll; max-height: 400px;">
-                                <ul>
-                                    <ul style="list-style-type: none;">
-                                        <li><i>Text</i>: {{ occurrence.mentions.spot }}</li>
-                                        <li><i>Date</i>: {{ occurrence.mentions.date }}</li>
-                                        <li><i>Position (offset)</i>: {{ occurrence.mentions.start }} - {{ occurrence.mentions.end }}</li>
-                                        <li><i>Ref. in Visual Library</i>: <a
-                                                href="http://sammlungen.ub.uni-frankfurt.de/cm/periodical/pageview/{{ occurrence.mentions.p_link }}">Visual
-                                            Library</a></li>
-                                    </ul>
+                        <div class="mentions mb-3" id="{{forloop.counter}}"
+                             style="display: none; overflow-y: scroll; max-height: 400px;">
+                            <ul>
+                                <ul style="list-style-type: none;">
+                                    <li><i>Text</i>: {{ occurrence.mentions.spot }}</li>
+                                    <li><i>Date</i>: {{ occurrence.mentions.date }}</li>
+                                    <li><i>Position (offset)</i>: {{ occurrence.mentions.start }} -
+                                        {{ occurrence.mentions.end }}
+                                    </li>
+                                    <li><i>Ref. in Visual Library</i>: <a
+                                            href="http://sammlungen.ub.uni-frankfurt.de/cm/periodical/pageview/{{ occurrence.mentions.p_link }}">Visual
+                                        Library</a></li>
                                 </ul>
-                            </div>
-                        </li>
+                            </ul>
+                        </div>
+                    </li>
                     {% endfor %}
                 </ul>
 
