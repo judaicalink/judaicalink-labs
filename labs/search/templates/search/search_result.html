@@ -7,17 +7,17 @@
 
 <main class="row">
 
-<div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-9 col-xl-8">
+    <div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-9 col-xl-8">
 
-<h1 class="text-center">JudaicaLink Search</h1>
+        <h1 class="text-center">JudaicaLink Search</h1>
 
-<!-- looking at our data -->
+        <!-- looking at our data -->
 
-    <div id="accordion">
-           {% include 'search/search_form.html' %}
-    </div>
+        <div id="accordion">
+            {% include 'search/search_form.html' %}
+        </div>
 
-    <!-- Begin Alert -->
+        <!-- Begin Alert -->
         {% if total_hits > 0 %}
         <div class="alert alert-success">
             <p>Found {{ total_hits }} result(s) for query: <strong>{{ alert }}</strong>.</p>
@@ -27,44 +27,56 @@
             <strong>No results found.</strong>
         </div>
         {% endif %}
-    <!-- End Alert -->
+        <!-- End Alert -->
 
-    <!-- Begin Results -->
+        <!-- Begin Results -->
+        <div>
+            <a class="btn btn-link" href="?page={{ current_page }}&sort=asc">Sort A-Z</a>
+            <a class="btn btn-link" href="?page={{ current_page }}&sort=desc">Sort Z-A</a>
+        </div>
 
-    <div class="table-responsive mb-3">
-        <table class="table table-light table-striped">
-
-            {% for values in ordered_dataset %}
-            <tr>
-                <td>
-                    {% for key, value in values.items %}
-                        {% if key == "Link"  %}
-                            {{ value | safe | escape }}
-                        {% elif key == "Dataslug" %}
-                            <p>Dataslug: <span class="badge text-bg-secondary text-white">{{value}}</span></p>
-                        {% else %}
-                            <p>{{ key }}: {{ value | safe | escape }}</p>
-                        {% endif %}
-                    {% endfor %}
-                </td>
-            </tr>
+        <div>
+            {% for page_num in pages %}
+            <a class="btn btn-link" href="?page={{ page_num }}&sort={{ sort_order }}">{{ page_num }}</a>
             {% endfor %}
+        </div>
 
-        </table>
-    </div>
-    <!-- End Results-->
+        <div class="table-responsive mb-3">
+            <table class="table table-light table-striped">
 
-    <!-- Begin Pagination-->
-    {% include 'search/pagination.html' %}
-    <!-- End Pagination-->
+                {% for values in ordered_dataset %}
+                <tr>
+                    <td>
+                        {% for key, value in values.items %}
+                        {% if key == "Alternatives" %}
+                        {{ value | safe }}
+                        {% elif key == "ID" and value %}
+                        {{ value | safe }}
+                        {% else %}
+                        <p><strong>{{ key }}:</strong> {{ value | safe }}</p>
+                        {% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </table>
+        </div>
+        <!-- End Results-->
+
+        <!-- Begin Pagination-->
+        {% include 'search/pagination.html' %}
+        <!-- End Pagination-->
 
     </div>
 
     <!-- Begin Picture -->
 
     <div class="col-md-0 col-lg-3 col-xl-4">
-        <div class="img-fluid mt-4" id="picturemargintop30">
-            <img src="/static/img/judaicalink_knowledge_graph_compressed.jpg" class="img-thumbnail img-fluid" alt="Judaicalink Knowledge Graph">
+        <div id="picturemargintop30" class="img-fluid mt-4">
+            <img alt="Judaicalink Knowledge Graph" class="img-thumbnail img-fluid"
+                 src="/static/img/judaicalink_knowledge_graph_compressed.jpg">
         </div>
 
         <!-- Begin Filter-->
