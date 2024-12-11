@@ -10,11 +10,11 @@
         <!-- Page Numbers -->
         {% for page in pages %}
             {% if pages|length > 10 %}
-                {% if page == 1 or page == pages|last or (page >= current_page|add:"-2" and page <= current_page|add:"2") %}
+                {% if page == 1 or page == pages|last or page >= current_page|add:'-2' and page <= current_page|add:'2' %}
                     <li class="page-item {% if page == current_page %}active{% endif %}">
                         <a class="page-link" href="{% url 'search:search' %}?page={{ page }}&sort={{ sort_order }}">{{ page }}</a>
                     </li>
-                {% elif page == 2 or page == pages|last|add:"-1" %}
+                {% elif page == 2 or page == pages|last|add:'-1' %}
                     <li class="page-item disabled">
                         <span class="page-link">...</span>
                     </li>
