@@ -144,8 +144,7 @@ def search(request):
     page = int(request.GET.get("page", 1))
     sort_order = request.GET.get("sort", "asc")  # Default: ascending
     rows_per_page = 20
-    start = (page - 1) * rows_per_page  # 20 results per page
-
+    start = (page - 1) * rows_per_page
 
     SOLR_URL = f"{SOLR_SERVER}/{SOLR_INDEX}"
     solr = pysolr.Solr(SOLR_URL, timeout=10)
@@ -173,6 +172,7 @@ def search(request):
     highlighting = response.highlighting
     formatted_results = format_results(response.docs, highlighting)
 
+    # Alert for display
     alert = query if "AND" in query or "OR" in query or "NOT" in query else query.split(":")[-1]
     query = query.replace("text:", "")
     query = query.replace("*:*", "")
@@ -182,8 +182,10 @@ def search(request):
     if alert == "*" or alert == "*:*":
         alert = "All results"
 
+    # Calculate pagination
     total_hits = response.hits
-    pages = list(range(1, (total_hits // 20) + 2)) # Pagination logic
+    total_pages = math.ceil(total_hits / rows_per_page)
+    pages = range(1, total_pages + 1)
 
     context = {
         'total_hits': total_hits,
@@ -195,6 +197,7 @@ def search(request):
         'simple_search_input': query,
     }
     return render(request, 'search/search_result.html', context)
+
 
 
 
