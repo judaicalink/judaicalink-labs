@@ -169,7 +169,7 @@ def search(request):
 # Build advanced query
 def build_advanced_query(request):
     query_parts = []
-    for i in range(1, 10):
+    for i in range(0, 10):
         operator = request.GET.get(f'operator{i}', '').strip()
         option = request.GET.get(f'option{i}', 'name').strip().rstrip(":")  # Remove trailing colon
         input_value = request.GET.get(f'input{i}', '').strip()
