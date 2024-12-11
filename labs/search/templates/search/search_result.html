@@ -48,13 +48,18 @@
                 <tr>
                     <td>
                         {% for key, value in values.items %}
-                        {% if key == "Alternatives" %}
-                        {{ value | safe }}
-                        {% elif key == "ID" and value %}
-                        {{ value | safe }}
-                        {% else %}
-                        <p><strong>{{ key }}:</strong> {{ value | safe }}</p>
-                        {% endif %}
+                            {% if key == "Alternatives" %}
+                                <p><strong>Alternatives:</strong></p>
+                                {{ value | safe }}
+                            {% if key == "Link"  %}
+                                {{ value | safe | escape }}
+                            {% elif key == "Dataslug" %}
+                                <p>Dataslug: <span class="badge text-bg-secondary text-white">{{value}}</span></p>
+                            {% elif key == "ID" and not None %}
+                                {{ value | safe }}
+                            {% else %}
+                                <p><strong>{{ key }}:</strong> {{ value | safe }}</p>
+                            {% endif %}
                         {% endfor %}
                     </td>
                 </tr>
