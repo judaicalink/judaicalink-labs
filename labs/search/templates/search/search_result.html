@@ -31,8 +31,22 @@
 
         <!-- Begin Results -->
         <div>
-            <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=asc">Sort A-Z</a>
+            {% if sort_order == "asc" %}
+            <b>
+                <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=asc">Sort A-Z</a>
+            </b>
             <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=desc">Sort Z-A</a>
+
+            {% elif sort_order == "desc" %}
+            <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=asc">Sort A-Z</a>
+            <b>
+                <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=desc">Sort Z-A</a>
+            </b>
+            {% else %}
+                <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=asc">Sort A-Z</a>
+                <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=desc">Sort Z-A</a>
+            {% endif %}
+
         </div>
 
         <div class="table-responsive mb-3">
