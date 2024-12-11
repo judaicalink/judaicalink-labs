@@ -176,7 +176,7 @@ def search(request):
                 "hl.simple.pre": "<mark>",
                 "hl.simple.post": "</mark>",
                 # add sort_order if it is not None
-                "sort": f"name_sort {'asc' if sort_order == 'asc' else 'desc'}" if sort_order is not None else None
+                "sort": f"name_sort {'asc' if sort_order == 'asc' else 'desc'}" if sort_order is not None else ""
             })
 
     except pysolr.SolrError as e:
