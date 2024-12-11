@@ -160,7 +160,7 @@ def search(request):
             q=query,
             start=start,
             rows=rows_per_page,
-            sort=f"name {'asc' if sort_order == 'asc' else 'desc'}",
+            #sort=f"name {'asc' if sort_order == 'asc' else 'desc'}",
             params={
                 "q": query,
                 "q.op": "OR",
