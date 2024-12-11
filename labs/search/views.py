@@ -168,7 +168,7 @@ def search(request):
                 "hl.fl": "*",
                 "hl.simple.pre": "<mark>",
                 "hl.simple.post": "</mark>",
-                #"sort": f"name {'asc' if sort_order == 'asc' else 'desc'}",
+                "sort": f"name {sort_order}"
             },
         )
     except pysolr.SolrError as e:
