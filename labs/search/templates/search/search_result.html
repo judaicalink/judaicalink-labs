@@ -30,6 +30,7 @@
         <!-- End Alert -->
 
         <!-- Begin Sorting -->
+        {% if total_hits > 0 %}
         <div>
             {% if sort_order == "asc" %}
             <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=asc"><strong>Sort
@@ -48,6 +49,7 @@
                 Z-A</a>
             {% endif %}
         </div>
+        {% endif %}
         <!-- End Sorting -->
 
         <!-- Begin Results-->
