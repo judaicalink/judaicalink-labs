@@ -1,7 +1,6 @@
-{% if page != 1 %}
+{% if pages != 1 %}
 <nav>
     <ul class="pagination">
-        {% if pages > 1 %}
             {% for page in pages %}
                 {% if pages > 1 %}
                 <li class="page-item"><a class="page-link" href="{% url 'search:search'}?page={{pages.first}}&input0={{simple_search_input}}">Previous</a></li>
@@ -11,7 +10,6 @@
                 <li class="page-item"><a class="page-link" href="{% url 'search:search'%}?page={{pages.last}}&input0={{simple_search_input}}">Next</a></li>
                 {% endif %}
             {% endfor %}
-        {% endif %}
     </ul>
 </nav>
 {% endif %}
