@@ -177,7 +177,7 @@ def search(request):
                 "hl.simple.post": "</mark>",
                 # add sort_order if it is not None
                 "sort": f"name_sort {sort_order}"
-            }
+            })
 
     except pysolr.SolrError as e:
         logger.error(f"Solr query failed: {e}")
