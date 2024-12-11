@@ -4,7 +4,7 @@
 
         <!-- Previous Button -->
         <li class="page-item {% if current_page == 1 %}disabled{% endif %}">
-            <a class="page-link" href="{% if current_page > 1 %}{% url 'search:search' %}?page={{ current_page-1 }}&sort={{ sort_order }}{% endif %}" tabindex="-1">Previous</a>
+            <a class="page-link" href="{% if current_page > 1 %}{% url 'search:search' %}?page={{ current_page|add:'-1' }}&sort={{ sort_order }}{% endif %}" tabindex="-1">Previous</a>
         </li>
 
         <!-- Page Numbers -->
@@ -28,7 +28,7 @@
 
         <!-- Next Button -->
         <li class="page-item {% if current_page == pages|last %}disabled{% endif %}">
-            <a class="page-link" href="{% if current_page < pages|last %}{% url 'search:search' %}?page={{ current_page+1 }}&sort={{ sort_order }}{% endif %}">Next</a>
+            <a class="page-link" href="{% if current_page < pages|last %}{% url 'search:search' %}?page={{ current_page|add:'1' }}&sort={{ sort_order }}{% endif %}">Next</a>
         </li>
 
     </ul>
