@@ -204,7 +204,7 @@ def search(request):
         'alert': alert,
         'current_page': page,
         'pages': pages,
-        'sort_order': sort_order,
+        'sort_order': sort_order if not None else "",
         'simple_search_input': query,
     }
     return render(request, 'search/search_result.html', context)
