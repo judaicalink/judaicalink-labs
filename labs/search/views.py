@@ -147,9 +147,7 @@ def search(request):
 
     # Pagination and sorting parameters
     page = int(request.GET.get("page", 1))
-    logger.debug(f"Page: {page}")
-    sort_order = request.GET.get("sort")  # Default: ascending
-    logger.debug(f"Sort Order: {sort_order}")
+    sort_order = request.GET.get("sort", "")  # Default: ascending
     rows_per_page = 20
     start = (page - 1) * rows_per_page
     logger.debug(f"Start: {start}")
@@ -169,10 +167,8 @@ def search(request):
         "hl.simple.post": "</mark>",
     }
     # Add sorting if specified
-    if sort_order:
+    if sort_order is not "":
         solr_params["sort"] = f"name_sort {sort_order}"
-    else:
-        sort_order = ""
 
     try:
         response = solr.search(q=query, **solr_params)
