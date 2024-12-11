@@ -177,7 +177,7 @@ def search(request):
     query = query.replace("*", "")
 
     total_hits = response.hits
-    pages = range(1, (total_hits // 20) + 2)  # Pagination logic
+    pages = list(range(1, (total_hits // 20) + 2)) # Pagination logic
 
     context = {
         'total_hits': total_hits,
