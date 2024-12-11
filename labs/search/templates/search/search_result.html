@@ -81,6 +81,8 @@
                         </div>
                         {% elif key == "Link" %}
                         {{ value|safe }}
+                        {% elif key == "Dataslug" %}
+                            <p>Dataslug: <span class="badge text-bg-secondary text-white">{{value}}</span></p>
                         {% else %}
                         <p><strong>{{ key }}:</strong> {{ value|safe }}</p>
                         {% endif %}
