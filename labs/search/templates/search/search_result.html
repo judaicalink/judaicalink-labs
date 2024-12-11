@@ -63,17 +63,17 @@
                         </p>
                         <div>
                             {% if value|length > 200 %}
-                            <p>{{ value|slice:":200" }}...</p>
+                            <p>{{ value|safe|slice:":200" }}...</p>
                             <button class="btn btn-link p-0" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#abstract-{{ forloop.counter }}" aria-expanded="false"
                                     aria-controls="abstract-{{ forloop.counter }}">
                                 Read more >>
                             </button>
                             <div id="abstract-{{ forloop.counter }}" class="collapse mt-2">
-                                {{ value }}
+                                {{ value|safe }}
                             </div>
                             {% else %}
-                            <p>{{ value }}</p>
+                            <p>{{ value|safe }}</p>
                             {% endif %}
                         </div>
                         {% elif key == "Link" %}
