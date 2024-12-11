@@ -18,32 +18,10 @@
     </div>
 
     <!-- Begin Alert -->
-    <div class="alert alert-info">
-            <strong>Query:</strong> {{ alert }}
-        </div>
-
         {% if total_hits > 0 %}
         <div class="alert alert-success">
-            <strong>Found {{ total_hits }} results.</strong>
+            <p>Found {{ total_hits }} results for Query: <strong>{{ alert }}</strong>.</p>
         </div>
-        <table class="table">
-            <thead>
-            <tr>
-                {% for key in ordered_dataset.0.keys %}
-                <th>{{ key }}</th>
-                {% endfor %}
-            </tr>
-            </thead>
-            <tbody>
-            {% for result in ordered_dataset %}
-            <tr>
-                {% for value in result.values %}
-                <td>{{ value|safe }}</td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
         {% else %}
         <div class="alert alert-danger">
             <strong>No results found.</strong>
