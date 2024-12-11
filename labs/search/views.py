@@ -108,9 +108,9 @@ def format_results(docs, highlighting):
                 result["ID"] = f"<a href='{value}'>{value}</a>" if value.startswith("http") else None
             elif key == "alternatives":
                 # Format alternatives as an unordered list
-                result["Alternatives"] = "<ul>" + "".join(
-                    f"<li>{alt}</li>" for alt in value if isinstance(value, list)
-                ) + "</ul>"
+                result["Alternatives"] = "".join(
+                    f"<p>{alt}</p>" for alt in value if isinstance(value, list)
+                )
             else:
                 # Apply highlighting if available
                 highlighted_value = highlighting.get(doc_id, {}).get(key, value)
