@@ -157,7 +157,7 @@ def search(request):
             f"Solr Query: {SOLR_URL}?q={query}&start={start}&rows={rows_per_page}&sort=name {'asc' if sort_order == 'asc' else 'desc'}")
 
         response = solr.search(
-            q=query,
+            query=query,
             params={
                 "q.op": "OR",
                 "wt": "json",
