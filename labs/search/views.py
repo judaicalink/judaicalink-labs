@@ -143,7 +143,9 @@ def search(request):
     # Pagination and sorting parameters
     page = int(request.GET.get("page", 1))
     sort_order = request.GET.get("sort", "asc")  # Default: ascending
-    start = (page - 1) * 20  # 20 results per page
+    rows_per_page = 20
+    start = (page - 1) * rows_per_page  # 20 results per page
+
 
     SOLR_URL = f"{SOLR_SERVER}/{SOLR_INDEX}"
     solr = pysolr.Solr(SOLR_URL, timeout=10)
@@ -155,7 +157,7 @@ def search(request):
                 "q.op": "OR",
                 "wt": "json",
                 "start": start,
-                "rows": 20,
+                "rows": rows_per_page,
                 "hl": "true",
                 "hl.fl": "*",
                 "hl.simple.pre": "<mark>",
