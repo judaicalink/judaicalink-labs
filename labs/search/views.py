@@ -171,6 +171,8 @@ def search(request):
     # Add sorting if specified
     if sort_order:
         solr_params["sort"] = f"name_sort {sort_order}"
+    else:
+        sort_order = ""
 
     try:
         response = solr.search(q=query, **solr_params)
@@ -204,7 +206,7 @@ def search(request):
         'alert': alert,
         'current_page': page,
         'pages': pages,
-        'sort_order': sort_order if not None else "",
+        'sort_order': sort_order
         'simple_search_input': query,
     }
     return render(request, 'search/search_result.html', context)
