@@ -173,6 +173,7 @@ def search(request):
 
     alert = query if "AND" in query or "OR" in query or "NOT" in query else query.split(":")[-1]
     query = query.replace("text:", "")
+    query = query.replace("*:*", "")
 
     total_hits = response.hits
     pages = range(1, (total_hits // 20) + 2)  # Pagination logic
