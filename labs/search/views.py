@@ -105,7 +105,7 @@ def format_results(docs, highlighting):
                 continue  # Exclude `_version_`
             if key == "id":
                 # Only show ID if it's a valid link
-                result["ID"] = f"<a href='{value}'>{value}</a>" if value.startswith("http") else key['id'].pop()
+                result["ID"] = f"<a href='{value}'>{value}</a>" if value.startswith("http") else None
             elif key == "alternatives":
                 # Format alternatives as an unordered list
                 result["Alternatives"] = "<ul>" + "".join(
@@ -125,6 +125,9 @@ def format_results(docs, highlighting):
         reordered_result.update(result)  # Add remaining fields
         if "ID" in result:
             reordered_result["ID"] = result.pop("ID")  # Move Link to the end
+
+        # remove all empty fields
+        reordered_result = {key: value for key, value in reordered_result.items() if value is not None}
 
         formatted.append(reordered_result)
     return formatted
