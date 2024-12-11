@@ -158,11 +158,10 @@ def search(request):
 
         response = solr.search(
             q=query,
-            start=start,
-            rows=rows_per_page,
+            #start=start,
+            #rows=rows_per_page,
             #sort=f"name {'asc' if sort_order == 'asc' else 'desc'}",
-            params={
-                "q": query,
+            **{
                 "q.op": "OR",
                 "wt": "json",
                 "start": start,
@@ -172,9 +171,8 @@ def search(request):
                 "hl.simple.pre": "<mark>",
                 "hl.simple.post": "</mark>",
                 "sort": f"name {sort_order}"
-            },
-        )
-        logger.debug(f"Response: {response.raw_response}")
+            })
+
     except pysolr.SolrError as e:
         logger.error(f"Solr query failed: {e}")
         logger.error(f"Request URL: {SOLR_URL}?q={query}")
