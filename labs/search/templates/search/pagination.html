@@ -4,7 +4,7 @@
 
         <!-- Previous Button -->
         <li class="page-item {% if current_page == 1 %}disabled{% endif %}">
-            <a class="page-link" href="{% if current_page > 1 %}{% url 'search:search' %}?page={{ current_page|add:'-1' }}&sort={{ sort_order }}{% endif %}" tabindex="-1">Previous</a>
+            <a class="page-link" href="{% if current_page > 1 %}{% url 'search:search' %}?page={{ current_page|add:'-1' }}&input0={{ simple_search_input}}&sort={{ sort_order }}{% endif %}" tabindex="-1">Previous</a>
         </li>
 
         <!-- Page Numbers -->
@@ -12,7 +12,7 @@
             {% if pages|length > 10 %}
                 {% if page == 1 or page == pages|last or page >= current_page|add:'-2' and page <= current_page|add:'2' %}
                     <li class="page-item {% if page == current_page %}active{% endif %}">
-                        <a class="page-link" href="{% url 'search:search' %}?page={{ page }}&sort={{ sort_order }}">{{ page }}</a>
+                        <a class="page-link" href="{% url 'search:search' %}?page={{ page }}&input0={{ simple_search_input}}&sort={{ sort_order }}">{{ page }}</a>
                     </li>
                 {% elif page == 2 or page == pages|last|add:'-1' %}
                     <li class="page-item disabled">
@@ -21,14 +21,14 @@
                 {% endif %}
             {% else %}
                 <li class="page-item {% if page == current_page %}active{% endif %}">
-                    <a class="page-link" href="{% url 'search:search' %}?page={{ page }}&sort={{ sort_order }}">{{ page }}</a>
+                    <a class="page-link" href="{% url 'search:search' %}?page={{ page }}&input0={{ simple_search_input}}&sort={{ sort_order }}">{{ page }}</a>
                 </li>
             {% endif %}
         {% endfor %}
 
         <!-- Next Button -->
         <li class="page-item {% if current_page == pages|last %}disabled{% endif %}">
-            <a class="page-link" href="{% if current_page < pages|last %}{% url 'search:search' %}?page={{ current_page|add:'1' }}&sort={{ sort_order }}{% endif %}">Next</a>
+            <a class="page-link" href="{% if current_page < pages|last %}{% url 'search:search' %}?page={{ current_page|add:'1' }}&input0={{ simple_search_input}}&sort={{ sort_order }}{% endif %}">Next</a>
         </li>
 
     </ul>
