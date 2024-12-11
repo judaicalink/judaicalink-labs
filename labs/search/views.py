@@ -176,8 +176,9 @@ def search(request):
     query = query.replace("*:*", "")
     query = query.replace("*", "")
     alert = alert.replace("text:", "")
-    alert = alert.replace("*:*", "")
-    alert = alert.replace("*", "")
+
+    if alert == "*" or alert == "*:*":
+        alert = "All results"
 
     total_hits = response.hits
     pages = list(range(1, (total_hits // 20) + 2)) # Pagination logic
