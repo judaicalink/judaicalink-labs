@@ -126,8 +126,6 @@ def format_results(docs, highlighting):
     return formatted
 
 
-
-
 # Search results page
 def search(request):
     logger.debug("Searching...")
@@ -213,7 +211,7 @@ def search(request):
 # Build advanced query
 def build_advanced_query(request):
     query_parts = []
-    simple_search = request.GET.get("simple_search", "").strip()
+    simple_search = request.GET.get("input0", "").strip()
 
     # Default to text field for simple searches
     if simple_search:
