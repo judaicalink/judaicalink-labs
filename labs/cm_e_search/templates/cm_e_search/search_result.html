@@ -71,40 +71,14 @@
 
         {% include "cm_e_search/search_form.html" %}
 
-        <div class="alert alert-info">
-            <strong>Query:</strong> {{ alert }}
-        </div>
-
-        {% if total_hits > 0 %}
-        <div class="alert alert-success">
-            <strong>Found {{ total_hits }} results.</strong>
-        </div>
-        <table class="table">
-            <thead>
-            <tr>
-                {% for key in ordered_dataset.0.keys %}
-                <th>{{ key }}</th>
-                {% endfor %}
-            </tr>
-            </thead>
-            <tbody>
-            {% for result in ordered_dataset %}
-            <tr>
-                {% for value in result.values %}
-                <td>{{ value|safe }}</td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        {% else %}
-        <div class="alert alert-danger">
-            <strong>No results found.</strong>
+        {% if results|length < 1 %}
+        <div class="alert alert-danger text-center mb-5" role="alert">
+            No entity matching your query!
         </div>
         {% endif %}
 
-
         <div>
+
 
 
             {% for result in results %}
