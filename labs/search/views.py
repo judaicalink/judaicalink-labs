@@ -148,7 +148,7 @@ def search(request):
     # Pagination and sorting parameters
     page = int(request.GET.get("page", 1))
     logger.debug(f"Page: {page}")
-    sort_order = request.GET.get("sort", "")  # Default: ascending
+    sort_order = request.GET.get("sort")  # Default: ascending
     logger.debug(f"Sort Order: {sort_order}")
     rows_per_page = 20
     start = (page - 1) * rows_per_page
@@ -157,27 +157,23 @@ def search(request):
     SOLR_URL = f"{SOLR_SERVER}/{SOLR_INDEX}"
     solr = pysolr.Solr(SOLR_URL, timeout=10)
 
-    try:
-        logger.debug(
-            f"Solr Query: {SOLR_URL}?q={query}&start={start}&rows={rows_per_page}&sort=name {'asc' if sort_order == 'asc' else 'desc'}")
+    # Construct Solr parameters
+    solr_params = {
+        "q.op": "OR",
+        "start": start,
+        "rows": rows_per_page,
+        "wt": "json",
+        "hl": "true",
+        "hl.fl": "*",
+        "hl.simple.pre": "<mark>",
+        "hl.simple.post": "</mark>",
+    }
+    # Add sorting if specified
+    if sort_order:
+        solr_params["sort"] = f"name_sort {sort_order}"
 
-        response = solr.search(
-            q=query,
-            #start=start,
-            #rows=rows_per_page,
-            #sort=f"name {'asc' if sort_order == 'asc' else 'desc'}",
-            **{
-                "q.op": "OR",
-                "wt": "json",
-                "start": start,
-                "rows": rows_per_page,
-                "hl": "true",
-                "hl.fl": "*",
-                "hl.simple.pre": "<mark>",
-                "hl.simple.post": "</mark>",
-                # add sort_order if it is not None
-                "sort": f"name_sort {sort_order}"
-            })
+    try:
+        response = solr.search(q=query, params=solr_params)
 
     except pysolr.SolrError as e:
         logger.error(f"Solr query failed: {e}")
