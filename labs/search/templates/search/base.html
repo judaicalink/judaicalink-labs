@@ -39,7 +39,8 @@
         <div class="row">
             {% block content %}
             {% if debug %}
-            <div class="modal fade" id="developmentAlert" tabindex="-1">
+            <div class="modal fade" id="developmentAlert" tabindex="-1" aria-labelledby="developmentAlertLabel"
+                 aria-hidden="true">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -96,6 +97,14 @@
 </script>
 <!-- End Matomo Code -->
 {% endif %}
+{% if debug %}
+<script>
 
+    document.addEventListener("DOMContentLoaded", function () {
+        var alertModal = new bootstrap.Modal(document.getElementById('developmentAlert'));
+        alertModal.show();
+    });
+</script>
+{% endif %}
 </body>
 </html>
