@@ -37,6 +37,7 @@
             {% include "search/header.html" %}
         </div>
         <div class="row">
+            {% block content %}
             {% if debug %}
             <div class="modal fade" id="developmentAlert" tabindex="-1" aria-labelledby="developmentAlertLabel"
                  aria-hidden="true">
@@ -55,15 +56,8 @@
                     </div>
                 </div>
             </div>
-            <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    var alertModal = new bootstrap.Modal(document.getElementById('developmentAlert'));
-                    alertModal.show();
-                });
-            </script>
             {% endif %}
-            {% block content %}
-
+            {{ block.super }}
             {% endblock %}
 
         </div>
@@ -102,6 +96,15 @@
     })();
 </script>
 <!-- End Matomo Code -->
+{% endif %}
+{% if debug %}
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var alertModal = new bootstrap.Modal(document.getElementById('developmentAlert'));
+        alertModal.show();
+    });
+</script>
 {% endif %}
 </body>
 </html>
