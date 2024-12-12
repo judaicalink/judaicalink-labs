@@ -37,7 +37,6 @@
             {% include "search/header.html" %}
         </div>
         <div class="row">
-            {% block content %}
             {% if debug %}
             <div class="modal fade" id="developmentAlert" tabindex="-1" aria-labelledby="developmentAlertLabel"
                  aria-hidden="true">
@@ -63,7 +62,8 @@
                 });
             </script>
             {% endif %}
-            {{ block.super }}
+            {% block content %}
+
             {% endblock %}
 
         </div>
