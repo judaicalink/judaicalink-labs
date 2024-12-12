@@ -26,6 +26,7 @@
 </head>
 
 <body>
+<script src="{% static 'js/bundle.js' %}"></script>
 {% cookiebanner_modal 'vanilla' %}
 
 <div class="container-fluid">
@@ -73,7 +74,7 @@
 {% endblock %}
 
 
-<script src="{% static 'js/bundle.js' %}"></script>
+
 
 {% cookie_accepted 'analytics' as cookie_analytics %}
 
