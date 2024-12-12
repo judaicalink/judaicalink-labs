@@ -1,4 +1,3 @@
-// Import dependencies
 import 'jquery';
 import 'jquery-ui';
 import 'bootstrap'; // Includes Popper.js and Bootstrap

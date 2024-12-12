@@ -1,11 +1,10 @@
 const path = require('path');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const { VueLoaderPlugin } = require('vue-loader');
 const webpack = require('webpack');
 
 module.exports = {
@@ -17,7 +16,7 @@ module.exports = {
         path: path.resolve(__dirname, 'search/static'),
         filename: 'js/[name].js',
     },
-    mode: 'production', // Ensure production mode for minification
+    mode: 'production',
     module: {
         rules: [
             {
@@ -34,7 +33,14 @@ module.exports = {
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
-                    'sass-loader',
+                    'sass-loader', // Add this for SCSS support
+                ],
+            },
+            {
+                test: /\.css$/i,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader', // Ensure this handles Vuetify CSS
                 ],
             },
             {
@@ -54,11 +60,10 @@ module.exports = {
         ],
     },
     plugins: [
-        new CleanWebpackPlugin(),
+        new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
         }),
-        new VueLoaderPlugin(),
         new CompressionPlugin({
             test: /\.(js|css|html|svg)$/,
             algorithm: 'gzip',

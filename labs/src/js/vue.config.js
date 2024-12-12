@@ -3,7 +3,7 @@ import SearchApp from '../vue/search.vue';
 import FilterApp from '../vue/filter.vue';
 import AutocompleteApp from '../vue/autocomplete.vue';
 
-import 'vuetify/styles'; // Vuetify CSS
+import 'vuetify/styles'; // Ensure Vuetify styles are included
 import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
