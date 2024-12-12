@@ -1,10 +1,9 @@
 const path = require('path');
-const { VueLoaderPlugin } = require('vue-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 const webpack = require('webpack');
 
 module.exports = {
@@ -13,34 +12,35 @@ module.exports = {
         styles: './src/scss/app.scss',
     },
     output: {
-        path: path.resolve(__dirname, 'search/static'),
-        filename: 'js/[name].js',
+        path: path.resolve(__dirname, 'dist'),
+        filename: '[name].js',
     },
-    mode: 'production',
+    mode: 'production', // 'development' for debugging with sourcemaps
+    devtool: process.env.NODE_ENV === 'development' ? 'source-map' : false, // Generate sourcemap for development
     module: {
         rules: [
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+            },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: 'babel-loader',
             },
             {
-                test: /\.vue$/,
-                loader: 'vue-loader',
-            },
-            {
                 test: /\.s[ac]ss$/i,
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
-                    'sass-loader', // Add this for SCSS support
+                    'sass-loader', // Handle Bootstrap SCSS
                 ],
             },
             {
                 test: /\.css$/i,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    'css-loader', // Ensure this handles Vuetify CSS
+                    'css-loader',
                 ],
             },
             {
@@ -60,26 +60,21 @@ module.exports = {
         ],
     },
     plugins: [
-        new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
-            filename: 'css/[name].css',
+            filename: '[name].css',
         }),
+        new VueLoaderPlugin(),
         new CompressionPlugin({
             test: /\.(js|css|html|svg)$/,
             algorithm: 'gzip',
             threshold: 10240,
             minRatio: 0.8,
         }),
-        new CopyWebpackPlugin({
-            patterns: [
-                { from: './src/img/', to: 'img/' },
-            ],
-        }),
         new webpack.ProvidePlugin({
-            bootstrap: 'bootstrap', // Make Bootstrap globally available
-            $: 'jquery', // Ensure jQuery is available if required by Bootstrap
+            $: 'jquery',
             jQuery: 'jquery',
-            Popper: ['@popperjs/core', 'default'], // Include Popper.js
+            Popper: ['@popperjs/core', 'default'],
+            bootstrap: 'bootstrap',
         }),
     ],
     optimization: {
