@@ -76,10 +76,10 @@ module.exports = {
             ],
         }),
         new webpack.ProvidePlugin({
-            $: 'jquery',
+            bootstrap: 'bootstrap', // Make Bootstrap globally available
+            $: 'jquery', // Ensure jQuery is available if required by Bootstrap
             jQuery: 'jquery',
-            Popper: ['@popperjs/core', 'default'],
-            bootstrap: 'bootstrap',
+            Popper: ['@popperjs/core', 'default'], // Include Popper.js
         }),
     ],
     optimization: {

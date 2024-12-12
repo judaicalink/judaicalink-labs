@@ -1,11 +1,15 @@
-import 'jquery';
-import 'jquery-ui';
-import 'bootstrap'; // Includes Popper.js and Bootstrap
-import '@popperjs/core';
+// Import dependencies
+import 'bootstrap'; // JavaScript for Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css'; // CSS for Bootstrap
 
-import '@fortawesome/fontawesome-free/js/all'; // Font Awesome
+import 'jquery'; // Ensure jQuery is included if needed
+import '@popperjs/core'; // Required by Bootstrap for tooltips/popovers
 
-require('./activePageHighlighting.js'); // Active page highlighting
-require('malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js'); // Custom scrollbar
-require('./design.js'); // Design-specific scripts
-require('./vue.config.js'); // Vue configuration
+// Font Awesome
+import '@fortawesome/fontawesome-free/js/all';
+
+// Other required files
+require('./activePageHighlighting.js');
+require('malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js');
+require('./design.js');
+require('./vue.config.js');
