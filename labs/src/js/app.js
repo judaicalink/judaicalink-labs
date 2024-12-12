@@ -1,21 +1,21 @@
 // import all the necessary files here
-
+// Import dependencies
 import 'jquery';
 import 'jquery-ui';
-import 'popper.js';
-import $ from 'jquery';
+import 'bootstrap'; // Bootstrap depends on Popper.js and jQuery
+import 'popper.js'; // Import Popper.js explicitly
+import $ from 'jquery'; // Import jQuery
+
 import autocomplete from 'jquery-ui/ui/widgets/autocomplete';
 
-// font awesome
-import '@fortawesome/fontawesome-free/js/fontawesome'
-import '@fortawesome/fontawesome-free/js/solid'
-import '@fortawesome/fontawesome-free/js/regular'
-import '@fortawesome/fontawesome-free/js/brands'
+
+// Font Awesome
+import '@fortawesome/fontawesome-free/js/all';
 
 require('./activePageHighlighting.js'); // import active page highlighting javascript files
 //import('./autocomplete.js'); // import auto complete for cm_e_search
 
-require('bootstrap');
+//require('bootstrap');
 require('malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js')
 require('./design.js')
 

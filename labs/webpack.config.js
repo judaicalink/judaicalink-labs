@@ -86,6 +86,11 @@ module.exports = [
                     minRatio: 0.8
                 }
             ]),
+             new webpack.ProvidePlugin({
+                $: 'jquery',
+                jQuery: 'jquery',
+                Popper: ['popper.js', 'default'], // Load Popper.js for Bootstrap
+            }),
         ]
     },
 

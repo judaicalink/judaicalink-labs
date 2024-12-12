@@ -100,10 +100,14 @@
 {% endif %}
 {% if debug %}
 <script>
-
     document.addEventListener("DOMContentLoaded", function () {
-        var alertModal = new bootstrap.Modal(document.getElementById('developmentAlert'));
-        alertModal.show();
+        // Check if Bootstrap is loaded
+        if (typeof bootstrap !== 'undefined') {
+            var alertModal = new bootstrap.Modal(document.getElementById('developmentAlert'));
+            alertModal.show();
+        } else {
+            console.error('Bootstrap not found.');
+        }
     });
 </script>
 {% endif %}
