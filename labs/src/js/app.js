@@ -3,7 +3,9 @@
 import 'jquery';
 import 'jquery-ui';
 import 'bootstrap'; // Bootstrap depends on Popper.js and jQuery
-import 'popper.js'; // Import Popper.js explicitly
+//import 'popper.js'; // Import Popper.js explicitly
+import '@popperjs/core';
+
 import $ from 'jquery'; // Import jQuery
 
 import autocomplete from 'jquery-ui/ui/widgets/autocomplete';
