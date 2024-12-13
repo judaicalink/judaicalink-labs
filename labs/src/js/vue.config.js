@@ -13,6 +13,14 @@ const vuetify = createVuetify({
     directives,
 });
 
-createApp(SearchApp).use(vuetify).mount('#search-app');
-createApp(FilterApp).use(vuetify).mount('#filter-app');
-createApp(AutocompleteApp).use(vuetify).mount('#autocomplete-app');
+if (document.querySelector('#search-app')) {
+    createApp(SearchApp).use(vuetify).mount('#search-app');
+}
+
+if (document.querySelector('#filter-app')) {
+    createApp(FilterApp).use(vuetify).mount('#filter-app');
+}
+
+if (document.querySelector('#autocomplete-app')) {
+    createApp(AutocompleteApp).use(vuetify).mount('#autocomplete-app');
+}

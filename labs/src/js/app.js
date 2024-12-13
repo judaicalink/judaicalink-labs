@@ -6,7 +6,7 @@ import '@fortawesome/fontawesome-free/js/all'; // FontAwesome Free
 
 // Vue imports
 import { createApp } from 'vue';
-import App from './components/App.vue';
+
 
 // Initialize Vue
 createApp(App).mount('#app');
