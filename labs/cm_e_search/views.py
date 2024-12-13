@@ -30,7 +30,6 @@ def get_names():
         # logging
         logger.info("Got names from solr: ")
         logger.info("Names found: %s", res.hits)
-        logger.info(res.docs)
         logger.info(res.hits)
 
         for doc in res.docs:
@@ -120,6 +119,7 @@ def result(request):
 
 def get_names_json(request):
     names = get_names()
+    logger.info("Names: %s", names)
     return JsonResponse({'names': names})
 
 
