@@ -21,6 +21,6 @@ if (document.querySelector('#filter-app')) {
     createApp(FilterApp).use(vuetify).mount('#filter-app');
 }
 
-if (document.querySelector('#autocomplete-app')) {
+//if (document.querySelector('#autocomplete-app')) {
     createApp(AutocompleteApp).use(vuetify).mount('#autocomplete-app');
-}
+//}
