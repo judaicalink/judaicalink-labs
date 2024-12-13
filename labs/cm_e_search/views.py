@@ -28,15 +28,15 @@ def get_names():
         res = solr.search('*:*', index="cm_entity_names", rows=10000)
 
         # logging
-        logger.info("Got names from solr: ")
-        logger.info("Names found: %s", res.hits)
-        logger.info(res.hits)
+        logger.debug("Got names from solr: ")
+        logger.debug("Names found: %s", res.hits)
+        logger.debug(res.hits)
 
         for doc in res.docs:
             # convert list to string
             doc['name'] = ''.join(map(str, doc['name']))
             names.append(html.escape(doc['name']).replace("'", "\\'").replace('"', '\\"'))
-            #logger.debug("Doc: %s", doc['name'])
+            logger.debug("Doc: %s", doc['name'])
         return names
 
     except Exception as e:
@@ -119,7 +119,7 @@ def result(request):
 
 def get_names_json(request):
     names = get_names()
-    logger.info("Names: %s", names)
+    logger.debug("Names: %s", names)
     return JsonResponse({'names': names})
 
 
