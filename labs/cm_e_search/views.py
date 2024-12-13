@@ -29,8 +29,8 @@ def get_names():
 
         # logging
         logger.info("Got names from solr: ")
-        logger.debug("Names found: %s", res.hits)
-        logger.info(res.debug)
+        logger.info("Names found: %s", res.hits)
+        logger.info(res.docs)
         logger.info(res.hits)
 
         for doc in res.docs:
