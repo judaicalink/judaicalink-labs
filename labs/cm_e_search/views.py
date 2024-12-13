@@ -8,7 +8,7 @@ from django.conf import settings
 from django.views.decorators.cache import cache_page
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('labs')
 # logger.setLevel(logging.DEBUG)
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 SOLR_SERVER = settings.SOLR_SERVER
