@@ -28,10 +28,10 @@ def get_names():
         res = solr.search('*:*', index="cm_entity_names", rows=10000)
 
         # logging
-        #logger.info("Got names from solr: ")
-        #logger.debug("Names found: %s", res.hits)
-        #logger.info(res.debug)
-        #logger.info(res.hits)
+        logger.info("Got names from solr: ")
+        logger.debug("Names found: %s", res.hits)
+        logger.info(res.debug)
+        logger.info(res.hits)
 
         for doc in res.docs:
             # convert list to string
