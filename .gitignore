@@ -162,7 +162,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-/labs/static/
+labs/static/
 
 # Keys
 labs/localhost.crt
