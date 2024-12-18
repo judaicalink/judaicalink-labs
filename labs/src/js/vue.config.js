@@ -13,6 +13,7 @@ const vuetify = createVuetify({
     directives,
 });
 
+// Conditionally mount Vue apps based on DOM elements
 if (document.querySelector('#search-app')) {
     createApp(SearchApp).use(vuetify).mount('#search-app');
 }
@@ -21,6 +22,6 @@ if (document.querySelector('#filter-app')) {
     createApp(FilterApp).use(vuetify).mount('#filter-app');
 }
 
-//if (document.querySelector('#autocomplete-app')) {
+if (document.querySelector('#autocomplete-app')) {
     createApp(AutocompleteApp).use(vuetify).mount('#autocomplete-app');
-//}
+}
