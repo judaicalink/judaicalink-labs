@@ -168,3 +168,5 @@ labs/static/
 labs/localhost.crt
 labs/localhost.csr
 labs/localhost.ke!/labs/package.json
+
+labs/search/static

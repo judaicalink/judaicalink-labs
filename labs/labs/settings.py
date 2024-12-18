@@ -174,8 +174,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = env('STATIC_ROOT') if env('STATIC_ROOT') is not None else os.path.join(BASE_DIR, "static/")
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 # Logging
 LOGGING = {
