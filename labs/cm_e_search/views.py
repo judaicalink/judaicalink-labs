@@ -17,7 +17,7 @@ SOLR_SERVER = settings.SOLR_SERVER
 def get_names():
     """
     This function gets all the names from the solr index cm_entity_names
-    :return:
+    :return: list of names
     """
     # gets all entity names from solr
     try:
@@ -36,7 +36,9 @@ def get_names():
             # convert list to string
             doc['name'] = ''.join(map(str, doc['name']))
             names.append(html.escape(doc['name']).replace("'", "\\'").replace('"', '\\"'))
-            logger.debug("Doc: %s", doc['name'])
+            #logger.debug("Doc: %s", doc['name'])
+        # sort names alphabetically
+        names.sort()
         return names
 
     except Exception as e:
@@ -107,6 +109,33 @@ def result(request):
         doc['related_entities'] = related_entities
 
         results.append(doc)
+        
+    """
+    Occurs in journals
+    Todo get the nested documents for:
+    * docs
+        * name
+        * entity_type: String
+        * entity_page: String (URL)
+        * journal_occurrences (nested, multiple)
+            * journal_name: String
+            * journal_id: Int
+            * first: Int
+            * last: Int
+            * mentions (nested, multiple)
+                * person_id: Int
+                * spot: String
+                * start: Int
+                * end: Int
+                * person_link: String 
+                * date: String or Date
+                * year: Int
+        * related_entities (nested, multiple)
+            * name: String
+            * url: String
+            * score: Float
+            * type: String
+    """
 
     context = {
         "results": results,
