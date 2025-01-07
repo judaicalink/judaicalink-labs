@@ -167,3 +167,21 @@ def create_timeline():
 
 def create_graph_visualization():
     pass
+
+from django.core.paginator import Paginator
+
+@cache_page(CACHE_TTL)
+def names_by_letter(request, letter):
+    names = get_names()  # Fetch all names
+    filtered_names = [name for name in names if name.startswith(letter.upper())]
+
+    # Paginate the filtered names
+    paginator = Paginator(filtered_names, 50)  # 50 names per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'letter': letter.upper(), 
+        'page_obj': page_obj,
+    }
+    return render(request, 'cm_e_search/names_by_letter.html', context)
