@@ -13,10 +13,10 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js',
+        filename: '[name].js', // Dynamically name JS files
     },
-    mode: 'production', // 'development' for debugging with sourcemaps
-    devtool: process.env.NODE_ENV === 'development' ? 'source-map' : false, // Generate sourcemap for development
+    mode: 'production',
+    devtool: process.env.NODE_ENV === 'development' ? 'source-map' : false,
     module: {
         rules: [
             {
@@ -33,7 +33,7 @@ module.exports = {
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
-                    'sass-loader', // Handle Bootstrap SCSS
+                    'sass-loader',
                 ],
             },
             {
@@ -61,7 +61,7 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'styles.css',
+            filename: '[name].css', // Avoid filename conflicts
         }),
         new VueLoaderPlugin(),
         new CompressionPlugin({
@@ -79,7 +79,7 @@ module.exports = {
     ],
     resolve: {
         alias: {
-            vue: 'vue/dist/vue.esm-bundler.js', // Ensure correct Vue version
+            vue: 'vue/dist/vue.esm-bundler.js',
         },
         extensions: ['.js', '.vue'],
     },
