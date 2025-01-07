@@ -7,21 +7,31 @@ import 'vuetify/styles'; // Ensure Vuetify styles are included
 import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
+import { defineAsyncComponent } from 'vue';
+
 
 const vuetify = createVuetify({
     components,
     directives,
 });
 
-// Conditionally mount Vue apps based on DOM elements
-if (document.querySelector('#search-app')) {
-    createApp(SearchApp).use(vuetify).mount('#search-app');
-}
+// Dynamically load Vue components
+const SearchApp = defineAsyncComponent(() =>
+    import(/* webpackChunkName: "search-app" */ '../vue/search.vue')
+);
 
-if (document.querySelector('#filter-app')) {
-    createApp(FilterApp).use(vuetify).mount('#filter-app');
-}
+const FilterApp = defineAsyncComponent(() =>
+    import(/* webpackChunkName: "filter-app" */ '../vue/filter.vue')
+);
 
-if (document.querySelector('#autocomplete-app')) {
-    createApp(AutocompleteApp).use(vuetify).mount('#autocomplete-app');
-}
+const AutocompleteApp = defineAsyncComponent(() =>
+    import(/* webpackChunkName: "autocomplete-app" */ '../vue/autocomplete.vue')
+);
+
+export default {
+    components: {
+        SearchApp,
+        FilterApp,
+        AutocompleteApp,
+    },
+};

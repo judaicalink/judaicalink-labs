@@ -7,6 +7,15 @@ import '@fortawesome/fontawesome-free/js/all'; // FontAwesome Free
 // Vue imports
 import { createApp } from 'vue';
 
+// Lazy load large modules
+import(/* webpackChunkName: "large-module" */ './largeModule')
+    .then(({ default: largeModule }) => {
+        largeModule.init();
+    })
+    .catch((err) => {
+        console.error('Error loading large module:', err);
+    });
+
 
 // Initialize Vue
 createApp(App).mount('#app');

@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { VueLoaderPlugin } = require('vue-loader');
 const webpack = require('webpack');
 
@@ -13,7 +14,8 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js', // Dynamically name JS files
+        filename: '[name].[contenthash].js', // Use contenthash for caching
+        chunkFilename: '[name].[contenthash].js', // Dynamic chunks
     },
     mode: 'production',
     devtool: process.env.NODE_ENV === 'development' ? 'source-map' : false,
@@ -57,6 +59,25 @@ module.exports = {
                     filename: 'fonts/[name][hash][ext]',
                 },
             },
+             {
+                test: /\.(png|jpe?g|gif|svg)$/i,
+                type: 'asset',
+                parser: {
+                    dataUrlCondition: {
+                        maxSize: 8192, // Inline files smaller than 8 KiB
+                    },
+                },
+                generator: {
+                    filename: 'img/[name].[contenthash][ext]',
+                },
+            },
+            {
+                test: /\.(woff(2)?|eot|ttf|otf|svg)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'fonts/[name].[contenthash][ext]',
+                },
+            },
         ],
     },
     plugins: [
@@ -76,6 +97,10 @@ module.exports = {
             Popper: ['@popperjs/core', 'default'],
             bootstrap: 'bootstrap',
         }),
+        new BundleAnalyzerPlugin({
+            analyzerMode: 'static', // Generates a static HTML report
+            openAnalyzer: false, // Prevents auto-opening
+        }),
     ],
     resolve: {
         alias: {
@@ -84,6 +109,10 @@ module.exports = {
         extensions: ['.js', '.vue'],
     },
     optimization: {
+        splitChunks: {
+            chunks: 'all', // Split all chunks
+            maxSize: 244000, // Set max size for chunks (244 KiB)
+        },
         minimize: true,
         minimizer: [
             new TerserPlugin(),
