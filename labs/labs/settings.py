@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     'cookiebanner',
     'rest_framework',
     'debug_toolbar',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
