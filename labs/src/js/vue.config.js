@@ -36,6 +36,6 @@ export default {
     },
 };
 
-SearchApp.createApp(SearchApp).use(vuetify).mount('#search-app');
-FilterApp.createApp(FilterApp).use(vuetify).mount('#filter-app');
-AutocompleteApp.createApp(AutocompleteApp).use(vuetify).mount('#autocomplete-app');
+//SearchApp.createApp(SearchApp).use(vuetify).mount('#search-app');
+//FilterApp.createApp(FilterApp).use(vuetify).mount('#filter-app');
+//AutocompleteApp.createApp(AutocompleteApp).use(vuetify).mount('#autocomplete-app');

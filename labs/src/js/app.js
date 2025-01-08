@@ -25,10 +25,10 @@ import { createApp } from 'vue';
 //         });
 
 // Initialize Vue
-createApp(App).mount('#app');
+createApp(App).mount('#search-app');
 
 require('bootstrap');
 require('malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js')
 require('./design.js')
 
-require('./vue.config.js')
+//require('./vue.config.js')
