@@ -8,14 +8,21 @@ import '@fortawesome/fontawesome-free/js/all'; // FontAwesome Free
 import { createApp } from 'vue';
 
 // Lazy load large modules
-import(/* webpackChunkName: "large-module" */ './largeModule')
-    .then(({ default: largeModule }) => {
-        largeModule.init();
-    })
-    .catch((err) => {
-        console.error('Error loading large module:', err);
-    });
-
+//import(/* webpackChunkName: "large-module" */ './largeModule')
+//    .then(({ default: largeModule }) => {
+//         largeModule.init();
+//     })
+//     .catch((err) => {
+//         console.error('Error loading large module:', err);
+//     });
+//
+// import(/* webpackChunkName: "styles" */ '../scss/largeStyles.scss')
+//         .then(() => {
+//             console.log('Styles loaded dynamically');
+//         })
+//         .catch((err) => {
+//             console.error('Error loading styles:', err);
+//         });
 
 // Initialize Vue
 createApp(App).mount('#app');
