@@ -9,6 +9,7 @@ const webpack = require('webpack');
 module.exports = {
     entry: {
         app: './src/js/app.js',
+        bootstrap: './src/js/bootstrap.js', // Adding Bootstrap entry point
         styles: './src/scss/app.scss',
     },
     output: {
