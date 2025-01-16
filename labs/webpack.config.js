@@ -19,7 +19,7 @@ module.exports = {
         publicPath: '/static/', // Base path for assets
     },
     mode: 'production',
-    devtool: process.env.NODE_ENV === 'development' ? 'source-map' : false,
+    devtool: process.env.NODE_ENV === 'development' ? 'source-map' : true,
     module: {
         rules: [
             {
