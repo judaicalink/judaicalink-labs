@@ -373,3 +373,11 @@ REST_FRAMEWORK = {
 DEBUG_TOOLBAR_CONFIG = {
     'RENDER_PANELS': False,
 }
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': 'static/',  # Path to your static folder
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+    }
+}

@@ -31,4 +31,5 @@ require('bootstrap');
 require('malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js')
 require('./design.js')
 
+
 //require('./vue.config.js')

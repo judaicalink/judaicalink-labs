@@ -1,5 +1,7 @@
 {% load static %}
 {% load cookiebanner %}
+{% load render_bundle from webpack_loader %}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,14 +21,15 @@
 
     <link rel="icon" href="{% static 'img/favicon.ico' %}">
 
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% render_bundle 'styles' 'css' %}">
 
     {% block header_scripts %}{% endblock %}
 
 </head>
 
 <body>
-<script src="{% static 'js/bundle.js' %}"></script>
+<script src="{% render_bundle 'app' 'js' %}"></script>
+
 {% cookiebanner_modal 'vanilla' %}
 
 <div class="container-fluid">
