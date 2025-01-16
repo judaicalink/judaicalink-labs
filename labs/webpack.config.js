@@ -1,3 +1,4 @@
+require('dotenv').config();
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
@@ -19,7 +20,7 @@ module.exports = {
         publicPath: '/static/', // Base path for assets
     },
     mode: 'production',
-    devtool: process.env.NODE_ENV === 'development' ? 'source-map' : true,
+    devtool: process.env.NODE_ENV === 'development' ? 'eval-source-map' : 'source-map',
     module: {
         rules: [
             {
