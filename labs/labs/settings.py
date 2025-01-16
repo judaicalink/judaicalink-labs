@@ -60,7 +60,6 @@ INSTALLED_APPS = [
     'channels',
     'core',
     'backend.apps.BackendConfig',
-    'webpack_loader',
     'search',
     'cm_search',
     'cm_e_search',
@@ -77,6 +76,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'debug_toolbar',
     'django_extensions',
+    'webpack_loader',
 ]
 
 MIDDLEWARE = [
