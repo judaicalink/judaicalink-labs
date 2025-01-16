@@ -77,8 +77,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'django_extensions',
     'webpack_loader',
-]
 
+]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -180,7 +180,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'src'),
+    os.path.join(BASE_DIR, 'assets'),
 ]
+
 
 # Logging
 LOGGING = {
@@ -377,8 +379,10 @@ DEBUG_TOOLBAR_CONFIG = {
 
 WEBPACK_LOADER = {
     'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'webpack_bundles/',
         'CACHE': not DEBUG,
-        'BUNDLE_DIR_NAME': 'static/',  # Path to your static folder
         'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+        'POLL_INTERVAL': 0.1,
+        'IGNORE': [r'.+\.hot-update.js', r'.+\.map'],
     }
 }
