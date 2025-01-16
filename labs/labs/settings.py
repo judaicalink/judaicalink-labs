@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'channels',
     'core',
     'backend.apps.BackendConfig',
+    'webpack_loader',
     'search',
     'cm_search',
     'cm_e_search',
