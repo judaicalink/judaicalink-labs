@@ -10,7 +10,7 @@ const BundleTracker = require('webpack-bundle-tracker');
 
 
 module.exports = {
-    productionSourceMap: false,
+    //productionSourceMap: false,
     entry: {
         app: './src/js/app.js',
         bootstrap: './src/js/bootstrap.js', // Adding Bootstrap entry point
@@ -21,7 +21,7 @@ module.exports = {
         filename: 'js/[name].[contenthash].js', // Output JS files to static/js/
         chunkFilename: 'js/[name].[contenthash].js', // Dynamic chunks in static/js/
         publicPath: '/static/', // Base path for assets
-        sourceMapFilename: 'js/[name].[contenthash].js.map',
+        //sourceMapFilename: 'js/[name].[contenthash].js.map',
     },
     mode: 'development',
     devtool: process.env.NODE_ENV === 'development' ? 'eval-source-map' : 'source-map',
