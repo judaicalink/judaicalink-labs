@@ -8,8 +8,8 @@ from django.conf import settings
 from django.views.decorators.cache import cache_page
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
-logger = logging.getLogger(__name__)
-# logger.setLevel(logging.DEBUG)
+logger = logging.getLogger('labs')
+logger.setLevel(logging.DEBUG)
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 SOLR_SERVER = settings.SOLR_SERVER
 
@@ -17,7 +17,7 @@ SOLR_SERVER = settings.SOLR_SERVER
 def get_names():
     """
     This function gets all the names from the solr index cm_entity_names
-    :return:
+    :return: list of names
     """
     # gets all entity names from solr
     try:
@@ -28,16 +28,17 @@ def get_names():
         res = solr.search('*:*', index="cm_entity_names", rows=10000)
 
         # logging
-        #logger.info("Got names from solr: ")
-        #logger.debug("Names found: %s", res.hits)
-        #logger.info(res.debug)
-        #logger.info(res.hits)
+        logger.debug("Got names from solr: ")
+        logger.debug("Names found: %s", res.hits)
+        logger.debug(res.hits)
 
         for doc in res.docs:
             # convert list to string
             doc['name'] = ''.join(map(str, doc['name']))
             names.append(html.escape(doc['name']).replace("'", "\\'").replace('"', '\\"'))
             #logger.debug("Doc: %s", doc['name'])
+        # sort names alphabetically
+        names.sort()
         return names
 
     except Exception as e:
@@ -58,12 +59,9 @@ def index(request):
 
 @cache_page(CACHE_TTL)
 def result(request):
-    names = get_names()  # searches for all names in cm_entity_names
-    #logger.debug("Got names from solr: %s", names)
+    names = get_names()
 
-    query = request.GET.get('query')
-    #logger.info("Query: %s",  query)
-    # add name: to query
+    query = request.GET.get('query', '')  # Safely get the query with a default value
 
     solr = pysolr.Solr(SOLR_SERVER + 'cm_entities', always_commit=True, timeout=10,
                        auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
@@ -75,11 +73,10 @@ def result(request):
 
     search_fields = ["name", "spot"]
 
-    # create a dict from the fields and add the query
-    # create a list for the fields that should be searched and add the query
-    solr_query = [field + ':"' + query + '"' for field in search_fields]
+    # Safely build the query list
+    solr_query = [field + ':"' + (query or '') + '"' for field in search_fields]
 
-    # build the body for solr
+    # Build Solr search body
     body = {
         "hl": "false",
         "indent": "true",
@@ -92,66 +89,66 @@ def result(request):
 
     res = solr.search(q=solr_query, search_handler="/select", **body)
 
-    #logger.info("Results found: %s", res.hits)
-    #logger.info("Got results from solr: %s", res.docs)
-
     results = []
     for doc in res.docs:
-        doc['name'] = ''.join(map(str, doc['name']))
-        doc['e_type'] = ''.join(map(str, doc['e_type']))
-        if 'ep' in doc:
-            doc['ep'] = ''.join(map(str, doc['ep']))
-        else:
-            doc['ep'] = ''
+        doc['name'] = ''.join(map(str, doc.get('name', '')))
+        doc['e_type'] = ''.join(map(str, doc.get('e_type', '')))
+        doc['ep'] = ''.join(map(str, doc.get('ep', ''))) if 'ep' in doc else ''
 
-        logger.info("Name: %s", doc['name'])
-
-        # create a dict for the related entities
+        related_entities = []
         if 'related_entities' in doc:
-            #logger.info("Related entities: ", len(doc['related_entities'])/4)
-            related_entities = []
-            entity = {}
             for index in range(0, len(doc['related_entities']), 4):
                 if index + 3 < len(doc['related_entities']):
-                    # entity is a list with 4 elements
-                    # 0: ep - entity page
-                    # 1: name
-                    # 2: score
-                    # 3: type
-                    entity['ep'] = doc['related_entities'][index]
-                    entity['name'] = doc['related_entities'][index + 1]
-                    entity['score'] = doc['related_entities'][index + 2]
-                    entity['type'] = doc['related_entities'][index + 3]
-
-                    #logger.info("Entity: ", entity)
+                    entity = {
+                        'ep': doc['related_entities'][index] or '',
+                        'name': doc['related_entities'][index + 1] or '',
+                        'score': doc['related_entities'][index + 2] or '',
+                        'type': doc['related_entities'][index + 3] or '',
+                    }
                     related_entities.append(entity)
-                    entity = {}
-
-            # Replace the whole data
-            doc['related_entities'] = related_entities
-        else:
-            doc['related_entities'] = []
-
-        # FIXME: Fix the results
-        # check for journal occurrences
-        # check if doc has journal_occs.j_name
-        #if 'journal_occs' in doc:
-        #    for occurrence in doc['journal_occs']:
-        #        logger.info("Journal occs: ", occurrence['j_name'])
+        doc['related_entities'] = related_entities
 
         results.append(doc)
+        
+    """
+    Occurs in journals
+    Todo get the nested documents for:
+    * docs
+        * name
+        * entity_type: String
+        * entity_page: String (URL)
+        * journal_occurrences (nested, multiple)
+            * journal_name: String
+            * journal_id: Int
+            * first: Int
+            * last: Int
+            * mentions (nested, multiple)
+                * person_id: Int
+                * spot: String
+                * start: Int
+                * end: Int
+                * person_link: String 
+                * date: String or Date
+                * year: Int
+        * related_entities (nested, multiple)
+            * name: String
+            * url: String
+            * score: Float
+            * type: String
+    """
 
-    #print("Results: ", results)
     context = {
         "results": results,
-        "data": json.dumps(names)
+        "data": json.dumps(names or [])
     }
 
     return render(request, 'cm_e_search/search_result.html', context)
 
 
+
 def get_names_json(request):
     names = get_names()
+    logger.debug("Names: %s", names)
     return JsonResponse({'names': names})
 
 
@@ -170,3 +167,21 @@ def create_timeline():
 
 def create_graph_visualization():
     pass
+
+from django.core.paginator import Paginator
+
+@cache_page(CACHE_TTL)
+def names_by_letter(request, letter):
+    names = get_names()  # Fetch all names
+    filtered_names = [name for name in names if name.startswith(letter.upper())]
+
+    # Paginate the filtered names
+    paginator = Paginator(filtered_names, 50)  # 50 names per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'letter': letter.upper(), 
+        'page_obj': page_obj,
+    }
+    return render(request, 'cm_e_search/names_by_letter.html', context)

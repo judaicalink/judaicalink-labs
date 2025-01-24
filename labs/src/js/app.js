@@ -1,22 +1,34 @@
-// import all the necessary files here
+import 'jquery'; // jQuery for Bootstrap
+import 'bootstrap'; // Bootstrap JavaScript
+import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap CSS
+import '@popperjs/core'; // Popper.js for Bootstrap
+import '@fortawesome/fontawesome-free/js/all'; // FontAwesome Free
 
-import 'jquery';
-import 'jquery-ui';
-import 'popper.js';
-import $ from 'jquery';
-import autocomplete from 'jquery-ui/ui/widgets/autocomplete';
+// Vue imports
+import { createApp } from 'vue';
 
-// font awesome
-import '@fortawesome/fontawesome-free/js/fontawesome'
-import '@fortawesome/fontawesome-free/js/solid'
-import '@fortawesome/fontawesome-free/js/regular'
-import '@fortawesome/fontawesome-free/js/brands'
+// Lazy load large modules
+//import(/* webpackChunkName: "large-module" */ './largeModule')
+//    .then(({ default: largeModule }) => {
+//         largeModule.init();
+//     })
+//     .catch((err) => {
+//         console.error('Error loading large module:', err);
+//     });
+//
+// import(/* webpackChunkName: "styles" */ '../scss/largeStyles.scss')
+//         .then(() => {
+//             console.log('Styles loaded dynamically');
+//         })
+//         .catch((err) => {
+//             console.error('Error loading styles:', err);
+//         });
 
-require('./activePageHighlighting.js'); // import active page highlighting javascript files
-//import('./autocomplete.js'); // import auto complete for cm_e_search
+// Initialize Vue
+createApp(App).mount('#search-app');
 
 require('bootstrap');
 require('malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js')
 require('./design.js')
 
-require('./vue.config.js')
+//require('./vue.config.js')

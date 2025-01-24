@@ -7,76 +7,109 @@
 
 <main class="row">
 
-<div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-9 col-xl-8">
+    <div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-9 col-xl-8">
 
-<h1 class="text-center">JudaicaLink Search</h1>
+        <h1 class="text-center">JudaicaLink Search</h1>
 
-<!-- looking at our data -->
+        <!-- looking at our data -->
 
-    <div id="accordion">
-           {% include 'search/search_form.html' %}
-    </div>
+        <div id="accordion">
+            {% include 'search/search_form.html' %}
+        </div>
 
-    <!-- Begin Alert -->
-    <div class="row mt-4">
-        {% if error_message %}
-            <div class="alert alert-danger text-center" role="alert">
-                {{ error_message }}
-            </div>
-        {% elif total_hits > 0 %}
-            <div class="alert alert-success text-center" role="alert">
-            Found {{ total_hits }} results for your query:
-            <b>{% for entry in alert %}
-                {{entry}}
-                {% endfor %}</b>
-            </div>
+        <!-- Begin Alert -->
+        {% if total_hits > 0 %}
+        <div class="alert alert-success">
+            <p>Found {{ total_hits }} result(s) for query: <strong>{{ alert }}</strong>.</p>
+        </div>
         {% else %}
-        <div class="alert alert-danger text-center" role="alert">
-            No results matching your query:
-            <b>{% for entry in alert %}
-                {{entry}}
-                {% endfor %}</b>
+        <div class="alert alert-danger">
+            <strong>No results found.</strong>
         </div>
         {% endif %}
-    </div>
-    <!-- End Alert -->
+        <!-- End Alert -->
 
-    <!-- Begin Results -->
+        <!-- Begin Sorting -->
+        {% if total_hits > 0 %}
+        <div>
+            {% if sort_order == "asc" %}
+            <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=asc"><strong>Sort
+                A-Z</strong></a>
+            <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=desc">Sort
+                Z-A</a>
+            {% elif sort_order == "desc" %}
+            <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=asc">Sort
+                A-Z</a>
+            <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=desc"><strong>Sort
+                Z-A</strong></a>
+            {% else %}
+            <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=asc">Sort
+                A-Z</a>
+            <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=desc">Sort
+                Z-A</a>
+            {% endif %}
+        </div>
+        {% endif %}
+        <!-- End Sorting -->
 
-    <div class="table-responsive mb-3">
-        <table class="table table-light table-striped">
-
-            {% for values in ordered_dataset %}
-            <tr>
-                <td>
-                    {% for key, value in values.items %}
-                        {% if key == "Link"  %}
-                            {{ value | safe | escape }}
+        <!-- Begin Results-->
+        <div class="table-responsive mb-3">
+            <table class="table table-light table-striped">
+                {% for result in ordered_dataset %}
+                <tr>
+                    <td>
+                        {% for key, value in result.items %}
+                        {% if key == "Abstract" %}
+                        <p>
+                            <strong>{{ key }}:</strong>
+                        </p>
+                        <div>
+                            {% if value|length > 200 %}
+                            <!-- First 200 characters are always visible -->
+                            <p>{{ value|slice:":200"|safe }}...</p>
+                            <!-- "Read More" button -->
+                            <button class="btn btn-link p-0" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#abstract-{{ forloop.counter }}" aria-expanded="false"
+                                    aria-controls="abstract-{{ forloop.counter }}">
+                                Read more >>
+                            </button>
+                            <!-- Remaining text -->
+                            <div id="abstract-{{ forloop.counter }}" class="collapse mt-2">
+                                {{ value|slice:"200:"|safe }}
+                            </div>
+                            {% else %}
+                            <p>{{ value|safe }}</p>
+                            {% endif %}
+                        </div>
+                        {% elif key == "Link" %}
+                        {{ value|safe }}
                         {% elif key == "Dataslug" %}
                             <p>Dataslug: <span class="badge text-bg-secondary text-white">{{value}}</span></p>
                         {% else %}
-                            <p>{{ key }}: {{ value | safe | escape }}</p>
+                        <p><strong>{{ key }}:</strong> {{ value|safe }}</p>
                         {% endif %}
-                    {% endfor %}
-                </td>
-            </tr>
-            {% endfor %}
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
 
-        </table>
-    </div>
-    <!-- End Results-->
 
-    <!-- Begin Pagination-->
-    {% include 'search/pagination.html' %}
-    <!-- End Pagination-->
+        <!-- End Results-->
+
+        <!-- Begin Pagination-->
+        {% include 'search/pagination.html' %}
+        <!-- End Pagination-->
 
     </div>
 
     <!-- Begin Picture -->
 
     <div class="col-md-0 col-lg-3 col-xl-4">
-        <div class="img-fluid mt-4" id="picturemargintop30">
-            <img src="/static/img/judaicalink_knowledge_graph_compressed.jpg" class="img-thumbnail img-fluid" alt="Judaicalink Knowledge Graph">
+        <div id="picturemargintop30" class="img-fluid mt-4">
+            <img alt="Judaicalink Knowledge Graph" class="img-thumbnail img-fluid"
+                 src="/static/img/judaicalink_knowledge_graph_compressed.jpg">
         </div>
 
         <!-- Begin Filter-->
