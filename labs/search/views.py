@@ -81,20 +81,6 @@ def all_search_nav(request):
     return render(request, "search/all_search_nav.html", context)
 
 
-# Load data into Judaicalink index
-def load(request):
-    """
-    Loads the data from the textfile-djh.json file into the Judaicalink index.
-    """
-    with open('../data/textfile-djh.json', 'rb') as f:
-        data = f.read()
-        logger.debug(data)
-        headers = {'content-type': 'application/json'}
-        response = requests.post(f'http://localhost:8389/{settings.JUDAICALINK_INDEX}/doc/_bulk?pretty', data=data,
-                                 headers=headers)
-        return HttpResponse(response)
-
-
 # Formats the results for display
 def format_results(docs, highlighting):
     formatted = []
