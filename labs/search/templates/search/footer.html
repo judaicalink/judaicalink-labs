@@ -2,39 +2,82 @@
 
 
 <footer class="row">
-    <div class="col-md-12">
-        <hr>
-        <div class="footer-logos">
-            <a href="https://www.hs-mannheim.de" target="_blank" rel="noopener noreferrer"><img id="hs-mannheim-logo"
-                                                                                                src="{% static 'img/mannheim_logo.png'%}"
-
-                                                                                                  alt="HS Mannheim Logo"/></a>
-            <a href="https://dm2e.eu" target="_blank" rel="noopener noreferrer"><img id=dmelogo
-                                                                                     src="{% static 'img/DigitisedManuscriptstoEuropeana.png'%}"
-                                                                                     alt="Digitised Manuscripts to Europeana Logo"/></a>
-            <a href="https://www.ub.uni-frankfurt.de" target="_blank" rel="noopener noreferrer"><img id=ubflogo
-                                                                                                     src="{% static 'img/ubfrankfurt.jpg'%}"
-                                                                                                     alt="ub frankfurt Logo"/></a>
-            <a href="http://www.jhn.ngo/judaica-europeana-archive/" target="_blank" rel="noopener noreferrer"><img
-                    id=jeulogo src="{% static 'img/Judaica_Europeana.png'%}" alt="Judaica Europeana Logo"/></a>
-            <a href="https://pro.europeana.eu" target="_blank" rel="noopener noreferrer"><img id=euprologo
-                                                                                              src="{% static 'img/Europeana_pro.png'%}"
-                                                                                              alt="Europeana Pro Logo"/></a>
-            <a href="https://www.ub.uni-frankfurt.de/judaica3/home.html" target="_blank" rel="noopener noreferrer"><img
-                    src="{% static 'img/fid-logo.jpg'%}" alt="FID logo" class="logofidfooter d-md-none"/></a>
-        </div>
-        <div class="footer-content">
-            <pre>Copyright &copy; WISS Research Group 2013-2021</pre>
-            <pre><a href="http://web.judaicalink.org/faq">FAQ</a> | <a
-                    href="http://data.judaicalink.org/sparql.html">SPARQL</a> | <a
-                        href="http://web.judaicalink.org/about-us">About</a> | <a
-                        href="http://web.judaicalink.org/legal">Disclaimer</a> | <a
-                        href="http://web.judaicalink.org/legal">Privacy Policy</a> | <a
-                        href="{%  url 'contact:contact' %}">Contact</a> | <a
-                        href="https://github.com/judaicalink">Github</a></pre>
-
+    <div class="row">
+        <div class="col">
+            <hr>
         </div>
     </div>
+
+        <div class="footer-logos row">
+            <div class="col">
+                <a href="https://www.hs-mannheim.de" target="_blank" rel="noopener noreferrer">
+                    <img class="img-fluid" id="hs-mannheim-logo" src="{% static 'img/mannheim_logo.png'%}" alt="HS Mannheim Logo"/>
+                </a>
+            </div>
+            <div class="col">
+                <a href="https://dm2e.eu" target="_blank" rel="noopener noreferrer">
+                    <img class="img-fluid" id="dmelogo" src="{% static 'img/DigitisedManuscriptstoEuropeana.png'%}" alt="Digitised Manuscripts to Europeana Logo"/>
+                </a>
+            </div>
+            <div class="col">
+                <a href="https://www.ub.uni-frankfurt.de" target="_blank" rel="noopener noreferrer">
+                    <img class="img-fluid" id="ubflogo" src="{% static 'img/ubfrankfurt.jpg'%}" alt="ub frankfurt Logo"/>
+                </a>
+            </div>
+            <div class="col">
+                <a href="http://www.jhn.ngo/judaica-europeana-archive/" target="_blank" rel="noopener noreferrer">
+                    <img class="img-fluid" id="jeulogo" src="{% static 'img/Judaica_Europeana.png'%}" alt="Judaica Europeana Logo"/>
+                </a>
+            </div>
+            <div class="col">
+                <a href="https://pro.europeana.eu" target="_blank" rel="noopener noreferrer">
+                    <img class="img-fluid" id="euprologo" src="{% static 'img/Europeana_pro.png'%}" alt="Europeana Pro Logo"/>
+                </a>
+            </div>
+            <div class="col">
+                <a href="https://www.ub.uni-frankfurt.de/judaica3/home.html" target="_blank" rel="noopener noreferrer">
+                    <img class="img-fluid logofidfooter d-md-none" src="{% static 'img/fid-logo.jpg'%}" alt="FID logo" />
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col align-self-end">
+                  <p>&copy WISS Research Group 2013-2025</p>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-sm navbar-light">
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapseFooter" aria-controls="navbarCollapseFooter" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="footer-content navbar-collapse collapse" id="navbarCollapseFooter">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+              <a class="nav-link" href="http://web.judaicalink.org/faq"><i class="fa-regular fa-circle-question"></i> FAQ</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="http://data.judaicalink.org/sparql.html"><i class="fa-solid fa-magnifying-glass-chart"></i> SPARQL</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="http://web.judaicalink.org/about-us"><i class="fa-solid fa-circle-info"></i> About</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://github.com/judaicalink"><i class="fa-brands fa-github"></i> Github</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="http://web.judaicalink.org/legal"><i class="fa-solid fa-scale-balanced"></i> Disclaimer</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="http://web.judaicalink.org/legal"><i class="fa-solid fa-shield-halved"></i> Privacy Policy</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{%  url 'contact:contact' %}"><i class="fa-regular fa-envelope"></i> Contact</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
     {% if settings.DEBUG %}
     <div class="col-md-12 alert alert-danger">
