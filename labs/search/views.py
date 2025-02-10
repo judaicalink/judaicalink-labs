@@ -78,7 +78,7 @@ def all_search_nav(request):
     context = {
         'debug': settings.DEBUG,
     }
-    return render(request, "search/partials/templates/search/all_search_nav.html", context)
+    return render(request, "search/all_search_nav.html", context)
 
 
 # Formats the results for display

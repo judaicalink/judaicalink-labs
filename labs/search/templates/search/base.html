@@ -31,11 +31,11 @@
 
 <div class="container-fluid">
     <div class="col-3">
-        {% include "search/sidebar.html" %}
+        {% include "search/partials/sidebar.html" %}
     </div>
     <div id="content" class="col-9">
         <div class="row">
-            {% include "search/header.html" %}
+            {% include "search/partials/header.html" %}
         </div>
         <div class="row">
             {% block content %}
@@ -63,7 +63,7 @@
 
         </div>
         <div class="row">
-            {% include "search/footer.html" %}
+            {% include "search/partials/footer.html" %}
         </div>
     </div>
 </div>
