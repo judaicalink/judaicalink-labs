@@ -55,7 +55,7 @@ a:hover {
     /*background: #d8ffbf;*/   /*hier*/
     color: $gray-700; /* dunkles Grau Schriftfarbe komplett*/
     transition: all 0.3s;
-    background-image: url("../img/backgroundtransparent.png");
+    background-image: url("../img/backgroundtransparent.webp");
     background-color: $background-color;
     background-size: cover;
     background-blend-mode: multiply;
@@ -63,7 +63,7 @@ a:hover {
 
 @supports (-ms-ime-align:auto) {
     #sidebar{
-           background-image: url("../img/backgroundtransparent.png");
+           background-image: url("../img/backgroundtransparent.webp");
          }
 } /*workaround for microsoft edge browser - background image was shown in different coloring*/
 
