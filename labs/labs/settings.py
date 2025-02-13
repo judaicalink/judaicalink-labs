@@ -76,6 +76,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'debug_toolbar',
     'django_extensions',
+    'webpack_loader',
+
 ]
 
 MIDDLEWARE = [
@@ -176,10 +178,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'src'),
+    os.path.join(BASE_DIR, 'build'),
 ]
+
+STATIC_ROOT = env('STATIC_ROOT') if env('STATIC_ROOT') is not None else os.path.join(BASE_DIR, "static/")
+
+#STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, "src"),
+#    os.path.join(BASE_DIR, "build"),
+#]
 
 # Logging
 LOGGING = {
@@ -372,4 +382,14 @@ REST_FRAMEWORK = {
 # Debug Toolbar
 DEBUG_TOOLBAR_CONFIG = {
     'RENDER_PANELS': False,
+}
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'webpack_bundles/',
+        'CACHE': not DEBUG,
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+        'POLL_INTERVAL': 0.1,
+        'IGNORE': [r'.+\.hot-update.js', r'.+\.map'],
+    }
 }
