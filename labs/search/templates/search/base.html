@@ -1,5 +1,7 @@
 {% load static %}
 {% load cookiebanner %}
+{% load render_bundle from webpack_loader %}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,25 +10,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    {% block meta_index %}{% endblock %}
-    {% block meta_search_index %}{% endblock %}
-    {% block meta_all_search_nav %}{% endblock %}
-    {% block meta_contact %}{% endblock %}
-    {% block meta_cm_index %}{% endblock %}
-    {% block meta_cme_index %}{% endblock %}
+    {% block meta %}{% endblock %}
 
     <title>JudaicaLink labs</title>
 
     <link rel="icon" href="{% static 'img/favicon.ico' %}">
 
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% render_bundle 'styles' 'css' %}">
 
     {% block header_scripts %}{% endblock %}
 
 </head>
 
 <body>
-<script src="{% static 'js/bundle.js' %}"></script>
+<script src="{% render_bundle 'app' 'js' %}"></script>
+
 {% cookiebanner_modal 'vanilla' %}
 
 <div class="container-fluid">
