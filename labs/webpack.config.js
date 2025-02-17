@@ -1,3 +1,4 @@
+require('dotenv').config();
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
@@ -5,6 +6,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 const webpack = require('webpack');
+const BundleTracker = require('webpack-bundle-tracker');
+
 
 module.exports = {
     entry: {
@@ -13,13 +16,14 @@ module.exports = {
         styles: './src/scss/app.scss',
     },
     output: {
-        path: path.resolve(__dirname, 'static'), // Output to Django's static folder
-        filename: 'js/[name].[contenthash].js', // Output JS files to static/js/
-        chunkFilename: 'js/[name].[contenthash].js', // Dynamic chunks in static/js/
-        publicPath: '/static/', // Base path for assets
+        path: path.resolve(__dirname, 'build'), // Webpack compiles into `build/`
+        filename: 'js/[name].[contenthash].js',
+        // chunkFilename: 'js/[name].[contenthash].js', // Dynamic chunks in static/js/
+        publicPath: '/static/', // Django serves files from /static/
+        sourceMapFilename: 'js/[name].[contenthash].js.map',
     },
-    mode: 'production',
-    devtool: process.env.NODE_ENV === 'development' ? 'source-map' : false,
+    mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
+    devtool: process.env.NODE_ENV === 'development' ? 'eval-source-map' : 'source-map',
     module: {
         rules: [
             {
@@ -63,6 +67,7 @@ module.exports = {
         ],
     },
     plugins: [
+        new BundleTracker({ path: __dirname, filename: 'webpack-stats.json' }),
         new MiniCssExtractPlugin({
             filename: 'css/[name].[contenthash].css', // Output CSS to static/css/
         }),

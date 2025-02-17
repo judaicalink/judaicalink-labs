@@ -7,44 +7,59 @@
             <hr>
         </div>
     </div>
-        <div class="row footer-logos">
-          <a href="https://www.jewishstudies.de" target="_blank" rel="noopener noreferrer">
-                <img src="{% static 'img/fid-logo-200.webp' %}" alt="FID logo"/>
-            </a>
+    <div class="row">
+        <div class="footer-logos">
+            <div class="col-12 col-md-2">
+                <a href="https://www.jewishstudies.de" target="_blank" rel="noopener noreferrer">
+                    <img src="{% static 'img/fid-logo-200.webp' %}" alt="FID logo"/>
+                </a>
+            </div>
 
-            <a href="https://www.ub.uni-frankfurt.de" target="_blank" rel="noopener noreferrer">
-                <img id=ubflogo src="{% static 'img/ubfrankfurt-200.webp' %}" alt="ub frankfurt Logo"/>
-            </a>
+            <div class="col-12 col-md-2">
+                <a href="https://www.ub.uni-frankfurt.de" target="_blank" rel="noopener noreferrer">
+                    <img id=ubflogo src="{% static 'img/ubfrankfurt-200.webp' %}" alt="ub frankfurt Logo"/>
+                </a>
+            </div>
 
-            <a href="https://www.hs-mannheim.de" target="_blank" rel="noopener noreferrer">
-                <img id="hslogo" src="{% static 'img/mannheim-logo-200.webp' %}" alt="HS Mannheim Logo"/>
-            </a>
+            <div class="col-12 col-md-2">
+                <a href="https://www.hs-mannheim.de" target="_blank" rel="noopener noreferrer">
+                    <img id="hslogo" src="{% static 'img/mannheim-logo-200.webp' %}" alt="HS Mannheim Logo"/>
+                </a>
+            </div>
 
-            <a href="https://pro.europeana.eu/project/dm2e" target="_blank" rel="noopener noreferrer">
-                <img id=dmelogo src="{% static 'img/digitisedmanuscriptstoeuropeana-200.webp' %}" alt="Digitised Manuscripts to Europeana Logo"/>
-            </a>
+            <div class="col-12 col-md-2">
+                <a href="https://pro.europeana.eu/project/dm2e" target="_blank" rel="noopener noreferrer">
+                    <img id=dmelogo src="{% static 'img/digitisedmanuscriptstoeuropeana-200.webp' %}"
+                     alt="Digitised Manuscripts to Europeana Logo"/>
+                </a>
+            </div>
 
-            <a href="http://www.jhn.ngo" target="_blank" rel="noopener noreferrer">
-                <img id=jeulogo src="{% static 'img/judaica-europeana-200.webp' %}" alt="Judaica Europeana Logo"/>
-            </a>
+            <div class="col-12 col-md-2">
+                <a href="http://www.jhn.ngo" target="_blank" rel="noopener noreferrer">
+                    <img id=jeulogo src="{% static 'img/judaica-europeana-200.webp' %}" alt="Judaica Europeana Logo"/>
+                </a>
+            </div>
 
-            <a href="https://pro.europeana.eu" target="_blank" rel="noopener noreferrer">
-                <img id=euprologo src="{% static 'img/europeana-pro-200.webp' %}" alt="Europeana Pro Logo"/>
-            </a>
+            <div class="col-12 col-md-2">
+                <a href="https://pro.europeana.eu" target="_blank" rel="noopener noreferrer">
+                    <img id=euprologo src="{% static 'img/europeana-pro-200.webp' %}" alt="Europeana Pro Logo"/>
+                </a>
+            </div>
+        </div>
         </div>
 
         <div class="row">
-            <div class="col align-self-end">
-                  <p>&copy WISS Research Group 2013-2025</p>
+            <div class="col-12 col-lg-3 text-center mt-lg-3">
+                  <p class="text-grey">&copy WISS Research Group 2013-2025</p>
             </div>
-        </div>
-
+            
+<div class="col-12 col-lg-9">
         <nav class="navbar navbar-expand-sm navbar-light">
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapseFooter" aria-controls="navbarCollapseFooter" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="footer-content navbar-collapse collapse" id="navbarCollapseFooter">
+      <div class="navbar-collapse collapse" id="navbarCollapseFooter">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
               <a class="nav-link" href="http://web.judaicalink.org/faq"><i class="fa-regular fa-circle-question"></i> FAQ</a>
@@ -70,6 +85,8 @@
         </ul>
       </div>
     </nav>
+</div>
+        </div>
 
     {% if settings.DEBUG %}
     <div class="col-md-12 alert alert-danger">

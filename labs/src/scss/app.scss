@@ -38,6 +38,7 @@ $badge-color:                 $background-color;
 $badge-border-radius:         .35rem !default;
 
 @import "~bootstrap/scss/bootstrap"; // import all bootstrap
+@import 'malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css';
 @import "./labs.scss"; //import custom stylesheet
 
 $fa-font-path: "~@fortawesome/fontawesome-free/webfonts"; // import all fontawesome fonts

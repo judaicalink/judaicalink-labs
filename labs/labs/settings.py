@@ -180,16 +180,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'src'),
-    os.path.join(BASE_DIR, 'build'),
+    os.path.join(BASE_DIR, "src"),  # Original static sources
+    os.path.join(BASE_DIR, "build"),  # Webpack build output
 ]
+
 
 STATIC_ROOT = env('STATIC_ROOT') if env('STATIC_ROOT') is not None else os.path.join(BASE_DIR, "static/")
 
-#STATICFILES_DIRS = [
-#    os.path.join(BASE_DIR, "src"),
-#    os.path.join(BASE_DIR, "build"),
-#]
 
 # Logging
 LOGGING = {
@@ -386,9 +383,9 @@ DEBUG_TOOLBAR_CONFIG = {
 
 WEBPACK_LOADER = {
     'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'webpack_bundles/',
+        'BUNDLE_DIR_NAME': 'static/',  # Django serves static files from /static/
         'CACHE': not DEBUG,
-        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),  # Ensure correct path
         'POLL_INTERVAL': 0.1,
         'IGNORE': [r'.+\.hot-update.js', r'.+\.map'],
     }

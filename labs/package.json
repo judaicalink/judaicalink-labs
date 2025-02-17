@@ -34,6 +34,7 @@
     "@popperjs/core": "^2.11.8",
     "@tarekraafat/autocomplete.js": "^10.2.9",
     "bootstrap": "^5.3.3",
+    "bootstrap-vue-next": "^0.26.26",
     "clean-webpack-plugin": "^4.0.0",
     "core-js": "^3.40.0",
     "dotenv-webpack": "^8.1.0",

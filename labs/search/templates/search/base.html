@@ -16,25 +16,29 @@
 
     <link rel="icon" href="{% static 'img/favicon.ico' %}">
 
-    <link rel="stylesheet" href="{% render_bundle 'styles' 'css' %}">
+    {% render_bundle 'styles' 'css' %}
 
     {% block header_scripts %}{% endblock %}
 
 </head>
 
 <body>
-<script src="{% render_bundle 'app' 'js' %}"></script>
+{% render_bundle 'app' 'js' %}
 
 {% cookiebanner_modal 'vanilla' %}
 
 <div class="container-fluid">
+
     <div class="col-3">
         {% include "search/partials/sidebar.html" %}
     </div>
+
     <div id="content" class="col-9">
+
         <div class="row">
             {% include "search/partials/header.html" %}
         </div>
+
         <div class="row">
             {% block content %}
             {% if debug %}
@@ -58,8 +62,8 @@
             {% endif %}
             {{ block.super }}
             {% endblock %}
-
         </div>
+
         <div class="row">
             {% include "search/partials/footer.html" %}
         </div>

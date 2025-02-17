@@ -9,7 +9,7 @@
         <ul class="list-unstyled navbar-nav">
             {% with url_name=request.resolver_match.url_name %}
             <li class="nav-item {% if url_name == 'index' %}active{% endif %}">
-                <a href="{% url 'index' %}"><i class="fas fa-home"></i> Labs Home</a>
+                <a href="{% url 'index' %}"><i class="fas fa-home"></i> Home</a>
             </li>
             {% endwith %}
             <li class="nav-item {% active_link 'search:all_search_nav' 'active' %}">
@@ -54,6 +54,10 @@
             <li class="nav-item {% active_link 'contact:contact' 'active' %}">
                 <a href="{% url 'contact:contact' %}"><i class="fas fa-envelope"></i> Contact</a>
             </li>
+             <br>
+                <li>
+                    <small><a href="https://web.judaicalink.org/"><i class="fas fa-door-open"></i> Web Home</a></small>
+                </li>
         </ul>
     </nav>
     <!-- End Page Navigation -->
