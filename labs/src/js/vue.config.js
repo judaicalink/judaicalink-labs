@@ -1,7 +1,13 @@
 import { createApp } from 'vue';
+import {createBootstrap} from 'bootstrap-vue-next'
+
+// Add the necessary CSS
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue-next/dist/bootstrap-vue-next.css'
+
 import SearchApp from '../vue/search.vue';
-import FilterApp from '../vue/filter.vue';
-import AutocompleteApp from '../vue/autocomplete.vue';
+//import FilterApp from '../vue/filter.vue';
+//import AutocompleteApp from '../vue/autocomplete.vue';
 
 import 'vuetify/styles'; // Ensure Vuetify styles are included
 import { createVuetify } from 'vuetify';
@@ -16,26 +22,24 @@ const vuetify = createVuetify({
 });
 
 // Dynamically load Vue components
-const SearchApp = defineAsyncComponent(() =>
-    import(/* webpackChunkName: "search-app" */ '../vue/search.vue')
-);
+//const SearchApp = defineAsyncComponent(() =>
+//    import(/* webpackChunkName: "search-app" */ '../vue/search.vue')
+//);
 
-const FilterApp = defineAsyncComponent(() =>
-    import(/* webpackChunkName: "filter-app" */ '../vue/filter.vue')
-);
+//const FilterApp = defineAsyncComponent(() =>
+//  import(/* webpackChunkName: "filter-app" */ '../vue/filter.vue')
+//);
 
-const AutocompleteApp = defineAsyncComponent(() =>
-    import(/* webpackChunkName: "autocomplete-app" */ '../vue/autocomplete.vue')
-);
+//const AutocompleteApp = defineAsyncComponent(() =>
+//   import(/* webpackChunkName: "autocomplete-app" */ '../vue/autocomplete.vue')
+//);
 
-export default {
-    components: {
-        SearchApp,
-        FilterApp,
-        AutocompleteApp,
-    },
-};
+
 
 //SearchApp.createApp(SearchApp).use(vuetify).mount('#search-app');
 //FilterApp.createApp(FilterApp).use(vuetify).mount('#filter-app');
 //AutocompleteApp.createApp(AutocompleteApp).use(vuetify).mount('#autocomplete-app');
+
+//SearchApp.use(vuetify)
+//SearchApp.use(createBootstrap())
+//SearchApp.mount('#search-app')
