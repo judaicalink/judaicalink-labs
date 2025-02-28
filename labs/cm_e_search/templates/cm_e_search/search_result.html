@@ -71,9 +71,9 @@
 
         {% include "cm_e_search/search_form.html" %}
 
-        {% if results|length < 1 %}
+        {% if error_message %}
         <div class="alert alert-danger text-center mb-5" role="alert">
-            No entity matching your query!
+            {{ error_message }}
         </div>
         {% endif %}
 

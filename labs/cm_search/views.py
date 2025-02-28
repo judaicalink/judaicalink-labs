@@ -24,46 +24,59 @@ def index(request):
 def result(request):
     error_message = None
 
-    solr = pysolr.Solr(SOLR_SERVER + SOLR_INDEX, always_commit=True, timeout=10,
-                       auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
+    try:
 
-    query = request.GET.get('query')
-    logger.debug("Query: ", query)
-    page = int(request.GET.get('page'))
-    size = 10
-    # changed size from 15 to 10 to match the amount of results in judaicalink search
-    start = (page - 1) * size
+        solr = pysolr.Solr(SOLR_SERVER + SOLR_INDEX, always_commit=True, timeout=10,
+                           auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
 
-    # TODO: add the language, publisher and place to the query and in the index
-    highlight_fields = ["page", "text", "dateIssued", "j_title", "vlid_journal", "vlid_page", "volume", "heft",
-                        "aufsatz"]
-    fields = ["page", "text", "dateIssued", "j_title", "volume", "vlid_journal", "vlid_page", "heft", "aufsatz", "id"]
-    search_fields = ["text", "j_title", "aufsatz"]
-    # create a dict from the fields and add the query
-    # create a list for the fields that should be searched and add the query
-    solr_query = [field + ":" + query for field in search_fields]
+        query = request.GET.get('query')
+        logger.debug("Query: ", query)
+        page = int(request.GET.get('page'))
+        size = 10
+        # changed size from 15 to 10 to match the amount of results in judaicalink search
+        start = (page - 1) * size
 
-    # build the body for solr
-    body = {
-        "hl": "true",
-        "indent": "true",
-        'fl': ','.join(fields),
-        "hl.requireFieldMatch": "true",
-        "hl.tag.pre": "<strong>",
-        "hl.tag.post": "</strong>",
-        "hl.fragsize": "0",
-        "start": start,
-        "q.op": "OR",
-        "hl.fl": ','.join(highlight_fields),
-        "rows": size,
-        "useParams": ""
-    }
+        # TODO: add the language, publisher and place to the query and in the index
+        highlight_fields = ["page", "text", "dateIssued", "j_title", "vlid_journal", "vlid_page", "volume", "heft",
+                            "aufsatz"]
+        fields = ["page", "text", "dateIssued", "j_title", "volume", "vlid_journal", "vlid_page", "heft", "aufsatz", "id"]
+        search_fields = ["text", "j_title", "aufsatz"]
+        # create a dict from the fields and add the query
+        # create a list for the fields that should be searched and add the query
+        solr_query = [field + ":" + query for field in search_fields]
 
-    res = solr.search(q=solr_query, search_handler="/select", **body)
-    # added 'from': start, to indicate which results should be displayed
-    # 'from' is used to tell solr which results to return by index
-    # -> if page = 1 then results 0-9 will be displayed
-    # -> if page = 2 then results 10-19 and so on
+        # build the body for solr
+        body = {
+            "hl": "true",
+            "indent": "true",
+            'fl': ','.join(fields),
+            "hl.requireFieldMatch": "true",
+            "hl.tag.pre": "<strong>",
+            "hl.tag.post": "</strong>",
+            "hl.fragsize": "0",
+            "start": start,
+            "q.op": "OR",
+            "hl.fl": ','.join(highlight_fields),
+            "rows": size,
+            "useParams": ""
+        }
+
+        res = solr.search(q=solr_query, search_handler="/select", **body)
+        # added 'from': start, to indicate which results should be displayed
+        # 'from' is used to tell solr which results to return by index
+        # -> if page = 1 then results 0-9 will be displayed
+        # -> if page = 2 then results 10-19 and so on
+
+    except Exception as e:
+        logger.error("Error: %s", e)
+        error_message = "An error occurred while searching. Please try again later."
+        context = {
+            'error_message': error_message,
+            'total_hits': 0,
+            'query': "",
+        }
+        return render(request, 'cm_search/search_result.html', context)
+
 
     logger.debug("Hits: ", res.hits)
     logger.debug(res.docs)

@@ -13,9 +13,11 @@ import requests
 from data.models import Dataset
 from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
+from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.cache import cache_page
+
 
 # see labs/urls.py def index to access root with http://localhost:8000
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
@@ -131,6 +133,7 @@ def search(request):
     logger.debug("Searching...")
     query = build_advanced_query(request)
     logger.debug(f"Constructed Query: {query}")
+    alert = None
 
     # Pagination and sorting parameters
     page = int(request.GET.get("page", 1))
@@ -162,13 +165,16 @@ def search(request):
     except pysolr.SolrError as e:
         logger.error(f"Solr query failed: {e}")
         logger.error(f"Request URL: {SOLR_URL}?q={query}")
-        return HttpResponse(f"Solr query failed: {e}", status=404)
+        # return the error page
+        return render(request, 'search/search_result.html', {"alert": "No results found, SOLR Connection error"})
+
 
     highlighting = response.highlighting
     formatted_results = format_results(response.docs, highlighting)
 
     # Alert for display
-    alert = query if "AND" in query or "OR" in query or "NOT" in query else query.split(":")[-1]
+    if alert is not None:
+        alert = query if "AND" in query or "OR" in query or "NOT" in query else query.split(":")[-1]
     query = query.replace("text:", "")
     query = query.replace("*:*", "")
     query = query.replace("*", "")
@@ -512,46 +518,56 @@ def process_query(query_dic, page, alert):
 
     page = int(page)
 
-    solr = pysolr.Solr(SOLR_SERVER + SOLR_INDEX, always_commit=True, timeout=10,
-                       auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
-    size = 10
-    start = (page - 1) * size
-    query_str = query_dic["query_str"]
-    logger.debug("Query: " + query_str)
+    try:
 
-    # Fields that should be highlighted
-    highlight_fields = ['name', 'birthDate', 'birthLocation', 'alternatives', 'deathDate', 'deathLocation',
-                        'dataslug', 'Abstract']
+        solr = pysolr.Solr(SOLR_SERVER + SOLR_INDEX, always_commit=True, timeout=10,
+                           auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
+        size = 10
+        start = (page - 1) * size
+        query_str = query_dic["query_str"]
+        logger.debug("Query: " + query_str)
 
-    fields = ['name', 'birthDate', 'birthLocation', 'alternatives', 'deathDate', 'deathLocation',
-              'dataslug', "Abstract", "id"]
+        # Fields that should be highlighted
+        highlight_fields = ['name', 'birthDate', 'birthLocation', 'alternatives', 'deathDate', 'deathLocation',
+                            'dataslug', 'Abstract']
 
-    solr_query = "\n".join(f"{field}:{query_str}" for field in fields)
+        fields = ['name', 'birthDate', 'birthLocation', 'alternatives', 'deathDate', 'deathLocation',
+                  'dataslug', "Abstract", "id"]
 
-    logger.debug(solr_query)
+        solr_query = "\n".join(f"{field}:{query_str}" for field in fields)
 
-    # build the body for solr
-    body = {
-        "hl": "true",
-        "indent": "true",
-        'fl': ','.join(fields),
-        "hl.requireFieldMatch": "true",
-        "hl.tag.pre": "<strong>",
-        "hl.tag.post": "</strong>",
-        "hl.fragsize": "0",
-        "start": start,
-        "q.op": "OR",
-        "hl.fl": ','.join(highlight_fields),
-        "rows": size,
-        "useParams": ""
-    }
+        logger.debug(solr_query)
 
-    # Perform the query with highlighting
-    result = solr.search(q=solr_query, search_handler="/select", **body)
-    # Debug
-    logger.debug("Result: ")
-    logger.debug(result.hits)
-    logger.debug(result.docs)
+        # build the body for solr
+        body = {
+            "hl": "true",
+            "indent": "true",
+            'fl': ','.join(fields),
+            "hl.requireFieldMatch": "true",
+            "hl.tag.pre": "<strong>",
+            "hl.tag.post": "</strong>",
+            "hl.fragsize": "0",
+            "start": start,
+            "q.op": "OR",
+            "hl.fl": ','.join(highlight_fields),
+            "rows": size,
+            "useParams": ""
+        }
+
+        # Perform the query with highlighting
+        result = solr.search(q=solr_query, search_handler="/select", **body)
+        # Debug
+        logger.debug("Result: ")
+        logger.debug(result.hits)
+        logger.debug(result.docs)
+
+    except pysolr.SolrError as e:
+        logger.error(f"Solr query failed: {e}")
+        logger.error(f"Request URL: {SOLR_SERVER}?q={query_str}")
+        # return the error page
+        alert = "No results found, SOLR Connection error"
+        context = {alert: alert}
+        return context
 
     if result.hits == 0:
         return None

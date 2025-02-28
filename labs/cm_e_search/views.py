@@ -44,6 +44,7 @@ def get_names():
     except Exception as e:
         logger.error("Error: %s", e)
         return None
+
     except pysolr.SolrError as e:
         logger.error("Error: %s", e)
         return None
@@ -63,31 +64,37 @@ def result(request):
 
     query = request.GET.get('query', '')  # Safely get the query with a default value
 
-    solr = pysolr.Solr(SOLR_SERVER + 'cm_entities', always_commit=True, timeout=10,
-                       auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
+    try:
+        solr = pysolr.Solr(SOLR_SERVER + 'cm_entities', always_commit=True, timeout=10,
+                           auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
 
-    fields = ["name", "e_type", "related_entities", 'ep', 'id', 'journal_occs.j_name', 'journal_occs.j_id',
-              'journal_occs.first', 'journal_occs.last', 'journal_occs.mentions.p_id',
-              'journal_occs.mentions.spot', 'journal_occs.mentions.start', 'journal_occs.mentions.end',
-              'journal_occs.mentions.p_link', 'journal_occs.mentions.date', 'journal_occs.mentions.year']
+        fields = ["name", "e_type", "related_entities", 'ep', 'id', 'journal_occs.j_name', 'journal_occs.j_id',
+                  'journal_occs.first', 'journal_occs.last', 'journal_occs.mentions.p_id',
+                  'journal_occs.mentions.spot', 'journal_occs.mentions.start', 'journal_occs.mentions.end',
+                  'journal_occs.mentions.p_link', 'journal_occs.mentions.date', 'journal_occs.mentions.year']
 
-    search_fields = ["name", "spot"]
+        search_fields = ["name", "spot"]
 
-    # Safely build the query list
-    solr_query = [field + ':"' + (query or '') + '"' for field in search_fields]
+        # Safely build the query list
+        solr_query = [field + ':"' + (query or '') + '"' for field in search_fields]
 
-    # Build Solr search body
-    body = {
-        "hl": "false",
-        "indent": "true",
-        'fl': '*,[child ]',
-        "start": 0,
-        "q.op": "OR",
-        "rows": 1000,
-        "useParams": ""
-    }
+        # Build Solr search body
+        body = {
+            "hl": "false",
+            "indent": "true",
+            'fl': '*,[child ]',
+            "start": 0,
+            "q.op": "OR",
+            "rows": 1000,
+            "useParams": ""
+        }
 
-    res = solr.search(q=solr_query, search_handler="/select", **body)
+        res = solr.search(q=solr_query, search_handler="/select", **body)
+
+    except pysolr.SolrError as e:
+        logger.error("Error: %s", e)
+        res.docs = []
+
 
     results = []
     for doc in res.docs:
@@ -139,7 +146,8 @@ def result(request):
 
     context = {
         "results": results,
-        "data": json.dumps(names or [])
+        "data": json.dumps(names or []),
+        "error_message": "",
     }
 
     return render(request, 'cm_e_search/search_result.html', context)

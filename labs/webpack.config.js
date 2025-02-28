@@ -9,6 +9,7 @@ const webpack = require('webpack');
 const BundleTracker = require('webpack-bundle-tracker');
 
 
+
 module.exports = {
     entry: {
         app: './src/js/app.js',
@@ -81,15 +82,16 @@ module.exports = {
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
+            'window.jQuery': 'jquery',
+            'window.$': 'jquery',
             Popper: ['@popperjs/core', 'default'],
-            bootstrap: 'bootstrap',
         }),
     ],
     resolve: {
         alias: {
             vue: 'vue/dist/vue.esm-bundler.js',
         },
-        extensions: ['.js', '.vue'],
+        extensions: ['.js', '.vue', '.json'],
     },
     optimization: {
         minimize: true,
