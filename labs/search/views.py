@@ -87,20 +87,21 @@ def all_search_nav(request):
 def format_results(docs, highlighting):
     formatted = []
     for doc in docs:
+        logger.debug(doc)
         result = {}
         doc_id = doc.get("id", "")
         for key, value in doc.items():
-            if key == "_version_":
+            if key == "_version_" or key == "id":
                 continue  # Exclude `_version_`
             if key == "name_sort":
                 continue  # Exclude `name_sort`
-            if key == "id":
+            if key == "link":
                 # Only show ID if it's a valid link
-                result["ID"] = f"<a href='{value}'>{value}</a>" if value.startswith("http") else None
+                result["Link"] = f"<a href='{value[0]}'>{value[0]}</a>" if value[0].startswith("http") else None
             elif key == "alternatives":
                 # Format alternatives as an unordered list
                 result["Alternatives"] = "".join(
-                    f"<p>{alt}</p>" for alt in value if isinstance(value, list)
+                    f'<p class="text-dark">{alt}</p>' for alt in value #if isinstance(value, list)
                 )
             else:
                 # Apply highlighting if available
@@ -115,8 +116,8 @@ def format_results(docs, highlighting):
         if "Alternatives" in result:
             reordered_result["Alternatives"] = result.pop("Alternatives")
         reordered_result.update(result)  # Add remaining fields
-        if "ID" in result:
-            reordered_result["ID"] = result.pop("ID")  # Move Link to the end
+        if "Link" in result:
+            reordered_result["Link"] = result.pop("Link")  # Move Link to the end
 
         if "name_sort" in result:
             reordered_result.pop("name_sort")
@@ -156,7 +157,7 @@ def search(request):
         "hl.simple.post": "</mark>",
     }
     # Add sorting if specified
-    if sort_order is not "":
+    if sort_order != "":
         solr_params["sort"] = f"name_sort {sort_order}"
 
     try:
@@ -535,8 +536,6 @@ def process_query(query_dic, page, alert):
 
         solr_query = "\n".join(f"{field}:{query_str}" for field in fields)
 
-        logger.debug(solr_query)
-
         # build the body for solr
         body = {
             "hl": "true",
@@ -577,6 +576,7 @@ def process_query(query_dic, page, alert):
     for doc in data:
         for key in doc:
             doc[key] = ''.join(map(str, doc[key]))
+            print(doc[key])
         doc['link'] = "<a href='{}'>{}</a>".format(doc["id"], doc["name"])
 
     # Extract the highlighting
@@ -594,6 +594,7 @@ def process_query(query_dic, page, alert):
     field_order = ["name", "alternatives", "birthDate", "birthLocation", "deathDate", "deathLocation", "Abstract",
                    "Publication", "dataslug", "id", "link"]
     data = [{key: doc[key] for key in field_order if key in doc} for doc in data]
+
 
     for doc in data:
         capitalized_doc = {key.capitalize(): value for key, value in doc.items()}
