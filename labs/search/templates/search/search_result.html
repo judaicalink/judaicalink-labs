@@ -60,15 +60,15 @@
                     <td>
                         {% for key, value in result.items %}
                         {% if key == "Abstract" %}
-                        <p>
+                        <p class="text-dark">
                             <strong>{{ key }}:</strong>
                         </p>
                         <div>
                             {% if value|length > 200 %}
                             <!-- First 200 characters are always visible -->
-                            <p>{{ value|slice:":200"|safe }}...</p>
+                            <p class="text-dark">{{ value|slice:":200"|safe }}...</p>
                             <!-- "Read More" button -->
-                            <button class="btn btn-link p-0" type="button" data-bs-toggle="collapse"
+                            <button class="btn btn-link p-0 text-dark" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#abstract-{{ forloop.counter }}" aria-expanded="false"
                                     aria-controls="abstract-{{ forloop.counter }}">
                                 Read more >>
@@ -78,15 +78,15 @@
                                 {{ value|slice:"200:"|safe }}
                             </div>
                             {% else %}
-                            <p>{{ value|safe }}</p>
+                            <p  class="text-dark">{{ value|safe }}</p>
                             {% endif %}
                         </div>
                         {% elif key == "Link" %}
                         {{ value|safe }}
                         {% elif key == "Dataslug" %}
-                            <p>Dataslug: <span class="badge text-bg-secondary text-white">{{value}}</span></p>
+                            <p class="text-dark">Dataslug: <span class="badge text-bg-secondary text-white">{{value}}</span></p>
                         {% else %}
-                        <p><strong>{{ key }}:</strong> {{ value|safe }}</p>
+                        <p class="text-dark"><strong>{{ key }}:</strong> {{ value|safe }}</p>
                         {% endif %}
                         {% endfor %}
                     </td>

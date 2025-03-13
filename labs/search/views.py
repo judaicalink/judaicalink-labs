@@ -173,8 +173,7 @@ def search(request):
     formatted_results = format_results(response.docs, highlighting)
 
     # Alert for display
-    if alert is not None:
-        alert = query if "AND" in query or "OR" in query or "NOT" in query else query.split(":")[-1]
+    alert = query if "AND" in query or "OR" in query or "NOT" in query else query.split(":")[-1]
     query = query.replace("text:", "")
     query = query.replace("*:*", "")
     query = query.replace("*", "")
