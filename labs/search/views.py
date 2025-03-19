@@ -18,7 +18,6 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.cache import cache_page
 
-
 # see labs/urls.py def index to access root with http://localhost:8000
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
@@ -42,10 +41,10 @@ def handle_error(request, template_name, log_message, exception=None):
 
 
 # Usage in URL routing or within views
-error_400 = lambda request, exception: handle_error(request, 'search/400.html', "Error 400", exception)
-error_404 = lambda request, exception: handle_error(request, 'search/404.html', "Error 404", exception)
-error_403 = lambda request, exception: handle_error(request, 'search/403.html', "Error 403", exception)
-error_500 = lambda request: handle_error(request, 'search/500.html', "Error 500")
+error_400 = lambda request, exception: handle_error(request, 'search/errors/400.html', "Error 400", exception)
+error_404 = lambda request, exception: handle_error(request, 'search/errors/404.html', "Error 404", exception)
+error_403 = lambda request, exception: handle_error(request, 'search/errors/403.html', "Error 403", exception)
+error_500 = lambda request: handle_error(request, 'search/errors/500.html', "Error 500")
 
 
 # Index page (root)
@@ -101,7 +100,7 @@ def format_results(docs, highlighting):
             elif key == "alternatives":
                 # Format alternatives as an unordered list
                 result["Alternatives"] = "".join(
-                    f'<p class="text-dark">{alt}</p>' for alt in value #if isinstance(value, list)
+                    f'<p class="text-dark">{alt}</p>' for alt in value  # if isinstance(value, list)
                 )
             else:
                 # Apply highlighting if available
@@ -168,7 +167,6 @@ def search(request):
         logger.error(f"Request URL: {SOLR_URL}?q={query}")
         # return the error page
         return render(request, 'search/search_result.html', {"alert": "No results found, SOLR Connection error"})
-
 
     highlighting = response.highlighting
     formatted_results = format_results(response.docs, highlighting)
@@ -594,7 +592,6 @@ def process_query(query_dic, page, alert):
     field_order = ["name", "alternatives", "birthDate", "birthLocation", "deathDate", "deathLocation", "Abstract",
                    "Publication", "dataslug", "id", "link"]
     data = [{key: doc[key] for key in field_order if key in doc} for doc in data]
-
 
     for doc in data:
         capitalized_doc = {key.capitalize(): value for key, value in doc.items()}
