@@ -20,6 +20,8 @@ from backend.admin import admin_site
 from django.conf import settings
 
 from search import views as search_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 admin.autodiscover()
 
@@ -36,7 +38,7 @@ urlpatterns = [
     #path('captcha/', include('captcha.urls')),
     path('contact/', include('contact.urls', namespace='contact')),
     path('api-auth/', include('rest_framework.urls'))
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 if settings.DEBUG:
