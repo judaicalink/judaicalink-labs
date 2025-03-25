@@ -23,9 +23,9 @@ CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 # import SEARCH_URL from settings.py
 SOLR_SERVER = settings.SOLR_SERVER
-SOLR_INDEX = "judaicalink"
+JUDAICALINK_INDEX = settings.JUDAICALINK_INDEX
 SOLR_SERVER = SOLR_SERVER.rstrip('/')
-SOLR_INDEX = SOLR_INDEX.lstrip('/')
+JUDAICALINK_INDEX = JUDAICALINK_INDEX.lstrip('/')
 
 # setup logging
 logger = logging.getLogger('labs')
@@ -141,7 +141,7 @@ def search(request):
     rows_per_page = 20
     start = (page - 1) * rows_per_page
 
-    SOLR_URL = f"{SOLR_SERVER}/{SOLR_INDEX}"
+    SOLR_URL = f"{SOLR_SERVER}/{JUDAICALINK_INDEX}"
     solr = pysolr.Solr(SOLR_URL, timeout=10)
 
     # Construct Solr parameters
@@ -518,7 +518,7 @@ def process_query(query_dic, page, alert):
 
     try:
 
-        solr = pysolr.Solr(SOLR_SERVER + SOLR_INDEX, always_commit=True, timeout=10,
+        solr = pysolr.Solr(SOLR_SERVER + JUDAICALINK_INDEX, always_commit=True, timeout=10,
                            auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
         size = 10
         start = (page - 1) * size
@@ -559,7 +559,7 @@ def process_query(query_dic, page, alert):
 
     except pysolr.SolrError as e:
         logger.error(f"Solr query failed: {e}")
-        logger.error(f"Request URL: {SOLR_SERVER}?q={query_str}")
+        logger.error(f"Request URL: {SOLR_SERVER + JUDAICALINK_INDEX}?q={query_str}")
         # return the error page
         alert = "No results found, SOLR Connection error"
         context = {alert: alert}

@@ -3,12 +3,13 @@ from django.http import HttpResponse, JsonResponse
 import pysolr
 import json
 
+from labs.labs import settings
 
 
 # Create your views here.
 
 def test(request):
-    solr = pysolr.Solr('http://localhost:8983/solr/judaicalink', always_commit=True, timeout=10)
+    solr = pysolr.Solr(settings.SOLR_SERVER + settings.JUDAICALINK_INDEX, always_commit=True, timeout=10)
     body = {
         "from" : 0, "size" : 1000,
         "query" : {
