@@ -14,10 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.contrib.admin import AdminSite
 from django.urls import include, path
 from backend.admin import admin_site
-from django.conf import settings
 
 from search import views as search_views
 from django.conf import settings
@@ -37,7 +35,7 @@ urlpatterns = [
     path('data', include('data.urls')),
     #path('captcha/', include('captcha.urls')),
     path('contact/', include('contact.urls', namespace='contact')),
-    path('api-auth/', include('rest_framework.urls'))
+    path('api/', include('api.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

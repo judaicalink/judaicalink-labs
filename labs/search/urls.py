@@ -10,7 +10,6 @@ from django.contrib.sitemaps.views import sitemap
 
 from . import views
 
-
 sitemaps = {'static': StaticViewSitemap}
 
 app_name = 'search'
@@ -23,3 +22,4 @@ urlpatterns = [
     # the sitemap
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
