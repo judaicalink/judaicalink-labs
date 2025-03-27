@@ -109,30 +109,68 @@ class JudaicalinkProxy(APIView):
         operation_description="Proxy Solr request to Judaicalink Search.",
         manual_parameters=[
             openapi.Parameter('name', openapi.IN_QUERY, description="Name, e.g. `Aron`", type=openapi.TYPE_STRING),
-            openapi.Parameter('Alternatives', openapi.IN_QUERY, description="Alternative Names, e.g. `Rabinowitsch`", type=openapi.TYPE_STRING),
-            openapi.Parameter('Abstract', openapi.IN_QUERY, description="Abstract Description, e.g. `Rabbi`", type=openapi.TYPE_STRING),
-            openapi.Parameter('link', openapi.IN_QUERY, description="URL, e.g. `Hirschfeld_Aron`", type=openapi.TYPE_STRING),
+            openapi.Parameter('Alternatives', openapi.IN_QUERY, description="Alternative Names, e.g. `Rabinowitsch`",
+                              type=openapi.TYPE_STRING),
+            openapi.Parameter('Abstract', openapi.IN_QUERY, description="Abstract Description, e.g. `Rabbi`",
+                              type=openapi.TYPE_STRING),
+            openapi.Parameter('link', openapi.IN_QUERY, description="URL, e.g. `Hirschfeld_Aron`",
+                              type=openapi.TYPE_STRING),
             openapi.Parameter('birthDate', openapi.IN_QUERY, description="Date, e.g. `1820`", type=openapi.TYPE_STRING),
             openapi.Parameter('deathDate', openapi.IN_QUERY, description="Date, e.g. `1885`", type=openapi.TYPE_STRING),
-            openapi.Parameter('birthLocation', openapi.IN_QUERY, description="Place, e.g. `Hamburg`", type=openapi.TYPE_STRING),
-            openapi.Parameter('deathLocation', openapi.IN_QUERY, description="Place, e.g. `Berlin`", type=openapi.TYPE_STRING),
-            openapi.Parameter('fq', openapi.IN_QUERY, description="Filter query, e.g. `birthDate:1820`", type=openapi.TYPE_STRING),
+            openapi.Parameter('birthLocation', openapi.IN_QUERY, description="Place, e.g. `Hamburg`",
+                              type=openapi.TYPE_STRING),
+            openapi.Parameter('deathLocation', openapi.IN_QUERY, description="Place, e.g. `Berlin`",
+                              type=openapi.TYPE_STRING),
+            openapi.Parameter('fq', openapi.IN_QUERY, description="Filter query, e.g. `birthDate:1820`",
+                              type=openapi.TYPE_STRING),
             openapi.Parameter('rows', openapi.IN_QUERY, description="Number of results", type=openapi.TYPE_INTEGER),
             openapi.Parameter('start', openapi.IN_QUERY, description="Pagination offset", type=openapi.TYPE_INTEGER),
-            openapi.Parameter('q.op', openapi.IN_QUERY, description="Query operator (default: OR)", type=openapi.TYPE_STRING, enum=['AND', 'OR'], default='OR'),
+            openapi.Parameter('q.op', openapi.IN_QUERY, description="Query operator (default: OR)",
+                              type=openapi.TYPE_STRING, enum=['AND', 'OR'], default='OR'),
         ],
-        responses={200: openapi.Response(description="Example result", examples={"application/json": {
-            "response": {
-                "numFound": 1,
-                "start": 0,
-                "docs": [{
-                    "name": ["Sandfort, Paul Aron"],
-                    "birthDate": ["1820"],
-                    "id": "63747260-3649-427a-ac9c-aed44e801410",
-                    "dataslug": ["gnd"],
-                    "link": ["http://data.judaicalink.org/data/gnd/121923053"]
-                }]
-            }}})}
+        responses={
+            200: openapi.Response(
+                description="Successful response",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        "response": openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            properties={
+                                "numFound": openapi.Schema(type=openapi.TYPE_INTEGER, example=1),
+                                "start": openapi.Schema(type=openapi.TYPE_INTEGER, example=0),
+                                "docs": openapi.Schema(
+                                    type=openapi.TYPE_ARRAY,
+                                    items=openapi.Schema(
+                                        type=openapi.TYPE_OBJECT,
+                                        properties={
+                                            "name": openapi.Schema(type=openapi.TYPE_ARRAY,
+                                                                   items=openapi.Items(type=openapi.TYPE_STRING)),
+                                            "birthDate": openapi.Schema(type=openapi.TYPE_ARRAY,
+                                                                        items=openapi.Items(type=openapi.TYPE_STRING)),
+                                            "id": openapi.Schema(type=openapi.TYPE_STRING),
+                                            "dataslug": openapi.Schema(type=openapi.TYPE_ARRAY,
+                                                                       items=openapi.Items(type=openapi.TYPE_STRING)),
+                                            "link": openapi.Schema(type=openapi.TYPE_ARRAY,
+                                                                   items=openapi.Items(type=openapi.TYPE_STRING)),
+                                        }
+                                    )
+                                )
+                            }
+                        )
+                    }
+                )
+            ),
+            400: openapi.Response(
+                description="Invalid query",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        "error": openapi.Schema(type=openapi.TYPE_STRING, example="Invalid query")
+                    }
+                )
+            )
+        }
     )
     def get(self, request):
         return solr_proxy(request, "judaicalink")
@@ -142,21 +180,50 @@ class CMProxy(APIView):
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(
-        operation_description="Proxy Solr request to cm core (text search only).",
+        operation_description="Request to Compact Memory for full-text search.",
         manual_parameters=[
-            openapi.Parameter('text', openapi.IN_QUERY, description="Fulltext query, e.g. `Israelit`", type=openapi.TYPE_STRING),
+            openapi.Parameter('text', openapi.IN_QUERY, description="Fulltext query (e.g. `Israelit`)",
+                              type=openapi.TYPE_STRING),
             openapi.Parameter('rows', openapi.IN_QUERY, description="Number of results", type=openapi.TYPE_INTEGER),
             openapi.Parameter('start', openapi.IN_QUERY, description="Pagination offset", type=openapi.TYPE_INTEGER),
         ],
-        responses={200: openapi.Response(description="Example result", examples={"application/json": {
-            "response": {
-                "numFound": 1,
-                "start": 0,
-                "docs": [{
-                    "id": "92a97098-a5b6-4590-a530-827a653e42e2",
-                    "text": ["128 Bayerische Israelitische Gemeindezeitung ..."]
-                }]
-            }}})}
+        responses={
+            200: openapi.Response(
+                description="Successful response",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        "response": openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            properties={
+                                "numFound": openapi.Schema(type=openapi.TYPE_INTEGER, example=1),
+                                "start": openapi.Schema(type=openapi.TYPE_INTEGER, example=0),
+                                "docs": openapi.Schema(
+                                    type=openapi.TYPE_ARRAY,
+                                    items=openapi.Schema(
+                                        type=openapi.TYPE_OBJECT,
+                                        properties={
+                                            "id": openapi.Schema(type=openapi.TYPE_STRING),
+                                            "text": openapi.Schema(type=openapi.TYPE_ARRAY,
+                                                                   items=openapi.Items(type=openapi.TYPE_STRING)),
+                                        }
+                                    )
+                                )
+                            }
+                        )
+                    }
+                )
+            ),
+            400: openapi.Response(
+                description="Invalid request (e.g. missing or malformed parameters)",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        "error": openapi.Schema(type=openapi.TYPE_STRING, example="Invalid query")
+                    }
+                )
+            )
+        }
     )
     def get(self, request):
         return solr_proxy(request, "cm")
@@ -166,30 +233,61 @@ class CMEntitiesProxy(APIView):
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(
-        operation_description="Proxy Solr request to Compact Memory Entities.",
+        operation_description="Request to the Compact Memory Entities.",
         manual_parameters=[
-            openapi.Parameter('spot', openapi.IN_QUERY, description="Spot text (e.g. `Haifa`)", type=openapi.TYPE_STRING),
-            openapi.Parameter('date', openapi.IN_QUERY, description="Date (e.g. `1902-12-12`)", type=openapi.TYPE_STRING),
-            openapi.Parameter('year', openapi.IN_QUERY, description="Year (e.g. `1902`)", type=openapi.TYPE_STRING),
+            openapi.Parameter('spot', openapi.IN_QUERY, description="Entity mention (e.g. `Haifa`)",
+                              type=openapi.TYPE_STRING),
+            openapi.Parameter('date', openapi.IN_QUERY, description="Full date (e.g. `1902-12-12`)",
+                              type=openapi.TYPE_STRING),
+            openapi.Parameter('year', openapi.IN_QUERY, description="Year only (e.g. `1902`)",
+                              type=openapi.TYPE_STRING),
             openapi.Parameter('rows', openapi.IN_QUERY, description="Number of results", type=openapi.TYPE_INTEGER),
             openapi.Parameter('start', openapi.IN_QUERY, description="Pagination offset", type=openapi.TYPE_INTEGER),
-            openapi.Parameter('q.op', openapi.IN_QUERY, description="Query operator (default: OR)",
-                              type=openapi.TYPE_STRING, enum=['AND', 'OR'], default='OR'),
+            openapi.Parameter('q.op', openapi.IN_QUERY, description="Query operator", type=openapi.TYPE_STRING,
+                              enum=['AND', 'OR'], default='OR'),
         ],
-        responses={200: openapi.Response(description="Example result", examples={"application/json": {
-            "response": {
-                "numFound": 1,
-                "start": 0,
-                "docs": [{
-                    "p_id": "2656877",
-                    "spot": "Haifa",
-                    "start": 4891,
-                    "end": 4896,
-                    "date": ["1902-12-12"],
-                    "year": 1902,
-                    "id": "df763...#0/mentions#0"
-                }]
-            }}})}
+        responses={
+            200: openapi.Response(
+                description="Successful response",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        "response": openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            properties={
+                                "numFound": openapi.Schema(type=openapi.TYPE_INTEGER),
+                                "start": openapi.Schema(type=openapi.TYPE_INTEGER),
+                                "docs": openapi.Schema(
+                                    type=openapi.TYPE_ARRAY,
+                                    items=openapi.Schema(
+                                        type=openapi.TYPE_OBJECT,
+                                        properties={
+                                            "p_id": openapi.Schema(type=openapi.TYPE_STRING),
+                                            "spot": openapi.Schema(type=openapi.TYPE_STRING),
+                                            "start": openapi.Schema(type=openapi.TYPE_INTEGER),
+                                            "end": openapi.Schema(type=openapi.TYPE_INTEGER),
+                                            "date": openapi.Schema(type=openapi.TYPE_ARRAY,
+                                                                   items=openapi.Items(type=openapi.TYPE_STRING)),
+                                            "year": openapi.Schema(type=openapi.TYPE_INTEGER),
+                                            "id": openapi.Schema(type=openapi.TYPE_STRING),
+                                        }
+                                    )
+                                )
+                            }
+                        )
+                    }
+                )
+            ),
+            400: openapi.Response(
+                description="Invalid request",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        "error": openapi.Schema(type=openapi.TYPE_STRING, example="Invalid query")
+                    }
+                )
+            )
+        }
     )
     def get(self, request):
         return solr_proxy(request, "cm_entities")
@@ -199,24 +297,55 @@ class CMEntityNamesProxy(APIView):
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(
-        operation_description="Proxy Solr request to Compact Memory Entity Names.",
+        operation_description="Request to Compact Memory Entity Names.",
         manual_parameters=[
-            openapi.Parameter('name', openapi.IN_QUERY, description="Name (e.g. `Rosenzweig`)", type=openapi.TYPE_STRING),
-            openapi.Parameter('uri', openapi.IN_QUERY, description="Name (e.g. `Franz_Kafka`)", type=openapi.TYPE_STRING),
+            openapi.Parameter('name', openapi.IN_QUERY, description="Entity name (e.g. `Rosenzweig`)",
+                              type=openapi.TYPE_STRING),
+            openapi.Parameter('uri', openapi.IN_QUERY, description="URI identifier (e.g. `Franz_Kafka`)",
+                              type=openapi.TYPE_STRING),
             openapi.Parameter('rows', openapi.IN_QUERY, description="Number of results", type=openapi.TYPE_INTEGER),
             openapi.Parameter('start', openapi.IN_QUERY, description="Pagination offset", type=openapi.TYPE_INTEGER),
-            openapi.Parameter('q.op', openapi.IN_QUERY, description="Query operator (default: OR)",
-                              type=openapi.TYPE_STRING, enum=['AND', 'OR'], default='OR'),
+            openapi.Parameter('q.op', openapi.IN_QUERY, description="Query operator", type=openapi.TYPE_STRING,
+                              enum=['AND', 'OR'], default='OR'),
         ],
-        responses={200: openapi.Response(description="Example result", examples={"application/json": {
-            "response": {
-                "numFound": 1,
-                "start": 0,
-                "docs": [{
-                    "name": ["Franz Mehring"],
-                    "uri": ["http://data.judaicalink.org/data/dbpedia/Franz_Mehring"]
-                }]
-            }}})}
+        responses={
+            200: openapi.Response(
+                description="Successful response",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        "response": openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            properties={
+                                "numFound": openapi.Schema(type=openapi.TYPE_INTEGER),
+                                "start": openapi.Schema(type=openapi.TYPE_INTEGER),
+                                "docs": openapi.Schema(
+                                    type=openapi.TYPE_ARRAY,
+                                    items=openapi.Schema(
+                                        type=openapi.TYPE_OBJECT,
+                                        properties={
+                                            "name": openapi.Schema(type=openapi.TYPE_ARRAY,
+                                                                   items=openapi.Items(type=openapi.TYPE_STRING)),
+                                            "uri": openapi.Schema(type=openapi.TYPE_ARRAY,
+                                                                  items=openapi.Items(type=openapi.TYPE_STRING)),
+                                        }
+                                    )
+                                )
+                            }
+                        )
+                    }
+                )
+            ),
+            400: openapi.Response(
+                description="Invalid request",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        "error": openapi.Schema(type=openapi.TYPE_STRING, example="Invalid query")
+                    }
+                )
+            )
+        }
     )
     def get(self, request):
         return solr_proxy(request, "cm_entity_names")
@@ -225,30 +354,55 @@ class CMMetaProxy(APIView):
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(
-        operation_description="Proxy Solr request to Compact Memory Meta.",
+        operation_description="Request to Compact Memory Entity Names.",
         manual_parameters=[
-            openapi.Parameter('text', openapi.IN_QUERY, description="Fulltext query in article text", type=openapi.TYPE_STRING),
-            openapi.Parameter('dateIssued', openapi.IN_QUERY, description="Publication date (e.g. `1913-02-28T00:00:00Z`)", type=openapi.TYPE_STRING),
-            openapi.Parameter('j_title', openapi.IN_QUERY, description="Journal title (e.g. `Die Welt`)", type=openapi.TYPE_STRING),
-            openapi.Parameter('volume', openapi.IN_QUERY, description="Journal volume (e.g. `1835`)", type=openapi.TYPE_INTEGER),
-            openapi.Parameter('heft', openapi.IN_QUERY, description="Journal issue (e.g. `1913`)", type=openapi.TYPE_INTEGER),
+            openapi.Parameter('name', openapi.IN_QUERY, description="Entity name (e.g. `Rosenzweig`)",
+                              type=openapi.TYPE_STRING),
+            openapi.Parameter('uri', openapi.IN_QUERY, description="URI identifier (e.g. `Franz_Kafka`)",
+                              type=openapi.TYPE_STRING),
+            openapi.Parameter('rows', openapi.IN_QUERY, description="Number of results", type=openapi.TYPE_INTEGER),
             openapi.Parameter('start', openapi.IN_QUERY, description="Pagination offset", type=openapi.TYPE_INTEGER),
-            openapi.Parameter('q.op', openapi.IN_QUERY, description="Query operator (default: OR)",
-                              type=openapi.TYPE_STRING, enum=['AND', 'OR'], default='OR'),
+            openapi.Parameter('q.op', openapi.IN_QUERY, description="Query operator", type=openapi.TYPE_STRING,
+                              enum=['AND', 'OR'], default='OR'),
         ],
-        responses={200: openapi.Response(description="Example result", examples={"application/json": {
-            "response": {
-                "numFound": 1,
-                "start": 0,
-                "docs": [{
-                    "text": ["DIE WELT BERLIN W15, SÄCHSISCHE STR. 8. ERSCHEINT ..."],
-                    "dateIssued": ["1913-02-28T00:00:00Z"],
-                    "j_title": ["Die Welt"],
-                    "volume": ["8 (1835)"],
-                    "heft": ["9 (28.2.1913)"],
-                    "id": "02f7cebf-bd41-44ae-97e6-4bfe3f10c07c"
-                }]
-            }}})}
+        responses={
+            200: openapi.Response(
+                description="Successful response from the cm_entity_names core",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        "response": openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            properties={
+                                "numFound": openapi.Schema(type=openapi.TYPE_INTEGER),
+                                "start": openapi.Schema(type=openapi.TYPE_INTEGER),
+                                "docs": openapi.Schema(
+                                    type=openapi.TYPE_ARRAY,
+                                    items=openapi.Schema(
+                                        type=openapi.TYPE_OBJECT,
+                                        properties={
+                                            "name": openapi.Schema(type=openapi.TYPE_ARRAY,
+                                                                   items=openapi.Items(type=openapi.TYPE_STRING)),
+                                            "uri": openapi.Schema(type=openapi.TYPE_ARRAY,
+                                                                  items=openapi.Items(type=openapi.TYPE_STRING)),
+                                        }
+                                    )
+                                )
+                            }
+                        )
+                    }
+                )
+            ),
+            400: openapi.Response(
+                description="Invalid request",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        "error": openapi.Schema(type=openapi.TYPE_STRING, example="Invalid query")
+                    }
+                )
+            )
+        }
     )
     def get(self, request):
         return solr_proxy(request, "cm_meta")
