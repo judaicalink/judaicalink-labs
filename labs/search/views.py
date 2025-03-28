@@ -105,8 +105,7 @@ def format_results(docs, highlighting):
             else:
                 # Apply highlighting if available
                 highlighted_value = highlighting.get(doc_id, {}).get(key, value)
-                result[key.capitalize()] = " ".join(highlighted_value) if isinstance(highlighted_value, list) else str(
-                    highlighted_value)
+                result[key.capitalize()] = " ".join(str(item) for item in highlighted_value) if isinstance(highlighted_value, list) else str(highlighted_value)
 
         # Reorder fields: Name → Alternatives → Others → Link
         reordered_result = {}
