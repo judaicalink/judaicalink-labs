@@ -89,7 +89,9 @@ def format_results(docs, highlighting):
         logger.debug(doc)
         result = {}
         doc_id = doc.get("id", "")
-        doc.pop('_version_').pop('_root_').pop('_text_').pop('id').pop('name_sort')
+        for key in ['_version_', '_root_', '_text_', 'id', 'name_sort']:
+            doc.pop(key, None)
+
         for key, value in doc.items():
 
             if key == "link":
