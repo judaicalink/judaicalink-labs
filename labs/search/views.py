@@ -90,10 +90,8 @@ def format_results(docs, highlighting):
         result = {}
         doc_id = doc.get("id", "")
         for key, value in doc.items():
-            if key == "_version_" or key == "id" or key == "_root_":
-                continue  # Exclude
-            if key == "name_sort":
-                continue  # Exclude `name_sort`
+            key.pop('_version_').pop('_root_').pop('_text_').pop('id').pop('name_sort')
+
             if key == "link":
                 # Only show ID if it's a valid link
                 result["Link"] = f"<a href='{value[0]}'>{value[0]}</a>" if value[0].startswith("http") else None
