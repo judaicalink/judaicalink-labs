@@ -90,8 +90,8 @@ def format_results(docs, highlighting):
         result = {}
         doc_id = doc.get("id", "")
         for key, value in doc.items():
-            if key == "_version_" or key == "id":
-                continue  # Exclude `_version_`
+            if key == "_version_" or key == "id" or key == "_root_":
+                continue  # Exclude
             if key == "name_sort":
                 continue  # Exclude `name_sort`
             if key == "link":
