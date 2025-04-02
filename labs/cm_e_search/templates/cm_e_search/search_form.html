@@ -1,11 +1,15 @@
-<form method="get" action="{% url 'cm_e_search:search_result'%}">
-    <div class="col-xs-6">
-        <input type="hidden" name="page" value="1">
-    </div>
-
-    <div class="col-xs-6">
-        <div id="autocomplete-app">
-
+<form method="get" action="{% url 'cm_e_search:search_result'%}" class="row g-0">
+        <div class="col-lg-10 col-auto form-group">
+            <select class="form-select" id="query" name="query">
+                <option value="" disabled selected>Select a name</option>
+                {% for name in names %}
+                    <option value="{{ name }}">{{ name }}</option>
+                {% endfor %}
+            </select>
         </div>
-    </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary form-submit">
+                <i class="fa fa-search"></i> Search
+            </button>
+        </div>
 </form>
