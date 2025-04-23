@@ -1,14 +1,7 @@
 {% extends 'search/base.html' %}
-{% block content %}
-
 {% load static %}
-<script src="{% static 'js/autocomplete.js' %}" type="text/javascript"></script>
-<script>
-    var availableTags = "{{data}}".replace(/&quot;/g, '"');
-    var availableTags = JSON.parse(availableTags);
-</script>
-<script language="JavaScript" type="text/javascript" src="{% static 'js/jquery-1.12.4.min.js'%}"></script>
 
+{% block header_scripts %}
 <script>
     function more_items(classname) {
 
@@ -62,6 +55,9 @@
     }
 </script>
 
+{% endblock header_scripts %}
+
+{% block content %}
 <main class="row">
 
     <div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-9 col-xl-8">

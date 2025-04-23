@@ -28,7 +28,7 @@ To load the data go to [localhost:8000/admin](http://localhost:8000/admin) and l
 - Select *action* "Index selected datasets and files"
 - Click *Go*  
 
-After completion click on "Load in Elasticsearch".
+After completion click on "Load in SOLR".
 
 Now visit [localhost:8000/search](http://localhost:8000/search). You should now be able to search for data.  
 ___

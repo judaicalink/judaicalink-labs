@@ -15,6 +15,7 @@ module.exports = {
         app: './src/js/app.js',
         bootstrap: './src/js/bootstrap.js',
         styles: './src/scss/app.scss',
+        autocomplete: './src/js/autocomplete.js', // for autocomplete
     },
     output: {
         path: path.resolve(__dirname, 'build'), // Webpack compiles into `build/`
@@ -24,7 +25,8 @@ module.exports = {
         sourceMapFilename: 'js/[name].[contenthash].js.map',
     },
     mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
-    devtool: process.env.NODE_ENV === 'development' ? 'eval-source-map' : 'source-map',
+    //devtool: process.env.NODE_ENV === 'development' ? 'eval-source-map' : false,
+    devtool: false,
     module: {
         rules: [
             {
@@ -68,6 +70,11 @@ module.exports = {
         ],
     },
     plugins: [
+        new webpack.DefinePlugin({
+            __VUE_OPTIONS_API__: true, // or false if you're not using `options` API
+            __VUE_PROD_DEVTOOLS__: false,
+            __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false, // usually fine
+        }),
         new BundleTracker({ path: __dirname, filename: 'webpack-stats.json' }),
         new MiniCssExtractPlugin({
             filename: 'css/[name].[contenthash].css', // Output CSS to static/css/

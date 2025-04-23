@@ -1,2 +1,2 @@
-import bootstrap from 'bootstrap'
-//const bootstrap = require('bootstrap')
+// src/js/bootstrap.js
+import 'bootstrap';
