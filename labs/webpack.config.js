@@ -13,13 +13,13 @@ const BundleTracker = require('webpack-bundle-tracker');
 module.exports = {
     entry: {
         app: './src/js/app.js',
-        bootstrap: './src/js/bootstrap.js', // Adding Bootstrap entry point
+        bootstrap: './src/js/bootstrap.js',
         styles: './src/scss/app.scss',
     },
     output: {
         path: path.resolve(__dirname, 'build'), // Webpack compiles into `build/`
         filename: 'js/[name].[contenthash].js',
-        // chunkFilename: 'js/[name].[contenthash].js', // Dynamic chunks in static/js/
+        chunkFilename: 'js/[name].[contenthash].js', // Dynamic chunks in static/js/
         publicPath: '/static/', // Django serves files from /static/
         sourceMapFilename: 'js/[name].[contenthash].js.map',
     },

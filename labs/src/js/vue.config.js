@@ -2,12 +2,12 @@ import { createApp } from 'vue';
 import {createBootstrap} from 'bootstrap-vue-next'
 
 // Add the necessary CSS
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue-next/dist/bootstrap-vue-next.css'
+import bootstrap from 'bootstrap';
+//const bootstrap = require('bootstrap')
 
 import SearchApp from '../vue/search.vue';
 //import FilterApp from '../vue/filter.vue';
-//import AutocompleteApp from '../vue/autocomplete.vue';
+import AutocompleteApp from '../vue/autocomplete.vue';
 
 import 'vuetify/styles'; // Ensure Vuetify styles are included
 import { createVuetify } from 'vuetify';
@@ -35,11 +35,11 @@ const vuetify = createVuetify({
 //);
 
 
-
-//SearchApp.createApp(SearchApp).use(vuetify).mount('#search-app');
+SearchApp.createApp(SearchApp).use(vuetify).mount('#search-app');
 //FilterApp.createApp(FilterApp).use(vuetify).mount('#filter-app');
-//AutocompleteApp.createApp(AutocompleteApp).use(vuetify).mount('#autocomplete-app');
+AutocompleteApp.createApp(AutocompleteApp).use(vuetify).mount('#autocomplete-app');
 
+//SearchApp.createApp(SearchApp)
 //SearchApp.use(vuetify)
 //SearchApp.use(createBootstrap())
 //SearchApp.mount('#search-app')
