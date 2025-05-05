@@ -126,7 +126,7 @@ snowballstemmer==2.2.0
 social-auth-app-django==5.0.0
 social-auth-core==4.3.0
 soupsieve==2.6
-spacy>=3.8.3
+spacy==3.8.3
 spacy-legacy==3.0.12
 spacy-loggers==1.0.5
 SPARQLWrapper==2.0.0
