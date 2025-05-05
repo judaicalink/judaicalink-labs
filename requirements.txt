@@ -77,3 +77,4 @@ django-debug-toolbar>=4.2
 django-extensions>=3.2.3
 django-webpack-loader>=2.0
 drf-yasg>=1.21.7
+psycopg2-binary>=2.9.9
