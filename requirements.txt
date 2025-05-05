@@ -73,3 +73,4 @@ pandas==1.5.0
 rdflib==6.2.0
 django-cookiebanner
 djangorestframework>=3.14.0
+django-debug-toolbar>=4.2
