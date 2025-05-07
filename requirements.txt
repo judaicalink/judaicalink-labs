@@ -91,3 +91,4 @@ django-webpack-loader>=2.0
 drf-yasg>=1.21.7
 psycopg2-binary>=2.9.9
 whitenoise>=6.6.0
+pysolr>=3.0.0
