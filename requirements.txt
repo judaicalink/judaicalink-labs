@@ -83,7 +83,7 @@ yarl==1.8.1
 zope.interface==5.5.0
 pandas==1.5.0
 rdflib==6.2.0
-django-cookiebanner
+django-cookiebanner>=0.2.8
 djangorestframework>=3.14.0
 django-debug-toolbar>=4.2
 django-extensions>=3.2.3
