@@ -50,15 +50,13 @@ def get_names():
         return None
 
 
-@cache_page(CACHE_TTL)
+#@cache_page(CACHE_TTL)
 def index(request):
-    names = get_names()
-    data = names
-    context = {'data': data}
+    context = {'names': get_names()}
     return render(request, 'cm_e_search/search_index.html', context)
 
 
-@cache_page(CACHE_TTL)
+#@cache_page(CACHE_TTL)
 def result(request):
     names = get_names()
 
@@ -146,7 +144,7 @@ def result(request):
 
     context = {
         "results": results,
-        "data": json.dumps(names or []),
+        "names": names,
         "error_message": "",
     }
 
@@ -178,7 +176,7 @@ def create_graph_visualization():
 
 from django.core.paginator import Paginator
 
-@cache_page(CACHE_TTL)
+#@cache_page(CACHE_TTL)
 def names_by_letter(request, letter):
     names = get_names()  # Fetch all names
     filtered_names = [name for name in names if name.startswith(letter.upper())]

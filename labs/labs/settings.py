@@ -82,6 +82,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -272,13 +273,6 @@ LABS_DUMPS_LOCAL = env('LABS_DUMPS_LOCAL') if env('LABS_DUMPS_LOCAL') is not Non
 FUSEKI_SERVER = env('FUSEKI_SERVER') if env('FUSEKI_SERVER') is not None else "http://localhost:3030"
 FUSEKI_STORAGE = env('FUSEKI_STORAGE') if env('FUSEKI_STORAGE') is not None else "."
 
-
-# Elasticsearch
-#ELASTICSEARCH_SERVER = "https://localhost:9200/" if env('ELASTICSEARCH_SERVER') is None else env('ELASTICSEARCH_SERVER')
-#ELASTICSEARCH_STORAGE = "/var/lib/elasticsearch"
-#ELASTICSEARCH_SSL_ENABLED = False if ELASTICSEARCH_SERVER.startswith("http://") else True
-#ELASTICSEARCH_USER = "elastic" if env('ELASTICSEARCH_USER') is None else env('ELASTICSEARCH_USER')
-#ELASTICSEARCH_PASSWORD = None if env('ELASTICSEARCH_PASSWORD') is None else env('ELASTICSEARCH_PASSWORD')
 JUDAICALINK_INDEX = env('JUDAICALINK_INDEX') if env('JUDAICALINK_INDEX') is not None else "judaicalink"
 COMPACT_MEMORY_INDEX = env('COMPACT_MEMORY_INDEX') if env('COMPACT_MEMORY_INDEX') is not None else "cm"
 COMPACT_MEMORY_META_INDEX = env('COMPACT_MEMORY_META_INDEX') if env('COMPACT_MEMORY_META_INDEX') is not None else "cm_meta"
@@ -298,14 +292,6 @@ HCAPTCHA_DEFAULT_CONFIG = {
     'theme': 'light',  # do not use data- prefix
     'size': 'normal',  # do not use data- prefix
 }
-
-
-# if the settings in the .env contain the ELASTICSEARCH_SERVER_CERT_PATH use it, else throw an error
-#if ELASTICSEARCH_SSL_ENABLED and env('ELASTICSEARCH_SERVER_CERT') is not None:
-#    ELASTICSEARCH_SERVER_CERT = env('ELASTICSEARCH_SERVER_CERT')
-#else:
-#    logging.ERROR("ELASTICSEARCH_SERVER_CERT_PATH not set in .env file")
-#    raise Exception('ELASTICSEARCH_SERVER_CERT_PATH not set in .env')
 
 # Geonames
 # https://www.geonames.org/login
@@ -403,3 +389,5 @@ WEBPACK_LOADER = {
         'IGNORE': [r'.+\.hot-update.js', r'.+\.map'],
     }
 }
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"

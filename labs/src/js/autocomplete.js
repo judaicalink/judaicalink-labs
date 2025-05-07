@@ -1,14 +1,10 @@
-// for the autocomplete function in cm_e_search
-import autocomplete from "jquery";
+// static/js/autocomplete.js
+import { createApp } from 'vue'
+import Autocomplete from '../vue/autocomplete.vue'
 
-
-    if (typeof (availableTags) !== 'undefined') {
-        console.log(availableTags);
-
-        $(function () {
-            $("#entities").autocomplete({
-                source: availableTags,
-                minLength: 2
-            });
-        });
-    }
+document.addEventListener('DOMContentLoaded', () => {
+  const el = document.getElementById('autocomplete-search')
+  if (el) {
+    createApp(Autocomplete).mount(el)
+  }
+})
