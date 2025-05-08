@@ -194,6 +194,11 @@ STATIC_ROOT = env('STATIC_ROOT') if env('STATIC_ROOT') is not None else os.path.
 logfile = env('LOGFILE', default='logs/labs.log')
 logfile_path = os.path.join(BASE_DIR, logfile)
 
+# Fail early if it's somehow a directory
+if os.path.isdir(logfile_path):
+    raise ValueError(f"LOGFILE path resolves to a directory: {logfile_path}")
+
+
 # Make sure parent directory exists
 os.makedirs(os.path.dirname(logfile_path), exist_ok=True)
 
