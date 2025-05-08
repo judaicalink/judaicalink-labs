@@ -30,7 +30,7 @@ env = environ.Env(
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # False if not in os.environ because of casting above
-DEBUG = env('DEBUG') if env('DEBUG') is not None else False
+DEBUG = env('DEBUG', default=False)
 
 # Raises Django's ImproperlyConfigured
 # exception if SECRET_KEY not in os.environ
@@ -137,7 +137,7 @@ DATABASES = {
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': env('REDIS_URL') if env('REDIS_URL') is not None else 'redis://localhost:6379',
+        'LOCATION': env('REDIS_URL', default='redis://localhost:6379'),
     },
  }
 CACHE_TTL = 60 * 15
@@ -186,12 +186,11 @@ STATICFILES_DIRS = [
 ]
 
 
-STATIC_ROOT = env('STATIC_ROOT') if env('STATIC_ROOT') is not None else os.path.join(BASE_DIR, "staticfiles")
+STATIC_ROOT = env('STATIC_ROOT', default=os.path.join(BASE_DIR, "staticfiles"))
 
 
 # Logging
-
-logfile = env('LOGFILE', default='logs/labs.log')
+logfile = env('LOGFILE', default=os.path.join(BASE_DIR, 'logs/labs.log'))
 logfile_path = os.path.join(BASE_DIR, logfile)
 
 # Fail early if it's somehow a directory
@@ -276,23 +275,23 @@ CHANNEL_LAYERS = {
 }
 
 # labs settings
-LABS_ROOT = env('LABS_ROOT') if env('LABS_ROOT') is not None else 'http://localhost:8000'
-LABS_GIT_WEBROOT = env('LABS_GIT_WEBROOT') if env('LABS_GIT_WEBROOT') is not None else "https://github.com/wisslab/judaicalink-labs/blob/master/labs/"
-LABS_DUMPS_WEBROOT = env('LABS_DUMPS_WEBROOT') if env('LABS_DUMPS_WEBROOT') is not None else "http://data.judaicalink.org/dumps/"
-LABS_DUMPS_LOCAL = env('LABS_DUMPS_LOCAL') if env('LABS_DUMPS_LOCAL') is not None else "dumps/"
+LABS_ROOT = env('LABS_ROOT', default='http://localhost:8000')
+LABS_GIT_WEBROOT = env('LABS_GIT_WEBROOT', default="https://github.com/wisslab/judaicalink-labs/blob/master/labs/")
+LABS_DUMPS_WEBROOT = env('LABS_DUMPS_WEBROOT', default= "http://data.judaicalink.org/dumps/")
+LABS_DUMPS_LOCAL = env('LABS_DUMPS_LOCAL', default= "dumps/")
 
 # Fuseki
-FUSEKI_SERVER = env('FUSEKI_SERVER') if env('FUSEKI_SERVER') is not None else "http://localhost:3030"
-FUSEKI_STORAGE = env('FUSEKI_STORAGE') if env('FUSEKI_STORAGE') is not None else "."
+FUSEKI_SERVER = env('FUSEKI_SERVER', default="http://localhost:3030")
+FUSEKI_STORAGE = env('FUSEKI_STORAGE', default=".")
 
-JUDAICALINK_INDEX = env('JUDAICALINK_INDEX') if env('JUDAICALINK_INDEX') is not None else "judaicalink"
-COMPACT_MEMORY_INDEX = env('COMPACT_MEMORY_INDEX') if env('COMPACT_MEMORY_INDEX') is not None else "cm"
-COMPACT_MEMORY_META_INDEX = env('COMPACT_MEMORY_META_INDEX') if env('COMPACT_MEMORY_META_INDEX') is not None else "cm_meta"
+JUDAICALINK_INDEX = env('JUDAICALINK_INDEX', default="judaicalink")
+COMPACT_MEMORY_INDEX = env('COMPACT_MEMORY_INDEX', default="cm")
+COMPACT_MEMORY_META_INDEX = env('COMPACT_MEMORY_META_INDEX', default="cm_meta")
 
 # Solr
-SOLR_SERVER = env('SOLR_SERVER') if env('SOLR_SERVER') is not None else "http://localhost:8983/solr"
-SOLR_USER = env('SOLR_USER') if env('SOLR_USER') is not None else "solr"
-SOLR_PASSWORD = env('SOLR_PASSWORD') if env('SOLR_PASSWORD') is not None else "solr"
+SOLR_SERVER = env('SOLR_SERVER', default= "http://localhost:8983/solr")
+SOLR_USER = env('SOLR_USER', default="solr")
+SOLR_PASSWORD = env('SOLR_PASSWORD', default="solr")
 SOLR_STORAGE = "/opt/solr"
 
 
@@ -307,7 +306,7 @@ HCAPTCHA_DEFAULT_CONFIG = {
 
 # Geonames
 # https://www.geonames.org/login
-GEONAMES_API_USER = env('GEONAMES_API_USER') if env('GEONAMES_API_USER') is not None else ""
+GEONAMES_API_USER = env('GEONAMES_API_USER', default="")
 
 # Django Cookie Banner
 COOKIEBANNER = {
