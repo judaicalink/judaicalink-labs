@@ -190,6 +190,13 @@ STATIC_ROOT = env('STATIC_ROOT') if env('STATIC_ROOT') is not None else os.path.
 
 
 # Logging
+
+logfile = env('LOGFILE', default='logs/labs.log')
+logfile_path = os.path.join(BASE_DIR, logfile)
+
+# Make sure parent directory exists
+os.makedirs(os.path.dirname(logfile_path), exist_ok=True)
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -208,7 +215,7 @@ LOGGING = {
         'logfile': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, env('LOGFILE')) if env('LOGFILE') is not None else os.path.join(BASE_DIR, 'logs/labs.log'),
+            'filename': logfile_path,
             'formatter': 'verbose'
         },
         'console': {
