@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False),
-    EMAIL_USE_TLS=(bool,False),
+    EMAIL_USE_TLS=(bool, False),
     EMAIL_USE_SSL=(bool, False),
 )
 
@@ -41,10 +41,10 @@ SECRET_KEY = env('SECRET_KEY')
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 ALLOWED_HOSTS = [
-    'labs.judaicalink.org',
-    'localhost',
-    'judaicalink.org',
-]+env('ALLOWED_HOSTS', default=[])
+                    'labs.judaicalink.org',
+                    'localhost',
+                    'judaicalink.org',
+                ] + env('ALLOWED_HOSTS', default=[])
 
 # Application definition
 
@@ -99,8 +99,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-             os.path.join(BASE_DIR, 'templates'),
-            ],
+            os.path.join(BASE_DIR, 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -112,7 +112,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 WSGI_APPLICATION = 'labs.wsgi.application'
 
@@ -139,7 +138,7 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
         'LOCATION': env('REDIS_URL', default='redis://localhost:6379'),
     },
- }
+}
 CACHE_TTL = 60 * 15
 
 INTERNAL_IPS = ["127.0.0.1"]
@@ -185,9 +184,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "build"),  # Webpack build output
 ]
 
-
 STATIC_ROOT = env('STATIC_ROOT', default=os.path.join(BASE_DIR, "staticfiles"))
-
 
 # Logging
 logfile = env('LOGFILE', default=os.path.join(BASE_DIR, 'logs/labs.log'))
@@ -196,7 +193,6 @@ logfile_path = os.path.join(BASE_DIR, logfile)
 # Fail early if it's somehow a directory
 if os.path.isdir(logfile_path):
     raise ValueError(f"LOGFILE path resolves to a directory: {logfile_path}")
-
 
 # Make sure parent directory exists
 os.makedirs(os.path.dirname(logfile_path), exist_ok=True)
@@ -265,7 +261,6 @@ EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 EMAIL_USE_SSL = env('EMAIL_USE_SSL')
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 
-
 # Channels
 ASGI_APPLICATION = "labs.routing.application"
 CHANNEL_LAYERS = {
@@ -277,8 +272,8 @@ CHANNEL_LAYERS = {
 # labs settings
 LABS_ROOT = env('LABS_ROOT', default='http://localhost:8000')
 LABS_GIT_WEBROOT = env('LABS_GIT_WEBROOT', default="https://github.com/wisslab/judaicalink-labs/blob/master/labs/")
-LABS_DUMPS_WEBROOT = env('LABS_DUMPS_WEBROOT', default= "http://data.judaicalink.org/dumps/")
-LABS_DUMPS_LOCAL = env('LABS_DUMPS_LOCAL', default= "dumps/")
+LABS_DUMPS_WEBROOT = env('LABS_DUMPS_WEBROOT', default="http://data.judaicalink.org/dumps/")
+LABS_DUMPS_LOCAL = env('LABS_DUMPS_LOCAL', default="dumps/")
 
 # Fuseki
 FUSEKI_SERVER = env('FUSEKI_SERVER', default="http://localhost:3030")
@@ -289,11 +284,10 @@ COMPACT_MEMORY_INDEX = env('COMPACT_MEMORY_INDEX', default="cm")
 COMPACT_MEMORY_META_INDEX = env('COMPACT_MEMORY_META_INDEX', default="cm_meta")
 
 # Solr
-SOLR_SERVER = env('SOLR_SERVER', default= "http://localhost:8983/solr")
+SOLR_SERVER = env('SOLR_SERVER', default="http://localhost:8983/solr")
 SOLR_USER = env('SOLR_USER', default="solr")
 SOLR_PASSWORD = env('SOLR_PASSWORD', default="solr")
 SOLR_STORAGE = "/opt/solr"
-
 
 # HCaptcha
 HCAPTCHA_SITEKEY = env('HCAPTCHA_SITEKEY')
