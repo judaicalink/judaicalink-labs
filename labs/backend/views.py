@@ -36,10 +36,13 @@ def load_solr(request):
 
 
 def load_fuseki(request):
-    """
-    Fetches all data files and loads them in Fuseki.
-    """
-    tasks.call_command_as_task("load_all_datasets")
+    """Load all datasets in Fuseki using the loader script."""
+    tasks.call_command_as_task("fuseki_loader", "load")
+    return redirect(reverse("admin:data_dataset_changelist"))
+
+def loader_manage_all(request, action):
+    """Run the loader script with the given action for all datasets."""
+    tasks.call_command_as_task("fuseki_loader", action)
     return redirect(reverse("admin:data_dataset_changelist"))
 
 

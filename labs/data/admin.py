@@ -52,7 +52,34 @@ class DatasetAdmin(admin.ModelAdmin):
 
     formfield_overrides = formfield_overrides     
     inlines = [ DatafileAdmin, ]
-    actions = [ set_indexed, unset_indexed ]
+    actions = [ set_indexed, unset_indexed, 'load_fuseki', 'unload_fuseki', 'delete_fuseki' ]
+
+    def load_fuseki(self, request, queryset):
+        from backend import tasks
+        for ds in queryset:
+            slug = ds.dataslug or ds.name
+            tasks.call_command_as_task('fuseki_loader', 'load', slug)
+        self.message_user(request, 'Load started for selected datasets.')
+
+    load_fuseki.short_description = 'Load in Fuseki'
+
+    def unload_fuseki(self, request, queryset):
+        from backend import tasks
+        for ds in queryset:
+            slug = ds.dataslug or ds.name
+            tasks.call_command_as_task('fuseki_loader', 'unload', slug)
+        self.message_user(request, 'Unload started for selected datasets.')
+
+    unload_fuseki.short_description = 'Unload from Fuseki'
+
+    def delete_fuseki(self, request, queryset):
+        from backend import tasks
+        for ds in queryset:
+            slug = ds.dataslug or ds.name
+            tasks.call_command_as_task('fuseki_loader', 'delete', slug)
+        self.message_user(request, 'Delete started for selected datasets.')
+
+    delete_fuseki.short_description = 'Delete from Fuseki'
 
 
 

@@ -4,7 +4,7 @@
 {% block object-tools-items %}
   <li>
     <a href="{% url 'admin:load_from_github' %}" class="">
-     Import from Github
+     Import from judaicalink-site
     </a>
   </li>
   <li>
@@ -13,8 +13,18 @@
     </a>
   </li>
   <li>
-    <a href="{% url 'admin:load_fuseki' %}" class="">
+    <a href="{% url 'admin:loader_manage_all' 'load' %}" class="">
      Load in Fuseki
+    </a>
+  </li>
+  <li>
+    <a href="{% url 'admin:loader_manage_all' 'unload' %}" class="">
+     Unload from Fuseki
+    </a>
+  </li>
+  <li>
+    <a href="{% url 'admin:loader_manage_all' 'delete' %}" class="">
+     Delete in Fuseki
     </a>
   </li>
   {{ block.super }}
