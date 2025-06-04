@@ -6,39 +6,30 @@
 {% if not is_popup %}
 {% block breadcrumbs %}
 <div class="breadcrumbs">
-<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
-&rsaquo;
-<a href="..">Backend</a>
-&rsaquo;
-Server Status
+  <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+  &rsaquo;
+  <a href="..">Backend</a>
+  &rsaquo;
+  {% trans 'Commands' %}
 </div>
 {% endblock %}
 {% endif %}
-
 
 {% block content %}
 <div id="content-main">
   <div class="app-backend module">
     <table>
-      <caption>Solr</caption>
-      <tbody>
-        {% for row in solr %}
+      <thead>
         <tr>
-          <th scope='row'>{{ row.0 }}:</th>
-          <td>{{ row.1 }}</td>
+          <th>{% trans 'Command' %}</th>
+          <th>{% trans 'Description' %}</th>
         </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-  <div class="app-backend module">
-    <table>
-      <caption>Fuseki</caption>
+      </thead>
       <tbody>
-        {% for row in fuseki %}
+        {% for cmd in cmds %}
         <tr>
-          <th scope='row'>{{ row.0 }}:</th>
-          <td>{{ row.1 }}</td>
+          <th scope="row">{{ cmd.name }}</th>
+          <td>{{ cmd.help }}</td>
         </tr>
         {% endfor %}
       </tbody>
