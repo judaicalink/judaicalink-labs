@@ -23,6 +23,7 @@
         <tr>
           <th>{% trans 'Command' %}</th>
           <th>{% trans 'Description' %}</th>
+          <th>{% trans 'Run' %}</th>
         </tr>
       </thead>
       <tbody>
@@ -30,6 +31,30 @@
         <tr>
           <th scope="row">{{ cmd.name }}</th>
           <td>{{ cmd.help }}</td>
+          <td><a href="{% url 'admin:run_command' cmd.name %}">{% trans 'Run' %}</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="app-backend module">
+    <h2>{% trans 'Recent tasks' %}</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>{% trans 'Command' %}</th>
+          <th>{% trans 'Status' %}</th>
+          <th>{% trans 'Last log entry' %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for task in tasks %}
+        <tr>
+          <th scope="row">{{ task.name }}</th>
+          <td>
+            {% if task.is_done %}{% trans 'completed' %}{% else %}{% trans 'running' %}{% endif %}
+          </td>
+          <td>{{ task.last_log }}</td>
         </tr>
         {% endfor %}
       </tbody>
