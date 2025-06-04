@@ -28,6 +28,11 @@ class MyAdminSite(AdminSite):
             ),
             re_path(r"^load_fuseki/$", self.admin_view(views.load_fuseki), name="load_fuseki"),
             re_path(
+                r"^backend/dashboard/$",
+                self.admin_view(views.dashboard),
+                name="dashboard",
+            ),
+            re_path(
                 r"^backend/serverstatus/$",
                 self.admin_view(views.serverstatus),
                 name="serverstatus",

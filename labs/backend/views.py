@@ -1,4 +1,5 @@
 import json
+import os
 import shutil
 from datetime import datetime
 from pathlib import Path
@@ -7,9 +8,11 @@ import requests
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 
 from . import admin
 from . import tasks
+from data import models as data_models
 
 
 # Create your views here.
@@ -147,3 +150,29 @@ def run_django_command(request, command):
     """Run a management command asynchronously and redirect back."""
     tasks.call_command_as_task(command)
     return redirect(reverse("admin:commands"))
+
+
+def dashboard(request):
+    """Render statistics, metrics and logs on an admin dashboard page."""
+    stats = {
+        "datasets": data_models.Dataset.objects.count(),
+        "files": data_models.Datafile.objects.count(),
+        "users": get_user_model().objects.count(),
+    }
+    metrics = {}
+    try:
+        with open(os.path.join(settings.BASE_DIR, "statistics.json")) as f:
+            metrics = json.load(f)
+    except Exception as e:
+        print(str(e))
+
+    logs = models.ThreadTask.objects.all().order_by("-started")[:10]
+
+    context = {
+        "site_header": admin.admin_site.site_header,
+        "stats": stats,
+        "metrics": metrics,
+        "logs": logs,
+    }
+
+    return render(request, "admin/dashboard.html", context)
