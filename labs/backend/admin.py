@@ -35,6 +35,11 @@ class MyAdminSite(AdminSite):
             re_path(
                 r"^backend/commands/$", self.admin_view(views.django_commands), name="commands"
             ),
+            re_path(
+                r"^backend/run_command/(?P<command>[^/]+)/$",
+                self.admin_view(views.run_django_command),
+                name="run_command",
+            ),
         ] + urls
         return urls
 

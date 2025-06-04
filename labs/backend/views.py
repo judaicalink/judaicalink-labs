@@ -133,8 +133,17 @@ def django_commands(request):
             cmd_class = management.load_command_class("data", cmd)
             cmds.append({"name": cmd, "help": getattr(cmd_class, "help", "")})
 
+    tasks = models.ThreadTask.objects.all().order_by("-started")[:20]
+
     context = {
         "site_header": admin.admin_site.site_header,
         "cmds": cmds,
+        "tasks": tasks,
     }
     return render(request, "admin/commands.html", context)
+
+
+def run_django_command(request, command):
+    """Run a management command asynchronously and redirect back."""
+    tasks.call_command_as_task(command)
+    return redirect(reverse("admin:commands"))
