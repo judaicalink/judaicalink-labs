@@ -21,6 +21,11 @@ class MyAdminSite(AdminSite):
                 self.admin_view(views.load_from_github),
                 name="load_from_github",
             ),
+            re_path(
+                r"^load_solr/$",
+                self.admin_view(views.load_solr),
+                name="load_solr",
+            ),
             re_path(r"^load_fuseki/$", self.admin_view(views.load_fuseki), name="load_fuseki"),
             re_path(
                 r"^backend/serverstatus/$",
