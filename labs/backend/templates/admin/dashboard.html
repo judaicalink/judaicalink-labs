@@ -1,16 +1,14 @@
 {% extends "admin/index.html" %}
 {% load i18n %}
 
-{% block bodyclass %}{{ block.super }} app-{{ app_label }}{% endblock %}
+{% block bodyclass %}{{ block.super }} app-dashboard{% endblock %}
 
 {% if not is_popup %}
 {% block breadcrumbs %}
 <div class="breadcrumbs">
   <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
   &rsaquo;
-  <a href="..">Backend</a>
-  &rsaquo;
-  {% trans 'Commands' %}
+  Dashboard
 </div>
 {% endblock %}
 {% endif %}
@@ -18,47 +16,45 @@
 {% block content %}
 <div id="content-main">
   <div class="app-backend module">
+    <h2>{% trans 'Statistics' %}</h2>
     <table>
-      <thead>
-        <tr>
-          <th>{% trans 'Command' %}</th>
-          <th>{% trans 'Description' %}</th>
-          <th>{% trans 'Run' %}</th>
-        </tr>
-      </thead>
       <tbody>
-        {% for cmd in cmds %}
-        <tr>
-          <th scope="row">{{ cmd.name }}</th>
-          <td>{{ cmd.help }}</td>
-          <td><a href="{% url 'admin:run_command' cmd.name %}">{% trans 'Run' %}</a></td>
-        </tr>
+        <tr><th>{% trans 'Datasets' %}</th><td>{{ stats.datasets }}</td></tr>
+        <tr><th>{% trans 'Files' %}</th><td>{{ stats.files }}</td></tr>
+        <tr><th>{% trans 'Users' %}</th><td>{{ stats.users }}</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="app-backend module">
+    <h2>{% trans 'Metrics' %}</h2>
+    <table>
+      <tbody>
+        {% for key, value in metrics.items %}
+        <tr><th scope="row">{{ key|capfirst }}</th><td>{{ value }}</td></tr>
+        {% empty %}
+        <tr><td colspan="2">{% trans 'No metrics available' %}</td></tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
   <div class="app-backend module">
-    <h2>{% trans 'Recent tasks' %}</h2>
+    <h2>{% trans 'Recent Logs' %}</h2>
     <table>
       <thead>
-        <tr>
-          <th>{% trans 'Command' %}</th>
-          <th>{% trans 'Status' %}</th>
-          <th>{% trans 'Last log entry' %}</th>
-        </tr>
+        <tr><th>{% trans 'Task' %}</th><th>{% trans 'Last log' %}</th></tr>
       </thead>
       <tbody>
-        {% for task in tasks %}
-        <tr>
-          <th scope="row">{{ task.name }}</th>
-          <td>
-            {% if task.is_done %}{% trans 'completed' %}{% else %}{% trans 'running' %}{% endif %}
-          </td>
-          <td>{{ task.last_log }}</td>
-        </tr>
+        {% for t in logs %}
+        <tr><td>{{ t.name }}</td><td>{{ t.last_log }}</td></tr>
+        {% empty %}
+        <tr><td colspan="2">{% trans 'No logs available' %}</td></tr>
         {% endfor %}
       </tbody>
     </table>
+  </div>
+  <div class="app-backend module">
+    <h2>{% trans 'User Administration' %}</h2>
+    <a href="{% url 'admin:auth_user_changelist' %}">{% trans 'Manage Users' %}</a>
   </div>
 </div>
 {% endblock %}
