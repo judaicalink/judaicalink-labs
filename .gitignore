@@ -173,3 +173,5 @@ labs/static/
 !/labs/package.json
 labs/search/static
 db.sqlite3
+db2.sqlite3
+
