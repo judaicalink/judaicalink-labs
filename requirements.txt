@@ -1,5 +1,5 @@
 asgiref>=3.6.0
-certifi==2022.9.24
+certifi==2024.7.4
 charset-normalizer==2.1.1
 django>=4.2
 django-webhook-consume@ git+https://github.com/FlorianRupp/django-webhook-consume.git@eb895b00c59286a79c921ec91ae9a30c4dc2b816
