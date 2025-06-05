@@ -90,7 +90,10 @@ def solr_proxy(request, core):
         cache.set(cache_key, solr_data, timeout=300)
         return Response(solr_data)
     except requests.RequestException as e:
-        return Response({'error': str(e)}, status=status.HTTP_502_BAD_GATEWAY)
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.error(f"Solr proxy error: {str(e)}")
+        return Response({'error': 'An internal error occurred. Please try again later.'}, status=status.HTTP_502_BAD_GATEWAY)
     # Add q.op to all views that use swagger_auto_schema
 
 q_op_param = openapi.Parameter(
