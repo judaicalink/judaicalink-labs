@@ -1,15 +1,13 @@
 {% extends 'search/base.html' %}
-{% block content %}
-
 {% load static %}
 
-{% include "search/header.html" %}
+{% block content %}
 
 <main class="row">
 
 <div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-9 col-xl-8">
 
-<h1 class="text-center">Compact Memory</h1>
+<h1 class="text-center">Compact Memory <br> Fulltext Search</h1>
 
     <form method="get" action="/cm_search/search_result/">
             <div class="col-xs-6">
@@ -38,65 +36,72 @@
     <div class="table-responsive">
     <table class="table table-light table-striped">
 
-    {% for r in result %}
-
+    {% for result in results %}
         <tr>
-
-            <td>
-
+            <td class="p-3">
                 <b>Matching text</b>: <br>
-                        {% for line in r.text %}
-                            {{line|safe}}
-                        {% endfor %}
-                <br> 
-
-                <b>Journal:</b>
-                {% if r.jl != '' %}            
-                    <a href={{r.jl}} target="_blank" rel="noopener noreferrer">{{r.j_title}}</a><br>
-                {% else %}
-                    {{r.j_title}}
-                {% endif %}
-
-                {% if r.lang != '' %}
-                    <b>Language:</b> {{r.lang}}<br>
-                {% endif %}
-
-                {% if r.dateIssued != '' %}
-                    <b>Date of Issue:</b> {{r.dateIssued}}
-                    <br>
-                {% endif %}
-
-                {% if r.place != '' %}
-                    <b>Place:</b> {{r.place}}
-                    <br>
-                {% endif %}
-
-                {% if r.publisher != '' %}
-                    <b>Publisher:</b> {{r.publisher}}
-                    <br>
-                {% endif %}
-
-                <b>Bibliographic reference</b><br>
-
-                {% if r.volume != '' %}
-                    &nbsp; Volume: {{r.volume}}<br>
-                {% endif %}
-
-                {% if r.heft != '' %}
-                    &nbsp; Issue: {{r.heft }}<br>
-                {% endif %}
-
-                {% if r.aufsatz != '' %}
-                    &nbsp; Essay: {{r.aufsatz}}<br>
-                {% endif %}
-
-                {% if r.page != '' and r.page != 'None' %}
-                    {% if r.pl != '' %}
-                        <b>Page:</b> <a href={{r.pl}} target="_blank" rel="noopener noreferrer">{{r.page}}</a>
+                    {% if result.text|wordcount > 56 %}
+                        <div class="half-content" id="half-{{forloop.counter}}">{{result.text|safe|linebreaks|truncatewords:50}}<br>
+                            <button type="button" data-id="{{forloop.counter}}" onclick="javascript:void(0)" class="show-hide-btn btn btn-primary btn-sm mb-2">Read more ></button>
+                        </div>
+                        <div class="full-content" id="full-{{forloop.counter}}" style="display: none;">{{ result.text|safe|linebreaks }}
+                            <button data-id="{{forloop.counter}}" onclick="javascript:void(0)" class="show-hide-btn btn btn-primary btn-sm mb-2">< Read less</button>
+                        </div>
                     {% else %}
-                        <b>Page:</b> {{r.page}} (Link to the page not available for this journal)
+                        <div>
+                            {{ result.text|safe|linebreaks }}
+                        </div>
                     {% endif %}
-                {% endif %}
+
+                <div class="pt-1">
+                    <b>Journal:</b>
+                    {% if result.jl != '' %}
+                    <a href={{result.jl}} target="_blank" rel="noopener noreferrer">{{result.j_title|safe}}</a><br>
+                    {% else %}
+                    {{result.j_title|safe}}
+                    {% endif %}
+
+                    {% if result.lang != '' %}
+                    <b>Language:</b> {{result.lang|safe}}<br>
+                    {% endif %}
+
+                    {% if result.dateIssued != '' %}
+                    <b>Date of Issue:</b> {{result.dateIssued|safe}}
+                    <br>
+                    {% endif %}
+
+                    {% if result.place != '' %}
+                    <b>Place:</b> {{result.place|safe}}
+                    <br>
+                    {% endif %}
+
+                    {% if result.publisher != '' %}
+                    <b>Publisher:</b> {{result.publisher|safe}}
+                    <br>
+                    {% endif %}
+
+                    <b>Bibliographic reference</b><br>
+
+                    {% if result.volume != '' %}
+                    &nbsp; Volume: {{result.volume|safe}}<br>
+                    {% endif %}
+
+                    {% if result.heft != '' %}
+                    &nbsp; Issue: {{result.heft|safe }}<br>
+                    {% endif %}
+
+                    {% if result.aufsatz != '' %}
+                    &nbsp; Essay: {{result.aufsatz|safe}}<br>
+                    {% endif %}
+
+                    {% if result.page != '' and result.page != 'None' %}
+                    {% if result.pl != '' %}
+                    <b>Page:</b> <a href={{result.pl|safe}} target="_blank" rel="noopener noreferrer">{{result.page|safe}}</a>
+                    {% else %}
+                    <b>Page:</b> {{result.page|safe}} (Link to the page not available for this journal)
+                    {% endif %}
+                    {% endif %}
+                </div>
 
             </td>
 
@@ -176,13 +181,9 @@
 </div>
     <div class="col-md-0 col-lg-3 col-xl-4">
             <div class="img-fluid sticky-top mt-4" id="picturemargintop30">
-            <img src="/static/img/books.jpg" class="img-thumbnail img-fluid" alt="stack of newspapers">
+            <img src="/static/img/books.webp" class="img-thumbnail img-fluid" alt="stack of newspapers">
             </div>
     </div>
 </main>
-
-{% include "search/footer.html" %}
-
-
 
 {% endblock content %}

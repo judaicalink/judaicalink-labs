@@ -1,6 +1,6 @@
 import json
 import re
-import elasticsearch
+import pysolr
 import rdflib
 import gzip
 from django.conf import settings
@@ -28,7 +28,7 @@ def cleanstring(value, chars):
 
 
 class Command(BaseCommand):
-    help = 'index data from a file in elasticsearch'
+    help = 'index data from a file in solr'
 
     def add_arguments(self, filepath):
         filepath.add_argument('filepath', type=str, help='Filepath to file that needs to be indexed')
@@ -41,7 +41,7 @@ class Command(BaseCommand):
         with openfunc(filepath, "rt", encoding="utf8") as f:
             g = rdflib.Graph()
             g.parse(f, format='n3')
-            es = elasticsearch.Elasticsearch()
+            solr = pysolr.Solr(settings.SOLR_SERVER, always_commit=True, timeout=10)
             data = {}
             triples = g.triples((None, None, None))
             for row in triples:
@@ -84,4 +84,4 @@ class Command(BaseCommand):
                 bulk_body.append(json.dumps({"doc": doc, "doc_as_upsert": True}))
             if len(bulk_body)>0:
                 self.stdout.write('indexing successful!')
-                es.bulk('\n'.join(bulk_body), request_timeout=60)
+                solr.add(bulk_body, commit=True)

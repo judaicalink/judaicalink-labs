@@ -1,21 +1,22 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from elasticsearch import Elasticsearch
+import pysolr
 import json
 
+from labs.labs import settings
 
 
 # Create your views here.
 
 def test(request):
-    es = Elasticsearch()
+    solr = pysolr.Solr(settings.SOLR_SERVER + settings.JUDAICALINK_INDEX, always_commit=True, timeout=10)
     body = {
         "from" : 0, "size" : 1000,
         "query" : {
             "match_all" : {}
         },
         }
-    result = es.search(index="judaicalink", body = body)
+    result = solr.search(body = body, index = "judaicalink")
    # dataset = []
     #for d in result ["hits"] ["hits"]:
       #  data = {

@@ -1,0 +1,44 @@
+{% extends 'search/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+    <main class="row">
+
+        <div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-8 col-xl-8">
+
+
+            <h1 class="text-center text-md-left">CSRF Failure</h1>
+
+            <div class="container">
+                <div class="row alert alert-danger text-align-center" role="alert">
+                    <p>
+                        There was an error processing the form.<br/>
+                        Please try the following:
+                    </p>
+                        <ol>
+                            <li>Make sure to enable cookies.</li>
+                            <li>Disable any adblocker or privacy mode.</li>
+                            <li>Reload the page.</li>
+                            <li>Try sending the mail again.</li>
+                        </ol>
+                        <p>In case the error persists, please <a href="mailto:b.schnabel@hs-mannheim.de">contact</a> us.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-0 col-lg-4 col-xl-4">
+            <img src="/static/img/cole-keister-ogQLprYfTKY-unsplash.webp" class="img-thumbnail img-fluid mt-4"
+                 alt="Contact us">
+            <div class="alert alert-info text-center mt-4" role="alert"><i class="fas fa-info-circle"></i>
+                <p><b>There is no such thing as a stupid question</b> <br> We are eager to hear what you have to say.
+                </p>
+            </div>
+        </div>
+
+    </main>
+    {% include "search/footer.html" %}
+
+{% endblock %}

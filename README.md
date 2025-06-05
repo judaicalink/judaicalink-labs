@@ -12,9 +12,7 @@ In folder *labs* run ``` pip install -r requirements.txt --user```
 In *labs/labs* copy *settings_dev.py* in the same directory and name it *settings.py*  
 In *labs* run ```python manage.py migrate``` command.
 
-Download [Elasticsearch](https://www.elastic.co/de/downloads/elasticsearch) and unzip the downloaded file.  
-Run elasticsearch:   
-For Windows run the file in the unzipped folder *elasticsearch-x-x-x/bin/elasticsearch.bat*.
+Install Apache Solr.
 
 
 Create a super user for loading data:  
@@ -30,7 +28,7 @@ To load the data go to [localhost:8000/admin](http://localhost:8000/admin) and l
 - Select *action* "Index selected datasets and files"
 - Click *Go*  
 
-After completion click on "Load in Elasticsearch".
+After completion click on "Load in SOLR".
 
 Now visit [localhost:8000/search](http://localhost:8000/search). You should now be able to search for data.  
 ___

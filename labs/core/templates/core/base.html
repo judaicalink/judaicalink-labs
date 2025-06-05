@@ -1,4 +1,6 @@
 {% load static %}
+{% load cookiebanner %}
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -6,28 +8,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'core/css/fontawesome.all.min.css' %}">
-    <link rel="  stylesheet" href="{% static 'core/css/labs.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
     <title>JudaicaLink Labs!</title>
-
-    <!-- Matomo -->
-    <script type="text/javascript">
-	var _paq = window._paq = window._paq || [];
-	/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-	_paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function() {
-		var u="//web.judaicalink.org/matomo/";
-		_paq.push(['setTrackerUrl', u+'matomo.php']);
-	        _paq.push(['setSiteId', '2']);
-		var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-		g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-		})();
-    </script>
-    <!-- End Matomo Code -->
 
 
   </head>
@@ -41,10 +24,31 @@
       
     {% endblock %}
 </div>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="{% static 'core/js/jquery-3.4.1.slim.min.js' %}"></script>
-    <script src="{% static 'core/js/popper.min.js' %}"></script>
-    <script src="{% static 'core/js/bootstrap.min.js' %}"></script>
+
+
+    <script src="{% static 'js/bundle.js' %}"></script>
+
+{% cookie_accepted 'analytics' as cookie_analytics %}
+{% if cookie_analytics %}
+    <!-- Matomo -->
+    <script type="text/javascript">
+        var _paq = window._paq = window._paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function () {
+            var u = "//web.judaicalink.org/matomo/";
+            _paq.push(['setTrackerUrl', u + 'matomo.php']);
+            _paq.push(['setSiteId', '2']);
+            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+            g.type = 'text/javascript';
+            g.async = true;
+            g.src = u + 'matomo.js';
+            s.parentNode.insertBefore(g, s);
+        })();
+    </script>
+    <!-- End Matomo Code -->
+{% endif %}
+
   </body>
 </html>

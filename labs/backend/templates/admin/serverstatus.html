@@ -20,9 +20,9 @@ Server Status
 <div id="content-main">
   <div class="app-backend module">
     <table>
-      <caption>Elasticsearch</caption>
+      <caption>Solr</caption>
       <tbody>
-        {% for row in elasticsearch %}
+        {% for row in solr %}
         <tr>
           <th scope='row'>{{ row.0 }}:</th>
           <td>{{ row.1 }}</td>
@@ -51,10 +51,22 @@ Server Status
 <div id="content-related">
     <div class="module" id="recent-actions-module">
         <h2>{% trans 'Menu' %}</h2>
+        <h3>{% trans 'Dashboard' %}</h3>
+            <ul class="actionlist">
+            <li class="">
+              <a href="{% url 'admin:dashboard' %}">{% trans 'Dashboard' %}</a>
+            </li>
+            </ul>
         <h3>{% trans 'Check Status' %}</h3>
             <ul class="actionlist">
             <li class="">
               <a href="{% url 'admin:serverstatus' %}">Server Status</a>
+            </li>
+            </ul>
+        <h3>{% trans 'Commands' %}</h3>
+            <ul class="actionlist">
+            <li class="">
+              <a href="{% url 'admin:commands' %}">{% trans 'Commands' %}</a>
             </li>
             </ul>
     </div>

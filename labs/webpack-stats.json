@@ -1,0 +1,461 @@
+{
+  "status": "done",
+  "assets": {
+    "433897008be52565db54.webp": {
+      "name": "433897008be52565db54.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/433897008be52565db54.webp",
+      "publicPath": "/static/433897008be52565db54.webp",
+      "sourceFilename": "src/img/backgroundtransparent.webp"
+    },
+    "css/103.83f9ac3edf155d0843e1.css": {
+      "name": "css/103.83f9ac3edf155d0843e1.css",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/103.83f9ac3edf155d0843e1.css",
+      "publicPath": "/static/css/103.83f9ac3edf155d0843e1.css"
+    },
+    "css/103.83f9ac3edf155d0843e1.css.gz": {
+      "name": "css/103.83f9ac3edf155d0843e1.css.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/103.83f9ac3edf155d0843e1.css.gz",
+      "publicPath": "/static/css/103.83f9ac3edf155d0843e1.css.gz"
+    },
+    "css/176.af0128665c70503484c2.css": {
+      "name": "css/176.af0128665c70503484c2.css",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/176.af0128665c70503484c2.css",
+      "publicPath": "/static/css/176.af0128665c70503484c2.css"
+    },
+    "css/176.af0128665c70503484c2.css.gz": {
+      "name": "css/176.af0128665c70503484c2.css.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/176.af0128665c70503484c2.css.gz",
+      "publicPath": "/static/css/176.af0128665c70503484c2.css.gz"
+    },
+    "css/487.6f17e863d16a2481da08.css": {
+      "name": "css/487.6f17e863d16a2481da08.css",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/487.6f17e863d16a2481da08.css",
+      "publicPath": "/static/css/487.6f17e863d16a2481da08.css"
+    },
+    "css/487.6f17e863d16a2481da08.css.gz": {
+      "name": "css/487.6f17e863d16a2481da08.css.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/487.6f17e863d16a2481da08.css.gz",
+      "publicPath": "/static/css/487.6f17e863d16a2481da08.css.gz"
+    },
+    "css/488.eb7d3f5f58d2530f8ac3.css": {
+      "name": "css/488.eb7d3f5f58d2530f8ac3.css",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/488.eb7d3f5f58d2530f8ac3.css",
+      "publicPath": "/static/css/488.eb7d3f5f58d2530f8ac3.css"
+    },
+    "css/488.eb7d3f5f58d2530f8ac3.css.gz": {
+      "name": "css/488.eb7d3f5f58d2530f8ac3.css.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/488.eb7d3f5f58d2530f8ac3.css.gz",
+      "publicPath": "/static/css/488.eb7d3f5f58d2530f8ac3.css.gz"
+    },
+    "css/512.cc2d381bb7df187cc0a8.css": {
+      "name": "css/512.cc2d381bb7df187cc0a8.css",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/512.cc2d381bb7df187cc0a8.css",
+      "publicPath": "/static/css/512.cc2d381bb7df187cc0a8.css"
+    },
+    "css/512.cc2d381bb7df187cc0a8.css.gz": {
+      "name": "css/512.cc2d381bb7df187cc0a8.css.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/512.cc2d381bb7df187cc0a8.css.gz",
+      "publicPath": "/static/css/512.cc2d381bb7df187cc0a8.css.gz"
+    },
+    "css/643.8a3f6e5eb0163544badb.css": {
+      "name": "css/643.8a3f6e5eb0163544badb.css",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/643.8a3f6e5eb0163544badb.css",
+      "publicPath": "/static/css/643.8a3f6e5eb0163544badb.css"
+    },
+    "css/643.8a3f6e5eb0163544badb.css.gz": {
+      "name": "css/643.8a3f6e5eb0163544badb.css.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/643.8a3f6e5eb0163544badb.css.gz",
+      "publicPath": "/static/css/643.8a3f6e5eb0163544badb.css.gz"
+    },
+    "css/891.c04c9b13807ac28f73e7.css": {
+      "name": "css/891.c04c9b13807ac28f73e7.css",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/891.c04c9b13807ac28f73e7.css",
+      "publicPath": "/static/css/891.c04c9b13807ac28f73e7.css"
+    },
+    "css/891.c04c9b13807ac28f73e7.css.gz": {
+      "name": "css/891.c04c9b13807ac28f73e7.css.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/891.c04c9b13807ac28f73e7.css.gz",
+      "publicPath": "/static/css/891.c04c9b13807ac28f73e7.css.gz"
+    },
+    "css/921.416e59c6c254db26595e.css": {
+      "name": "css/921.416e59c6c254db26595e.css",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/921.416e59c6c254db26595e.css",
+      "publicPath": "/static/css/921.416e59c6c254db26595e.css"
+    },
+    "css/921.416e59c6c254db26595e.css.gz": {
+      "name": "css/921.416e59c6c254db26595e.css.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/921.416e59c6c254db26595e.css.gz",
+      "publicPath": "/static/css/921.416e59c6c254db26595e.css.gz"
+    },
+    "css/autocomplete.88ff89e5b84e58c3cc37.css": {
+      "name": "css/autocomplete.88ff89e5b84e58c3cc37.css",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/autocomplete.88ff89e5b84e58c3cc37.css",
+      "publicPath": "/static/css/autocomplete.88ff89e5b84e58c3cc37.css"
+    },
+    "css/styles-7121d0dc.6bc12eaaf29617bc0489.css": {
+      "name": "css/styles-7121d0dc.6bc12eaaf29617bc0489.css",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/styles-7121d0dc.6bc12eaaf29617bc0489.css",
+      "publicPath": "/static/css/styles-7121d0dc.6bc12eaaf29617bc0489.css"
+    },
+    "css/styles-7121d0dc.6bc12eaaf29617bc0489.css.gz": {
+      "name": "css/styles-7121d0dc.6bc12eaaf29617bc0489.css.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/styles-7121d0dc.6bc12eaaf29617bc0489.css.gz",
+      "publicPath": "/static/css/styles-7121d0dc.6bc12eaaf29617bc0489.css.gz"
+    },
+    "img/mCSB_buttons.5b35a39c5f877ba43637.png": {
+      "name": "img/mCSB_buttons.5b35a39c5f877ba43637.png",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/mCSB_buttons.5b35a39c5f877ba43637.png",
+      "publicPath": "/static/img/mCSB_buttons.5b35a39c5f877ba43637.png",
+      "sourceFilename": "node_modules/malihu-custom-scrollbar-plugin/mCSB_buttons.png"
+    },
+    "js/103.6688afa277535b362c11.js": {
+      "name": "js/103.6688afa277535b362c11.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/103.6688afa277535b362c11.js",
+      "publicPath": "/static/js/103.6688afa277535b362c11.js"
+    },
+    "js/103.6688afa277535b362c11.js.gz": {
+      "name": "js/103.6688afa277535b362c11.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/103.6688afa277535b362c11.js.gz",
+      "publicPath": "/static/js/103.6688afa277535b362c11.js.gz"
+    },
+    "js/176.8c1bd72027ad48a42b9e.js": {
+      "name": "js/176.8c1bd72027ad48a42b9e.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/176.8c1bd72027ad48a42b9e.js",
+      "publicPath": "/static/js/176.8c1bd72027ad48a42b9e.js"
+    },
+    "js/176.8c1bd72027ad48a42b9e.js.gz": {
+      "name": "js/176.8c1bd72027ad48a42b9e.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/176.8c1bd72027ad48a42b9e.js.gz",
+      "publicPath": "/static/js/176.8c1bd72027ad48a42b9e.js.gz"
+    },
+    "js/177.bd4b293c6783a9a737fc.js": {
+      "name": "js/177.bd4b293c6783a9a737fc.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/177.bd4b293c6783a9a737fc.js",
+      "publicPath": "/static/js/177.bd4b293c6783a9a737fc.js"
+    },
+    "js/177.bd4b293c6783a9a737fc.js.gz": {
+      "name": "js/177.bd4b293c6783a9a737fc.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/177.bd4b293c6783a9a737fc.js.gz",
+      "publicPath": "/static/js/177.bd4b293c6783a9a737fc.js.gz"
+    },
+    "js/235.6a0ded7ea4f292525a3f.js": {
+      "name": "js/235.6a0ded7ea4f292525a3f.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/235.6a0ded7ea4f292525a3f.js",
+      "publicPath": "/static/js/235.6a0ded7ea4f292525a3f.js"
+    },
+    "js/235.6a0ded7ea4f292525a3f.js.gz": {
+      "name": "js/235.6a0ded7ea4f292525a3f.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/235.6a0ded7ea4f292525a3f.js.gz",
+      "publicPath": "/static/js/235.6a0ded7ea4f292525a3f.js.gz"
+    },
+    "js/336.5fd439df4ed4df6c2de1.js": {
+      "name": "js/336.5fd439df4ed4df6c2de1.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/336.5fd439df4ed4df6c2de1.js",
+      "publicPath": "/static/js/336.5fd439df4ed4df6c2de1.js"
+    },
+    "js/336.5fd439df4ed4df6c2de1.js.gz": {
+      "name": "js/336.5fd439df4ed4df6c2de1.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/336.5fd439df4ed4df6c2de1.js.gz",
+      "publicPath": "/static/js/336.5fd439df4ed4df6c2de1.js.gz"
+    },
+    "js/336.5fd439df4ed4df6c2de1.js.LICENSE.txt": {
+      "name": "js/336.5fd439df4ed4df6c2de1.js.LICENSE.txt",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/336.5fd439df4ed4df6c2de1.js.LICENSE.txt",
+      "publicPath": "/static/js/336.5fd439df4ed4df6c2de1.js.LICENSE.txt"
+    },
+    "js/352.fd61418749fd0f419c9d.js": {
+      "name": "js/352.fd61418749fd0f419c9d.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/352.fd61418749fd0f419c9d.js",
+      "publicPath": "/static/js/352.fd61418749fd0f419c9d.js"
+    },
+    "js/352.fd61418749fd0f419c9d.js.gz": {
+      "name": "js/352.fd61418749fd0f419c9d.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/352.fd61418749fd0f419c9d.js.gz",
+      "publicPath": "/static/js/352.fd61418749fd0f419c9d.js.gz"
+    },
+    "js/402.84f211019c8984b78c29.js": {
+      "name": "js/402.84f211019c8984b78c29.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/402.84f211019c8984b78c29.js",
+      "publicPath": "/static/js/402.84f211019c8984b78c29.js"
+    },
+    "js/402.84f211019c8984b78c29.js.gz": {
+      "name": "js/402.84f211019c8984b78c29.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/402.84f211019c8984b78c29.js.gz",
+      "publicPath": "/static/js/402.84f211019c8984b78c29.js.gz"
+    },
+    "js/44.e5671f56269065bbcf5c.js": {
+      "name": "js/44.e5671f56269065bbcf5c.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/44.e5671f56269065bbcf5c.js",
+      "publicPath": "/static/js/44.e5671f56269065bbcf5c.js"
+    },
+    "js/44.e5671f56269065bbcf5c.js.gz": {
+      "name": "js/44.e5671f56269065bbcf5c.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/44.e5671f56269065bbcf5c.js.gz",
+      "publicPath": "/static/js/44.e5671f56269065bbcf5c.js.gz"
+    },
+    "js/44.e5671f56269065bbcf5c.js.LICENSE.txt": {
+      "name": "js/44.e5671f56269065bbcf5c.js.LICENSE.txt",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/44.e5671f56269065bbcf5c.js.LICENSE.txt",
+      "publicPath": "/static/js/44.e5671f56269065bbcf5c.js.LICENSE.txt"
+    },
+    "js/487.61434ee263bb694b1795.js": {
+      "name": "js/487.61434ee263bb694b1795.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/487.61434ee263bb694b1795.js",
+      "publicPath": "/static/js/487.61434ee263bb694b1795.js"
+    },
+    "js/487.61434ee263bb694b1795.js.gz": {
+      "name": "js/487.61434ee263bb694b1795.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/487.61434ee263bb694b1795.js.gz",
+      "publicPath": "/static/js/487.61434ee263bb694b1795.js.gz"
+    },
+    "js/488.b71d4c593046b5b16cdc.js": {
+      "name": "js/488.b71d4c593046b5b16cdc.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/488.b71d4c593046b5b16cdc.js",
+      "publicPath": "/static/js/488.b71d4c593046b5b16cdc.js"
+    },
+    "js/488.b71d4c593046b5b16cdc.js.gz": {
+      "name": "js/488.b71d4c593046b5b16cdc.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/488.b71d4c593046b5b16cdc.js.gz",
+      "publicPath": "/static/js/488.b71d4c593046b5b16cdc.js.gz"
+    },
+    "js/529.d9ad9007b23c501c18c9.js": {
+      "name": "js/529.d9ad9007b23c501c18c9.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/529.d9ad9007b23c501c18c9.js",
+      "publicPath": "/static/js/529.d9ad9007b23c501c18c9.js"
+    },
+    "js/529.d9ad9007b23c501c18c9.js.gz": {
+      "name": "js/529.d9ad9007b23c501c18c9.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/529.d9ad9007b23c501c18c9.js.gz",
+      "publicPath": "/static/js/529.d9ad9007b23c501c18c9.js.gz"
+    },
+    "js/529.d9ad9007b23c501c18c9.js.LICENSE.txt": {
+      "name": "js/529.d9ad9007b23c501c18c9.js.LICENSE.txt",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/529.d9ad9007b23c501c18c9.js.LICENSE.txt",
+      "publicPath": "/static/js/529.d9ad9007b23c501c18c9.js.LICENSE.txt"
+    },
+    "js/544.6f0d441dfbd1d9dda05c.js": {
+      "name": "js/544.6f0d441dfbd1d9dda05c.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/544.6f0d441dfbd1d9dda05c.js",
+      "publicPath": "/static/js/544.6f0d441dfbd1d9dda05c.js"
+    },
+    "js/544.6f0d441dfbd1d9dda05c.js.gz": {
+      "name": "js/544.6f0d441dfbd1d9dda05c.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/544.6f0d441dfbd1d9dda05c.js.gz",
+      "publicPath": "/static/js/544.6f0d441dfbd1d9dda05c.js.gz"
+    },
+    "js/544.6f0d441dfbd1d9dda05c.js.LICENSE.txt": {
+      "name": "js/544.6f0d441dfbd1d9dda05c.js.LICENSE.txt",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/544.6f0d441dfbd1d9dda05c.js.LICENSE.txt",
+      "publicPath": "/static/js/544.6f0d441dfbd1d9dda05c.js.LICENSE.txt"
+    },
+    "js/641.d75cb40ba47b3478b152.js": {
+      "name": "js/641.d75cb40ba47b3478b152.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/641.d75cb40ba47b3478b152.js",
+      "publicPath": "/static/js/641.d75cb40ba47b3478b152.js"
+    },
+    "js/641.d75cb40ba47b3478b152.js.gz": {
+      "name": "js/641.d75cb40ba47b3478b152.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/641.d75cb40ba47b3478b152.js.gz",
+      "publicPath": "/static/js/641.d75cb40ba47b3478b152.js.gz"
+    },
+    "js/641.d75cb40ba47b3478b152.js.LICENSE.txt": {
+      "name": "js/641.d75cb40ba47b3478b152.js.LICENSE.txt",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/641.d75cb40ba47b3478b152.js.LICENSE.txt",
+      "publicPath": "/static/js/641.d75cb40ba47b3478b152.js.LICENSE.txt"
+    },
+    "js/643.b7a4a073ba0300690a30.js": {
+      "name": "js/643.b7a4a073ba0300690a30.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/643.b7a4a073ba0300690a30.js",
+      "publicPath": "/static/js/643.b7a4a073ba0300690a30.js"
+    },
+    "js/643.b7a4a073ba0300690a30.js.gz": {
+      "name": "js/643.b7a4a073ba0300690a30.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/643.b7a4a073ba0300690a30.js.gz",
+      "publicPath": "/static/js/643.b7a4a073ba0300690a30.js.gz"
+    },
+    "js/692.d2076b903217b93f226c.js": {
+      "name": "js/692.d2076b903217b93f226c.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/692.d2076b903217b93f226c.js",
+      "publicPath": "/static/js/692.d2076b903217b93f226c.js"
+    },
+    "js/692.d2076b903217b93f226c.js.gz": {
+      "name": "js/692.d2076b903217b93f226c.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/692.d2076b903217b93f226c.js.gz",
+      "publicPath": "/static/js/692.d2076b903217b93f226c.js.gz"
+    },
+    "js/692.d2076b903217b93f226c.js.LICENSE.txt": {
+      "name": "js/692.d2076b903217b93f226c.js.LICENSE.txt",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/692.d2076b903217b93f226c.js.LICENSE.txt",
+      "publicPath": "/static/js/692.d2076b903217b93f226c.js.LICENSE.txt"
+    },
+    "js/734.7a49d88594f1310dd792.js": {
+      "name": "js/734.7a49d88594f1310dd792.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/734.7a49d88594f1310dd792.js",
+      "publicPath": "/static/js/734.7a49d88594f1310dd792.js"
+    },
+    "js/734.7a49d88594f1310dd792.js.gz": {
+      "name": "js/734.7a49d88594f1310dd792.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/734.7a49d88594f1310dd792.js.gz",
+      "publicPath": "/static/js/734.7a49d88594f1310dd792.js.gz"
+    },
+    "js/751.41c469f85a6f4868ca51.js": {
+      "name": "js/751.41c469f85a6f4868ca51.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/751.41c469f85a6f4868ca51.js",
+      "publicPath": "/static/js/751.41c469f85a6f4868ca51.js"
+    },
+    "js/751.41c469f85a6f4868ca51.js.gz": {
+      "name": "js/751.41c469f85a6f4868ca51.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/751.41c469f85a6f4868ca51.js.gz",
+      "publicPath": "/static/js/751.41c469f85a6f4868ca51.js.gz"
+    },
+    "js/751.41c469f85a6f4868ca51.js.LICENSE.txt": {
+      "name": "js/751.41c469f85a6f4868ca51.js.LICENSE.txt",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/751.41c469f85a6f4868ca51.js.LICENSE.txt",
+      "publicPath": "/static/js/751.41c469f85a6f4868ca51.js.LICENSE.txt"
+    },
+    "js/908.ebf7df9d4fbd7defb279.js": {
+      "name": "js/908.ebf7df9d4fbd7defb279.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/908.ebf7df9d4fbd7defb279.js",
+      "publicPath": "/static/js/908.ebf7df9d4fbd7defb279.js"
+    },
+    "js/908.ebf7df9d4fbd7defb279.js.gz": {
+      "name": "js/908.ebf7df9d4fbd7defb279.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/908.ebf7df9d4fbd7defb279.js.gz",
+      "publicPath": "/static/js/908.ebf7df9d4fbd7defb279.js.gz"
+    },
+    "js/908.ebf7df9d4fbd7defb279.js.LICENSE.txt": {
+      "name": "js/908.ebf7df9d4fbd7defb279.js.LICENSE.txt",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/908.ebf7df9d4fbd7defb279.js.LICENSE.txt",
+      "publicPath": "/static/js/908.ebf7df9d4fbd7defb279.js.LICENSE.txt"
+    },
+    "js/915.cdc4977c63fb0668d464.js": {
+      "name": "js/915.cdc4977c63fb0668d464.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/915.cdc4977c63fb0668d464.js",
+      "publicPath": "/static/js/915.cdc4977c63fb0668d464.js"
+    },
+    "js/915.cdc4977c63fb0668d464.js.gz": {
+      "name": "js/915.cdc4977c63fb0668d464.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/915.cdc4977c63fb0668d464.js.gz",
+      "publicPath": "/static/js/915.cdc4977c63fb0668d464.js.gz"
+    },
+    "js/915.cdc4977c63fb0668d464.js.LICENSE.txt": {
+      "name": "js/915.cdc4977c63fb0668d464.js.LICENSE.txt",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/915.cdc4977c63fb0668d464.js.LICENSE.txt",
+      "publicPath": "/static/js/915.cdc4977c63fb0668d464.js.LICENSE.txt"
+    },
+    "js/921.b8480246b7a5bb5e2425.js": {
+      "name": "js/921.b8480246b7a5bb5e2425.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/921.b8480246b7a5bb5e2425.js",
+      "publicPath": "/static/js/921.b8480246b7a5bb5e2425.js"
+    },
+    "js/921.b8480246b7a5bb5e2425.js.gz": {
+      "name": "js/921.b8480246b7a5bb5e2425.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/921.b8480246b7a5bb5e2425.js.gz",
+      "publicPath": "/static/js/921.b8480246b7a5bb5e2425.js.gz"
+    },
+    "js/953.55df2e7c636d55aa1294.js": {
+      "name": "js/953.55df2e7c636d55aa1294.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/953.55df2e7c636d55aa1294.js",
+      "publicPath": "/static/js/953.55df2e7c636d55aa1294.js"
+    },
+    "js/953.55df2e7c636d55aa1294.js.gz": {
+      "name": "js/953.55df2e7c636d55aa1294.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/953.55df2e7c636d55aa1294.js.gz",
+      "publicPath": "/static/js/953.55df2e7c636d55aa1294.js.gz"
+    },
+    "js/953.55df2e7c636d55aa1294.js.LICENSE.txt": {
+      "name": "js/953.55df2e7c636d55aa1294.js.LICENSE.txt",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/953.55df2e7c636d55aa1294.js.LICENSE.txt",
+      "publicPath": "/static/js/953.55df2e7c636d55aa1294.js.LICENSE.txt"
+    },
+    "js/974.2eb2b73fe135e5bbca46.js": {
+      "name": "js/974.2eb2b73fe135e5bbca46.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/974.2eb2b73fe135e5bbca46.js",
+      "publicPath": "/static/js/974.2eb2b73fe135e5bbca46.js"
+    },
+    "js/974.2eb2b73fe135e5bbca46.js.gz": {
+      "name": "js/974.2eb2b73fe135e5bbca46.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/974.2eb2b73fe135e5bbca46.js.gz",
+      "publicPath": "/static/js/974.2eb2b73fe135e5bbca46.js.gz"
+    },
+    "js/app.dd6e0013caab5749c942.js": {
+      "name": "js/app.dd6e0013caab5749c942.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/app.dd6e0013caab5749c942.js",
+      "publicPath": "/static/js/app.dd6e0013caab5749c942.js"
+    },
+    "js/autocomplete.2029daa24bd8f5468390.js": {
+      "name": "js/autocomplete.2029daa24bd8f5468390.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/autocomplete.2029daa24bd8f5468390.js",
+      "publicPath": "/static/js/autocomplete.2029daa24bd8f5468390.js"
+    },
+    "js/bootstrap.6d16ebbeeb4e3e77d73c.js": {
+      "name": "js/bootstrap.6d16ebbeeb4e3e77d73c.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/bootstrap.6d16ebbeeb4e3e77d73c.js",
+      "publicPath": "/static/js/bootstrap.6d16ebbeeb4e3e77d73c.js"
+    },
+    "js/styles-30a715b0.329e6eb608bba3d13ed9.js": {
+      "name": "js/styles-30a715b0.329e6eb608bba3d13ed9.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/styles-30a715b0.329e6eb608bba3d13ed9.js",
+      "publicPath": "/static/js/styles-30a715b0.329e6eb608bba3d13ed9.js"
+    },
+    "js/styles-7121d0dc.d9e19e915fb680702540.js": {
+      "name": "js/styles-7121d0dc.d9e19e915fb680702540.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/styles-7121d0dc.d9e19e915fb680702540.js",
+      "publicPath": "/static/js/styles-7121d0dc.d9e19e915fb680702540.js"
+    }
+  },
+  "chunks": {
+    "app": [
+      "js/529.d9ad9007b23c501c18c9.js",
+      "js/953.55df2e7c636d55aa1294.js",
+      "js/641.d75cb40ba47b3478b152.js",
+      "js/751.41c469f85a6f4868ca51.js",
+      "js/336.5fd439df4ed4df6c2de1.js",
+      "js/692.d2076b903217b93f226c.js",
+      "js/974.2eb2b73fe135e5bbca46.js",
+      "js/235.6a0ded7ea4f292525a3f.js",
+      "js/352.fd61418749fd0f419c9d.js",
+      "js/402.84f211019c8984b78c29.js",
+      "js/915.cdc4977c63fb0668d464.js",
+      "js/44.e5671f56269065bbcf5c.js",
+      "js/908.ebf7df9d4fbd7defb279.js",
+      "css/176.af0128665c70503484c2.css",
+      "js/176.8c1bd72027ad48a42b9e.js",
+      "css/488.eb7d3f5f58d2530f8ac3.css",
+      "js/488.b71d4c593046b5b16cdc.js",
+      "css/103.83f9ac3edf155d0843e1.css",
+      "js/103.6688afa277535b362c11.js",
+      "css/921.416e59c6c254db26595e.css",
+      "js/921.b8480246b7a5bb5e2425.js",
+      "css/643.8a3f6e5eb0163544badb.css",
+      "js/643.b7a4a073ba0300690a30.js",
+      "css/487.6f17e863d16a2481da08.css",
+      "js/487.61434ee263bb694b1795.js",
+      "js/734.7a49d88594f1310dd792.js",
+      "js/177.bd4b293c6783a9a737fc.js",
+      "js/544.6f0d441dfbd1d9dda05c.js",
+      "css/891.c04c9b13807ac28f73e7.css",
+      "js/app.dd6e0013caab5749c942.js"
+    ],
+    "autocomplete": [
+      "js/529.d9ad9007b23c501c18c9.js",
+      "js/953.55df2e7c636d55aa1294.js",
+      "js/641.d75cb40ba47b3478b152.js",
+      "js/751.41c469f85a6f4868ca51.js",
+      "css/autocomplete.88ff89e5b84e58c3cc37.css",
+      "js/autocomplete.2029daa24bd8f5468390.js"
+    ],
+    "bootstrap": [
+      "js/336.5fd439df4ed4df6c2de1.js",
+      "js/692.d2076b903217b93f226c.js",
+      "js/bootstrap.6d16ebbeeb4e3e77d73c.js"
+    ],
+    "styles": [
+      "css/512.cc2d381bb7df187cc0a8.css",
+      "js/styles-30a715b0.329e6eb608bba3d13ed9.js",
+      "css/styles-7121d0dc.6bc12eaaf29617bc0489.css",
+      "js/styles-7121d0dc.d9e19e915fb680702540.js"
+    ]
+  },
+  "publicPath": "/static/"
+}

@@ -5,7 +5,7 @@
   <div class='col-3'>
   <table class='table'>
     <thead class='grid-head'>
-      <th colspan='2'class='text-right'>
+      <th colspan='2' class='text-right'>
         <i class='fas fa-arrow-right'></i>
       </th>
     </thead>
@@ -29,7 +29,7 @@
           {% if forloop.first %}
           <th class='col-1'>{% last_path property %}<br/>
               {% if forloop.revcounter > 1 %}
-              <a class="expandlist" data-toggle="collapse" data-target=".left-collapse-{% last_path property %}" aria-expanded="false"></a>
+              <a class="expandlist" data-bs-toggle="collapse" data-target=".left-collapse-{% last_path property %}" aria-expanded="false"></a>
               {% endif %}
             </th>
           {% else %}
@@ -56,7 +56,7 @@
           <tr>  
             <th scope='row' class='col-1'>{% last_path property %}<br/>
               {% if forloop.revcounter > 1 %}
-              <a class="expandlist" data-toggle="collapse" data-target=".center-collapse-{% last_path property %}" aria-expanded="false"></a>
+              <a class="expandlist" data-bs-toggle="collapse" data-target=".center-collapse-{% last_path property %}" aria-expanded="false"></a>
               {% endif %}
             </th>
           {% else %}
@@ -92,7 +92,7 @@
           <tr>  
             <th scope='row' class='col-1'>{% last_path property %}<br/>
               {% if forloop.revcounter > 1 %}
-              <a class="expandlist" data-toggle="collapse" data-target=".right-collapse-{% last_path property %}" aria-expanded="false"></a>
+              <a class="expandlist" data-bs-toggle="collapse" data-target=".right-collapse-{% last_path property %}" aria-expanded="false"></a>
               {% endif %}
             </th>
           {% else %}

@@ -1,0 +1,86 @@
+{% extends "admin/index.html" %}
+{% load i18n %}
+
+{% block bodyclass %}{{ block.super }} app-dashboard{% endblock %}
+
+{% if not is_popup %}
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+  &rsaquo;
+  Dashboard
+</div>
+{% endblock %}
+{% endif %}
+
+{% block content %}
+<div id="content-main">
+  <div class="app-backend module">
+    <h2>{% trans 'Statistics' %}</h2>
+    <table>
+      <tbody>
+        <tr><th>{% trans 'Datasets' %}</th><td>{{ stats.datasets }}</td></tr>
+        <tr><th>{% trans 'Files' %}</th><td>{{ stats.files }}</td></tr>
+        <tr><th>{% trans 'Users' %}</th><td>{{ stats.users }}</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="app-backend module">
+    <h2>{% trans 'Metrics' %}</h2>
+    <table>
+      <tbody>
+        {% for key, value in metrics.items %}
+        <tr><th scope="row">{{ key|capfirst }}</th><td>{{ value }}</td></tr>
+        {% empty %}
+        <tr><td colspan="2">{% trans 'No metrics available' %}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="app-backend module">
+    <h2>{% trans 'Recent Logs' %}</h2>
+    <table>
+      <thead>
+        <tr><th>{% trans 'Task' %}</th><th>{% trans 'Last log' %}</th></tr>
+      </thead>
+      <tbody>
+        {% for t in logs %}
+        <tr><td>{{ t.name }}</td><td>{{ t.last_log }}</td></tr>
+        {% empty %}
+        <tr><td colspan="2">{% trans 'No logs available' %}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="app-backend module">
+    <h2>{% trans 'User Administration' %}</h2>
+    <a href="{% url 'admin:auth_user_changelist' %}">{% trans 'Manage Users' %}</a>
+  </div>
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<div id="content-related">
+    <div class="module" id="recent-actions-module">
+        <h2>{% trans 'Menu' %}</h2>
+        <h3>{% trans 'Dashboard' %}</h3>
+            <ul class="actionlist">
+            <li class="">
+              <a href="{% url 'admin:dashboard' %}">{% trans 'Dashboard' %}</a>
+            </li>
+            </ul>
+        <h3>{% trans 'Check Status' %}</h3>
+            <ul class="actionlist">
+            <li class="">
+              <a href="{% url 'admin:serverstatus' %}">Server Status</a>
+            </li>
+            </ul>
+        <h3>{% trans 'Commands' %}</h3>
+            <ul class="actionlist">
+            <li class="">
+              <a href="{% url 'admin:commands' %}">{% trans 'Commands' %}</a>
+            </li>
+            </ul>
+    </div>
+</div>
+{% endblock %}

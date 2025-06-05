@@ -1,7 +1,7 @@
 import requests
 import json
 import re
-import elasticsearch
+import pysolr
 import rdflib
 import time
 import gzip

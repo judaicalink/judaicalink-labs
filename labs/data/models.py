@@ -4,6 +4,7 @@ from django.utils import timezone
 # Create your models here.
 from . import hugotools
 
+
 class Dataset(models.Model):
     name = models.TextField()
     title = models.TextField()
@@ -13,7 +14,6 @@ class Dataset(models.Model):
     graph = models.TextField(null=True)
     category = models.TextField(null=True)
 
-    
     def set_indexed(self, value):
         self.indexed = value
         for file in self.datafile_set.all():
@@ -21,7 +21,6 @@ class Dataset(models.Model):
             file.save()
         self.save()
 
-    
     def set_loaded(self, value):
         self.loaded = value
         for file in self.datafile_set.all():
@@ -71,7 +70,3 @@ def update_from_markdown(filename):
             datafile.description = file['description']
         datafile.save()
     ds.save()
-
-
-
-

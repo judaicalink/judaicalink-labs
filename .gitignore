@@ -7,12 +7,24 @@
 /labs/backend/rdf_files
 /labs/data/rdf_files
 /labs/dumps
+/labs/search/static/js
 /data/
 /fuseki/
 /static
 labs/secret_key.txt
 labs/labs/localsettings.py
-htpasswd
+.htpasswd
+/labs/.env
+/labs/node_modules/
+/labs/static/
+update.sh
+update.log
+runserver.sh
+/labs/search/static/
+
+/node_modules/
+beacon-persons.txt
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -92,7 +104,7 @@ instance/
 .scrapy
 
 # Sphinx documentation
-docs/_build/
+../judaicalink-docs/docs/_build/
 
 # PyBuilder
 target/
@@ -150,3 +162,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+labs/static/
+
+# Keys
+labs/localhost.crt
+labs/localhost.csr
+labs/localhost.ke!/labs/package.json
+
+labs/search/static

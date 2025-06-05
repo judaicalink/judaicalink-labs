@@ -1,59 +1,73 @@
 {% extends 'search/base.html' %}
-{% block content %}
 {% load static %}
 
-{% include "search/header.html" %}
+{% block meta %}
+    <meta name="keywords" content="judaicalink, homepage, labs">
+    <meta name="description" content="JudaicaLink is our central platform to provide access to the data related to the topic of Jewish Studies.">
+{% endblock %}
+
+{% block content %}
 
 <!--content-->
 
 <main class="row">
 
-        <div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-8 col-xl-8">
+    <div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-8 col-xl-8">
 
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#judaicalink_search" type="button" role="tab" aria-controls="judaicalink_search" aria-selected="true">JudaicaLink Search</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#fulltext_search" type="button" role="tab" aria-controls="fulltext_search" aria-selected="false">Fulltext Search</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#entity_search" type="button" role="tab" aria-controls="entity_search" aria-selected="false">Entity Search</button>
+            </li>
+        </ul>
 
-            <h1 class="text-center text-md-center">Experimental Full Text Search Online</h1>
-            <div class="alert alert-success text-center" role="alert"><i class="fas fa-bullhorn"></i>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="judaicalink_search" role="tabpanel" aria-labelledby="judaicalink_search-tab">
+              <br>
+
+              {% include "search/search_form.html" %}
+              <br>
+              <p class="alert alert-success text-center" role="alert">
+                  Here you can access the JudaicaLink Knowledge Graph and search for different entities that we have collected from several datasets. <br>
+                  You also have the option to specify your search query by using the advanced search.
+              </p>
+
+          </div>
+          <div class="tab-pane fade" id="fulltext_search" role="tabpanel" aria-labelledby="fulltext_search-tab">
+              <br>
+              <p class="alert alert-success text-center" role="alert">
+                  The Compact Memory collection comprises over 300 Jewish newspapers and journals of the German speaking area of the years 1768–1938 and beyond. <br>
+                  Here you can search the digitized version of the whole collection in fulltext mode.
+              </p>
+              {% include "cm_search/search_form.html" %}
+          </div>
+          <div class="tab-pane fade" id="entity_search" role="tabpanel" aria-labelledby="entity_search-tab">
+              <br>
+              <p class="alert alert-success text-center" role="alert">
+                  Here you can search persons and places extracted from Compact Memory and linked to Judaicalink entities.
+              </p>
+              {% include "cm_e_search/search_form.html" %}
+          </div>
+        </div>
+
+    </div>
+    <div class="col-md-0 col-lg-4 col-xl-4">
+
+        <div class="alert alert-success text-center" role="alert"><i class="fas fa-bullhorn"></i>
             <b>Give us your datasets!</b> We are always searching for new datasets to expand our knowledge graph. If you have interesting datasets about Jewish Studies, please get in touch with us!
             <br><br><a class="btn btn-success" href="{%  url 'contact:contact' %}">contact Team</a>
-            </div>
-            <p>
-
-                We have some news regarding search functionality in JudaicaLink.
-
-                As we said earlier, we plan to develop a full text search for JudaicaLink. Today, we launch a first
-                version of it, although it is still very limited.
-
-                You can now search our data, backed by ElasticSearch. We are currently mainly working again on the
-                backend part of this, like the processes to populate the search index, the integration with the data
-                pages and so on.
-                <br><br>
-                This first search functionality is therefore very limited: you can search in a subset of our data fields
-                <b>(name/title, abstract, birthDate, deathDate, birthLocation, deathLocation)</b> and only the first 10 results are shown, as simple links to the data pages.
-
-                Nevertheless we think this is already useful, as this way you can quickly find out,
-                if there are some matching resources available in JudaicaLink, and you can also find quickly some new
-                entries to explore our dataset.
-                <br><br><b>
-                So have fun with it - and be patient, it is still under heavy development and things inevitably will
-                break.</b>
-            </p>
-
         </div>
-        <div class="col-md-0 col-lg-4 col-xl-4">
 
-            <img src="/static/img/marie-bellando-mitjans-m7NAcy4l2bQ-unsplash.jpg" class="img-thumbnail img-fluid mt-4" alt="Neue Synagoge Berlin">
         <div class="alert alert-info text-center mt-4"  role="alert"><i class="fa fa-code" aria-hidden="true"></i>
             <b>Join us on Github</b> <br>You are interested in the code of our JudaicaLink knowledge graph project, then visit the Judaicalink labs repo on Github.
             <br><br><a class="btn btn-secondary" href="https://github.com/judaicalink" target="_blank" rel="noopener noreferrer">Github Repository</a>
         </div>
-        </div>
+    </div>
 </main>
-
-<!--footer-->
-
-{% include "search/footer.html" %}
-
-<!--footer-->
-
 {% endblock content %}
 

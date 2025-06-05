@@ -1,12 +1,11 @@
 import json
 import re
-import elasticsearch
+import pysolr
 import rdflib
 import gzip
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.core import management
-import elasticsearch
 from data import models
 from data import utils
 
@@ -53,11 +52,11 @@ mappings_simpletext = {
 
 
 class Command(BaseCommand):
-    help = 'index all datasets marked as indexed in elasticsearch'
+    help = 'index all datasets marked as indexed in solr'
 
     def handle(self, *args, **kwargs):
-        es = elasticsearch.Elasticsearch()
-        ic = elasticsearch.client.IndicesClient(es)
+        solr = pysolr.Solr(settings.SOLR_SERVER, always_commit=True, timeout=10)
+        ic = pysolr.client.IndicesClient(solr)
         if ic.exists(settings.JUDAICALINK_INDEX):
             ic.delete(settings.JUDAICALINK_INDEX)
         ic.create(index=settings.JUDAICALINK_INDEX, body={'mappings': mappings})
@@ -74,4 +73,5 @@ class Command(BaseCommand):
                     openfunc = gzip.open
                 with openfunc(filename, "rt", encoding="utf8") as f:
                     self.stdout.write("indexing: " + filename)
-                    es.bulk(f.read())
+                    solr.add(json.load(f))
+

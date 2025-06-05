@@ -1,0 +1,46 @@
+{% extends 'search/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<!--content-->
+
+<main class="row">
+
+    <div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-9 col-xl-8">
+
+        <h1 class="text-center">Forbidden Access</h1>
+
+        <br>
+        <p>
+            Sorry, but you don't have permission to access the requested resource. This could be due to one of the
+            following reasons:
+        </p>
+        <ol>
+            <li>Insufficient Privileges: Your account or credentials may not have the necessary permissions to access
+                this content or perform the requested action.
+            </li>
+            <li>
+                Access Denied by Server: The server understood your request, but it refuses to authorize access. This
+                could be a result of IP blocking, restrictions based on geographical location, or other server-side
+                security policies.
+            </li>
+            <li>
+                Unauthorized URL or Path: The URL or path you are trying to access may be restricted, and you may need
+                to check if it is valid or if there are any typos in the address.
+            </li>
+        </ol>
+        <p>
+            If you believe you should have access, please contact the system administrator or support team for
+            assistance. Include the details of your request and any relevant information to help resolve the issue
+            promptly.
+        </p>
+    </div>
+    <div class="col-md-0 col-lg-3 col-xl-4">
+
+        <img src="/static/img/new-synagogue-berlin.webp" class="img-thumbnail img-fluid mt-4" alt="new synagogue berlin">
+    </div>
+</main>
+<!--content end-->
+
+{% endblock content %}
