@@ -56,10 +56,13 @@
     }
     $('li#' + id).remove();
     var msgEl = $('<li id=' + id + ' class="' + level + '"><span class="message">' + message + '</span><span class="submessage">' + submessage + '</span></li>').appendTo('.messagelist');
-    if (timeout){
+    const MAX_TIMEOUT = 5000; // Maximum allowed timeout in milliseconds
+    if (timeout && timeout > 0 && timeout <= MAX_TIMEOUT) {
       window.setTimeout(function(){
         msgEl.remove();
       }, timeout);
+    } else if (timeout) {
+      console.warn('Invalid timeout value: ' + timeout);
     }
   }
 })(django.jQuery);
