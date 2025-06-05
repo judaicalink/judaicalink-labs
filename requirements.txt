@@ -52,7 +52,7 @@ hyperlink==21.0.0
 incremental==21.3.0
 multidict==6.0.2
 packaging==21.3
-Pillow==9.2.0
+Pillow==10.3.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycparser==2.21
