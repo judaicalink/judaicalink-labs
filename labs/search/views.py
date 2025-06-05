@@ -140,11 +140,10 @@ def search(request):
     rows_per_page = 20
     start = (page - 1) * rows_per_page
 
-    SOLR_URL = f"{SOLR_SERVER}/{JUDAICALINK_INDEX}"
-    solr = pysolr.Solr(SOLR_URL, timeout=10)
+    api_url = request.build_absolute_uri('/api/judaicalink/')
 
-    # Construct Solr parameters
     solr_params = {
+        "q": query,
         "q.op": "OR",
         "start": start,
         "rows": rows_per_page,
@@ -159,16 +158,17 @@ def search(request):
         solr_params["sort"] = f"name_sort {sort_order}"
 
     try:
-        response = solr.search(q=query, **solr_params)
+        response = requests.get(api_url, params=solr_params, timeout=10)
+        response.raise_for_status()
+        response_data = response.json()
+    except requests.RequestException as e:
+        logger.error(f"API query failed: {e}")
+        logger.error(f"Request URL: {api_url}?{solr_params}")
+        return render(request, 'search/search_result.html', {"alert": "No results found, API Connection error"})
 
-    except pysolr.SolrError as e:
-        logger.error(f"Solr query failed: {e}")
-        logger.error(f"Request URL: {SOLR_URL}?q={query}")
-        # return the error page
-        return render(request, 'search/search_result.html', {"alert": "No results found, SOLR Connection error"})
-
-    highlighting = response.highlighting
-    formatted_results = format_results(response.docs, highlighting)
+    highlighting = response_data.get('highlighting', {})
+    docs = response_data.get('response', {}).get('docs', [])
+    formatted_results = format_results(docs, highlighting)
 
     # Alert for display
     alert = query if "AND" in query or "OR" in query or "NOT" in query else query.split(":")[-1]
@@ -181,7 +181,7 @@ def search(request):
         alert = "All results"
 
     # Calculate pagination
-    total_hits = response.hits
+    total_hits = response_data.get('response', {}).get('numFound', 0)
     total_pages = math.ceil(total_hits / rows_per_page)
     pages = range(1, total_pages + 1)
 
