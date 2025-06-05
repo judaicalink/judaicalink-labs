@@ -174,4 +174,5 @@ labs/static/
 labs/search/static
 db.sqlite3
 db2.sqlite3
+.fuse_*
 
