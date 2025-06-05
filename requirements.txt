@@ -16,7 +16,7 @@ six==1.16.0
 SPARQLWrapper==2.0.0
 sqlparse==0.5.0
 urllib3==1.26.19
-zipp==1.0.0
+zipp==3.19.1
 channels>=2.4.0
 elasticsearch>=7.1.0
 libsass==0.20.0
