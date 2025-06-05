@@ -34,7 +34,7 @@ Automat==20.2.0
 cffi==1.15.1
 constantly==15.1.0
 crispy-bootstrap5==0.7
-cryptography==38.0.1
+cryptography==44.0.1
 daphne==3.0.2
 Deprecated==1.2.13
 discord==2.0.0
