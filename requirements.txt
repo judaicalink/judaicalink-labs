@@ -9,7 +9,7 @@ isodate==0.6.1
 Markdown==3.3.6
 more-itertools==8.10.0
 powerline-status==2.7
-Pygments==2.11.2
+Pygments==2.15.0
 pyparsing==3.0.9
 requests>=2.28.1
 six==1.16.0
