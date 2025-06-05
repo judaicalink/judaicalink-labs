@@ -162,11 +162,14 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-labs/static/
 
 # Keys
 labs/localhost.crt
 labs/localhost.csr
-labs/localhost.ke!/labs/package.json
+labs/localhost.ke
 
+# Labs specific
+labs/static/
+!/labs/package.json
 labs/search/static
+db.sqlite3
