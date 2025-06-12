@@ -175,5 +175,5 @@ db.sqlite3
 db2.sqlite3
 .fuse_*
 
-webpack-stats.json
-package-lock.json
+labs/webpack-stats.json
+labs/package-lock.json
