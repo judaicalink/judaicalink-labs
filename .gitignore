@@ -170,9 +170,10 @@ labs/localhost.ke
 
 # Labs specific
 labs/static/
-!/labs/package.json
 labs/search/static
 db.sqlite3
 db2.sqlite3
 .fuse_*
 
+webpack-stats.json
+package-lock.json
