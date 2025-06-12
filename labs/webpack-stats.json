@@ -142,20 +142,20 @@
       "publicPath": "/static/img/mCSB_buttons.5b35a39c5f877ba43637.png",
       "sourceFilename": "node_modules/malihu-custom-scrollbar-plugin/mCSB_buttons.png"
     },
-    "js/app.7db37b292a3c1ffc5085.js": {
-      "name": "js/app.7db37b292a3c1ffc5085.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/app.7db37b292a3c1ffc5085.js",
-      "publicPath": "/static/js/app.7db37b292a3c1ffc5085.js"
+    "js/app.761ba5162de3072db34c.js": {
+      "name": "js/app.761ba5162de3072db34c.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/app.761ba5162de3072db34c.js",
+      "publicPath": "/static/js/app.761ba5162de3072db34c.js"
     },
-    "js/app.7db37b292a3c1ffc5085.js.gz": {
-      "name": "js/app.7db37b292a3c1ffc5085.js.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/app.7db37b292a3c1ffc5085.js.gz",
-      "publicPath": "/static/js/app.7db37b292a3c1ffc5085.js.gz"
+    "js/app.761ba5162de3072db34c.js.gz": {
+      "name": "js/app.761ba5162de3072db34c.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/app.761ba5162de3072db34c.js.gz",
+      "publicPath": "/static/js/app.761ba5162de3072db34c.js.gz"
     },
-    "js/app.7db37b292a3c1ffc5085.js.LICENSE.txt": {
-      "name": "js/app.7db37b292a3c1ffc5085.js.LICENSE.txt",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/app.7db37b292a3c1ffc5085.js.LICENSE.txt",
-      "publicPath": "/static/js/app.7db37b292a3c1ffc5085.js.LICENSE.txt"
+    "js/app.761ba5162de3072db34c.js.LICENSE.txt": {
+      "name": "js/app.761ba5162de3072db34c.js.LICENSE.txt",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/app.761ba5162de3072db34c.js.LICENSE.txt",
+      "publicPath": "/static/js/app.761ba5162de3072db34c.js.LICENSE.txt"
     },
     "js/autocomplete.6200e2271593b603ac0c.js": {
       "name": "js/autocomplete.6200e2271593b603ac0c.js",
@@ -464,7 +464,7 @@
       "js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_js-node_modules_vuetify_lib_labs_rules_-b2aacc.7807bcace6c88d0d489f.js",
       "js/vendors-node_modules_vuetify_lib_styles_main_css-node_modules_vuetify_lib_util_anchor_js-node-09d944.da6b6e55a72b7a7f7c85.js",
       "css/vendors-node_modules_vuetify_lib_styles_main_css.bc6e89ecbbff5aaaddcf.css",
-      "js/app.7db37b292a3c1ffc5085.js"
+      "js/app.761ba5162de3072db34c.js"
     ],
     "autocomplete": [
       "js/vendors-node_modules_vue-loader_dist_exportHelper_js-node_modules_vue_dist_vue_esm-bundler_js.d7b2cecb8b640477979f.js",
