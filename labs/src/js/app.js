@@ -1,7 +1,8 @@
 import '@fortawesome/fontawesome-free/js/all'; // FontAwesome Free
 import * as bootstrap from 'bootstrap';
 import {createApp} from "vue";
-import vuetify from "../../static/js/vuetify"; // Bootstrap 5 korrekt importieren
+import 'vuetify'
+
 window.bootstrap = bootstrap; // Falls global erwartet
 
 require('./design.js')
@@ -11,6 +12,7 @@ require('./vue.config.js')
 import SearchApp from '../vue/search.vue';
 
 document.addEventListener('DOMContentLoaded', () => {
+    //Search-App
     const el = document.querySelector('#search-app');
     if (el) {
         const app = createApp(SearchApp);
