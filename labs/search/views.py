@@ -7,10 +7,8 @@ import logging
 import math
 import pysolr
 import re
-from data.models import Dataset
 from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.cache import cache_page
 
@@ -23,6 +21,11 @@ JUDAICALINK_INDEX = settings.JUDAICALINK_INDEX.lstrip('/')
 
 # setup logging
 logger = logging.getLogger('labs')
+
+# SOLR Pooling
+SOLR_SERVER = settings.SOLR_SERVER.rstrip('/')
+SOLR_INDEX = settings.JUDAICALINK_INDEX.lstrip('/')
+solr = pysolr.Solr(f"{SOLR_SERVER}/{SOLR_INDEX}", timeout=10, always_commit=False)
 
 
 # error handling
@@ -41,40 +44,24 @@ error_403 = lambda request, exception: handle_error(request, 'search/errors/403.
 error_500 = lambda request: handle_error(request, 'search/errors/500.html', "Error 500")
 
 
-# Index page (root)
-@cache_page(CACHE_TTL)
-def index(request):
-    """
-    This function gets all the names from the solr index.
-    """
-    # load all the datasets
-    return HttpResponse(Dataset.objects.all())
-    # return render(request, "search/root.html")
-
-
 # Search index page
 @cache_page(CACHE_TTL)
-def search_index(request):
+def index(request):
     """
     Renders the search index page.
     This page serves as the entry point for the search functionality.
     """
-    context = {
-        'debug': settings.DEBUG,
-    }
-    return render(request, "search/search_index.html", context)
+    return render(request, "search/search_index.html")
 
 
-# All search navigation page
 @cache_page(CACHE_TTL)
+# All search navigation page
 def all_search_nav(request):
     """
     Renders the search for all searches.
     """
-    context = {
-        'debug': settings.DEBUG,
-    }
-    return render(request, "search/all_search_nav.html", context)
+
+    return render(request, "search/all_search_nav.html")
 
 
 # Formats the results for display
@@ -138,61 +125,79 @@ def search(request):
     :return: Rendered search results page with formatted results and pagination.
     """
     logger.debug("Searching...")
+    alert = None
+
     if 'page' not in request.GET:
         params = request.GET.copy()
         params['page'] = '1'
         return redirect(f"{request.path}?{params.urlencode()}")
-    query = build_advanced_query(request)
+
+    # Get the raw query from the request
     search_term = request.GET.get("q", "").strip()
+    # If the user didn’t enter anything, show an error instead of “match-all”
+
+    if not search_term:
+        # Render the *index* page again with an error message
+        alert = "Please enter at least one search term."
+        return render(request, "search/search_result.html",
+                      context={
+                          "alert": alert,
+                          "search_input": "",
+                      })
+
+    # build the core query string
+    query = build_advanced_query(search_term)
+
+    # decompose simple AND‐filters into q + fq
+    fq_list = []
+    if " AND " in query and all(part.count(':') == 1 for part in query.split(" AND ")):
+        parts = query.split(" AND ")
+        query = parts[0]
+        fq_list = parts[1:]
+
     logger.debug(f"Constructed Query: {query}")
-    alert = None
 
     # Pagination and sorting parameters
     page = int(request.GET.get("page", 1))
     sort_order = request.GET.get("sort", "")  # Default: ascending
     rows_per_page = 20
     start = (page - 1) * rows_per_page
-
-    SOLR_URL = f"{SOLR_SERVER}/{JUDAICALINK_INDEX}"
-    solr = pysolr.Solr(SOLR_URL, timeout=10)
+    sort = request.GET.get("sort")  # 'asc' or 'desc'
 
     # Construct Solr parameters
     solr_params = {
+        "q": query,
         "q.op": "OR",
         "start": start,
         "rows": rows_per_page,
         "wt": "json",
         "hl": "true",
-        "hl.fl": "*",
+        "hl.fl": ["name", "Alternatives", "birthLocation", "deathLocation"],
         "timeAllowed": 2000,
-        "hl.simple.pre": "<mark>",
-        "hl.simple.post": "</mark>",
+        "hl.simple.pre": "<b>",
+        "hl.simple.post": "</b>",
+        "fl": "id,name,Alternatives,birthDate,birthLocation,deathDate,deathLocation,link",
     }
-    # Add sorting if specified
-    if sort_order != "":
-        solr_params["sort"] = f"name_sort {sort_order}"
+
+    if fq_list:
+        solr_params["fq"] = fq_list  # 1. use fq for filters
+
+    if sort in ("asc", "desc"):
+        # use sort for ordering
+        # TODO: use a more specific field for sorting, e.g., "name_sort" or "birthDate"
+        solr_params["sort"] = f"score {sort}"
 
     try:
-        response = solr.search(q=query, **solr_params)
+        response = solr.search(**solr_params)
 
     except pysolr.SolrError as e:
         logger.error(f"Solr query failed: {e}")
-        logger.error(f"Request URL: {SOLR_URL}?q={query}")
         # return the error page
-        return render(request, 'search/search_result.html', {"alert": "No results found, SOLR Connection error"})
+        alert = "No results found, SOLR Connection error"
+        return render(request, 'search/search_result.html', {"alert": alert})
 
     highlighting = response.highlighting
     formatted_results = format_results(response.docs, highlighting)
-
-    # Alert for display
-    alert = search_term if search_term else "All results"
-    query = query.replace("text:", "")
-    query = query.replace("*:*", "")
-    query = query.replace("*", "")
-    alert = alert.replace("text:", "")
-
-    if alert == "*" or alert == "*:*":
-        alert = "All results"
 
     # Calculate pagination
     total_hits = response.hits
@@ -202,11 +207,11 @@ def search(request):
     context = {
         'total_hits': total_hits,
         'ordered_dataset': formatted_results,
-        'alert': alert,
+        'alert': alert or "No results found.",
         'current_page': page,
         'pages': pages,
-        'sort_order': sort_order,
-        'simple_search_input': search_term,
+        'sort_order': sort or "",
+        'search_input': search_term,
     }
     return render(request, 'search/search_result.html', context)
 
@@ -219,7 +224,7 @@ def escape_query_chars(s: str) -> str:
     return ''.join(f'\\{c}' if c in lucene_specials else c for c in s)
 
 
-def build_advanced_query(request):
+def build_advanced_query(raw: str) -> str:
     """
     Build a Solr query from ?q=… that:
       • If empty => returns "*:*"
@@ -227,9 +232,11 @@ def build_advanced_query(request):
       • If it contains * or ? => OR‘s that wildcard across all fields
       • Otherwise => escapes the term and OR‘s it across all fields
       • Includes birthDate/deathDate when q looks like YYYY or YYYY-MM or YYYY-MM-DD
+    :param raw: The raw search query string.
+    :return: A Solr query string.
     """
-    raw = request.GET.get("q", "").strip()
-    # strip out any stray HTML brackets
+
+    # strip out any stray HTML brackets against XSS attacks
     raw = re.sub(r"[<>]", "", raw)
 
     # 1) empty => match everything
@@ -259,333 +266,3 @@ def build_advanced_query(request):
     # 5) simple term => escape special chars and OR across all fields
     safe = escape_query_chars(raw)
     return " OR ".join(f"{f}:{safe}" for f in fields)
-
-
-# Create query stringimport logging
-# import math
-# import re
-#
-# import pysolr
-# from django.conf import settings
-# from django.http import HttpResponse
-# from django.shortcuts import render, redirect
-# from django.views.decorators.cache import cache_page
-# from data.models import Dataset
-#
-# # Cache time-to-live
-# CACHE_TTL = getattr(settings, 'CACHE_TTL', None)
-#
-# # Solr server and index
-# SOLR_SERVER = settings.SOLR_SERVER.rstrip('/')
-# SOLR_INDEX  = settings.JUDAICALINK_INDEX.lstrip('/')
-#
-# logger = logging.getLogger('labs')
-#
-#
-# @cache_page(CACHE_TTL)
-# def index(request):
-#     """
-#     Root endpoint: list all datasets (used only for debugging).
-#     """
-#     return HttpResponse(Dataset.objects.all())
-#
-#
-# @cache_page(CACHE_TTL)
-# def search_index(request):
-#     """
-#     Render the initial search page (Vue will mount here).
-#     """
-#     return render(request, "search/search_index.html", {
-#         'debug': settings.DEBUG,
-#     })
-#
-#
-# def escape_query_chars(s: str) -> str:
-#     """
-#     Escape special Lucene characters so simple terms don't break.
-#     """
-#     specials = r'+-!():^[]\"{}~*?|&\\/'
-#     return ''.join(f'\\{c}' if c in specials else c for c in s)
-#
-#
-# def build_advanced_query(request):
-#     """
-#     Build a Solr query from GET-param 'q':
-#      - empty → '*:*'
-#      - contains colon/BOOL/quotes/parens → pass through raw
-#      - contains '*' or '?' → wildcard OR across all fields
-#      - else → escape term and OR across all fields
-#      - auto-include birthDate/deathDate if q looks like YYYY[-MM[-DD]]
-#     """
-#     raw = request.GET.get("q", "").strip()
-#     raw = re.sub(r"[<>]", "", raw)
-#
-#     if not raw:
-#         return "*:*"
-#
-#     # base fields; add date fields if q is a date
-#     fields = ["name", "alternatives", "publication", "birthLocation", "deathLocation"]
-#     if re.match(r"^\d{4}(?:-\d{2}(?:-\d{2})?)?$", raw):
-#         fields += ["birthDate", "deathDate"]
-#
-#     # advanced syntax → pass through
-#     if (":" in raw
-#         or re.search(r"\b(AND|OR|NOT)\b", raw, re.IGNORECASE)
-#         or '"' in raw
-#         or "(" in raw
-#         or ")" in raw
-#     ):
-#         return raw
-#
-#     # wildcard queries → OR across all fields
-#     if "*" in raw or "?" in raw:
-#         return " OR ".join(f"{f}:{raw}" for f in fields)
-#
-#     # simple term → escape and OR across fields
-#     safe = escape_query_chars(raw)
-#     return " OR ".join(f"{f}:{safe}" for f in fields)
-#
-#
-# def format_results(docs, highlighting):
-#     """
-#     Convert Solr docs + highlighting into a list of display-ready dicts.
-#     """
-#     out = []
-#     for doc in docs:
-#         # drop internal fields
-#         for k in ('_version_','_root_','_text_','name_sort'): doc.pop(k, None)
-#
-#         doc_id = doc.get("id", "")
-#         entry = {}
-#
-#         for k,v in doc.items():
-#             if k == "link":
-#                 entry["Link"] = f"<a href='{v[0]}'>{v[0]}</a>" if v and v[0].startswith("http") else None
-#
-#             elif k == "alternatives":
-#                 entry["Alternatives"] = "".join(f"<p>{alt}</p>" for alt in v)
-#
-#             else:
-#                 # apply highlighting if present
-#                 hl = highlighting.get(doc_id, {}).get(k, v)
-#                 entry[k.capitalize()] = " ".join(hl) if isinstance(hl, list) else str(hl)
-#
-#         # move Name and Alternatives to front, Link to end
-#         ordered = {}
-#         for key in ("Name","Alternatives"):
-#             if key in entry:
-#                 ordered[key] = entry.pop(key)
-#         ordered.update(entry)
-#         if "Link" in entry:
-#             ordered["Link"] = entry["Link"]
-#
-#         out.append(ordered)
-#     return out
-#
-#
-# def search(request):
-#     """
-#     Main search endpoint:
-#      - ensures ?page=1 if missing
-#      - builds a Solr query
-#      - runs it with paging, timeout, highlighting
-#      - renders results into search_result.html
-#     """
-#     if 'page' not in request.GET:
-#         params = request.GET.copy()
-#         params['page'] = '1'
-#         return redirect(f"{request.path}?{params.urlencode()}")
-#
-#     q = build_advanced_query(request)
-#     raw_term = request.GET.get("q", "").strip()
-#
-#     # pagination & sorting
-#     page = int(request.GET.get("page", 1))
-#     rows_per_page = 20
-#     start = (page - 1) * rows_per_page
-#     sort = request.GET.get("sort")
-#
-#     # Solr setup
-#     solr = pysolr.Solr(f"{SOLR_SERVER}/{SOLR_INDEX}", timeout=10)
-#     solr_params = {
-#         "q.op": "OR",
-#         "start": start,
-#         "rows": rows_per_page,
-#         "wt": "json",
-#         "timeAllowed": 2000,
-#         "hl": "true",
-#         "hl.fl": "*",
-#         "hl.simple.pre": "<mark>",
-#         "hl.simple.post": "</mark>",
-#     }
-#     if sort:
-#         solr_params["sort"] = f"name_sort {sort}"
-#
-#     try:
-#         resp = solr.search(q=q, **solr_params)
-#     except pysolr.SolrError as e:
-#         logger.error(f"Solr error: {e}")
-#         return render(request, 'search/search_result.html', {
-#             "alert": "Solr connection error",
-#         })
-#
-#     results = format_results(resp.docs, resp.highlighting)
-#     total = resp.hits
-#     total_pages = math.ceil(total / rows_per_page)
-#     pages = range(1, total_pages + 1)
-#
-#     return render(request, 'search/search_result.html', {
-#         'total_hits': total,
-#         'ordered_dataset': results,
-#         'alert': raw_term or "All results",
-#         'current_page': page,
-#         'pages': pages,
-#         'sort_order': sort or "",
-#         'simple_search_input': raw_term,
-#         'rows': 'null',  # no server-side rows needed for Vue
-#     })
-
-# Create alert
-def create_alert(submitted_search):
-    """
-    Creates a string that shows the error response.
-    :param submitted_search:
-    :return: alert: string that contains the error response
-    """
-
-    # receives dictionary query_dic ["submitted_search"] submitted_search may look like this: [{'Option1': 'name:',
-    # 'Input1': 'einstein'}, {'Operator3': ' OR ', 'Option3': 'birthDate:', 'Input3': '1900'}] creates a string for
-    # each part of the query that will be stored in a list (alert)
-    alert = []
-    for dictionary in submitted_search:
-        for entry in dictionary:
-            # Operators like AND, OR, NOT will be stripped of any whitespaces and transformed into capital letters only
-            if entry.startswith("operator"):
-                alert.append(dictionary[entry].upper().strip())
-            # Options will start with a capital letter, other letters will be transformed into lowercase
-            if entry.startswith("option"):
-                alert.append(dictionary[entry].capitalize())
-            # User Input will be displayed exactly like the user submitted it
-            if entry.startswith("input"):
-                alert.append(dictionary[entry])
-    # returns a list like this ["Name: ", "Einstein", "OR" "Birthdate: ", "1900"]
-    if alert[0] == "AND" or alert[0] == "OR" or alert[0] == "NOT":
-        del alert[0]
-    return alert
-
-
-# Process query for the search results
-def process_query(query_dic, page, alert):
-    """
-    The search query is processed here: request to solr is made, search results are received, paging is generated according to the number of search results
-    paging: implemented so 10 results will be displayed per page
-    :param query_dic:
-    :param page: integer, representing the page the user is currently on
-    :param alert: string, built from the search query in a readable form, displayed when a search was requested
-    :return: context that contains all the information needed to generate the template
-    """
-
-    page = int(page)
-
-    try:
-
-        solr = pysolr.Solr(SOLR_SERVER + JUDAICALINK_INDEX, always_commit=True, timeout=10,
-                           auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
-        rows_per_page = 10
-        start = (page - 1) * rows_per_page
-        query_str = query_dic["query_str"]
-        logger.debug("Query: " + query_str)
-
-        # Fields that should be highlighted
-        highlight_fields = ['name', 'birthDate', 'birthLocation', 'alternatives', 'deathDate', 'deathLocation',
-                            'dataslug', 'Abstract']
-
-        fields = ['name', 'birthDate', 'birthLocation', 'alternatives', 'deathDate', 'deathLocation',
-                  'dataslug', "Abstract", "id"]
-
-        solr_query = query_str
-
-        # build the parameters for solr
-        solr_params = {
-            "hl": "true",
-            "indent": "true",
-            'fl': ','.join(fields),
-            "hl.requireFieldMatch": "true",
-            "hl.tag.pre": "<strong>",
-            "hl.tag.post": "</strong>",
-            "hl.fragsize": "0",
-            "start": start,
-            "timeAllowed": 2000,
-            "q.op": "OR",
-            "hl.fl": ','.join(highlight_fields),
-            "rows": rows_per_page,
-            "useParams": ""
-        }
-
-        # Perform the query with highlighting
-        result = solr.search(q=solr_query, search_handler="/select", **solr_params)
-        # Debug
-        logger.debug("Result: ")
-        logger.debug(result.hits)
-        logger.debug(result.docs)
-
-    except pysolr.SolrError as e:
-        logger.error(f"Solr query failed: {e}")
-        logger.error(f"Request URL: {SOLR_SERVER + JUDAICALINK_INDEX}?q={query_str}")
-        # return the error page
-        alert = "No results found, SOLR Connection error"
-        context = {alert: alert}
-        return context
-
-    if result.hits == 0:
-        return None
-
-    data = result.docs
-
-    # add the link to the data
-    for doc in data:
-        for key in doc:
-            doc[key] = ''.join(map(str, doc[key]))
-            print(doc[key])
-        doc['link'] = "<a href='{}'>{}</a>".format(doc["id"], doc["name"])
-
-    # Extract the highlighting
-    highlighting = result.highlighting
-
-    for doc in data:
-        doc_id = doc['id']
-        if doc_id in highlighting:
-            for field in highlight_fields:
-                if field in highlighting[doc_id]:
-                    # Replace the original field value with the flattened highlighted value
-                    doc[field] = "".join(highlighting[doc_id][field])
-
-    # reorder the data according to the field_order, ignore key errors
-    field_order = ["name", "alternatives", "birthDate", "birthLocation", "deathDate", "deathLocation", "Abstract",
-                   "Publication", "dataslug", "id", "link"]
-    data = [{key: doc[key] for key in field_order if key in doc} for doc in data]
-
-    for doc in data:
-        capitalized_doc = {key.capitalize(): value for key, value in doc.items()}
-        capitalized_doc.pop('Id', None)
-        doc.clear()
-        doc.update(capitalized_doc)
-
-    total_hits = result.hits
-    pages = []
-    for page in range(0, math.ceil(total_hits / rows_per_page)):
-        # number of needed pages for paging
-        # round up number of pages
-        pages.append(page + 1)
-
-    context = {
-        "pages": pages,  # amount of pages that need to be generated
-        "total_hits": total_hits,  # amount of search results
-        "current_page": page,  # page the user has selected
-        "submitted_search": query_dic["submitted_search"],
-        "query_str": query_dic["query_str"],
-        "simple_search_input": query_dic["simple_search_input"],
-        "ordered_dataset": data,  # ordered_dataset,
-        "alert": alert,
-    }
-    return context
