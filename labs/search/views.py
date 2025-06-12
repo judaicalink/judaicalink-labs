@@ -176,7 +176,7 @@ def search(request):
         "timeAllowed": 2000,
         "hl.simple.pre": "<b>",
         "hl.simple.post": "</b>",
-        "fl": "id,name,Alternatives,birthDate,birthLocation,deathDate,deathLocation,link",
+        "fl": "id,name,Alternatives,dataslug,birthDate,birthLocation,deathDate,deathLocation,link",
     }
 
     if fq_list:
