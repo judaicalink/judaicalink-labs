@@ -7,7 +7,7 @@ from rest_framework.schemas import openapi
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi as yasg_openapi
 from django.http import JsonResponse
-from search.views import search, advanced
+from search.views import search
 
 class SimpleSearchAPIView(APIView):
     renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
@@ -25,27 +25,6 @@ class SimpleSearchAPIView(APIView):
         if not query:
             return Response({'error': 'Missing query parameter ?q='}, status=400)
         results = search(request=request)
-
-        paginator = self.pagination_class()
-        paginated_results = paginator.paginate_queryset(results, request)
-        return paginator.get_paginated_response(paginated_results)
-
-
-class AdvancedSearchAPIView(APIView):
-    renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
-    pagination_class = LimitOffsetPagination
-
-    @swagger_auto_schema(
-        manual_parameters=[
-            yasg_openapi.Parameter('type', yasg_openapi.IN_QUERY, description="Filter by type facet", type=yasg_openapi.TYPE_STRING),
-            yasg_openapi.Parameter('author', yasg_openapi.IN_QUERY, description="Filter by author facet", type=yasg_openapi.TYPE_STRING),
-            yasg_openapi.Parameter('limit', yasg_openapi.IN_QUERY, description="Number of results", type=yasg_openapi.TYPE_INTEGER),
-            yasg_openapi.Parameter('offset', yasg_openapi.IN_QUERY, description="Pagination offset", type=yasg_openapi.TYPE_INTEGER),
-        ]
-    )
-    def get(self, request):
-        params = request.query_params
-        results = advanced(params)
 
         paginator = self.pagination_class()
         paginated_results = paginator.paginate_queryset(results, request)
