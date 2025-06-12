@@ -19,11 +19,11 @@
 
         <!-- Begin Alert -->
         {% if total_hits > 0 %}
-        <div class="alert alert-success">
+        <div class="alert alert-success text-center" role="alert">
             <p>Found {{ total_hits }} result(s) for query: <strong>{{ alert }}</strong>.</p>
         </div>
         {% else %}
-        <div class="alert alert-danger">
+        <div class="alert alert-danger text-center" role="alert">
             <strong>No results found.</strong>
         </div>
         {% endif %}
@@ -109,7 +109,7 @@
     <div class="col-md-0 col-lg-3 col-xl-4">
         <div id="picturemargintop30" class="img-fluid mt-4">
             <img alt="Judaicalink Knowledge Graph" class="img-thumbnail img-fluid"
-                 src="/static/img/judaicalink-knowledge-graph-compressed.webp">
+                 src="{% static 'img/judaicalink-knowledge-graph-compressed.webp' %}">
         </div>
 
         <!-- Begin Filter-->

@@ -1,290 +1,167 @@
 <template>
+  <v-form @submit.prevent="submitSearch">
+    <div v-for="(row, index) in rows" :key="index" class="mb-4">
+      <v-row align="center">
+        <v-col cols="12" md="2" v-if="index !== 0">
+          <v-select
+              :items="operatorItems"
+              item-value="value"
+              item-title="text"
+              v-model="row.selected_operator"
+              label="Operator"
+              dense
+              hide-details="auto"
+          />
 
-<form  method="get" action="search">
-    <input type="hidden" name="page" value="1">
-    <div v-for="(row, index) in rows" class="row">
+        </v-col>
 
-      <!--Operator-->
-      <div v-if="index <= 0" class="form-group col-2">
-        <!--Placeholder for missing Operators in first row-->
-      </div>
+        <v-col cols="12" md="3">
+          <v-select
+              :items="optionItems"
+              item-value="value"
+              item-title="text"
+              v-model="row.selected_option"
+              label="Field"
+              dense
+              hide-details="auto"
+          />
 
-      <div v-else class="form-group col-2">
-         <select v-model="row.selected_operator" class="form-select" :name="row.operator">
-          <option v-for="(operator) in row.other_operators" v-bind:value="operator.fieldname">{{operator.display}}</option>
-        </select>
-      </div>
+        </v-col>
 
-      <!--Option-->
-      <div class="form-group col-4">
-        <select v-model="row.selected_option" class="form-select" :name="row.option">
-          <option v-for="(option) in row.other_options" v-bind:value="option.fieldname">{{option.display}}</option>
-        </select>
-      </div>
-      <!--Input-->
-      <div class="form-group col-5">
-        <input v-model="row.submitted_input" type="text" :name="row.input" class="form-control">
-      </div>
-      <!--@click="removeElement(index);"-->
+        <v-col cols="12" md="6">
+          <v-text-field
+              v-model="row.submitted_input"
+              label="Search term"
+              placeholder="e.g. Einstein"
+              dense
+              hide-details="auto"
+          />
+        </v-col>
 
-      <div class="form-group col-1">
-          <span role="button" class="btn btn-danger text-white" @click="removeElement(index)"><i class="fas fa-trash"></i></span>
-      </div>
+        <v-col cols="12" md="1" v-if="index !== 0">
+          <v-btn icon color="error" @click="removeRow(index)">
+            <v-icon>mdi-delete</v-icon>
+          </v-btn>
+        </v-col>
+      </v-row>
     </div>
 
-    <div class="row">
-        <div class ="col-auto">
-            <span role="button" class="btn btn-primary search_button text-white" @click="addRow()"><i class="fas fa-plus"></i> Add</span>
-        </div>
-
-         <div class ="col-auto">
-             <span role="button" class="btn btn-danger text-white" @click="clearElements(); addRow(); addRow()">Clear all</span>
-         </div>
-
-        <div class ="col-md-3 ms-md-auto">
-            <button type="submit" class="btn btn-primary search_button float-right text-white"><i class="fas fa-search"></i> Search</button>
-        </div>
-    </div>
-</form>
+    <v-btn color="primary" @click="addRow">Add field</v-btn>
+    <v-btn color="success" type="submit" class="ml-2">Search</v-btn>
+  </v-form>
 </template>
-
 
 <script>
 export default {
-  // export the function and name it search
-  name : 'SearchApp',
-  delimiter: ['[[', ']]'],
-
-  // create empty data
+  name: 'SearchApp',
   data() {
     return {
       rows: [],
-      counter: 0,
+      operatorItems: [
+        {text: 'AND', value: ' AND '},
+        {text: 'OR', value: ' OR '},
+        {text: 'NOT', value: ' NOT '}
+      ],
+      optionItems: [
+        {text: 'Name', value: 'name:'},
+        {text: 'Alternatives', value: 'alternatives:'},
+        {text: 'Publication', value: 'publication:'},
+        {text: 'Birth Date', value: 'birthDate:'},
+        {text: 'Death Date', value: 'deathDate:'},
+        {text: 'Birth Location', value: 'birthLocation:'},
+        {text: 'Death Location', value: 'deathLocation:'}
+      ]
     };
   },
+  mounted() {
+    // 1. Try to parse Django-injected data
+    try {
+      const raw = this.$el.dataset.rows || 'null';
+      const loadedRows = JSON.parse(raw);
 
-  // define the methods
+      if (Array.isArray(loadedRows) && loadedRows.length > 0) {
+        this.rows = loadedRows.map((r, i) => ({
+          selected_operator: typeof r.selected_operator === 'string' ? r.selected_operator : (i === 0 ? '' : ' AND '),
+          selected_option: typeof r.selected_option === 'string' ? r.selected_option : 'name:',
+          submitted_input: r.submitted_input || ''
+        }));
+
+        return;
+      }
+    } catch (e) {
+      console.warn('Failed to parse rows from backend:', e);
+    }
+
+    // 2. If nothing loaded, try to parse q param
+    const q = new URLSearchParams(window.location.search).get('q');
+    if (q) {
+      const parsed = this.parseQueryToRows(q);
+      if (parsed.length > 0) {
+        this.rows = parsed;
+        return;
+      }
+    }
+
+    // 3. Default fallback
+    this.initializeDefaultRows();
+  },
   methods: {
-    returnData: function() {
-      try {
-        /* rows_data is defined in views.py and is passed on to search_result.html*/
-        //this.rows = rows_data;
-        this.rows = document.getElementById('rows').textContent;
-        this.rows = JSON.parse(JSON.parse(this.rows));
-        console.log(typeof this.rows);
-        console.log(this.rows);
-        // if the standard search is used we don't get values in rows_data
-        // need to throw an error so the standard rows will be generated
-        if (this.rows == null) {
-            this.rows = [];
-            throw new TypeError();
-            /* console.log(this.rows); */
-        }
-        return this.rows;
-      }
-          /* create 2 standard rows */
-      catch (error) {
-        this.rows = [
-          {
-            operator: "operator1",
-            option: "option1",
-            input: "input1",
-            selected_operator: " AND ",
-            other_operators: [
-              {
-                display: "AND",
-                fieldname: " AND "
-              },
-              {
-                display: "OR",
-                fieldname: " OR "
-              },
-              {
-                display: "NOT",
-                fieldname: " NOT "
-              }
-            ],
-            selected_option: "name:",
-            other_options: [
-              {
-                display: "Name",
-                fieldname: "name:"
-              },
-              {
-                display: "Alternatives",
-                fieldname: "Alternatives:"
-              },
-              {
-                display: "Publication",
-                fieldname: "Publication:"
-              },
-              {
-                display: "Birthdate",
-                fieldname: "birthDate:"
-              },
-              {
-                display: "Deathdate",
-                fieldname: "deathDate:"
-              },
-              {
-                display: "Birthlocation",
-                fieldname: "birthLocation:"
-              },
-              {
-                display: "Deathlocation",
-                fieldname: "deathLocation:"
-              }
-            ],
-            submitted_input: "",
-          },
-          {
-            operator: "operator2",
-            option: "option2",
-            input: "input2",
-            selected_operator: " AND ",
-            other_operators: [
-              {
-                display: "AND",
-                fieldname: " AND "
-              },
-              {
-                display: "OR",
-                fieldname: " OR "
-              },
-              {
-                display: "NOT",
-                fieldname: " NOT "
-              }
-            ],
-            selected_option: "name:",
-            other_options: [
-              {
-                display: "Name",
-                fieldname: "name:"
-              },
-              {
-                display: "Alternatives",
-                fieldname: "Alternatives:"
-              },
-              {
-                display: "Publication",
-                fieldname: "Publication:"
-              },
-              {
-                display: "Birthdate",
-                fieldname: "birthDate:"
-              },
-              {
-                display: "Deathdate",
-                fieldname: "deathDate:"
-              },
-              {
-                display: "Birthlocation",
-                fieldname: "birthLocation:"
-              },
-              {
-                display: "Deathlocation",
-                fieldname: "deathLocation:"
-              }
-            ],
-            submitted_input: "",
-          }
-        ];
-        /* console.log(error);
-        console.log("We have no data! - therefore 2 standard rows"); */
-        return this.rows;
-      }
-
+    initializeDefaultRows() {
+      this.rows = [
+        {selected_operator: '', selected_option: 'name:', submitted_input: ''},
+        {selected_operator: ' AND ', selected_option: 'name:', submitted_input: ''}
+      ];
     },
-
-    // remove function addRow
-    addRow: function () {
-      this.elem = document.createElement('div');
-
-      /*creating the distinct names for input and select fields
-                    when the "addRow"-function is activated
-                    and increasing the value of the counter accordingly*/
+    addRow() {
       this.rows.push({
-        operator: `operator${++this.counter}`,
-        option: `option${this.counter}`,
-        input: `input${this.counter}`,
-        selected_operator: " AND ",
-        other_operators: [
-          {
-            display: "AND",
-            fieldname: " AND "
-          },
-          {
-            display: "OR",
-            fieldname: " OR "
-          },
-          {
-            display: "NOT",
-            fieldname: " NOT "
-          }
-        ],
-        selected_option: "name:",
-        other_options: [
-          {
-            display: "Name",
-            fieldname: "name:"
-          },
-          {
-            display: "Alternatives",
-            fieldname: "Alternatives:"
-          },
-          {
-            display: "Publication",
-            fieldname: "Publication:"
-          },
-          {
-            display: "Birthdate",
-            fieldname: "birthDate:"
-          },
-          {
-            display: "Deathdate",
-            fieldname: "deathDate:"
-          },
-          {
-            display: "Birthlocation",
-            fieldname: "birthLocation:"
-          },
-          {
-            display: "Deathlocation",
-            fieldname: "deathLocation:"
-          }
-        ],
-        submitted_input: "",
+        selected_operator: ' AND ',
+        selected_option: 'name:',
+        submitted_input: ''
       });
     },
-
-    //create function removeElement
-    removeElement: function (index) {
-      this.rows.splice(index, 1);
+    removeRow(index) {
+      if (index > 0) this.rows.splice(index, 1);
     },
+    parseQueryToRows(qstring) {
+      const parts = qstring.split(/( AND | OR | NOT )/);
+      const rows = [];
 
-    // create function clearElements
-    clearElements: function (index) {
-      this.rows.splice(0);
+      for (let i = 0; i < parts.length; i++) {
+        const part = parts[i].trim();
+        if (['AND', 'OR', 'NOT'].includes(part)) continue;
 
+        const match = part.match(/^(\w+):(.+)$/);
+        if (!match) continue;
+
+        const field = match[1] + ':';
+        const value = match[2].trim();
+        const operator = i > 0 ? parts[i - 1].trim() : '';
+
+        rows.push({
+          selected_operator: operator ? ` ${operator} ` : '',
+          selected_option: field,
+          submitted_input: value
+        });
+      }
+
+      return rows;
     },
+    submitSearch() {
+      const validRows = this.rows.filter(row => row.submitted_input?.trim());
 
-  },
-  // when the app is mounted make these functions available
-  mounted() {
+      if (validRows.length === 0) {
+        alert('Please enter at least one search term.');
+        return;
+      }
 
-    this.returnData();
-    this.addRow();
-    this.removeElement();
-    this.clearElements();
-    this.rows = this.returnData();
-    this.counter = (typeof (this.returnData()) !== 'undefined') ? this.returnData(2).length : 0;
+      const queryParts = validRows.map((row, index) => {
+        const prefix = index === 0 ? '' : row.selected_operator || ' AND ';
+        return `${prefix}${row.selected_option}${row.submitted_input.trim()}`;
+      });
+
+      const q = encodeURIComponent(queryParts.join(' '));
+      window.location.href = `/search/search?page=1&q=${q}`;
+    }
   }
 };
-
 </script>
-
-
-<style>
-
-</style>

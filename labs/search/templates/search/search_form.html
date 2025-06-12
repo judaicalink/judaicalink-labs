@@ -1,39 +1,43 @@
-<div id="accordion">
+<div id="accordion" class="mb-5">
     <!-- Begin Simple Search -->
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-        <form method="get" action="{% url 'search:search' %}">
-            <div class="col-xs-6">
-                <input type="hidden" name="page" value="1">
-                <div class="input-group">
-                    <input class="form-control" type="text" name="input0" value="{{ simple_search_input }}"
-                           placeholder="Search...">
-                    <div class="input-group-btn">
-                        <button type="submit" class="btn btn-primary search_button text-white"><i
-                                class="fas fa-search"></i></button>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingSimple">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseSimple" aria-expanded="true" aria-controls="collapseSimple">
+                Simple Search
+            </button>
+        </h2>
+        <div id="collapseSimple" class="accordion-collapse collapse show" aria-labelledby="headingSimple"
+             data-bs-parent="#accordion">
+            <div class="accordion-body">
+                <form method="get" action="{% url 'search:search' %}">
+                    <div class="col-xs-6">
+                        <div class="input-group">
+                            <input class="form-control" type="text" name="q" value="{{ simple_search_input }}"
+                                   placeholder="Search...">
+                            <button type="submit" class="btn btn-primary search_button text-white">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </form>
-    </div>
-    <!-- End Simple Search -->
-
-    <!-- Begin Advanced Search -->
-    <div id="headingOne">
-        <button id="buttonadvancedsearch" type="button" class="btn btn-link" data-bs-toggle="collapse"
-                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color:#0056b3">
-            Advanced Search
-        </button>
-    </div>
-
-    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-        <div class="card">
-            <div class="card-body">
-                <div id="search-app">
-
-                </div>
+                </form>
             </div>
         </div>
     </div>
 
-</div> <!--close accordion div-->
-<!-- End Advanced Search -->
+    <!-- Begin Advanced Search -->
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingAdvanced">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseAdvanced" aria-expanded="false" aria-controls="collapseAdvanced">
+                Advanced Search
+            </button>
+        </h2>
+        <div id="collapseAdvanced" class="accordion-collapse collapse" aria-labelledby="headingAdvanced"
+             data-bs-parent="#accordion">
+            <div class="accordion-body">
+                <div id="search-app" data-rows='{{ rows|safe }}'></div> <!-- Vue-Component -->
+            </div>
+        </div>
+    </div>
+</div>

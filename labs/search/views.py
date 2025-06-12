@@ -15,17 +15,15 @@ from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.core.mail import send_mail
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.cache import cache_page
 
 # see labs/urls.py def index to access root with http://localhost:8000
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 # import SEARCH_URL from settings.py
-SOLR_SERVER = settings.SOLR_SERVER
-JUDAICALINK_INDEX = settings.JUDAICALINK_INDEX
-SOLR_SERVER = SOLR_SERVER.rstrip('/')
-JUDAICALINK_INDEX = JUDAICALINK_INDEX.lstrip('/')
+SOLR_SERVER = settings.SOLR_SERVER.rstrip('/')
+JUDAICALINK_INDEX = settings.JUDAICALINK_INDEX.lstrip('/')
 
 # setup logging
 logger = logging.getLogger('labs')
@@ -63,6 +61,7 @@ def index(request):
 def search_index(request):
     """
     Renders the search index page.
+    This page serves as the entry point for the search functionality.
     """
     context = {
         'debug': settings.DEBUG,
@@ -84,6 +83,12 @@ def all_search_nav(request):
 
 # Formats the results for display
 def format_results(docs, highlighting):
+    """
+    Formats the search results for display in the search results page.
+    :param docs: List of documents returned from Solr.
+    :param highlighting: Dictionary containing highlighted fields for each document.
+    :return: List of formatted results.
+    """
     formatted = []
     for doc in docs:
         logger.debug(doc)
@@ -129,8 +134,19 @@ def format_results(docs, highlighting):
 
 # Search results page
 def search(request):
+    """
+    Handles the search request, constructs the query, and retrieves results from Solr.
+    This function processes both simple and advanced search queries.
+    :param request: The HTTP request object containing search parameters.
+    :return: Rendered search results page with formatted results and pagination.
+    """
     logger.debug("Searching...")
+    if 'page' not in request.GET:
+        params = request.GET.copy()
+        params['page'] = '1'
+        return redirect(f"{request.path}?{params.urlencode()}")
     query = build_advanced_query(request)
+    search_term = request.GET.get("q", "").strip()
     logger.debug(f"Constructed Query: {query}")
     alert = None
 
@@ -151,6 +167,7 @@ def search(request):
         "wt": "json",
         "hl": "true",
         "hl.fl": "*",
+        "timeAllowed": 2000,
         "hl.simple.pre": "<mark>",
         "hl.simple.post": "</mark>",
     }
@@ -171,7 +188,7 @@ def search(request):
     formatted_results = format_results(response.docs, highlighting)
 
     # Alert for display
-    alert = query if "AND" in query or "OR" in query or "NOT" in query else query.split(":")[-1]
+    alert = search_term if search_term else "All results"
     query = query.replace("text:", "")
     query = query.replace("*:*", "")
     query = query.replace("*", "")
@@ -192,35 +209,58 @@ def search(request):
         'current_page': page,
         'pages': pages,
         'sort_order': sort_order,
-        'simple_search_input': query,
+        'simple_search_input': search_term,
     }
     return render(request, 'search/search_result.html', context)
 
 
-# Build advanced query
+def escape_query_chars(s: str) -> str:
+    """
+    Escape Lucene special characters so they don’t break your simple-term searches.
+    """
+    lucene_specials = r'+-!():^[]\"{}~*?|&\\/'
+    return ''.join(f'\\{c}' if c in lucene_specials else c for c in s)
+
 def build_advanced_query(request):
-    query_parts = []
-    simple_search = request.GET.get("input0", "").strip()
+    """
+    Build a Solr query from ?q=… that:
+      • If empty => returns "*:*"
+      • If it contains ":", AND/OR/NOT, quotes or parentheses => passes it through raw
+      • If it contains * or ? => OR‘s that wildcard across all fields
+      • Otherwise => escapes the term and OR‘s it across all fields
+      • Includes birthDate/deathDate when q looks like YYYY or YYYY-MM or YYYY-MM-DD
+    """
+    raw = request.GET.get("q", "").strip()
+    # strip out any stray HTML brackets
+    raw = re.sub(r"[<>]", "", raw)
 
-    # Sanitize input to prevent XSS and injection
-    simple_search = re.sub(r'[<>]', '', simple_search)
+    # 1) empty => match everything
+    if not raw:
+        return "*:*"
 
-    # Handle complex queries in simple search
-    if simple_search:
-        if ":" in simple_search or any(op in simple_search for op in ["AND", "OR", "NOT"]):
-            # Complex query: validate and return as-is
-            return simple_search
-        else:
-            # Simple terms: add 'text:' around operators
-            terms = re.split(r"(AND|OR|NOT)", simple_search)
-            sanitized_terms = [
-                f"text:{term.strip()}" if term.strip() not in ["AND", "OR", "NOT"] else term.strip()
-                for term in terms
-            ]
-            return " ".join(sanitized_terms)
+    # 2) collect your searchable fields
+    # TODO: add Abstract, Publication and write all of them lowercase
+    fields = ["name", "Alternatives", "birthLocation", "deathLocation", "link"]
+    if re.match(r"^\d{4}(-\d{2}){0,2}$", raw):
+        fields += ["birthDate", "deathDate"]
 
-    # Default case: return all results
-    return "*:*"
+    # 3) advanced syntax: field:value, boolean, phrase or parens => hand off raw
+    if (
+        ":" in raw
+        or re.search(r"\b(AND|OR|NOT)\b", raw, re.IGNORECASE)
+        or '"' in raw
+        or "(" in raw
+        or ")" in raw
+    ):
+        return raw
+
+    # 4) wildcard queries (“Ham*” or “?atz”) => search each field with that wildcard
+    if "*" in raw or "?" in raw:
+        return " OR ".join(f"{f}:{raw}" for f in fields)
+
+    # 5) simple term => escape special chars and OR across all fields
+    safe = escape_query_chars(raw)
+    return " OR ".join(f"{f}:{safe}" for f in fields)
 
 
 # Create query string
@@ -231,25 +271,37 @@ def create_query_str(submitted_search):
     :return: query_dic: dictionary with query strings
     """
 
-    query_str = ""
+    query_parts = []
     simple_search_input = ""
-    for dictionary in submitted_search:
-        for entry in dictionary:
-            query_str = query_str + dictionary[entry]
 
-    if query_str.startswith((" AND ", " OR ", " NOT ")):
-        query_str = query_str.strip(" AND OR NOT ")
+    for part in submitted_search:
+        # Skip parts without input or option
+        if not part.get("input"):
+            continue
 
-    # check if it's the simple search and if something was submitted
-    if "option" not in submitted_search[0] and submitted_search != [{'input': 'error_nothing_submitted'}]:
+        option = part.get("option", "text:")
+        input_value = part["input"].strip()
+        operator = part.get("operator", "").strip()
+
+        if not input_value:
+            continue
+
+        # append query part with operator
+        query_part = f"{operator} {option}{input_value}" if operator else f"{option}{input_value}"
+        query_parts.append(query_part)
+
+    # Build final query string
+    query_str = " ".join(query_parts).strip()
+
+    # Simple input if no options
+    if "option" not in submitted_search[0]:
         simple_search_input = query_str
 
     query_dic = {
-        "simple_search_input": simple_search_input.strip(),
-        "query_str": query_str.strip(),
+        "simple_search_input": simple_search_input,
+        "query_str": query_str,
         "submitted_search": submitted_search,
     }
-
     return query_dic
 
 
@@ -257,6 +309,8 @@ def create_query_str(submitted_search):
 def advanced(request):
     """
     Renders the advanced search form.
+    :param request: The HTTP request object.
+    :return: Rendered advanced search page with the form and any existing search parameters.
     """
     if request.GET.get('paging') is not None:
         # search query gets processed by solr again, but this time with the corresponding page
@@ -359,14 +413,6 @@ def get_query(request):
     submitted_search = [{'option': 'name:', 'input': 'Anders'}, {'operator': ' AND ', 'option': 'name:', 'input': ''}]
     logger.debug(submitted_search)
 
-    cleared_submitted_search = submitted_search.copy()
-    for dictionary in submitted_search:
-        for entry in dictionary:
-            if dictionary[entry] is None or dictionary[entry] == "":
-                cleared_submitted_search.remove(dictionary)
-                break
-
-    submitted_search = cleared_submitted_search
     return submitted_search
 
 
@@ -519,8 +565,8 @@ def process_query(query_dic, page, alert):
 
         solr = pysolr.Solr(SOLR_SERVER + JUDAICALINK_INDEX, always_commit=True, timeout=10,
                            auth=(settings.SOLR_USER, settings.SOLR_PASSWORD))
-        size = 10
-        start = (page - 1) * size
+        rows_per_page = 10
+        start = (page - 1) * rows_per_page
         query_str = query_dic["query_str"]
         logger.debug("Query: " + query_str)
 
@@ -531,10 +577,10 @@ def process_query(query_dic, page, alert):
         fields = ['name', 'birthDate', 'birthLocation', 'alternatives', 'deathDate', 'deathLocation',
                   'dataslug', "Abstract", "id"]
 
-        solr_query = "\n".join(f"{field}:{query_str}" for field in fields)
+        solr_query = query_str
 
-        # build the body for solr
-        body = {
+        # build the parameters for solr
+        solr_params = {
             "hl": "true",
             "indent": "true",
             'fl': ','.join(fields),
@@ -543,14 +589,15 @@ def process_query(query_dic, page, alert):
             "hl.tag.post": "</strong>",
             "hl.fragsize": "0",
             "start": start,
+            "timeAllowed": 2000,
             "q.op": "OR",
             "hl.fl": ','.join(highlight_fields),
-            "rows": size,
+            "rows": rows_per_page,
             "useParams": ""
         }
 
         # Perform the query with highlighting
-        result = solr.search(q=solr_query, search_handler="/select", **body)
+        result = solr.search(q=solr_query, search_handler="/select", **solr_params)
         # Debug
         logger.debug("Result: ")
         logger.debug(result.hits)
@@ -600,7 +647,7 @@ def process_query(query_dic, page, alert):
 
     total_hits = result.hits
     pages = []
-    for page in range(0, math.ceil(total_hits / size)):
+    for page in range(0, math.ceil(total_hits / rows_per_page)):
         # number of needed pages for paging
         # round up number of pages
         pages.append(page + 1)
