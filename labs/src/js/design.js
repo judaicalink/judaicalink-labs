@@ -1,9 +1,3 @@
-/*-------------HAMBURGER-MENU-BUTTON------------------*/
-
-$('#sidebarCollapse').click(function () {
-    $('#sidebarCollapse > svg').toggleClass('fa-bars fa-xmark')
-});
-
 /*------------Sidebar active page highlighting---------------*/
 
 $(document).ready(function ($) {
