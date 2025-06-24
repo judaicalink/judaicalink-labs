@@ -177,7 +177,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = "/static/"
+STATIC_URL = env('STATIC_URL', default=os.path.join(BASE_DIR, "/static"))
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "src"),  # Original static sources
@@ -185,6 +185,9 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = env('STATIC_ROOT', default=os.path.join(BASE_DIR, "staticfiles"))
+
+MEDIA_ROOT = env('MEDIA_ROOT', default=os.path.join(BASE_DIR, "media"))
+MEDIA_URL = env('MEDIA_URL', default=os.path.join(BASE_DIR, "/media/"))
 
 # Logging
 logfile = env('LOGFILE', default=os.path.join(BASE_DIR, 'logs/labs.log'))
