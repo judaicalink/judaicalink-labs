@@ -25,8 +25,8 @@ module.exports = {
         sourceMapFilename: 'js/[name].[contenthash].js.map',
     },
     mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
-    //devtool: process.env.NODE_ENV === 'development' ? 'eval-source-map' : false,
-    devtool: false,
+    devtool: process.env.NODE_ENV === 'development' ? 'eval-source-map' : false,
+    //devtool: false,
     module: {
         rules: [
             {

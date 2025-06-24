@@ -1,6 +1,7 @@
 {% load static %}
 {% load cookiebanner %}
 {% load render_bundle from webpack_loader %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +18,6 @@
     {% render_bundle 'styles' 'css' %}
     {% render_bundle 'bootstrap' %}
     {% render_bundle 'autocomplete' %}
-    {% render_bundle 'app' 'js' %}
 
     {% block header_scripts %}{% endblock %}
 
@@ -29,8 +29,8 @@
 
 <div class="container-fluid">
 
-    <div class="col-3">
-        {% include "search/partials/sidebar.html" %}
+    <div class="col-12 col-md-3 p-0">
+      {% include "search/partials/sidebar.html" %}
     </div>
 
     <div id="content" class="col-9">
@@ -75,8 +75,7 @@
 
 {% endblock %}
 
-
-
+{% render_bundle 'app' %}
 
 {% cookie_accepted 'analytics' as cookie_analytics %}
 
@@ -100,17 +99,6 @@
 </script>
 <!-- End Matomo Code -->
 {% endif %}
-{% if debug %}
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        if (typeof bootstrap !== 'undefined') {
-            console.log('Bootstrap is available');
-        } else {
-            console.error('Bootstrap is not defined');
-        }
-    });
-</script>
 
-{% endif %}
 </body>
 </html>

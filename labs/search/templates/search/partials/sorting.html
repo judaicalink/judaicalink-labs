@@ -1,0 +1,16 @@
+{% if total_hits %}
+  <div>
+    <a
+      class="btn btn-link {% if sort_order == 'asc' %}fw-bold{% endif %}"
+      href="?page={{ current_page }}&q={{ search_input }}&sort=asc"
+    >
+      Sort A–Z
+    </a>
+    <a
+      class="btn btn-link {% if sort_order == 'desc' %}fw-bold{% endif %}"
+      href="?page={{ current_page }}&q={{ search_input }}&sort=desc"
+    >
+      Sort Z–A
+    </a>
+  </div>
+{% endif %}

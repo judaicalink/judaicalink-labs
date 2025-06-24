@@ -59,10 +59,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'channels',
     'core',
-    'backend.apps.BackendConfig',
+    'api',
+    'backend',
+    #'backend.apps.BackendConfig',
     'search',
     'cm_search',
     'cm_e_search',
+    'contact',
     'lodjango',
     'dashboard',
     'data',
@@ -82,7 +85,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    #'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -398,4 +401,4 @@ WEBPACK_LOADER = {
     }
 }
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+#STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"

@@ -19,41 +19,22 @@
 
         <!-- Begin Alert -->
         {% if total_hits > 0 %}
-        <div class="alert alert-success">
-            <p>Found {{ total_hits }} result(s) for query: <strong>{{ alert }}</strong>.</p>
+        <div class="alert alert-success text-center" role="alert">
+            <p>Found {{ total_hits }} result(s) for query: <strong>{{ search_input }}</strong>.</p>
         </div>
         {% else %}
-        <div class="alert alert-danger">
-            <strong>No results found.</strong>
+        <div class="alert alert-danger text-center" role="alert">
+            <strong>No results found. {% if search_input is "" %} {{alert}} {% endif %}</strong>
         </div>
         {% endif %}
         <!-- End Alert -->
 
         <!-- Begin Sorting -->
-        {% if total_hits > 0 %}
-        <div>
-            {% if sort_order == "asc" %}
-            <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=asc"><strong>Sort
-                A-Z</strong></a>
-            <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=desc">Sort
-                Z-A</a>
-            {% elif sort_order == "desc" %}
-            <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=asc">Sort
-                A-Z</a>
-            <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=desc"><strong>Sort
-                Z-A</strong></a>
-            {% else %}
-            <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=asc">Sort
-                A-Z</a>
-            <a class="btn btn-link" href="?page={{ current_page }}&input0={{ simple_search_input }}&sort=desc">Sort
-                Z-A</a>
-            {% endif %}
-        </div>
-        {% endif %}
+        {% include 'search/partials/sorting.html' %}
         <!-- End Sorting -->
 
         <!-- Begin Results-->
-        <div class="table-responsive mb-3">
+        <div class="table-responsive mb-3" style="overflow-y: auto;">
             <table class="table table-light table-striped">
                 {% for result in ordered_dataset %}
                 <tr>
@@ -109,7 +90,7 @@
     <div class="col-md-0 col-lg-3 col-xl-4">
         <div id="picturemargintop30" class="img-fluid mt-4">
             <img alt="Judaicalink Knowledge Graph" class="img-thumbnail img-fluid"
-                 src="/static/img/judaicalink-knowledge-graph-compressed.webp">
+                 src="{% static 'img/judaicalink-knowledge-graph-compressed.webp' %}">
         </div>
 
         <!-- Begin Filter-->
