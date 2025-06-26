@@ -15,9 +15,10 @@
 
     <link rel="icon" href="{% static 'img/favicon.ico' %}">
 
-    {% render_bundle 'styles' 'css' %}
-    {% render_bundle 'bootstrap' %}
-    {% render_bundle 'autocomplete' %}
+    <script type="module" src="{% static 'js/bootstrap.js' %}"></script>
+    <script type="module" src="{% static 'js/autocomplete.js' %}"></script>
+    <script type="module" src="{% static 'js/app.js' %}"></script>
+
 
     {% block header_scripts %}{% endblock %}
 
@@ -30,7 +31,7 @@
 <div class="container-fluid">
 
     <div class="col-12 col-md-3 p-0">
-      {% include "search/partials/sidebar.html" %}
+        {% include "search/partials/sidebar.html" %}
     </div>
 
     <div id="content" class="col-9">
