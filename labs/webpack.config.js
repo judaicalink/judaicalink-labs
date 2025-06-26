@@ -4,10 +4,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-const { VueLoaderPlugin } = require('vue-loader');
+const {VueLoaderPlugin} = require('vue-loader');
 const webpack = require('webpack');
 const BundleTracker = require('webpack-bundle-tracker');
-
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 
 module.exports = {
@@ -31,6 +31,11 @@ module.exports = {
             {
                 test: /\.vue$/,
                 loader: 'vue-loader',
+            },
+            {
+                enforce: 'pre',
+                test: /\.js$/,
+                use: ['source-map-loader'],
             },
             {
                 test: /\.js$/,
@@ -74,7 +79,7 @@ module.exports = {
             __VUE_PROD_DEVTOOLS__: false,
             __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false, // usually fine
         }),
-        new BundleTracker({ path: __dirname, filename: 'webpack-stats.json' }),
+        new BundleTracker({path: __dirname, filename: 'webpack-stats.json'}),
         new MiniCssExtractPlugin({
             filename: 'css/[name].[contenthash].css', // Output CSS to static/css/
         }),
@@ -91,6 +96,12 @@ module.exports = {
             'window.jQuery': 'jquery',
             'window.$': 'jquery',
             Popper: ['@popperjs/core', 'default'],
+        }),
+        new CopyWebpackPlugin({
+            patterns: [{
+                from: path.resolve(__dirname, 'node_modules/@popperjs/core/dist/umd/popper.min.js.map'),
+                    to: 'js'
+            }]
         }),
     ],
     resolve: {
