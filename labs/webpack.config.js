@@ -100,8 +100,13 @@ module.exports = {
         new CopyWebpackPlugin({
             patterns: [{
                 from: path.resolve(__dirname, 'node_modules/@popperjs/core/dist/umd/popper.min.js.map'),
+                to: 'js'
+            },
+                {
+                    from: path.resolve(__dirname, 'node_modules/bootstrap/dist/js/bootstrap.min.js.map'),
                     to: 'js'
-            }]
+                }
+            ]
         }),
     ],
     resolve: {
