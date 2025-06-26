@@ -73,6 +73,7 @@
     "sass": "^1.85.0",
     "sass-loader": "^13.3.3",
     "style-loader": "^3.3.4",
+    "source-map-loader": "^3.0.2",
     "vue-loader": "^17.4.2",
     "vue-template-compiler": "^2.7.16",
     "webpack": "^5.98.0",
