@@ -12,7 +12,6 @@ certifi==2024.7.4
 cffi==1.15.1
 channels==4.2.2
 charset-normalizer==2.1.1
-constantly==15.1.0
 crispy-bootstrap5==0.7
 cryptography==44.0.3
 cssselect==1.2.0
@@ -74,12 +73,9 @@ packaging==21.3
 pandas==1.5.0
 parsel==1.10.0
 pillow==10.3.0
-powerline-status==2.7
 propcache==0.3.2
 Protego==0.4.0
 psycopg2-binary==2.9.10
-pyasn1==0.4.8
-pyasn1-modules==0.2.8
 pycparser==2.21
 PyDispatcher==2.0.7
 Pygments==2.15.0
@@ -121,5 +117,3 @@ w3lib==2.3.1
 whitenoise==6.9.0
 wrapt==1.14.1
 yarl==1.20.1
-zipp==3.19.1
-zope.interface==5.5.0
