@@ -184,8 +184,8 @@ USE_TZ = True
 STATIC_URL = env('STATIC_URL', default=os.path.join(BASE_DIR, "static/"))
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "src"),  # Original static sources
     os.path.join(BASE_DIR, "build"),  # Webpack build output
+    os.path.join(BASE_DIR, "src"),  # Original static sources
 ]
 
 STATIC_ROOT = env('STATIC_ROOT', default=os.path.join(BASE_DIR, "staticfiles"))
