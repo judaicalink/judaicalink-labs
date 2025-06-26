@@ -37,7 +37,7 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
+        test: /\.(png|jpe?g|gif|svg|ico)$/i,
         type: 'asset/resource',
         generator: { filename: 'img/[name][ext]' },
       },
@@ -78,6 +78,10 @@ module.exports = {
         {
           from: path.resolve(__dirname, 'node_modules/bootstrap/dist/css/bootstrap.min.css.map'),
           to: 'core/css',
+        },
+        {
+          from: path.resolve(__dirname, 'src/img/**/*'),
+          to: 'img',
         },
       ],
     }),

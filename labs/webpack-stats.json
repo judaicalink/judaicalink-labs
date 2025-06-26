@@ -3,473 +3,158 @@
   "assets": {
     "433897008be52565db54.webp": {
       "name": "433897008be52565db54.webp",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/433897008be52565db54.webp",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/433897008be52565db54.webp",
       "publicPath": "/static/433897008be52565db54.webp",
       "sourceFilename": "src/img/backgroundtransparent.webp"
     },
-    "css/app.e1390f95fabd5d4ab579.css": {
-      "name": "css/app.e1390f95fabd5d4ab579.css",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/app.e1390f95fabd5d4ab579.css",
-      "publicPath": "/static/css/app.e1390f95fabd5d4ab579.css"
-    },
-    "css/autocomplete.39897af8ba82cb93153b.css": {
-      "name": "css/autocomplete.39897af8ba82cb93153b.css",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/autocomplete.39897af8ba82cb93153b.css",
-      "publicPath": "/static/css/autocomplete.39897af8ba82cb93153b.css"
-    },
-    "css/styles-src_scss_app_scss-c4b4af01.a83cfb3c43a6fbad2995.css": {
-      "name": "css/styles-src_scss_app_scss-c4b4af01.a83cfb3c43a6fbad2995.css",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/styles-src_scss_app_scss-c4b4af01.a83cfb3c43a6fbad2995.css",
-      "publicPath": "/static/css/styles-src_scss_app_scss-c4b4af01.a83cfb3c43a6fbad2995.css"
-    },
-    "css/styles-src_scss_app_scss-c4b4af01.a83cfb3c43a6fbad2995.css.gz": {
-      "name": "css/styles-src_scss_app_scss-c4b4af01.a83cfb3c43a6fbad2995.css.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/styles-src_scss_app_scss-c4b4af01.a83cfb3c43a6fbad2995.css.gz",
-      "publicPath": "/static/css/styles-src_scss_app_scss-c4b4af01.a83cfb3c43a6fbad2995.css.gz"
-    },
-    "css/vendors-node_modules_malihu-custom-scrollbar-plugin_jquery_mCustomScrollbar_css-node_modules_-502668.483cc9cfa0076885ec24.css": {
-      "name": "css/vendors-node_modules_malihu-custom-scrollbar-plugin_jquery_mCustomScrollbar_css-node_modules_-502668.483cc9cfa0076885ec24.css",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/vendors-node_modules_malihu-custom-scrollbar-plugin_jquery_mCustomScrollbar_css-node_modules_-502668.483cc9cfa0076885ec24.css",
-      "publicPath": "/static/css/vendors-node_modules_malihu-custom-scrollbar-plugin_jquery_mCustomScrollbar_css-node_modules_-502668.483cc9cfa0076885ec24.css"
-    },
-    "css/vendors-node_modules_malihu-custom-scrollbar-plugin_jquery_mCustomScrollbar_css-node_modules_-502668.483cc9cfa0076885ec24.css.gz": {
-      "name": "css/vendors-node_modules_malihu-custom-scrollbar-plugin_jquery_mCustomScrollbar_css-node_modules_-502668.483cc9cfa0076885ec24.css.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/vendors-node_modules_malihu-custom-scrollbar-plugin_jquery_mCustomScrollbar_css-node_modules_-502668.483cc9cfa0076885ec24.css.gz",
-      "publicPath": "/static/css/vendors-node_modules_malihu-custom-scrollbar-plugin_jquery_mCustomScrollbar_css-node_modules_-502668.483cc9cfa0076885ec24.css.gz"
-    },
-    "css/vendors-node_modules_vuetify_lib_components_VAlert_index_js-node_modules_vuetify_lib_componen-c07367.383ddbd55a81f3ab14d4.css": {
-      "name": "css/vendors-node_modules_vuetify_lib_components_VAlert_index_js-node_modules_vuetify_lib_componen-c07367.383ddbd55a81f3ab14d4.css",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/vendors-node_modules_vuetify_lib_components_VAlert_index_js-node_modules_vuetify_lib_componen-c07367.383ddbd55a81f3ab14d4.css",
-      "publicPath": "/static/css/vendors-node_modules_vuetify_lib_components_VAlert_index_js-node_modules_vuetify_lib_componen-c07367.383ddbd55a81f3ab14d4.css"
-    },
-    "css/vendors-node_modules_vuetify_lib_components_VAlert_index_js-node_modules_vuetify_lib_componen-c07367.383ddbd55a81f3ab14d4.css.gz": {
-      "name": "css/vendors-node_modules_vuetify_lib_components_VAlert_index_js-node_modules_vuetify_lib_componen-c07367.383ddbd55a81f3ab14d4.css.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/vendors-node_modules_vuetify_lib_components_VAlert_index_js-node_modules_vuetify_lib_componen-c07367.383ddbd55a81f3ab14d4.css.gz",
-      "publicPath": "/static/css/vendors-node_modules_vuetify_lib_components_VAlert_index_js-node_modules_vuetify_lib_componen-c07367.383ddbd55a81f3ab14d4.css.gz"
-    },
-    "css/vendors-node_modules_vuetify_lib_components_VDataIterator_index_js-node_modules_vuetify_lib_c-d5731f.0f6afc752ba4b2cf9c86.css": {
-      "name": "css/vendors-node_modules_vuetify_lib_components_VDataIterator_index_js-node_modules_vuetify_lib_c-d5731f.0f6afc752ba4b2cf9c86.css",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/vendors-node_modules_vuetify_lib_components_VDataIterator_index_js-node_modules_vuetify_lib_c-d5731f.0f6afc752ba4b2cf9c86.css",
-      "publicPath": "/static/css/vendors-node_modules_vuetify_lib_components_VDataIterator_index_js-node_modules_vuetify_lib_c-d5731f.0f6afc752ba4b2cf9c86.css"
-    },
-    "css/vendors-node_modules_vuetify_lib_components_VDataIterator_index_js-node_modules_vuetify_lib_c-d5731f.0f6afc752ba4b2cf9c86.css.gz": {
-      "name": "css/vendors-node_modules_vuetify_lib_components_VDataIterator_index_js-node_modules_vuetify_lib_c-d5731f.0f6afc752ba4b2cf9c86.css.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/vendors-node_modules_vuetify_lib_components_VDataIterator_index_js-node_modules_vuetify_lib_c-d5731f.0f6afc752ba4b2cf9c86.css.gz",
-      "publicPath": "/static/css/vendors-node_modules_vuetify_lib_components_VDataIterator_index_js-node_modules_vuetify_lib_c-d5731f.0f6afc752ba4b2cf9c86.css.gz"
-    },
-    "css/vendors-node_modules_vuetify_lib_components_VFab_index_js-node_modules_vuetify_lib_components-4e4f05.d18e666df4d58c76a9e8.css": {
-      "name": "css/vendors-node_modules_vuetify_lib_components_VFab_index_js-node_modules_vuetify_lib_components-4e4f05.d18e666df4d58c76a9e8.css",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/vendors-node_modules_vuetify_lib_components_VFab_index_js-node_modules_vuetify_lib_components-4e4f05.d18e666df4d58c76a9e8.css",
-      "publicPath": "/static/css/vendors-node_modules_vuetify_lib_components_VFab_index_js-node_modules_vuetify_lib_components-4e4f05.d18e666df4d58c76a9e8.css"
-    },
-    "css/vendors-node_modules_vuetify_lib_components_VFab_index_js-node_modules_vuetify_lib_components-4e4f05.d18e666df4d58c76a9e8.css.gz": {
-      "name": "css/vendors-node_modules_vuetify_lib_components_VFab_index_js-node_modules_vuetify_lib_components-4e4f05.d18e666df4d58c76a9e8.css.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/vendors-node_modules_vuetify_lib_components_VFab_index_js-node_modules_vuetify_lib_components-4e4f05.d18e666df4d58c76a9e8.css.gz",
-      "publicPath": "/static/css/vendors-node_modules_vuetify_lib_components_VFab_index_js-node_modules_vuetify_lib_components-4e4f05.d18e666df4d58c76a9e8.css.gz"
-    },
-    "css/vendors-node_modules_vuetify_lib_components_VGrid_index_js-node_modules_vuetify_lib_component-9b8af7.6a02007f528f70e7e7ae.css": {
-      "name": "css/vendors-node_modules_vuetify_lib_components_VGrid_index_js-node_modules_vuetify_lib_component-9b8af7.6a02007f528f70e7e7ae.css",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/vendors-node_modules_vuetify_lib_components_VGrid_index_js-node_modules_vuetify_lib_component-9b8af7.6a02007f528f70e7e7ae.css",
-      "publicPath": "/static/css/vendors-node_modules_vuetify_lib_components_VGrid_index_js-node_modules_vuetify_lib_component-9b8af7.6a02007f528f70e7e7ae.css"
-    },
-    "css/vendors-node_modules_vuetify_lib_components_VGrid_index_js-node_modules_vuetify_lib_component-9b8af7.6a02007f528f70e7e7ae.css.gz": {
-      "name": "css/vendors-node_modules_vuetify_lib_components_VGrid_index_js-node_modules_vuetify_lib_component-9b8af7.6a02007f528f70e7e7ae.css.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/vendors-node_modules_vuetify_lib_components_VGrid_index_js-node_modules_vuetify_lib_component-9b8af7.6a02007f528f70e7e7ae.css.gz",
-      "publicPath": "/static/css/vendors-node_modules_vuetify_lib_components_VGrid_index_js-node_modules_vuetify_lib_component-9b8af7.6a02007f528f70e7e7ae.css.gz"
-    },
-    "css/vendors-node_modules_vuetify_lib_components_VNumberInput_index_js-node_modules_vuetify_lib_co-14276f.424bb60cc1b8b454759f.css": {
-      "name": "css/vendors-node_modules_vuetify_lib_components_VNumberInput_index_js-node_modules_vuetify_lib_co-14276f.424bb60cc1b8b454759f.css",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/vendors-node_modules_vuetify_lib_components_VNumberInput_index_js-node_modules_vuetify_lib_co-14276f.424bb60cc1b8b454759f.css",
-      "publicPath": "/static/css/vendors-node_modules_vuetify_lib_components_VNumberInput_index_js-node_modules_vuetify_lib_co-14276f.424bb60cc1b8b454759f.css"
-    },
-    "css/vendors-node_modules_vuetify_lib_components_VNumberInput_index_js-node_modules_vuetify_lib_co-14276f.424bb60cc1b8b454759f.css.gz": {
-      "name": "css/vendors-node_modules_vuetify_lib_components_VNumberInput_index_js-node_modules_vuetify_lib_co-14276f.424bb60cc1b8b454759f.css.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/vendors-node_modules_vuetify_lib_components_VNumberInput_index_js-node_modules_vuetify_lib_co-14276f.424bb60cc1b8b454759f.css.gz",
-      "publicPath": "/static/css/vendors-node_modules_vuetify_lib_components_VNumberInput_index_js-node_modules_vuetify_lib_co-14276f.424bb60cc1b8b454759f.css.gz"
-    },
-    "css/vendors-node_modules_vuetify_lib_components_VThemeProvider_VThemeProvider_css-node_modules_vu-816787.2a467e1e5b73a82c548b.css": {
-      "name": "css/vendors-node_modules_vuetify_lib_components_VThemeProvider_VThemeProvider_css-node_modules_vu-816787.2a467e1e5b73a82c548b.css",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/vendors-node_modules_vuetify_lib_components_VThemeProvider_VThemeProvider_css-node_modules_vu-816787.2a467e1e5b73a82c548b.css",
-      "publicPath": "/static/css/vendors-node_modules_vuetify_lib_components_VThemeProvider_VThemeProvider_css-node_modules_vu-816787.2a467e1e5b73a82c548b.css"
-    },
-    "css/vendors-node_modules_vuetify_lib_components_VThemeProvider_VThemeProvider_css-node_modules_vu-816787.2a467e1e5b73a82c548b.css.gz": {
-      "name": "css/vendors-node_modules_vuetify_lib_components_VThemeProvider_VThemeProvider_css-node_modules_vu-816787.2a467e1e5b73a82c548b.css.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/vendors-node_modules_vuetify_lib_components_VThemeProvider_VThemeProvider_css-node_modules_vu-816787.2a467e1e5b73a82c548b.css.gz",
-      "publicPath": "/static/css/vendors-node_modules_vuetify_lib_components_VThemeProvider_VThemeProvider_css-node_modules_vu-816787.2a467e1e5b73a82c548b.css.gz"
-    },
-    "css/vendors-node_modules_vuetify_lib_styles_main_css.bc6e89ecbbff5aaaddcf.css": {
-      "name": "css/vendors-node_modules_vuetify_lib_styles_main_css.bc6e89ecbbff5aaaddcf.css",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/vendors-node_modules_vuetify_lib_styles_main_css.bc6e89ecbbff5aaaddcf.css",
-      "publicPath": "/static/css/vendors-node_modules_vuetify_lib_styles_main_css.bc6e89ecbbff5aaaddcf.css"
-    },
-    "css/vendors-node_modules_vuetify_lib_styles_main_css.bc6e89ecbbff5aaaddcf.css.gz": {
-      "name": "css/vendors-node_modules_vuetify_lib_styles_main_css.bc6e89ecbbff5aaaddcf.css.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/vendors-node_modules_vuetify_lib_styles_main_css.bc6e89ecbbff5aaaddcf.css.gz",
-      "publicPath": "/static/css/vendors-node_modules_vuetify_lib_styles_main_css.bc6e89ecbbff5aaaddcf.css.gz"
-    },
-    "img/mCSB_buttons.5b35a39c5f877ba43637.png": {
-      "name": "img/mCSB_buttons.5b35a39c5f877ba43637.png",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/mCSB_buttons.5b35a39c5f877ba43637.png",
-      "publicPath": "/static/img/mCSB_buttons.5b35a39c5f877ba43637.png",
-      "sourceFilename": "node_modules/malihu-custom-scrollbar-plugin/mCSB_buttons.png"
-    },
-    "js/app.7e4550f6c3c531f3df6d.js": {
-      "name": "js/app.7e4550f6c3c531f3df6d.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/app.7e4550f6c3c531f3df6d.js",
-      "publicPath": "/static/js/app.7e4550f6c3c531f3df6d.js"
-    },
-    "js/app.7e4550f6c3c531f3df6d.js.gz": {
-      "name": "js/app.7e4550f6c3c531f3df6d.js.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/app.7e4550f6c3c531f3df6d.js.gz",
-      "publicPath": "/static/js/app.7e4550f6c3c531f3df6d.js.gz"
-    },
-    "js/app.7e4550f6c3c531f3df6d.js.LICENSE.txt": {
-      "name": "js/app.7e4550f6c3c531f3df6d.js.LICENSE.txt",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/app.7e4550f6c3c531f3df6d.js.LICENSE.txt",
-      "publicPath": "/static/js/app.7e4550f6c3c531f3df6d.js.LICENSE.txt"
-    },
-    "js/autocomplete.6200e2271593b603ac0c.js": {
-      "name": "js/autocomplete.6200e2271593b603ac0c.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/autocomplete.6200e2271593b603ac0c.js",
-      "publicPath": "/static/js/autocomplete.6200e2271593b603ac0c.js"
-    },
-    "js/autocomplete.6200e2271593b603ac0c.js.gz": {
-      "name": "js/autocomplete.6200e2271593b603ac0c.js.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/autocomplete.6200e2271593b603ac0c.js.gz",
-      "publicPath": "/static/js/autocomplete.6200e2271593b603ac0c.js.gz"
-    },
-    "js/autocomplete.6200e2271593b603ac0c.js.LICENSE.txt": {
-      "name": "js/autocomplete.6200e2271593b603ac0c.js.LICENSE.txt",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/autocomplete.6200e2271593b603ac0c.js.LICENSE.txt",
-      "publicPath": "/static/js/autocomplete.6200e2271593b603ac0c.js.LICENSE.txt"
-    },
-    "js/bootstrap.1d288bd741c106753bee.js": {
-      "name": "js/bootstrap.1d288bd741c106753bee.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/bootstrap.1d288bd741c106753bee.js",
-      "publicPath": "/static/js/bootstrap.1d288bd741c106753bee.js"
-    },
-    "js/bootstrap.1d288bd741c106753bee.js.LICENSE.txt": {
-      "name": "js/bootstrap.1d288bd741c106753bee.js.LICENSE.txt",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/bootstrap.1d288bd741c106753bee.js.LICENSE.txt",
-      "publicPath": "/static/js/bootstrap.1d288bd741c106753bee.js.LICENSE.txt"
-    },
-    "js/styles-src_scss_app_scss-8b6fa696.98531ab9a81416a8ebed.js": {
-      "name": "js/styles-src_scss_app_scss-8b6fa696.98531ab9a81416a8ebed.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/styles-src_scss_app_scss-8b6fa696.98531ab9a81416a8ebed.js",
-      "publicPath": "/static/js/styles-src_scss_app_scss-8b6fa696.98531ab9a81416a8ebed.js"
-    },
-    "js/styles-src_scss_app_scss-8b6fa696.98531ab9a81416a8ebed.js.LICENSE.txt": {
-      "name": "js/styles-src_scss_app_scss-8b6fa696.98531ab9a81416a8ebed.js.LICENSE.txt",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/styles-src_scss_app_scss-8b6fa696.98531ab9a81416a8ebed.js.LICENSE.txt",
-      "publicPath": "/static/js/styles-src_scss_app_scss-8b6fa696.98531ab9a81416a8ebed.js.LICENSE.txt"
-    },
-    "js/styles-src_scss_app_scss-c4b4af01.dabebfd1e288e3a00c3c.js": {
-      "name": "js/styles-src_scss_app_scss-c4b4af01.dabebfd1e288e3a00c3c.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/styles-src_scss_app_scss-c4b4af01.dabebfd1e288e3a00c3c.js",
-      "publicPath": "/static/js/styles-src_scss_app_scss-c4b4af01.dabebfd1e288e3a00c3c.js"
-    },
-    "js/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js.6b7663a2c4afe9ebdb5a.js": {
-      "name": "js/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js.6b7663a2c4afe9ebdb5a.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js.6b7663a2c4afe9ebdb5a.js",
-      "publicPath": "/static/js/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js.6b7663a2c4afe9ebdb5a.js"
-    },
-    "js/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js.6b7663a2c4afe9ebdb5a.js.gz": {
-      "name": "js/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js.6b7663a2c4afe9ebdb5a.js.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js.6b7663a2c4afe9ebdb5a.js.gz",
-      "publicPath": "/static/js/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js.6b7663a2c4afe9ebdb5a.js.gz"
-    },
-    "js/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js.6b7663a2c4afe9ebdb5a.js.LICENSE.txt": {
-      "name": "js/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js.6b7663a2c4afe9ebdb5a.js.LICENSE.txt",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js.6b7663a2c4afe9ebdb5a.js.LICENSE.txt",
-      "publicPath": "/static/js/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js.6b7663a2c4afe9ebdb5a.js.LICENSE.txt"
-    },
-    "js/vendors-node_modules_fortawesome_fontawesome-free_js_all_js.c8efb2b125b02a8edbe5.js": {
-      "name": "js/vendors-node_modules_fortawesome_fontawesome-free_js_all_js.c8efb2b125b02a8edbe5.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_fortawesome_fontawesome-free_js_all_js.c8efb2b125b02a8edbe5.js",
-      "publicPath": "/static/js/vendors-node_modules_fortawesome_fontawesome-free_js_all_js.c8efb2b125b02a8edbe5.js"
-    },
-    "js/vendors-node_modules_fortawesome_fontawesome-free_js_all_js.c8efb2b125b02a8edbe5.js.gz": {
-      "name": "js/vendors-node_modules_fortawesome_fontawesome-free_js_all_js.c8efb2b125b02a8edbe5.js.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_fortawesome_fontawesome-free_js_all_js.c8efb2b125b02a8edbe5.js.gz",
-      "publicPath": "/static/js/vendors-node_modules_fortawesome_fontawesome-free_js_all_js.c8efb2b125b02a8edbe5.js.gz"
-    },
-    "js/vendors-node_modules_fortawesome_fontawesome-free_js_all_js.c8efb2b125b02a8edbe5.js.LICENSE.txt": {
-      "name": "js/vendors-node_modules_fortawesome_fontawesome-free_js_all_js.c8efb2b125b02a8edbe5.js.LICENSE.txt",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_fortawesome_fontawesome-free_js_all_js.c8efb2b125b02a8edbe5.js.LICENSE.txt",
-      "publicPath": "/static/js/vendors-node_modules_fortawesome_fontawesome-free_js_all_js.c8efb2b125b02a8edbe5.js.LICENSE.txt"
-    },
-    "js/vendors-node_modules_jquery_dist_jquery_js.b6103381f6642687a261.js": {
-      "name": "js/vendors-node_modules_jquery_dist_jquery_js.b6103381f6642687a261.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_jquery_dist_jquery_js.b6103381f6642687a261.js",
-      "publicPath": "/static/js/vendors-node_modules_jquery_dist_jquery_js.b6103381f6642687a261.js"
-    },
-    "js/vendors-node_modules_jquery_dist_jquery_js.b6103381f6642687a261.js.gz": {
-      "name": "js/vendors-node_modules_jquery_dist_jquery_js.b6103381f6642687a261.js.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_jquery_dist_jquery_js.b6103381f6642687a261.js.gz",
-      "publicPath": "/static/js/vendors-node_modules_jquery_dist_jquery_js.b6103381f6642687a261.js.gz"
-    },
-    "js/vendors-node_modules_jquery_dist_jquery_js.b6103381f6642687a261.js.LICENSE.txt": {
-      "name": "js/vendors-node_modules_jquery_dist_jquery_js.b6103381f6642687a261.js.LICENSE.txt",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_jquery_dist_jquery_js.b6103381f6642687a261.js.LICENSE.txt",
-      "publicPath": "/static/js/vendors-node_modules_jquery_dist_jquery_js.b6103381f6642687a261.js.LICENSE.txt"
-    },
-    "js/vendors-node_modules_lodash_debounce_js-node_modules_axios_lib_axios_js.1cb00e95a02ca2eb366a.js": {
-      "name": "js/vendors-node_modules_lodash_debounce_js-node_modules_axios_lib_axios_js.1cb00e95a02ca2eb366a.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_lodash_debounce_js-node_modules_axios_lib_axios_js.1cb00e95a02ca2eb366a.js",
-      "publicPath": "/static/js/vendors-node_modules_lodash_debounce_js-node_modules_axios_lib_axios_js.1cb00e95a02ca2eb366a.js"
-    },
-    "js/vendors-node_modules_lodash_debounce_js-node_modules_axios_lib_axios_js.1cb00e95a02ca2eb366a.js.gz": {
-      "name": "js/vendors-node_modules_lodash_debounce_js-node_modules_axios_lib_axios_js.1cb00e95a02ca2eb366a.js.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_lodash_debounce_js-node_modules_axios_lib_axios_js.1cb00e95a02ca2eb366a.js.gz",
-      "publicPath": "/static/js/vendors-node_modules_lodash_debounce_js-node_modules_axios_lib_axios_js.1cb00e95a02ca2eb366a.js.gz"
-    },
-    "js/vendors-node_modules_lodash_debounce_js-node_modules_axios_lib_axios_js.1cb00e95a02ca2eb366a.js.LICENSE.txt": {
-      "name": "js/vendors-node_modules_lodash_debounce_js-node_modules_axios_lib_axios_js.1cb00e95a02ca2eb366a.js.LICENSE.txt",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_lodash_debounce_js-node_modules_axios_lib_axios_js.1cb00e95a02ca2eb366a.js.LICENSE.txt",
-      "publicPath": "/static/js/vendors-node_modules_lodash_debounce_js-node_modules_axios_lib_axios_js.1cb00e95a02ca2eb366a.js.LICENSE.txt"
-    },
-    "js/vendors-node_modules_vue_runtime-core_dist_runtime-core_esm-bundler_js.f82042295c07532b76b6.js": {
-      "name": "js/vendors-node_modules_vue_runtime-core_dist_runtime-core_esm-bundler_js.f82042295c07532b76b6.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vue_runtime-core_dist_runtime-core_esm-bundler_js.f82042295c07532b76b6.js",
-      "publicPath": "/static/js/vendors-node_modules_vue_runtime-core_dist_runtime-core_esm-bundler_js.f82042295c07532b76b6.js"
-    },
-    "js/vendors-node_modules_vue_runtime-core_dist_runtime-core_esm-bundler_js.f82042295c07532b76b6.js.gz": {
-      "name": "js/vendors-node_modules_vue_runtime-core_dist_runtime-core_esm-bundler_js.f82042295c07532b76b6.js.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vue_runtime-core_dist_runtime-core_esm-bundler_js.f82042295c07532b76b6.js.gz",
-      "publicPath": "/static/js/vendors-node_modules_vue_runtime-core_dist_runtime-core_esm-bundler_js.f82042295c07532b76b6.js.gz"
-    },
-    "js/vendors-node_modules_vue_runtime-core_dist_runtime-core_esm-bundler_js.f82042295c07532b76b6.js.LICENSE.txt": {
-      "name": "js/vendors-node_modules_vue_runtime-core_dist_runtime-core_esm-bundler_js.f82042295c07532b76b6.js.LICENSE.txt",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vue_runtime-core_dist_runtime-core_esm-bundler_js.f82042295c07532b76b6.js.LICENSE.txt",
-      "publicPath": "/static/js/vendors-node_modules_vue_runtime-core_dist_runtime-core_esm-bundler_js.f82042295c07532b76b6.js.LICENSE.txt"
-    },
-    "js/vendors-node_modules_vue_runtime-dom_dist_runtime-dom_esm-bundler_js.aca4caf11fd84742e8f1.js": {
-      "name": "js/vendors-node_modules_vue_runtime-dom_dist_runtime-dom_esm-bundler_js.aca4caf11fd84742e8f1.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vue_runtime-dom_dist_runtime-dom_esm-bundler_js.aca4caf11fd84742e8f1.js",
-      "publicPath": "/static/js/vendors-node_modules_vue_runtime-dom_dist_runtime-dom_esm-bundler_js.aca4caf11fd84742e8f1.js"
-    },
-    "js/vendors-node_modules_vue_runtime-dom_dist_runtime-dom_esm-bundler_js.aca4caf11fd84742e8f1.js.gz": {
-      "name": "js/vendors-node_modules_vue_runtime-dom_dist_runtime-dom_esm-bundler_js.aca4caf11fd84742e8f1.js.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vue_runtime-dom_dist_runtime-dom_esm-bundler_js.aca4caf11fd84742e8f1.js.gz",
-      "publicPath": "/static/js/vendors-node_modules_vue_runtime-dom_dist_runtime-dom_esm-bundler_js.aca4caf11fd84742e8f1.js.gz"
-    },
-    "js/vendors-node_modules_vue_runtime-dom_dist_runtime-dom_esm-bundler_js.aca4caf11fd84742e8f1.js.LICENSE.txt": {
-      "name": "js/vendors-node_modules_vue_runtime-dom_dist_runtime-dom_esm-bundler_js.aca4caf11fd84742e8f1.js.LICENSE.txt",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vue_runtime-dom_dist_runtime-dom_esm-bundler_js.aca4caf11fd84742e8f1.js.LICENSE.txt",
-      "publicPath": "/static/js/vendors-node_modules_vue_runtime-dom_dist_runtime-dom_esm-bundler_js.aca4caf11fd84742e8f1.js.LICENSE.txt"
-    },
-    "js/vendors-node_modules_vue-loader_dist_exportHelper_js-node_modules_vue_dist_vue_esm-bundler_js.d7b2cecb8b640477979f.js": {
-      "name": "js/vendors-node_modules_vue-loader_dist_exportHelper_js-node_modules_vue_dist_vue_esm-bundler_js.d7b2cecb8b640477979f.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vue-loader_dist_exportHelper_js-node_modules_vue_dist_vue_esm-bundler_js.d7b2cecb8b640477979f.js",
-      "publicPath": "/static/js/vendors-node_modules_vue-loader_dist_exportHelper_js-node_modules_vue_dist_vue_esm-bundler_js.d7b2cecb8b640477979f.js"
-    },
-    "js/vendors-node_modules_vue-loader_dist_exportHelper_js-node_modules_vue_dist_vue_esm-bundler_js.d7b2cecb8b640477979f.js.gz": {
-      "name": "js/vendors-node_modules_vue-loader_dist_exportHelper_js-node_modules_vue_dist_vue_esm-bundler_js.d7b2cecb8b640477979f.js.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vue-loader_dist_exportHelper_js-node_modules_vue_dist_vue_esm-bundler_js.d7b2cecb8b640477979f.js.gz",
-      "publicPath": "/static/js/vendors-node_modules_vue-loader_dist_exportHelper_js-node_modules_vue_dist_vue_esm-bundler_js.d7b2cecb8b640477979f.js.gz"
-    },
-    "js/vendors-node_modules_vue-loader_dist_exportHelper_js-node_modules_vue_dist_vue_esm-bundler_js.d7b2cecb8b640477979f.js.LICENSE.txt": {
-      "name": "js/vendors-node_modules_vue-loader_dist_exportHelper_js-node_modules_vue_dist_vue_esm-bundler_js.d7b2cecb8b640477979f.js.LICENSE.txt",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vue-loader_dist_exportHelper_js-node_modules_vue_dist_vue_esm-bundler_js.d7b2cecb8b640477979f.js.LICENSE.txt",
-      "publicPath": "/static/js/vendors-node_modules_vue-loader_dist_exportHelper_js-node_modules_vue_dist_vue_esm-bundler_js.d7b2cecb8b640477979f.js.LICENSE.txt"
-    },
-    "js/vendors-node_modules_vuetify_lib_components_index_js-node_modules_vuetify_lib_composables_cal-f91367.7f426fbef69f6d177239.js": {
-      "name": "js/vendors-node_modules_vuetify_lib_components_index_js-node_modules_vuetify_lib_composables_cal-f91367.7f426fbef69f6d177239.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_components_index_js-node_modules_vuetify_lib_composables_cal-f91367.7f426fbef69f6d177239.js",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_components_index_js-node_modules_vuetify_lib_composables_cal-f91367.7f426fbef69f6d177239.js"
-    },
-    "js/vendors-node_modules_vuetify_lib_components_index_js-node_modules_vuetify_lib_composables_cal-f91367.7f426fbef69f6d177239.js.gz": {
-      "name": "js/vendors-node_modules_vuetify_lib_components_index_js-node_modules_vuetify_lib_composables_cal-f91367.7f426fbef69f6d177239.js.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_components_index_js-node_modules_vuetify_lib_composables_cal-f91367.7f426fbef69f6d177239.js.gz",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_components_index_js-node_modules_vuetify_lib_composables_cal-f91367.7f426fbef69f6d177239.js.gz"
-    },
-    "js/vendors-node_modules_vuetify_lib_components_index_js-node_modules_vuetify_lib_composables_cal-f91367.7f426fbef69f6d177239.js.LICENSE.txt": {
-      "name": "js/vendors-node_modules_vuetify_lib_components_index_js-node_modules_vuetify_lib_composables_cal-f91367.7f426fbef69f6d177239.js.LICENSE.txt",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_components_index_js-node_modules_vuetify_lib_composables_cal-f91367.7f426fbef69f6d177239.js.LICENSE.txt",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_components_index_js-node_modules_vuetify_lib_composables_cal-f91367.7f426fbef69f6d177239.js.LICENSE.txt"
-    },
-    "js/vendors-node_modules_vuetify_lib_components_VAlert_index_js-node_modules_vuetify_lib_componen-c07367.fc56174a1d5e2615a697.js": {
-      "name": "js/vendors-node_modules_vuetify_lib_components_VAlert_index_js-node_modules_vuetify_lib_componen-c07367.fc56174a1d5e2615a697.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_components_VAlert_index_js-node_modules_vuetify_lib_componen-c07367.fc56174a1d5e2615a697.js",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_components_VAlert_index_js-node_modules_vuetify_lib_componen-c07367.fc56174a1d5e2615a697.js"
-    },
-    "js/vendors-node_modules_vuetify_lib_components_VAlert_index_js-node_modules_vuetify_lib_componen-c07367.fc56174a1d5e2615a697.js.gz": {
-      "name": "js/vendors-node_modules_vuetify_lib_components_VAlert_index_js-node_modules_vuetify_lib_componen-c07367.fc56174a1d5e2615a697.js.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_components_VAlert_index_js-node_modules_vuetify_lib_componen-c07367.fc56174a1d5e2615a697.js.gz",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_components_VAlert_index_js-node_modules_vuetify_lib_componen-c07367.fc56174a1d5e2615a697.js.gz"
-    },
-    "js/vendors-node_modules_vuetify_lib_components_VAlert_index_js-node_modules_vuetify_lib_componen-c07367.fc56174a1d5e2615a697.js.LICENSE.txt": {
-      "name": "js/vendors-node_modules_vuetify_lib_components_VAlert_index_js-node_modules_vuetify_lib_componen-c07367.fc56174a1d5e2615a697.js.LICENSE.txt",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_components_VAlert_index_js-node_modules_vuetify_lib_componen-c07367.fc56174a1d5e2615a697.js.LICENSE.txt",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_components_VAlert_index_js-node_modules_vuetify_lib_componen-c07367.fc56174a1d5e2615a697.js.LICENSE.txt"
-    },
-    "js/vendors-node_modules_vuetify_lib_components_VDataIterator_index_js-node_modules_vuetify_lib_c-d5731f.9d72044b898891677c5e.js": {
-      "name": "js/vendors-node_modules_vuetify_lib_components_VDataIterator_index_js-node_modules_vuetify_lib_c-d5731f.9d72044b898891677c5e.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_components_VDataIterator_index_js-node_modules_vuetify_lib_c-d5731f.9d72044b898891677c5e.js",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_components_VDataIterator_index_js-node_modules_vuetify_lib_c-d5731f.9d72044b898891677c5e.js"
-    },
-    "js/vendors-node_modules_vuetify_lib_components_VDataIterator_index_js-node_modules_vuetify_lib_c-d5731f.9d72044b898891677c5e.js.gz": {
-      "name": "js/vendors-node_modules_vuetify_lib_components_VDataIterator_index_js-node_modules_vuetify_lib_c-d5731f.9d72044b898891677c5e.js.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_components_VDataIterator_index_js-node_modules_vuetify_lib_c-d5731f.9d72044b898891677c5e.js.gz",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_components_VDataIterator_index_js-node_modules_vuetify_lib_c-d5731f.9d72044b898891677c5e.js.gz"
-    },
-    "js/vendors-node_modules_vuetify_lib_components_VDataIterator_index_js-node_modules_vuetify_lib_c-d5731f.9d72044b898891677c5e.js.LICENSE.txt": {
-      "name": "js/vendors-node_modules_vuetify_lib_components_VDataIterator_index_js-node_modules_vuetify_lib_c-d5731f.9d72044b898891677c5e.js.LICENSE.txt",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_components_VDataIterator_index_js-node_modules_vuetify_lib_c-d5731f.9d72044b898891677c5e.js.LICENSE.txt",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_components_VDataIterator_index_js-node_modules_vuetify_lib_c-d5731f.9d72044b898891677c5e.js.LICENSE.txt"
-    },
-    "js/vendors-node_modules_vuetify_lib_components_VFab_index_js-node_modules_vuetify_lib_components-4e4f05.da462d7c7f690590b1e3.js": {
-      "name": "js/vendors-node_modules_vuetify_lib_components_VFab_index_js-node_modules_vuetify_lib_components-4e4f05.da462d7c7f690590b1e3.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_components_VFab_index_js-node_modules_vuetify_lib_components-4e4f05.da462d7c7f690590b1e3.js",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_components_VFab_index_js-node_modules_vuetify_lib_components-4e4f05.da462d7c7f690590b1e3.js"
-    },
-    "js/vendors-node_modules_vuetify_lib_components_VFab_index_js-node_modules_vuetify_lib_components-4e4f05.da462d7c7f690590b1e3.js.gz": {
-      "name": "js/vendors-node_modules_vuetify_lib_components_VFab_index_js-node_modules_vuetify_lib_components-4e4f05.da462d7c7f690590b1e3.js.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_components_VFab_index_js-node_modules_vuetify_lib_components-4e4f05.da462d7c7f690590b1e3.js.gz",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_components_VFab_index_js-node_modules_vuetify_lib_components-4e4f05.da462d7c7f690590b1e3.js.gz"
-    },
-    "js/vendors-node_modules_vuetify_lib_components_VFab_index_js-node_modules_vuetify_lib_components-4e4f05.da462d7c7f690590b1e3.js.LICENSE.txt": {
-      "name": "js/vendors-node_modules_vuetify_lib_components_VFab_index_js-node_modules_vuetify_lib_components-4e4f05.da462d7c7f690590b1e3.js.LICENSE.txt",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_components_VFab_index_js-node_modules_vuetify_lib_components-4e4f05.da462d7c7f690590b1e3.js.LICENSE.txt",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_components_VFab_index_js-node_modules_vuetify_lib_components-4e4f05.da462d7c7f690590b1e3.js.LICENSE.txt"
-    },
-    "js/vendors-node_modules_vuetify_lib_components_VGrid_index_js-node_modules_vuetify_lib_component-9b8af7.ea646d65c407a16e0454.js": {
-      "name": "js/vendors-node_modules_vuetify_lib_components_VGrid_index_js-node_modules_vuetify_lib_component-9b8af7.ea646d65c407a16e0454.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_components_VGrid_index_js-node_modules_vuetify_lib_component-9b8af7.ea646d65c407a16e0454.js",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_components_VGrid_index_js-node_modules_vuetify_lib_component-9b8af7.ea646d65c407a16e0454.js"
-    },
-    "js/vendors-node_modules_vuetify_lib_components_VGrid_index_js-node_modules_vuetify_lib_component-9b8af7.ea646d65c407a16e0454.js.gz": {
-      "name": "js/vendors-node_modules_vuetify_lib_components_VGrid_index_js-node_modules_vuetify_lib_component-9b8af7.ea646d65c407a16e0454.js.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_components_VGrid_index_js-node_modules_vuetify_lib_component-9b8af7.ea646d65c407a16e0454.js.gz",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_components_VGrid_index_js-node_modules_vuetify_lib_component-9b8af7.ea646d65c407a16e0454.js.gz"
-    },
-    "js/vendors-node_modules_vuetify_lib_components_VGrid_index_js-node_modules_vuetify_lib_component-9b8af7.ea646d65c407a16e0454.js.LICENSE.txt": {
-      "name": "js/vendors-node_modules_vuetify_lib_components_VGrid_index_js-node_modules_vuetify_lib_component-9b8af7.ea646d65c407a16e0454.js.LICENSE.txt",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_components_VGrid_index_js-node_modules_vuetify_lib_component-9b8af7.ea646d65c407a16e0454.js.LICENSE.txt",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_components_VGrid_index_js-node_modules_vuetify_lib_component-9b8af7.ea646d65c407a16e0454.js.LICENSE.txt"
-    },
-    "js/vendors-node_modules_vuetify_lib_components_VNumberInput_index_js-node_modules_vuetify_lib_co-14276f.071cd4e4fc9d4195de3f.js": {
-      "name": "js/vendors-node_modules_vuetify_lib_components_VNumberInput_index_js-node_modules_vuetify_lib_co-14276f.071cd4e4fc9d4195de3f.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_components_VNumberInput_index_js-node_modules_vuetify_lib_co-14276f.071cd4e4fc9d4195de3f.js",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_components_VNumberInput_index_js-node_modules_vuetify_lib_co-14276f.071cd4e4fc9d4195de3f.js"
-    },
-    "js/vendors-node_modules_vuetify_lib_components_VNumberInput_index_js-node_modules_vuetify_lib_co-14276f.071cd4e4fc9d4195de3f.js.gz": {
-      "name": "js/vendors-node_modules_vuetify_lib_components_VNumberInput_index_js-node_modules_vuetify_lib_co-14276f.071cd4e4fc9d4195de3f.js.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_components_VNumberInput_index_js-node_modules_vuetify_lib_co-14276f.071cd4e4fc9d4195de3f.js.gz",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_components_VNumberInput_index_js-node_modules_vuetify_lib_co-14276f.071cd4e4fc9d4195de3f.js.gz"
-    },
-    "js/vendors-node_modules_vuetify_lib_components_VNumberInput_index_js-node_modules_vuetify_lib_co-14276f.071cd4e4fc9d4195de3f.js.LICENSE.txt": {
-      "name": "js/vendors-node_modules_vuetify_lib_components_VNumberInput_index_js-node_modules_vuetify_lib_co-14276f.071cd4e4fc9d4195de3f.js.LICENSE.txt",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_components_VNumberInput_index_js-node_modules_vuetify_lib_co-14276f.071cd4e4fc9d4195de3f.js.LICENSE.txt",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_components_VNumberInput_index_js-node_modules_vuetify_lib_co-14276f.071cd4e4fc9d4195de3f.js.LICENSE.txt"
-    },
-    "js/vendors-node_modules_vuetify_lib_components_VThemeProvider_VThemeProvider_css-node_modules_vu-816787.fa4f01d226007447e999.js": {
-      "name": "js/vendors-node_modules_vuetify_lib_components_VThemeProvider_VThemeProvider_css-node_modules_vu-816787.fa4f01d226007447e999.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_components_VThemeProvider_VThemeProvider_css-node_modules_vu-816787.fa4f01d226007447e999.js",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_components_VThemeProvider_VThemeProvider_css-node_modules_vu-816787.fa4f01d226007447e999.js"
-    },
-    "js/vendors-node_modules_vuetify_lib_components_VThemeProvider_VThemeProvider_css-node_modules_vu-816787.fa4f01d226007447e999.js.gz": {
-      "name": "js/vendors-node_modules_vuetify_lib_components_VThemeProvider_VThemeProvider_css-node_modules_vu-816787.fa4f01d226007447e999.js.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_components_VThemeProvider_VThemeProvider_css-node_modules_vu-816787.fa4f01d226007447e999.js.gz",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_components_VThemeProvider_VThemeProvider_css-node_modules_vu-816787.fa4f01d226007447e999.js.gz"
-    },
-    "js/vendors-node_modules_vuetify_lib_components_VThemeProvider_VThemeProvider_css-node_modules_vu-816787.fa4f01d226007447e999.js.LICENSE.txt": {
-      "name": "js/vendors-node_modules_vuetify_lib_components_VThemeProvider_VThemeProvider_css-node_modules_vu-816787.fa4f01d226007447e999.js.LICENSE.txt",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_components_VThemeProvider_VThemeProvider_css-node_modules_vu-816787.fa4f01d226007447e999.js.LICENSE.txt",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_components_VThemeProvider_VThemeProvider_css-node_modules_vu-816787.fa4f01d226007447e999.js.LICENSE.txt"
-    },
-    "js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_css-node_modules_vuetify_lib_directives-e436d7.d3807dbebbf5ce6a78b0.js": {
-      "name": "js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_css-node_modules_vuetify_lib_directives-e436d7.d3807dbebbf5ce6a78b0.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_css-node_modules_vuetify_lib_directives-e436d7.d3807dbebbf5ce6a78b0.js",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_css-node_modules_vuetify_lib_directives-e436d7.d3807dbebbf5ce6a78b0.js"
-    },
-    "js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_css-node_modules_vuetify_lib_directives-e436d7.d3807dbebbf5ce6a78b0.js.gz": {
-      "name": "js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_css-node_modules_vuetify_lib_directives-e436d7.d3807dbebbf5ce6a78b0.js.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_css-node_modules_vuetify_lib_directives-e436d7.d3807dbebbf5ce6a78b0.js.gz",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_css-node_modules_vuetify_lib_directives-e436d7.d3807dbebbf5ce6a78b0.js.gz"
-    },
-    "js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_css-node_modules_vuetify_lib_directives-e436d7.d3807dbebbf5ce6a78b0.js.LICENSE.txt": {
-      "name": "js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_css-node_modules_vuetify_lib_directives-e436d7.d3807dbebbf5ce6a78b0.js.LICENSE.txt",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_css-node_modules_vuetify_lib_directives-e436d7.d3807dbebbf5ce6a78b0.js.LICENSE.txt",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_css-node_modules_vuetify_lib_directives-e436d7.d3807dbebbf5ce6a78b0.js.LICENSE.txt"
-    },
-    "js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_js-node_modules_vuetify_lib_labs_rules_-b2aacc.7807bcace6c88d0d489f.js": {
-      "name": "js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_js-node_modules_vuetify_lib_labs_rules_-b2aacc.7807bcace6c88d0d489f.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_js-node_modules_vuetify_lib_labs_rules_-b2aacc.7807bcace6c88d0d489f.js",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_js-node_modules_vuetify_lib_labs_rules_-b2aacc.7807bcace6c88d0d489f.js"
-    },
-    "js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_js-node_modules_vuetify_lib_labs_rules_-b2aacc.7807bcace6c88d0d489f.js.gz": {
-      "name": "js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_js-node_modules_vuetify_lib_labs_rules_-b2aacc.7807bcace6c88d0d489f.js.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_js-node_modules_vuetify_lib_labs_rules_-b2aacc.7807bcace6c88d0d489f.js.gz",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_js-node_modules_vuetify_lib_labs_rules_-b2aacc.7807bcace6c88d0d489f.js.gz"
-    },
-    "js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_js-node_modules_vuetify_lib_labs_rules_-b2aacc.7807bcace6c88d0d489f.js.LICENSE.txt": {
-      "name": "js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_js-node_modules_vuetify_lib_labs_rules_-b2aacc.7807bcace6c88d0d489f.js.LICENSE.txt",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_js-node_modules_vuetify_lib_labs_rules_-b2aacc.7807bcace6c88d0d489f.js.LICENSE.txt",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_js-node_modules_vuetify_lib_labs_rules_-b2aacc.7807bcace6c88d0d489f.js.LICENSE.txt"
-    },
-    "js/vendors-node_modules_vuetify_lib_styles_main_css-node_modules_vuetify_lib_util_anchor_js-node-09d944.da6b6e55a72b7a7f7c85.js": {
-      "name": "js/vendors-node_modules_vuetify_lib_styles_main_css-node_modules_vuetify_lib_util_anchor_js-node-09d944.da6b6e55a72b7a7f7c85.js",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_styles_main_css-node_modules_vuetify_lib_util_anchor_js-node-09d944.da6b6e55a72b7a7f7c85.js",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_styles_main_css-node_modules_vuetify_lib_util_anchor_js-node-09d944.da6b6e55a72b7a7f7c85.js"
-    },
-    "js/vendors-node_modules_vuetify_lib_styles_main_css-node_modules_vuetify_lib_util_anchor_js-node-09d944.da6b6e55a72b7a7f7c85.js.gz": {
-      "name": "js/vendors-node_modules_vuetify_lib_styles_main_css-node_modules_vuetify_lib_util_anchor_js-node-09d944.da6b6e55a72b7a7f7c85.js.gz",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_styles_main_css-node_modules_vuetify_lib_util_anchor_js-node-09d944.da6b6e55a72b7a7f7c85.js.gz",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_styles_main_css-node_modules_vuetify_lib_util_anchor_js-node-09d944.da6b6e55a72b7a7f7c85.js.gz"
-    },
-    "js/vendors-node_modules_vuetify_lib_styles_main_css-node_modules_vuetify_lib_util_anchor_js-node-09d944.da6b6e55a72b7a7f7c85.js.LICENSE.txt": {
-      "name": "js/vendors-node_modules_vuetify_lib_styles_main_css-node_modules_vuetify_lib_util_anchor_js-node-09d944.da6b6e55a72b7a7f7c85.js.LICENSE.txt",
-      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/vendors-node_modules_vuetify_lib_styles_main_css-node_modules_vuetify_lib_util_anchor_js-node-09d944.da6b6e55a72b7a7f7c85.js.LICENSE.txt",
-      "publicPath": "/static/js/vendors-node_modules_vuetify_lib_styles_main_css-node_modules_vuetify_lib_util_anchor_js-node-09d944.da6b6e55a72b7a7f7c85.js.LICENSE.txt"
+    "core/css/bootstrap.min.css.map": {
+      "name": "core/css/bootstrap.min.css.map",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/core/css/bootstrap.min.css.map",
+      "publicPath": "/static/core/css/bootstrap.min.css.map",
+      "sourceFilename": "node_modules/bootstrap/dist/css/bootstrap.min.css.map"
+    },
+    "core/js/bootstrap.min.js.map": {
+      "name": "core/js/bootstrap.min.js.map",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/core/js/bootstrap.min.js.map",
+      "publicPath": "/static/core/js/bootstrap.min.js.map",
+      "sourceFilename": "node_modules/bootstrap/dist/js/bootstrap.min.js.map"
+    },
+    "core/js/popper.min.js.map": {
+      "name": "core/js/popper.min.js.map",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/core/js/popper.min.js.map",
+      "publicPath": "/static/core/js/popper.min.js.map",
+      "sourceFilename": "node_modules/@popperjs/core/dist/umd/popper.min.js.map"
+    },
+    "css/app.css": {
+      "name": "css/app.css",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/css/app.css",
+      "publicPath": "/static/css/app.css"
+    },
+    "css/app.css.gz": {
+      "name": "css/app.css.gz",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/css/app.css.gz",
+      "publicPath": "/static/css/app.css.gz"
+    },
+    "css/autocomplete.css": {
+      "name": "css/autocomplete.css",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/css/autocomplete.css",
+      "publicPath": "/static/css/autocomplete.css"
+    },
+    "css/styles.css": {
+      "name": "css/styles.css",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/css/styles.css",
+      "publicPath": "/static/css/styles.css"
+    },
+    "css/styles.css.gz": {
+      "name": "css/styles.css.gz",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/css/styles.css.gz",
+      "publicPath": "/static/css/styles.css.gz"
+    },
+    "fonts/materialdesignicons-webfont.eot": {
+      "name": "fonts/materialdesignicons-webfont.eot",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/fonts/materialdesignicons-webfont.eot",
+      "publicPath": "/static/fonts/materialdesignicons-webfont.eot",
+      "sourceFilename": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.eot"
+    },
+    "fonts/materialdesignicons-webfont.ttf": {
+      "name": "fonts/materialdesignicons-webfont.ttf",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/fonts/materialdesignicons-webfont.ttf",
+      "publicPath": "/static/fonts/materialdesignicons-webfont.ttf",
+      "sourceFilename": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.ttf?v=7.4.47"
+    },
+    "fonts/materialdesignicons-webfont.woff": {
+      "name": "fonts/materialdesignicons-webfont.woff",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/fonts/materialdesignicons-webfont.woff",
+      "publicPath": "/static/fonts/materialdesignicons-webfont.woff",
+      "sourceFilename": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff?v=7.4.47"
+    },
+    "fonts/materialdesignicons-webfont.woff2": {
+      "name": "fonts/materialdesignicons-webfont.woff2",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/fonts/materialdesignicons-webfont.woff2",
+      "publicPath": "/static/fonts/materialdesignicons-webfont.woff2",
+      "sourceFilename": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff2?v=7.4.47"
+    },
+    "js/app.js": {
+      "name": "js/app.js",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/app.js",
+      "publicPath": "/static/js/app.js"
+    },
+    "js/app.js.gz": {
+      "name": "js/app.js.gz",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/app.js.gz",
+      "publicPath": "/static/js/app.js.gz"
+    },
+    "js/autocomplete.js": {
+      "name": "js/autocomplete.js",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/autocomplete.js",
+      "publicPath": "/static/js/autocomplete.js"
+    },
+    "js/autocomplete.js.gz": {
+      "name": "js/autocomplete.js.gz",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/autocomplete.js.gz",
+      "publicPath": "/static/js/autocomplete.js.gz"
+    },
+    "js/bootstrap.js": {
+      "name": "js/bootstrap.js",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/bootstrap.js",
+      "publicPath": "/static/js/bootstrap.js"
+    },
+    "js/bootstrap.js.gz": {
+      "name": "js/bootstrap.js.gz",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/bootstrap.js.gz",
+      "publicPath": "/static/js/bootstrap.js.gz"
+    },
+    "js/css/app.css.map": {
+      "name": "js/css/app.css.map",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/css/app.css.map",
+      "publicPath": "/static/js/css/app.css.map"
+    },
+    "js/css/autocomplete.css.map": {
+      "name": "js/css/autocomplete.css.map",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/css/autocomplete.css.map",
+      "publicPath": "/static/js/css/autocomplete.css.map"
+    },
+    "js/css/styles.css.map": {
+      "name": "js/css/styles.css.map",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/css/styles.css.map",
+      "publicPath": "/static/js/css/styles.css.map"
+    },
+    "js/js/app.js.map": {
+      "name": "js/js/app.js.map",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/js/app.js.map",
+      "publicPath": "/static/js/js/app.js.map"
+    },
+    "js/js/autocomplete.js.map": {
+      "name": "js/js/autocomplete.js.map",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/js/autocomplete.js.map",
+      "publicPath": "/static/js/js/autocomplete.js.map"
+    },
+    "js/js/bootstrap.js.map": {
+      "name": "js/js/bootstrap.js.map",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/js/bootstrap.js.map",
+      "publicPath": "/static/js/js/bootstrap.js.map"
+    },
+    "js/styles.js": {
+      "name": "js/styles.js",
+      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/styles.js",
+      "publicPath": "/static/js/styles.js"
     }
   },
   "chunks": {
     "app": [
-      "js/vendors-node_modules_vue-loader_dist_exportHelper_js-node_modules_vue_dist_vue_esm-bundler_js.d7b2cecb8b640477979f.js",
-      "js/vendors-node_modules_vue_runtime-dom_dist_runtime-dom_esm-bundler_js.aca4caf11fd84742e8f1.js",
-      "js/vendors-node_modules_vue_runtime-core_dist_runtime-core_esm-bundler_js.f82042295c07532b76b6.js",
-      "js/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js.6b7663a2c4afe9ebdb5a.js",
-      "js/vendors-node_modules_jquery_dist_jquery_js.b6103381f6642687a261.js",
-      "js/vendors-node_modules_lodash_debounce_js-node_modules_axios_lib_axios_js.1cb00e95a02ca2eb366a.js",
-      "js/vendors-node_modules_fortawesome_fontawesome-free_js_all_js.c8efb2b125b02a8edbe5.js",
-      "css/vendors-node_modules_vuetify_lib_components_VAlert_index_js-node_modules_vuetify_lib_componen-c07367.383ddbd55a81f3ab14d4.css",
-      "js/vendors-node_modules_vuetify_lib_components_VAlert_index_js-node_modules_vuetify_lib_componen-c07367.fc56174a1d5e2615a697.js",
-      "css/vendors-node_modules_vuetify_lib_components_VDataIterator_index_js-node_modules_vuetify_lib_c-d5731f.0f6afc752ba4b2cf9c86.css",
-      "js/vendors-node_modules_vuetify_lib_components_VDataIterator_index_js-node_modules_vuetify_lib_c-d5731f.9d72044b898891677c5e.js",
-      "css/vendors-node_modules_vuetify_lib_components_VFab_index_js-node_modules_vuetify_lib_components-4e4f05.d18e666df4d58c76a9e8.css",
-      "js/vendors-node_modules_vuetify_lib_components_VFab_index_js-node_modules_vuetify_lib_components-4e4f05.da462d7c7f690590b1e3.js",
-      "css/vendors-node_modules_vuetify_lib_components_VGrid_index_js-node_modules_vuetify_lib_component-9b8af7.6a02007f528f70e7e7ae.css",
-      "js/vendors-node_modules_vuetify_lib_components_VGrid_index_js-node_modules_vuetify_lib_component-9b8af7.ea646d65c407a16e0454.js",
-      "css/vendors-node_modules_vuetify_lib_components_VNumberInput_index_js-node_modules_vuetify_lib_co-14276f.424bb60cc1b8b454759f.css",
-      "js/vendors-node_modules_vuetify_lib_components_VNumberInput_index_js-node_modules_vuetify_lib_co-14276f.071cd4e4fc9d4195de3f.js",
-      "css/vendors-node_modules_vuetify_lib_components_VThemeProvider_VThemeProvider_css-node_modules_vu-816787.2a467e1e5b73a82c548b.css",
-      "js/vendors-node_modules_vuetify_lib_components_VThemeProvider_VThemeProvider_css-node_modules_vu-816787.fa4f01d226007447e999.js",
-      "js/vendors-node_modules_vuetify_lib_components_index_js-node_modules_vuetify_lib_composables_cal-f91367.7f426fbef69f6d177239.js",
-      "js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_css-node_modules_vuetify_lib_directives-e436d7.d3807dbebbf5ce6a78b0.js",
-      "js/vendors-node_modules_vuetify_lib_labs_VPicker_VPicker_js-node_modules_vuetify_lib_labs_rules_-b2aacc.7807bcace6c88d0d489f.js",
-      "js/vendors-node_modules_vuetify_lib_styles_main_css-node_modules_vuetify_lib_util_anchor_js-node-09d944.da6b6e55a72b7a7f7c85.js",
-      "css/vendors-node_modules_vuetify_lib_styles_main_css.bc6e89ecbbff5aaaddcf.css",
-      "css/app.e1390f95fabd5d4ab579.css",
-      "js/app.7e4550f6c3c531f3df6d.js"
+      "css/app.css",
+      "js/app.js"
     ],
     "autocomplete": [
-      "js/vendors-node_modules_vue-loader_dist_exportHelper_js-node_modules_vue_dist_vue_esm-bundler_js.d7b2cecb8b640477979f.js",
-      "js/vendors-node_modules_vue_runtime-dom_dist_runtime-dom_esm-bundler_js.aca4caf11fd84742e8f1.js",
-      "js/vendors-node_modules_vue_runtime-core_dist_runtime-core_esm-bundler_js.f82042295c07532b76b6.js",
-      "css/autocomplete.39897af8ba82cb93153b.css",
-      "js/autocomplete.6200e2271593b603ac0c.js"
+      "css/autocomplete.css",
+      "js/autocomplete.js"
     ],
     "bootstrap": [
-      "js/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js.6b7663a2c4afe9ebdb5a.js",
-      "js/vendors-node_modules_jquery_dist_jquery_js.b6103381f6642687a261.js",
-      "js/bootstrap.1d288bd741c106753bee.js"
+      "js/bootstrap.js"
     ],
     "styles": [
-      "css/vendors-node_modules_malihu-custom-scrollbar-plugin_jquery_mCustomScrollbar_css-node_modules_-502668.483cc9cfa0076885ec24.css",
-      "js/styles-src_scss_app_scss-8b6fa696.98531ab9a81416a8ebed.js",
-      "css/styles-src_scss_app_scss-c4b4af01.a83cfb3c43a6fbad2995.css",
-      "js/styles-src_scss_app_scss-c4b4af01.dabebfd1e288e3a00c3c.js"
+      "css/styles.css",
+      "js/styles.js"
     ]
   },
   "publicPath": "/static/"
