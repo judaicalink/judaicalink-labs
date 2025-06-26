@@ -15,9 +15,11 @@
 
     <link rel="icon" href="{% static 'img/favicon.ico' %}">
 
-    <script type="module" src="{% static 'js/bootstrap.js' %}"></script>
-    <script type="module" src="{% static 'js/autocomplete.js' %}"></script>
-    <script type="module" src="{% static 'js/app.js' %}"></script>
+    {% render_bundle 'styles' 'css' %}
+
+    {% render_bundle 'bootstrap' 'js' type="module" %}
+    {% render_bundle 'autocomplete' 'js' type="module" %}
+    {% render_bundle 'app' 'js' type="module" %}
 
 
     {% block header_scripts %}{% endblock %}
