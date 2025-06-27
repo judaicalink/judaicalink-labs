@@ -9,7 +9,7 @@ const BundleTracker = require('webpack-bundle-tracker');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  // Only one JS entry that pulls in Bootstrap, Vue apps, and SCSS
+  // Single JS entry pulling in Bootstrap, Vue apps, and SCSS
   entry: {
     app: path.resolve(__dirname, 'src/js/app.js'),
   },
@@ -30,7 +30,7 @@ module.exports = {
       { test: /\.vue$/, loader: 'vue-loader' },
       { test: /\.js$/, exclude: /node_modules/, use: 'babel-loader' },
       {
-        test: /\.s?css$/i,
+        test: /\.(sa|sc|c)ss$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
@@ -65,22 +65,10 @@ module.exports = {
     }),
     new CopyWebpackPlugin({
       patterns: [
-        {
-          from: path.resolve(__dirname, 'node_modules/@popperjs/core/dist/umd/popper.min.js.map'),
-          to: 'js',
-        },
-        {
-          from: path.resolve(__dirname, 'node_modules/bootstrap/dist/js/bootstrap.min.js.map'),
-          to: 'js',
-        },
-        {
-          from: path.resolve(__dirname, 'node_modules/bootstrap/dist/css/bootstrap.min.css.map'),
-          to: 'css',
-        },
-        {
-          from: path.resolve(__dirname, 'src/img'),
-          to: 'img',
-        },
+        { from: path.resolve(__dirname, 'node_modules/@popperjs/core/dist/umd/popper.min.js.map'), to: 'js' },
+        { from: path.resolve(__dirname, 'node_modules/bootstrap/dist/js/bootstrap.min.js.map'), to: 'js' },
+        { from: path.resolve(__dirname, 'node_modules/bootstrap/dist/css/bootstrap.min.css.map'), to: 'css' },
+        { from: path.resolve(__dirname, 'src/img'), to: 'img' },
       ],
     }),
   ],
@@ -92,6 +80,8 @@ module.exports = {
 
   optimization: {
     minimize: true,
+    runtimeChunk: false,
+    splitChunks: false,
     minimizer: [new TerserPlugin({ extractComments: false }), new CssMinimizerPlugin()],
   },
 };
