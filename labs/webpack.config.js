@@ -21,7 +21,7 @@ module.exports = {
     filename: 'js/[name].js',
     publicPath: '/static/',
     // generate per-bundle sourcemaps without collision
-    sourceMapFilename: 'js/[name].js.map',
+    sourceMapFilename: 'js/[file].map',
   },
 
   mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
