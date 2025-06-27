@@ -11,9 +11,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
   // Three separate bundles: app logic, bootstrap JS, and global styles
   entry: {
-    app: path.resolve(__dirname, 'src/js/app.js'),
+    app:       path.resolve(__dirname, 'src/js/app.js'),
     bootstrap: path.resolve(__dirname, 'src/js/bootstrap.js'),
-    styles: path.resolve(__dirname, 'src/scss/app.scss'),
+    autocomplete: path.resolve(__dirname, 'src/js/autocomplete.js'),
+    styles:    path.resolve(__dirname, 'src/scss/app.scss'),
   },
 
   output: {
