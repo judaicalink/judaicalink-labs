@@ -9,16 +9,18 @@ const BundleTracker = require('webpack-bundle-tracker');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  // Single JS entry pulling in Bootstrap, Vue apps, and SCSS
+  // Three entries: app logic, bootstrap JS, and global styles
   entry: {
     app: path.resolve(__dirname, 'src/js/app.js'),
+    bootstrap: path.resolve(__dirname, 'src/js/bootstrap.js'),
+    styles: path.resolve(__dirname, 'src/scss/app.scss'),
   },
 
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'js/app.js',
+    filename: 'js/[name].js',
     publicPath: '/static/',
-    sourceMapFilename: 'js/app.js.map',
+    sourceMapFilename: 'js/[file].map',
   },
 
   mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
@@ -30,7 +32,7 @@ module.exports = {
       { test: /\.vue$/, loader: 'vue-loader' },
       { test: /\.js$/, exclude: /node_modules/, use: 'babel-loader' },
       {
-        test: /\.(sa|sc|c)ss$/i,
+        test: /\.s?css$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
@@ -53,24 +55,20 @@ module.exports = {
       __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
     }),
     new BundleTracker({ path: __dirname, filename: 'webpack-stats.json' }),
-    new MiniCssExtractPlugin({ filename: 'css/app.css' }),
+    // extract each entry's CSS to its own file
+    new MiniCssExtractPlugin({ filename: 'css/[name].css' }),
     new VueLoaderPlugin(),
     new CompressionPlugin({ test: /\.(js|css|html|svg)$/, algorithm: 'gzip', threshold: 10240, minRatio: 0.8 }),
     new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery',
-      'window.$': 'jquery',
+      $: 'jquery', jQuery: 'jquery', 'window.$': 'jquery', 'window.jQuery': 'jquery',
       Popper: ['@popperjs/core', 'default'],
     }),
-    new CopyWebpackPlugin({
-      patterns: [
-        { from: path.resolve(__dirname, 'node_modules/@popperjs/core/dist/umd/popper.min.js.map'), to: 'js' },
-        { from: path.resolve(__dirname, 'node_modules/bootstrap/dist/js/bootstrap.min.js.map'), to: 'js' },
-        { from: path.resolve(__dirname, 'node_modules/bootstrap/dist/css/bootstrap.min.css.map'), to: 'css' },
-        { from: path.resolve(__dirname, 'src/img'), to: 'img' },
-      ],
-    }),
+    new CopyWebpackPlugin({ patterns: [
+      { from: path.resolve(__dirname, 'node_modules/@popperjs/core/dist/umd/popper.min.js.map'), to: 'js' },
+      { from: path.resolve(__dirname, 'node_modules/bootstrap/dist/js/bootstrap.min.js.map'), to: 'js' },
+      { from: path.resolve(__dirname, 'node_modules/bootstrap/dist/css/bootstrap.min.css.map'), to: 'css' },
+      { from: path.resolve(__dirname, 'src/img'), to: 'img' },
+    ]}),
   ],
 
   resolve: {
@@ -82,6 +80,6 @@ module.exports = {
     minimize: true,
     runtimeChunk: false,
     splitChunks: false,
-    minimizer: [new TerserPlugin({ extractComments: false }), new CssMinimizerPlugin()],
+    minimizer: [ new TerserPlugin({ extractComments: false }), new CssMinimizerPlugin() ],
   },
 };
