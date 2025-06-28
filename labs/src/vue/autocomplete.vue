@@ -14,6 +14,7 @@ b.schnabel@hs-mannheim.de
         type="text"
         class="form-control"
         v-model="query"
+        name="query"
         @input="onInput"
         @focus="showSuggestions = true"
         @keydown.down.prevent="highlightNext"

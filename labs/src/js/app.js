@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (autocompleteEl) {
         const app = createApp(AutocompleteApp);
         app.use(vuetify);
-        app.mount('#autocomplete-app');
+        app.mount('#autocomplete-search');
     } else {
         console.warn('#autocomplete-app not found in DOM – Vue not mounted');
     }
