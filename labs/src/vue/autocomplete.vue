@@ -21,6 +21,7 @@ b.schnabel@hs-mannheim.de
         @keydown.up.prevent="highlightPrev"
         @keydown.enter.prevent="selectHighlighted"
         @keydown.esc="showSuggestions = false"
+        @keyup.enter="$autocompleteEl.form.submit()"
         placeholder="Type a name..."
         autocomplete="off"
         aria-label="Entity search"
