@@ -3,14 +3,13 @@ from django.urls import path, include
 # for the sitemap
 from django.contrib.sitemaps import GenericSitemap
 from django.contrib.sitemaps.views import sitemap
-from .sitemaps import StaticViewSitemap
 
-from . import views
+from .views import commands, DatasetListView, DatasetDetailView
 
 app_name = 'data'
-sitemaps = {'static': StaticViewSitemap}
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    path('commands', commands, name='commands'),
+    path("datasets/", DatasetListView.as_view(), name="list"),
+    path("datasets/<slug:slug>/", DatasetDetailView.as_view(), name="detail"),
 ]

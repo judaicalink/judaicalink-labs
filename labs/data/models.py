@@ -1,6 +1,5 @@
 from django.db import models
-from datetime import datetime
-from django.utils import timezone
+
 # Create your models here.
 from . import hugotools
 
@@ -43,7 +42,16 @@ class Datafile(models.Model):
     loaded = models.BooleanField(default=False)
 
 
+def _as_bool(val, default=False):
+    if isinstance(val, bool):
+        return val
+    if val is None:
+        return default
+    return str(val).strip().lower() in {"1", "true", "yes", "y", "on"}
+
+
 def update_from_markdown(filename):
+    # TODO: Implement this function to update dataset from markdown files
     data = hugotools.get_data('data/gh_datasets/{}'.format(filename))
     try:
         ds = Dataset.objects.get(name=filename[:-3])
@@ -53,7 +61,8 @@ def update_from_markdown(filename):
         ds.save()
         ds.refresh_from_db()
     ds.title = data['title']
-    ds.loaded = data['loaded']
+    ds.loaded = _as_bool(data.get('loaded', False))
+
     if 'dataslug' in data:
         ds.dataslug = data['dataslug']
     if 'category' in data:
@@ -70,3 +79,35 @@ def update_from_markdown(filename):
             datafile.description = file['description']
         datafile.save()
     ds.save()
+
+
+class Generator(models.Model):
+    slug = models.SlugField(primary_key=True)
+    title = models.CharField(max_length=250)
+    enabled = models.BooleanField(default=True)
+    schedule_cron = models.CharField(max_length=100, blank=True)  # optional (Doku, nicht ausführen)
+    output_dir = models.CharField(max_length=500, blank=True)
+    symbol_image = models.ImageField(upload_to="generator_icons/", blank=True, null=True)
+
+    def __str__(self): return self.slug
+
+
+class Run(models.Model):
+    generator = models.ForeignKey(Generator, on_delete=models.CASCADE, related_name="runs")
+    started_at = models.DateTimeField(auto_now_add=True)
+    finished_at = models.DateTimeField(null=True, blank=True)
+    status = models.CharField(max_length=20, choices=[("success", "success"), ("error", "error")])
+    triples = models.IntegerField(default=0)
+    artifact_ttl = models.URLField(blank=True)
+    log = models.TextField(blank=True)  # traceback / messages
+
+
+class Artifact(models.Model):
+    run = models.ForeignKey(Run, on_delete=models.CASCADE, related_name="artifacts")
+    path = models.CharField(max_length=500)
+    url = models.URLField(blank=True)
+
+
+class Config(models.Model):
+    key = models.CharField(max_length=100, unique=True)
+    value = models.TextField(blank=True)

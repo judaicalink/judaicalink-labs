@@ -17,8 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 
 from . import views
+from .admin import admin_site
 
 app_name = 'backend'
 
 urlpatterns = [
+    path('', admin_site.urls),
 ]
