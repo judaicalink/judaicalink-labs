@@ -76,7 +76,7 @@ class DatasetAdmin(admin.ModelAdmin):
     formfield_overrides = formfield_overrides
     inlines = [DatafileAdmin, ]
     actions = ['regenerate_and_load_async', 'load_fuseki_and_solr_async', 'load_fuseki', 'unload_fuseki', 'load_into_solr',
-               'unload_from_solr',  'delete_ds']
+               'unload_from_solr',  'unload_fuseki_and_solr_async', 'delete_ds']
     fieldsets = (
         (None, {
             "fields": (
@@ -537,6 +537,61 @@ class DatasetAdmin(admin.ModelAdmin):
         )
     load_fuseki_and_solr_async.short_description = ("Load into Fuseki & SOLR")
 
+    @admin.action(description="Unload selected datasets from Fuseki & SOLR (async)")
+    def unload_fuseki_and_solr_async(self, request, queryset):
+        started_fuseki = 0
+        started_solr = 0
+        failed = 0
+
+        for ds in queryset:
+            slug = ds.dataslug or ds.name
+
+            # 1. Fuseki-Unload starten
+            try:
+                fuseki_task_id = run_management_command(
+                    task_name=f"fuseki_unload:{slug}",
+                    command="fuseki_loader",
+                    args=["unload", slug],
+                )
+                fuseki_task = ThreadTask.objects.get(pk=fuseki_task_id)
+                fuseki_task.dataset = ds
+                fuseki_task.save()
+                started_fuseki += 1
+            except Exception as e:
+                failed += 1
+                messages.error(
+                    request,
+                    f"Fehler beim Starten des Fuseki-Unload-Tasks für '{slug}': {e}"
+                )
+                # Wenn Fuseki schon scheitert, SOLR lieber überspringen
+                continue
+
+            # 2. SOLR-Unload starten (solr_delete_dataset)
+            try:
+                solr_task_id = run_management_command(
+                    task_name=f"solr_delete_dataset:{slug}",
+                    command="solr_delete_dataset",
+                    args=[slug],
+                )
+                solr_task = ThreadTask.objects.get(pk=solr_task_id)
+                solr_task.dataset = ds
+                solr_task.save()
+                started_solr += 1
+            except Exception as e:
+                failed += 1
+                messages.error(
+                    request,
+                    f"Fehler beim Starten des SOLR-Unload-Tasks für '{slug}': {e}"
+                )
+
+        self.message_user(
+            request,
+            f"{started_fuseki} Fuseki- und {started_solr} SOLR-Unload-Task(s) gestartet; "
+            f"{failed} Fehlversuch(e).",
+            level=messages.INFO,
+        )
+
+    unload_fuseki_and_solr_async.short_description = ("Unload from Fuseki & SOLR")
 
     @admin.action(description="Delete the dataset completely (Fuseki, Solr, Django)")
     def delete_ds(self, request, queryset):

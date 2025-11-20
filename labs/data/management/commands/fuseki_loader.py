@@ -9,16 +9,89 @@ from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from pathlib import Path
 from rdflib import Graph, URIRef, Literal
-from urllib.parse import quote
-
+from urllib.parse import quote, urlparse
 from ...models import Dataset
 
 env = os.environ.copy()
 env["HUGO_DIR"] = str(getattr(settings, "HUGO_DIR", ""))
 env.setdefault("ENDPOINT", "http://localhost:3030/judaicalink")
-env.setdefault("DUMPS_LOCAL_DIR", getattr(settings, "LABS_DUMPS_LOCAL", "/mnt/data/dumps"))
-env.setdefault("DUMPS_GLOBAL_URL", "http://data.judaicalink.org/dumps/")
+env.setdefault("LABS_DUMPS_WEBROOT", "http://data.judaicalink.org/dumps/")
+DUMPS_LOCAL_DIR = env.get("LABS_DUMPS_LOCAL", "/mnt/data/dumps")
+GENERATORS_PATH = (
+    getattr(settings, "JUDAICALINK_GENERATORS_PATH", None)
+    or getattr(settings, "GENERATORS_BASE_DIR", None)
+)
 
+
+def resolve_datafile_path(df, dataslug: str, stdout=None) -> Path:
+    """
+    Versucht aus Datafile.url einen lokalen Pfad zu machen.
+
+    Reihenfolge:
+      1. Absoluter Pfad aus df.url
+      2. Mapping von HTTP-URLs / relativen Pfaden nach DUMPS_LOCAL_DIR
+      3. Fallback: GENERATORS_PATH/<slug>/output/<slug>.ttl(.gz)
+      4. Fallback: roher Path(df.url)
+    """
+    raw = (df.url or "").strip()
+    p = Path(raw)
+
+    def log(msg: str):
+        if stdout is not None:
+            stdout.write(msg)
+
+    # 1) Absoluter Pfad direkt
+    if p.is_absolute():
+        log(f"[PATH] Absoluter Pfad aus url: {p} (exists={p.exists()})")
+        return p
+
+    # 2) Basis-Dumps-Dir (nur wenn es existiert)
+    base_dumps = None
+    if DUMPS_LOCAL_DIR:
+        base_path = Path(DUMPS_LOCAL_DIR)
+        if base_path.exists():
+            base_dumps = base_path
+        else:
+            log(f"[PATH] DUMPS_LOCAL_DIR existiert nicht: {base_path}")
+
+    candidates = []
+
+    # HTTP-URL → Pfad relativ zu /dumps/
+    parsed = urlparse(raw)
+    if parsed.scheme in ("http", "https"):
+        rel = parsed.path.lstrip("/")
+        if "dumps/" in rel:
+            # z.B. "dumps/gba/current/gba-final-01.ttl.gz" → "gba/current/gba-final-01.ttl.gz"
+            rel = rel.split("dumps/", 1)[1]
+        if base_dumps:
+            candidates.append(base_dumps / rel)
+    else:
+        # Nicht-HTTP → direkt unter base_dumps
+        if base_dumps:
+            candidates.append(base_dumps / raw)
+
+    # 2b) Kandidaten aus Dumps prüfen
+    for cand in candidates:
+        log(f"[PATH] Prüfe Kandidat: {cand}")
+        if cand.exists():
+            log(f"[PATH] → Verwende Datei (Dumps): {cand}")
+            return cand
+
+    # 3) Fallback: Generators-Ordner /<slug>/output/<slug>.ttl(.gz)
+    if GENERATORS_PATH:
+        gen_base = Path(GENERATORS_PATH) / dataslug / "output"
+        cand_gz = gen_base / f"{dataslug}.ttl.gz"
+        cand_ttl = gen_base / f"{dataslug}.ttl"
+
+        for cand in (cand_gz, cand_ttl):
+            log(f"[PATH] Prüfe Generator-Kandidat: {cand}")
+            if cand.exists():
+                log(f"[PATH] → Verwende Datei (Generator): {cand}")
+                return cand
+
+    # 4) Fallback: roher Pfad (wird später noch einmal auf exists geprüft)
+    log(f"[PATH] Kein Kandidat gefunden, nutze raw-Pfad: {p}")
+    return p
 
 def _iter_dataset_slugs():
     for ds in Dataset.objects.all().only('name', 'dataslug'):
@@ -114,6 +187,123 @@ class Command(BaseCommand):
             "JL_METADATA_GRAPH_URI",
             "http://data.judaicalink.org/datasets",
         )
+
+    def _dataset_graph_uri(self, ds, dataslug: str) -> str:
+        """
+        Graph-URI für das Dataset.
+
+        Wenn im Dataset ein graph-Feld gesetzt ist, wird dieses benutzt.
+        Sonst Fallback auf JL_DATA_GRAPH_BASE/dataslug.
+        """
+        graph = getattr(ds, "graph", None)
+        if graph:
+            graph = graph.strip()
+        if graph:
+            return graph
+
+        base = getattr(settings, "JL_DATA_GRAPH_BASE", "http://data.judaicalink.org/data")
+        return f"{base.rstrip('/')}/{dataslug}"
+
+    def _fuseki_post_file(self, path: Path, graph_uri: str):
+        """
+        Schickt eine Datei (TTL/NT, optional .gz) an Fuseki in den angegebenen Graph.
+        """
+        endpoint = env.get("ENDPOINT", "http://localhost:3030/judaicalink").rstrip("/")
+        url = f"{endpoint}/data?graph={quote(graph_uri, safe='')}"
+
+        path_str = str(path)
+        data = path.read_bytes()
+        if path_str.endswith(".gz"):
+            data = gzip.decompress(data)
+            # Endung ohne .gz bestimmen
+            inner = path_str[:-3]
+        else:
+            inner = path_str
+
+        if inner.endswith(".ttl"):
+            content_type = "text/turtle"
+        elif inner.endswith(".nt") or inner.endswith(".ntriples"):
+            content_type = "application/n-triples"
+        else:
+            # Fallback: versuche Turtle
+            content_type = "text/turtle"
+
+        self.stdout.write(f"[Fuseki] POST {url} ({content_type}), Datei: {path}")
+        resp = requests.post(url, data=data, headers={"Content-Type": content_type})
+        try:
+            resp.raise_for_status()
+        except Exception as e:
+            raise CommandError(f"[Fuseki] Fehler beim POST von {path} in Graph <{graph_uri}>: {e}")
+
+    def _load_dataset_from_datafiles(self, slug: str):
+        """
+        Lädt EIN Dataset in Fuseki, basierend auf allen zugehörigen Datafiles.
+        Verwendet die gleiche Pfadlogik wie der SOLR-Loader.
+        """
+        self.stdout.write(self.style.NOTICE(f"[Fuseki] Lade Dataset '{slug}' über Datafiles …"))
+
+        # Dataset finden (name oder dataslug)
+        try:
+            ds = Dataset.objects.get(name=slug)
+        except Dataset.DoesNotExist:
+            try:
+                ds = Dataset.objects.get(dataslug=slug)
+            except Dataset.DoesNotExist:
+                raise CommandError(
+                    f"Dataset '{slug}' existiert nicht (weder als name noch als dataslug)."
+                )
+
+        dataslug = ds.dataslug or ds.name
+        graph_uri = self._dataset_graph_uri(ds, dataslug)
+
+        datafiles = ds.datafile_set.all()
+        if not datafiles:
+            raise CommandError(f"Dataset '{slug}' hat keine Datafiles zum Laden.")
+
+        loaded_files = 0
+        missing_files = 0
+
+        for df in datafiles:
+            path = resolve_datafile_path(df, dataslug, stdout=self.stdout)
+
+            if not path.exists():
+                self.stdout.write(
+                    self.style.ERROR(
+                        f"[Fuseki] Datei fehlt: {path} (aus url={df.url})"
+                    )
+                )
+                missing_files += 1
+                continue
+
+            self.stdout.write(f"[Fuseki] → Lade Datei: {path} in Graph <{graph_uri}>")
+            self._fuseki_post_file(path, graph_uri)
+            loaded_files += 1
+
+        self.stdout.write(
+            f"[Fuseki] Dateien mit gültigem Pfad: {loaded_files}, fehlende Dateien: {missing_files}"
+        )
+
+        if loaded_files == 0:
+            ds.set_loaded(False)
+            raise CommandError(
+                f"Dataset '{slug}' konnte nicht geladen werden (0 Dateien erfolgreich)."
+            )
+
+        # Flag am Dataset & Datafiles setzen
+        ds.set_loaded(True)
+        self.stdout.write(
+            self.style.SUCCESS(
+                f"[Fuseki] Dataset '{slug}' erfolgreich in Graph <{graph_uri}> geladen "
+                f"({loaded_files} Datei(en))."
+            )
+        )
+
+        # Metadaten ebenfalls laden (ein gemeinsamer Meta-Graph, wie du ihn schon hast)
+        try:
+            self._load_metadata_graph(dataslug)
+        except Exception as e:
+            self.stderr.write(f"[META] Fehler beim Laden der Metadaten für '{dataslug}': {e}")
+
 
     def _find_meta_file(self, slug: str) -> Path | None:
         """
@@ -397,57 +587,52 @@ WHERE {{
 
     # --- main handler -------------------------------------------------------
 
+    # --- main handler -------------------------------------------------------
+
     def handle(self, *args, **options):
-        action = options['action']
-        dataset = options.get('dataset') or 'all'
-        cmd = self._build_cmd(action, dataset)
+        action = options["action"]
+        dataset = options["dataset"]
 
-        # prepare env once
-        env = os.environ.copy()
-        env["HUGO_DIR"] = str(getattr(settings, "HUGO_DIR", ""))
-        env.setdefault("ENDPOINT", "http://localhost:3030/judaicalink")
-
-        if cmd == ['__BATCH__']:
-            errors = 0
-            for slug in _iter_dataset_slugs():
-                single_cmd = self._build_cmd(action, slug)
-                self.stdout.write(f"Running: {' '.join(single_cmd)}")
-                proc = subprocess.run(single_cmd, check=False, env=env)
-                if proc.returncode != 0:
-                    self.stderr.write(f"Loader failed for {slug} (code {proc.returncode})")
-                    _set_loaded_flag(slug, False)
-                    errors += 1
-                else:
-                    if action == 'load':
-                        _set_loaded_flag(slug, True)
-                    elif action in ('unload', 'delete'):
-                        _set_loaded_flag(slug, False)
-
-            if errors:
-                raise CommandError(f"{errors} dataset(s) failed during {action}.")
+        # Neuer Weg: EIN Dataset laden → direkt über Datafiles (ohne loader.py)
+        if action == "load" and dataset != "all":
+            # dataset ist der Name/Slug aus dem Admin (name oder dataslug)
+            self._load_dataset_from_datafiles(dataset)
             return
 
-        # single run
-        self.stdout.write(f"Running: {' '.join(cmd)}")
+        # Slug-Liste bestimmen
+        if dataset == "all":
+            # Für load/unload/delete all iterieren wir über alle bekannten Datasets
+            slugs = list(_iter_dataset_slugs())
+        else:
+            slugs = [dataset]
 
-        proc = subprocess.run(cmd, env=env)
-        if proc.returncode != 0:
-            if dataset != 'all':
-                _set_loaded_flag(dataset, False)
-            raise CommandError(f"Loader exited with code {proc.returncode}")
+        for ds_slug in slugs:
+            # Vor dem eigentlichen Loader-Call ggf. loaded-Flag zurücksetzen
+            if action in ("unload", "delete"):
+                _set_loaded_flag(ds_slug, False)
 
-        if dataset != 'all':
-            if action == 'load':
-                _set_loaded_flag(dataset, True)
+            # Command über die zentrale Builder-Funktion zusammenbauen
+            cmd = self._build_cmd(action, ds_slug)
+
+            self.stdout.write(f"Running: {' '.join(cmd)}")
+            result = subprocess.run(cmd, env=env)
+
+            if result.returncode != 0:
+                raise CommandError(
+                    f"Loader-Fehler (exit {result.returncode}) für Dataset {ds_slug}"
+                )
+
+            # Nach erfolgreichem Lauf: Flags & Metadaten anpassen
+            if action == "load":
+                _set_loaded_flag(ds_slug, True)
                 # Metadaten (falls vorhanden) für dieses Dataset aktualisieren
                 try:
-                    self._load_metadata_graph(dataset)
+                    self._load_metadata_graph(ds_slug)
                 except Exception as e:
                     self.stderr.write(f"[META][ERROR] {e}")
-            elif action in ('unload', 'delete'):
-                _set_loaded_flag(dataset, False)
+            elif action in ("unload", "delete"):
                 # Metadaten für dieses Dataset entfernen, aber gemeinsamen Graph behalten
                 try:
-                    self._delete_metadata_for_slug(dataset)
+                    self._delete_metadata_for_slug(ds_slug)
                 except Exception as e:
                     self.stderr.write(f"[META][ERROR] {e}")

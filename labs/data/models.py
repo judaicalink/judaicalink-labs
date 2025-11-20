@@ -1,10 +1,12 @@
+from datetime import datetime
 from django.conf import settings
 from django.db import models
-from pathlib import Path
 from django.utils import timezone
-from datetime import datetime
-from . import hugotools
+from pathlib import Path
+
 from . import consumers
+from . import hugotools
+
 
 class ThreadTask(models.Model):
     name = models.TextField()
@@ -45,6 +47,7 @@ class ThreadTask(models.Model):
 
     def __str__(self):
         return "{}".format(self.name)
+
 
 class Dataset(models.Model):
     name = models.TextField()
@@ -104,7 +107,7 @@ def update_from_markdown(filename):
         ds.save()
         ds.refresh_from_db()
     ds.title = data['title']
-    ds.loaded = "false" # hardcoded to force reload
+    ds.loaded = False
 
     if 'dataslug' in data:
         ds.dataslug = data['dataslug']

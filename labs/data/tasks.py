@@ -3,9 +3,9 @@ from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 from django.core import management
 import io
-from django.db import close_old_connections
+from django.db import close_old_connections, transaction
 
-from . import models
+from .models import ThreadTask
 from . import consumers
 '''
 Task handling is based on:
@@ -34,7 +34,7 @@ def call_command_as_task(name, *args, **options):
 
     Creates a new task for the given command name.
     '''
-    task = models.ThreadTask()
+    task = ThreadTask()
     task.name = name
     task.save()
     task.refresh_from_db()
@@ -53,8 +53,8 @@ def _command_target_wrapper(task_id, name, args, options):
     close_old_connections()
 
     try:
-        task = models.ThreadTask.objects.get(pk=task_id)
-    except models.ThreadTask.DoesNotExist:
+        task = ThreadTask.objects.get(pk=task_id)
+    except ThreadTask.DoesNotExist:
         # Falls versehentlich eine falsche ID übergeben wurde,
         # nicht mit Traceback sterben, sondern nur loggen.
         print(f"[ThreadTask] Task with id={task_id} does not exist.")
@@ -73,7 +73,6 @@ def _command_target_wrapper(task_id, name, args, options):
         task.done()
         raise e
 
-# labs/backend/tasks.py
 
 def run_management_command(task_name, command, args=None, options=None):
     """
@@ -90,16 +89,22 @@ def run_management_command(task_name, command, args=None, options=None):
         options = {}
 
     # ThreadTask mit sprechendem Namen anlegen
-    task = models.ThreadTask()
-    task.name = task_name
-    task.save()
-    task.refresh_from_db()
+    task = ThreadTask.objects.create(name=task_name)
+    task_id = task.id
 
-    # 'command' ist der wirkliche Django-Command, der ausgeführt werden soll
-    t = threading.Thread(
-        target=_command_target_wrapper,
-        args=[task.id, command, args, options],
-    )
-    t.setDaemon(True)
-    t.start()
-    return task.id
+    def _start_thread():
+        # Dieser Code läuft ERST NACH Commit der aktuellen Transaktion
+        t = threading.Thread(
+            target=_command_target_wrapper,
+            args=[task_id, command, args, options],
+            daemon=True,
+        )
+        t.start()
+
+    # Wenn wir in einer Transaktion sind (Admin-Detail-View),
+    # wird der Thread erst nach dem Commit gestartet.
+    # Wenn wir nicht in einer Transaktion sind (z.B. viele Actions),
+    # läuft _start_thread praktisch sofort.
+    transaction.on_commit(_start_thread)
+
+    return task_id

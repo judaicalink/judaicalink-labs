@@ -258,7 +258,17 @@ class Command(BaseCommand):
 
             if docs:
                 files_with_docs += 1
-                solr.add(docs)
+                try:
+                    solr.add(docs)
+                except pysolr.SolrError as e:
+                    self.stdout.write(self.style.ERROR(f"[SOLR] Fehler beim Add: {e}"))
+                    # Fallback: problematische Felder global entfernen
+                    for doc in docs:
+                        doc.pop("birthDate", None)
+                        doc.pop("deathDate", None)
+                    self.stdout.write("[SOLR] birthDate/deathDate aus allen Docs entfernt, retry …")
+                    solr.add(docs)
+
                 indexed += len(docs)
             else:
                 self.stdout.write(
@@ -369,9 +379,27 @@ class Command(BaseCommand):
             for key, val in list(doc.items()):
                 if isinstance(val, dict) and "add" in val:
                     cleaned = [cleanstring(x) for x in val["add"]]
-                    #if key in ("birthDate", "deathDate"):
-                    #    cleaned = [convert_date(x) for x in cleaned]
+
+                    # Nur reine Zahlen für birthYear/deathYear erlauben
+                    if key in ("birthYear", "deathYear"):
+                        cleaned = [x for x in cleaned if re.fullmatch(r"\d{1,4}", x)]
+
+                    # Für birthDate/deathDate: nur sehr konservative Formate zulassen
+                    # z.B. YYYY oder YYYY-MM oder YYYY-MM-DD
+                    if key in ("birthDate", "deathDate"):
+                        cleaned = [
+                            x
+                            for x in cleaned
+                            if re.fullmatch(r"\d{4}(-\d{2}(-\d{2})?)?$", x)
+                        ]
+
+                    # Wenn nach dem Filtern nichts übrig ist → Feld komplett löschen
+                    if not cleaned:
+                        del doc[key]
+                        continue
+
                     doc[key]["add"] = cleaned
+
             docs.append(doc)
 
         return docs
