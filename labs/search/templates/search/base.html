@@ -17,7 +17,6 @@
 
     {% render_bundle 'styles' 'css' %}
 
-    {% render_bundle 'bootstrap' 'js' %}
     {% render_bundle 'autocomplete' 'js' %}
     {% render_bundle 'app' 'js' %}
 
@@ -77,8 +76,6 @@
 {% block footer_scripts %}
 
 {% endblock %}
-
-{% render_bundle 'app' %}
 
 {% cookie_accepted 'analytics' as cookie_analytics %}
 

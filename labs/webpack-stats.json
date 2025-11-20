@@ -3,140 +3,1973 @@
   "assets": {
     "433897008be52565db54.webp": {
       "name": "433897008be52565db54.webp",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/433897008be52565db54.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/433897008be52565db54.webp",
       "publicPath": "/static/433897008be52565db54.webp",
       "sourceFilename": "src/img/backgroundtransparent.webp"
     },
-    "core/css/bootstrap.min.css.map": {
-      "name": "core/css/bootstrap.min.css.map",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/core/css/bootstrap.min.css.map",
-      "publicPath": "/static/core/css/bootstrap.min.css.map",
-      "sourceFilename": "node_modules/bootstrap/dist/css/bootstrap.min.css.map"
-    },
-    "core/js/bootstrap.min.js.map": {
-      "name": "core/js/bootstrap.min.js.map",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/core/js/bootstrap.min.js.map",
-      "publicPath": "/static/core/js/bootstrap.min.js.map",
-      "sourceFilename": "node_modules/bootstrap/dist/js/bootstrap.min.js.map"
-    },
-    "core/js/popper.min.js.map": {
-      "name": "core/js/popper.min.js.map",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/core/js/popper.min.js.map",
-      "publicPath": "/static/core/js/popper.min.js.map",
-      "sourceFilename": "node_modules/@popperjs/core/dist/umd/popper.min.js.map"
-    },
     "css/app.css": {
       "name": "css/app.css",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/css/app.css",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/app.css",
       "publicPath": "/static/css/app.css"
     },
     "css/app.css.gz": {
       "name": "css/app.css.gz",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/css/app.css.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/app.css.gz",
       "publicPath": "/static/css/app.css.gz"
     },
     "css/autocomplete.css": {
       "name": "css/autocomplete.css",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/css/autocomplete.css",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/autocomplete.css",
       "publicPath": "/static/css/autocomplete.css"
+    },
+    "css/bootstrap.min.css.map": {
+      "name": "css/bootstrap.min.css.map",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/bootstrap.min.css.map",
+      "publicPath": "/static/css/bootstrap.min.css.map",
+      "sourceFilename": "node_modules/bootstrap/dist/css/bootstrap.min.css.map"
     },
     "css/styles.css": {
       "name": "css/styles.css",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/css/styles.css",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/styles.css",
       "publicPath": "/static/css/styles.css"
     },
     "css/styles.css.gz": {
       "name": "css/styles.css.gz",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/css/styles.css.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/css/styles.css.gz",
       "publicPath": "/static/css/styles.css.gz"
     },
     "fonts/materialdesignicons-webfont.eot": {
       "name": "fonts/materialdesignicons-webfont.eot",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/fonts/materialdesignicons-webfont.eot",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/fonts/materialdesignicons-webfont.eot",
       "publicPath": "/static/fonts/materialdesignicons-webfont.eot",
       "sourceFilename": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.eot"
     },
     "fonts/materialdesignicons-webfont.ttf": {
       "name": "fonts/materialdesignicons-webfont.ttf",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/fonts/materialdesignicons-webfont.ttf",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/fonts/materialdesignicons-webfont.ttf",
       "publicPath": "/static/fonts/materialdesignicons-webfont.ttf",
       "sourceFilename": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.ttf?v=7.4.47"
     },
     "fonts/materialdesignicons-webfont.woff": {
       "name": "fonts/materialdesignicons-webfont.woff",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/fonts/materialdesignicons-webfont.woff",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/fonts/materialdesignicons-webfont.woff",
       "publicPath": "/static/fonts/materialdesignicons-webfont.woff",
       "sourceFilename": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff?v=7.4.47"
     },
     "fonts/materialdesignicons-webfont.woff2": {
       "name": "fonts/materialdesignicons-webfont.woff2",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/fonts/materialdesignicons-webfont.woff2",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/fonts/materialdesignicons-webfont.woff2",
       "publicPath": "/static/fonts/materialdesignicons-webfont.woff2",
       "sourceFilename": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff2?v=7.4.47"
     },
+    "img/anton-mislawsky-small.webp": {
+      "name": "img/anton-mislawsky-small.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/anton-mislawsky-small.webp",
+      "publicPath": "/static/img/anton-mislawsky-small.webp",
+      "sourceFilename": "src/img/anton-mislawsky-small.webp"
+    },
+    "img/backgroundtransparent.webp": {
+      "name": "img/backgroundtransparent.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/backgroundtransparent.webp",
+      "publicPath": "/static/img/backgroundtransparent.webp",
+      "sourceFilename": "src/img/backgroundtransparent.webp"
+    },
+    "img/books.webp": {
+      "name": "img/books.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/books.webp",
+      "publicPath": "/static/img/books.webp",
+      "sourceFilename": "src/img/books.webp"
+    },
+    "img/cm-search-small.webp": {
+      "name": "img/cm-search-small.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/cm-search-small.webp",
+      "publicPath": "/static/img/cm-search-small.webp",
+      "sourceFilename": "src/img/cm-search-small.webp"
+    },
+    "img/cm-search.webp": {
+      "name": "img/cm-search.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/cm-search.webp",
+      "publicPath": "/static/img/cm-search.webp",
+      "sourceFilename": "src/img/cm-search.webp"
+    },
+    "img/cole-keister-ogqlpryftky-unsplash.webp": {
+      "name": "img/cole-keister-ogqlpryftky-unsplash.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/cole-keister-ogqlpryftky-unsplash.webp",
+      "publicPath": "/static/img/cole-keister-ogqlpryftky-unsplash.webp",
+      "sourceFilename": "src/img/cole-keister-ogqlpryftky-unsplash.webp"
+    },
+    "img/digitisedmanuscriptstoeuropeana-150.webp": {
+      "name": "img/digitisedmanuscriptstoeuropeana-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/digitisedmanuscriptstoeuropeana-150.webp",
+      "publicPath": "/static/img/digitisedmanuscriptstoeuropeana-150.webp",
+      "sourceFilename": "src/img/digitisedmanuscriptstoeuropeana-150.webp"
+    },
+    "img/digitisedmanuscriptstoeuropeana-200.webp": {
+      "name": "img/digitisedmanuscriptstoeuropeana-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/digitisedmanuscriptstoeuropeana-200.webp",
+      "publicPath": "/static/img/digitisedmanuscriptstoeuropeana-200.webp",
+      "sourceFilename": "src/img/digitisedmanuscriptstoeuropeana-200.webp"
+    },
+    "img/digitisedmanuscriptstoeuropeana.webp": {
+      "name": "img/digitisedmanuscriptstoeuropeana.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/digitisedmanuscriptstoeuropeana.webp",
+      "publicPath": "/static/img/digitisedmanuscriptstoeuropeana.webp",
+      "sourceFilename": "src/img/digitisedmanuscriptstoeuropeana.webp"
+    },
+    "img/dl-1.webp": {
+      "name": "img/dl-1.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/dl-1.webp",
+      "publicPath": "/static/img/dl-1.webp",
+      "sourceFilename": "src/img/dl-1.webp"
+    },
+    "img/dl-2.webp": {
+      "name": "img/dl-2.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/dl-2.webp",
+      "publicPath": "/static/img/dl-2.webp",
+      "sourceFilename": "src/img/dl-2.webp"
+    },
+    "img/europeana-pro-150.webp": {
+      "name": "img/europeana-pro-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/europeana-pro-150.webp",
+      "publicPath": "/static/img/europeana-pro-150.webp",
+      "sourceFilename": "src/img/europeana-pro-150.webp"
+    },
+    "img/europeana-pro-200.webp": {
+      "name": "img/europeana-pro-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/europeana-pro-200.webp",
+      "publicPath": "/static/img/europeana-pro-200.webp",
+      "sourceFilename": "src/img/europeana-pro-200.webp"
+    },
+    "img/europeana-pro.webp": {
+      "name": "img/europeana-pro.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/europeana-pro.webp",
+      "publicPath": "/static/img/europeana-pro.webp",
+      "sourceFilename": "src/img/europeana-pro.webp"
+    },
+    "img/favicon.ico": {
+      "name": "img/favicon.ico",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/favicon.ico",
+      "publicPath": "/static/img/favicon.ico",
+      "sourceFilename": "src/img/favicon.ico"
+    },
+    "img/fid-logo-150.webp": {
+      "name": "img/fid-logo-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/fid-logo-150.webp",
+      "publicPath": "/static/img/fid-logo-150.webp",
+      "sourceFilename": "src/img/fid-logo-150.webp"
+    },
+    "img/fid-logo-200.webp": {
+      "name": "img/fid-logo-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/fid-logo-200.webp",
+      "publicPath": "/static/img/fid-logo-200.webp",
+      "sourceFilename": "src/img/fid-logo-200.webp"
+    },
+    "img/fid-logo.webp": {
+      "name": "img/fid-logo.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/fid-logo.webp",
+      "publicPath": "/static/img/fid-logo.webp",
+      "sourceFilename": "src/img/fid-logo.webp"
+    },
+    "img/img-20210730-153812.webp": {
+      "name": "img/img-20210730-153812.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/img-20210730-153812.webp",
+      "publicPath": "/static/img/img-20210730-153812.webp",
+      "sourceFilename": "src/img/img-20210730-153812.webp"
+    },
+    "img/img-20210730-153818.webp": {
+      "name": "img/img-20210730-153818.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/img-20210730-153818.webp",
+      "publicPath": "/static/img/img-20210730-153818.webp",
+      "sourceFilename": "src/img/img-20210730-153818.webp"
+    },
+    "img/judaica-europeana-150.webp": {
+      "name": "img/judaica-europeana-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/judaica-europeana-150.webp",
+      "publicPath": "/static/img/judaica-europeana-150.webp",
+      "sourceFilename": "src/img/judaica-europeana-150.webp"
+    },
+    "img/judaica-europeana-200.webp": {
+      "name": "img/judaica-europeana-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/judaica-europeana-200.webp",
+      "publicPath": "/static/img/judaica-europeana-200.webp",
+      "sourceFilename": "src/img/judaica-europeana-200.webp"
+    },
+    "img/judaica-europeana.webp": {
+      "name": "img/judaica-europeana.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/judaica-europeana.webp",
+      "publicPath": "/static/img/judaica-europeana.webp",
+      "sourceFilename": "src/img/judaica-europeana.webp"
+    },
+    "img/judaicalink-knowledge-graph-compressed.webp": {
+      "name": "img/judaicalink-knowledge-graph-compressed.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/judaicalink-knowledge-graph-compressed.webp",
+      "publicPath": "/static/img/judaicalink-knowledge-graph-compressed.webp",
+      "sourceFilename": "src/img/judaicalink-knowledge-graph-compressed.webp"
+    },
+    "img/judaicalink-knowledge-graph-small.webp": {
+      "name": "img/judaicalink-knowledge-graph-small.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/judaicalink-knowledge-graph-small.webp",
+      "publicPath": "/static/img/judaicalink-knowledge-graph-small.webp",
+      "sourceFilename": "src/img/judaicalink-knowledge-graph-small.webp"
+    },
+    "img/judaicalink-knowledge-graph.webp": {
+      "name": "img/judaicalink-knowledge-graph.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/judaicalink-knowledge-graph.webp",
+      "publicPath": "/static/img/judaicalink-knowledge-graph.webp",
+      "sourceFilename": "src/img/judaicalink-knowledge-graph.webp"
+    },
+    "img/knowledge-graph.webp": {
+      "name": "img/knowledge-graph.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/knowledge-graph.webp",
+      "publicPath": "/static/img/knowledge-graph.webp",
+      "sourceFilename": "src/img/knowledge-graph.webp"
+    },
+    "img/mannheim-logo-150.webp": {
+      "name": "img/mannheim-logo-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/mannheim-logo-150.webp",
+      "publicPath": "/static/img/mannheim-logo-150.webp",
+      "sourceFilename": "src/img/mannheim-logo-150.webp"
+    },
+    "img/mannheim-logo-200.webp": {
+      "name": "img/mannheim-logo-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/mannheim-logo-200.webp",
+      "publicPath": "/static/img/mannheim-logo-200.webp",
+      "sourceFilename": "src/img/mannheim-logo-200.webp"
+    },
+    "img/mannheim-logo.webp": {
+      "name": "img/mannheim-logo.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/mannheim-logo.webp",
+      "publicPath": "/static/img/mannheim-logo.webp",
+      "sourceFilename": "src/img/mannheim-logo.webp"
+    },
+    "img/marie-bellando-mitjans-m7nacy4l2bq-unsplash.webp": {
+      "name": "img/marie-bellando-mitjans-m7nacy4l2bq-unsplash.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/marie-bellando-mitjans-m7nacy4l2bq-unsplash.webp",
+      "publicPath": "/static/img/marie-bellando-mitjans-m7nacy4l2bq-unsplash.webp",
+      "sourceFilename": "src/img/marie-bellando-mitjans-m7nacy4l2bq-unsplash.webp"
+    },
+    "img/new-synagogue-berlin.webp": {
+      "name": "img/new-synagogue-berlin.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/new-synagogue-berlin.webp",
+      "publicPath": "/static/img/new-synagogue-berlin.webp",
+      "sourceFilename": "src/img/new-synagogue-berlin.webp"
+    },
+    "img/news-detail.webp": {
+      "name": "img/news-detail.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/news-detail.webp",
+      "publicPath": "/static/img/news-detail.webp",
+      "sourceFilename": "src/img/news-detail.webp"
+    },
+    "img/newspaper-detail.webp": {
+      "name": "img/newspaper-detail.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/newspaper-detail.webp",
+      "publicPath": "/static/img/newspaper-detail.webp",
+      "sourceFilename": "src/img/newspaper-detail.webp"
+    },
+    "img/newspaper.webp": {
+      "name": "img/newspaper.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/newspaper.webp",
+      "publicPath": "/static/img/newspaper.webp",
+      "sourceFilename": "src/img/newspaper.webp"
+    },
+    "img/originals/graphics/JudaicaLink_Knowledge_Graph.jpg": {
+      "name": "img/originals/graphics/JudaicaLink_Knowledge_Graph.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/JudaicaLink_Knowledge_Graph.jpg",
+      "publicPath": "/static/img/originals/graphics/JudaicaLink_Knowledge_Graph.jpg",
+      "sourceFilename": "src/img/originals/graphics/JudaicaLink_Knowledge_Graph.jpg"
+    },
+    "img/originals/graphics/JudaicaLink_Knowledge_Graph_small.jpg": {
+      "name": "img/originals/graphics/JudaicaLink_Knowledge_Graph_small.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/JudaicaLink_Knowledge_Graph_small.jpg",
+      "publicPath": "/static/img/originals/graphics/JudaicaLink_Knowledge_Graph_small.jpg",
+      "sourceFilename": "src/img/originals/graphics/JudaicaLink_Knowledge_Graph_small.jpg"
+    },
+    "img/originals/graphics/all_search_nav_knowledge_graph.jpeg": {
+      "name": "img/originals/graphics/all_search_nav_knowledge_graph.jpeg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/all_search_nav_knowledge_graph.jpeg",
+      "publicPath": "/static/img/originals/graphics/all_search_nav_knowledge_graph.jpeg",
+      "sourceFilename": "src/img/originals/graphics/all_search_nav_knowledge_graph.jpeg"
+    },
+    "img/originals/graphics/backgroundtransparent.png": {
+      "name": "img/originals/graphics/backgroundtransparent.png",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/backgroundtransparent.png",
+      "publicPath": "/static/img/originals/graphics/backgroundtransparent.png",
+      "sourceFilename": "src/img/originals/graphics/backgroundtransparent.png"
+    },
+    "img/originals/graphics/judaicalink_knowledge_graph_compressed.jpg": {
+      "name": "img/originals/graphics/judaicalink_knowledge_graph_compressed.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/judaicalink_knowledge_graph_compressed.jpg",
+      "publicPath": "/static/img/originals/graphics/judaicalink_knowledge_graph_compressed.jpg",
+      "sourceFilename": "src/img/originals/graphics/judaicalink_knowledge_graph_compressed.jpg"
+    },
+    "img/originals/graphics/optimized/all-search-nav-knowledge-graph-150.webp": {
+      "name": "img/originals/graphics/optimized/all-search-nav-knowledge-graph-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/all-search-nav-knowledge-graph-150.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/all-search-nav-knowledge-graph-150.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/all-search-nav-knowledge-graph-150.webp"
+    },
+    "img/originals/graphics/optimized/all-search-nav-knowledge-graph-200.webp": {
+      "name": "img/originals/graphics/optimized/all-search-nav-knowledge-graph-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/all-search-nav-knowledge-graph-200.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/all-search-nav-knowledge-graph-200.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/all-search-nav-knowledge-graph-200.webp"
+    },
+    "img/originals/graphics/optimized/all-search-nav-knowledge-graph-300.webp": {
+      "name": "img/originals/graphics/optimized/all-search-nav-knowledge-graph-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/all-search-nav-knowledge-graph-300.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/all-search-nav-knowledge-graph-300.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/all-search-nav-knowledge-graph-300.webp"
+    },
+    "img/originals/graphics/optimized/all-search-nav-knowledge-graph-400.webp": {
+      "name": "img/originals/graphics/optimized/all-search-nav-knowledge-graph-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/all-search-nav-knowledge-graph-400.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/all-search-nav-knowledge-graph-400.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/all-search-nav-knowledge-graph-400.webp"
+    },
+    "img/originals/graphics/optimized/all-search-nav-knowledge-graph-800.webp": {
+      "name": "img/originals/graphics/optimized/all-search-nav-knowledge-graph-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/all-search-nav-knowledge-graph-800.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/all-search-nav-knowledge-graph-800.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/all-search-nav-knowledge-graph-800.webp"
+    },
+    "img/originals/graphics/optimized/all-search-nav-knowledge-graph.webp": {
+      "name": "img/originals/graphics/optimized/all-search-nav-knowledge-graph.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/all-search-nav-knowledge-graph.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/all-search-nav-knowledge-graph.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/all-search-nav-knowledge-graph.webp"
+    },
+    "img/originals/graphics/optimized/backgroundtransparent-150.webp": {
+      "name": "img/originals/graphics/optimized/backgroundtransparent-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/backgroundtransparent-150.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/backgroundtransparent-150.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/backgroundtransparent-150.webp"
+    },
+    "img/originals/graphics/optimized/backgroundtransparent-200.webp": {
+      "name": "img/originals/graphics/optimized/backgroundtransparent-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/backgroundtransparent-200.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/backgroundtransparent-200.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/backgroundtransparent-200.webp"
+    },
+    "img/originals/graphics/optimized/backgroundtransparent-300.webp": {
+      "name": "img/originals/graphics/optimized/backgroundtransparent-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/backgroundtransparent-300.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/backgroundtransparent-300.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/backgroundtransparent-300.webp"
+    },
+    "img/originals/graphics/optimized/backgroundtransparent-400.webp": {
+      "name": "img/originals/graphics/optimized/backgroundtransparent-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/backgroundtransparent-400.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/backgroundtransparent-400.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/backgroundtransparent-400.webp"
+    },
+    "img/originals/graphics/optimized/backgroundtransparent-800.webp": {
+      "name": "img/originals/graphics/optimized/backgroundtransparent-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/backgroundtransparent-800.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/backgroundtransparent-800.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/backgroundtransparent-800.webp"
+    },
+    "img/originals/graphics/optimized/backgroundtransparent.webp": {
+      "name": "img/originals/graphics/optimized/backgroundtransparent.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/backgroundtransparent.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/backgroundtransparent.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/backgroundtransparent.webp"
+    },
+    "img/originals/graphics/optimized/judaicalink-knowledge-graph-150.webp": {
+      "name": "img/originals/graphics/optimized/judaicalink-knowledge-graph-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/judaicalink-knowledge-graph-150.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/judaicalink-knowledge-graph-150.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/judaicalink-knowledge-graph-150.webp"
+    },
+    "img/originals/graphics/optimized/judaicalink-knowledge-graph-200.webp": {
+      "name": "img/originals/graphics/optimized/judaicalink-knowledge-graph-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/judaicalink-knowledge-graph-200.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/judaicalink-knowledge-graph-200.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/judaicalink-knowledge-graph-200.webp"
+    },
+    "img/originals/graphics/optimized/judaicalink-knowledge-graph-300.webp": {
+      "name": "img/originals/graphics/optimized/judaicalink-knowledge-graph-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/judaicalink-knowledge-graph-300.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/judaicalink-knowledge-graph-300.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/judaicalink-knowledge-graph-300.webp"
+    },
+    "img/originals/graphics/optimized/judaicalink-knowledge-graph-400.webp": {
+      "name": "img/originals/graphics/optimized/judaicalink-knowledge-graph-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/judaicalink-knowledge-graph-400.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/judaicalink-knowledge-graph-400.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/judaicalink-knowledge-graph-400.webp"
+    },
+    "img/originals/graphics/optimized/judaicalink-knowledge-graph-800.webp": {
+      "name": "img/originals/graphics/optimized/judaicalink-knowledge-graph-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/judaicalink-knowledge-graph-800.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/judaicalink-knowledge-graph-800.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/judaicalink-knowledge-graph-800.webp"
+    },
+    "img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-150.webp": {
+      "name": "img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-150.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-150.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-150.webp"
+    },
+    "img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-200.webp": {
+      "name": "img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-200.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-200.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-200.webp"
+    },
+    "img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-300.webp": {
+      "name": "img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-300.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-300.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-300.webp"
+    },
+    "img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-400.webp": {
+      "name": "img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-400.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-400.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-400.webp"
+    },
+    "img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-800.webp": {
+      "name": "img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-800.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-800.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed-800.webp"
+    },
+    "img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed.webp": {
+      "name": "img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/judaicalink-knowledge-graph-compressed.webp"
+    },
+    "img/originals/graphics/optimized/judaicalink-knowledge-graph-small-150.webp": {
+      "name": "img/originals/graphics/optimized/judaicalink-knowledge-graph-small-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/judaicalink-knowledge-graph-small-150.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/judaicalink-knowledge-graph-small-150.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/judaicalink-knowledge-graph-small-150.webp"
+    },
+    "img/originals/graphics/optimized/judaicalink-knowledge-graph-small-200.webp": {
+      "name": "img/originals/graphics/optimized/judaicalink-knowledge-graph-small-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/judaicalink-knowledge-graph-small-200.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/judaicalink-knowledge-graph-small-200.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/judaicalink-knowledge-graph-small-200.webp"
+    },
+    "img/originals/graphics/optimized/judaicalink-knowledge-graph-small-300.webp": {
+      "name": "img/originals/graphics/optimized/judaicalink-knowledge-graph-small-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/judaicalink-knowledge-graph-small-300.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/judaicalink-knowledge-graph-small-300.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/judaicalink-knowledge-graph-small-300.webp"
+    },
+    "img/originals/graphics/optimized/judaicalink-knowledge-graph-small-400.webp": {
+      "name": "img/originals/graphics/optimized/judaicalink-knowledge-graph-small-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/judaicalink-knowledge-graph-small-400.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/judaicalink-knowledge-graph-small-400.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/judaicalink-knowledge-graph-small-400.webp"
+    },
+    "img/originals/graphics/optimized/judaicalink-knowledge-graph-small-800.webp": {
+      "name": "img/originals/graphics/optimized/judaicalink-knowledge-graph-small-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/judaicalink-knowledge-graph-small-800.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/judaicalink-knowledge-graph-small-800.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/judaicalink-knowledge-graph-small-800.webp"
+    },
+    "img/originals/graphics/optimized/judaicalink-knowledge-graph-small.webp": {
+      "name": "img/originals/graphics/optimized/judaicalink-knowledge-graph-small.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/judaicalink-knowledge-graph-small.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/judaicalink-knowledge-graph-small.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/judaicalink-knowledge-graph-small.webp"
+    },
+    "img/originals/graphics/optimized/judaicalink-knowledge-graph.webp": {
+      "name": "img/originals/graphics/optimized/judaicalink-knowledge-graph.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/graphics/optimized/judaicalink-knowledge-graph.webp",
+      "publicPath": "/static/img/originals/graphics/optimized/judaicalink-knowledge-graph.webp",
+      "sourceFilename": "src/img/originals/graphics/optimized/judaicalink-knowledge-graph.webp"
+    },
+    "img/originals/icons/favicon.ico": {
+      "name": "img/originals/icons/favicon.ico",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/icons/favicon.ico",
+      "publicPath": "/static/img/originals/icons/favicon.ico",
+      "sourceFilename": "src/img/originals/icons/favicon.ico"
+    },
+    "img/originals/icons/lens.png": {
+      "name": "img/originals/icons/lens.png",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/icons/lens.png",
+      "publicPath": "/static/img/originals/icons/lens.png",
+      "sourceFilename": "src/img/originals/icons/lens.png"
+    },
+    "img/originals/images/IMG_20210730_153812.jpg": {
+      "name": "img/originals/images/IMG_20210730_153812.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/IMG_20210730_153812.jpg",
+      "publicPath": "/static/img/originals/images/IMG_20210730_153812.jpg",
+      "sourceFilename": "src/img/originals/images/IMG_20210730_153812.jpg"
+    },
+    "img/originals/images/IMG_20210730_153818.jpg": {
+      "name": "img/originals/images/IMG_20210730_153818.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/IMG_20210730_153818.jpg",
+      "publicPath": "/static/img/originals/images/IMG_20210730_153818.jpg",
+      "sourceFilename": "src/img/originals/images/IMG_20210730_153818.jpg"
+    },
+    "img/originals/images/Westend-synagoge.jpg": {
+      "name": "img/originals/images/Westend-synagoge.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/Westend-synagoge.jpg",
+      "publicPath": "/static/img/originals/images/Westend-synagoge.jpg",
+      "sourceFilename": "src/img/originals/images/Westend-synagoge.jpg"
+    },
+    "img/originals/images/anton-mislawsky_small.jpg": {
+      "name": "img/originals/images/anton-mislawsky_small.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/anton-mislawsky_small.jpg",
+      "publicPath": "/static/img/originals/images/anton-mislawsky_small.jpg",
+      "sourceFilename": "src/img/originals/images/anton-mislawsky_small.jpg"
+    },
+    "img/originals/images/anton-mislawsky_small1.jpg": {
+      "name": "img/originals/images/anton-mislawsky_small1.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/anton-mislawsky_small1.jpg",
+      "publicPath": "/static/img/originals/images/anton-mislawsky_small1.jpg",
+      "sourceFilename": "src/img/originals/images/anton-mislawsky_small1.jpg"
+    },
+    "img/originals/images/backgroundtransparent.png": {
+      "name": "img/originals/images/backgroundtransparent.png",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/backgroundtransparent.png",
+      "publicPath": "/static/img/originals/images/backgroundtransparent.png",
+      "sourceFilename": "src/img/originals/images/backgroundtransparent.png"
+    },
+    "img/originals/images/books.jpg": {
+      "name": "img/originals/images/books.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/books.jpg",
+      "publicPath": "/static/img/originals/images/books.jpg",
+      "sourceFilename": "src/img/originals/images/books.jpg"
+    },
+    "img/originals/images/cm_search.jpg": {
+      "name": "img/originals/images/cm_search.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/cm_search.jpg",
+      "publicPath": "/static/img/originals/images/cm_search.jpg",
+      "sourceFilename": "src/img/originals/images/cm_search.jpg"
+    },
+    "img/originals/images/cm_search_small.jpg": {
+      "name": "img/originals/images/cm_search_small.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/cm_search_small.jpg",
+      "publicPath": "/static/img/originals/images/cm_search_small.jpg",
+      "sourceFilename": "src/img/originals/images/cm_search_small.jpg"
+    },
+    "img/originals/images/cole-keister-ogQLprYfTKY-unsplash.jpg": {
+      "name": "img/originals/images/cole-keister-ogQLprYfTKY-unsplash.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/cole-keister-ogQLprYfTKY-unsplash.jpg",
+      "publicPath": "/static/img/originals/images/cole-keister-ogQLprYfTKY-unsplash.jpg",
+      "sourceFilename": "src/img/originals/images/cole-keister-ogQLprYfTKY-unsplash.jpg"
+    },
+    "img/originals/images/david-clode-Hg-4IWyVViE-unsplash.jpg": {
+      "name": "img/originals/images/david-clode-Hg-4IWyVViE-unsplash.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/david-clode-Hg-4IWyVViE-unsplash.jpg",
+      "publicPath": "/static/img/originals/images/david-clode-Hg-4IWyVViE-unsplash.jpg",
+      "sourceFilename": "src/img/originals/images/david-clode-Hg-4IWyVViE-unsplash.jpg"
+    },
+    "img/originals/images/dl_1.jpg": {
+      "name": "img/originals/images/dl_1.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/dl_1.jpg",
+      "publicPath": "/static/img/originals/images/dl_1.jpg",
+      "sourceFilename": "src/img/originals/images/dl_1.jpg"
+    },
+    "img/originals/images/dl_2.jpg": {
+      "name": "img/originals/images/dl_2.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/dl_2.jpg",
+      "publicPath": "/static/img/originals/images/dl_2.jpg",
+      "sourceFilename": "src/img/originals/images/dl_2.jpg"
+    },
+    "img/originals/images/marie-bellando-mitjans-m7NAcy4l2bQ-unsplash.jpg": {
+      "name": "img/originals/images/marie-bellando-mitjans-m7NAcy4l2bQ-unsplash.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/marie-bellando-mitjans-m7NAcy4l2bQ-unsplash.jpg",
+      "publicPath": "/static/img/originals/images/marie-bellando-mitjans-m7NAcy4l2bQ-unsplash.jpg",
+      "sourceFilename": "src/img/originals/images/marie-bellando-mitjans-m7NAcy4l2bQ-unsplash.jpg"
+    },
+    "img/originals/images/new_synagogue_berlin.jpg": {
+      "name": "img/originals/images/new_synagogue_berlin.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/new_synagogue_berlin.jpg",
+      "publicPath": "/static/img/originals/images/new_synagogue_berlin.jpg",
+      "sourceFilename": "src/img/originals/images/new_synagogue_berlin.jpg"
+    },
+    "img/originals/images/news_detail.jpg": {
+      "name": "img/originals/images/news_detail.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/news_detail.jpg",
+      "publicPath": "/static/img/originals/images/news_detail.jpg",
+      "sourceFilename": "src/img/originals/images/news_detail.jpg"
+    },
+    "img/originals/images/newspaper.jpg": {
+      "name": "img/originals/images/newspaper.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/newspaper.jpg",
+      "publicPath": "/static/img/originals/images/newspaper.jpg",
+      "sourceFilename": "src/img/originals/images/newspaper.jpg"
+    },
+    "img/originals/images/newspaper_detail.jpg": {
+      "name": "img/originals/images/newspaper_detail.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/newspaper_detail.jpg",
+      "publicPath": "/static/img/originals/images/newspaper_detail.jpg",
+      "sourceFilename": "src/img/originals/images/newspaper_detail.jpg"
+    },
+    "img/originals/images/optimized/anton-mislawsky-small-150.webp": {
+      "name": "img/originals/images/optimized/anton-mislawsky-small-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/anton-mislawsky-small-150.webp",
+      "publicPath": "/static/img/originals/images/optimized/anton-mislawsky-small-150.webp",
+      "sourceFilename": "src/img/originals/images/optimized/anton-mislawsky-small-150.webp"
+    },
+    "img/originals/images/optimized/anton-mislawsky-small-200.webp": {
+      "name": "img/originals/images/optimized/anton-mislawsky-small-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/anton-mislawsky-small-200.webp",
+      "publicPath": "/static/img/originals/images/optimized/anton-mislawsky-small-200.webp",
+      "sourceFilename": "src/img/originals/images/optimized/anton-mislawsky-small-200.webp"
+    },
+    "img/originals/images/optimized/anton-mislawsky-small-300.webp": {
+      "name": "img/originals/images/optimized/anton-mislawsky-small-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/anton-mislawsky-small-300.webp",
+      "publicPath": "/static/img/originals/images/optimized/anton-mislawsky-small-300.webp",
+      "sourceFilename": "src/img/originals/images/optimized/anton-mislawsky-small-300.webp"
+    },
+    "img/originals/images/optimized/anton-mislawsky-small-400.webp": {
+      "name": "img/originals/images/optimized/anton-mislawsky-small-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/anton-mislawsky-small-400.webp",
+      "publicPath": "/static/img/originals/images/optimized/anton-mislawsky-small-400.webp",
+      "sourceFilename": "src/img/originals/images/optimized/anton-mislawsky-small-400.webp"
+    },
+    "img/originals/images/optimized/anton-mislawsky-small-800.webp": {
+      "name": "img/originals/images/optimized/anton-mislawsky-small-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/anton-mislawsky-small-800.webp",
+      "publicPath": "/static/img/originals/images/optimized/anton-mislawsky-small-800.webp",
+      "sourceFilename": "src/img/originals/images/optimized/anton-mislawsky-small-800.webp"
+    },
+    "img/originals/images/optimized/anton-mislawsky-small.webp": {
+      "name": "img/originals/images/optimized/anton-mislawsky-small.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/anton-mislawsky-small.webp",
+      "publicPath": "/static/img/originals/images/optimized/anton-mislawsky-small.webp",
+      "sourceFilename": "src/img/originals/images/optimized/anton-mislawsky-small.webp"
+    },
+    "img/originals/images/optimized/anton-mislawsky-small1-150.webp": {
+      "name": "img/originals/images/optimized/anton-mislawsky-small1-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/anton-mislawsky-small1-150.webp",
+      "publicPath": "/static/img/originals/images/optimized/anton-mislawsky-small1-150.webp",
+      "sourceFilename": "src/img/originals/images/optimized/anton-mislawsky-small1-150.webp"
+    },
+    "img/originals/images/optimized/anton-mislawsky-small1-200.webp": {
+      "name": "img/originals/images/optimized/anton-mislawsky-small1-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/anton-mislawsky-small1-200.webp",
+      "publicPath": "/static/img/originals/images/optimized/anton-mislawsky-small1-200.webp",
+      "sourceFilename": "src/img/originals/images/optimized/anton-mislawsky-small1-200.webp"
+    },
+    "img/originals/images/optimized/anton-mislawsky-small1-300.webp": {
+      "name": "img/originals/images/optimized/anton-mislawsky-small1-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/anton-mislawsky-small1-300.webp",
+      "publicPath": "/static/img/originals/images/optimized/anton-mislawsky-small1-300.webp",
+      "sourceFilename": "src/img/originals/images/optimized/anton-mislawsky-small1-300.webp"
+    },
+    "img/originals/images/optimized/anton-mislawsky-small1-400.webp": {
+      "name": "img/originals/images/optimized/anton-mislawsky-small1-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/anton-mislawsky-small1-400.webp",
+      "publicPath": "/static/img/originals/images/optimized/anton-mislawsky-small1-400.webp",
+      "sourceFilename": "src/img/originals/images/optimized/anton-mislawsky-small1-400.webp"
+    },
+    "img/originals/images/optimized/anton-mislawsky-small1-800.webp": {
+      "name": "img/originals/images/optimized/anton-mislawsky-small1-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/anton-mislawsky-small1-800.webp",
+      "publicPath": "/static/img/originals/images/optimized/anton-mislawsky-small1-800.webp",
+      "sourceFilename": "src/img/originals/images/optimized/anton-mislawsky-small1-800.webp"
+    },
+    "img/originals/images/optimized/books-150.webp": {
+      "name": "img/originals/images/optimized/books-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/books-150.webp",
+      "publicPath": "/static/img/originals/images/optimized/books-150.webp",
+      "sourceFilename": "src/img/originals/images/optimized/books-150.webp"
+    },
+    "img/originals/images/optimized/books-200.webp": {
+      "name": "img/originals/images/optimized/books-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/books-200.webp",
+      "publicPath": "/static/img/originals/images/optimized/books-200.webp",
+      "sourceFilename": "src/img/originals/images/optimized/books-200.webp"
+    },
+    "img/originals/images/optimized/books-300.webp": {
+      "name": "img/originals/images/optimized/books-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/books-300.webp",
+      "publicPath": "/static/img/originals/images/optimized/books-300.webp",
+      "sourceFilename": "src/img/originals/images/optimized/books-300.webp"
+    },
+    "img/originals/images/optimized/books-400.webp": {
+      "name": "img/originals/images/optimized/books-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/books-400.webp",
+      "publicPath": "/static/img/originals/images/optimized/books-400.webp",
+      "sourceFilename": "src/img/originals/images/optimized/books-400.webp"
+    },
+    "img/originals/images/optimized/books-800.webp": {
+      "name": "img/originals/images/optimized/books-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/books-800.webp",
+      "publicPath": "/static/img/originals/images/optimized/books-800.webp",
+      "sourceFilename": "src/img/originals/images/optimized/books-800.webp"
+    },
+    "img/originals/images/optimized/books.webp": {
+      "name": "img/originals/images/optimized/books.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/books.webp",
+      "publicPath": "/static/img/originals/images/optimized/books.webp",
+      "sourceFilename": "src/img/originals/images/optimized/books.webp"
+    },
+    "img/originals/images/optimized/cm-search-150.webp": {
+      "name": "img/originals/images/optimized/cm-search-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/cm-search-150.webp",
+      "publicPath": "/static/img/originals/images/optimized/cm-search-150.webp",
+      "sourceFilename": "src/img/originals/images/optimized/cm-search-150.webp"
+    },
+    "img/originals/images/optimized/cm-search-200.webp": {
+      "name": "img/originals/images/optimized/cm-search-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/cm-search-200.webp",
+      "publicPath": "/static/img/originals/images/optimized/cm-search-200.webp",
+      "sourceFilename": "src/img/originals/images/optimized/cm-search-200.webp"
+    },
+    "img/originals/images/optimized/cm-search-300.webp": {
+      "name": "img/originals/images/optimized/cm-search-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/cm-search-300.webp",
+      "publicPath": "/static/img/originals/images/optimized/cm-search-300.webp",
+      "sourceFilename": "src/img/originals/images/optimized/cm-search-300.webp"
+    },
+    "img/originals/images/optimized/cm-search-400.webp": {
+      "name": "img/originals/images/optimized/cm-search-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/cm-search-400.webp",
+      "publicPath": "/static/img/originals/images/optimized/cm-search-400.webp",
+      "sourceFilename": "src/img/originals/images/optimized/cm-search-400.webp"
+    },
+    "img/originals/images/optimized/cm-search-800.webp": {
+      "name": "img/originals/images/optimized/cm-search-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/cm-search-800.webp",
+      "publicPath": "/static/img/originals/images/optimized/cm-search-800.webp",
+      "sourceFilename": "src/img/originals/images/optimized/cm-search-800.webp"
+    },
+    "img/originals/images/optimized/cm-search-small-150.webp": {
+      "name": "img/originals/images/optimized/cm-search-small-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/cm-search-small-150.webp",
+      "publicPath": "/static/img/originals/images/optimized/cm-search-small-150.webp",
+      "sourceFilename": "src/img/originals/images/optimized/cm-search-small-150.webp"
+    },
+    "img/originals/images/optimized/cm-search-small-200.webp": {
+      "name": "img/originals/images/optimized/cm-search-small-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/cm-search-small-200.webp",
+      "publicPath": "/static/img/originals/images/optimized/cm-search-small-200.webp",
+      "sourceFilename": "src/img/originals/images/optimized/cm-search-small-200.webp"
+    },
+    "img/originals/images/optimized/cm-search-small-300.webp": {
+      "name": "img/originals/images/optimized/cm-search-small-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/cm-search-small-300.webp",
+      "publicPath": "/static/img/originals/images/optimized/cm-search-small-300.webp",
+      "sourceFilename": "src/img/originals/images/optimized/cm-search-small-300.webp"
+    },
+    "img/originals/images/optimized/cm-search-small-400.webp": {
+      "name": "img/originals/images/optimized/cm-search-small-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/cm-search-small-400.webp",
+      "publicPath": "/static/img/originals/images/optimized/cm-search-small-400.webp",
+      "sourceFilename": "src/img/originals/images/optimized/cm-search-small-400.webp"
+    },
+    "img/originals/images/optimized/cm-search-small-800.webp": {
+      "name": "img/originals/images/optimized/cm-search-small-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/cm-search-small-800.webp",
+      "publicPath": "/static/img/originals/images/optimized/cm-search-small-800.webp",
+      "sourceFilename": "src/img/originals/images/optimized/cm-search-small-800.webp"
+    },
+    "img/originals/images/optimized/cm-search-small.webp": {
+      "name": "img/originals/images/optimized/cm-search-small.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/cm-search-small.webp",
+      "publicPath": "/static/img/originals/images/optimized/cm-search-small.webp",
+      "sourceFilename": "src/img/originals/images/optimized/cm-search-small.webp"
+    },
+    "img/originals/images/optimized/cm-search.webp": {
+      "name": "img/originals/images/optimized/cm-search.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/cm-search.webp",
+      "publicPath": "/static/img/originals/images/optimized/cm-search.webp",
+      "sourceFilename": "src/img/originals/images/optimized/cm-search.webp"
+    },
+    "img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-150.webp": {
+      "name": "img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-150.webp",
+      "publicPath": "/static/img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-150.webp",
+      "sourceFilename": "src/img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-150.webp"
+    },
+    "img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-200.webp": {
+      "name": "img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-200.webp",
+      "publicPath": "/static/img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-200.webp",
+      "sourceFilename": "src/img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-200.webp"
+    },
+    "img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-300.webp": {
+      "name": "img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-300.webp",
+      "publicPath": "/static/img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-300.webp",
+      "sourceFilename": "src/img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-300.webp"
+    },
+    "img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-400.webp": {
+      "name": "img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-400.webp",
+      "publicPath": "/static/img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-400.webp",
+      "sourceFilename": "src/img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-400.webp"
+    },
+    "img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-800.webp": {
+      "name": "img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-800.webp",
+      "publicPath": "/static/img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-800.webp",
+      "sourceFilename": "src/img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash-800.webp"
+    },
+    "img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash.webp": {
+      "name": "img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash.webp",
+      "publicPath": "/static/img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash.webp",
+      "sourceFilename": "src/img/originals/images/optimized/cole-keister-ogqlpryftky-unsplash.webp"
+    },
+    "img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-150.webp": {
+      "name": "img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-150.webp",
+      "publicPath": "/static/img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-150.webp",
+      "sourceFilename": "src/img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-150.webp"
+    },
+    "img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-200.webp": {
+      "name": "img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-200.webp",
+      "publicPath": "/static/img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-200.webp",
+      "sourceFilename": "src/img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-200.webp"
+    },
+    "img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-300.webp": {
+      "name": "img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-300.webp",
+      "publicPath": "/static/img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-300.webp",
+      "sourceFilename": "src/img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-300.webp"
+    },
+    "img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-400.webp": {
+      "name": "img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-400.webp",
+      "publicPath": "/static/img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-400.webp",
+      "sourceFilename": "src/img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-400.webp"
+    },
+    "img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-800.webp": {
+      "name": "img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-800.webp",
+      "publicPath": "/static/img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-800.webp",
+      "sourceFilename": "src/img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash-800.webp"
+    },
+    "img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash.webp": {
+      "name": "img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash.webp",
+      "publicPath": "/static/img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash.webp",
+      "sourceFilename": "src/img/originals/images/optimized/david-clode-hg-4iwyvvie-unsplash.webp"
+    },
+    "img/originals/images/optimized/dl-1-150.webp": {
+      "name": "img/originals/images/optimized/dl-1-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/dl-1-150.webp",
+      "publicPath": "/static/img/originals/images/optimized/dl-1-150.webp",
+      "sourceFilename": "src/img/originals/images/optimized/dl-1-150.webp"
+    },
+    "img/originals/images/optimized/dl-1-200.webp": {
+      "name": "img/originals/images/optimized/dl-1-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/dl-1-200.webp",
+      "publicPath": "/static/img/originals/images/optimized/dl-1-200.webp",
+      "sourceFilename": "src/img/originals/images/optimized/dl-1-200.webp"
+    },
+    "img/originals/images/optimized/dl-1-300.webp": {
+      "name": "img/originals/images/optimized/dl-1-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/dl-1-300.webp",
+      "publicPath": "/static/img/originals/images/optimized/dl-1-300.webp",
+      "sourceFilename": "src/img/originals/images/optimized/dl-1-300.webp"
+    },
+    "img/originals/images/optimized/dl-1-400.webp": {
+      "name": "img/originals/images/optimized/dl-1-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/dl-1-400.webp",
+      "publicPath": "/static/img/originals/images/optimized/dl-1-400.webp",
+      "sourceFilename": "src/img/originals/images/optimized/dl-1-400.webp"
+    },
+    "img/originals/images/optimized/dl-1-800.webp": {
+      "name": "img/originals/images/optimized/dl-1-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/dl-1-800.webp",
+      "publicPath": "/static/img/originals/images/optimized/dl-1-800.webp",
+      "sourceFilename": "src/img/originals/images/optimized/dl-1-800.webp"
+    },
+    "img/originals/images/optimized/dl-1.webp": {
+      "name": "img/originals/images/optimized/dl-1.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/dl-1.webp",
+      "publicPath": "/static/img/originals/images/optimized/dl-1.webp",
+      "sourceFilename": "src/img/originals/images/optimized/dl-1.webp"
+    },
+    "img/originals/images/optimized/dl-2-150.webp": {
+      "name": "img/originals/images/optimized/dl-2-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/dl-2-150.webp",
+      "publicPath": "/static/img/originals/images/optimized/dl-2-150.webp",
+      "sourceFilename": "src/img/originals/images/optimized/dl-2-150.webp"
+    },
+    "img/originals/images/optimized/dl-2-200.webp": {
+      "name": "img/originals/images/optimized/dl-2-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/dl-2-200.webp",
+      "publicPath": "/static/img/originals/images/optimized/dl-2-200.webp",
+      "sourceFilename": "src/img/originals/images/optimized/dl-2-200.webp"
+    },
+    "img/originals/images/optimized/dl-2-300.webp": {
+      "name": "img/originals/images/optimized/dl-2-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/dl-2-300.webp",
+      "publicPath": "/static/img/originals/images/optimized/dl-2-300.webp",
+      "sourceFilename": "src/img/originals/images/optimized/dl-2-300.webp"
+    },
+    "img/originals/images/optimized/dl-2-400.webp": {
+      "name": "img/originals/images/optimized/dl-2-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/dl-2-400.webp",
+      "publicPath": "/static/img/originals/images/optimized/dl-2-400.webp",
+      "sourceFilename": "src/img/originals/images/optimized/dl-2-400.webp"
+    },
+    "img/originals/images/optimized/dl-2-800.webp": {
+      "name": "img/originals/images/optimized/dl-2-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/dl-2-800.webp",
+      "publicPath": "/static/img/originals/images/optimized/dl-2-800.webp",
+      "sourceFilename": "src/img/originals/images/optimized/dl-2-800.webp"
+    },
+    "img/originals/images/optimized/dl-2.webp": {
+      "name": "img/originals/images/optimized/dl-2.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/dl-2.webp",
+      "publicPath": "/static/img/originals/images/optimized/dl-2.webp",
+      "sourceFilename": "src/img/originals/images/optimized/dl-2.webp"
+    },
+    "img/originals/images/optimized/img-20210730-153812-150.webp": {
+      "name": "img/originals/images/optimized/img-20210730-153812-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/img-20210730-153812-150.webp",
+      "publicPath": "/static/img/originals/images/optimized/img-20210730-153812-150.webp",
+      "sourceFilename": "src/img/originals/images/optimized/img-20210730-153812-150.webp"
+    },
+    "img/originals/images/optimized/img-20210730-153812-200.webp": {
+      "name": "img/originals/images/optimized/img-20210730-153812-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/img-20210730-153812-200.webp",
+      "publicPath": "/static/img/originals/images/optimized/img-20210730-153812-200.webp",
+      "sourceFilename": "src/img/originals/images/optimized/img-20210730-153812-200.webp"
+    },
+    "img/originals/images/optimized/img-20210730-153812-300.webp": {
+      "name": "img/originals/images/optimized/img-20210730-153812-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/img-20210730-153812-300.webp",
+      "publicPath": "/static/img/originals/images/optimized/img-20210730-153812-300.webp",
+      "sourceFilename": "src/img/originals/images/optimized/img-20210730-153812-300.webp"
+    },
+    "img/originals/images/optimized/img-20210730-153812-400.webp": {
+      "name": "img/originals/images/optimized/img-20210730-153812-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/img-20210730-153812-400.webp",
+      "publicPath": "/static/img/originals/images/optimized/img-20210730-153812-400.webp",
+      "sourceFilename": "src/img/originals/images/optimized/img-20210730-153812-400.webp"
+    },
+    "img/originals/images/optimized/img-20210730-153812-800.webp": {
+      "name": "img/originals/images/optimized/img-20210730-153812-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/img-20210730-153812-800.webp",
+      "publicPath": "/static/img/originals/images/optimized/img-20210730-153812-800.webp",
+      "sourceFilename": "src/img/originals/images/optimized/img-20210730-153812-800.webp"
+    },
+    "img/originals/images/optimized/img-20210730-153812.webp": {
+      "name": "img/originals/images/optimized/img-20210730-153812.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/img-20210730-153812.webp",
+      "publicPath": "/static/img/originals/images/optimized/img-20210730-153812.webp",
+      "sourceFilename": "src/img/originals/images/optimized/img-20210730-153812.webp"
+    },
+    "img/originals/images/optimized/img-20210730-153818-150.webp": {
+      "name": "img/originals/images/optimized/img-20210730-153818-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/img-20210730-153818-150.webp",
+      "publicPath": "/static/img/originals/images/optimized/img-20210730-153818-150.webp",
+      "sourceFilename": "src/img/originals/images/optimized/img-20210730-153818-150.webp"
+    },
+    "img/originals/images/optimized/img-20210730-153818-200.webp": {
+      "name": "img/originals/images/optimized/img-20210730-153818-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/img-20210730-153818-200.webp",
+      "publicPath": "/static/img/originals/images/optimized/img-20210730-153818-200.webp",
+      "sourceFilename": "src/img/originals/images/optimized/img-20210730-153818-200.webp"
+    },
+    "img/originals/images/optimized/img-20210730-153818-300.webp": {
+      "name": "img/originals/images/optimized/img-20210730-153818-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/img-20210730-153818-300.webp",
+      "publicPath": "/static/img/originals/images/optimized/img-20210730-153818-300.webp",
+      "sourceFilename": "src/img/originals/images/optimized/img-20210730-153818-300.webp"
+    },
+    "img/originals/images/optimized/img-20210730-153818-400.webp": {
+      "name": "img/originals/images/optimized/img-20210730-153818-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/img-20210730-153818-400.webp",
+      "publicPath": "/static/img/originals/images/optimized/img-20210730-153818-400.webp",
+      "sourceFilename": "src/img/originals/images/optimized/img-20210730-153818-400.webp"
+    },
+    "img/originals/images/optimized/img-20210730-153818-800.webp": {
+      "name": "img/originals/images/optimized/img-20210730-153818-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/img-20210730-153818-800.webp",
+      "publicPath": "/static/img/originals/images/optimized/img-20210730-153818-800.webp",
+      "sourceFilename": "src/img/originals/images/optimized/img-20210730-153818-800.webp"
+    },
+    "img/originals/images/optimized/img-20210730-153818.webp": {
+      "name": "img/originals/images/optimized/img-20210730-153818.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/img-20210730-153818.webp",
+      "publicPath": "/static/img/originals/images/optimized/img-20210730-153818.webp",
+      "sourceFilename": "src/img/originals/images/optimized/img-20210730-153818.webp"
+    },
+    "img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-150.webp": {
+      "name": "img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-150.webp",
+      "publicPath": "/static/img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-150.webp",
+      "sourceFilename": "src/img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-150.webp"
+    },
+    "img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-200.webp": {
+      "name": "img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-200.webp",
+      "publicPath": "/static/img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-200.webp",
+      "sourceFilename": "src/img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-200.webp"
+    },
+    "img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-300.webp": {
+      "name": "img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-300.webp",
+      "publicPath": "/static/img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-300.webp",
+      "sourceFilename": "src/img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-300.webp"
+    },
+    "img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-400.webp": {
+      "name": "img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-400.webp",
+      "publicPath": "/static/img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-400.webp",
+      "sourceFilename": "src/img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-400.webp"
+    },
+    "img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-800.webp": {
+      "name": "img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-800.webp",
+      "publicPath": "/static/img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-800.webp",
+      "sourceFilename": "src/img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash-800.webp"
+    },
+    "img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash.webp": {
+      "name": "img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash.webp",
+      "publicPath": "/static/img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash.webp",
+      "sourceFilename": "src/img/originals/images/optimized/marie-bellando-mitjans-m7nacy4l2bq-unsplash.webp"
+    },
+    "img/originals/images/optimized/new-synagogue-berlin-150.webp": {
+      "name": "img/originals/images/optimized/new-synagogue-berlin-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/new-synagogue-berlin-150.webp",
+      "publicPath": "/static/img/originals/images/optimized/new-synagogue-berlin-150.webp",
+      "sourceFilename": "src/img/originals/images/optimized/new-synagogue-berlin-150.webp"
+    },
+    "img/originals/images/optimized/new-synagogue-berlin-200.webp": {
+      "name": "img/originals/images/optimized/new-synagogue-berlin-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/new-synagogue-berlin-200.webp",
+      "publicPath": "/static/img/originals/images/optimized/new-synagogue-berlin-200.webp",
+      "sourceFilename": "src/img/originals/images/optimized/new-synagogue-berlin-200.webp"
+    },
+    "img/originals/images/optimized/new-synagogue-berlin-300.webp": {
+      "name": "img/originals/images/optimized/new-synagogue-berlin-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/new-synagogue-berlin-300.webp",
+      "publicPath": "/static/img/originals/images/optimized/new-synagogue-berlin-300.webp",
+      "sourceFilename": "src/img/originals/images/optimized/new-synagogue-berlin-300.webp"
+    },
+    "img/originals/images/optimized/new-synagogue-berlin-400.webp": {
+      "name": "img/originals/images/optimized/new-synagogue-berlin-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/new-synagogue-berlin-400.webp",
+      "publicPath": "/static/img/originals/images/optimized/new-synagogue-berlin-400.webp",
+      "sourceFilename": "src/img/originals/images/optimized/new-synagogue-berlin-400.webp"
+    },
+    "img/originals/images/optimized/new-synagogue-berlin-800.webp": {
+      "name": "img/originals/images/optimized/new-synagogue-berlin-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/new-synagogue-berlin-800.webp",
+      "publicPath": "/static/img/originals/images/optimized/new-synagogue-berlin-800.webp",
+      "sourceFilename": "src/img/originals/images/optimized/new-synagogue-berlin-800.webp"
+    },
+    "img/originals/images/optimized/new-synagogue-berlin.webp": {
+      "name": "img/originals/images/optimized/new-synagogue-berlin.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/new-synagogue-berlin.webp",
+      "publicPath": "/static/img/originals/images/optimized/new-synagogue-berlin.webp",
+      "sourceFilename": "src/img/originals/images/optimized/new-synagogue-berlin.webp"
+    },
+    "img/originals/images/optimized/news-detail-150.webp": {
+      "name": "img/originals/images/optimized/news-detail-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/news-detail-150.webp",
+      "publicPath": "/static/img/originals/images/optimized/news-detail-150.webp",
+      "sourceFilename": "src/img/originals/images/optimized/news-detail-150.webp"
+    },
+    "img/originals/images/optimized/news-detail-200.webp": {
+      "name": "img/originals/images/optimized/news-detail-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/news-detail-200.webp",
+      "publicPath": "/static/img/originals/images/optimized/news-detail-200.webp",
+      "sourceFilename": "src/img/originals/images/optimized/news-detail-200.webp"
+    },
+    "img/originals/images/optimized/news-detail-300.webp": {
+      "name": "img/originals/images/optimized/news-detail-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/news-detail-300.webp",
+      "publicPath": "/static/img/originals/images/optimized/news-detail-300.webp",
+      "sourceFilename": "src/img/originals/images/optimized/news-detail-300.webp"
+    },
+    "img/originals/images/optimized/news-detail-400.webp": {
+      "name": "img/originals/images/optimized/news-detail-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/news-detail-400.webp",
+      "publicPath": "/static/img/originals/images/optimized/news-detail-400.webp",
+      "sourceFilename": "src/img/originals/images/optimized/news-detail-400.webp"
+    },
+    "img/originals/images/optimized/news-detail-800.webp": {
+      "name": "img/originals/images/optimized/news-detail-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/news-detail-800.webp",
+      "publicPath": "/static/img/originals/images/optimized/news-detail-800.webp",
+      "sourceFilename": "src/img/originals/images/optimized/news-detail-800.webp"
+    },
+    "img/originals/images/optimized/news-detail.webp": {
+      "name": "img/originals/images/optimized/news-detail.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/news-detail.webp",
+      "publicPath": "/static/img/originals/images/optimized/news-detail.webp",
+      "sourceFilename": "src/img/originals/images/optimized/news-detail.webp"
+    },
+    "img/originals/images/optimized/newspaper-150.webp": {
+      "name": "img/originals/images/optimized/newspaper-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/newspaper-150.webp",
+      "publicPath": "/static/img/originals/images/optimized/newspaper-150.webp",
+      "sourceFilename": "src/img/originals/images/optimized/newspaper-150.webp"
+    },
+    "img/originals/images/optimized/newspaper-200.webp": {
+      "name": "img/originals/images/optimized/newspaper-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/newspaper-200.webp",
+      "publicPath": "/static/img/originals/images/optimized/newspaper-200.webp",
+      "sourceFilename": "src/img/originals/images/optimized/newspaper-200.webp"
+    },
+    "img/originals/images/optimized/newspaper-300.webp": {
+      "name": "img/originals/images/optimized/newspaper-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/newspaper-300.webp",
+      "publicPath": "/static/img/originals/images/optimized/newspaper-300.webp",
+      "sourceFilename": "src/img/originals/images/optimized/newspaper-300.webp"
+    },
+    "img/originals/images/optimized/newspaper-400.webp": {
+      "name": "img/originals/images/optimized/newspaper-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/newspaper-400.webp",
+      "publicPath": "/static/img/originals/images/optimized/newspaper-400.webp",
+      "sourceFilename": "src/img/originals/images/optimized/newspaper-400.webp"
+    },
+    "img/originals/images/optimized/newspaper-800.webp": {
+      "name": "img/originals/images/optimized/newspaper-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/newspaper-800.webp",
+      "publicPath": "/static/img/originals/images/optimized/newspaper-800.webp",
+      "sourceFilename": "src/img/originals/images/optimized/newspaper-800.webp"
+    },
+    "img/originals/images/optimized/newspaper-detail-150.webp": {
+      "name": "img/originals/images/optimized/newspaper-detail-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/newspaper-detail-150.webp",
+      "publicPath": "/static/img/originals/images/optimized/newspaper-detail-150.webp",
+      "sourceFilename": "src/img/originals/images/optimized/newspaper-detail-150.webp"
+    },
+    "img/originals/images/optimized/newspaper-detail-200.webp": {
+      "name": "img/originals/images/optimized/newspaper-detail-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/newspaper-detail-200.webp",
+      "publicPath": "/static/img/originals/images/optimized/newspaper-detail-200.webp",
+      "sourceFilename": "src/img/originals/images/optimized/newspaper-detail-200.webp"
+    },
+    "img/originals/images/optimized/newspaper-detail-300.webp": {
+      "name": "img/originals/images/optimized/newspaper-detail-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/newspaper-detail-300.webp",
+      "publicPath": "/static/img/originals/images/optimized/newspaper-detail-300.webp",
+      "sourceFilename": "src/img/originals/images/optimized/newspaper-detail-300.webp"
+    },
+    "img/originals/images/optimized/newspaper-detail-400.webp": {
+      "name": "img/originals/images/optimized/newspaper-detail-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/newspaper-detail-400.webp",
+      "publicPath": "/static/img/originals/images/optimized/newspaper-detail-400.webp",
+      "sourceFilename": "src/img/originals/images/optimized/newspaper-detail-400.webp"
+    },
+    "img/originals/images/optimized/newspaper-detail-800.webp": {
+      "name": "img/originals/images/optimized/newspaper-detail-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/newspaper-detail-800.webp",
+      "publicPath": "/static/img/originals/images/optimized/newspaper-detail-800.webp",
+      "sourceFilename": "src/img/originals/images/optimized/newspaper-detail-800.webp"
+    },
+    "img/originals/images/optimized/newspaper-detail.webp": {
+      "name": "img/originals/images/optimized/newspaper-detail.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/newspaper-detail.webp",
+      "publicPath": "/static/img/originals/images/optimized/newspaper-detail.webp",
+      "sourceFilename": "src/img/originals/images/optimized/newspaper-detail.webp"
+    },
+    "img/originals/images/optimized/newspaper.webp": {
+      "name": "img/originals/images/optimized/newspaper.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/newspaper.webp",
+      "publicPath": "/static/img/originals/images/optimized/newspaper.webp",
+      "sourceFilename": "src/img/originals/images/optimized/newspaper.webp"
+    },
+    "img/originals/images/optimized/stack-150.webp": {
+      "name": "img/originals/images/optimized/stack-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/stack-150.webp",
+      "publicPath": "/static/img/originals/images/optimized/stack-150.webp",
+      "sourceFilename": "src/img/originals/images/optimized/stack-150.webp"
+    },
+    "img/originals/images/optimized/stack-200.webp": {
+      "name": "img/originals/images/optimized/stack-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/stack-200.webp",
+      "publicPath": "/static/img/originals/images/optimized/stack-200.webp",
+      "sourceFilename": "src/img/originals/images/optimized/stack-200.webp"
+    },
+    "img/originals/images/optimized/stack-300.webp": {
+      "name": "img/originals/images/optimized/stack-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/stack-300.webp",
+      "publicPath": "/static/img/originals/images/optimized/stack-300.webp",
+      "sourceFilename": "src/img/originals/images/optimized/stack-300.webp"
+    },
+    "img/originals/images/optimized/stack-400.webp": {
+      "name": "img/originals/images/optimized/stack-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/stack-400.webp",
+      "publicPath": "/static/img/originals/images/optimized/stack-400.webp",
+      "sourceFilename": "src/img/originals/images/optimized/stack-400.webp"
+    },
+    "img/originals/images/optimized/stack-800.webp": {
+      "name": "img/originals/images/optimized/stack-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/stack-800.webp",
+      "publicPath": "/static/img/originals/images/optimized/stack-800.webp",
+      "sourceFilename": "src/img/originals/images/optimized/stack-800.webp"
+    },
+    "img/originals/images/optimized/stack.webp": {
+      "name": "img/originals/images/optimized/stack.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/stack.webp",
+      "publicPath": "/static/img/originals/images/optimized/stack.webp",
+      "sourceFilename": "src/img/originals/images/optimized/stack.webp"
+    },
+    "img/originals/images/optimized/westend-synagoge-150.webp": {
+      "name": "img/originals/images/optimized/westend-synagoge-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/westend-synagoge-150.webp",
+      "publicPath": "/static/img/originals/images/optimized/westend-synagoge-150.webp",
+      "sourceFilename": "src/img/originals/images/optimized/westend-synagoge-150.webp"
+    },
+    "img/originals/images/optimized/westend-synagoge-200.webp": {
+      "name": "img/originals/images/optimized/westend-synagoge-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/westend-synagoge-200.webp",
+      "publicPath": "/static/img/originals/images/optimized/westend-synagoge-200.webp",
+      "sourceFilename": "src/img/originals/images/optimized/westend-synagoge-200.webp"
+    },
+    "img/originals/images/optimized/westend-synagoge-300.webp": {
+      "name": "img/originals/images/optimized/westend-synagoge-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/westend-synagoge-300.webp",
+      "publicPath": "/static/img/originals/images/optimized/westend-synagoge-300.webp",
+      "sourceFilename": "src/img/originals/images/optimized/westend-synagoge-300.webp"
+    },
+    "img/originals/images/optimized/westend-synagoge-400.webp": {
+      "name": "img/originals/images/optimized/westend-synagoge-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/westend-synagoge-400.webp",
+      "publicPath": "/static/img/originals/images/optimized/westend-synagoge-400.webp",
+      "sourceFilename": "src/img/originals/images/optimized/westend-synagoge-400.webp"
+    },
+    "img/originals/images/optimized/westend-synagoge-800.webp": {
+      "name": "img/originals/images/optimized/westend-synagoge-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/westend-synagoge-800.webp",
+      "publicPath": "/static/img/originals/images/optimized/westend-synagoge-800.webp",
+      "sourceFilename": "src/img/originals/images/optimized/westend-synagoge-800.webp"
+    },
+    "img/originals/images/optimized/westend-synagoge.webp": {
+      "name": "img/originals/images/optimized/westend-synagoge.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/optimized/westend-synagoge.webp",
+      "publicPath": "/static/img/originals/images/optimized/westend-synagoge.webp",
+      "sourceFilename": "src/img/originals/images/optimized/westend-synagoge.webp"
+    },
+    "img/originals/images/stack.jpg": {
+      "name": "img/originals/images/stack.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/images/stack.jpg",
+      "publicPath": "/static/img/originals/images/stack.jpg",
+      "sourceFilename": "src/img/originals/images/stack.jpg"
+    },
+    "img/originals/logos/D2ME/DigitisedManuscriptstoEuropeana.png": {
+      "name": "img/originals/logos/D2ME/DigitisedManuscriptstoEuropeana.png",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/D2ME/DigitisedManuscriptstoEuropeana.png",
+      "publicPath": "/static/img/originals/logos/D2ME/DigitisedManuscriptstoEuropeana.png",
+      "sourceFilename": "src/img/originals/logos/D2ME/DigitisedManuscriptstoEuropeana.png"
+    },
+    "img/originals/logos/D2ME/optimized/d2me-300.webp": {
+      "name": "img/originals/logos/D2ME/optimized/d2me-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/D2ME/optimized/d2me-300.webp",
+      "publicPath": "/static/img/originals/logos/D2ME/optimized/d2me-300.webp",
+      "sourceFilename": "src/img/originals/logos/D2ME/optimized/d2me-300.webp"
+    },
+    "img/originals/logos/D2ME/optimized/d2me-400.webp": {
+      "name": "img/originals/logos/D2ME/optimized/d2me-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/D2ME/optimized/d2me-400.webp",
+      "publicPath": "/static/img/originals/logos/D2ME/optimized/d2me-400.webp",
+      "sourceFilename": "src/img/originals/logos/D2ME/optimized/d2me-400.webp"
+    },
+    "img/originals/logos/D2ME/optimized/d2me-800.webp": {
+      "name": "img/originals/logos/D2ME/optimized/d2me-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/D2ME/optimized/d2me-800.webp",
+      "publicPath": "/static/img/originals/logos/D2ME/optimized/d2me-800.webp",
+      "sourceFilename": "src/img/originals/logos/D2ME/optimized/d2me-800.webp"
+    },
+    "img/originals/logos/D2ME/optimized/d2me.webp": {
+      "name": "img/originals/logos/D2ME/optimized/d2me.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/D2ME/optimized/d2me.webp",
+      "publicPath": "/static/img/originals/logos/D2ME/optimized/d2me.webp",
+      "sourceFilename": "src/img/originals/logos/D2ME/optimized/d2me.webp"
+    },
+    "img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-150.webp": {
+      "name": "img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-150.webp",
+      "publicPath": "/static/img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-150.webp",
+      "sourceFilename": "src/img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-150.webp"
+    },
+    "img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-200.webp": {
+      "name": "img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-200.webp",
+      "publicPath": "/static/img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-200.webp",
+      "sourceFilename": "src/img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-200.webp"
+    },
+    "img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-300.webp": {
+      "name": "img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-300.webp",
+      "publicPath": "/static/img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-300.webp",
+      "sourceFilename": "src/img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-300.webp"
+    },
+    "img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-400.webp": {
+      "name": "img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-400.webp",
+      "publicPath": "/static/img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-400.webp",
+      "sourceFilename": "src/img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-400.webp"
+    },
+    "img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-800.webp": {
+      "name": "img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-800.webp",
+      "publicPath": "/static/img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-800.webp",
+      "sourceFilename": "src/img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-800.webp"
+    },
+    "img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-png.webp": {
+      "name": "img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-png.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-png.webp",
+      "publicPath": "/static/img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-png.webp",
+      "sourceFilename": "src/img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana-png.webp"
+    },
+    "img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana.webp": {
+      "name": "img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana.webp",
+      "publicPath": "/static/img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana.webp",
+      "sourceFilename": "src/img/originals/logos/D2ME/optimized/digitisedmanuscriptstoeuropeana.webp"
+    },
+    "img/originals/logos/Europeana/Europeana_pro.png": {
+      "name": "img/originals/logos/Europeana/Europeana_pro.png",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Europeana/Europeana_pro.png",
+      "publicPath": "/static/img/originals/logos/Europeana/Europeana_pro.png",
+      "sourceFilename": "src/img/originals/logos/Europeana/Europeana_pro.png"
+    },
+    "img/originals/logos/Europeana/optimized/europeana-400.webp": {
+      "name": "img/originals/logos/Europeana/optimized/europeana-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Europeana/optimized/europeana-400.webp",
+      "publicPath": "/static/img/originals/logos/Europeana/optimized/europeana-400.webp",
+      "sourceFilename": "src/img/originals/logos/Europeana/optimized/europeana-400.webp"
+    },
+    "img/originals/logos/Europeana/optimized/europeana-800.webp": {
+      "name": "img/originals/logos/Europeana/optimized/europeana-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Europeana/optimized/europeana-800.webp",
+      "publicPath": "/static/img/originals/logos/Europeana/optimized/europeana-800.webp",
+      "sourceFilename": "src/img/originals/logos/Europeana/optimized/europeana-800.webp"
+    },
+    "img/originals/logos/Europeana/optimized/europeana-pro-150.webp": {
+      "name": "img/originals/logos/Europeana/optimized/europeana-pro-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Europeana/optimized/europeana-pro-150.webp",
+      "publicPath": "/static/img/originals/logos/Europeana/optimized/europeana-pro-150.webp",
+      "sourceFilename": "src/img/originals/logos/Europeana/optimized/europeana-pro-150.webp"
+    },
+    "img/originals/logos/Europeana/optimized/europeana-pro-200.webp": {
+      "name": "img/originals/logos/Europeana/optimized/europeana-pro-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Europeana/optimized/europeana-pro-200.webp",
+      "publicPath": "/static/img/originals/logos/Europeana/optimized/europeana-pro-200.webp",
+      "sourceFilename": "src/img/originals/logos/Europeana/optimized/europeana-pro-200.webp"
+    },
+    "img/originals/logos/Europeana/optimized/europeana-pro-300.webp": {
+      "name": "img/originals/logos/Europeana/optimized/europeana-pro-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Europeana/optimized/europeana-pro-300.webp",
+      "publicPath": "/static/img/originals/logos/Europeana/optimized/europeana-pro-300.webp",
+      "sourceFilename": "src/img/originals/logos/Europeana/optimized/europeana-pro-300.webp"
+    },
+    "img/originals/logos/Europeana/optimized/europeana-pro-400.webp": {
+      "name": "img/originals/logos/Europeana/optimized/europeana-pro-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Europeana/optimized/europeana-pro-400.webp",
+      "publicPath": "/static/img/originals/logos/Europeana/optimized/europeana-pro-400.webp",
+      "sourceFilename": "src/img/originals/logos/Europeana/optimized/europeana-pro-400.webp"
+    },
+    "img/originals/logos/Europeana/optimized/europeana-pro-800.webp": {
+      "name": "img/originals/logos/Europeana/optimized/europeana-pro-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Europeana/optimized/europeana-pro-800.webp",
+      "publicPath": "/static/img/originals/logos/Europeana/optimized/europeana-pro-800.webp",
+      "sourceFilename": "src/img/originals/logos/Europeana/optimized/europeana-pro-800.webp"
+    },
+    "img/originals/logos/Europeana/optimized/europeana-pro-png.webp": {
+      "name": "img/originals/logos/Europeana/optimized/europeana-pro-png.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Europeana/optimized/europeana-pro-png.webp",
+      "publicPath": "/static/img/originals/logos/Europeana/optimized/europeana-pro-png.webp",
+      "sourceFilename": "src/img/originals/logos/Europeana/optimized/europeana-pro-png.webp"
+    },
+    "img/originals/logos/Europeana/optimized/europeana-pro.webp": {
+      "name": "img/originals/logos/Europeana/optimized/europeana-pro.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Europeana/optimized/europeana-pro.webp",
+      "publicPath": "/static/img/originals/logos/Europeana/optimized/europeana-pro.webp",
+      "sourceFilename": "src/img/originals/logos/Europeana/optimized/europeana-pro.webp"
+    },
+    "img/originals/logos/Europeana/optimized/europeana.webp": {
+      "name": "img/originals/logos/Europeana/optimized/europeana.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Europeana/optimized/europeana.webp",
+      "publicPath": "/static/img/originals/logos/Europeana/optimized/europeana.webp",
+      "sourceFilename": "src/img/originals/logos/Europeana/optimized/europeana.webp"
+    },
+    "img/originals/logos/FID/fid-logo.jpg": {
+      "name": "img/originals/logos/FID/fid-logo.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/FID/fid-logo.jpg",
+      "publicPath": "/static/img/originals/logos/FID/fid-logo.jpg",
+      "sourceFilename": "src/img/originals/logos/FID/fid-logo.jpg"
+    },
+    "img/originals/logos/FID/optimized/fid-logo-150.webp": {
+      "name": "img/originals/logos/FID/optimized/fid-logo-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/FID/optimized/fid-logo-150.webp",
+      "publicPath": "/static/img/originals/logos/FID/optimized/fid-logo-150.webp",
+      "sourceFilename": "src/img/originals/logos/FID/optimized/fid-logo-150.webp"
+    },
+    "img/originals/logos/FID/optimized/fid-logo-200.webp": {
+      "name": "img/originals/logos/FID/optimized/fid-logo-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/FID/optimized/fid-logo-200.webp",
+      "publicPath": "/static/img/originals/logos/FID/optimized/fid-logo-200.webp",
+      "sourceFilename": "src/img/originals/logos/FID/optimized/fid-logo-200.webp"
+    },
+    "img/originals/logos/FID/optimized/fid-logo-300.webp": {
+      "name": "img/originals/logos/FID/optimized/fid-logo-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/FID/optimized/fid-logo-300.webp",
+      "publicPath": "/static/img/originals/logos/FID/optimized/fid-logo-300.webp",
+      "sourceFilename": "src/img/originals/logos/FID/optimized/fid-logo-300.webp"
+    },
+    "img/originals/logos/FID/optimized/fid-logo-400.webp": {
+      "name": "img/originals/logos/FID/optimized/fid-logo-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/FID/optimized/fid-logo-400.webp",
+      "publicPath": "/static/img/originals/logos/FID/optimized/fid-logo-400.webp",
+      "sourceFilename": "src/img/originals/logos/FID/optimized/fid-logo-400.webp"
+    },
+    "img/originals/logos/FID/optimized/fid-logo-800.webp": {
+      "name": "img/originals/logos/FID/optimized/fid-logo-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/FID/optimized/fid-logo-800.webp",
+      "publicPath": "/static/img/originals/logos/FID/optimized/fid-logo-800.webp",
+      "sourceFilename": "src/img/originals/logos/FID/optimized/fid-logo-800.webp"
+    },
+    "img/originals/logos/FID/optimized/fid-logo-jpg.webp": {
+      "name": "img/originals/logos/FID/optimized/fid-logo-jpg.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/FID/optimized/fid-logo-jpg.webp",
+      "publicPath": "/static/img/originals/logos/FID/optimized/fid-logo-jpg.webp",
+      "sourceFilename": "src/img/originals/logos/FID/optimized/fid-logo-jpg.webp"
+    },
+    "img/originals/logos/FID/optimized/fid-logo.webp": {
+      "name": "img/originals/logos/FID/optimized/fid-logo.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/FID/optimized/fid-logo.webp",
+      "publicPath": "/static/img/originals/logos/FID/optimized/fid-logo.webp",
+      "sourceFilename": "src/img/originals/logos/FID/optimized/fid-logo.webp"
+    },
+    "img/originals/logos/Frankfurt/optimized/ubfrankfurt-150.webp": {
+      "name": "img/originals/logos/Frankfurt/optimized/ubfrankfurt-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Frankfurt/optimized/ubfrankfurt-150.webp",
+      "publicPath": "/static/img/originals/logos/Frankfurt/optimized/ubfrankfurt-150.webp",
+      "sourceFilename": "src/img/originals/logos/Frankfurt/optimized/ubfrankfurt-150.webp"
+    },
+    "img/originals/logos/Frankfurt/optimized/ubfrankfurt-200.webp": {
+      "name": "img/originals/logos/Frankfurt/optimized/ubfrankfurt-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Frankfurt/optimized/ubfrankfurt-200.webp",
+      "publicPath": "/static/img/originals/logos/Frankfurt/optimized/ubfrankfurt-200.webp",
+      "sourceFilename": "src/img/originals/logos/Frankfurt/optimized/ubfrankfurt-200.webp"
+    },
+    "img/originals/logos/Frankfurt/optimized/ubfrankfurt-300.webp": {
+      "name": "img/originals/logos/Frankfurt/optimized/ubfrankfurt-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Frankfurt/optimized/ubfrankfurt-300.webp",
+      "publicPath": "/static/img/originals/logos/Frankfurt/optimized/ubfrankfurt-300.webp",
+      "sourceFilename": "src/img/originals/logos/Frankfurt/optimized/ubfrankfurt-300.webp"
+    },
+    "img/originals/logos/Frankfurt/optimized/ubfrankfurt-400.webp": {
+      "name": "img/originals/logos/Frankfurt/optimized/ubfrankfurt-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Frankfurt/optimized/ubfrankfurt-400.webp",
+      "publicPath": "/static/img/originals/logos/Frankfurt/optimized/ubfrankfurt-400.webp",
+      "sourceFilename": "src/img/originals/logos/Frankfurt/optimized/ubfrankfurt-400.webp"
+    },
+    "img/originals/logos/Frankfurt/optimized/ubfrankfurt-800.webp": {
+      "name": "img/originals/logos/Frankfurt/optimized/ubfrankfurt-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Frankfurt/optimized/ubfrankfurt-800.webp",
+      "publicPath": "/static/img/originals/logos/Frankfurt/optimized/ubfrankfurt-800.webp",
+      "sourceFilename": "src/img/originals/logos/Frankfurt/optimized/ubfrankfurt-800.webp"
+    },
+    "img/originals/logos/Frankfurt/optimized/ubfrankfurt-jpg.webp": {
+      "name": "img/originals/logos/Frankfurt/optimized/ubfrankfurt-jpg.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Frankfurt/optimized/ubfrankfurt-jpg.webp",
+      "publicPath": "/static/img/originals/logos/Frankfurt/optimized/ubfrankfurt-jpg.webp",
+      "sourceFilename": "src/img/originals/logos/Frankfurt/optimized/ubfrankfurt-jpg.webp"
+    },
+    "img/originals/logos/Frankfurt/optimized/ubfrankfurt.webp": {
+      "name": "img/originals/logos/Frankfurt/optimized/ubfrankfurt.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Frankfurt/optimized/ubfrankfurt.webp",
+      "publicPath": "/static/img/originals/logos/Frankfurt/optimized/ubfrankfurt.webp",
+      "sourceFilename": "src/img/originals/logos/Frankfurt/optimized/ubfrankfurt.webp"
+    },
+    "img/originals/logos/Frankfurt/ubfrankfurt.jpg": {
+      "name": "img/originals/logos/Frankfurt/ubfrankfurt.jpg",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Frankfurt/ubfrankfurt.jpg",
+      "publicPath": "/static/img/originals/logos/Frankfurt/ubfrankfurt.jpg",
+      "sourceFilename": "src/img/originals/logos/Frankfurt/ubfrankfurt.jpg"
+    },
+    "img/originals/logos/HDM/HDM-logo.png": {
+      "name": "img/originals/logos/HDM/HDM-logo.png",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/HDM/HDM-logo.png",
+      "publicPath": "/static/img/originals/logos/HDM/HDM-logo.png",
+      "sourceFilename": "src/img/originals/logos/HDM/HDM-logo.png"
+    },
+    "img/originals/logos/HDM/optimized/hdm-logo-150.webp": {
+      "name": "img/originals/logos/HDM/optimized/hdm-logo-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/HDM/optimized/hdm-logo-150.webp",
+      "publicPath": "/static/img/originals/logos/HDM/optimized/hdm-logo-150.webp",
+      "sourceFilename": "src/img/originals/logos/HDM/optimized/hdm-logo-150.webp"
+    },
+    "img/originals/logos/HDM/optimized/hdm-logo-200.webp": {
+      "name": "img/originals/logos/HDM/optimized/hdm-logo-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/HDM/optimized/hdm-logo-200.webp",
+      "publicPath": "/static/img/originals/logos/HDM/optimized/hdm-logo-200.webp",
+      "sourceFilename": "src/img/originals/logos/HDM/optimized/hdm-logo-200.webp"
+    },
+    "img/originals/logos/HDM/optimized/hdm-logo-300.webp": {
+      "name": "img/originals/logos/HDM/optimized/hdm-logo-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/HDM/optimized/hdm-logo-300.webp",
+      "publicPath": "/static/img/originals/logos/HDM/optimized/hdm-logo-300.webp",
+      "sourceFilename": "src/img/originals/logos/HDM/optimized/hdm-logo-300.webp"
+    },
+    "img/originals/logos/HDM/optimized/hdm-logo-400.webp": {
+      "name": "img/originals/logos/HDM/optimized/hdm-logo-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/HDM/optimized/hdm-logo-400.webp",
+      "publicPath": "/static/img/originals/logos/HDM/optimized/hdm-logo-400.webp",
+      "sourceFilename": "src/img/originals/logos/HDM/optimized/hdm-logo-400.webp"
+    },
+    "img/originals/logos/HDM/optimized/hdm-logo-800.webp": {
+      "name": "img/originals/logos/HDM/optimized/hdm-logo-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/HDM/optimized/hdm-logo-800.webp",
+      "publicPath": "/static/img/originals/logos/HDM/optimized/hdm-logo-800.webp",
+      "sourceFilename": "src/img/originals/logos/HDM/optimized/hdm-logo-800.webp"
+    },
+    "img/originals/logos/HDM/optimized/hdm-logo-png.webp": {
+      "name": "img/originals/logos/HDM/optimized/hdm-logo-png.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/HDM/optimized/hdm-logo-png.webp",
+      "publicPath": "/static/img/originals/logos/HDM/optimized/hdm-logo-png.webp",
+      "sourceFilename": "src/img/originals/logos/HDM/optimized/hdm-logo-png.webp"
+    },
+    "img/originals/logos/HDM/optimized/hdm-logo.webp": {
+      "name": "img/originals/logos/HDM/optimized/hdm-logo.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/HDM/optimized/hdm-logo.webp",
+      "publicPath": "/static/img/originals/logos/HDM/optimized/hdm-logo.webp",
+      "sourceFilename": "src/img/originals/logos/HDM/optimized/hdm-logo.webp"
+    },
+    "img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-150.webp": {
+      "name": "img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-150.webp",
+      "publicPath": "/static/img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-150.webp",
+      "sourceFilename": "src/img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-150.webp"
+    },
+    "img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-200.webp": {
+      "name": "img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-200.webp",
+      "publicPath": "/static/img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-200.webp",
+      "sourceFilename": "src/img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-200.webp"
+    },
+    "img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-300.webp": {
+      "name": "img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-300.webp",
+      "publicPath": "/static/img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-300.webp",
+      "sourceFilename": "src/img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-300.webp"
+    },
+    "img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-400.webp": {
+      "name": "img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-400.webp",
+      "publicPath": "/static/img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-400.webp",
+      "sourceFilename": "src/img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-400.webp"
+    },
+    "img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-800.webp": {
+      "name": "img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-800.webp",
+      "publicPath": "/static/img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-800.webp",
+      "sourceFilename": "src/img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-800.webp"
+    },
+    "img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-png.webp": {
+      "name": "img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-png.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-png.webp",
+      "publicPath": "/static/img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-png.webp",
+      "sourceFilename": "src/img/originals/logos/JudaicaLink/optimized/transp-judaica-labs-png.webp"
+    },
+    "img/originals/logos/JudaicaLink/optimized/transp-judaica-labs.webp": {
+      "name": "img/originals/logos/JudaicaLink/optimized/transp-judaica-labs.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/JudaicaLink/optimized/transp-judaica-labs.webp",
+      "publicPath": "/static/img/originals/logos/JudaicaLink/optimized/transp-judaica-labs.webp",
+      "sourceFilename": "src/img/originals/logos/JudaicaLink/optimized/transp-judaica-labs.webp"
+    },
+    "img/originals/logos/JudaicaLink/transp_judaica_labs.png": {
+      "name": "img/originals/logos/JudaicaLink/transp_judaica_labs.png",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/JudaicaLink/transp_judaica_labs.png",
+      "publicPath": "/static/img/originals/logos/JudaicaLink/transp_judaica_labs.png",
+      "sourceFilename": "src/img/originals/logos/JudaicaLink/transp_judaica_labs.png"
+    },
+    "img/originals/logos/Judaica_Europeana/Judaica_Europeana.png": {
+      "name": "img/originals/logos/Judaica_Europeana/Judaica_Europeana.png",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Judaica_Europeana/Judaica_Europeana.png",
+      "publicPath": "/static/img/originals/logos/Judaica_Europeana/Judaica_Europeana.png",
+      "sourceFilename": "src/img/originals/logos/Judaica_Europeana/Judaica_Europeana.png"
+    },
+    "img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-150.webp": {
+      "name": "img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-150.webp",
+      "publicPath": "/static/img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-150.webp",
+      "sourceFilename": "src/img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-150.webp"
+    },
+    "img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-200.webp": {
+      "name": "img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-200.webp",
+      "publicPath": "/static/img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-200.webp",
+      "sourceFilename": "src/img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-200.webp"
+    },
+    "img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-300.webp": {
+      "name": "img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-300.webp",
+      "publicPath": "/static/img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-300.webp",
+      "sourceFilename": "src/img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-300.webp"
+    },
+    "img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-400.webp": {
+      "name": "img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-400.webp",
+      "publicPath": "/static/img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-400.webp",
+      "sourceFilename": "src/img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-400.webp"
+    },
+    "img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-800.webp": {
+      "name": "img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-800.webp",
+      "publicPath": "/static/img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-800.webp",
+      "sourceFilename": "src/img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-800.webp"
+    },
+    "img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-png.webp": {
+      "name": "img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-png.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-png.webp",
+      "publicPath": "/static/img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-png.webp",
+      "sourceFilename": "src/img/originals/logos/Judaica_Europeana/optimized/judaica-europeana-png.webp"
+    },
+    "img/originals/logos/Judaica_Europeana/optimized/judaica-europeana.webp": {
+      "name": "img/originals/logos/Judaica_Europeana/optimized/judaica-europeana.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Judaica_Europeana/optimized/judaica-europeana.webp",
+      "publicPath": "/static/img/originals/logos/Judaica_Europeana/optimized/judaica-europeana.webp",
+      "sourceFilename": "src/img/originals/logos/Judaica_Europeana/optimized/judaica-europeana.webp"
+    },
+    "img/originals/logos/Mannheim/mannheim_logo.png": {
+      "name": "img/originals/logos/Mannheim/mannheim_logo.png",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Mannheim/mannheim_logo.png",
+      "publicPath": "/static/img/originals/logos/Mannheim/mannheim_logo.png",
+      "sourceFilename": "src/img/originals/logos/Mannheim/mannheim_logo.png"
+    },
+    "img/originals/logos/Mannheim/mannheim_logo_big.png": {
+      "name": "img/originals/logos/Mannheim/mannheim_logo_big.png",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Mannheim/mannheim_logo_big.png",
+      "publicPath": "/static/img/originals/logos/Mannheim/mannheim_logo_big.png",
+      "sourceFilename": "src/img/originals/logos/Mannheim/mannheim_logo_big.png"
+    },
+    "img/originals/logos/Mannheim/optimized/mannheim-logo-150.webp": {
+      "name": "img/originals/logos/Mannheim/optimized/mannheim-logo-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Mannheim/optimized/mannheim-logo-150.webp",
+      "publicPath": "/static/img/originals/logos/Mannheim/optimized/mannheim-logo-150.webp",
+      "sourceFilename": "src/img/originals/logos/Mannheim/optimized/mannheim-logo-150.webp"
+    },
+    "img/originals/logos/Mannheim/optimized/mannheim-logo-200.webp": {
+      "name": "img/originals/logos/Mannheim/optimized/mannheim-logo-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Mannheim/optimized/mannheim-logo-200.webp",
+      "publicPath": "/static/img/originals/logos/Mannheim/optimized/mannheim-logo-200.webp",
+      "sourceFilename": "src/img/originals/logos/Mannheim/optimized/mannheim-logo-200.webp"
+    },
+    "img/originals/logos/Mannheim/optimized/mannheim-logo-300.webp": {
+      "name": "img/originals/logos/Mannheim/optimized/mannheim-logo-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Mannheim/optimized/mannheim-logo-300.webp",
+      "publicPath": "/static/img/originals/logos/Mannheim/optimized/mannheim-logo-300.webp",
+      "sourceFilename": "src/img/originals/logos/Mannheim/optimized/mannheim-logo-300.webp"
+    },
+    "img/originals/logos/Mannheim/optimized/mannheim-logo-400.webp": {
+      "name": "img/originals/logos/Mannheim/optimized/mannheim-logo-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Mannheim/optimized/mannheim-logo-400.webp",
+      "publicPath": "/static/img/originals/logos/Mannheim/optimized/mannheim-logo-400.webp",
+      "sourceFilename": "src/img/originals/logos/Mannheim/optimized/mannheim-logo-400.webp"
+    },
+    "img/originals/logos/Mannheim/optimized/mannheim-logo-800.webp": {
+      "name": "img/originals/logos/Mannheim/optimized/mannheim-logo-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Mannheim/optimized/mannheim-logo-800.webp",
+      "publicPath": "/static/img/originals/logos/Mannheim/optimized/mannheim-logo-800.webp",
+      "sourceFilename": "src/img/originals/logos/Mannheim/optimized/mannheim-logo-800.webp"
+    },
+    "img/originals/logos/Mannheim/optimized/mannheim-logo-big-png.webp": {
+      "name": "img/originals/logos/Mannheim/optimized/mannheim-logo-big-png.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Mannheim/optimized/mannheim-logo-big-png.webp",
+      "publicPath": "/static/img/originals/logos/Mannheim/optimized/mannheim-logo-big-png.webp",
+      "sourceFilename": "src/img/originals/logos/Mannheim/optimized/mannheim-logo-big-png.webp"
+    },
+    "img/originals/logos/Mannheim/optimized/mannheim-logo-png.webp": {
+      "name": "img/originals/logos/Mannheim/optimized/mannheim-logo-png.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Mannheim/optimized/mannheim-logo-png.webp",
+      "publicPath": "/static/img/originals/logos/Mannheim/optimized/mannheim-logo-png.webp",
+      "sourceFilename": "src/img/originals/logos/Mannheim/optimized/mannheim-logo-png.webp"
+    },
+    "img/originals/logos/Mannheim/optimized/mannheim-logo.webp": {
+      "name": "img/originals/logos/Mannheim/optimized/mannheim-logo.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/Mannheim/optimized/mannheim-logo.webp",
+      "publicPath": "/static/img/originals/logos/Mannheim/optimized/mannheim-logo.webp",
+      "sourceFilename": "src/img/originals/logos/Mannheim/optimized/mannheim-logo.webp"
+    },
+    "img/originals/logos/TH Mannheim/TH_Mannheim_Logo_RGB_blau.png": {
+      "name": "img/originals/logos/TH Mannheim/TH_Mannheim_Logo_RGB_blau.png",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/TH_Mannheim_Logo_RGB_blau.png",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/TH_Mannheim_Logo_RGB_blau.png",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/TH_Mannheim_Logo_RGB_blau.png"
+    },
+    "img/originals/logos/TH Mannheim/TH_Mannheim_Logo_RGB_schwarz.png": {
+      "name": "img/originals/logos/TH Mannheim/TH_Mannheim_Logo_RGB_schwarz.png",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/TH_Mannheim_Logo_RGB_schwarz.png",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/TH_Mannheim_Logo_RGB_schwarz.png",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/TH_Mannheim_Logo_RGB_schwarz.png"
+    },
+    "img/originals/logos/TH Mannheim/TH_Mannheim_Minilogo_RGB_blau.png": {
+      "name": "img/originals/logos/TH Mannheim/TH_Mannheim_Minilogo_RGB_blau.png",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/TH_Mannheim_Minilogo_RGB_blau.png",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/TH_Mannheim_Minilogo_RGB_blau.png",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/TH_Mannheim_Minilogo_RGB_blau.png"
+    },
+    "img/originals/logos/TH Mannheim/TH_Mannheim_Minilogo_RGB_schwarz.png": {
+      "name": "img/originals/logos/TH Mannheim/TH_Mannheim_Minilogo_RGB_schwarz.png",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/TH_Mannheim_Minilogo_RGB_schwarz.png",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/TH_Mannheim_Minilogo_RGB_schwarz.png",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/TH_Mannheim_Minilogo_RGB_schwarz.png"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-150.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-150.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-150.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-150.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-200.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-200.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-200.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-200.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-300.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-300.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-300.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-300.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-400.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-400.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-400.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-400.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-800.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-800.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-800.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau-800.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-blau.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-150.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-150.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-150.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-150.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-200.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-200.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-200.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-200.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-300.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-300.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-300.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-300.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-400.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-400.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-400.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-400.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-800.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-800.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-800.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz-800.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-logo-rgb-schwarz.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-150.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-150.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-150.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-150.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-200.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-200.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-200.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-200.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-300.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-300.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-300.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-300.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-400.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-400.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-400.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-400.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-800.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-800.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-800.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau-800.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-blau.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-150.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-150.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-150.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-150.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-200.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-200.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-200.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-200.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-300.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-300.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-300.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-300.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-300.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-400.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-400.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-400.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-400.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-400.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-800.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-800.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-800.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-800.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz-800.webp"
+    },
+    "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz.webp": {
+      "name": "img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz.webp",
+      "publicPath": "/static/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz.webp",
+      "sourceFilename": "src/img/originals/logos/TH Mannheim/optimized/th-mannheim-minilogo-rgb-schwarz.webp"
+    },
+    "img/stack.webp": {
+      "name": "img/stack.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/stack.webp",
+      "publicPath": "/static/img/stack.webp",
+      "sourceFilename": "src/img/stack.webp"
+    },
+    "img/th-mannheim-logo-rgb-schwarz-150.webp": {
+      "name": "img/th-mannheim-logo-rgb-schwarz-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/th-mannheim-logo-rgb-schwarz-150.webp",
+      "publicPath": "/static/img/th-mannheim-logo-rgb-schwarz-150.webp",
+      "sourceFilename": "src/img/th-mannheim-logo-rgb-schwarz-150.webp"
+    },
+    "img/th-mannheim-logo-rgb-schwarz-200.webp": {
+      "name": "img/th-mannheim-logo-rgb-schwarz-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/th-mannheim-logo-rgb-schwarz-200.webp",
+      "publicPath": "/static/img/th-mannheim-logo-rgb-schwarz-200.webp",
+      "sourceFilename": "src/img/th-mannheim-logo-rgb-schwarz-200.webp"
+    },
+    "img/th-mannheim-logo-rgb-schwarz.webp": {
+      "name": "img/th-mannheim-logo-rgb-schwarz.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/th-mannheim-logo-rgb-schwarz.webp",
+      "publicPath": "/static/img/th-mannheim-logo-rgb-schwarz.webp",
+      "sourceFilename": "src/img/th-mannheim-logo-rgb-schwarz.webp"
+    },
+    "img/transp-judaica-labs.webp": {
+      "name": "img/transp-judaica-labs.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/transp-judaica-labs.webp",
+      "publicPath": "/static/img/transp-judaica-labs.webp",
+      "sourceFilename": "src/img/transp-judaica-labs.webp"
+    },
+    "img/ubfrankfurt-150.webp": {
+      "name": "img/ubfrankfurt-150.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/ubfrankfurt-150.webp",
+      "publicPath": "/static/img/ubfrankfurt-150.webp",
+      "sourceFilename": "src/img/ubfrankfurt-150.webp"
+    },
+    "img/ubfrankfurt-200.webp": {
+      "name": "img/ubfrankfurt-200.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/ubfrankfurt-200.webp",
+      "publicPath": "/static/img/ubfrankfurt-200.webp",
+      "sourceFilename": "src/img/ubfrankfurt-200.webp"
+    },
+    "img/ubfrankfurt.webp": {
+      "name": "img/ubfrankfurt.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/ubfrankfurt.webp",
+      "publicPath": "/static/img/ubfrankfurt.webp",
+      "sourceFilename": "src/img/ubfrankfurt.webp"
+    },
+    "img/westend-synagoge.webp": {
+      "name": "img/westend-synagoge.webp",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/img/westend-synagoge.webp",
+      "publicPath": "/static/img/westend-synagoge.webp",
+      "sourceFilename": "src/img/westend-synagoge.webp"
+    },
     "js/app.js": {
       "name": "js/app.js",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/app.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/app.js",
       "publicPath": "/static/js/app.js"
     },
     "js/app.js.gz": {
       "name": "js/app.js.gz",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/app.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/app.js.gz",
       "publicPath": "/static/js/app.js.gz"
     },
     "js/autocomplete.js": {
       "name": "js/autocomplete.js",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/autocomplete.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/autocomplete.js",
       "publicPath": "/static/js/autocomplete.js"
     },
     "js/autocomplete.js.gz": {
       "name": "js/autocomplete.js.gz",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/autocomplete.js.gz",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/autocomplete.js.gz",
       "publicPath": "/static/js/autocomplete.js.gz"
     },
-    "js/bootstrap.js": {
-      "name": "js/bootstrap.js",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/bootstrap.js",
-      "publicPath": "/static/js/bootstrap.js"
-    },
-    "js/bootstrap.js.gz": {
-      "name": "js/bootstrap.js.gz",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/bootstrap.js.gz",
-      "publicPath": "/static/js/bootstrap.js.gz"
+    "js/bootstrap.min.js.map": {
+      "name": "js/bootstrap.min.js.map",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/bootstrap.min.js.map",
+      "publicPath": "/static/js/bootstrap.min.js.map",
+      "sourceFilename": "node_modules/bootstrap/dist/js/bootstrap.min.js.map"
     },
     "js/css/app.css.map": {
       "name": "js/css/app.css.map",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/css/app.css.map",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/css/app.css.map",
       "publicPath": "/static/js/css/app.css.map"
     },
     "js/css/autocomplete.css.map": {
       "name": "js/css/autocomplete.css.map",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/css/autocomplete.css.map",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/css/autocomplete.css.map",
       "publicPath": "/static/js/css/autocomplete.css.map"
     },
     "js/css/styles.css.map": {
       "name": "js/css/styles.css.map",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/css/styles.css.map",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/css/styles.css.map",
       "publicPath": "/static/js/css/styles.css.map"
     },
     "js/js/app.js.map": {
       "name": "js/js/app.js.map",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/js/app.js.map",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/js/app.js.map",
       "publicPath": "/static/js/js/app.js.map"
     },
     "js/js/autocomplete.js.map": {
       "name": "js/js/autocomplete.js.map",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/js/autocomplete.js.map",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/js/autocomplete.js.map",
       "publicPath": "/static/js/js/autocomplete.js.map"
     },
-    "js/js/bootstrap.js.map": {
-      "name": "js/js/bootstrap.js.map",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/js/bootstrap.js.map",
-      "publicPath": "/static/js/js/bootstrap.js.map"
+    "js/popper.min.js.map": {
+      "name": "js/popper.min.js.map",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/popper.min.js.map",
+      "publicPath": "/static/js/popper.min.js.map",
+      "sourceFilename": "node_modules/@popperjs/core/dist/umd/popper.min.js.map"
     },
     "js/styles.js": {
       "name": "js/styles.js",
-      "path": "/Users/benni/coding/judaicalink/judaicalink-labs/labs/build/js/styles.js",
+      "path": "/mnt/data/coding/judaicalink/judaicalink-labs/labs/build/js/styles.js",
       "publicPath": "/static/js/styles.js"
     }
   },
@@ -148,9 +1981,6 @@
     "autocomplete": [
       "css/autocomplete.css",
       "js/autocomplete.js"
-    ],
-    "bootstrap": [
-      "js/bootstrap.js"
     ],
     "styles": [
       "css/styles.css",
