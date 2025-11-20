@@ -1,16 +1,15 @@
 import django.db.models as django_models
-from backend import tasks as backend_tasks
-from backend.models import ThreadTask
 from django.conf import settings
 from django.contrib import admin, messages
-from django.core.management import call_command, CommandError
+from django.http import HttpResponseRedirect
+from django.urls import path
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from pathlib import Path
-from django.http import HttpResponseRedirect
 
-
-from . import models
+from . import models, views
+from .models import ThreadTask
+from .tasks import run_management_command
 
 formfield_overrides = {
     django_models.TextField: {'widget': admin.widgets.AdminTextInputWidget},
@@ -51,7 +50,6 @@ set_indexed.short_description = "Index selected datasets and files"
 unset_indexed.short_description = "Do not index selected datasets and files"
 
 
-
 class DatafileAdmin(admin.TabularInline):
     model = models.Datafile
     formfield_overrides = formfield_overrides
@@ -70,14 +68,15 @@ class DatafileAdmin(admin.TabularInline):
     # Checkbox-Spalte zum Löschen ausblenden, aber Bearbeiten erlauben
     can_delete = False
 
+
 class DatasetAdmin(admin.ModelAdmin):
     list_display = ['name', 'title', 'category', 'graph', 'loaded', 'indexed', 'generation_status_short']
     list_display_links = ['name']
 
     formfield_overrides = formfield_overrides
     inlines = [DatafileAdmin, ]
-    actions = ['regenerate_and_load_async', 'load_fuseki', 'unload_fuseki', 'load_into_solr',
-               'unload_from_solr', 'delete_ds']
+    actions = ['regenerate_and_load_async', 'load_fuseki_and_solr_async', 'load_fuseki', 'unload_fuseki', 'load_into_solr',
+               'unload_from_solr',  'delete_ds']
     fieldsets = (
         (None, {
             "fields": (
@@ -108,8 +107,6 @@ class DatasetAdmin(admin.ModelAdmin):
         "generator_log",
         "task_log",
     )
-
-
 
     # -------- Kurzstatus für die Liste --------
     @admin.display(description="Gen.-Status")
@@ -292,7 +289,7 @@ class DatasetAdmin(admin.ModelAdmin):
                 continue
 
             # Neuen Task starten
-            task_id = backend_tasks.run_management_command(
+            task_id = run_management_command(
                 task_name=f"generate_dataset:{slug}",
                 command="generate_and_load_dataset",
                 args=[slug],
@@ -337,7 +334,7 @@ class DatasetAdmin(admin.ModelAdmin):
             slug = ds.name
 
             try:
-                task_id = backend_tasks.run_management_command(
+                task_id = run_management_command(
                     task_name=f"fuseki_load:{slug}",
                     command="fuseki_loader",
                     args=["load", slug],
@@ -371,10 +368,10 @@ class DatasetAdmin(admin.ModelAdmin):
         started, fail = 0, 0
 
         for ds in queryset:
-            slug = ds.name
+            slug = ds.dataslug or ds.name
 
             try:
-                task_id = backend_tasks.run_management_command(
+                task_id = run_management_command(
                     task_name=f"fuseki_unload:{slug}",
                     command="fuseki_loader",
                     args=["unload", slug],
@@ -412,7 +409,7 @@ class DatasetAdmin(admin.ModelAdmin):
 
             try:
                 # Neuen ThreadTask starten
-                task_id = backend_tasks.run_management_command(
+                task_id = run_management_command(
                     task_name=f"solr_load_dataset:{slug}",
                     command="solr_load_dataset",
                     args=[slug],
@@ -453,7 +450,7 @@ class DatasetAdmin(admin.ModelAdmin):
             slug = ds.dataslug or ds.name
 
             try:
-                task_id = backend_tasks.run_management_command(
+                task_id = run_management_command(
                     task_name=f"solr_delete_dataset:{slug}",
                     command="solr_delete_dataset",
                     args=[slug],
@@ -482,6 +479,65 @@ class DatasetAdmin(admin.ModelAdmin):
 
     unload_from_solr.short_description = "Unload selected datasets from SOLR"
 
+    @admin.action(description="Load selected datasets into Fuseki & SOLR (async)")
+    def load_fuseki_and_solr_async(self, request, queryset):
+        started_fuseki = 0
+        started_solr = 0
+        failed = 0
+
+        for ds in queryset:
+            slug = ds.dataslug or ds.name
+
+            # 1. Fuseki-Load starten
+            try:
+                fuseki_task_id = run_management_command(
+                    task_name=f"fuseki_load:{slug}",
+                    command="fuseki_loader",
+                    args=["load", slug],
+                )
+                fuseki_task = ThreadTask.objects.get(pk=fuseki_task_id)
+                fuseki_task.dataset = ds
+                fuseki_task.save()
+                started_fuseki += 1
+            except Exception as e:
+                failed += 1
+                messages.error(
+                    request,
+                    f"Fehler beim Starten des Fuseki-Load-Tasks für '{slug}': {e}"
+                )
+                # Wenn Fuseki schon scheitert, SOLR lieber überspringen:
+                continue
+
+            # 2. SOLR-Load starten
+            try:
+                solr_task_id = run_management_command(
+                    task_name=f"solr_load_dataset:{slug}",
+                    command="solr_load_dataset",
+                    args=[slug],
+                )
+                solr_task = ThreadTask.objects.get(pk=solr_task_id)
+                solr_task.dataset = ds
+                solr_task.save()
+                started_solr += 1
+            except Exception as e:
+                failed += 1
+                messages.error(
+                    request,
+                    f"Fehler beim Starten des SOLR-Load-Tasks für '{slug}': {e}"
+                )
+                # ggf. Flag zurücksetzen, wenn du magst
+                ds.indexed = False
+                ds.save()
+
+        self.message_user(
+            request,
+            f"{started_fuseki} Fuseki- und {started_solr} SOLR-Task(s) gestartet; "
+            f"{failed} Fehlversuch(e).",
+            level=messages.INFO,
+        )
+    load_fuseki_and_solr_async.short_description = ("Load into Fuseki & SOLR")
+
+
     @admin.action(description="Delete the dataset completely (Fuseki, Solr, Django)")
     def delete_ds(self, request, queryset):
         started, fail = 0, 0
@@ -490,7 +546,7 @@ class DatasetAdmin(admin.ModelAdmin):
             slug = ds.name
 
             try:
-                task_id = backend_tasks.run_management_command(
+                task_id = run_management_command(
                     task_name=f"delete_dataset:{slug}",
                     command="delete_dataset",
                     args=[slug],
@@ -563,3 +619,177 @@ class DatasetAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.Dataset, DatasetAdmin)
+
+
+@admin.register(models.ThreadTask)
+class ThreadTaskAdmin(admin.ModelAdmin):
+    """
+    Admin-Ansicht für ALLE Tasks (ThreadTask), unabhängig vom Dataset.
+    """
+
+    list_display = (
+        "id",
+        "name",
+        "dataset",
+        "started",
+        "ended",
+        "is_done",
+        "status_icon",
+        "short_last_line",
+    )
+
+    list_filter = (
+        "is_done",
+        "status_ok",
+        "dataset",
+    )
+
+    search_fields = (
+        "name",
+        "log_text",
+        "dataset__name",
+        "dataset__dataslug",
+    )
+
+    date_hierarchy = "started"
+    ordering = ("-started",)
+
+    readonly_fields = (
+        "name",
+        "dataset",
+        "is_done",
+        "status_ok",
+        "started",
+        "ended",
+        "log_pretty",
+    )
+
+    fieldsets = (
+        (None, {
+            "fields": (
+                "name",
+                "dataset",
+            )
+        }),
+        ("Status", {
+            "fields": (
+                "is_done",
+                "status_ok",
+                "started",
+                "ended",
+            )
+        }),
+        ("Log", {
+            "fields": ("log_pretty",)
+        }),
+    )
+
+    @admin.display(description="Status")
+    def status_icon(self, obj):
+        if not obj.is_done:
+            return "⏳"
+        return "✅" if obj.status_ok else "❌"
+
+    @admin.display(description="Letzte Logzeile")
+    def short_last_line(self, obj):
+        last = obj.last_log()
+        if not last:
+            return "—"
+        last = last.strip()
+        if len(last) > 120:
+            return last[:117] + "…"
+        return last
+
+    @admin.display(description="Task-Log (Tail)")
+    def log_pretty(self, obj):
+        text = obj.log_text or ""
+        text = text.strip()
+        if not text:
+            return "Keine Logeinträge."
+
+        lines = [l for l in text.splitlines() if l.strip()]
+        tail_lines = 200
+        tail = "\n".join(lines[-tail_lines:])
+
+        html = (
+            "<details open>"
+            "<summary>Letzte "
+            f"{min(tail_lines, len(lines))} Zeilen anzeigen</summary>"
+            "<pre style='max-height: 500px; overflow: auto;'>"
+            f"{escape(tail)}"
+            "</pre></details>"
+        )
+        return mark_safe(html)
+
+
+admin.register(models.ThreadTask, ThreadTaskAdmin)
+
+# ... alles oben (DatasetAdmin, ThreadTaskAdmin etc.) bleibt wie bisher ...
+
+
+# Alias, damit in data/views.py `admin.admin_site.site_header` funktioniert
+admin_site = admin.site
+
+
+def _extra_admin_urls():
+    """
+    Zusätzliche Admin-URLs aus der data-App.
+    Pfade sind relativ zu /admin/.
+    """
+    return [
+        path(
+            "load_from_github/",
+            admin.site.admin_view(views.load_from_github),
+            name="load_from_github",
+        ),
+        path(
+            "load_solr/",
+            admin.site.admin_view(views.load_solr),
+            name="load_solr",
+        ),
+        path(
+            "load_fuseki/",
+            admin.site.admin_view(views.load_fuseki),
+            name="load_fuseki",
+        ),
+        path(
+            "loader/<str:action>/",
+            admin.site.admin_view(views.loader_manage_all),
+            name="loader_manage_all",
+        ),
+        path(
+            "backend/dashboard/",
+            admin.site.admin_view(views.dashboard),
+            name="dashboard",
+        ),
+        path(
+            "backend/serverstatus/",
+            admin.site.admin_view(views.serverstatus),
+            name="serverstatus",
+        ),
+        path(
+            "backend/commands/",
+            admin.site.admin_view(views.django_commands),
+            name="commands",
+        ),
+        path(
+            "backend/run_command/<str:command>/",
+            admin.site.admin_view(views.run_django_command),
+            name="run_command",
+        ),
+    ]
+
+
+def _wrap_admin_urls(original_get_urls):
+    """
+    Hängt unsere zusätzlichen URLs an das Standard-Admin an.
+    """
+
+    def get_urls():
+        return _extra_admin_urls() + original_get_urls()
+
+    return get_urls
+
+
+# Hier wird das Django-Admin „gepatched“:
+admin.site.get_urls = _wrap_admin_urls(admin.site.get_urls)

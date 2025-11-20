@@ -1,15 +1,15 @@
 # labs/backend/management/commands/fuseki_loader.py
 import os
+import requests
 import shutil
 import subprocess
 import sys
-from urllib.parse import quote
-import requests
 import gzip
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from pathlib import Path
 from rdflib import Graph, URIRef, Literal
+from urllib.parse import quote
 
 from ...models import Dataset
 
@@ -64,6 +64,7 @@ def _set_loaded_flag(dataset_slug: str, value: bool):
 
         self.stdout.write(f"[META] Keine Metadaten-Datei für {slug} gefunden.")
         return None
+
 
 class Command(BaseCommand):
     help = "Wrapper around the JudaicaLink Fuseki loader. Uses either a CLI 'judaicalink-loader' or a loader.py script."
@@ -218,109 +219,136 @@ WHERE {{
                 f"(Status {resp_post.status_code}): {resp_post.text[:500]}"
             )
 
-        def _delete_metadata_for_slug(self, slug: str):
-            """
-            Löscht Metadaten für einen slug aus dem gemeinsamen Metadaten-Graphen,
-            ohne den Graphen selbst zu löschen.
+    def _delete_metadata_for_slug(self, slug: str):
+        """
+        Löscht Metadaten für einen slug aus dem gemeinsamen Metadaten-Graphen,
+        ohne den Graphen selbst zu löschen.
 
-            1. Wie bisher: alle Tripel mit URI-Subjekten aus der <slug>.meta.ttl.
-            2. Zusätzlich: die prov:used / build.py-BNode-Kette anhand des
-               rdfs:label "<slug>/scripts/build.py".
-            """
-            meta_path = self._find_meta_file(slug)
-            if not meta_path:
-                # Wenn es keine Meta-Datei mehr gibt, wissen wir nicht sicher,
-                # welche Tripel zu diesem slug gehören -> nichts tun.
-                self.stdout.write(f"[META] Keine Meta-Datei für {slug}; kein selektives Löschen möglich.")
-                return
+        1. Wenn eine <slug>.meta.ttl(.gz) existiert:
+           - Lösche alle Tripel mit URI-Subjekten aus dieser Datei.
+           - Lösche zusätzlich die prov:used / build.py-BNode-Kette anhand
+             des rdfs:label "<slug>/scripts/build.py".
+        2. Wenn KEINE Meta-Datei existiert:
+           - Fallback: lösche alle Tripel, deren Subjekt
+             <http://data.judaicalink.org/datasets/{slug}> ist.
+        """
+        endpoint = env.get("ENDPOINT", "http://localhost:3030/judaicalink").rstrip("/")
+        graph_uri = self._metadata_graph_uri()
+        update_url = f"{endpoint}/update"
 
-            endpoint = env.get("ENDPOINT", "http://localhost:3030/judaicalink").rstrip("/")
-            graph_uri = self._metadata_graph_uri()
-            update_url = f"{endpoint}/update"
+        # --- Versuch: Meta-Datei finden ------------------------------------
+        meta_path = self._find_meta_file(slug)
 
-            # Meta-Datei lesen (ggf. .gz dekomprimieren)
-            data = meta_path.read_bytes()
-            if str(meta_path).endswith(".gz"):
-                import gzip
-                data = gzip.decompress(data)
-
-            g = Graph()
-            g.parse(data=data.decode("utf-8"), format="turtle")
-
-            # --- 1) Bisheriges Verhalten: URI-Subjekte löschen ------------------
-            subjects = {s for s in g.subjects() if isinstance(s, URIRef)}
-
-            if subjects:
-                values = " ".join(f"<{str(s)}>" for s in subjects)
-                sparql = f"""
-    DELETE {{
-      GRAPH <{graph_uri}> {{
-        ?s ?p ?o .
-      }}
-    }}
-    WHERE {{
-      GRAPH <{graph_uri}> {{
-        VALUES ?s {{ {values} }}
-        ?s ?p ?o .
-      }}
-    }}
-    """
-                self.stdout.write(f"[META] Lösche URI-Subjekte für {slug} aus Graph {graph_uri}")
-                resp = requests.post(
-                    update_url,
-                    data={"update": sparql},
-                    headers={"Content-Type": "application/x-www-form-urlencoded"},
+        # --- Fallback, wenn keine Meta-Datei vorhanden ---------------------
+        if not meta_path:
+            subject = f"http://data.judaicalink.org/datasets/{slug}"
+            sparql = f"""
+DELETE {{
+  GRAPH <{graph_uri}> {{
+    <{subject}> ?p ?o .
+  }}
+}}
+WHERE {{
+  GRAPH <{graph_uri}> {{
+    <{subject}> ?p ?o .
+  }}
+}}
+"""
+            self.stdout.write(
+                f"[META] Keine Meta-Datei für {slug}; Fallback: "
+                f"Lösche alle Tripel mit Subjekt <{subject}> aus Graph {graph_uri}"
+            )
+            resp = requests.post(
+                update_url,
+                data={"update": sparql},
+                headers={"Content-Type": "application/x-www-form-urlencoded"},
+            )
+            if not resp.ok:
+                raise CommandError(
+                    f"Metadaten-Fallback-Löschung für {slug} fehlgeschlagen "
+                    f"(Status {resp.status_code}): {resp.text[:500]}"
                 )
-                if not resp.ok:
-                    raise CommandError(
-                        f"Metadaten-Löschung (URI-Subjekte) für {slug} fehlgeschlagen "
-                        f"(Status {resp.status_code}): {resp.text[:500]}"
-                    )
+            return
 
-            # --- 2) Blank-Node-Kette für build.py löschen -----------------------
-            # Wir suchen in der Meta-Datei nach rdfs:label-Literalen mit "/scripts/build.py"
-            prov_used = URIRef("http://www.w3.org/ns/prov#used")
-            rdfs_label = URIRef("http://www.w3.org/2000/01/rdf-schema#label")
+        # --- Normale Löschung basierend auf der Meta-Datei -----------------
+        # Meta-Datei lesen (ggf. .gz dekomprimieren)
+        data = meta_path.read_bytes()
+        if str(meta_path).endswith(".gz"):
+            data = gzip.decompress(data)
 
-            build_labels: set[str] = set()
-            for s, p, o in g.triples((None, rdfs_label, None)):
-                if isinstance(o, Literal) and "/scripts/build.py" in str(o):
-                    build_labels.add(str(o))
+        g = Graph()
+        g.parse(data=data.decode("utf-8"), format="turtle")
 
-            for label in build_labels:
-                # Lösche:
-                #  - alle Tripel ?activity ?p1 ?code
-                #  - alle Tripel ?code ?p2 ?o2
-                # für jene Kette, in der ?code rdfs:label "…/scripts/build.py" hat
-                sparql_bnodes = f"""
-    DELETE {{
-      GRAPH <{graph_uri}> {{
-        ?activity ?p1 ?code .
-        ?code ?p2 ?o2 .
-      }}
-    }}
-    WHERE {{
-      GRAPH <{graph_uri}> {{
-        ?activity <{prov_used}> ?code .
-        ?code <{rdfs_label}> "{label}" .
-        ?activity ?p1 ?code .
-        ?code ?p2 ?o2 .
-      }}
-    }}
-    """
-                self.stdout.write(
-                    f"[META] Lösche prov:used/build.py-BNodes für {slug} (Label '{label}') aus Graph {graph_uri}"
+        # --- 1) URI-Subjekte löschen ----------------------------------------
+        subjects = {s for s in g.subjects() if isinstance(s, URIRef)}
+
+        if subjects:
+            values = " ".join(f"<{str(s)}>" for s in subjects)
+            sparql = f"""
+DELETE {{
+  GRAPH <{graph_uri}> {{
+    ?s ?p ?o .
+  }}
+}}
+WHERE {{
+  GRAPH <{graph_uri}> {{
+    VALUES ?s {{ {values} }}
+    ?s ?p ?o .
+  }}
+}}
+"""
+            self.stdout.write(f"[META] Lösche URI-Subjekte für {slug} aus Graph {graph_uri}")
+            resp = requests.post(
+                update_url,
+                data={"update": sparql},
+                headers={"Content-Type": "application/x-www-form-urlencoded"},
+            )
+            if not resp.ok:
+                raise CommandError(
+                    f"Metadaten-Löschung (URI-Subjekte) für {slug} fehlgeschlagen "
+                    f"(Status {resp.status_code}): {resp.text[:500]}"
                 )
-                resp2 = requests.post(
-                    update_url,
-                    data={"update": sparql_bnodes},
-                    headers={"Content-Type": "application/x-www-form-urlencoded"},
+
+        # --- 2) Blank-Node-Kette für build.py löschen -----------------------
+        prov_used = URIRef("http://www.w3.org/ns/prov#used")
+        rdfs_label = URIRef("http://www.w3.org/2000/01/rdf-schema#label")
+
+        build_labels: set[str] = set()
+        for s, p, o in g.triples((None, rdfs_label, None)):
+            if isinstance(o, Literal) and "/scripts/build.py" in str(o):
+                build_labels.add(str(o))
+
+        for label in build_labels:
+            sparql_bnodes = f"""
+DELETE {{
+  GRAPH <{graph_uri}> {{
+    ?activity ?p1 ?code .
+    ?code ?p2 ?o2 .
+  }}
+}}
+WHERE {{
+  GRAPH <{graph_uri}> {{
+    ?activity <{prov_used}> ?code .
+    ?code <{rdfs_label}> "{label}" .
+    ?activity ?p1 ?code .
+    ?code ?p2 ?o2 .
+  }}
+}}
+"""
+            self.stdout.write(
+                f"[META] Lösche prov:used/build.py-BNodes für {slug} "
+                f"(Label '{label}') aus Graph {graph_uri}"
+            )
+            resp2 = requests.post(
+                update_url,
+                data={"update": sparql_bnodes},
+                headers={"Content-Type": "application/x-www-form-urlencoded"},
+            )
+            if not resp2.ok:
+                raise CommandError(
+                    f"Metadaten-Löschung (build.py-BNodes) für {slug} fehlgeschlagen "
+                    f"(Status {resp2.status_code}): {resp2.text[:500]}"
                 )
-                if not resp2.ok:
-                    raise CommandError(
-                        f"Metadaten-Löschung (build.py-BNodes) für {slug} fehlgeschlagen "
-                        f"(Status {resp2.status_code}): {resp2.text[:500]}"
-                    )
 
     # --- command builder ----------------------------------------------------
 

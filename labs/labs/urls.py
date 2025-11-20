@@ -24,13 +24,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('search/', include('search.urls', namespace='search')),
-    path('lod/', include('lodjango.urls')),
     path('', search_views.index, name='index'),
     path('cm_search/', include('cm_search.urls')),
     path('cm_e_search/', include('cm_e_search.urls')),
-    path('dashboard/', include('dashboard.urls')),
     path('data/', include('data.urls')),
-    path('backend', include('backend.urls')),
     #path('captcha/', include('captcha.urls')),
     path('contact/', include('contact.urls', namespace='contact')),
     path('api/', include('api.urls')),

@@ -46,8 +46,11 @@ for field in all_fields:
         ftype, mv = 'pint', False
     elif field in ('link', 'dataslug'):
         ftype, mv = 'string', False
+    elif field in ('birthDate', 'deathDate'):
+        ftype, mv = 'string', True
     else:
         ftype, mv = 'text_general', True
+
     schema_fields[field] = {
         'name': field,
         'type': ftype,
@@ -152,9 +155,6 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument("slug", type=str)
 
-    # ---------------------------------------------------------
-    # Schema-Check (wie in sync_fuseki_solr)
-    # ---------------------------------------------------------
     def ensure_schema(self, solr_base: str):
         url = f"{solr_base}/schema/fields"
         self.stdout.write("[SCHEMA] Fetching existing schema fields…")
@@ -180,7 +180,6 @@ class Command(BaseCommand):
         self.stdout.write(self.style.NOTICE(f"Indexiere Dataset: {slug}"))
 
         # Dataset finden
-        ds = None
         try:
             ds = Dataset.objects.get(name=slug)
         except Dataset.DoesNotExist:
@@ -203,22 +202,9 @@ class Command(BaseCommand):
         # Alte Dokumente für dieses Dataset löschen
         self.stdout.write(f"Lösche alte Dokumente in SOLR für dataslug=\"{dataslug}\" …")
         solr.delete(q=f'dataslug:"{dataslug}"')
-        meta_path = self._find_meta_file(dataslug, stdout=self.stdout)
-        if meta_path:
-            self.stdout.write(f"[SOLR][META] Lade Metadaten aus {meta_path}")
-            meta_docs = self._parse_rdf_with_rdflib(meta_path, dataslug)
-            if meta_docs:
-                solr.add(meta_docs)
-                indexed += len(meta_docs)
-                files_with_docs += 1
-            else:
-                self.stdout.write(
-                    self.style.WARNING(
-                        f"[SOLR][META] Aus Metadaten-Datei {meta_path} wurden 0 Solr-Dokumente erzeugt."
-                    )
-                )
-
         solr.commit()
+
+        # --- AB HIER KEINE METADATEN MEHR LADEN! ---
 
         # Datafiles laden
         datafiles = ds.datafile_set.all()
@@ -231,21 +217,18 @@ class Command(BaseCommand):
         missing_files = 0
 
         for df in datafiles:
-            if not df.indexed:
-                continue
-
             path = resolve_datafile_path(df, dataslug, stdout=self.stdout)
 
             if not path.exists():
-                self.stdout.write(self.style.ERROR(f"[SOLR] Datei fehlt: {path} (aus url={df.url})"))
+                self.stdout.write(
+                    self.style.ERROR(
+                        f"[SOLR] Datei fehlt: {path} (aus url={df.url})"
+                    )
+                )
                 missing_files += 1
                 continue
 
             resolved_any += 1
-
-            self.stdout.write(f"→ Lade Datei: {path}")
-
-            # Dateityp bestimmen
             self.stdout.write(f"→ Lade Datei: {path}")
 
             path_str = str(path)
@@ -253,7 +236,6 @@ class Command(BaseCommand):
             # 1) Turtle / Turtle.gz mit rdflib
             if path_str.endswith(".ttl") or path_str.endswith(".ttl.gz"):
                 docs = self._parse_rdf_with_rdflib(path, dataslug)
-
             # 2) Alles andere als N-Triples über Zeilenparser
             else:
                 if path_str.endswith(".gz"):
@@ -302,38 +284,9 @@ class Command(BaseCommand):
 
         ds.indexed = True
         ds.save()
-
-        self.stdout.write(
-            self.style.SUCCESS(
-                f"Dataset '{slug}' erfolgreich geladen – {indexed} Solr-Dokumente."
-            )
-        )
-
-    def _find_meta_file(self, dataslug: str, stdout=None) -> Path | None:
-        """
-        Sucht nach <slug>.meta.ttl(.gz) im Generator-Output-Verzeichnis.
-
-        Erwartet:
-            GENERATORS_BASE_DIR/<slug>/output/<slug>.meta.ttl(.gz)
-        """
-        if not GENERATORS_PATH:
-            return None
-
-        base = Path(GENERATORS_PATH) / dataslug / "output"
-        candidates = [
-            base / f"{dataslug}.meta.ttl",
-            base / f"{dataslug}.meta.ttl.gz",
-        ]
-
-        for cand in candidates:
-            if cand.exists():
-                if stdout is not None:
-                    stdout.write(f"[META] Metadaten-Datei gefunden: {cand}")
-                return cand
-
-        if stdout is not None:
-            stdout.write(f"[META] Keine Metadaten-Datei für {dataslug} gefunden.")
-        return None
+        self.stdout.write(self.style.SUCCESS(
+            f"[SOLR] Dataset '{slug}' erfolgreich indexiert ({indexed} Dokumente)."
+        ))
 
     def _parse_rdf_with_rdflib(self, path: Path, dataslug: str):
         """
@@ -416,8 +369,8 @@ class Command(BaseCommand):
             for key, val in list(doc.items()):
                 if isinstance(val, dict) and "add" in val:
                     cleaned = [cleanstring(x) for x in val["add"]]
-                    if key in ("birthDate", "deathDate"):
-                        cleaned = [convert_date(x) for x in cleaned]
+                    #if key in ("birthDate", "deathDate"):
+                    #    cleaned = [convert_date(x) for x in cleaned]
                     doc[key]["add"] = cleaned
             docs.append(doc)
 
@@ -498,8 +451,8 @@ class Command(BaseCommand):
             for key, val in list(doc.items()):
                 if isinstance(val, dict) and "add" in val:
                     cleaned = [cleanstring(x) for x in val["add"]]
-                    if key in ("birthDate", "deathDate"):
-                        cleaned = [convert_date(x) for x in cleaned]
+                    #if key in ("birthDate", "deathDate"):
+                    #    cleaned = [convert_date(x) for x in cleaned]
                     doc[key]["add"] = cleaned
             docs.append(doc)
 

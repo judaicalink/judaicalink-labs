@@ -61,14 +61,10 @@ INSTALLED_APPS = [
     'channels',
     'core',
     'api',
-    'backend',
-    #'backend.apps.BackendConfig',
     'search',
     'cm_search',
     'cm_e_search',
     'contact',
-    'lodjango',
-    'dashboard',
     'data',
     'crispy_forms',
     'captcha',
@@ -418,3 +414,4 @@ GENERATOR_LOG_DIR = GENERATORS_BASE_DIR + "/logs"
 LABS_DUMPS_LOCAL = env("LABS_DUMPS_LOCAL", default="/dumps/")
 LABS_DUMPS_WEBROOT = env("LABS_DUMPS_WEBROOT", default="http://data.judaicalink.org/dumps/")
 ENDPOINT = env("ENDPOINT", default="http://localhost:3030/judaicalink")
+DATASETS_GITHUB_API_URL = env("DATASETS_GITHUB_API_URL", default="https://api.github.com/repos/wisslab/judaicalink-site/contents/content/datasets")
