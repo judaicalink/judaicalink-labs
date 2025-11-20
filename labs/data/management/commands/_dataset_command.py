@@ -21,7 +21,7 @@ import traceback
 
 ## The base script
 # Here, all the magic happens to ensure that our datasets are consistent.
-# You should only change this code in close cooperation with the rest of 
+# You should only change this code in close cooperation with the rest of
 # the team as any change here might break the other dataset commands.
 
 # Good example commands to see this in action:
@@ -67,7 +67,7 @@ def gzip_file(filename):
 # Base class for the spiders.
 class DatasetSpider(scrapy.Spider):
     # We provide two sets to keep track of already seen
-    # pages and already queued ones. 
+    # pages and already queued ones.
     # This is not always needed, Scrapy caches requests and
     # also provided means to avoid duplicates
     def __init__(self, *args, **options):
@@ -90,7 +90,7 @@ class DatasetSpider(scrapy.Spider):
 class DatasetCommand(BaseCommand):
     help = 'Base Command for a scraper'
 
-    
+
     def __init__(self):
         super().__init__()
         self.gzip = False
@@ -185,7 +185,7 @@ class DatasetCommand(BaseCommand):
         if not rdf_filename:
             rdf_filename = f"{self.metadata['slug']}.ttl"
         if self.gzip and not jsonl_filename.endswith(".gz"):
-            jsonl_filename += ".gz" 
+            jsonl_filename += ".gz"
         jsonl_filepath = os.path.join(self.directory, jsonl_filename)
         rdf_filepath = os.path.join(self.directory, rdf_filename)
         graph = rdflib.Graph()
@@ -218,7 +218,7 @@ class DatasetCommand(BaseCommand):
             print("You must explicitly give a different rdf_filename, if you read from the default filename.")
             return
         if self.gzip and not rdf_filename.endswith(".gz"):
-            rdf_filename += ".gz" 
+            rdf_filename += ".gz"
         directory = self.directory
         if source_dataset_slug:
             directory = directory.replace(self.metadata['slug'], source_dataset_slug)

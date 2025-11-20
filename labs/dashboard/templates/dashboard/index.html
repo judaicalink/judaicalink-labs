@@ -1,14 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends 'search/base.html' %}
+{% load static %}
+{% load cookiebanner %}
+{% load render_bundle from webpack_loader %}
+
+{% block content %}
     <meta charset="UTF-8">
-    <title>Dashboard Main</title>
-</head>
-<body>
+    <h1>Dashboard Main</h1>
 
 {{result}}
-<br><br><br>
-{% if result %}
+
+{% endblock %}
+
+{% block footer_scripts %}
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script type='text/javascript'>
     var datasets = {{result|safe}};
@@ -30,8 +33,4 @@
       },
     });
   </script>
-{% endif %}
-
-
-</body>
-</html>
+{% endblock %}

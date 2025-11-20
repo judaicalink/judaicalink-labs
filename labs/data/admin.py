@@ -1,10 +1,16 @@
 import django.db.models as django_models
-from backend import tasks
-from django.contrib import admin
+from backend import tasks as backend_tasks
+from backend.models import ThreadTask
+from django.conf import settings
+from django.contrib import admin, messages
+from django.core.management import call_command, CommandError
+from django.utils.html import escape
+from django.utils.safestring import mark_safe
+from pathlib import Path
+from django.http import HttpResponseRedirect
+
 
 from . import models
-
-# Register your models here.
 
 formfield_overrides = {
     django_models.TextField: {'widget': admin.widgets.AdminTextInputWidget},
@@ -45,63 +51,515 @@ set_indexed.short_description = "Index selected datasets and files"
 unset_indexed.short_description = "Do not index selected datasets and files"
 
 
+
 class DatafileAdmin(admin.TabularInline):
     model = models.Datafile
     formfield_overrides = formfield_overrides
     extra = 0
+    can_delete = False  # löscht die Delete-Checkbox-Spalte
+    show_change_link = False  # kein „Stift“-Icon
+    readonly_fields = ("url", "description", "indexed", "loaded")
+    max_num = 0  # keine neuen Datafiles per Admin anlegen
 
+    # Reihenfolge und sichtbare Felder im Inline
+    fields = ("url", "description", "indexed", "loaded")
+
+    # Diese Felder nur anzeigen, nicht bearbeitbar:
+    readonly_fields = ("indexed", "loaded",)
+
+    # Checkbox-Spalte zum Löschen ausblenden, aber Bearbeiten erlauben
+    can_delete = False
 
 class DatasetAdmin(admin.ModelAdmin):
-    list_display = ['name', 'title', 'category', 'loaded', num_loaded, 'indexed', num_indexed]
-    list_editable = ['indexed', 'loaded']
+    list_display = ['name', 'title', 'category', 'graph', 'loaded', 'indexed', 'generation_status_short']
     list_display_links = ['name']
 
     formfield_overrides = formfield_overrides
     inlines = [DatafileAdmin, ]
-    actions = [set_indexed, unset_indexed, 'load_fuseki', 'unload_fuseki', 'delete_fuseki']
+    actions = ['regenerate_and_load_async', 'load_fuseki', 'unload_fuseki', 'load_into_solr',
+               'unload_from_solr', 'delete_ds']
+    fieldsets = (
+        (None, {
+            "fields": (
+                "name",
+                "title",
+                "dataslug",
+                "category",
+            )
+        }),
+        ("Status", {
+            "fields": (
+                "loaded",
+                "indexed",
+                "generation_status_short",
+            )
+        }),
+        ("Logs", {
+            "fields": (
+                "generator_log",
+                "task_log",
+            )
+        }),
+    )
+    readonly_fields = (
+        "loaded",
+        "indexed",
+        "generation_status_short",
+        "generator_log",
+        "task_log",
+    )
+
+
+
+    # -------- Kurzstatus für die Liste --------
+    @admin.display(description="Gen.-Status")
+    def generation_status_short(self, obj):
+        status, _ = self._get_status_and_error(obj)
+        # nur ein Wort + Symbol
+        if status.startswith("OK"):
+            return "✅"
+        if status.startswith("läuft"):
+            return "⏳"
+        if status.startswith("Fehlgeschlagen"):
+            return "❌"
+        return status
+
+    # -------- Detaillierter Status für Detailansicht --------
+    @admin.display(description="Generierungsstatus")
+    def generation_status(self, obj):
+        status, error = self._get_status_and_error(obj)
+
+        if status.startswith("OK"):
+            # grüner Haken + Zeitstempel
+            return mark_safe(f"<span style='color:green;'>✅ {status}</span>")
+
+        if status.startswith("Fehlgeschlagen"):
+            # rotes Kreuz + letzte Fehlerzeile
+            short_err = error or "(siehe Log unten)"
+            return mark_safe(
+                f"<span style='color:red;'>❌ {status}<br><small>{short_err}</small></span>"
+            )
+
+        # laufend oder kein Task
+        return status
+
+    def _get_status_and_error(self, obj):
+        task = obj.thread_tasks.order_by("-started").first()
+        slug = obj.dataslug or obj.name
+
+        # kein Task → nur Generator-Log auswerten
+        if not task:
+            gen_status, gen_line = self._detect_generator_result(slug)
+            if gen_status == "SUCCESS":
+                return "OK (Generator erfolgreich, kein Task)", None
+            if gen_status == "ERROR":
+                return "Fehlgeschlagen (Generator)", gen_line
+            return "kein Task/kein Log", None
+
+        # Task läuft noch
+        if not task.is_done:
+            return f"läuft seit {task.started}", None
+
+        # Task fertig → mit Generator-Ergebnis kombinieren
+        gen_status, gen_line = self._detect_generator_result(slug)
+
+        if task.status_ok and gen_status == "SUCCESS":
+            return f"OK (fertig {task.ended})", None
+
+        if gen_status == "ERROR":
+            return f"Fehlgeschlagen (fertig {task.ended})", gen_line
+
+        if not task.status_ok:
+            # Fallback: nutze Task-Log als Fehler
+            return f"Fehlgeschlagen (fertig {task.ended})", task.last_log()
+
+        # ansonsten weiß man es nicht genau, aber Task war OK
+        return f"OK (fertig {task.ended})", None
+
+    def _detect_generator_result(self, slug: str):
+        """Liest logs/<slug>.log und gibt ('SUCCESS'|'ERROR'|'UNKNOWN', letzte_relevante_Zeile) zurück."""
+        log_dir = getattr(settings, "GENERATOR_LOG_DIR", None)
+        if not log_dir:
+            return "UNKNOWN", None
+
+        path = Path(log_dir) / f"{slug}.log"
+        if not path.exists():
+            return "UNKNOWN", None
+
+        try:
+            text = path.read_text(encoding="utf-8", errors="replace")
+        except Exception:
+            return "UNKNOWN", None
+
+        lines = [l for l in text.splitlines() if l.strip()]
+        lines_rev = list(reversed(lines))
+
+        last_error = None
+        last_success = None
+
+        for line in lines_rev:
+            lower = line.lower()
+            # typische Fehler-Marker
+            if "failed" in lower or "error" in lower:
+                last_error = line
+                break
+            # typische Erfolgs-Marker
+            if "generation finished" in lower or "generation finished" in lower or "copied →" in line:
+                last_success = line
+                break
+
+        if last_error:
+            return "ERROR", last_error
+        if last_success:
+            return "SUCCESS", last_success
+        return "UNKNOWN", None
+
+    # -------- Log aus logs/<slug>.log (nur Tail) --------
+    @admin.display(description="Generator-Log")
+    def generator_log(self, obj):
+        slug = obj.dataslug or obj.name
+        log_dir = getattr(settings, "GENERATOR_LOG_DIR", None)
+        if not log_dir:
+            return "GENERATOR_LOG_DIR ist nicht konfiguriert."
+
+        path = Path(log_dir) / f"{slug}.log"
+        if not path.exists():
+            return f"Kein Log gefunden ({path})"
+
+        try:
+            text = path.read_text(encoding="utf-8", errors="replace")
+        except Exception as e:
+            return f"Fehler beim Lesen von {path}: {e}"
+
+        lines = text.splitlines()
+        tail_lines = 100  # Anzahl der Zeilen, die du sehen willst
+        tail = "\n".join(lines[-tail_lines:])
+
+        html = (
+            "<details>"
+            "<summary>Log anzeigen (letzte "
+            f"{min(tail_lines, len(lines))} Zeilen)</summary>"
+            "<pre style='max-height:400px; overflow:auto;'>"
+            f"{tail}"
+            "</pre></details>"
+        )
+        return mark_safe(html)
+
+    @admin.display(description="Letzter Task-Log")
+    def task_log(self, obj):
+        """
+        Zeigt den Log des letzten ThreadTask an, der mit dem Dataset verknüpft ist.
+        Nur die letzten 200 Zeilen, in einem <details>-Block.
+        """
+        task = obj.thread_tasks.order_by("-started").first()
+        if not task:
+            return "Kein Task-Log vorhanden."
+
+        text = task.log_text or ""
+        lines = [l for l in text.splitlines() if l.strip()]
+        if not lines:
+            return "Log ist leer."
+
+        tail_lines = 200
+        tail = "\n".join(lines[-tail_lines:])
+
+        html = (
+            "<details>"
+            "<summary>Task-Log anzeigen (letzte "
+            f"{min(tail_lines, len(lines))} Zeilen)</summary>"
+            "<pre style='max-height:400px; overflow:auto;'>"
+            f"{escape(tail)}"
+            "</pre></details>"
+        )
+        return mark_safe(html)
+
+    # -------- Async-Action: neu generieren & laden --------
+    def regenerate_and_load_async(self, request, queryset):
+        started, skipped = 0, 0
+
+        for obj in queryset:
+            slug = obj.dataslug or obj.name
+
+            # Läuft schon ein Task für dieses Dataset?
+            running = obj.thread_tasks.filter(is_done=False).exists()
+            if running:
+                skipped += 1
+                self.message_user(
+                    request,
+                    f"Dataset '{slug}' wird bereits generiert – neuer Start wird übersprungen.",
+                    level=messages.WARNING,
+                )
+                continue
+
+            # Neuen Task starten
+            task_id = backend_tasks.run_management_command(
+                task_name=f"generate_dataset:{slug}",
+                command="generate_and_load_dataset",
+                args=[slug],
+            )
+
+            # Task mit Dataset verknüpfen
+            task = ThreadTask.objects.get(pk=task_id)
+            task.dataset = obj
+            task.save()
+
+            started += 1
+
+        if started:
+            self.message_user(
+                request,
+                f"{started} Dataset(s) zur Generierung/Ladung gestartet.",
+                level=messages.SUCCESS,
+            )
+        if skipped:
+            self.message_user(
+                request,
+                f"{skipped} Dataset(s) wurden übersprungen (läuft bereits).",
+                level=messages.INFO,
+            )
+
+    regenerate_and_load_async.short_description = (
+        "Dataset neu generieren (inkl. Metadaten) und in Fuseki laden (asynchron)"
+    )
 
     def get_dataset_log(slug: str):
-        path = Path(f"/path/to/logs/{slug}.log")
+        path = Path(getattr(settings, 'JUDAICALINK_GENERATORS_PATH', None), f"/logs/{slug}.log")
         if not path.exists():
             return "No log available."
         with path.open(encoding="utf-8") as f:
             return f.read().splitlines()[-500:]  # letzte 500 Zeilen
 
     def load_fuseki(self, request, queryset):
+        started, fail = 0, 0
+
         for ds in queryset:
-            slug = ds.dataslug or ds.name
-            tasks.call_command_as_task('fuseki_loader', 'load', slug)
-        self.message_user(request, 'Load started for selected datasets.')
+            # wie bisher: Fuseki arbeitet mit dem Dataset-Namen
+            slug = ds.name
+
+            try:
+                task_id = backend_tasks.run_management_command(
+                    task_name=f"fuseki_load:{slug}",
+                    command="fuseki_loader",
+                    args=["load", slug],
+                )
+
+                # Task mit Dataset verknüpfen, damit task_log/generation_status funktionieren
+                task = ThreadTask.objects.get(pk=task_id)
+                task.dataset = ds
+                task.save()
+
+                started += 1
+                messages.success(
+                    request,
+                    f"Fuseki-Load-Task für Dataset '{slug}' gestartet."
+                )
+            except Exception as e:
+                fail += 1
+                messages.error(
+                    request,
+                    f"Fehler beim Starten des Fuseki-Load-Tasks für {slug}: {e}"
+                )
+
+        self.message_user(
+            request,
+            f"{started} Fuseki-Load-Task(s) gestartet; {fail} fehlgeschlagen.",
+        )
 
     load_fuseki.short_description = 'Load in Fuseki'
 
     def unload_fuseki(self, request, queryset):
+        started, fail = 0, 0
+
         for ds in queryset:
-            slug = ds.dataslug or ds.name
-            tasks.call_command_as_task('fuseki_loader', 'unload', slug)
-        self.message_user(request, 'Unload started for selected datasets.')
+            slug = ds.name
+
+            try:
+                task_id = backend_tasks.run_management_command(
+                    task_name=f"fuseki_unload:{slug}",
+                    command="fuseki_loader",
+                    args=["unload", slug],
+                )
+
+                task = ThreadTask.objects.get(pk=task_id)
+                task.dataset = ds
+                task.save()
+
+                started += 1
+                messages.success(
+                    request,
+                    f"Fuseki-Unload-Task für Dataset '{slug}' gestartet."
+                )
+            except Exception as e:
+                fail += 1
+                messages.error(
+                    request,
+                    f"Fehler beim Starten des Fuseki-Unload-Tasks für {slug}: {e}"
+                )
+
+        self.message_user(
+            request,
+            f"{started} Fuseki-Unload-Task(s) gestartet; {fail} fehlgeschlagen.",
+        )
 
     unload_fuseki.short_description = 'Unload from Fuseki'
 
-    # inside DatasetAdmin
-    def delete_fuseki(self, request, queryset):
-        from django.core.management import call_command
-        from django.core.management.base import CommandError
+    @admin.action(description="Load selected datasets into SOLR")
+    def load_into_solr(self, request, queryset):
+        started, fail = 0, 0
 
-        ok, fail = 0, 0
-        for obj in queryset:
-            slug = obj.dataslug or obj.name
+        for ds in queryset:
+            slug = ds.dataslug or ds.name
+
             try:
-                call_command("fuseki_loader", "delete", slug)
-                obj.delete()  # <-- also delete the Django record
-                ok += 1
-            except CommandError as e:
-                fail += 1
-        self.message_user(request, f"Deleted {ok} dataset(s); {fail} failed.")
+                # Neuen ThreadTask starten
+                task_id = backend_tasks.run_management_command(
+                    task_name=f"solr_load_dataset:{slug}",
+                    command="solr_load_dataset",
+                    args=[slug],
+                )
 
-    delete_fuseki.short_description = 'Delete from Fuseki'
+                task = ThreadTask.objects.get(pk=task_id)
+                task.dataset = ds
+                task.save()
+
+                started += 1
+                messages.success(
+                    request,
+                    f"SOLR-Load-Task für Dataset '{slug}' gestartet."
+                )
+            except Exception as e:
+                fail += 1
+                messages.error(
+                    request,
+                    f"Fehler beim Starten des SOLR-Load-Tasks für {slug}: {e}"
+                )
+                ds.indexed = False
+                ds.save()
+
+        self.message_user(
+            request,
+            f"{started} SOLR-Load-Task(s) gestartet; {fail} fehlgeschlagen.",
+        )
+
+    load_into_solr.short_description = "Load selected datasets into SOLR"
+
+    @admin.action(description="Unload selected datasets from SOLR")
+    def unload_from_solr(self, request, queryset):
+        started, fail = 0, 0
+
+        for ds in queryset:
+            # Wir nutzen hier ebenfalls den Dataset-Namen; der Command
+            # übersetzt ihn intern in das echte dataslug (siehe oben).
+            slug = ds.dataslug or ds.name
+
+            try:
+                task_id = backend_tasks.run_management_command(
+                    task_name=f"solr_delete_dataset:{slug}",
+                    command="solr_delete_dataset",
+                    args=[slug],
+                )
+
+                task = ThreadTask.objects.get(pk=task_id)
+                task.dataset = ds
+                task.save()
+
+                started += 1
+                messages.success(
+                    request,
+                    f"SOLR-Unload-Task für Dataset '{slug}' gestartet."
+                )
+            except Exception as e:
+                fail += 1
+                messages.error(
+                    request,
+                    f"Fehler beim Starten des SOLR-Unload-Tasks für {slug}: {e}"
+                )
+
+        self.message_user(
+            request,
+            f"{started} SOLR-Unload-Task(s) gestartet; {fail} fehlgeschlagen.",
+        )
+
+    unload_from_solr.short_description = "Unload selected datasets from SOLR"
+
+    @admin.action(description="Delete the dataset completely (Fuseki, Solr, Django)")
+    def delete_ds(self, request, queryset):
+        started, fail = 0, 0
+
+        for ds in queryset:
+            slug = ds.name
+
+            try:
+                task_id = backend_tasks.run_management_command(
+                    task_name=f"delete_dataset:{slug}",
+                    command="delete_dataset",
+                    args=[slug],
+                )
+
+                task = ThreadTask.objects.get(pk=task_id)
+                task.dataset = ds
+                task.save()
+
+                started += 1
+                messages.success(
+                    request,
+                    f"Lösch-Task für Dataset '{slug}' gestartet."
+                )
+
+            except Exception as e:
+                fail += 1
+                messages.error(
+                    request,
+                    f"Fehler beim Starten des Delete-Tasks für {slug}: {e}"
+                )
+
+        self.message_user(
+            request,
+            f"{started} Lösch-Task(s) gestartet; {fail} fehlgeschlagen."
+        )
+
+    delete_ds.short_description = 'Delete the dataset'
+
+    def _single_queryset(self, obj):
+        # Hilfsfunktion, damit wir deine bestehenden Actions wiederverwenden können
+        return models.Dataset.objects.filter(pk=obj.pk)
+
+    def response_change(self, request, obj):
+        """
+        Reagiere auf Extra-Buttons im Change-Form (Detailansicht) und
+        führe die bestehenden Actions nur für dieses eine Objekt aus.
+        """
+        # Name der Buttons muss zu den "name"-Attributen im Template passen
+        if "_regenerate_and_load" in request.POST:
+            self.regenerate_and_load_async(request, self._single_queryset(obj))
+            return HttpResponseRedirect(".")  # auf der Detailseite bleiben
+
+        if "_load_fuseki" in request.POST:
+            self.load_fuseki(request, self._single_queryset(obj))
+            return HttpResponseRedirect(".")
+
+        if "_unload_fuseki" in request.POST:
+            self.unload_fuseki(request, self._single_queryset(obj))
+            return HttpResponseRedirect(".")
+
+        if "_load_solr" in request.POST:
+            self.load_into_solr(request, self._single_queryset(obj))
+            return HttpResponseRedirect(".")
+
+        if "_unload_solr" in request.POST:
+            self.unload_from_solr(request, self._single_queryset(obj))
+            return HttpResponseRedirect(".")
+
+        if "_delete_ds" in request.POST:
+            self.delete_ds(request, self._single_queryset(obj))
+            # Nach Delete lieber zurück zur Liste:
+            return HttpResponseRedirect("../")
+
+        # Standardverhalten für alle anderen Buttons (Speichern usw.)
+        return super().response_change(request, obj)
 
     change_list_template = 'admin/data/dataset/change_list.html'
+    change_form_template = 'admin/data/dataset/change_form.html'
 
 
 admin.site.register(models.Dataset, DatasetAdmin)

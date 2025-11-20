@@ -1,8 +1,9 @@
 {% extends 'search/base.html' %}
 {% load static %}
+{% load cookiebanner %}
+{% load render_bundle from webpack_loader %}
+
 {% block content %}
-
-
 <!--content-->
 <main class="row">
 
@@ -31,7 +32,5 @@
 
 </main>
 <!--content end-->
-
-{% include "search/footer.html" %}
 
 {% endblock content %}

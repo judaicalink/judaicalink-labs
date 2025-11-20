@@ -1,0 +1,27 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+{# unten bei den Submit-Buttons zusätzliche Action-Buttons einfügen #}
+{% block submit_buttons_bottom %}
+    {{ block.super }}
+
+    <div class="submit-row">
+        <input type="submit" name="_regenerate_and_load"
+               value="Regenerate & Load (async)" class="default">
+
+        <input type="submit" name="_load_fuseki"
+               value="Load in Fuseki">
+
+        <input type="submit" name="_unload_fuseki"
+               value="Unload from Fuseki">
+
+        <input type="submit" name="_load_solr"
+               value="Load into SOLR">
+
+        <input type="submit" name="_unload_solr"
+               value="Unload from SOLR">
+
+        <input type="submit" name="_delete_ds"
+               value="Delete Dataset (Task)" style="background:#ba2121; color:white;">
+    </div>
+{% endblock %}

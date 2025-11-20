@@ -1,18 +1,17 @@
 import json
 import os
+import requests
 import shutil
 from datetime import datetime
-from pathlib import Path
-
-import requests
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.contrib.auth import get_user_model
+from pathlib import Path
 
-from . import admin
-from . import tasks
 from data import models as data_models
+from . import admin, models
+from . import tasks
 
 
 # Create your views here.
@@ -39,6 +38,7 @@ def load_fuseki(request):
     """Load all datasets in Fuseki using the loader script."""
     tasks.call_command_as_task("fuseki_loader", "load")
     return redirect(reverse("admin:data_dataset_changelist"))
+
 
 def loader_manage_all(request, action):
     """Run the loader script with the given action for all datasets."""
@@ -84,13 +84,13 @@ def serverstatus(request):
             context["solr"].append(
                 (
                     "Disk space (" + settings.SOLR_STORAGE + ")",
-                    "{:.2f} / {:.2f} G".format(df.free / 2**30, df.total / 2**30),
+                    "{:.2f} / {:.2f} G".format(df.free / 2 ** 30, df.total / 2 ** 30),
                 )
             )
             context["solr"].append(
                 (
                     "Disk used (" + settings.SOLR_STORAGE + ")",
-                    "{:.2f} M".format(dirsize(settings.SOLR_STORAGE) / 2**20),
+                    "{:.2f} M".format(dirsize(settings.SOLR_STORAGE) / 2 ** 20),
                 )
             )
     except Exception as e:
@@ -114,13 +114,13 @@ def serverstatus(request):
             context["fuseki"].append(
                 (
                     "Disk space (" + settings.FUSEKI_STORAGE + ")",
-                    "{:.2f} / {:.2f} G".format(df.free / 2**30, df.total / 2**30),
+                    "{:.2f} / {:.2f} G".format(df.free / 2 ** 30, df.total / 2 ** 30),
                 )
             )
             context["fuseki"].append(
                 (
                     "Disk used (" + settings.FUSEKI_STORAGE + ")",
-                    "{:.2f} M".format(dirsize(settings.FUSEKI_STORAGE) / 2**20),
+                    "{:.2f} M".format(dirsize(settings.FUSEKI_STORAGE) / 2 ** 20),
                 )
             )
     except Exception as e:

@@ -135,6 +135,7 @@ DATABASES = {
         default='sqlite:///db.sqlite3'
     )
 }
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Cache Redis
 CACHES = {
@@ -181,7 +182,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = env('STATIC_URL', default=os.path.join(BASE_DIR, "static/"))
+STATIC_URL = env('STATIC_URL', default='/static/')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "build"),  # Webpack build output
@@ -394,7 +395,7 @@ DEBUG_TOOLBAR_CONFIG = {
 
 WEBPACK_LOADER = {
     'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'static/',  # Django serves static files from /static/
+        'BUNDLE_DIR_NAME': '',
         'CACHE': not DEBUG,
         'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),  # Ensure correct path
         'POLL_INTERVAL': 0.1,
@@ -407,3 +408,13 @@ WEBPACK_LOADER = {
 #        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
 #    },
 #}
+
+
+JUDAICALINK_LOADER_PATH = env('JUDAICALINK_LOADER_PATH', default="../../judaicalink-loader/loader/loader.py")
+HUGO_DIR = env('HUGO_DIR', default=BASE_DIR + "/data/gh_datasets")
+JUDAICALINK_DATASETS_CATALOG_DIR = env('JUDAICALINK_DATASETS_CATALOG_DIR ', default=BASE_DIR + "/data/gh_datasets")
+GENERATORS_BASE_DIR = env("GENERATORS_BASE_DIR", default="judaicalink-generators")
+GENERATOR_LOG_DIR = GENERATORS_BASE_DIR + "/logs"
+LABS_DUMPS_LOCAL = env("LABS_DUMPS_LOCAL", default="/dumps/")
+LABS_DUMPS_WEBROOT = env("LABS_DUMPS_WEBROOT", default="http://data.judaicalink.org/dumps/")
+ENDPOINT = env("ENDPOINT", default="http://localhost:3030/judaicalink")

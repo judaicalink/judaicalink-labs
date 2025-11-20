@@ -1,6 +1,6 @@
+from django.conf import settings
 from django.db import models
-
-# Create your models here.
+from pathlib import Path
 from . import hugotools
 
 
@@ -51,8 +51,9 @@ def _as_bool(val, default=False):
 
 
 def update_from_markdown(filename):
-    # TODO: Implement this function to update dataset from markdown files
-    data = hugotools.get_data('data/gh_datasets/{}'.format(filename))
+    path = Path(settings.HUGO_DIR) / filename
+    data = hugotools.get_data(str(path))
+
     try:
         ds = Dataset.objects.get(name=filename[:-3])
     except Dataset.DoesNotExist:

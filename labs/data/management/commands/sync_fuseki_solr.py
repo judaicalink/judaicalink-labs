@@ -1,7 +1,7 @@
+import logging
+import pysolr
 import re
 import requests
-import pysolr
-import logging
 from datetime import datetime
 from django.conf import settings
 from django.core.management.base import BaseCommand
@@ -44,12 +44,14 @@ for field in all_fields:
 logger = logging.getLogger('sync_fuseki_solr')
 logger.setLevel(logging.DEBUG)
 
+
 # Clean string function
 
 def cleanstring(value):
     """Trim whitespace, collapse spaces, strip commas."""
     v = re.sub(r'\s+', ' ', value).strip()
     return v.rstrip(',')
+
 
 # Date conversion for ISO Solr format
 
@@ -65,6 +67,7 @@ def convert_date(val):
         except Exception:
             continue
     return val
+
 
 class Command(BaseCommand):
     help = 'Sync Fuseki RDF triples to Solr with incremental clears, cleaning, logging, and console output'
@@ -111,7 +114,8 @@ class Command(BaseCommand):
         graphs_q = "SELECT DISTINCT ?graph WHERE { GRAPH ?graph {} }"
         try:
             print("[INFO] Fetching graph list...")
-            r = requests.post(sparql_url, data={'query': graphs_q}, headers={'Accept': 'application/sparql-results+json'})
+            r = requests.post(sparql_url, data={'query': graphs_q},
+                              headers={'Accept': 'application/sparql-results+json'})
             r.raise_for_status()
             graphs = [b['graph']['value'] for b in r.json()['results']['bindings']]
             print(f"[INFO] Found {len(graphs)} graphs")
@@ -139,7 +143,8 @@ class Command(BaseCommand):
 
             # count triples
             try:
-                cr = requests.post(sparql_url, data={'query': cnt_q(graph)}, headers={'Accept': 'application/sparql-results+json'})
+                cr = requests.post(sparql_url, data={'query': cnt_q(graph)},
+                                   headers={'Accept': 'application/sparql-results+json'})
                 cr.raise_for_status()
                 total = int(cr.json()['results']['bindings'][0]['count']['value'])
                 print(f"[INFO] Graph {slug} has {total} triples")
@@ -153,7 +158,8 @@ class Command(BaseCommand):
             while offset < total:
                 try:
                     print(f"[INFO] Fetching triples from {slug} offset={offset}")
-                    dr = requests.post(sparql_url, data={'query': data_q(graph, offset, 1000)}, headers={'Accept': 'application/sparql-results+json'})
+                    dr = requests.post(sparql_url, data={'query': data_q(graph, offset, 1000)},
+                                       headers={'Accept': 'application/sparql-results+json'})
                     dr.raise_for_status()
                     rows = dr.json()['results']['bindings']
                     print(f"[INFO] Retrieved {len(rows)} triples")
@@ -165,13 +171,15 @@ class Command(BaseCommand):
 
                 updates = {}
                 for rbind in rows:
-                    s = rbind['s']['value']; p = rbind['p']['value']; o = rbind['o']
+                    s = rbind['s']['value'];
+                    p = rbind['p']['value'];
+                    o = rbind['o']
                     fld = property2field.get(p)
                     if s not in updates:
                         updates[s] = {'id': s, 'link': {'set': s}, 'dataslug': {'set': slug}}
                     if not fld:
                         continue
-                    v = o['value'] if o['type']=='uri' else cleanstring(o['value'])
+                    v = o['value'] if o['type'] == 'uri' else cleanstring(o['value'])
                     if fld in updates[s]:
                         updates[s][fld]['add'].append(v)
                     else:
@@ -183,7 +191,7 @@ class Command(BaseCommand):
                     for key, val in list(doc.items()):
                         if isinstance(val, dict) and 'add' in val:
                             cleaned = [cleanstring(x) for x in val['add']]
-                            if key in ('birthDate','deathDate'):
+                            if key in ('birthDate', 'deathDate'):
                                 cleaned = [convert_date(x) for x in cleaned]
                             doc[key]['add'] = cleaned
                     docs.append(doc)
