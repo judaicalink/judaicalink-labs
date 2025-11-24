@@ -1,9 +1,10 @@
+import json
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
-from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
-import json
+
 from . import models
+
 
 class BackendConsumer(WebsocketConsumer):
     def connect(self):
@@ -18,7 +19,7 @@ class BackendConsumer(WebsocketConsumer):
         self.accept()
         running = models.ThreadTask.objects.filter(is_done=False)
         for task in running:
-            send_message('task{}'.format(task.id), 'info', task.name + ':', '') 
+            send_message('task{}'.format(task.id), 'info', task.name + ':', '')
 
     def disconnect(self, close_code):
         # Leave room group
@@ -34,28 +35,28 @@ class BackendConsumer(WebsocketConsumer):
 
 
 def send_message(id, level, message, submessage):
-        async_to_sync(get_channel_layer().group_send)(
-            'taskmessages',
-            {
-                'action': 'create',
-                'type': 'task_message',
-                'message': message,
-                'id': id,
-                'submessage': submessage,
-                'level': 'info',
-            }
-        )
+    async_to_sync(get_channel_layer().group_send)(
+        'taskmessages',
+        {
+            'action': 'create',
+            'type': 'task_message',
+            'message': message,
+            'id': id,
+            'submessage': submessage,
+            'level': 'info',
+        }
+    )
 
 
 def send_sub_message(id, level='info', submessage=''):
-        print('sending sub message: {}'.format(submessage))
-        async_to_sync(get_channel_layer().group_send)(
-            'taskmessages',
-            {
-                'action': 'update',
-                'type': 'task_message',
-                'id': id,
-                'submessage': submessage,
-                'level': level,
-            }
-        )
+    print('sending sub message: {}'.format(submessage))
+    async_to_sync(get_channel_layer().group_send)(
+        'taskmessages',
+        {
+            'action': 'update',
+            'type': 'task_message',
+            'id': id,
+            'submessage': submessage,
+            'level': level,
+        }
+    )

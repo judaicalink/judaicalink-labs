@@ -1,8 +1,4 @@
-from django.contrib import admin
-from django.urls import path, include
-# for the sitemap
-from django.contrib.sitemaps import GenericSitemap
-from django.contrib.sitemaps.views import sitemap
+from django.urls import path
 
 from .views import commands, DatasetListView, DatasetDetailView
 

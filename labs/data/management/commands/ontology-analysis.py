@@ -1,15 +1,9 @@
 import json
-import re
-import rdflib
-import gzip
 import requests
-from django.conf import settings
 from django.core.management.base import BaseCommand
-from django.core import management
+
 from data import models
 from data import utils, sparqltools
-import requests
-import json
 
 
 class Command(BaseCommand):
@@ -18,14 +12,15 @@ class Command(BaseCommand):
     '''
 
     def handle(self, *args, **kwargs):
-        res = requests.get("http://data.judaicalink.org/sparql/query?query=select+distinct+%3Fp+%3Fg+where+%7Bgraph+%3Fg+%7B%3Fs+%3Fp+%3Fo%7D%7D&default-graph-uri=&output=json&stylesheet=")
+        res = requests.get(
+            "http://data.judaicalink.org/sparql/query?query=select+distinct+%3Fp+%3Fg+where+%7Bgraph+%3Fg+%7B%3Fs+%3Fp+%3Fo%7D%7D&default-graph-uri=&output=json&stylesheet=")
         res = json.loads(res.text)
         jl_props = {}
         other_props = {}
         for binding in res["results"]["bindings"]:
             prop = binding["p"]["value"]
             graph = binding["g"]["value"]
-            graph = graph[graph.rfind('/')+1:]
+            graph = graph[graph.rfind('/') + 1:]
             if "judaicalink" in prop:
                 props = jl_props
             else:
@@ -42,6 +37,3 @@ class Command(BaseCommand):
                 print(f"{p}: {', '.join(props[p])}")
                 print()
             print('-------------------------------------------------------------')
-
-
-

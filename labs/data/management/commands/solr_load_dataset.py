@@ -1,19 +1,15 @@
 # labs/data/management/commands/solr_load_dataset.py
-import os
-
 import gzip
-from pathlib import Path
-from urllib.parse import urlparse
-
+import os
 import pysolr
 import re
 import requests
-
+import rdflib
+from data.models import Dataset
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
-
-from data.models import Dataset
-
+from pathlib import Path
+from urllib.parse import urlparse
 
 DUMPS_LOCAL_DIR = os.environ.get(
     "DUMPS_LOCAL_DIR",
@@ -22,7 +18,7 @@ DUMPS_LOCAL_DIR = os.environ.get(
 
 GENERATORS_PATH = getattr(settings, "GENERATORS_BASE_DIR", None)
 
-# --- Mapping wie in sync_fuseki_solr ---------------------------------------
+# Mapping
 
 property2field = {
     'http://www.w3.org/2004/02/skos/core#prefLabel': 'name',
@@ -79,13 +75,13 @@ def convert_date(val: str) -> str:
 
 def resolve_datafile_path(df, dataslug, stdout=None) -> Path:
     """
-    Versucht aus Datafile.url einen lokalen Pfad zu machen.
+    Attempts to create a local path from Datafile.url.
 
-    Reihenfolge:
-    1. Absoluter Pfad aus df.url
-    2. Mapping von HTTP-URLs / relativen Pfaden nach DUMPS_LOCAL_DIR
+    Order:
+    1. Absolute path from df.url
+    2. Mapping of HTTP URLs / relative paths to DUMPS_LOCAL_DIR
     3. Fallback: JUDAICALINK_GENERATORS_PATH/<slug>/output/<slug>.ttl(.gz)
-    4. Fallback: roher Path(df.url)
+    4. Fallback: raw path(df.url)
     """
     raw = (df.url or "").strip()
     p = Path(raw)
@@ -94,63 +90,61 @@ def resolve_datafile_path(df, dataslug, stdout=None) -> Path:
         if stdout is not None:
             stdout.write(msg)
 
-    # 1) Absoluter Pfad direkt
+    # 1) Absolute path direct
     if p.is_absolute():
-        log(f"[PATH] Absoluter Pfad aus url: {p} (exists={p.exists()})")
+        log(f"[PATH] Absoulte path from url: {p} (exists={p.exists()})")
         return p
 
-    # 2) Basis-Dumps-Dir (nur wenn es existiert)
+    # 2) Base dumps directory (only if it exists)
     base_dumps = None
     if DUMPS_LOCAL_DIR:
         base_path = Path(DUMPS_LOCAL_DIR)
         if base_path.exists():
             base_dumps = base_path
         else:
-            log(f"[PATH] DUMPS_LOCAL_DIR existiert nicht: {base_path}")
+            log(f"[PATH] DUMPS_LOCAL_DIR does not exist: {base_path}")
 
     candidates = []
 
-    # HTTP-URL → Pfad relativ zu /dumps/
+    # HTTP-URL → Path relative to /dumps/
     parsed = urlparse(raw)
     if parsed.scheme in ("http", "https"):
         rel = parsed.path.lstrip("/")
         if "dumps/" in rel:
-            rel = rel.split("dumps/", 1)[1]  # z.B. "gba/current/gba-final-01.ttl.gz"
+            rel = rel.split("dumps/", 1)[1]  # e.g. "gba/current/gba-final-01.ttl.gz"
         if base_dumps:
             candidates.append(base_dumps / rel)
     else:
-        # Nicht-HTTP → direkt unter base_dumps
+        # Not HTTP → direct under unter base_dumps
         if base_dumps:
             candidates.append(base_dumps / raw)
 
-    # 2b) Kandidaten aus Dumps prüfen
+    # 2b) Validate candidates from dumps
     for cand in candidates:
-        log(f"[PATH] Prüfe Kandidat: {cand}")
+        log(f"[PATH] Check candidate: {cand}")
         if cand.exists():
-            log(f"[PATH] → Verwende Datei (Dumps): {cand}")
+            log(f"[PATH] → Use file (dumps): {cand}")
             return cand
 
-    # 3) Fallback: Generators-Ordner /<slug>/output/<slug>.ttl(.gz)
+    # 3) Fallback: Generators Folder /<slug>/output/<slug>.ttl(.gz)
     if GENERATORS_PATH:
         gen_base = Path(GENERATORS_PATH) / dataslug / "output"
         cand_gz = gen_base / f"{dataslug}.ttl.gz"
         cand_ttl = gen_base / f"{dataslug}.ttl"
 
         for cand in (cand_gz, cand_ttl):
-            log(f"[PATH] Prüfe Generator-Kandidat: {cand}")
+            log(f"[PATH] Checking Generator candidate: {cand}")
             if cand.exists():
-                log(f"[PATH] → Verwende Datei (Generator): {cand}")
+                log(f"[PATH] → Use file  (Generator): {cand}")
                 return cand
 
-    # 4) Fallback: roher Pfad (wird später noch einmal auf exists geprüft)
-    log(f"[PATH] Kein Kandidat gefunden, nutze raw-Pfad: {p}")
+    # 4) Fallback: raw path (is checked later)
+    log(f"[PATH] No candidate found, use raw path: {p}")
     return p
 
 
-
-
 class Command(BaseCommand):
-    help = "Lädt ein einzelnes Dataset (nach name/dataslug) in den SOLR-Index."
+    help = "Loads a single dataset (name/slug) into the SOLR-Index."
 
     def add_arguments(self, parser):
         parser.add_argument("slug", type=str)
@@ -173,13 +167,13 @@ class Command(BaseCommand):
             self.stderr.write(f"[SCHEMA][ERROR] {e}")
 
     # ---------------------------------------------------------
-    # Haupt-Handler
+    # Main-Handler
     # ---------------------------------------------------------
     def handle(self, *args, **options):
         slug = options["slug"]
-        self.stdout.write(self.style.NOTICE(f"Indexiere Dataset: {slug}"))
+        self.stdout.write(self.style.NOTICE(f"Indexing dataset: {slug}"))
 
-        # Dataset finden
+        # Find Dataset by name or dataslug
         try:
             ds = Dataset.objects.get(name=slug)
         except Dataset.DoesNotExist:
@@ -187,29 +181,27 @@ class Command(BaseCommand):
                 ds = Dataset.objects.get(dataslug=slug)
             except Dataset.DoesNotExist:
                 raise CommandError(
-                    f"Dataset '{slug}' existiert nicht (weder als name noch als dataslug)."
+                    f"Dataset '{slug}' does not exist."
                 )
 
         dataslug = ds.dataslug or ds.name
 
-        # SOLR-Endpunkt wie in sync_fuseki_solr
+        # SOLR-Endpoint
         solr_base = f"{settings.SOLR_SERVER.rstrip('/')}/{settings.JUDAICALINK_INDEX.lstrip('/')}"
         solr = pysolr.Solr(solr_base, timeout=60)
 
-        # Schema prüfen
+        # Check the schema
         self.ensure_schema(solr_base)
 
-        # Alte Dokumente für dieses Dataset löschen
-        self.stdout.write(f"Lösche alte Dokumente in SOLR für dataslug=\"{dataslug}\" …")
+        # Delete old documents for this dataset
+        self.stdout.write(f"Deleting old documents in SOLR for slug=\"{dataslug}\" …")
         solr.delete(q=f'dataslug:"{dataslug}"')
         solr.commit()
 
-        # --- AB HIER KEINE METADATEN MEHR LADEN! ---
-
-        # Datafiles laden
+        # Load Datafiles
         datafiles = ds.datafile_set.all()
         if not datafiles:
-            raise CommandError(f"Dataset '{slug}' hat keine Datafiles zum Indexen.")
+            raise CommandError(f"Dataset '{slug}' has no datafiles for indexing.")
 
         indexed = 0
         files_with_docs = 0
@@ -222,21 +214,21 @@ class Command(BaseCommand):
             if not path.exists():
                 self.stdout.write(
                     self.style.ERROR(
-                        f"[SOLR] Datei fehlt: {path} (aus url={df.url})"
+                        f"[SOLR] File is missing: {path} (from url={df.url})"
                     )
                 )
                 missing_files += 1
                 continue
 
             resolved_any += 1
-            self.stdout.write(f"→ Lade Datei: {path}")
+            self.stdout.write(f"→ Loading file: {path}")
 
             path_str = str(path)
 
-            # 1) Turtle / Turtle.gz mit rdflib
+            # 1) Turtle / Turtle.gz with rdflib
             if path_str.endswith(".ttl") or path_str.endswith(".ttl.gz"):
                 docs = self._parse_rdf_with_rdflib(path, dataslug)
-            # 2) Alles andere als N-Triples über Zeilenparser
+            # 2) Everything else as N-Triples
             else:
                 if path_str.endswith(".gz"):
                     open_func = gzip.open
@@ -261,77 +253,68 @@ class Command(BaseCommand):
                 try:
                     solr.add(docs)
                 except pysolr.SolrError as e:
-                    self.stdout.write(self.style.ERROR(f"[SOLR] Fehler beim Add: {e}"))
-                    # Fallback: problematische Felder global entfernen
+                    self.stdout.write(self.style.ERROR(f"[SOLR] Error in Add: {e}"))
+                    # Fallback: remove problematic fields and retry
                     for doc in docs:
                         doc.pop("birthDate", None)
                         doc.pop("deathDate", None)
-                    self.stdout.write("[SOLR] birthDate/deathDate aus allen Docs entfernt, retry …")
+                    self.stdout.write("[SOLR] birthDate/deathDate removed from all docs, retry …")
                     solr.add(docs)
 
                 indexed += len(docs)
             else:
                 self.stdout.write(
                     self.style.WARNING(
-                        f"⚠️ Aus Datei {path} wurden 0 Solr-Dokumente erzeugt "
-                        f"(evtl. keine passenden Properties in property2field oder falsches Format)."
+                        f"⚠️ 0 Solr documents were generated from file {path}."
                     )
                 )
 
         solr.commit()
 
         self.stdout.write(
-            f"[SOLR] Dateien mit gültigem Pfad: {resolved_any}, fehlende Dateien: {missing_files}"
+            f"[SOLR] Files with valid path: {resolved_any}, missing files: {missing_files}"
         )
 
         if indexed == 0:
             ds.indexed = False
             ds.save()
             raise CommandError(
-                f"Dataset '{slug}' erzeugte insgesamt 0 Solr-Dokumente. "
-                f"Bitte Dump-Dateien und property2field-Mapping prüfen."
+                f"Dataset '{slug}' generated a total of 0 Solr documents. "
+                f"Please check the dump files and property2field mapping."
             )
 
         ds.indexed = True
         ds.save()
         self.stdout.write(self.style.SUCCESS(
-            f"[SOLR] Dataset '{slug}' erfolgreich indexiert ({indexed} Dokumente)."
+            f"[SOLR] Dataset '{slug}' successfully indexed ({indexed} documents)."
         ))
 
     def _parse_rdf_with_rdflib(self, path: Path, dataslug: str):
         """
-        Parsed eine RDF-Datei (z.B. Turtle) mit rdflib und baut Solr-Dokumente
-        auf Basis von property2field wie in sync_fuseki_solr.
-        Unterstützt auch .ttl.gz (gzip-komprimiert).
+        Parses an RDF file (e.g., Turtle) using rdflib and builds Solr documents
+        based on property2field.
+        Also supports .ttl.gz (gzip-compressed).
         """
-        try:
-            import rdflib
-        except ImportError:
-            raise CommandError(
-                "rdflib ist nicht installiert. Bitte mit "
-                "'pip install rdflib' nachinstallieren, "
-                "um Turtle-Dateien (.ttl/.ttl.gz) zu verarbeiten."
-            )
 
         g = rdflib.Graph()
         fmt = "turtle"
 
         path_str = str(path)
 
-        # --- WICHTIG: gzipped Turtle vorher entpacken ---
+        # Import: unpack gzipped Turtle files first
         if path_str.endswith(".ttl.gz"):
             import gzip
 
             self.stdout.write(
-                f"[RDF] Parse gzipped Turtle {path} mit rdflib im Format '{fmt}' …"
+                f"[RDF] Parse gzipped Turtle {path}  in format '{fmt}' …"
             )
-            # gzip.open liefert bereits die dekomprimierten Bytes
+            # gzip.open already delivers the decompressed bytes.
             with gzip.open(path, "rb") as f:
-                # rdflib kann direkt mit einem File-Objekt umgehen
+                # rdflib can directly manipulate a File object.
                 g.parse(file=f, format=fmt)
         else:
             self.stdout.write(
-                f"[RDF] Parse {path} mit rdflib im Format '{fmt}' …"
+                f"[RDF] Parse {path} with rdflib in format '{fmt}' …"
             )
             g.parse(path.as_posix(), format=fmt)
 
@@ -370,8 +353,8 @@ class Command(BaseCommand):
                 updates[s_str][field] = {"add": [val]}
 
         self.stdout.write(
-            f"[RDF] Gesamt-Tripel: {total_triples}, "
-            f"davon mit bekanntem Prädikat (property2field): {mapped_triples}"
+            f"[RDF] Total triples: {total_triples}, "
+            f"of which with known prefix (property2field): {mapped_triples}"
         )
 
         docs = []
@@ -380,12 +363,12 @@ class Command(BaseCommand):
                 if isinstance(val, dict) and "add" in val:
                     cleaned = [cleanstring(x) for x in val["add"]]
 
-                    # Nur reine Zahlen für birthYear/deathYear erlauben
+                    # Only allow numeric years for birthYear/deathYear
                     if key in ("birthYear", "deathYear"):
                         cleaned = [x for x in cleaned if re.fullmatch(r"\d{1,4}", x)]
 
-                    # Für birthDate/deathDate: nur sehr konservative Formate zulassen
-                    # z.B. YYYY oder YYYY-MM oder YYYY-MM-DD
+                    # For birthDate/deathDate: only allow very conservative formats.
+                    # e.g. YYYY or YYYY-MM or YYYY-MM-DD
                     if key in ("birthDate", "deathDate"):
                         cleaned = [
                             x
@@ -393,7 +376,7 @@ class Command(BaseCommand):
                             if re.fullmatch(r"\d{4}(-\d{2}(-\d{2})?)?$", x)
                         ]
 
-                    # Wenn nach dem Filtern nichts übrig ist → Feld komplett löschen
+                    # If there are no valid values, remove the field
                     if not cleaned:
                         del doc[key]
                         continue
@@ -405,13 +388,13 @@ class Command(BaseCommand):
         return docs
 
     # ---------------------------------------------------------
-    # NT → Solr-Dokumente (analog zu sync_fuseki_solr)
+    # NT → Solr-Documents
     # ---------------------------------------------------------
     def _parse_ntriples_to_solr_docs(self, fh, dataslug: str):
         """
-        Liest ein N-Triples/TTL-ähnliches Dumpfile und baut
-        Solr-Dokumente, die nach Subject aggregiert sind.
-        Nur Predicates, die in property2field gemappt sind, werden indexiert.
+        Reads an N-triples/TTL-like dump file and builds
+        Solr documents aggregated by subject.
+        Only predicates mapped to property2field are indexed.
         """
 
         updates = {}
@@ -421,7 +404,7 @@ class Command(BaseCommand):
             if not line or line.startswith("#"):
                 continue
 
-            # Einfacher Parser für N-Triples-Zeilen: <s> <p> <o> .
+            # Simple Parser for N-Triples rows: <s> <p> <o> .
             if line.endswith("."):
                 line = line[:-1].strip()
 
@@ -431,23 +414,23 @@ class Command(BaseCommand):
 
             s_raw, p_raw, o_raw = parts
 
-            # URIs ohne <>
+            # URIs without <>
             s = s_raw.strip("<>")
             p = p_raw.strip("<>")
 
             field = property2field.get(p)
             if not field:
-                # Predicate nicht relevant für unseren Solr-Core
+                # Predicate not relevant for Solr-Core
                 continue
 
-            # Objekt parsen (Literal oder URI)
+            # Parse Object (Literal or URI)
             o_raw = o_raw.strip()
             if o_raw.startswith("<") and o_raw.endswith(">"):
                 val = o_raw.strip("<>")
             elif o_raw.startswith('"'):
-                # Literal: "value"@de oder "value"^^<datatype>
+                # Literal: "value"@de or "value"^^<datatype>
                 try:
-                    # sehr einfacher Ansatz: erstes und letztes Anführungszeichen
+                    # First or last quote
                     first = o_raw.find('"')
                     last = o_raw.rfind('"')
                     if last > first:
@@ -473,13 +456,13 @@ class Command(BaseCommand):
             else:
                 updates[s][field] = {"add": [val]}
 
-        # Clean + Datumskonvertierung wie in sync_fuseki_solr
+        # Clean + convert dates
         docs = []
         for doc in updates.values():
             for key, val in list(doc.items()):
                 if isinstance(val, dict) and "add" in val:
                     cleaned = [cleanstring(x) for x in val["add"]]
-                    #if key in ("birthDate", "deathDate"):
+                    # if key in ("birthDate", "deathDate"):
                     #    cleaned = [convert_date(x) for x in cleaned]
                     doc[key]["add"] = cleaned
             docs.append(doc)

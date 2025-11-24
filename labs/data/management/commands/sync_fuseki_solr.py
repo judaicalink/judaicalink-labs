@@ -54,7 +54,6 @@ def cleanstring(value):
 
 
 # Date conversion for ISO Solr format
-
 def convert_date(val):
     """
     Try parsing common date formats, fallback to raw string.

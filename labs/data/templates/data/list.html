@@ -1,6 +1,7 @@
 {% extends 'search/base.html' %}
 {% load static %}
 {% load cookiebanner %}
+{% load i18n %}
 {% load render_bundle from webpack_loader %}
 
 {% block content %}
@@ -11,13 +12,13 @@
         <p>JudaicaLink extracts structural information from various sources, making their described concepts as well as
             the relations between them accessible as Linked Open Data with stable URIs in the following datasets.</p>
 
-        <h2 class="text-md-left">Judaicalink</h2>
+        <h2 class="text-md-left">JudaicaLink</h2>
 
         <div class="table-responsive">
             <table class="table table-bg-light table-striped">
                 <tr>
                     <th scope="col" style="width: 35%">Name</th>
-                    <th scope="col">Summary</th>
+                    <th scope="col">{% trans 'Summary' %}</th>
                 </tr>
                 <tbody>
                 {% for d in datasets %}
@@ -27,7 +28,7 @@
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="5">No datasets found in {{ content_dir }}</td>
+                    <td colspan="5">{% trans 'No datasets found in' %} {{ content_dir }}</td>
                 </tr>
                 {% endfor %}
                 </tbody>
@@ -39,7 +40,7 @@
             <table class="table table-bg-light table-striped">
                 <tr>
                     <th scope="col" style="width: 35%">Name</th>
-                    <th scope="col">Summary</th>
+                    <th scope="col">{% trans 'Summary' %}</th>
                 </tr>
                 <tbody>
                 {% for d in support %}
@@ -49,7 +50,7 @@
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="5">No datasets found in {{ content_dir }}</td>
+                    <td colspan="5">{% trans'No datasets found in'} {{ content_dir }}</td>
                 </tr>
                 {% endfor %}
                 </tbody>

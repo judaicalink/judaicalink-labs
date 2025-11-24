@@ -55,8 +55,7 @@ def _command_target_wrapper(task_id, name, args, options):
     try:
         task = ThreadTask.objects.get(pk=task_id)
     except ThreadTask.DoesNotExist:
-        # Falls versehentlich eine falsche ID übergeben wurde,
-        # nicht mit Traceback sterben, sondern nur loggen.
+        # Log if wrong ID
         print(f"[ThreadTask] Task with id={task_id} does not exist.")
         return
 
@@ -76,13 +75,13 @@ def _command_target_wrapper(task_id, name, args, options):
 
 def run_management_command(task_name, command, args=None, options=None):
     """
-    Startet einen Management-Command asynchron als ThreadTask.
-
-    task_name  = Anzeigename des Tasks (z.B. "generate_dataset:sosy")
-    command    = Name des Django-Management-Commands (z.B. "generate_and_load_dataset")
-    args       = Positionsargumente für den Command
-    options    = Keyword-Argumente für den Command
+    Starts a management command asynchronously as a ThreadTask.
+    task_name = Display name of the task (e.g., "generate_dataset:sosy")
+    command = Name of the Django management command (e.g., "generate_and_load_dataset")
+    args = Positional arguments for the command
+    options = Keyword arguments for the command
     """
+
     if args is None:
         args = []
     if options is None:
@@ -93,7 +92,7 @@ def run_management_command(task_name, command, args=None, options=None):
     task_id = task.id
 
     def _start_thread():
-        # Dieser Code läuft ERST NACH Commit der aktuellen Transaktion
+        # Runs only after transaction commit
         t = threading.Thread(
             target=_command_target_wrapper,
             args=[task_id, command, args, options],
@@ -101,10 +100,11 @@ def run_management_command(task_name, command, args=None, options=None):
         )
         t.start()
 
-    # Wenn wir in einer Transaktion sind (Admin-Detail-View),
-    # wird der Thread erst nach dem Commit gestartet.
-    # Wenn wir nicht in einer Transaktion sind (z.B. viele Actions),
-    # läuft _start_thread praktisch sofort.
+    # If in a transaction (admin detail view),
+    # the thread is only started after the commit.
+    # If we  not in a transaction (e.g. many actions),
+    # _start_thread runs almost immediately.
+
     transaction.on_commit(_start_thread)
 
     return task_id

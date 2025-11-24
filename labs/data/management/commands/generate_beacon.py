@@ -13,6 +13,9 @@ from django.core.management.base import BaseCommand, CommandError
 import datetime
 import os
 from SPARQLWrapper import SPARQLWrapper, JSON
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def header():

@@ -1,34 +1,33 @@
+import gzip
 import json
-import re
 import pysolr
 import rdflib
-import gzip
+import re
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
 property2field = {
-        'http://www.w3.org/2004/02/skos/core#prefLabel': 'name',
-        'http://www.w3.org/2004/02/skos/core#altLabel': 'Alternatives',
-        'http://data.judaicalink.org/ontology/birthDate': 'birthDate',
-        'http://data.judaicalink.org/ontology/birthYear': 'birthYear',
-        'http://data.judaicalink.org/ontology/birthLocation': 'birthLocation',
-        'http://data.judaicalink.org/ontology/deathDate': 'deathDate',
-        'http://data.judaicalink.org/ontology/deathYear': 'deathYear',
-        'http://data.judaicalink.org/ontology/deathLocation': 'deathLocation',
-        'http://data.judaicalink.org/ontology/hasAbstract': 'Abstract',
-        }
+    'http://www.w3.org/2004/02/skos/core#prefLabel': 'name',
+    'http://www.w3.org/2004/02/skos/core#altLabel': 'Alternatives',
+    'http://data.judaicalink.org/ontology/birthDate': 'birthDate',
+    'http://data.judaicalink.org/ontology/birthYear': 'birthYear',
+    'http://data.judaicalink.org/ontology/birthLocation': 'birthLocation',
+    'http://data.judaicalink.org/ontology/deathDate': 'deathDate',
+    'http://data.judaicalink.org/ontology/deathYear': 'deathYear',
+    'http://data.judaicalink.org/ontology/deathLocation': 'deathLocation',
+    'http://data.judaicalink.org/ontology/hasAbstract': 'Abstract',
+}
+
 
 def cleanstring(value, chars):
     for c in chars:
         value = value.replace(c, '')
-    value = re.sub( '\s+', ' ', value).strip()
+    value = re.sub('\s+', ' ', value).strip()
     return value
 
 
-
-
 class Command(BaseCommand):
-    help = 'index data from a file in solr'
+    help = 'Index data from a file in solr'
 
     def add_arguments(self, filepath):
         filepath.add_argument('filepath', type=str, help='Filepath to file that needs to be indexed')
@@ -55,17 +54,17 @@ class Command(BaseCommand):
                         if f in doc:
                             doc[f].append(o)
                         else:
-                            doc[f] = [ o ]
+                            doc[f] = [o]
                     else:
                         data[s] = {
-                                f: [ o ]
-                                }
+                            f: [o]
+                        }
             bulk_body = []
             for s in data:
                 doc = {}
                 for f in data[s]:
                     values = data[s][f]
-                    if len(values)==0:
+                    if len(values) == 0:
                         continue
                     values = ' - '.join(values)
                     if f == 'Abstract':
@@ -73,15 +72,15 @@ class Command(BaseCommand):
                     if f == 'Alternatives':
                         values = cleanstring(values, ['"', '{', '}', '.'])
                     doc[f] = values
-                #indexing slug
+                # indexing slug
                 dataslug = s
-                dataslug = dataslug.replace ("http://data.judaicalink.org/data/", "").split ("/")[0]
-                doc ["dataslug"] = dataslug
+                dataslug = dataslug.replace("http://data.judaicalink.org/data/", "").split("/")[0]
+                doc["dataslug"] = dataslug
                 index = {
-                        "update": { "_index": settings.JUDAICALINK_INDEX, "_id": s }
-                        }
+                    "update": {"_index": settings.JUDAICALINK_INDEX, "_id": s}
+                }
                 bulk_body.append(json.dumps(index))
                 bulk_body.append(json.dumps({"doc": doc, "doc_as_upsert": True}))
-            if len(bulk_body)>0:
+            if len(bulk_body) > 0:
                 self.stdout.write('indexing successful!')
                 solr.add(bulk_body, commit=True)

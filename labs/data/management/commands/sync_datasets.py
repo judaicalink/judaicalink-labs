@@ -34,12 +34,9 @@ class Command(BaseCommand):
 
             dataset = models.update_from_markdown(gh_dataset["name"])
 
-            # *************************************************
-            #  AUTLOAD-LOGIK:
-            #  Wenn das Dataset (z.B. aus Frontmatter) als
-            #  "autoload" markiert ist, in Fuseki & SOLR laden
-            # *************************************************
-            # Falls du kein 'autoload'-Feld hast, hier ggf. anpassen:
+            #  AUTOLOAD
+            # If the dataset is marked as autoload, load it into Fuseki & SOLR
+
             autoload = getattr(dataset, "autoload", False)
 
             if autoload:

@@ -1,12 +1,6 @@
-import json
-import re
-import pysolr
-import rdflib
-import gzip
-from django.conf import settings
 from django.core.management.base import BaseCommand
-from data import models, utils
 
+from data import models, utils
 
 
 class Command(BaseCommand):
@@ -21,7 +15,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         datasets = []
-        if len(kwargs['slugs'])==0:
+        if len(kwargs['slugs']) == 0:
             datasets = models.Dataset.objects.all()
         else:
             for slug in kwargs['slugs']:

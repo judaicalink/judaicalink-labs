@@ -1,6 +1,7 @@
 {% extends 'search/base.html' %}
 {% load static %}
 {% load cookiebanner %}
+{% load i18n %}
 {% load render_bundle from webpack_loader %}
 
 {% block extra_css %}
@@ -49,19 +50,18 @@
 
             <h3>{{ meta.title|default:slug }}</h3>
 
-            {# Beschreibung zuerst #}
+            {# Description #}
             <div class="dataset-body">
                 {{ body_html|safe }}
             </div>
 
-            {# Tabelle wie in Hugo, aber mit deiner gewünschten Reihenfolge #}
             <div class="table-responsive dataset-table mt-3">
                 <table class="table table-bg-light table-striped">
 
                     {# Website #}
                     {% if meta.website %}
                     <tr>
-                        <th>Website:</th>
+                        <th>{% trans 'Website' %}:</th>
                         <td><a href="{{ meta.website }}">{{ meta.website }}</a></td>
                     </tr>
                     {% endif %}
@@ -69,15 +69,15 @@
                     {# Example #}
                     {% if meta.example %}
                     <tr>
-                        <th>Example:</th>
+                        <th>{% trans 'Example' %}:</th>
                         <td><a href="{{ meta.example }}">{{ meta.example }}</a></td>
                     </tr>
                     {% endif %}
 
-                    {# Files aus Frontmatter #}
+                    {# Files #}
                     {% if files %}
                     <tr>
-                        <th>Files:</th>
+                        <th>{% trans 'Files'%}:</th>
                         <td>
                             {% for f in files %}
                             {% if not forloop.first %}<br/>{% endif %}
@@ -113,7 +113,7 @@
                     {# Author / Maintained by #}
                     {% if meta.author %}
                     <tr>
-                        <th>Maintained by:</th>
+                        <th>{% trans 'Maintained by' %}:</th>
                         <td>
                             {% if meta.authorlink %}
                             <a href="{{ meta.authorlink }}">{{ meta.author }}</a>
@@ -127,7 +127,7 @@
                     {# License (Name, Link, Bild) #}
                     {% if meta.license %}
                     <tr>
-                        <th>License:</th>
+                        <th>{% trans 'License'%}:</th>
                         <td>
                             {% if meta.license.uri %}
                             <a href="{{ meta.license.uri }}" target="_blank">
@@ -145,7 +145,7 @@
                     </tr>
                     {% endif %}
 
-                    {# Online-Status: aus Modell + Dumps #}
+                    {# Online-Status #}
                     <tr>
                         <th>Online:</th>
                         <td>
@@ -163,9 +163,9 @@
                 </table>
             </div>
 
-            {# Dumps-Bereich #}
+            {# Dumps #}
             <div class="dump-section">
-                <h2>Dumps</h2>
+                <h2>{% trans 'Dumps' %}</h2>
                 {% if dumps_groups %}
                 {% for g in dumps_groups %}
                 <div class="dump-dir">
@@ -192,18 +192,18 @@
                         {% endfor %}
                     </ul>
                     {% else %}
-                    <p><em>No files in this directory.</em></p>
+                    <p><em>{% trans 'No files in this directory.' %}</em></p>
                     {% endif %}
                 </div>
                 {% endfor %}
                 {% else %}
-                <p><em>No dumps found for this dataset.</em></p>
+                <p><em>{% trans 'No dumps found for this dataset.' %}</em></p>
                 {% endif %}
             </div>
 
         </div>
 
-        {# Rechte Spalte mit Bild wie bei Hugo #}
+        {# Image #}
         <div class="col-md-0 col-lg-3 col-xl-4">
             <div class="img-fluid mt-4 sticky-top" id="picturemargintop30">
                 <img src="{% static 'img/Datasetsingle.jpg' %}"

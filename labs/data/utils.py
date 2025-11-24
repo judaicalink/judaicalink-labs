@@ -1,6 +1,7 @@
 import os
 import re
 import requests
+import toml
 from django.conf import settings
 from django.utils.http import http_date
 from functools import lru_cache
@@ -43,12 +44,10 @@ def content_root() -> Path:
 @lru_cache(maxsize=1_000)
 def read_markdown_with_frontmatter(slug: str) -> Tuple[Dict[str, Any], str, Path]:
     """
-    Liefert (meta, body, path). meta kommt aus TOML-Frontmatter, body ist Markdown (ohne Frontmatter).
-    Erlaubt slug.md oder <slug>/index.md
+    Returns (meta, body, path). `meta` comes from TOML front matter, `body` is Markdown (without front matter).
+    Allows `slug.md` or `<slug>/index.md`.
     """
-    import toml
 
-    # Kandidaten wie bei Hugo
     root = content_root()
     candidates = [
         root / f"{slug}.md",
@@ -69,14 +68,14 @@ def read_markdown_with_frontmatter(slug: str) -> Tuple[Dict[str, Any], str, Path
         meta = toml.loads(toml_block) or {}
     except Exception:
         meta = {}
-    # slug aus Dateiname ableiten, wenn nicht gesetzt
+    # slug from filename, if not set
     meta.setdefault("slug", slug)
     return meta, body, md_path
 
 
 def list_dataset_slugs() -> list[str]:
     """
-    Sucht alle .md Dateien im content_dir (Hugo-Struktur).
+    Searches for all .md files in content_dir.
     """
     root = content_root()
     slugs = set()

@@ -1,13 +1,11 @@
-import os
-
-import shutil
 import json
-import requests
-from django.contrib.auth import get_user_model
-from pathlib import Path
-from datetime import datetime
 import markdown as md
+import os
+import requests
+import shutil
+from datetime import datetime
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.core import management
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.http import Http404
@@ -16,13 +14,13 @@ from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.views.decorators.cache import cache_page
 from django.views.generic import TemplateView
+from pathlib import Path
 
-from .models import Generator, Dataset, ThreadTask, Datafile
 from . import admin
-from .utils import list_dataset_slugs, read_markdown_with_frontmatter
 from . import tasks
+from .models import Generator, Dataset, ThreadTask, Datafile
+from .utils import list_dataset_slugs, read_markdown_with_frontmatter
 
-# Create your views here.
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 
@@ -41,8 +39,7 @@ def commands(request):
 
 def load_status_for_slug(slug: str) -> dict:
     """
-    Holt den letzten Run & Status-Fahnen (generated/loaded) aus dem Generator-Modell.
-    (Kann später mit dem neuen Dataset-Management zusammengeführt werden.)
+    Retrieves the last run and status flags (generated/loaded) from the generator model.
     """
     try:
         g = Generator.objects.get(slug=slug)
@@ -52,7 +49,7 @@ def load_status_for_slug(slug: str) -> dict:
     if not r:
         return {"generated": False, "loaded": False, "status": "never"}
     generated = (r.status == "SUCCESS")
-    loaded = (r.status == "SUCCESS")  # wird gleich durch "online" überschrieben
+    loaded = (r.status == "SUCCESS")
     return {
         "generated": generated,
         "loaded": loaded,
@@ -62,10 +59,10 @@ def load_status_for_slug(slug: str) -> dict:
 
 def _collect_dumps_for_dataset(dataslug: str):
     """
-    Sammelt Dumps aus JUDAICALINK_DUMPS_DIR/<dataslug>/...
-    - current immer zuerst
-    - danach andere Unterordner nach mtime (absteigend)
-    Gibt (online_bool, dumps_groups) zurück.
+   Collects dumps from JUDAICALINK_DUMPS_DIR/<dataslug>/...
+    - always current first
+    - then other subfolders according to mtime (descending)
+    Returns (online_bool, dumps_groups).
     """
     dumps_root = Path(getattr(settings, "LABS_DUMPS_LOCAL", "/data/dumps"))
     base_url = getattr(settings, "LABS_DUMPS_WEBROOT",
@@ -107,13 +104,13 @@ def _collect_dumps_for_dataset(dataslug: str):
             "files": files,
         })
 
-    # Online-Heuristik: wenn Dataset.loaded True und es gibt irgendeinen Dump
+    # Online heuristic: if Dataset.loaded is true and there is any dump
     ds = Dataset.objects.filter(dataslug=dataslug).first()
     online = False
     if ds and ds.loaded and any_files:
         online = True
     elif any_files and not ds:
-        # Fallback: alte/archivierte Dumps, aber noch kein neues Dataset-Objekt
+        # Fallback: old/archived dumps
         online = True
 
     return online, dumps_groups
@@ -131,7 +128,7 @@ class DatasetListView(TemplateView):
         for slug in slugs:
             meta, body_md, _ = read_markdown_with_frontmatter(slug)
             title = meta.get("title") or slug
-            # Markdown → HTML (nur Body!)
+            # Markdown → HTML (only Body!)
             body_html = md.markdown(
                 body_md,
                 extensions=["extra", "toc", "sane_lists", "smarty"]
@@ -176,11 +173,11 @@ class DatasetDetailView(TemplateView):
                     for ext in [".ttl", ".ttl.gz", ".nt", ".nt.gz", ".n3", ".n3.gz"]
                 )
 
-            # Files aus Frontmatter in eine einfache Struktur bringen
+            # Bring files from Frontmatter into a simple structure
             raw_files = meta.get("files", [])
             files = []
             for f in raw_files:
-                # f ist in deinem TOML ein dict mit "url" und "description"
+                # f is a TOML-dict with "url" and "description"
                 url = f.get("url") if isinstance(f, dict) else f
                 if not url:
                     continue
@@ -198,21 +195,21 @@ class DatasetDetailView(TemplateView):
         except FileNotFoundError:
             raise Http404("Dataset not found")
 
-        # Markdown → HTML (nur Body!)
+        # Markdown → HTML (only body!)
         body_html = md.markdown(
             body_md,
             extensions=["extra", "toc", "sane_lists", "smarty"]
         )
 
-        # Slug für URIs: dataslug aus Frontmatter oder fallback slug
+        # Slug for URIs: dataslug from frontmatter or fallback slug
         dataslug = meta.get("dataslug") or slug
 
-        # Status aus Generator/Run (wird unten bzgl. "loaded" angepasst)
+        # Status from Generator/Run
         status = load_status_for_slug(slug)
 
-        # Dumps & „online“ bestimmen
+        # Determine Dumps & „online“
         online, dumps_groups = _collect_dumps_for_dataset(dataslug)
-        status["loaded"] = online  # Überschreibt loaded: hier bedeutet „online“
+        status["loaded"] = online  # overrides loaded status
 
         ctx.update({
             "slug": slug,
@@ -224,14 +221,15 @@ class DatasetDetailView(TemplateView):
             "content_dir": settings.JUDAICALINK_DATASETS_CATALOG_DIR,
             "online": online,
             "dumps_groups": dumps_groups,
-            "files": files,  # <-- neu
+            "files": files,
         })
 
         return ctx
 
+
 def load_from_github(request):
     """
-    Loads all Markdown files from the judaicalink-site Github repository.
+    Loads all Markdown files from the JudaicaLink-site Github repository.
     Saves files in data/gh_datasets.
     """
     tasks.call_command_as_task("sync_datasets")
@@ -247,13 +245,17 @@ def load_solr(request):
 
 
 def load_fuseki(request):
-    """Load all datasets in Fuseki using the loader script."""
+    """
+    Load all datasets in Fuseki using the loader script.
+    """
     tasks.call_command_as_task("fuseki_loader", "load")
     return redirect(reverse("admin:data_dataset_changelist"))
 
 
 def loader_manage_all(request, action):
-    """Run the loader script with the given action for all datasets."""
+    """
+    Run the loader script with the given action for all datasets.
+    """
     tasks.call_command_as_task("fuseki_loader", action)
     return redirect(reverse("admin:data_dataset_changelist"))
 
@@ -341,7 +343,9 @@ def serverstatus(request):
 
 
 def django_commands(request):
-    """Render a list of available dataset commands on an admin page."""
+    """
+    Render a list of available dataset commands on an admin page.
+    """
     from django.core import management
 
     all_cmds = management.get_commands()
@@ -362,13 +366,17 @@ def django_commands(request):
 
 
 def run_django_command(request, command):
-    """Run a management command asynchronously and redirect back."""
+    """
+    Run a management command asynchronously and redirect back.
+    """
     tasks.call_command_as_task(command)
     return redirect(reverse("admin:commands"))
 
 
 def dashboard(request):
-    """Render statistics, metrics and logs on an admin dashboard page."""
+    """
+    Render statistics, metrics and logs on an admin dashboard page.
+    """
     stats = {
         "datasets": Dataset.objects.count(),
         "files": Datafile.objects.count(),

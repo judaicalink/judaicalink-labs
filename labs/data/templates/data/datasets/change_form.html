@@ -1,7 +1,6 @@
 {% extends "admin/change_form.html" %}
 {% load i18n %}
 
-{# unten bei den Submit-Buttons zusätzliche Action-Buttons einfügen #}
 {% block submit_buttons_bottom %}
     {{ block.super }}
 
@@ -22,6 +21,6 @@
                value="Unload from SOLR">
 
         <input type="submit" name="_delete_ds"
-               value="Delete Dataset (Task)" style="background:#ba2121; color:white;">
+               value="Delete Dataset" style="background:#ba2121; color:white;">
     </div>
 {% endblock %}

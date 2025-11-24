@@ -1,49 +1,48 @@
 import subprocess
-
-from django.core.management.base import BaseCommand, CommandError
 from django.core.management import call_command
+from django.core.management.base import BaseCommand, CommandError
 
 from data import models
 from labs import settings
 
 
 class Command(BaseCommand):
-    help = "Erzeugt ein Dataset neu (inkl. Metadaten) und lädt es in Fuseki."
+    help = "Generates a dataset (including metadata) and loads it into Fuseki."
 
     def add_arguments(self, parser):
         parser.add_argument(
             "dataslug",
             type=str,
-            help="Slug des Datasets (dataslug oder name, ohne .md)",
+            help="Slug of the dataset(slug oder name, without .md)",
         )
 
     def handle(self, *args, **options):
         slug = options["dataslug"]
         filename = f"{slug}.md"
 
-        # 1. Metadaten aus der Markdown-Datei neu einlesen
+        # 1. Read the metadata from the markdown file
         try:
             self.stdout.write(f"update_from_markdown({filename}) …")
             models.update_from_markdown(filename)
         except Exception as e:
-            raise CommandError(f"update_from_markdown({filename}) fehlgeschlagen: {e}")
+            raise CommandError(f"update_from_markdown({filename}) failed: {e}")
 
-        # HIER kannst du, falls nötig, deinen externen Generator aus
-        # judaicalink-generators aufrufen (z.B. via subprocess). Beispiel:
-        #
+        # Here we call the external build script
+        self.stdout.write(f"Generating dataset {slug} …")
+
         try:
             subprocess.run(
-                ["python", f"{slug}/scripts/build.py" ],
+                ["python", f"{slug}/scripts/build.py"],
                 cwd=settings.GENERATORS_BASE_DIR,
-                   check=True,
-               )
+                check=True,
+            )
 
         except Exception as e:
-            raise CommandError()
+            raise CommandError(f"Generating dataset {slug} failed: {e}")
 
-        # 2. Dataset in Fuseki laden
+        # 2. Load dataset into Fuseki
         try:
             self.stdout.write(f"fuseki_loader load {slug} …")
             call_command("fuseki_loader", "load", slug)
         except Exception as e:
-            raise CommandError(f"fuseki_loader load {slug} fehlgeschlagen: {e}")
+            raise CommandError(f"Fuseki load of {slug} failed: {e}")
