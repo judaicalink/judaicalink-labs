@@ -177,3 +177,5 @@ labs/db2.sqlite3
 
 labs/webpack-stats.json
 labs/package-lock.json
+
+labs/data/migrations/*
