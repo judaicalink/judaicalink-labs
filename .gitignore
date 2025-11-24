@@ -171,8 +171,8 @@ labs/localhost.ke
 # Labs specific
 labs/static/
 labs/search/static
-db.sqlite3
-db2.sqlite3
+labs/db.sqlite3
+labs/db2.sqlite3
 .fuse_*
 
 labs/webpack-stats.json
