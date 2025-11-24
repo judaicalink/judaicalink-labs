@@ -20,7 +20,7 @@ defusedxml==0.7.1
 Deprecated==1.2.13
 discord==2.0.0
 discord.py==2.0.1
-Django==5.2.3
+Django==5.2.8
 django-active-link==0.1.8
 django-appconf==1.0.5
 django-compressor==4.5.1
