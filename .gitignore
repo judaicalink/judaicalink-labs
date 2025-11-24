@@ -173,6 +173,7 @@ labs/static/
 labs/search/static
 labs/db.sqlite3
 labs/db2.sqlite3
+labs/*sqlite3
 .fuse_*
 
 labs/webpack-stats.json
