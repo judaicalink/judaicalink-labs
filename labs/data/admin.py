@@ -105,7 +105,7 @@ class DatasetAdmin(admin.ModelAdmin):
     )
 
     # Short status for the list view
-    @admin.display(description="State")
+    @admin.display(description="Status")
     def generation_status_short(self, obj):
         status, _ = self._get_status_and_error(obj)
         # nur ein Wort + Symbol
@@ -113,12 +113,12 @@ class DatasetAdmin(admin.ModelAdmin):
             return "✅"
         if status.startswith("running"):
             return "⏳"
-        if status.startswith("Fehlgeschlagen"):
+        if status.startswith("Failed"):
             return "❌"
         return status
 
     # Detailed status for the detail view
-    @admin.display(description="State of generation")
+    @admin.display(description="Status of generation")
     def generation_status(self, obj):
         status, error = self._get_status_and_error(obj)
 
@@ -140,7 +140,7 @@ class DatasetAdmin(admin.ModelAdmin):
         task = obj.thread_tasks.order_by("-started").first()
         slug = obj.dataslug or obj.name
 
-        # no task → only evaluate Generator-Log
+        # no task → only evaluate Generator Log
         if not task:
             gen_status, gen_line = self._detect_generator_result(slug)
             if gen_status == "SUCCESS":
@@ -163,7 +163,7 @@ class DatasetAdmin(admin.ModelAdmin):
             return f"Failed (done {task.ended})", gen_line
 
         if not task.status_ok:
-            # Fallback: use Task-Log as error message
+            # Fallback: use Task Log as error message
             return f"Failed (done {task.ended})", task.last_log()
 
         # otherwise, all OK
@@ -210,7 +210,7 @@ class DatasetAdmin(admin.ModelAdmin):
         return "UNKNOWN", None
 
     # -------- Log from logs/<slug>.log (only tail) --------
-    @admin.display(description="Generator-Log")
+    @admin.display(description="Generator Log")
     def generator_log(self, obj):
         slug = obj.dataslug or obj.name
         log_dir = getattr(settings, "GENERATOR_LOG_DIR", None)
@@ -240,7 +240,7 @@ class DatasetAdmin(admin.ModelAdmin):
         )
         return mark_safe(html)
 
-    @admin.display(description="Last Task-Log")
+    @admin.display(description="Last Task Log")
     def task_log(self, obj):
         """
         Displays the log of the last ThreadTask associated with the dataset.
@@ -248,7 +248,7 @@ class DatasetAdmin(admin.ModelAdmin):
         """
         task = obj.thread_tasks.order_by("-started").first()
         if not task:
-            return "No Task-Log available."
+            return "No Task Log available."
 
         text = task.log_text or ""
         lines = [l for l in text.splitlines() if l.strip()]
@@ -260,7 +260,7 @@ class DatasetAdmin(admin.ModelAdmin):
 
         html = (
             "<details>"
-            "<summary>Show Task-Log (last "
+            "<summary>Show Task Log (last "
             f"{min(tail_lines, len(lines))} lines)</summary>"
             "<pre style='max-height:400px; overflow:auto;'>"
             f"{escape(tail)}"
@@ -754,7 +754,7 @@ class ThreadTaskAdmin(admin.ModelAdmin):
             return last[:117] + "…"
         return last
 
-    @admin.display(description="Task-Log (tail)")
+    @admin.display(description="Task Log (tail)")
     def log_pretty(self, obj):
         text = obj.log_text or ""
         text = text.strip()
