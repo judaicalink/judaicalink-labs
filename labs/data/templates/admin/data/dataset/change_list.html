@@ -1,0 +1,11 @@
+{% extends "admin/change_list.html" %}
+
+
+{% block object-tools-items %}
+  <li>
+    <a href="{% url 'admin:load_from_github' %}" class="">
+     Import from judaicalink-site
+    </a>
+  </li>
+  {{ block.super }}
+{% endblock %}

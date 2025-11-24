@@ -14,38 +14,39 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.contrib.admin import AdminSite
 from django.urls import include, path
-from backend.admin import admin_site
-from django.shortcuts import render
 
+from search import views as search_views
+from django.conf import settings
+from django.conf.urls.static import static
 
-def index(request):
-    # return HttpResponse(Dataset.objects.all())
-    return render(request, "search/root.html")
-
-
-admin.autodiscover()
 
 urlpatterns = [
-    path('admin/', admin_site.urls),
-    path('backend/', include('backend.urls', namespace='backend')),
+    path('admin/', admin.site.urls),
     path('search/', include('search.urls', namespace='search')),
-    path('lod/', include('lodjango.urls')),
-    path('', index, name='index'),
+    path('', search_views.index, name='index'),
     path('cm_search/', include('cm_search.urls')),
     path('cm_e_search/', include('cm_e_search.urls')),
-    #path('dashboard/', include('dashboard.urls')),
-    path('data', include('data.urls')),
+    path('data/', include('data.urls')),
     #path('captcha/', include('captcha.urls')),
     path('contact/', include('contact.urls', namespace='contact')),
-]
+    path('api/', include('api.urls')),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
+
 
 #urlpatterns += [
 #    path('captcha/', include('captcha.urls')),
 #    ]
 
-handler404 = 'search.views.custom_error_404'
-handler500 = 'search.views.custom_error_500'
-handler403 = 'search.views.custom_error_403'
-handler400 = 'search.views.custom_error_400'
+handler404 = 'search.views.error_404'
+handler500 = 'search.views.error_500'
+handler403 = 'search.views.error_403'
+handler400 = 'search.views.error_400'

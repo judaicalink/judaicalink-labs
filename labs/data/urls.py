@@ -1,10 +1,11 @@
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 
-from . import views
+from .views import commands, DatasetListView, DatasetDetailView
 
 app_name = 'data'
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('commands', commands, name='commands'),
+    path("datasets/", DatasetListView.as_view(), name="list"),
+    path("datasets/<slug:slug>/", DatasetDetailView.as_view(), name="detail"),
 ]

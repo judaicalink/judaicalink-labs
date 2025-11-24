@@ -1,0 +1,74 @@
+{% extends 'search/base.html' %}
+{% load static %}
+{% load cookiebanner %}
+{% load i18n %}
+{% load render_bundle from webpack_loader %}
+
+{% block content %}
+<main class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-8">
+        <h1 class="text-md-left" id="title">Datasets</h1>
+
+        <p>JudaicaLink extracts structural information from various sources, making their described concepts as well as
+            the relations between them accessible as Linked Open Data with stable URIs in the following datasets.</p>
+
+        <h2 class="text-md-left">JudaicaLink</h2>
+
+        <div class="table-responsive">
+            <table class="table table-bg-light table-striped">
+                <tr>
+                    <th scope="col" style="width: 35%">Name</th>
+                    <th scope="col">{% trans 'Summary' %}</th>
+                </tr>
+                <tbody>
+                {% for d in datasets %}
+                <tr>
+                    <td><a href="{% url 'data:detail' d.slug %}">{{ d.title }}</a></td>
+                    <td>{{ d.summary }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">{% trans 'No datasets found in' %} {{ content_dir }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <h2 class="text-md-left">Support</h2>
+                <div class="table-responsive">
+            <table class="table table-bg-light table-striped">
+                <tr>
+                    <th scope="col" style="width: 35%">Name</th>
+                    <th scope="col">{% trans 'Summary' %}</th>
+                </tr>
+                <tbody>
+                {% for d in support %}
+                <tr>
+                    <td><a href="{% url 'data:detail' d.slug %}">{{ d.title }}</a></td>
+                    <td>{{ d.summary }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">{% trans'No datasets found in'} {{ content_dir }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="col-md-0 col-lg-3 col-xl-4">
+        <div class="img-fluid mt-4 sticky-top" id="picturemargintop30">
+            <img src="{% static '/img/Datasetsingle.jpg' %}" class="img-thumbnail img-fluid" alt="Newspapers Datasets Picture">
+        </div>
+
+    </div>
+
+
+</main>
+{% endblock %}
+
+
+

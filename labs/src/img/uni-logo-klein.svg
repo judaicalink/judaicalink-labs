@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 16.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Ebene_1"
+   x="0px"
+   y="0px"
+   width="40"
+   height="40"
+   viewBox="0 0 40 40"
+   xml:space="preserve"
+   sodipodi:docname="test3.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"><metadata
+   id="metadata107"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title /></cc:Work></rdf:RDF></metadata><defs
+   id="defs105"><clipPath
+     clipPathUnits="userSpaceOnUse"
+     id="clipPath978"><rect
+       style="opacity:0.52999998;fill:#00ff00;fill-opacity:1;stroke:#646464;stroke-width:2.08949208;stroke-opacity:0"
+       id="rect980"
+       x="1.044746"
+       y="1.4617462"
+       height="37.910507"
+       width="37.910507" /></clipPath></defs><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1680"
+   inkscape:window-height="1027"
+   id="namedview103"
+   showgrid="false"
+   inkscape:zoom="10.306774"
+   inkscape:cx="68.472086"
+   inkscape:cy="20.2085"
+   inkscape:window-x="-8"
+   inkscape:window-y="-8"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Ebene_1" />
+
+
+<g
+   id="g22"
+   transform="translate(0,-0.41699982)">
+	<g
+   id="g20">
+		<defs
+   id="defs3">
+			<rect
+   y="0"
+   id="SVGID_1_"
+   x="-16.888"
+   width="72.740997"
+   height="42.432999" />
+		</defs>
+		<clipPath
+   id="SVGID_2_">
+			<use
+   height="100%"
+   width="100%"
+   y="0"
+   x="0"
+   style="overflow:visible"
+   xlink:href="#SVGID_1_"
+   overflow="visible"
+   id="use5" />
+		</clipPath>
+		<g
+   clip-path="url(#SVGID_2_)"
+   id="g18">
+			<defs
+   id="defs9">
+				<rect
+   y="0"
+   id="SVGID_3_"
+   x="-16.888"
+   width="72.740997"
+   height="42.432999" />
+			</defs>
+			<clipPath
+   id="SVGID_4_">
+				<use
+   height="100%"
+   width="100%"
+   y="0"
+   x="0"
+   style="overflow:visible"
+   xlink:href="#SVGID_3_"
+   overflow="visible"
+   id="use11" />
+			</clipPath>
+			<path
+   style="fill:#004284"
+   inkscape:connector-curvature="0"
+   clip-path="url(#SVGID_4_)"
+   d="M 20.387,3.709 H 18.474 V 6.292 L 17.557,6.294 V 7.03 h 0.911 l 0.014,7.32 c -2.081,-0.223 -4.566,-1.049 -4.9,-4.705 H 14.5 V 8.908 H 13.581 V 8.222 H 11.876 V 8.909 H 10.96 v 0.74 l 0.916,-0.003 c 0.292,4.326 3.555,6.399 6.598,6.513 0.004,0 -0.003,3.749 -0.008,3.748 C 14.649,19.091 8.413,16.651 8.88,9.642 L 9.789,9.645 9.791,8.908 H 8.88 V 8.222 H 7.181 V 8.909 H 6.266 L 6.271,9.646 7.185,9.643 C 6.93,18.246 14.379,20.974 18.474,21.7 v 3.795 C 9.514,24.666 4.346,18.828 3.868,9.642 L 4.66,9.645 4.662,8.908 H 3.868 V 8.222 H 2.163 V 8.909 H 1.248 v 0.737 h 0.915 c 0.206,7.628 3.739,16.886 16.303,17.645 0.008,0.001 0.003,5.854 0,5.854 L 16.32,33.136 c 0,3.739 -2.009,3.733 -2.009,3.733 h -1.914 v 1.961 h 7.99 z"
+   id="path14" />
+			<path
+   style="fill:#004284"
+   inkscape:connector-curvature="0"
+   clip-path="url(#SVGID_4_)"
+   d="m 18.537,3.709 h 1.914 v 2.583 l 0.917,0.002 V 7.03 h -0.911 l -0.015,7.32 c 2.082,-0.223 4.566,-1.049 4.901,-4.705 H 24.424 V 8.908 h 0.919 V 8.222 h 1.705 v 0.687 h 0.915 v 0.74 L 27.048,9.646 c -0.293,4.326 -3.555,6.399 -6.598,6.513 -0.003,0 0.002,3.749 0.008,3.748 3.815,-0.814 10.053,-3.254 9.586,-10.263 L 29.135,9.647 29.132,8.91 h 0.913 V 8.222 h 1.698 v 0.687 h 0.916 L 32.653,9.646 31.74,9.643 c 0.254,8.604 -7.194,11.332 -11.29,12.058 v 3.795 C 29.41,24.667 34.577,18.829 35.056,9.643 L 34.263,9.646 34.262,8.909 h 0.794 V 8.222 h 1.704 v 0.687 h 0.916 V 9.646 H 36.76 c -0.205,7.628 -3.738,16.886 -16.302,17.645 -0.008,0.001 -0.004,5.854 0,5.854 l 2.145,-0.009 c 0,3.739 2.01,3.733 2.01,3.733 h 1.914 V 38.83 H 18.536 V 3.709 Z"
+   id="path16" />
+		</g>
+	</g>
+</g>
+</svg>

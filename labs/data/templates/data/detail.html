@@ -1,0 +1,216 @@
+{% extends 'search/base.html' %}
+{% load static %}
+{% load cookiebanner %}
+{% load i18n %}
+{% load render_bundle from webpack_loader %}
+
+{% block extra_css %}
+<style>
+    .dataset-main {
+        margin-top: 1.5rem;
+    }
+
+    .dataset-table {
+        margin-top: 1.5rem;
+    }
+
+    .dataset-table th {
+        width: 180px;
+        white-space: nowrap;
+    }
+
+    .rdf-icon {
+        vertical-align: middle;
+        margin-right: .25rem;
+    }
+
+    .dump-section {
+        margin-top: 2rem;
+    }
+
+    .dump-section h2 {
+        margin-bottom: .75rem;
+    }
+
+    .dump-dir {
+        margin-bottom: 1rem;
+    }
+
+    .dump-dir h3 {
+        font-size: 1rem;
+        margin-bottom: .25rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="main container-fluid dataset-main">
+    <div class="row">
+        <div class="col-md-12 col-lg-9 col-xl-8">
+
+            <h3>{{ meta.title|default:slug }}</h3>
+
+            {# Description #}
+            <div class="dataset-body">
+                {{ body_html|safe }}
+            </div>
+
+            <div class="table-responsive dataset-table mt-3">
+                <table class="table table-bg-light table-striped">
+
+                    {# Website #}
+                    {% if meta.website %}
+                    <tr>
+                        <th>{% trans 'Website' %}:</th>
+                        <td><a href="{{ meta.website }}">{{ meta.website }}</a></td>
+                    </tr>
+                    {% endif %}
+
+                    {# Example #}
+                    {% if meta.example %}
+                    <tr>
+                        <th>{% trans 'Example' %}:</th>
+                        <td><a href="{{ meta.example }}">{{ meta.example }}</a></td>
+                    </tr>
+                    {% endif %}
+
+                    {# Files #}
+                    {% if files %}
+                    <tr>
+                        <th>{% trans 'Files'%}:</th>
+                        <td>
+                            {% for f in files %}
+                            {% if not forloop.first %}<br/>{% endif %}
+                            {% if f.is_rdf %}
+                            <img class="rdf-icon" src="http://www.w3.org/RDF/icons/rdf_flyer.24"
+                                 alt="RDF Resource Description Framework Flyer Icon"/>
+                            {% else %}
+                            <img class="rdf-icon" src="{% static 'img/support_25.png' %}"
+                                 alt="Support data icon"/>
+                            {% endif %}
+                            <a href="{{ f.url }}">{{ f.filename }}</a>
+                            {% if f.description %}: {{ f.description }}{% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    {% endif %}
+
+
+                    {# URI Slug #}
+                    <tr>
+                        <th>URI Slug:</th>
+                        <td>{{ dataslug }}</td>
+                    </tr>
+
+                    {# Named Graph #}
+                    {% if meta.graph %}
+                    <tr>
+                        <th>Named Graph:</th>
+                        <td>{{ meta.graph }}</td>
+                    </tr>
+                    {% endif %}
+
+                    {# Author / Maintained by #}
+                    {% if meta.author %}
+                    <tr>
+                        <th>{% trans 'Maintained by' %}:</th>
+                        <td>
+                            {% if meta.authorlink %}
+                            <a href="{{ meta.authorlink }}">{{ meta.author }}</a>
+                            {% else %}
+                            {{ meta.author }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endif %}
+
+                    {# License (Name, Link, Bild) #}
+                    {% if meta.license %}
+                    <tr>
+                        <th>{% trans 'License'%}:</th>
+                        <td>
+                            {% if meta.license.uri %}
+                            <a href="{{ meta.license.uri }}" target="_blank">
+                                {{ meta.license.name|default:meta.license.uri }}
+                            </a>
+                            {% else %}
+                            {{ meta.license.name }}
+                            {% endif %}
+                            {% if meta.license.image %}
+                            &nbsp;
+                            <img src="{{ meta.license.image }}" width="88" height="31"
+                                 alt="{{ meta.license.name }} Image"/>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endif %}
+
+                    {# Online-Status #}
+                    <tr>
+                        <th>Online:</th>
+                        <td>
+                            {% if online %}
+                            <img src="{% static 'img/on.png' %}" alt="on"
+                                 title="This dataset is currently loaded in our public SPARQL endpoint." width="32"/>
+                            {% else %}
+                            <img src="{% static 'img/off.png' %}" alt="off"
+                                 title="This dataset is currently not loaded in our public SPARQL endpoint."
+                                 width="32"/>
+                            {% endif %}
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+
+            {# Dumps #}
+            <div class="dump-section">
+                <h2>{% trans 'Dumps' %}</h2>
+                {% if dumps_groups %}
+                {% for g in dumps_groups %}
+                <div class="dump-dir">
+                    <h3>
+                        {% if g.is_current %}
+                        current
+                        {% else %}
+                        {{ g.dir }}
+                        {% endif %}
+                    </h3>
+                    {% if g.files %}
+                    <ul class="list-unstyled">
+                        {% for f in g.files %}
+                        <li>
+                            {% if f.is_rdf %}
+                            <img class="rdf-icon" src="http://www.w3.org/RDF/icons/rdf_flyer.24"
+                                 alt="RDF Resource Description Framework Flyer Icon"/>
+                            {% else %}
+                            <img class="rdf-icon" src="{% static 'img/support_25.png' %}"
+                                 alt="Support data icon"/>
+                            {% endif %}
+                            <a href="{{ f.url }}">{{ f.name }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p><em>{% trans 'No files in this directory.' %}</em></p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                {% else %}
+                <p><em>{% trans 'No dumps found for this dataset.' %}</em></p>
+                {% endif %}
+            </div>
+
+        </div>
+
+        {# Image #}
+        <div class="col-md-0 col-lg-3 col-xl-4">
+            <div class="img-fluid mt-4 sticky-top" id="picturemargintop30">
+                <img src="{% static 'img/Datasetsingle.jpg' %}"
+                     class="img-thumbnail img-fluid"
+                     alt="Datasets Picture">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

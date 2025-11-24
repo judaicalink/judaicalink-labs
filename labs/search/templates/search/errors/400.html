@@ -1,0 +1,22 @@
+{% extends 'search/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<!--content-->
+
+<main class="row">
+
+    <div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-9 col-xl-8">
+        <h1>Error 400 - Bad Request</h1>
+        <p>The server could not understand the request due to invalid syntax or other client-side errors.</p>
+        <p>Please check your request for any errors or contact the system administrator for assistance.</p>
+    </div>
+    <div class="col-md-0 col-lg-3 col-xl-4">
+
+        <img src="{% static 'img/new-synagogue-berlin.webp' %}" class="img-thumbnail img-fluid mt-4" alt="new synagogue berlin">
+    </div>
+</main>
+<!--content end-->
+
+{% endblock content %}

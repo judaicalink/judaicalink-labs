@@ -1,27 +1,23 @@
-from django.core.management.base import BaseCommand
-from django.utils import timezone
-from django.conf import settings
 import gzip
+import json
+import logging
+import os
 import rdflib
-from bs4 import BeautifulSoup
-from pathlib import Path
 import scrapy
 import scrapy.crawler
-import re
-import gzip
 import shutil
-import os
-import json
-import toml
 import subprocess
-import logging
 import sys
+import toml
 import traceback
-
+from django.conf import settings
+from django.core.management.base import BaseCommand
+from django.utils import timezone
+from pathlib import Path
 
 ## The base script
 # Here, all the magic happens to ensure that our datasets are consistent.
-# You should only change this code in close cooperation with the rest of 
+# You should only change this code in close cooperation with the rest of
 # the team as any change here might break the other dataset commands.
 
 # Good example commands to see this in action:
@@ -31,30 +27,31 @@ import traceback
 # The following namespaces are preconfigured and can directly be used.
 # Make sure to import them in your dataset command:
 # from ._dataset_command import jlo, jld, ...
+
 namespaces = {
-        "jlo": rdflib.Namespace("http://data.judaicalink.org/ontology/"),
-        "jld": rdflib.Namespace("http://data.judaicalink.org/data/"),
-        "skos": rdflib.Namespace("http://www.w3.org/2004/02/skos/core#"),
-        "dcterms": rdflib.Namespace("http://purl.org/dc/terms/"),
-        "rdf": rdflib.Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#"),
-        "rdfs": rdflib.Namespace("http://www.w3.org/2000/01/rdf-schema#"),
-        "owl": rdflib.Namespace("http://www.w3.org/2002/07/owl#"),
-        "xsd": rdflib.Namespace("http://www.w3.org/2001/XMLSchema#"),
-        "geo": rdflib.Namespace("http://www.w3.org/2003/01/geo/wgs84_pos#"),
-        "void": rdflib.Namespace("http://rdfs.org/ns/void#"),
-        "foaf": rdflib.Namespace("http://xmlns.com/foaf/0.1/"),
-        "prov": rdflib.Namespace("http://www.w3.org/ns/prov#"),
-        "cc": rdflib.Namespace("https://creativecommons.org/ns#"),
+    "jlo": rdflib.Namespace("http://data.judaicalink.org/ontology/"),
+    "jld": rdflib.Namespace("http://data.judaicalink.org/data/"),
+    "skos": rdflib.Namespace("http://www.w3.org/2004/02/skos/core#"),
+    "dcterms": rdflib.Namespace("http://purl.org/dc/terms/"),
+    "rdf": rdflib.Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#"),
+    "rdfs": rdflib.Namespace("http://www.w3.org/2000/01/rdf-schema#"),
+    "owl": rdflib.Namespace("http://www.w3.org/2002/07/owl#"),
+    "xsd": rdflib.Namespace("http://www.w3.org/2001/XMLSchema#"),
+    "geo": rdflib.Namespace("http://www.w3.org/2003/01/geo/wgs84_pos#"),
+    "void": rdflib.Namespace("http://rdfs.org/ns/void#"),
+    "foaf": rdflib.Namespace("http://xmlns.com/foaf/0.1/"),
+    "prov": rdflib.Namespace("http://www.w3.org/ns/prov#"),
+    "cc": rdflib.Namespace("https://creativecommons.org/ns#"),
 }
 
 # Yes, this is evil. But saves a lot of writing ;-)
 for ns in namespaces:
     exec(f"{ns} = namespaces['{ns}']")
 
-
 # Logging for our scripts
-log = logging.getLogger("log")
-error = logging.getLogger("error")
+log = logging.getLogger(__name__)
+error = logging.getLogger(__name__)
+
 
 # Helper to zip files, obviously...
 def gzip_file(filename):
@@ -67,14 +64,13 @@ def gzip_file(filename):
 # Base class for the spiders.
 class DatasetSpider(scrapy.Spider):
     # We provide two sets to keep track of already seen
-    # pages and already queued ones. 
+    # pages and already queued ones.
     # This is not always needed, Scrapy caches requests and
     # also provided means to avoid duplicates
     def __init__(self, *args, **options):
         super().__init__(*args, **options)
         self.visited = set()
         self.queued = set()
-
 
     # Helper to check if we already know a URL.
     def check_queue(self, url):
@@ -90,7 +86,6 @@ class DatasetSpider(scrapy.Spider):
 class DatasetCommand(BaseCommand):
     help = 'Base Command for a scraper'
 
-    
     def __init__(self):
         super().__init__()
         self.gzip = False
@@ -105,7 +100,6 @@ class DatasetCommand(BaseCommand):
         parser.add_argument("--no-rdf", action="store_true", help="Create only json")
         parser.add_argument("--gzip", action="store_true", help="Zip output files.")
 
-
     def set_metadata(self, metadata):
         '''
         This does various initialisations, it is mandatory to call this method at the beginning,
@@ -115,7 +109,8 @@ class DatasetCommand(BaseCommand):
         if not "files" in metadata:
             self.metadata["files"] = []
         self.directory = os.path.join(settings.LABS_DUMPS_LOCAL, metadata["slug"])
-        self.add_file(f"{self.metadata['slug']}-metadata.ttl", description=f"Metadata for {self.metadata['slug']} dataset.")
+        self.add_file(f"{self.metadata['slug']}-metadata.ttl",
+                      description=f"Metadata for {self.metadata['slug']} dataset.")
         Path(self.directory).mkdir(parents=True, exist_ok=True)
         if os.path.exists(os.path.join(self.directory, "log.txt")):
             os.remove(os.path.join(self.directory, "log.txt"))
@@ -130,8 +125,7 @@ class DatasetCommand(BaseCommand):
         log.setLevel(logging.INFO)
         error.setLevel(logging.INFO)
 
-
-    def add_file(self, filename, description = None):
+    def add_file(self, filename, description=None):
         '''
         Adds a file officially to the dataset. Use just the filename, without .gz ending.
         Metadata includes filename, filepath (within the dumps directory), public URL, description.
@@ -144,12 +138,11 @@ class DatasetCommand(BaseCommand):
             description = f"RDF dump of the {self.metadata['slug']} dataset."
 
         self.metadata["files"].append({
-                "filename": filename,
-                "filepath": os.path.join(self.metadata['slug'], filename),
-                "url": f"{settings.LABS_DUMPS_WEBROOT}{self.metadata['slug']}/{filename}",
-                "description": description,
-            })
-
+            "filename": filename,
+            "filepath": os.path.join(self.metadata['slug'], filename),
+            "url": f"{settings.LABS_DUMPS_WEBROOT}{self.metadata['slug']}/{filename}",
+            "description": description,
+        })
 
     def start_scraper(self, scraper_class, filename=None, settings={}, args_list=[], kwargs_dict={}):
         if not filename:
@@ -158,11 +151,11 @@ class DatasetCommand(BaseCommand):
         if os.path.exists(filepath):
             os.remove(filepath)
         default_settings = {
-                'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)',
-                'FEED_FORMAT': 'jsonlines',
-                'FEED_URI': filepath,
-                'HTTPCACHE_ENABLED': True,
-                'HTTPCACHE_DIR': f"{self.metadata['slug']}-cache",
+            'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)',
+            'FEED_FORMAT': 'jsonlines',
+            'FEED_URI': filepath,
+            'HTTPCACHE_ENABLED': True,
+            'HTTPCACHE_DIR': f"{self.metadata['slug']}-cache",
         }
         default_settings.update(settings)
         scraper_class.directory = self.directory
@@ -173,19 +166,18 @@ class DatasetCommand(BaseCommand):
         if self.gzip:
             gzip_file(filepath)
 
-
     def jsonlines_to_rdf(self, dict_to_graph_function, jsonl_filename=None, rdf_filename=None):
-        '''
+        """
         Opens the jsonl file, either the default (slug.jsonl) or the one provided as parameter.
         Calls the provided dict_to_graph_function with a prepared graph and a dict for the
         current record.
-        '''
+        """
         if not jsonl_filename:
             jsonl_filename = f"{self.metadata['slug']}.jsonl"
         if not rdf_filename:
             rdf_filename = f"{self.metadata['slug']}.ttl"
         if self.gzip and not jsonl_filename.endswith(".gz"):
-            jsonl_filename += ".gz" 
+            jsonl_filename += ".gz"
         jsonl_filepath = os.path.join(self.directory, jsonl_filename)
         rdf_filepath = os.path.join(self.directory, rdf_filename)
         graph = rdflib.Graph()
@@ -203,22 +195,21 @@ class DatasetCommand(BaseCommand):
         if self.gzip:
             gzip_file(rdf_filepath)
 
-
     def turtle_to_rdf(self, graph_to_graph_function, turtle_filename=None, rdf_filename=None, source_dataset_slug=None):
-        '''
+        """
         Opens the turtle file, either the default (slug.jsonl) or the one provided as parameter.
         Calls the provided graph_to_graph_function with a prepared graph and a graph for the
         current record.
-        '''
+        """
         if not turtle_filename:
             turtle_filename = f"{self.metadata['slug']}.ttl"
         if not rdf_filename:
             rdf_filename = f"{self.metadata['slug']}.ttl"
-        if turtle_filename==rdf_filename and not source_dataset_slug:
+        if turtle_filename == rdf_filename and not source_dataset_slug:
             print("You must explicitly give a different rdf_filename, if you read from the default filename.")
             return
         if self.gzip and not rdf_filename.endswith(".gz"):
-            rdf_filename += ".gz" 
+            rdf_filename += ".gz"
         directory = self.directory
         if source_dataset_slug:
             directory = directory.replace(self.metadata['slug'], source_dataset_slug)
@@ -250,7 +241,7 @@ class DatasetCommand(BaseCommand):
                             data += "\n\n"
                             data += "\n".join(datalines)
                             datalines.clear()
-                            ingraph.parse(data = data, format="turtle")
+                            ingraph.parse(data=data, format="turtle")
                             try:
                                 graph_to_graph_function(graph, ingraph)
                             except Exception as e:
@@ -263,7 +254,6 @@ class DatasetCommand(BaseCommand):
         if self.gzip:
             gzip_file(rdf_filepath)
 
-
     def create_version(self):
         date_prefix = timezone.now().strftime("%Y-%m-%d-")
         for f in self.metadata["files"]:
@@ -271,13 +261,12 @@ class DatasetCommand(BaseCommand):
             target = os.path.join(self.directory, f"{date_prefix}{f['filename']}")
             shutil.copy(source, target)
 
-
     def write_metadata(self, rdf_filename=None, toml_filename=None):
-        '''
+        """
         Creates toml and ttl metadata files, containing all infos from the provided
         metadata, as well as automatically obtained data, such as git commit, current date, script name, ...
         It also creates the versioned copies of the data, although we might want to make this optional.
-        '''
+        """
         if not rdf_filename:
             rdf_filename = f"{self.metadata['slug']}-metadata.ttl"
         if not toml_filename:
@@ -305,7 +294,7 @@ class DatasetCommand(BaseCommand):
             "script": script,
             "gitweb": script_path,
             "commit": git_head_hash,
-            }
+        }
         # The toml file contains the metadata to be copied to the Hugo page
         with open(toml_filepath, "w", encoding="utf-8") as f:
             toml.dump(self.metadata, f)
@@ -336,9 +325,5 @@ class DatasetCommand(BaseCommand):
             gzip_file(rdf_filepath)
         self.create_version()
 
-
     def handle(self, *args, **kwargs):
         print("This command is not meant to be executed directly, use a subclass.")
-
-
-

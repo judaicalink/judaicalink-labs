@@ -1,61 +1,53 @@
 {% extends 'search/base.html' %}
-{% block content %}
 {% load static %}
 
-<script src="{% static 'js/autocomplete.js' %}" type="text/javascript"></script>
-<script>
-    var availableTags = "{{data}}".replace(/&quot;/g, '"');
-    var availableTags = JSON.parse(availableTags);
-    //console.log(mydata);
-</script>
+
+{% block meta %}
+<meta name="keywords" content="judaicalink, search, entity search, compact memory, access">
+<meta name="description"
+      content="Through this interface the user can search persons and places automatically extracted from Compact Memory and linked to Judaicalink entries.">
+{% endblock %}
 
 
-{% include "search/header.html" %}
-
+{% block content %}
 <!--content-->
 <main class="row">
 
-	<div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-9 col-xl-8">
+    <div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-9 col-xl-8">
+        <div class="row">
+            <h1 class="text-center">Compact Memory Entity Search</h1>
+        </div>
 
-    <h1 class="text-center">Compact Memory <br>Entity Search</h1>
-        
+        {% include "cm_e_search/search_form.html" %}
 
-
-        <form method="get" action="search_result/"> 
-            <div class="col-xs-6">
-                <input type="hidden" name="page" value="1">
-                <div class="input-group">
-                    
-                    <input class="form-control" id="entities" type="search" name="query" value="" placeholder="Enter your search keyword">
-
-                    <div class="input-group-btn">
-                        <button type="submit" class="btn btn-primary search_button"><i class="fas fa-search"></i></button>
-                    </div>
-                </div>
-            </div>
-        </form>
-<br>
-<!--
-{% for name in data %}
-    <p>{{name}}</p>
-{% endfor%}
--->
-
-
-<p>The Compact Memory collection comprises over 300 Jewish newspapers and journals of the German speaking area of the years 1768–1938 and beyond.
-<br>Through this interface the user can search <b>persons</b> and <b>places</b> automatically extracted from Compact Memory and <b>linked to Judaicalink entries</b>.
-</p>
+        <div class="row">
+            <p>The Compact Memory collection comprises over 300 Jewish newspapers and journals of the German speaking
+                area of the years 1768–1938 and beyond.
+                <br>Through this interface the user can search <b>persons</b> and <b>places</b> automatically extracted
+                from Compact Memory and <b>linked to Judaicalink entries</b>.
+            </p>
+        </div>
     </div>
 
     <div class="col-md-0 col-lg-3 col-xl-4">
-            <div class="img-fluid sticky-top mt-4" id="picturemargintop30">
-            <img src="/static/img/Westend-synagoge.jpg" class="img-thumbnail img-fluid" alt="Jewish building">
-            </div>
+        <div class="alert alert-info text-center mt-4 sticky-top" id="picturemargintop30" role="alert">
+            <b>Try some search keywords:</b>
+            <ul class="list-unstyled">
+                <li><i class="fa fa-search-plus"></i> <a
+                        href="{% url 'cm_e_search:search_result' %}?query=Albert+Einstein">Albert Einstein</a></li>
+                <li><i class="fa fa-search-plus"></i> <a
+                        href="{% url 'cm_e_search:search_result' %}?query=Berlin">Berlin</a>
+                </li>
+                <li><i class="fa fa-search-plus"></i> <a
+                        href="{% url 'cm_e_search:search_result' %}?query=Theodor+Herzl">Theodor Herzl</a></li>
+                <li><i class="fa fa-search-plus"></i> <a
+                        href="{% url 'cm_e_search:search_result' %}?query=Gershom+Scholem">Gershom Scholem</a></li>
+            </ul>
+        </div>
     </div>
 
 </main>
 <!--content end-->
 
-{% include "search/footer.html" %}
-
 {% endblock content %}
+

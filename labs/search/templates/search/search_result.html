@@ -1,221 +1,106 @@
 {% extends 'search/base.html' %}
-{% block content %}
-
 {% load static %}
 
-{% include "search/header.html" %}
+{% block content %}
 
-<script> var rows_data = {{rows | safe}}; </script>
-
+<!--<script> var rows_data = {{rows | safe}}; </script>-->
 
 <main class="row">
 
-<div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-9 col-xl-8">
+    <div class="col-12 col-sm-12 ml-xl-0 col-md-12 col-lg-9 col-xl-8">
 
-<h1 class="text-center">JudaicaLink Search</h1>
+        <h1 class="text-center">JudaicaLink Search</h1>
 
-<!-- looking at our data -->
-<!--{{rows}}-->
+        <!-- looking at our data -->
 
-    <div id="accordion">
+        <div id="accordion">
+            {% include 'search/search_form.html' %}
+        </div>
 
-    <!-- Simple Search -->
+        <!-- Begin Alert -->
+        {% if total_hits > 0 %}
+        <div class="alert alert-success text-center" role="alert">
+            <p>Found {{ total_hits }} result(s) for query: <strong>{{ search_input }}</strong>.</p>
+        </div>
+        {% else %}
+        <div class="alert alert-danger text-center" role="alert">
+            <strong>No results found. {% if search_input is "" %} {{alert}} {% endif %}</strong>
+        </div>
+        {% endif %}
+        <!-- End Alert -->
 
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                <form method="get" action="search">
-                    <div class="col-xs-6">
-                        <input type="hidden" name="page" value="1">
-                        <div class="input-group">
-                            <input class="form-control" type="text" name="input0" value="{{ simple_search_input }}" placeholder="Search...">
-                            <div class="input-group-btn" >
-                                <button type="submit" class="btn btn-primary search_button"><i class="fas fa-search"></i></button>
+        <!-- Begin Sorting -->
+        {% include 'search/partials/sorting.html' %}
+        <!-- End Sorting -->
+
+        <!-- Begin Results-->
+        <div class="table-responsive mb-3" style="overflow-y: auto;">
+            <table class="table table-light table-striped">
+                {% for result in ordered_dataset %}
+                <tr>
+                    <td>
+                        {% for key, value in result.items %}
+                        {% if key == "Abstract" %}
+                        <p class="text-dark">
+                            <strong>{{ key }}:</strong>
+                        </p>
+                        <div>
+                            {% if value|length > 200 %}
+                            <!-- First 200 characters are always visible -->
+                            <p class="text-dark">{{ value|slice:":200"|safe }}...</p>
+                            <!-- "Read More" button -->
+                            <button class="btn btn-link p-0 text-dark" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#abstract-{{ forloop.counter }}" aria-expanded="false"
+                                    aria-controls="abstract-{{ forloop.counter }}">
+                                Read more &gt;&gt;
+                            </button>
+                            <!-- Remaining text -->
+                            <div id="abstract-{{ forloop.counter }}" class="collapse mt-2">
+                                {{ value|slice:"200:"|safe }}
                             </div>
+                            {% else %}
+                            <p  class="text-dark">{{ value|safe }}</p>
+                            {% endif %}
                         </div>
-                    </div>
-                </form>
-        </div>
-
-    <!-- Advanced Search -->
-
-        <div id="headingOne">
-                <button id="buttonadvancedsearch" type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color:#0056b3">
-                    Advanced Search
-                </button>
-        </div>
-
-        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-            <div class="card">
-                <div class="card-body">
-
-                    {% verbatim %}
-                    <div id="app">
-                    <form  method="get" action="search">
-                    <input type="hidden" name="page" value="1">
-                            <div v-for="(row, index) in rows" class="form-row">
-
-                                <!--Operator-->
-                                <div v-if="index > 0" class="form-group col-2">
-                                    <select v-model="row.selected_operator" class="form-control" :name="row.operator">
-                                        <option v-for="(operator) in row.other_operators" v-bind:value="operator.fieldname">{{operator.display}}</option>
-                                    </select>
-                                </div>
-                                <div v-if="index < 1" class="form-group col-2">
-                                    <!--Placeholder for missing Operators in first row-->
-                                </div>
-                                <!--Option-->
-                                <div class="form-group col-4">
-                                    <select v-model="row.selected_option" class="form-control" :name="row.option">
-                                        <option v-for="(option) in row.other_options" v-bind:value="option.fieldname">{{option.display}}</option>
-                                    </select>
-                                </div>
-                                <!--Input-->
-                                <div class="form-group col-5">
-                                    <input v-model="row.submitted_input" type="text" :name="row.input" class="form-control" value="row.submitted_input">
-                                </div>
-
-                                <!--@click="removeElement(index);"-->
-                                <div class="form-group col-1">
-                                    <button type="button" class="btn btn-danger" @click="removeElement(index)"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </div>
-
-                        <button type="submit" class="btn btn-primary search_button float-right"><i class="fas fa-search"></i> Search</button>
-                    </form>
-                    <button class="btn btn-primary search_button" @click="addRow()"><i class="fas fa-plus"></i> Add</button>
-                    <button class="btn btn-danger" @click="clearElements(), addRow(), addRow()">Clear All</button>
-                    </div>
-                    {% endverbatim %}
-
-                </div>
-            </div>
-        </div> <!--close collapse div-->
-    </div> <!--close accordion div-->
-    <!-- End Advanced Search -->
-    <br>
-
-    <!--Alert--->
-
-            {% if total_hits > 0 %}
-                <div class="alert alert-success text-center" role="alert">
-                Found {{ total_hits }} results for your query:
-                <b>{% for entry in alert %}
-                    {{entry}}
-                    {% endfor %}</b>
-                </div>
-            {% else %}
-            <div class="alert alert-danger text-center" role="alert">
-                No results matching your query:
-                <b>{% for entry in alert %}
-                    {{entry}}
-                    {% endfor %}</b>
-            </div>
-            {% endif %}
-
-
-    <!--Results-->
-
-    <div class="table-responsive">
-    <table class="table table-light table-striped">
-
-        {% for data in ordered_dataset %}
-
-        <tr>
-
-            <td>
-                {% for item in data %}
-                    {%if "Dataslug" not in item  %}
-                        {{ item | safe}} <br>
-                    {% endif %}
+                        {% elif key == "link" %}
+                            {{ value|safe }}
+                        {% elif key == "Dataslug" %}
+                            <p class="text-dark">Dataslug: <span class="badge text-bg-secondary text-white">{{value}}</span></p>
+                        {% else %}
+                        <p class="text-dark"><strong>{{ key }}:</strong> {{ value|safe }}</p>
+                        {% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
                 {% endfor %}
-            </td>
-
-        </tr>
-
-        {% endfor %}
-
-    </table>
-    </div>
-    <br> <br>
+            </table>
+        </div>
 
 
-    <!--Pagination-->
+        <!-- End Results-->
 
-    {% if pages > 1 %}
-
-        <form style="display: inline;" method="get" action="search">
-            <input type="hidden" name="paging" value="{{ submitted_search }}">
-            <input type="hidden" name="page" value="{{ 1 }}">
-            {% if page != 1 %}
-            <button class="btn btn-light paging_button_inactive" type="submit" > {{ 1 }} </button>
-            {% else %}
-            <button class="btn btn-light paging_button_active" type="submit" > {{ 1 }} </button>
-            {% endif %}
-        </form>
-
-        {% if page != 1 %}
-
-        <form style="display: inline;" method="get" action="search">
-            <input type="hidden" name="paging" value="{{ submitted_search }}">
-            <input type="hidden" name="page" value="{{ previous }}">
-            <button class="btn btn-light paging_button_inactive" type="submit" > previous </button>
-        </form>
-
-        {% endif %}
-
-        {% for i in paging %}
-
-            <form style="display: inline;" method="get" action="search">
-                <input type="hidden" name="paging" value="{{ submitted_search }}">
-                <input type="hidden" name="page" value="{{ i }}">
-                {% if i == page %}
-                <button class="btn btn-light paging_button_active" type="submit" > {{ i }} </button>
-                {% else %}
-                <button class="btn btn-light paging_button_inactive" type="submit" > {{ i }} </button>
-                {% endif %}
-            </form>
-
-        {%endfor %}
-
-        {% if page != pages %}
-
-        <form style="display: inline;" method="get" action="search">
-            <input type="hidden" name="paging" value="{{ submitted_search }}">
-            <input type="hidden" name="page" value="{{ next }}">
-            <button class="btn btn-light paging_button_inactive" type="submit" > next </button>
-        </form>
-
-        {% endif %}
-
-        {% if pages != 1 %}
-
-        <form style="display: inline;" method="get" action="search">
-            <input type="hidden" name="paging" value="{{ submitted_search }}">
-            <input type="hidden" name="page" value="{{ pages }}">
-            {% if pages != page %}
-            <button class="btn btn-light paging_button_inactive" type="submit" > {{ pages }} </button>
-            {% else %}
-            <button class="btn btn-light paging_button_active" type="submit" > {{ pages }} </button>
-            {% endif %}
-        </form>
-
-        {% endif %}
-
-    {% endif %}
+        <!-- Begin Pagination-->
+        {% include 'search/partials/pagination.html' %}
+        <!-- End Pagination-->
 
     </div>
 
-    <!--Picture-->
+    <!-- Begin Picture -->
 
     <div class="col-md-0 col-lg-3 col-xl-4">
-        <div class="img-fluid sticky-top mt-4" id="picturemargintop30">
-            <img src="/static/img/JudaicaLink_Knowledge_Graph.jpg" class="img-thumbnail img-fluid" alt="Judaicalink Knowledge Graph">
+        <div id="picturemargintop30" class="img-fluid mt-4">
+            <img alt="Judaicalink Knowledge Graph" class="img-thumbnail img-fluid"
+                 src="{% static 'img/judaicalink-knowledge-graph-compressed.webp' %}">
         </div>
-    </div>
 
+        <!-- Begin Filter-->
+        <div id="filter-app"></div>
+        <!-- End filter-->
+    </div>
+    <!-- End Picture -->
 
 </main>
-
-{% include "search/footer.html" %}
-
 {% endblock content %}
+
+
 
