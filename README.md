@@ -1,5 +1,27 @@
 # JudaicaLink Labs
 
+[![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)](https://github.com/Naereen/badges/)
+![license](https://badgen.net/badge/license/MIT/blue)
+![Maintenance](https://img.shields.io/maintenance/yes/2025)
+
+[![made-with-Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)
+
+![github](https://badgen.net/badge/icon/github?icon=github&label)
+![release](https://badgen.net/github/release/judaicalink/judaicalink-labs?color=green)
+![releases](https://badgen.net/github/releases/judaicalink/judaicalink-labs)
+![stars](https://badgen.net/github/stars/judaicalink/judaicalink-labs)![forks](https://badgen.net/github/forks/judaicalink/judaicalink-labs)
+![issues](https://badgen.net/github/issues/judaicalink/judaicalink-labs)
+![commits](https://badgen.net/github/commits/judaicalink/judaicalink-labs)
+![last-commit](https://badgen.net/github/last-commit/judaicalink/judaicalink-labs)
+![branches](https://badgen.net/github/branches/judaicalink/judaicalink-labs)
+![contributors](https://badgen.net/github/contributors/judaicalink/judaicalink-labs)
+
+![wiki](https://badgen.net/badge/icon/wiki?icon=wiki&label)
+[![Documentation Status](https://readthedocs.org/projects/judaicalink-docs/badge/?version=latest)](http://judaicalink-docs.readthedocs.io/?badge=latest)
+
+![discord](https://badgen.net/badge/icon/discord?icon=discord&label)
+![Discord](https://img.shields.io/discord/696646598868074576)
+
 The JudaicaLink Portal for experimental access to our data.
 
 Make sure [Python 3.8](https://www.python.org/downloads/release/python-382/) is installed!  
