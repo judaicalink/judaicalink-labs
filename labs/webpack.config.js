@@ -21,7 +21,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'js/[name].js',
-    publicPath: '/static/',
+    publicPath: STATIC_URL,
     // generate per-bundle sourcemaps without collision
     sourceMapFilename: 'js/[file].map',
   },
