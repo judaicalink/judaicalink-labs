@@ -8,7 +8,6 @@ const webpack = require('webpack');
 const BundleTracker = require('webpack-bundle-tracker');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const STATIC_URL = process.env.STATIC_URL || '/static/';
 
 module.exports = {
   // Three separate bundles: app logic, bootstrap JS, and global styles
@@ -21,7 +20,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'js/[name].js',
-    publicPath: STATIC_URL,
+    publicPath: process.env.STATIC_URL || '/static/',
     // generate per-bundle sourcemaps without collision
     sourceMapFilename: 'js/[file].map',
   },
