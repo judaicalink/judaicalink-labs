@@ -9,7 +9,7 @@ channels==4.3.2
 charset-normalizer==3.4.4
 constantly==23.10.4
 crispy-bootstrap5==2025.6
-cryptography==46.0.3
+cryptography==46.0.5
 daphne==4.2.1
 Django==5.2.9
 django-active-link==0.3.0
