@@ -64,7 +64,7 @@ toml==0.10.2
 Twisted==25.5.0
 txaio==25.9.2
 typing_extensions==4.15.0
-ujson==5.11.0
+ujson==5.12.0
 uritemplate==4.2.0
 urllib3==2.6.3
 whitenoise==6.11.0
