@@ -59,7 +59,7 @@ rjsmin==1.2.5
 service-identity==24.2.0
 setuptools==80.9.0
 SPARQLWrapper==2.0.0
-sqlparse==0.5.3
+sqlparse==0.5.4
 toml==0.10.2
 Twisted==25.5.0
 txaio==25.9.2
