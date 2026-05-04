@@ -54,7 +54,7 @@ rcssmin==1.2.2
 rdflib==7.4.0
 redis==7.1.0
 regex==2025.11.3
-requests==2.32.5
+requests==2.33.0
 rjsmin==1.2.5
 service-identity==24.2.0
 setuptools==80.9.0
