@@ -37,7 +37,7 @@ incremental==24.7.2
 inflection==0.5.1
 lxml==6.1.0
 Markdown==3.10
-msgpack==1.1.2
+msgpack==1.2.1
 packaging==25.0
 pillow==12.2.0
 psycopg2-binary==2.9.11
