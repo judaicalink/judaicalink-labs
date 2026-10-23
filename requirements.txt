@@ -61,7 +61,7 @@ setuptools==83.0.0
 SPARQLWrapper==2.0.0
 sqlparse==0.6.0
 toml==0.10.2
-Twisted==26.4.0rc2
+Twisted==26.10.0rc1
 txaio==25.9.2
 typing_extensions==4.15.0
 ujson==5.13.0
