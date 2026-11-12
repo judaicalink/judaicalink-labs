@@ -1,4 +1,7 @@
-# JudaicaLink Labs
+# JudaicaLink Labs (ARCHIVED)
+
+**This repository is not actively maintained anymore. It was used as development environment before the migration of JudaicaLink intro the FID Jewish Studies, where most of the functionality developed here should now be available.
+The role of JudaicaLink Labs is now taken over by judaicalink-mannheim, our new platform for experimental data access.**
 
 [![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)](https://github.com/Naereen/badges/)
 ![license](https://badgen.net/badge/license/MIT/blue)
